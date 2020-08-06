@@ -23,12 +23,15 @@
 		46BEB4F124C98F0D00FE0CD1 /* Profiles.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46BEB4F024C98F0D00FE0CD1 /* Profiles.storyboard */; };
 		46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */; };
 		46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C2BC9124D432F90077E49D /* ProfileTabBarViewController.swift */; };
+		990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */; };
+		990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */; };
+		990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
-		466C4270249A8748007D033E /* labs-ios-starter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "labs-ios-starter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		466C4270249A8748007D033E /* EcoSoapBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoSoapBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		466C4273249A8748007D033E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		466C4275249A8748007D033E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		466C427A249A8748007D033E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -44,6 +47,9 @@
 		46BEB4F024C98F0D00FE0CD1 /* Profiles.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profiles.storyboard; sourceTree = "<group>"; };
 		46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+SimpleAlert.swift"; sourceTree = "<group>"; };
 		46C2BC9124D432F90077E49D /* ProfileTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabBarViewController.swift; sourceTree = "<group>"; };
+		990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
+		990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Constants.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,20 +64,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		465DAA2724BD0BC100D94C24 /* App Lifecycle */ = {
+		465DAA2724BD0BC100D94C24 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */,
 				466C4273249A8748007D033E /* AppDelegate.swift */,
 				466C4275249A8748007D033E /* SceneDelegate.swift */,
 				466C427E249A8749007D033E /* LaunchScreen.storyboard */,
 			);
-			path = "App Lifecycle";
+			path = App;
 			sourceTree = "<group>";
 		};
 		466C4267249A8748007D033E = {
 			isa = PBXGroup;
 			children = (
-				466C4272249A8748007D033E /* labs-ios-starter */,
+				466C4272249A8748007D033E /* EcoSoapBank */,
 				466C4271249A8748007D033E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -79,12 +86,12 @@
 		466C4271249A8748007D033E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				466C4270249A8748007D033E /* labs-ios-starter.app */,
+				466C4270249A8748007D033E /* EcoSoapBank.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		466C4272249A8748007D033E /* labs-ios-starter */ = {
+		466C4272249A8748007D033E /* EcoSoapBank */ = {
 			isa = PBXGroup;
 			children = (
 				46BEB4EB24C98EB400FE0CD1 /* Model */,
@@ -92,12 +99,12 @@
 				46BEB4EF24C98ED900FE0CD1 /* Login */,
 				46BEB4F224C98F1100FE0CD1 /* Profiles */,
 				46BEB4EA24C98EA300FE0CD1 /* Helpers */,
-				465DAA2724BD0BC100D94C24 /* App Lifecycle */,
+				465DAA2724BD0BC100D94C24 /* App */,
 				466C427C249A8749007D033E /* Assets.xcassets */,
 				466C4281249A8749007D033E /* Info.plist */,
 				466C4287249A889F007D033E /* File Organization.md */,
 			);
-			path = "labs-ios-starter";
+			path = EcoSoapBank;
 			sourceTree = "<group>";
 		};
 		46BEB4EA24C98EA300FE0CD1 /* Helpers */ = {
@@ -105,6 +112,7 @@
 			children = (
 				46BEB4E624C98D8900FE0CD1 /* Notifications.swift */,
 				46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */,
+				990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -113,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				46BEB4E024C9828800FE0CD1 /* Profile.swift */,
+				990CA24024DB6A6C002B5FA4 /* Protocols */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -146,12 +155,20 @@
 			path = Profiles;
 			sourceTree = "<group>";
 		};
+		990CA24024DB6A6C002B5FA4 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		466C426F249A8748007D033E /* labs-ios-starter */ = {
+		466C426F249A8748007D033E /* EcoSoapBank */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 466C4284249A8749007D033E /* Build configuration list for PBXNativeTarget "labs-ios-starter" */;
+			buildConfigurationList = 466C4284249A8749007D033E /* Build configuration list for PBXNativeTarget "EcoSoapBank" */;
 			buildPhases = (
 				466C426C249A8748007D033E /* Sources */,
 				466C426D249A8748007D033E /* Frameworks */,
@@ -161,12 +178,12 @@
 			);
 			dependencies = (
 			);
-			name = "labs-ios-starter";
+			name = EcoSoapBank;
 			packageProductDependencies = (
 				46BEB4DE24C8F88C00FE0CD1 /* OktaAuth */,
 			);
 			productName = LabsScaffolding;
-			productReference = 466C4270249A8748007D033E /* labs-ios-starter.app */;
+			productReference = 466C4270249A8748007D033E /* EcoSoapBank.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -184,7 +201,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 466C426B249A8748007D033E /* Build configuration list for PBXProject "labs-ios-starter" */;
+			buildConfigurationList = 466C426B249A8748007D033E /* Build configuration list for PBXProject "EcoSoapBank" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -200,7 +217,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				466C426F249A8748007D033E /* labs-ios-starter */,
+				466C426F249A8748007D033E /* EcoSoapBank */,
 			);
 		};
 /* End PBXProject section */
@@ -226,8 +243,11 @@
 			files = (
 				46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
+				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
+				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
+				990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */,
 				46BEB4E924C98DAF00FE0CD1 /* ProfileListViewController.swift in Sources */,
 				463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
@@ -379,16 +399,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "labs-ios-starter/Info.plist";
+				INFOPLIST_FILE = EcoSoapBank/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.LambdaSchool.LabsScaffolding;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.LambdaSchool.EcoSoapBankA;
+				PRODUCT_NAME = EcoSoapBank;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -397,23 +417,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "labs-ios-starter/Info.plist";
+				INFOPLIST_FILE = EcoSoapBank/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.LambdaSchool.LabsScaffolding;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.LambdaSchool.EcoSoapBankA;
+				PRODUCT_NAME = EcoSoapBank;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		466C426B249A8748007D033E /* Build configuration list for PBXProject "labs-ios-starter" */ = {
+		466C426B249A8748007D033E /* Build configuration list for PBXProject "EcoSoapBank" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				466C4282249A8749007D033E /* Debug */,
@@ -422,7 +442,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		466C4284249A8749007D033E /* Build configuration list for PBXNativeTarget "labs-ios-starter" */ = {
+		466C4284249A8749007D033E /* Build configuration list for PBXNativeTarget "EcoSoapBank" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				466C4285249A8749007D033E /* Debug */,
