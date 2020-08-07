@@ -13,13 +13,18 @@ import XCTest
 class UtilityTests: XCTestCase {
 
     func testConfigure() {
+        class TestObject {
+            var int = 0
+        }
+        
+        let int = configure(9) { $0 += 1 }
+        XCTAssertEqual(int, 10)
+
+        let object = configure(TestObject()) {
+            let x = 30 * 2
+            $0.int *= 234
+            $0.int = x - 18
+        }
+        XCTAssertEqual(object.int, 42)
     }
-
-//    func testPerformanceExample() throws {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
-
 }
