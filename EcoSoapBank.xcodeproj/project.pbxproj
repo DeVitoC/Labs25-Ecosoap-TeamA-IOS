@@ -31,7 +31,19 @@
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
 		994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* UtilityFunctions.swift */; };
+		994E4B8124DDB67000C12921 /* EcoSoapBankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8024DDB67000C12921 /* EcoSoapBankTests.swift */; };
+		994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8824DDB68700C12921 /* UtilityTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		994E4B8324DDB67000C12921 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 466C4268249A8748007D033E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 466C426F249A8748007D033E;
+			remoteInfo = EcoSoapBank;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +72,10 @@
 		994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
 		994E4B7824DDB58300C12921 /* UtilityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
+		994E4B7E24DDB67000C12921 /* EcoSoapBankTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcoSoapBankTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		994E4B8024DDB67000C12921 /* EcoSoapBankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSoapBankTests.swift; sourceTree = "<group>"; };
+		994E4B8224DDB67000C12921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		994E4B8824DDB68700C12921 /* UtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +84,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				46BEB4DF24C8F88C00FE0CD1 /* OktaAuth in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		994E4B7B24DDB67000C12921 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				466C4272249A8748007D033E /* EcoSoapBank */,
+				994E4B7F24DDB67000C12921 /* EcoSoapBankTests */,
 				466C4271249A8748007D033E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				466C4270249A8748007D033E /* EcoSoapBank.app */,
+				994E4B7E24DDB67000C12921 /* EcoSoapBankTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,6 +227,16 @@
 			path = Payment;
 			sourceTree = "<group>";
 		};
+		994E4B7F24DDB67000C12921 /* EcoSoapBankTests */ = {
+			isa = PBXGroup;
+			children = (
+				994E4B8024DDB67000C12921 /* EcoSoapBankTests.swift */,
+				994E4B8824DDB68700C12921 /* UtilityTests.swift */,
+				994E4B8224DDB67000C12921 /* Info.plist */,
+			);
+			path = EcoSoapBankTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -225,18 +260,40 @@
 			productReference = 466C4270249A8748007D033E /* EcoSoapBank.app */;
 			productType = "com.apple.product-type.application";
 		};
+		994E4B7D24DDB67000C12921 /* EcoSoapBankTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 994E4B8524DDB67000C12921 /* Build configuration list for PBXNativeTarget "EcoSoapBankTests" */;
+			buildPhases = (
+				994E4B7A24DDB67000C12921 /* Sources */,
+				994E4B7B24DDB67000C12921 /* Frameworks */,
+				994E4B7C24DDB67000C12921 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				994E4B8424DDB67000C12921 /* PBXTargetDependency */,
+			);
+			name = EcoSoapBankTests;
+			productName = EcoSoapBankTests;
+			productReference = 994E4B7E24DDB67000C12921 /* EcoSoapBankTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		466C4268249A8748007D033E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1150;
+				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Spencer Curtis";
 				TargetAttributes = {
 					466C426F249A8748007D033E = {
 						CreatedOnToolsVersion = 11.5;
+					};
+					994E4B7D24DDB67000C12921 = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = 466C426F249A8748007D033E;
 					};
 				};
 			};
@@ -257,6 +314,7 @@
 			projectRoot = "";
 			targets = (
 				466C426F249A8748007D033E /* EcoSoapBank */,
+				994E4B7D24DDB67000C12921 /* EcoSoapBankTests */,
 			);
 		};
 /* End PBXProject section */
@@ -270,6 +328,13 @@
 				466C427D249A8749007D033E /* Assets.xcassets in Resources */,
 				46BEB4F124C98F0D00FE0CD1 /* Profiles.storyboard in Resources */,
 				466C427B249A8748007D033E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		994E4B7C24DDB67000C12921 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,7 +367,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		994E4B7A24DDB67000C12921 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */,
+				994E4B8124DDB67000C12921 /* EcoSoapBankTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		994E4B8424DDB67000C12921 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 466C426F249A8748007D033E /* EcoSoapBank */;
+			targetProxy = 994E4B8324DDB67000C12921 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		466C4279249A8748007D033E /* Main.storyboard */ = {
@@ -474,6 +556,46 @@
 			};
 			name = Release;
 		};
+		994E4B8624DDB67000C12921 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = EcoSoapBankTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.LambdaSchool.EcoSoapBankTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EcoSoapBank.app/EcoSoapBank";
+			};
+			name = Debug;
+		};
+		994E4B8724DDB67000C12921 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = EcoSoapBankTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.LambdaSchool.EcoSoapBankTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EcoSoapBank.app/EcoSoapBank";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -491,6 +613,15 @@
 			buildConfigurations = (
 				466C4285249A8749007D033E /* Debug */,
 				466C4286249A8749007D033E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		994E4B8524DDB67000C12921 /* Build configuration list for PBXNativeTarget "EcoSoapBankTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				994E4B8624DDB67000C12921 /* Debug */,
+				994E4B8724DDB67000C12921 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
