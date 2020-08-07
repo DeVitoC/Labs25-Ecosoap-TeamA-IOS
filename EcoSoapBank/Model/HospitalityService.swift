@@ -10,7 +10,7 @@
 
 import Foundation
 
-enum HospitalityService {
+enum HospitalityService: String {
     case bottles
     case linens
     case other

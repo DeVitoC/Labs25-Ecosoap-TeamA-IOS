@@ -55,11 +55,11 @@ struct Pickup: Identifiable {
 
 
 extension Pickup {
-    enum Status {
-        case submitted, outForPickup, complete, cancelled
+    enum Status: String {
+        case submitted, outForPickup = "out for pickup", complete, cancelled
     }
 
-    struct Carton {
+    struct Carton: Identifiable {
         let id: Int
         let product: HospitalityService?
         let weight: Int?
