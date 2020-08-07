@@ -12,18 +12,26 @@ import UIKit
 class AppFlowCoordinator: FlowCoordinator {
     let window: UIWindow
 
-    var rootVC: UIViewController
+    let tabBarController = UITabBarController()
+
+    let impactCoord = ImpactCoordinator()
+    let pickupCoord = PickupCoordinator()
 
     init(window: UIWindow) {
         self.window = window
-        guard let initialVC = UIStoryboard.main.instantiateInitialViewController() else {
-            preconditionFailure("Could not instantiate initial view controller from main storyboard")
-        }
-        rootVC = initialVC
     }
 
     func start() {
-        window.rootViewController = rootVC
+        tabBarController.viewControllers = [
+            impactCoord.rootVC,
+            pickupCoord.rootVC
+        ]
+
+        impactCoord.start()
+        pickupCoord.start()
+
+        window.rootViewController = tabBarController
         window.makeKeyAndVisible()
     }
 }
+

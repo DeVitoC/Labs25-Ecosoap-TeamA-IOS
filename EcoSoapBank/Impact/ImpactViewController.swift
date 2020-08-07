@@ -12,11 +12,12 @@ import UIKit
 class ImpactViewController: UIViewController {
     lazy var label = configure(UILabel()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "Hello world"
+        $0.text = "Hello impact"
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         
         view.addSubview(label)
         NSLayoutConstraint.activate([

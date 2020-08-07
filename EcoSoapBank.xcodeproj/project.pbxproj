@@ -26,7 +26,6 @@
 		990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */; };
 		990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */; };
 		990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */; };
-		994E4B7124DDAF8600C12921 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7024DDAF8600C12921 /* MainTabBarController.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
@@ -68,7 +67,6 @@
 		990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Constants.swift"; sourceTree = "<group>"; };
-		994E4B7024DDAF8600C12921 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */,
-				994E4B7024DDAF8600C12921 /* MainTabBarController.swift */,
 				466C4273249A8748007D033E /* AppDelegate.swift */,
 				466C4275249A8748007D033E /* SceneDelegate.swift */,
 				466C427E249A8749007D033E /* LaunchScreen.storyboard */,
@@ -350,7 +347,6 @@
 			files = (
 				46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
-				994E4B7124DDAF8600C12921 /* MainTabBarController.swift in Sources */,
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,

@@ -6,12 +6,13 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 class PickupCoordinator: FlowCoordinator {
-    func start() {
-        
-    }
+    var rootVC = PickupHistoryViewController()
 
+    func start() {
+        rootVC.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
+    }
 }
