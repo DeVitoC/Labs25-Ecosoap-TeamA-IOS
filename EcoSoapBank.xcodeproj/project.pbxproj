@@ -38,6 +38,7 @@
 		998913D524DE0907009ADBC1 /* PickupListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D424DE0907009ADBC1 /* PickupListItem.swift */; };
 		998913D724DE0C34009ADBC1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D624DE0C33009ADBC1 /* Property.swift */; };
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
+		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		998913D424DE0907009ADBC1 /* PickupListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupListItem.swift; sourceTree = "<group>"; };
 		998913D624DE0C33009ADBC1 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
+		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */,
 				990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */,
 				994E4B7824DDB58300C12921 /* UtilityFunctions.swift */,
+				998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */,
 				463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
+				998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */,
 				998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */,
 				466C4276249A8748007D033E /* SceneDelegate.swift in Sources */,
 			);
