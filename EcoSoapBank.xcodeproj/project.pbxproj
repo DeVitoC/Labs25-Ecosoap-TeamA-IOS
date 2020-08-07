@@ -35,6 +35,9 @@
 		998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */; };
 		998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D024DDFF96009ADBC1 /* PickupController.swift */; };
 		998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D224DDFFA8009ADBC1 /* Pickup.swift */; };
+		998913D524DE0907009ADBC1 /* PickupListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D424DE0907009ADBC1 /* PickupListItem.swift */; };
+		998913D724DE0C34009ADBC1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D624DE0C33009ADBC1 /* Property.swift */; };
+		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +83,9 @@
 		998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryView.swift; sourceTree = "<group>"; };
 		998913D024DDFF96009ADBC1 /* PickupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupController.swift; sourceTree = "<group>"; };
 		998913D224DDFFA8009ADBC1 /* Pickup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pickup.swift; sourceTree = "<group>"; };
+		998913D424DE0907009ADBC1 /* PickupListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupListItem.swift; sourceTree = "<group>"; };
+		998913D624DE0C33009ADBC1 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +171,8 @@
 			children = (
 				46BEB4E024C9828800FE0CD1 /* Profile.swift */,
 				998913D224DDFFA8009ADBC1 /* Pickup.swift */,
+				998913D824DE0C90009ADBC1 /* HospitalityService.swift */,
+				998913D624DE0C33009ADBC1 /* Property.swift */,
 				990CA24024DB6A6C002B5FA4 /* Protocols */,
 			);
 			path = Model;
@@ -222,6 +230,7 @@
 			children = (
 				994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */,
 				998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */,
+				998913D424DE0907009ADBC1 /* PickupListItem.swift */,
 			);
 			path = Pickups;
 			sourceTree = "<group>";
@@ -363,7 +372,9 @@
 				990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
+				998913D524DE0907009ADBC1 /* PickupListItem.swift in Sources */,
 				998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */,
+				998913D724DE0C34009ADBC1 /* Property.swift in Sources */,
 				46BEB4E924C98DAF00FE0CD1 /* ProfileListViewController.swift in Sources */,
 				998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */,
 				463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */,
@@ -371,6 +382,7 @@
 				46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */,
 				463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
+				998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */,
 				466C4276249A8748007D033E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
