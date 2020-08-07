@@ -9,13 +9,22 @@
 import SwiftUI
 
 struct PickupHistoryView: View {
+    @ObservedObject var pickupController: PickupController
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(pickupController.pickups) {
+                PickupListItem(pickup: $0)
+            }
+        }
     }
 }
 
+
+// MARK: - Previews
+
 struct PickupHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        PickupHistoryView()
+        PickupHistoryView(pickupController: .init())
     }
 }
