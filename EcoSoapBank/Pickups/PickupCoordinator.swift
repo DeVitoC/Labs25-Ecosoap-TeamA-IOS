@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import SwiftUI
 
 
 class PickupCoordinator: FlowCoordinator {
-    var rootVC = PickupHistoryViewController()
+    let pickupController = PickupController()
+
+    private(set) lazy var rootVC: UIViewController = UIHostingController(
+        rootView: PickupHistoryView(pickupController: pickupController))
 
     func start() {
         rootVC.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
