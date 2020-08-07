@@ -6,4 +6,22 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+
+class ImpactViewController: UIViewController {
+    lazy var label = configure(UILabel()) {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.text = "Hello world"
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.addSubview(label)
+        NSLayoutConstraint.activate([
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+}
