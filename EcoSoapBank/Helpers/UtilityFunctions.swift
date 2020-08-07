@@ -23,3 +23,32 @@ public func configure<T>(
     try change(&mutable)
     return mutable
 }
+
+
+extension Date {
+    init?(year: Int, month: Int, day: Int, hour: Int, minute: Int) {
+        guard let date = DateComponents(
+            calendar: .current,
+            timeZone: .current,
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute
+        ).date
+            else { return nil }
+
+        self = date
+    }
+
+    func string(from formatter: DateFormatter) -> String {
+        formatter.string(from: self)
+    }
+}
+
+
+extension TimeInterval {
+    static func days(_ count: Int) -> TimeInterval {
+        Double(count) * 86_400
+    }
+}
