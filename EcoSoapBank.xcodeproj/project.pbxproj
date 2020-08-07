@@ -33,6 +33,7 @@
 		994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* UtilityFunctions.swift */; };
 		994E4B8124DDB67000C12921 /* EcoSoapBankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8024DDB67000C12921 /* EcoSoapBankTests.swift */; };
 		994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8824DDB68700C12921 /* UtilityTests.swift */; };
+		998913CC24DDBE6F009ADBC1 /* PickupHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913CB24DDBE6F009ADBC1 /* PickupHistoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		994E4B8024DDB67000C12921 /* EcoSoapBankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSoapBankTests.swift; sourceTree = "<group>"; };
 		994E4B8224DDB67000C12921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		994E4B8824DDB68700C12921 /* UtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityTests.swift; sourceTree = "<group>"; };
+		998913CB24DDBE6F009ADBC1 /* PickupHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */,
+				998913CB24DDBE6F009ADBC1 /* PickupHistoryViewController.swift */,
 			);
 			path = Pickups;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				46BEB4E924C98DAF00FE0CD1 /* ProfileListViewController.swift in Sources */,
 				463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
+				998913CC24DDBE6F009ADBC1 /* PickupHistoryViewController.swift in Sources */,
 				46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */,
 				463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
