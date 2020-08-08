@@ -41,7 +41,6 @@
 import Foundation
 
 
-/// TEMPORARY: This model will be vastly modified when network model structures are re-confirmed.
 struct Pickup: Identifiable {
     let id: Int
     let confirmationCode: String
