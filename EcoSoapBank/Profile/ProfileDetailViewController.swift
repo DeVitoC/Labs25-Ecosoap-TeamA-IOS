@@ -12,14 +12,14 @@ class ProfileDetailViewController: UIViewController {
     
     // MARK: - Properties and Outlets
     
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var emailLabel: UILabel!
     
-    @IBOutlet weak var editStackView: UIStackView!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var avatarURLTextField: UITextField!
+    @IBOutlet private weak var editStackView: UIStackView!
+    @IBOutlet private weak var nameTextField: UITextField!
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var avatarURLTextField: UITextField!
     
     var profileController: ProfileController = ProfileController.shared
     var profile: Profile?
