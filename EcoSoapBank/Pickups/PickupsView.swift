@@ -33,3 +33,12 @@ struct PickupsView: View {
         }
     }
 }
+
+struct PickupsView_Previews: PreviewProvider {
+    static var previews: some View {
+        PickupsView(
+            pickupController: PickupController(
+                dataProvider: MockPickupProvider()),
+            delegate: nil)
+    }
+}
