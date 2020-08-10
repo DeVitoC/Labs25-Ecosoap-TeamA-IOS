@@ -30,3 +30,7 @@ struct ProfileWithMessage: Codable {
     let profile: Profile
     let message: String?
 }
+
+struct ProfileQuery: Codable {
+    let data: [String: Profile]
+}
