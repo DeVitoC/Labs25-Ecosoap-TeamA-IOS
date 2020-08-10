@@ -20,3 +20,9 @@ class PickupCoordinator: FlowCoordinator {
         rootVC.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
     }
 }
+
+extension PickupCoordinator: PickupsViewDelegate {
+    func logOut() {
+        preconditionFailure("Requested log out (not yet implemented)")
+    }
+}
