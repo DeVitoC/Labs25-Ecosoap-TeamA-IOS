@@ -10,13 +10,22 @@ import UIKit
 
 class ProfileTabBarViewController: UITabBarController {
 
+    private var authExpirationObserver: NSObjectProtocol?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: .oktaAuthenticationExpired,
-                                                             object: nil,
-                                                             queue: .main,
-                                                             using: dismissToLogin)
+        authExpirationObserver = NotificationCenter.default.addObserver(
+            forName: .oktaAuthenticationExpired,
+            object: nil,
+            queue: .main,
+            using: dismissToLogin)
+    }
+
+    deinit {
+        if let observer = authExpirationObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
     
     func dismissToLogin(_ notification: Notification) {

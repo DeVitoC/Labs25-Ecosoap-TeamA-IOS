@@ -12,20 +12,29 @@ import OktaAuth
 class LoginViewController: UIViewController {
     
     let profileController = ProfileController.shared
+
+    var observers: [NSObjectProtocol] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(forName: .oktaAuthenticationSuccessful,
-                                               object: nil,
-                                               queue: .main,
-                                               using: checkForExistingProfile)
-        
-        NotificationCenter.default.addObserver(forName: .oktaAuthenticationExpired,
-                                               object: nil,
-                                               queue: .main,
-                                               using: alertUserOfExpiredCredentials)
-        
+
+        let authSuccessObserver = NotificationCenter.default.addObserver(
+            forName: .oktaAuthenticationSuccessful,
+            object: nil,
+            queue: .main,
+            using: checkForExistingProfile)
+        let authExpiredObserver = NotificationCenter.default.addObserver(
+            forName: .oktaAuthenticationExpired,
+            object: nil,
+            queue: .main,
+            using: alertUserOfExpiredCredentials)
+        observers.append(contentsOf: [authSuccessObserver, authExpiredObserver])
+    }
+
+    deinit {
+        observers.forEach {
+            NotificationCenter.default.removeObserver($0)
+        }
     }
     
     // MARK: - Actions
