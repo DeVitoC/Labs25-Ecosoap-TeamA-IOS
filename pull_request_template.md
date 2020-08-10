@@ -3,6 +3,8 @@
 - Broad, bulleted overview of what's included in PR
 	- If necessary, clarifying sub-bullets for justification
 
+PR comments should contain minimum amount of info needed to convey what you need to; template is intentionally minimalist.
+
 <link(s) to applicable Trello card(s)>
 
 ## Needs review
