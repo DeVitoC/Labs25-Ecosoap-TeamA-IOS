@@ -11,7 +11,7 @@ import SwiftUI
 
 
 class PickupCoordinator: FlowCoordinator {
-    let pickupController = PickupController()
+    let pickupController = PickupController(dataProvider: MockPickupProvider())
 
     private(set) lazy var rootVC: UIViewController = UIHostingController(
         rootView: PickupHistoryView(pickupController: pickupController))
