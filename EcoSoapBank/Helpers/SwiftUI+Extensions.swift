@@ -10,6 +10,16 @@
 import SwiftUI
 
 
+// MARK: - Image
+
+extension Image {
+    static func plus() -> Image { Image(systemName: "plus") }
+    static func cubeBox() -> Image { Image(systemName: "cube.box") }
+}
+
+
+// MARK: - Text
+
 extension Text {
     static func += (lhs: inout Text, rhs: Text) {
         lhs = lhs + rhs
