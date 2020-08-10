@@ -186,35 +186,20 @@ class ProfileController {
         dataTask.resume()
     }
     
-    func updateAuthenticatedUserProfile(_ profile: Profile, with name: String, email: String, avatarURL: URL, completion: @escaping (Profile) -> Void) {
-        
-        var oktaCredentials: OktaCredentials
-        
+    func updateAuthenticatedUserProfile(
+        _ profile: Profile,
+        with name: String,
+        email: String,
+        avatarURL: URL,
+        completion: @escaping (Profile) -> Void
+    ) {
+        let request: URLRequest
         do {
-            oktaCredentials = try oktaAuth.credentialsIfAvailable()
+            request = try requestForUpdatingProfile(profile)
         } catch {
             postAuthenticationExpiredNotification()
-            NSLog("Credentials do not exist. Unable to get authenticated user profile from API")
-            DispatchQueue.main.async {
-                completion(profile)
-            }
-            return
-        }
-        
-        let requestURL = baseURL
-            .appendingPathComponent("profiles")
-        
-        var request = URLRequest(url: requestURL)
-        request.httpMethod = "PUT"
-        request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
-        
-        do {
-            request.httpBody = try JSONEncoder().encode(profile)
-        } catch {
-            NSLog("Error encoding profile JSON: \(error)")
-            DispatchQueue.main.async {
-                completion(profile)
-            }
+            NSLog("Profile Update Request creation failed")
+            DispatchQueue.main.async { completion(profile) }
             return
         }
         
@@ -359,5 +344,19 @@ class ProfileController {
     
     func postAuthenticationExpiredNotification() {
         NotificationCenter.default.post(name: .oktaAuthenticationExpired, object: nil)
+    }
+
+    private func requestForUpdatingProfile(_ profile: Profile) throws -> URLRequest {
+        let oktaCredentials = try oktaAuth.credentialsIfAvailable()
+
+        var request = URLRequest(url: baseURL.appendingPathComponent("profiles"))
+        request.httpMethod = "PUT"
+        request.addValue(
+            "Bearer \(oktaCredentials.idToken)",
+            forHTTPHeaderField: "Authorization")
+
+        request.httpBody = try JSONEncoder().encode(profile)
+
+        return request
     }
 }
