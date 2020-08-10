@@ -31,6 +31,7 @@ struct ProfileWithMessage: Codable {
     let message: String?
 }
 
+/// Model that describes the data returned from GraphQL Query request for "userById"
 struct ProfileQuery: Codable {
     let data: [String: Profile]
 }
