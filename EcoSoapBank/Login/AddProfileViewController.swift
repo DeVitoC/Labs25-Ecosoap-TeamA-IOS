@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AddProfileDelegate: class {
+protocol AddProfileDelegate: AnyObject {
     func profileWasAdded()
 }
 
@@ -16,10 +16,10 @@ class AddProfileViewController: UIViewController {
 
     // MARK: - Properties and Outlets
     
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var avatarURLTextField: UITextField!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var nameTextField: UITextField!
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var avatarURLTextField: UITextField!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     weak var delegate: AddProfileDelegate?
     

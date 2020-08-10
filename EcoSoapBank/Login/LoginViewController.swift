@@ -12,20 +12,29 @@ import OktaAuth
 class LoginViewController: UIViewController {
     
     let profileController = ProfileController.shared
+
+    var observers: [NSObjectProtocol] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(forName: .oktaAuthenticationSuccessful,
-                                               object: nil,
-                                               queue: .main,
-                                               using: checkForExistingProfile)
-        
-        NotificationCenter.default.addObserver(forName: .oktaAuthenticationExpired,
-                                               object: nil,
-                                               queue: .main,
-                                               using: alertUserOfExpiredCredentials)
-        
+
+        let authSuccessObserver = NotificationCenter.default.addObserver(
+            forName: .oktaAuthenticationSuccessful,
+            object: nil,
+            queue: .main,
+            using: checkForExistingProfile)
+        let authExpiredObserver = NotificationCenter.default.addObserver(
+            forName: .oktaAuthenticationExpired,
+            object: nil,
+            queue: .main,
+            using: alertUserOfExpiredCredentials)
+        observers.append(contentsOf: [authSuccessObserver, authExpiredObserver])
+    }
+
+    deinit {
+        observers.forEach {
+            NotificationCenter.default.removeObserver($0)
+        }
     }
     
     // MARK: - Actions
@@ -38,10 +47,11 @@ class LoginViewController: UIViewController {
     
     private func alertUserOfExpiredCredentials(_ notification: Notification) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.presentSimpleAlert(with: "Your Okta credentials have expired",
-                           message: "Please sign in again",
-                           preferredStyle: .alert,
-                           dismissText: "Dimiss")
+            self.presentSimpleAlert(
+                with: "Your Okta credentials have expired",
+                message: "Please sign in again",
+                preferredStyle: .alert,
+                dismissText: "Dimiss")
         }
     }
     
@@ -52,7 +62,7 @@ class LoginViewController: UIViewController {
     }
     
     private func checkForExistingProfile() {
-        profileController.checkForExistingAuthenticatedUserProfile { [weak self] (exists) in
+        profileController.checkForExistingAuthenticatedUserProfile { [weak self] exists in
             
             guard let self = self,
                 self.presentedViewController == nil else { return }

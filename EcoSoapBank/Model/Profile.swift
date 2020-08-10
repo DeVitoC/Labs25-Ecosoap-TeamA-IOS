@@ -16,7 +16,7 @@ struct Profile: Codable {
     let avatarURL: URL?
     
     /// Storing the `avatarImage` on the model object itself is fine up to a point due to potentially using too much memory. If you know you will be storing a large amount of images, using a cache and clearing it out after you hit a certain amount of information in it would be better.
-    var avatarImage: UIImage? = nil
+    var avatarImage: UIImage?
     
     enum CodingKeys: String, CodingKey {
         case id

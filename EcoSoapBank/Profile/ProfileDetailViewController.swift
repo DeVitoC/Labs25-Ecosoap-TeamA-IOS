@@ -12,14 +12,14 @@ class ProfileDetailViewController: UIViewController {
     
     // MARK: - Properties and Outlets
     
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var emailLabel: UILabel!
     
-    @IBOutlet weak var editStackView: UIStackView!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var avatarURLTextField: UITextField!
+    @IBOutlet private weak var editStackView: UIStackView!
+    @IBOutlet private weak var nameTextField: UITextField!
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var avatarURLTextField: UITextField!
     
     var profileController: ProfileController = ProfileController.shared
     var profile: Profile?
@@ -52,7 +52,7 @@ class ProfileDetailViewController: UIViewController {
                 return
         }
         
-        profileController.updateAuthenticatedUserProfile(profile, with: name, email: email, avatarURL: avatarURL) { [weak self] (updatedProfile) in
+        profileController.updateAuthenticatedUserProfile(profile, with: name, email: email, avatarURL: avatarURL) { [weak self] updatedProfile in
             
             guard let self = self else { return }
             self.updateViews(with: updatedProfile)
@@ -96,7 +96,7 @@ class ProfileDetailViewController: UIViewController {
         if let avatarImage = profile.avatarImage {
             avatarImageView.image = avatarImage
         } else if let avatarURL = profile.avatarURL {
-            profileController.image(for: avatarURL, completion: { [weak self] (avatarImage) in
+            profileController.image(for: avatarURL, completion: { [weak self] avatarImage in
                 guard let self = self else { return }
                 
                 self.profile?.avatarImage = avatarImage

@@ -25,7 +25,7 @@ extension Array where Element == Pickup {
                 readyDate: Date(timeIntervalSinceNow: .days(-10)),
                 pickupDate: Date(timeIntervalSinceNow: .days(-5)),
                 cartons: [
-                    .init(id: 0, product: .bottles, weight: 20),],
+                    .init(id: 0, product: .bottles, weight: 20), ],
                 notes: "notes"),
             Pickup(
                 id: 1,
