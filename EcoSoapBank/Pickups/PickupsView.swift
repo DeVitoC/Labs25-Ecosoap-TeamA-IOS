@@ -8,8 +8,24 @@
 
 import SwiftUI
 
+
+protocol PickupsViewDelegate: AnyObject {
+    func logOut()
+}
+
+
 struct PickupsView: View {
     @ObservedObject private var pickupController: PickupController
+
+    private weak var delegate: PickupsViewDelegate?
+
+    init(
+        pickupController: PickupController,
+        delegate: PickupsViewDelegate?
+    ) {
+        self.pickupController = pickupController
+        self.delegate = delegate
+    }
 
     var body: some View {
         NavigationView {
