@@ -6,4 +6,14 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
+
+struct PickupsView: View {
+    @ObservedObject private var pickupController: PickupController
+
+    var body: some View {
+        NavigationView {
+            PickupHistoryView(pickupController: pickupController)
+        }
+    }
+}
