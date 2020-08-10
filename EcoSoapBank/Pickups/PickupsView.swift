@@ -17,6 +17,8 @@ protocol PickupsViewDelegate: AnyObject {
 struct PickupsView: View {
     @ObservedObject private var pickupController: PickupController
 
+    @State private var makingNewPickup = false
+
     private weak var delegate: PickupsViewDelegate?
 
     init(
@@ -30,7 +32,25 @@ struct PickupsView: View {
     var body: some View {
         NavigationView {
             PickupHistoryView(pickupController: pickupController)
+                .navigationBarTitle("Pickup History", displayMode: .inline)
+                .navigationBarItems(
+                    leading: Button(
+                        action: { self.delegate?.logOut() },
+                        label: { Text("Log out") }),
+                    trailing: Button(
+                        action: { self.makingNewPickup = true },
+                        label: newPickupButtonLabel
+                    )
+                )
         }
+    }
+
+    private func newPickupButtonLabel() -> some View {
+        HStack(spacing: 4) {
+            Image.plus()
+            Image.cubeBox()
+        }.padding(4).overlay(RoundedRectangle(cornerRadius: 10).stroke())
+        .accessibility(label: Text("Schedule New Pickup"))
     }
 }
 
