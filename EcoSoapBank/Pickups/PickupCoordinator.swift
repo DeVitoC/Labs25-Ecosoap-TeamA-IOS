@@ -14,10 +14,14 @@ class PickupCoordinator: FlowCoordinator {
     let pickupController = PickupController(dataProvider: MockPickupProvider())
 
     private(set) lazy var rootVC: UIViewController = UIHostingController(
-        rootView: PickupHistoryView(pickupController: pickupController))
+        rootView: PickupsView(
+            pickupController: pickupController,
+            delegate: self))
 
     func start() {
-        rootVC.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
+        rootVC.tabBarItem = UITabBarItem(
+            tabBarSystemItem: .history,
+            tag: 1)
     }
 }
 
