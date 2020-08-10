@@ -34,4 +34,3 @@ class AppFlowCoordinator: FlowCoordinator {
         window.makeKeyAndVisible()
     }
 }
-

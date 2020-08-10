@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let context = URLContexts.first else { return }
 
         let url = context.url
-        ProfileController.shared.oktaAuth.receiveCredentials(fromCallbackURL: url) { (result) in
+        ProfileController.shared.oktaAuth.receiveCredentials(fromCallbackURL: url) { result in
             
             let notificationName: Notification.Name
             do {
@@ -48,4 +48,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
 }
-

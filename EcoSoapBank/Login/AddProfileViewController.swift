@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AddProfileDelegate: class {
+protocol AddProfileDelegate: AnyObject {
     func profileWasAdded()
 }
 

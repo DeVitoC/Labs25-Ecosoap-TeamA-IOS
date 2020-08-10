@@ -19,7 +19,7 @@ class ProfileTabBarViewController: UITabBarController {
                                                              using: dismissToLogin)
     }
     
-    func dismissToLogin(_ notification: Notification)  {
+    func dismissToLogin(_ notification: Notification) {
         dismiss(animated: true, completion: nil)
     }
 }

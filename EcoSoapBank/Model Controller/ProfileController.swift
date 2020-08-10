@@ -53,7 +53,7 @@ class ProfileController {
         
         request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
         
-        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             
             defer {
                 DispatchQueue.main.async {
@@ -113,7 +113,7 @@ class ProfileController {
             return
         }
         
-        getSingleProfile(userID) { (profile) in
+        getSingleProfile(userID) { profile in
             self.authenticatedUserProfile = profile
             DispatchQueue.main.async {
                 completion()
@@ -149,7 +149,7 @@ class ProfileController {
         
         request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
         
-        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             
             var fetchedProfile: Profile?
             
@@ -218,10 +218,9 @@ class ProfileController {
             return
         }
         
-        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
+        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             var profile = profile
-            
+
             defer {
                 DispatchQueue.main.async {
                     completion(profile)
@@ -311,7 +310,7 @@ class ProfileController {
             return
         }
         
-        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let dataTask = URLSession.shared.dataTask(with: request) { _, response, error in
             
             defer {
                 DispatchQueue.main.async {
@@ -335,9 +334,9 @@ class ProfileController {
     }
     
     func image(for url: URL, completion: @escaping (UIImage?) -> Void) {
-        let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
+        let dataTask = URLSession.shared.dataTask(with: url) { data, _, error in
             
-            var fetchedImage: UIImage? = nil
+            var fetchedImage: UIImage?
             
             defer {
                 DispatchQueue.main.async {

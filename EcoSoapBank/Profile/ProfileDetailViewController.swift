@@ -52,7 +52,7 @@ class ProfileDetailViewController: UIViewController {
                 return
         }
         
-        profileController.updateAuthenticatedUserProfile(profile, with: name, email: email, avatarURL: avatarURL) { [weak self] (updatedProfile) in
+        profileController.updateAuthenticatedUserProfile(profile, with: name, email: email, avatarURL: avatarURL) { [weak self] updatedProfile in
             
             guard let self = self else { return }
             self.updateViews(with: updatedProfile)
@@ -96,7 +96,7 @@ class ProfileDetailViewController: UIViewController {
         if let avatarImage = profile.avatarImage {
             avatarImageView.image = avatarImage
         } else if let avatarURL = profile.avatarURL {
-            profileController.image(for: avatarURL, completion: { [weak self] (avatarImage) in
+            profileController.image(for: avatarURL, completion: { [weak self] avatarImage in
                 guard let self = self else { return }
                 
                 self.profile?.avatarImage = avatarImage
