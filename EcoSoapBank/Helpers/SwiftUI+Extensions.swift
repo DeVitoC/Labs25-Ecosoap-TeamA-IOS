@@ -92,3 +92,15 @@ extension View {
             for: nil)
     }
 }
+
+
+// MARK: - Binding
+
+extension Binding {
+    /// Initializes a `Binding` that simply returns the provided value non-dynamically.
+    /// The binding's setter does nothing.
+    /// - Parameter getValue: The value to be returned from the getter.
+    init(getValue: Value) {
+        self.init(get: { getValue }, set: { _ in })
+    }
+}
