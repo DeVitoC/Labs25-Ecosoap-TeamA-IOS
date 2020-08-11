@@ -32,6 +32,7 @@
 		994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* UtilityFunctions.swift */; };
 		994E4B8124DDB67000C12921 /* EcoSoapBankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8024DDB67000C12921 /* EcoSoapBankTests.swift */; };
 		994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8824DDB68700C12921 /* UtilityTests.swift */; };
+		997BF11024E1FA1E00A643D8 /* NewPickupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BF10F24E1FA1E00A643D8 /* NewPickupView.swift */; };
 		997BF11224E20AAE00A643D8 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BF11124E20AAE00A643D8 /* TextView.swift */; };
 		998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */; };
 		998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D024DDFF96009ADBC1 /* PickupController.swift */; };
@@ -83,6 +84,7 @@
 		994E4B8024DDB67000C12921 /* EcoSoapBankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSoapBankTests.swift; sourceTree = "<group>"; };
 		994E4B8224DDB67000C12921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		994E4B8824DDB68700C12921 /* UtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityTests.swift; sourceTree = "<group>"; };
+		997BF10F24E1FA1E00A643D8 /* NewPickupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewPickupView.swift; path = EcoSoapBank/Pickups/NewPickupView.swift; sourceTree = "<group>"; };
 		997BF11124E20AAE00A643D8 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextView.swift; path = EcoSoapBank/Helpers/TextView.swift; sourceTree = "<group>"; };
 		998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryView.swift; sourceTree = "<group>"; };
 		998913D024DDFF96009ADBC1 /* PickupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				997BF11124E20AAE00A643D8 /* TextView.swift */,
+				997BF10F24E1FA1E00A643D8 /* NewPickupView.swift */,
 				466C4272249A8748007D033E /* EcoSoapBank */,
 				994E4B7F24DDB67000C12921 /* EcoSoapBankTests */,
 				466C4271249A8748007D033E /* Products */,
@@ -396,6 +399,7 @@
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
+				997BF11024E1FA1E00A643D8 /* NewPickupView.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
 				998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
