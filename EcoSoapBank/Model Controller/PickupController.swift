@@ -9,14 +9,51 @@
 import Foundation
 
 
-class PickupController: ObservableObject {
-    @Published var pickups: [Pickup] = .mockData()
+protocol PickupDataProvider {
+    func fetchAllPickups(_ completion: (Result<[Pickup], Error>) -> Void)
 }
 
 
-extension Array where Element == Pickup {
-    static func mockData() -> Self {
-        [
+class PickupController: ObservableObject {
+    @Published private(set) var pickups: [Pickup] = []
+    @Published private(set) var error: Error?
+
+    private var dataProvider: PickupDataProvider
+
+    init(dataProvider: PickupDataProvider) {
+        self.dataProvider = dataProvider
+
+        self.dataProvider.fetchAllPickups { [weak self] result in
+            switch result {
+            case .success(let pickups):
+                self?.pickups = pickups
+            case .failure(let error):
+                self?.error = error
+            }
+        }
+    }
+}
+
+
+// MARK: - Mock Data Provider
+
+struct MockPickupProvider: PickupDataProvider {
+    enum Error: Swift.Error {
+        case shouldFail
+    }
+
+    var shouldFail: Bool
+
+    init(shouldFail: Bool = false) {
+        self.shouldFail = shouldFail
+    }
+
+    func fetchAllPickups(_ completion: (Result<[Pickup], Swift.Error>) -> Void) {
+        guard !shouldFail else {
+            completion(.failure(Self.Error.shouldFail))
+            return
+        }
+        completion(.success([
             Pickup(
                 id: 0,
                 confirmationCode: UUID().uuidString,
@@ -49,6 +86,6 @@ extension Array where Element == Pickup {
                     .init(id: 0, product: .linens, weight: 20),
                     .init(id: 4, product: .other, weight: 98)],
                 notes: ""),
-        ]
+        ]))
     }
 }
