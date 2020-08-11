@@ -58,10 +58,10 @@ class GraphQLController {
 
     /// Method for GraphQL mutation requests
     /// - Parameters:
-    ///   - mutationQuery: The indended mutation query in string format
+    ///   - mutationQuery: The intended mutation query in string format
     ///   - variables: The variables to be passed in the request
     ///   - session: The URLSession used for the request. By default this is URLSession.shared
-    ///   - completion: Completion handler that passes back a Result of type Prfile or Error
+    ///   - completion: Completion handler that passes back a Result of type Profile or Error
     func mutationRequest(mutationQuery: String,
                          variables: [Any] = [],
                          session: URLSession = URLSession.shared,
