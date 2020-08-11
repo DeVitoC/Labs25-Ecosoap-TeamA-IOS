@@ -6,28 +6,19 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
+
 import XCTest
+@testable import EcoSoapBank
 
 class ColorTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    // swiftlint:disable empty_xctest_method
+    func testColorsInitializeProperly() {
+        let _: UIColor = .esbGreen
+        let _: UIColor = .downyBlue
+        let _: UIColor = .codGrey
+        let _: UIColor = .montanaGrey
+        let _: UIColor = .shuttleGrey
+        let _: UIColor = .silver
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
