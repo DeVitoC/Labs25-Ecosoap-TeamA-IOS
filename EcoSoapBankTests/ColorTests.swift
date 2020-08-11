@@ -12,13 +12,12 @@ import XCTest
 
 class ColorTests: XCTestCase {
     
-    // swiftlint:disable empty_xctest_method
     func testColorsInitializeProperly() {
-        let _: UIColor = .esbGreen
-        let _: UIColor = .downyBlue
-        let _: UIColor = .codGrey
-        let _: UIColor = .montanaGrey
-        let _: UIColor = .shuttleGrey
-        let _: UIColor = .silver
+        XCTAssertNotNil(UIColor.esbGreen)
+        XCTAssertNotNil(UIColor.downyBlue)
+        XCTAssertNotNil(UIColor.codGrey)
+        XCTAssertNotNil(UIColor.montanaGrey)
+        XCTAssertNotNil(UIColor.shuttleGrey)
+        XCTAssertNotNil(UIColor.silver)
     }
 }
