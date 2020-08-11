@@ -25,6 +25,7 @@ struct PickupHistoryView: View {
 
 struct PickupHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        PickupHistoryView(pickupController: .init())
+        PickupHistoryView(
+            pickupController: .init(dataProvider: MockPickupProvider()))
     }
 }
