@@ -42,6 +42,7 @@
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
 		9998716424E1E8C4000A993E /* PickupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9998716324E1E8C4000A993E /* PickupsView.swift */; };
+		99B5790324E30F140097957D /* PickupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5790224E30F140097957D /* PickupTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
 		9998716324E1E8C4000A993E /* PickupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupsView.swift; sourceTree = "<group>"; };
+		99B5790224E30F140097957D /* PickupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +259,7 @@
 		994E4B7F24DDB67000C12921 /* EcoSoapBankTests */ = {
 			isa = PBXGroup;
 			children = (
+				99B5790224E30F140097957D /* PickupTests.swift */,
 				994E4B8024DDB67000C12921 /* EcoSoapBankTests.swift */,
 				994E4B8824DDB68700C12921 /* UtilityTests.swift */,
 				994E4B8224DDB67000C12921 /* Info.plist */,
@@ -430,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */,
+				99B5790324E30F140097957D /* PickupTests.swift in Sources */,
 				994E4B8124DDB67000C12921 /* EcoSoapBankTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
