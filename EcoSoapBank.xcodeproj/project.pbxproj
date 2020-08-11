@@ -98,6 +98,7 @@
 		998913D724DE0C34009ADBC1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D624DE0C33009ADBC1 /* Property.swift */; };
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
+		E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */; };
 		9998716424E1E8C4000A993E /* PickupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9998716324E1E8C4000A993E /* PickupsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -179,6 +180,7 @@
 		998913D624DE0C33009ADBC1 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
+		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
 		9998716324E1E8C4000A993E /* PickupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -286,6 +288,7 @@
 		466C4272249A8748007D033E /* EcoSoapBank */ = {
 			isa = PBXGroup;
 			children = (
+				E27B4B1924E1ECE800148E4E /* Network Controller */,
 				994E4B6D24DDAEA800C12921 /* Impact */,
 				994E4B6E24DDAEB100C12921 /* Pickups */,
 				994E4B6F24DDAEB700C12921 /* Payment */,
@@ -401,6 +404,14 @@
 				994E4B8224DDB67000C12921 /* Info.plist */,
 			);
 			path = EcoSoapBankTests;
+			sourceTree = "<group>";
+		};
+		E27B4B1924E1ECE800148E4E /* Network Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */,
+			);
+			path = "Network Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -591,6 +602,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */,
+				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
