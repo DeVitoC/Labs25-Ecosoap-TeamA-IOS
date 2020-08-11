@@ -37,17 +37,21 @@ class PickupController: ObservableObject {
 
 // MARK: - Mock Data Provider
 
+/// For placeholder and testing purposes.
 struct MockPickupProvider: PickupDataProvider {
     enum Error: Swift.Error {
         case shouldFail
     }
 
+    /// Set to `true` for testing networking failures
     var shouldFail: Bool
 
     init(shouldFail: Bool = false) {
         self.shouldFail = shouldFail
     }
 
+    /// Simply returns mock Pickups through closure
+    /// (or `MockPickupProvider.Error.shouldFail` if `shouldFail` instance property is set to `true`).
     func fetchAllPickups(_ completion: (Result<[Pickup], Swift.Error>) -> Void) {
         guard !shouldFail else {
             completion(.failure(Self.Error.shouldFail))
