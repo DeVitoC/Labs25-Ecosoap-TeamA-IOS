@@ -16,7 +16,7 @@ struct PickupHistoryView: View {
             ForEach(pickupController.pickups) {
                 PickupListItem(pickup: $0)
             }
-        }
+        }.navigationBarTitle("Pickup History", displayMode: .inline)
     }
 }
 
