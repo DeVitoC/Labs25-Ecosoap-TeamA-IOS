@@ -32,8 +32,8 @@ class GraphQLController {
     /// Method for GraphQL query requests
     /// - Parameters:
     ///   - query: The intended query in string format
-    ///   - session: The URLSession used for the request. By default this is URLSession.shared
     ///   - completion: Completion handler that passes back a Result of type Profile or Error
+    ///   - type: The Model Type for the JSON Decoder to decode
     func queryRequest<T: Codable>(_ type: T.Type,
                                   query: String,
                                   completion: @escaping (Result<T, Error>) -> Void) {
@@ -61,8 +61,8 @@ class GraphQLController {
     /// - Parameters:
     ///   - mutationQuery: The intended mutation query in string format
     ///   - variables: The variables to be passed in the request
-    ///   - session: The URLSession used for the request. By default this is URLSession.shared
     ///   - completion: Completion handler that passes back a Result of type Profile or Error
+    ///   - type: The Model Type for the JSON Decoder to decode
     func mutationRequest<T: Codable>(_ type: T.Type,
                          mutationQuery: String,
                          variables: [Any] = [],
@@ -91,6 +91,7 @@ class GraphQLController {
 
     /// Method to decode JSON Data to usable Type
     /// - Parameter data: The JSON Data returned from the request
+    /// - Parameter type: The Model Type for the JSON Decoder to decode
     /// - Returns: Either an Error or the Decoded object
     private func decodeJSON<T: Codable>(_ type: T.Type, data: Data) -> Result<T, Error> {
         do {
