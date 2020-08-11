@@ -12,11 +12,8 @@ struct NewPickupView: View {
     @State private var cartons: [Pickup.CartonContents] = []
     @State private var readyDate: Date = Date()
     @State private var notes: String = ""
-    @Binding private var isPresented: Bool
 
-    init(isPresented: Binding<Bool>) {
-        self._isPresented = isPresented
-    }
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         Form {
@@ -61,7 +58,6 @@ struct NewPickupView: View {
                     .frame(alignment: .center)
             }
         }.keyboardAvoiding()
-        
     }
 
     private func addAdditionalCarton() {
@@ -69,7 +65,7 @@ struct NewPickupView: View {
     }
 
     private func submitPickup() {
-
+        presentationMode.wrappedValue.dismiss()
     }
 
     private func removeCartons(in indexSet: IndexSet) {
@@ -110,6 +106,6 @@ struct CartonSummaryView_Previews: PreviewProvider {
 
 struct NewPickupView_Previews: PreviewProvider {
     static var previews: some View {
-        NewPickupView(isPresented: .init(getValue: true))
+        NewPickupView()
     }
 }
