@@ -114,6 +114,7 @@
 		465DAA2724BD0BC100D94C24 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				466C427C249A8749007D033E /* Assets.xcassets */,
 				990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */,
 				466C4273249A8748007D033E /* AppDelegate.swift */,
 				466C4275249A8748007D033E /* SceneDelegate.swift */,
@@ -152,7 +153,6 @@
 				46BEB4EC24C98EBB00FE0CD1 /* Model Controller */,
 				46BEB4EA24C98EA300FE0CD1 /* Helpers */,
 				465DAA2724BD0BC100D94C24 /* App */,
-				466C427C249A8749007D033E /* Assets.xcassets */,
 				466C4281249A8749007D033E /* Info.plist */,
 				466C4287249A889F007D033E /* File Organization.md */,
 			);
