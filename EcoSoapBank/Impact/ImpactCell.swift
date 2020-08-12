@@ -86,7 +86,7 @@ class ImpactCell: UICollectionViewCell {
     
     // MARK: - Public Methods
     
-    func setUpCell(with title: String, subtitle: String, image: UIImage) {
+    func setUp(withTitle title: String?, subtitle: String?, image: UIImage?) {
         titleLabel.text = title
         subtitleLabel.text = subtitle
         imageView.image = image
