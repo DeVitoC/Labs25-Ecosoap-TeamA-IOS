@@ -71,7 +71,6 @@
 		041E1EA924E22DF50052831D /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E1EA824E22DF50052831D /* ColorTests.swift */; };
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
-		04D1758B24E4121800F8929C /* UIView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758A24E4121800F8929C /* UIView+Subviews.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
 		463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */; };
 		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
@@ -91,6 +90,7 @@
 		990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */; };
 		990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */; };
 		990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */; };
+		991874D424E4B28900F636FB /* UIView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991874D324E4B28900F636FB /* UIView+Subviews.swift */; };
 		9921943024E4844A00E16C16 /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921942F24E4844A00E16C16 /* ConditionalModifier.swift */; };
 		9921943224E49AAB00E16C16 /* AnyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921943124E49AAB00E16C16 /* AnyGestureRecognizer.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
@@ -166,7 +166,6 @@
 		041E1EA824E22DF50052831D /* ColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
-		04D1758A24E4121800F8929C /* UIView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Subviews.swift"; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +188,7 @@
 		990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Constants.swift"; sourceTree = "<group>"; };
+		991874D324E4B28900F636FB /* UIView+Subviews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Subviews.swift"; path = "EcoSoapBank/Helpers/UIKit/UIView+Subviews.swift"; sourceTree = SOURCE_ROOT; };
 		9921942F24E4844A00E16C16 /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
 		9921943124E49AAB00E16C16 /* AnyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyGestureRecognizer.swift; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
@@ -421,6 +421,7 @@
 				46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */,
 				990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */,
 				9921943124E49AAB00E16C16 /* AnyGestureRecognizer.swift */,
+				991874D324E4B28900F636FB /* UIView+Subviews.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -694,7 +695,6 @@
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
 				990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */,
-				04D1758B24E4121800F8929C /* UIView+Subviews.swift in Sources */,
 				9983874A24E34C5E00450244 /* CartonSummaryView.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
@@ -722,6 +722,7 @@
 				E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */,
 				998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */,
 				466C4276249A8748007D033E /* SceneDelegate.swift in Sources */,
+				991874D424E4B28900F636FB /* UIView+Subviews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
