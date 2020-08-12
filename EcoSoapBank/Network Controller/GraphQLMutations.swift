@@ -43,8 +43,8 @@ enum GraphQLMutations {
     /* works with variables as:
     {
         "input": {
-            "collectionType":"enum:CollectionType",
-            "status":"enum:PickupStatus",
+            "collectionType":"enum:Pickup.CollectionType",
+            "status":"enum:Pickup.Status",
             "readyDate":"Date()",
             "PickupDate":"Date()"?,
             "propertyId":"ID",
@@ -53,20 +53,4 @@ enum GraphQLMutations {
         }
      }
     */
-}
-
-// MARK: - Enums for input variables
-enum CollectionType: String {
-    case courierConsolidated = "COURIER_CONSOLIDATED"
-    case courierDirect = "COURIER_DIRECT"
-    case generatedLabel = "GENERATED_LABEL"
-    case local = "LOCAL"
-    case other = "OTHER"
-}
-
-enum PickupStatus: String {
-    case submitted = "SUBMITTED"
-    case outForPickup = "OUT_FOR_PICKUP"
-    case complete = "COMPLETE"
-    case cancelled = "CANCELLED"
 }

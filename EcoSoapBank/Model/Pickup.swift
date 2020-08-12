@@ -55,15 +55,18 @@ struct Pickup: Identifiable {
 
 extension Pickup {
     enum Status: String {
-        case submitted, outForPickup = "out for pickup", complete, cancelled
+        case submitted = "SUBMITTED"
+        case outForPickup = "OUT_FOR_PICKUP"
+        case complete = "COMPLETE"
+        case cancelled = "CANCELLED"
     }
 
-    enum CollectionType {
-        case courierConsolidated
-        case courierDirect
-        case generatedLabel
-        case local
-        case other
+    enum CollectionType: String {
+        case courierConsolidated = "COURIER_CONSOLIDATED"
+        case courierDirect = "COURIER_DIRECT"
+        case generatedLabel = "GENERATED_LABEL"
+        case local = "LOCAL"
+        case other = "OTHER"
     }
 
     struct Carton: Identifiable {
