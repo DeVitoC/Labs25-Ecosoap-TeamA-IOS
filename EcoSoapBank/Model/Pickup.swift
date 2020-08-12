@@ -2,12 +2,22 @@
  type Pickup {
      id: ID!
      confirmationCode: String!
+     collectionType: CollectionType!**
+     status: PickupStatus!**
+     readyDate: Date!**
+     pickupDate: Date**
+     property: Property!^^
+     cartons: [PickupCarton!]!^^
+     notes: String**
+ }
+
+ type SchedulePickupInput {
      collectionType: CollectionType!
      status: PickupStatus!
      readyDate: Date!
      pickupDate: Date
-     property: Property!
-     cartons: [PickupCarton!]!
+     propertyId: ID!
+     cartons: [PickupCartonInput!]!
      notes: String
  }
 
@@ -41,19 +51,53 @@
 import Foundation
 
 
-struct Pickup: Identifiable {
-    let id: Int
+struct Pickup: Identifiable, PickupBaseContainer {
+    let base: Base
+
+    let id: UUID
     let confirmationCode: String
-    let collectionType: CollectionType
-    let status: Status
-    let readyDate: Date
-    let pickupDate: Date?
     let cartons: [Carton]
-    let notes: String
 }
 
+// MARK: - SubTypes
 
 extension Pickup {
+    struct Base {
+        let collectionType: CollectionType
+        let status: Status
+        let readyDate: Date
+        let pickupDate: Date?
+        let notes: String
+    }
+
+    // MARK: Schedule I/O
+
+    struct ScheduleInput: PickupBaseContainer {
+        let base: Base
+
+        let propertyID: UUID
+        let cartons: [CartonContents]
+    }
+
+    struct ScheduleResult {
+        let pickup: Pickup
+        let labelURL: URL
+    }
+
+    struct Carton: Identifiable {
+        let id: UUID
+        let contents: CartonContents?
+    }
+
+    struct CartonContents: Hashable, Identifiable {
+        let product: HospitalityService
+        let weight: Int
+
+        var id: Int { self.hashValue }
+    }
+
+    // MARK: Enums
+
     enum Status: String {
         case submitted, outForPickup = "out for pickup", complete, cancelled
     }
@@ -65,25 +109,17 @@ extension Pickup {
         case local
         case other
     }
+}
 
-    struct Carton: Identifiable {
-        let id: Int
-        let contents: CartonContents?
+// MARK: Base Container Protocol
 
-        init(id: Int, product: HospitalityService?, weight: Int?) {
-            self.id = id
-            if let p = product, let w = weight {
-                self.contents = CartonContents(product: p, weight: w)
-            } else {
-                self.contents = nil
-            }
-        }
-    }
+protocol PickupBaseContainer {
+    var base: Pickup.Base { get }
+}
 
-    struct CartonContents: Hashable, Identifiable {
-        let product: HospitalityService
-        let weight: Int
-
-        var id: Int { self.hashValue }
-    }
+extension PickupBaseContainer {
+    var collectionType: Pickup.CollectionType { base.collectionType }
+    var status: Pickup.Status { base.status }
+    var readyDate: Date { base.readyDate }
+    var pickupDate: Date? { base.pickupDate }
 }
