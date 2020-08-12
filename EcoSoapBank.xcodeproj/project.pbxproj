@@ -69,6 +69,10 @@
 		041E1EA524E1F7970052831D /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 041E1E4724E1EA920052831D /* Montserrat-SemiBold.otf */; };
 		041E1EA724E22B1E0052831D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E1EA624E22B1E0052831D /* Colors.swift */; };
 		041E1EA924E22DF50052831D /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E1EA824E22DF50052831D /* ColorTests.swift */; };
+		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
+		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
+		04D1758B24E4121800F8929C /* UIView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758A24E4121800F8929C /* UIView+Subviews.swift */; };
+		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
 		463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */; };
 		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
 		466C4274249A8748007D033E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4273249A8748007D033E /* AppDelegate.swift */; };
@@ -154,6 +158,10 @@
 		041E1E8724E1F3890052831D /* FontTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontTests.swift; sourceTree = "<group>"; };
 		041E1EA624E22B1E0052831D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		041E1EA824E22DF50052831D /* ColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
+		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
+		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
+		04D1758A24E4121800F8929C /* UIView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Subviews.swift"; sourceTree = "<group>"; };
+		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		466C4270249A8748007D033E /* EcoSoapBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoSoapBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -271,6 +279,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		04D1758E24E41DF500F8929C /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				04D1758C24E4195C00F8929C /* GradientView.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
 		465DAA2724BD0BC100D94C24 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +331,7 @@
 				46BEB4EC24C98EBB00FE0CD1 /* Model Controller */,
 				46BEB4EA24C98EA300FE0CD1 /* Helpers */,
 				465DAA2724BD0BC100D94C24 /* App */,
+				04D1758E24E41DF500F8929C /* Custom Views */,
 				466C4281249A8749007D033E /* Info.plist */,
 				466C4287249A889F007D033E /* File Organization.md */,
 			);
@@ -332,6 +349,7 @@
 				990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */,
 				998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */,
 				997BF11124E20AAE00A643D8 /* TextView.swift */,
+				04D1758A24E4121800F8929C /* UIView+Subviews.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -343,6 +361,7 @@
 				998913D224DDFFA8009ADBC1 /* Pickup.swift */,
 				998913D824DE0C90009ADBC1 /* HospitalityService.swift */,
 				998913D624DE0C33009ADBC1 /* Property.swift */,
+				04D1758624E317FB00F8929C /* ImpactStats.swift */,
 				990CA24024DB6A6C002B5FA4 /* Protocols */,
 			);
 			path = Model;
@@ -391,6 +410,7 @@
 			children = (
 				994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */,
 				994E4B7624DDB55E00C12921 /* ImpactViewController.swift */,
+				04D1758824E3453B00F8929C /* ImpactCell.swift */,
 			);
 			path = Impact;
 			sourceTree = "<group>";
@@ -627,6 +647,7 @@
 			files = (
 				46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */,
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
+				04D1758D24E4195C00F8929C /* GradientView.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
@@ -638,6 +659,7 @@
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
 				990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */,
+				04D1758B24E4121800F8929C /* UIView+Subviews.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
@@ -653,6 +675,8 @@
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
 				46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */,
 				463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */,
+				04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */,
+				04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
 				E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */,
 				998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */,
