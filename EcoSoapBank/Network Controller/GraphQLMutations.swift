@@ -48,8 +48,11 @@ enum GraphQLMutations {
             "readyDate":"Date()",
             "PickupDate":"Date()"?,
             "propertyId":"ID",
-            "cartons":["PickupCartonInput": {"product":"enum:HospitalityService","weight":"Int"}],
-            "notes":"NotesGoHere"
+            "cartons":["PickupCartonInput": {
+                "product":"enum:HospitalityService"?,
+                "weight":"Int"?
+            }],
+            "notes":"NotesGoHere"?
         }
      }
     */
