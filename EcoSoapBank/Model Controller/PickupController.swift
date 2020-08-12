@@ -22,7 +22,7 @@ protocol PickupDataProvider {
 
 class PickupController: ObservableObject {
     @Published private(set) var pickups: [Pickup] = []
-    @Published var error: Error?
+    @Published private(set) var error: Error?
 
     private var dataProvider: PickupDataProvider
 
@@ -53,5 +53,9 @@ class PickupController: ObservableObject {
                 completion(result)
             }
         }
+    }
+
+    func clearError() {
+        error = nil
     }
 }

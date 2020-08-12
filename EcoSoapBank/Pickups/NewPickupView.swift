@@ -93,7 +93,7 @@ extension NewPickupView {
             self.pickupController.error != nil
         }, set: { willHaveError in
             if !willHaveError {
-                self.pickupController.error = nil
+                self.pickupController.clearError()
             }
         })
     }
