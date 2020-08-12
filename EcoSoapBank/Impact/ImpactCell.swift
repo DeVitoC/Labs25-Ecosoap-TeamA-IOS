@@ -66,10 +66,10 @@ class ImpactCell: UICollectionViewCell {
     private var trailingConstraints: [NSLayoutConstraint] = []
     
     // Layout Constants
-    private let circlePadding: CGFloat = 20.0
+    private let circlePadding: CGFloat = 22.0
     private let circleHeightMultiplier: CGFloat = 1.0
-    private let imagePadding: CGFloat = 18.0
-    private let strokeWidth: CGFloat = 2.5
+    private let imagePadding: CGFloat = 16.0
+    private let strokeWidth: CGFloat = 2.0
     private let verticalLabelPadding: CGFloat = 5.0
     private let horizontalLabelPadding: CGFloat = 15.0
     

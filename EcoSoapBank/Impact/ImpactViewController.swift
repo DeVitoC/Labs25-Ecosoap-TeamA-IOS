@@ -25,8 +25,9 @@ class ImpactViewController: UIViewController {
             $0.colors = [.esbGreen, .downyBlue]
             $0.startPoint = CGPoint(x: 0.2, y: 0.5)
             $0.endPoint = CGPoint(x: 0.4, y: -0.5)
-            
         }
+        
+        setUpCollectionView()
     }
     
     private func setUpCollectionView() {
@@ -73,12 +74,12 @@ extension ImpactViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width
-        return CGSize(width: width, height: width * 0.32)
+        return CGSize(width: width, height: width * 0.31)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 30, left: 0, bottom: 30, right: 0)
+        UIEdgeInsets(top: 40, left: 0, bottom: 40, right: 0)
     }
 }
