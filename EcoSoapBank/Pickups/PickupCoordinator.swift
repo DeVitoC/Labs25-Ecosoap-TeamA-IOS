@@ -14,19 +14,11 @@ class PickupCoordinator: FlowCoordinator {
     let pickupController = PickupController(dataProvider: MockPickupProvider())
 
     private(set) lazy var rootVC: UIViewController = UIHostingController(
-        rootView: PickupsView(
-            pickupController: pickupController,
-            delegate: self))
+        rootView: PickupsView(pickupController: pickupController))
 
     func start() {
         rootVC.tabBarItem = UITabBarItem(
             tabBarSystemItem: .history,
             tag: 1)
-    }
-}
-
-extension PickupCoordinator: PickupsViewDelegate {
-    func logOut() {
-        preconditionFailure("Requested log out (not yet implemented)")
     }
 }

@@ -61,15 +61,12 @@ extension Pickup.Status {
     }
 }
 
-
 extension Pickup.Carton {
-    var display: String? {
-        guard
-            let product = self.product,
-            let weight = self.weight
-            else { return nil }
-        return "\(product.rawValue.capitalized): \(weight)g"
-    }
+    var display: String? { contents?.display }
+}
+
+extension Pickup.CartonContents {
+    var display: String { "\(product.rawValue.capitalized): \(weight)g" }
 }
 
 

@@ -58,17 +58,32 @@ extension Pickup {
         case submitted, outForPickup = "out for pickup", complete, cancelled
     }
 
-    struct Carton: Identifiable {
-        let id: Int
-        let product: HospitalityService?
-        let weight: Int?
-    }
-
     enum CollectionType {
         case courierConsolidated
         case courierDirect
         case generatedLabel
         case local
         case other
+    }
+
+    struct Carton: Identifiable {
+        let id: Int
+        let contents: CartonContents?
+
+        init(id: Int, product: HospitalityService?, weight: Int?) {
+            self.id = id
+            if let p = product, let w = weight {
+                self.contents = CartonContents(product: p, weight: w)
+            } else {
+                self.contents = nil
+            }
+        }
+    }
+
+    struct CartonContents: Hashable, Identifiable {
+        let product: HospitalityService
+        let weight: Int
+
+        var id: Int { self.hashValue }
     }
 }
