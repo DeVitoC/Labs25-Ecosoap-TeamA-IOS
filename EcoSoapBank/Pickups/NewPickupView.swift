@@ -38,19 +38,14 @@ struct NewPickupView: View {
             ) {
                 ForEach(cartons, content: CartonSummaryView.init)
                     .onDelete(perform: removeCartons(in:))
-                Button(action: addAdditionalCarton, label: {
+                Button(action: addAdditionalCarton) {
                     HStack {
                         Image.plus()
                         Image.cubeBox()
                         Text("Add carton")
                     }
-                })
-            }.alert(isPresented: hasError, content: {
-                Alert(
-                    title: Text("Error!"),
-                    message: Text("It seems there's been some sort of error."),
-                    dismissButton: .default(Text("Okay?")))
-            })
+                }
+            }
 
             Section {
                 DatePicker(
@@ -66,7 +61,7 @@ struct NewPickupView: View {
                 VStack(alignment: .leading) {
                     Text("Notes".uppercased())
                         .font(.caption)
-                    TextView(text: $notes, textStyle: .body)
+                    TextView(text: $notes)
                         .frame(maxWidth: .infinity, idealHeight: 120)
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(5)
@@ -77,10 +72,16 @@ struct NewPickupView: View {
                 Button("Submit For Pickup", action: submitPickup)
                     .frame(alignment: .center)
             }
-            .alert(isPresented: $successfulSubmit, content: submitSuccessAlert)
         }
         .disabled(pickupSubmitInProgress)
         .keyboardAvoiding()
+        .keyboardDismissing()
+        .alert(isPresented: $successfulSubmit || hasError) {
+            successfulSubmit ? submitSuccessAlert() : Alert(
+                title: Text("Error!"),
+                message: Text("It seems there's been some sort of error."),
+                dismissButton: .default(Text("Okay?")))
+        }
     }
 }
 
@@ -101,8 +102,8 @@ extension NewPickupView {
         cartons.append(.init(product: .bottles, weight: 0))
     }
 
-    private func removeCartons(in indexSet: IndexSet) {
-        indexSet.forEach { cartons.remove(at: $0) }
+    private func removeCartons(in offsets: IndexSet) {
+        cartons.remove(atOffsets: offsets)
     }
 
     private func submitPickup() {
