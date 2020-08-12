@@ -118,13 +118,14 @@ extension NewPickupView {
                     notes: notes),
                 propertyID: UUID(), // WILL BE CHANGED
                 cartons: cartons)
-        ).sink(receiveCompletion: { _ in
+        ) { result in
             self.pickupSubmitInProgress = false
-        }, receiveValue: { result in
-            self.pickupSubmitInProgress = false
-            self.shippingLabelURL = result.labelURL
-            self.successfulSubmit = true // shows alert
-        }).store(in: &cancellables)
+
+            if case .success(let pickupResult) = result {
+                self.shippingLabelURL = pickupResult.labelURL
+                self.successfulSubmit = true // shows alert
+            }
+        }
     }
 
     private func submitSuccessAlert() -> Alert {

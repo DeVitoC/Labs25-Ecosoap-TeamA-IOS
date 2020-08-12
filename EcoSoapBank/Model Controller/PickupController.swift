@@ -40,19 +40,18 @@ class PickupController: ObservableObject {
     }
 
     func schedulePickup(
-        _ pickupInput: Pickup.ScheduleInput
-    ) -> AnyPublisher<Pickup.ScheduleResult, Error> {
-        Future { promise in
-            self.dataProvider.schedulePickup(pickupInput) { result in
-                switch result {
-                case .success(let pickupResult):
-                    self.pickups.append(pickupResult.pickup)
-                    promise(result)
-                case .failure(let error):
-                    self.error = error
-                    promise(result)
-                }
+        _ pickupInput: Pickup.ScheduleInput,
+        completion: @escaping (Result<Pickup.ScheduleResult, Error>) -> Void
+    ) {
+        self.dataProvider.schedulePickup(pickupInput) { result in
+            switch result {
+            case .success(let pickupResult):
+                self.pickups.append(pickupResult.pickup)
+                completion(result)
+            case .failure(let error):
+                self.error = error
+                completion(result)
             }
-        }.eraseToAnyPublisher()
+        }
     }
 }
