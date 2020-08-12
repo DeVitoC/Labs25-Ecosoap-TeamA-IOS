@@ -13,6 +13,7 @@ class ImpactCoordinator: FlowCoordinator {
     var rootVC = ImpactViewController()
     
     func start() {
-        rootVC.tabBarItem = UITabBarItem(title: "Impact", image: UIImage(systemName: "globe"), tag: 0)
+        let globe = UIImage(systemName: "globe", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
+        rootVC.tabBarItem = UITabBarItem(title: "Impact", image: globe, tag: 0)
     }
 }
