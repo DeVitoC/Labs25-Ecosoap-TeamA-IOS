@@ -169,17 +169,4 @@ class ImpactCell: UICollectionViewCell {
     }
 }
 
-extension UIView {
-    func addSubviews(usingAutolayout: Bool = true, _ views: UIView...) {
-        for view in views {
-            view.translatesAutoresizingMaskIntoConstraints = !usingAutolayout
-            addSubview(view)
-        }
-    }
-    
-    func removeSubviews() {
-        for view in subviews {
-            view.removeFromSuperview()
-        }
-    }
-}
+
