@@ -49,8 +49,10 @@ class ImpactCell: UICollectionViewCell {
         $0.image = UIImage(named: "Bottles")
     }
     
-    private lazy var circleView = configure(UIView()) {
-        $0.backgroundColor = .downyBlue
+    private lazy var circleView = configure(GradientView()) {
+        $0.colors = [.esbGreen, .downyBlue]
+        $0.startPoint = CGPoint(x: 0, y: 1)
+        $0.endPoint = CGPoint(x: 1, y: 0)
         $0.layer.borderColor = UIColor.white.cgColor
         $0.layer.borderWidth = self.strokeWidth
     }
