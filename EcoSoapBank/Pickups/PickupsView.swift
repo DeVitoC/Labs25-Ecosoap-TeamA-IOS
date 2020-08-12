@@ -27,7 +27,7 @@ struct PickupsView: View {
 
     private func newPickupButton() -> some View {
         NavigationLink(
-            destination: NewPickupView(),
+            destination: NewPickupView(pickupController: pickupController),
             label: {
                 HStack(spacing: 4) {
                     Image.plus()
