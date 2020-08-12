@@ -11,8 +11,6 @@ import UIKit
 
 class ImpactCoordinator: FlowCoordinator {
     var rootVC = configure(UINavigationController()) {
-        $0.pushViewController(ImpactViewController(), animated: false)
-        
         $0.navigationBar.prefersLargeTitles = true
         $0.navigationBar.layoutMargins.left = 22
         $0.navigationBar.largeTitleTextAttributes = [
@@ -31,5 +29,7 @@ class ImpactCoordinator: FlowCoordinator {
             withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular)
         )
         rootVC.tabBarItem = UITabBarItem(title: "Impact", image: globe, tag: 0)
+        
+        rootVC.pushViewController(ImpactViewController(), animated: false)
     }
 }
