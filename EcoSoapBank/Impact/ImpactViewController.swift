@@ -11,10 +11,12 @@ import UIKit
 
 class ImpactViewController: UIViewController {
     
-    var collectionView = UICollectionView(
+    private var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
+    
+    private var impactController = ImpactController(dataProvider: MockImpactDataProvider())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,16 @@ class ImpactViewController: UIViewController {
         }
         
         setUpCollectionView()
+        
+        impactController.getImpactStats { error in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            collectionView.reloadData()
+        }
+        
     }
     
     private func setUpCollectionView() {
@@ -54,7 +66,7 @@ class ImpactViewController: UIViewController {
 
 extension ImpactViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        6
+        impactController.impactStats?.stats.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -63,6 +75,11 @@ extension ImpactViewController: UICollectionViewDataSource {
         }
         cell.alignment = indexPath.row % 2 == 0 ? .leading : .trailing
         
+        if let impactStats = impactController.impactStats {
+            let stat = Array(impactStats.stats.keys)[indexPath.row]
+            let title = impactStats.amountString(for: stat)
+            cell.setUp(withTitle: title, subtitle: stat.description, image: stat.image)
+        }
         return cell
     }
 }
