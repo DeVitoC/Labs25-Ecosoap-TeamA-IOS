@@ -73,6 +73,7 @@
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758B24E4121800F8929C /* UIView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758A24E4121800F8929C /* UIView+Subviews.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
+		04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEE1B524E48AB000F51D69 /* ImpactController.swift */; };
 		463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */; };
 		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
 		466C4274249A8748007D033E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4273249A8748007D033E /* AppDelegate.swift */; };
@@ -159,6 +160,7 @@
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758A24E4121800F8929C /* UIView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Subviews.swift"; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		04FEE1B524E48AB000F51D69 /* ImpactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactController.swift; sourceTree = "<group>"; };
 		463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		466C4270249A8748007D033E /* EcoSoapBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoSoapBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -366,6 +368,7 @@
 			children = (
 				46BEB4ED24C98ECC00FE0CD1 /* ProfileController.swift */,
 				998913D024DDFF96009ADBC1 /* PickupController.swift */,
+				04FEE1B524E48AB000F51D69 /* ImpactController.swift */,
 			);
 			path = "Model Controller";
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
 				990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */,
 				04D1758B24E4121800F8929C /* UIView+Subviews.swift in Sources */,
+				04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
