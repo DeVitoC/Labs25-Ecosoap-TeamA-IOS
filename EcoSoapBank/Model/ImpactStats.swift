@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ImpactStats: Decodable {
+struct ImpactStats {
     
     let stats: [Statistic: Int]
 
@@ -62,7 +62,9 @@ struct ImpactStats: Decodable {
             return nil
         }
     }
-    
+}
+
+extension ImpactStats: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Statistic.self)
         
