@@ -10,9 +10,26 @@ import UIKit
 
 
 class ImpactCoordinator: FlowCoordinator {
-    var rootVC = ImpactViewController()
+    var rootVC = configure(UINavigationController()) {
+        $0.navigationBar.prefersLargeTitles = true
+        $0.navigationBar.layoutMargins.left = 22
+        $0.navigationBar.largeTitleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.montserrat(ofSize: 30, style: .semiBold),
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ]
+        
+        $0.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.montserrat(ofSize: 18, style: .semiBold)
+        ]
+    }
     
     func start() {
-        rootVC.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
+        let globe = UIImage(
+            systemName: "globe",
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular)
+        )
+        rootVC.tabBarItem = UITabBarItem(title: "Impact", image: globe, tag: 0)
+        
+        rootVC.pushViewController(ImpactViewController(), animated: false)
     }
 }
