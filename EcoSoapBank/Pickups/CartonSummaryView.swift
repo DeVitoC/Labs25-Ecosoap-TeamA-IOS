@@ -35,6 +35,4 @@ struct CartonSummaryView_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
             .padding()
     }
-
-
 }

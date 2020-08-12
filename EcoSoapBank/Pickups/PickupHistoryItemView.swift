@@ -60,6 +60,13 @@ extension Pickup.Status {
             return .gray
         }
     }
+
+    var display: String {
+        switch self {
+        case .outForPickup: return "Out for Pickup"
+        default: return rawValue.lowercased().capitalized
+        }
+    }
 }
 
 extension Pickup.Carton {
