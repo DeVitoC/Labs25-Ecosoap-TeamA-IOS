@@ -10,12 +10,6 @@ import SwiftUI
 
 
 struct PickupHistoryItemView: View {
-
-    static let dateFormatter = configure(DateFormatter()) {
-        $0.dateStyle = .short
-        $0.timeStyle = .short
-    }
-
     let pickup: Pickup
 
     init(pickup: Pickup) {
@@ -40,6 +34,13 @@ struct PickupHistoryItemView: View {
                 .compactMap { $0.display }
                 .uiText(separatedBy: ", ")
         }
+    }
+}
+
+extension PickupHistoryItemView {
+    static let dateFormatter = configure(DateFormatter()) {
+        $0.dateStyle = .short
+        $0.timeStyle = .short
     }
 }
 
@@ -74,6 +75,6 @@ extension Pickup.CartonContents {
 
 struct PickupListItem_Previews: PreviewProvider {
     static var previews: some View {
-        PickupHistoryItemView(pickup: .mock())
+        PickupHistoryItemView(pickup: .random())
     }
 }
