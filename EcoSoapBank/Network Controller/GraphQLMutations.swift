@@ -70,4 +70,3 @@ enum PickupStatus: String {
     case complete = "COMPLETE"
     case cancelled = "CANCELLED"
 }
-
