@@ -31,7 +31,7 @@ class ImpactCell: UICollectionViewCell {
     
     // Views
     private let titleLabel = configure(UILabel()) {
-        $0.font = .montserrat(ofSize: 26, style: .semiBold)
+        $0.font = .montserrat(ofSize: 24, style: .semiBold)
         $0.textColor = .white
         $0.text = "34.9 lbs"
     }
@@ -66,7 +66,7 @@ class ImpactCell: UICollectionViewCell {
     private var trailingConstraints: [NSLayoutConstraint] = []
     
     // Layout Constants
-    private let circlePadding: CGFloat = 25.0
+    private let circlePadding: CGFloat = 20.0
     private let circleHeightMultiplier: CGFloat = 1.0
     private let imagePadding: CGFloat = 18.0
     private let strokeWidth: CGFloat = 2.5
