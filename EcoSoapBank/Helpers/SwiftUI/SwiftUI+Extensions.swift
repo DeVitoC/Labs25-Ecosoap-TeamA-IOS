@@ -51,12 +51,16 @@ extension Array where Element == String {
 extension Binding {
     /// Initializes a `Binding` that simply returns the provided value non-dynamically.
     /// The binding's setter does nothing.
+    ///
+    /// Useful for preview/test purposes.
     /// - Parameter getValue: The value to be returned from the getter.
     init(getValue: Value) {
         self.init(get: { getValue }, set: { _ in })
     }
 }
 
+// Combines two `Bool`s using the associated operator in the getter
+// Setter sets both to the same value for both `&&` and `||`
 extension Binding where Value == Bool {
     static func && (lhs: Binding<Bool>, rhs: Binding<Bool>) -> Binding<Bool> {
         Binding<Bool>(
