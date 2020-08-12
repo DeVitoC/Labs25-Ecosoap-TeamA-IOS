@@ -13,7 +13,7 @@ enum GraphQLQueries {
 
 
     static let impactStatsByPropery = """
-    query ImpactStatsByPropertyIdInput($input: ID!) {
+    query ImpactStatsByPropertyIdInput($input:ImpactStatsByPropertyIdInput) {
         impactStatsByPropertyId(input:$input) {
             impactStats {
                 \(QueryObjects.impactStats)
@@ -21,9 +21,16 @@ enum GraphQLQueries {
         }
     }
     """
+    /* works with variables as:
+     {
+        "input": {
+            "propertyId": "4" or 4
+        }
+     }
+     */
 
     static let userById = """
-    query UserByIdInput($input: ID!) {
+    query UserByIdInput($input:UserByIdInput) {
         userById(input:$input) {
             user {
                 \(QueryObjects.user)
@@ -31,10 +38,17 @@ enum GraphQLQueries {
         }
     }
     """
+    /* works with variables as:
+     {
+        "input": {
+            "userId": "4" or 4
+        }
+     }
+     */
 
     static let hubByPropertyId = """
-    query HubByPropertyIdInput($input: ID!) {
-        hubByPropertyId(input:$id) {
+    query HubByPropertyIdInput($input:HubByPropertyIdInput) {
+        hubByPropertyId(input:$input) {
             hub {
                 id
                 name
@@ -57,9 +71,16 @@ enum GraphQLQueries {
         }
     }
     """
+    /* works with variables as:
+     {
+        "input": {
+            "propertyId": "4" or 4
+        }
+     }
+     */
 
     static let propertiesByUserId = """
-    query PropertiesByUserIdInput($input: ID!) {
+    query PropertiesByUserIdInput($input: PropertiesByUserIdInput) {
         propertiesByUserId(input:$input) {
             properties {
                 \(QueryObjects.property)
@@ -67,6 +88,12 @@ enum GraphQLQueries {
         }
     }
     """
-
+    /* works with variables as:
+     {
+        "input": {
+            "userId": "4" or 4
+        }
+     }
+     */
 
 }
