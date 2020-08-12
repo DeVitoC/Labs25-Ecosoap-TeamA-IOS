@@ -11,28 +11,46 @@ import UIKit
 
 class ImpactViewController: UIViewController {
     
-    var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-
+    var collectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: UICollectionViewFlowLayout()
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .esbGreen
         
+        navigationItem.title = "Impact Summary"
+        
+        view = configure(GradientView()) {
+            $0.colors = [.esbGreen, .downyBlue]
+            $0.startPoint = CGPoint(x: 0.2, y: 0.5)
+            $0.endPoint = CGPoint(x: 0.4, y: -0.5)
+            
+        }
+    }
+    
+    private func setUpCollectionView() {
         collectionView.register(ImpactCell.self, forCellWithReuseIdentifier: ImpactCell.reuseIdentifier)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
         
         view.addSubview(collectionView)
+        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
-        
     }
 }
+
+// MARK: - Collection View Data Source
+
 extension ImpactViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         6
@@ -46,8 +64,9 @@ extension ImpactViewController: UICollectionViewDataSource {
         
         return cell
     }
-
 }
+
+// MARK: - Collection View Delegate
 
 extension ImpactViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
