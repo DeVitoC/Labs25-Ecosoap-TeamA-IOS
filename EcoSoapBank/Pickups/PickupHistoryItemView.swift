@@ -45,39 +45,6 @@ extension PickupHistoryItemView {
 }
 
 
-// MARK: - Model Extensions
-
-extension Pickup.Status {
-    var color: Color {
-        switch self {
-        case .submitted:
-            return .blue
-        case .outForPickup:
-            return .purple
-        case .complete:
-            return .green
-        case .cancelled:
-            return .gray
-        }
-    }
-
-    var display: String {
-        switch self {
-        case .outForPickup: return "Out for Pickup"
-        default: return rawValue.lowercased().capitalized
-        }
-    }
-}
-
-extension Pickup.Carton {
-    var display: String? { contents?.display }
-}
-
-extension Pickup.CartonContents {
-    var display: String { "\(product.rawValue.capitalized): \(weight)g" }
-}
-
-
 // MARK: - Previews
 
 struct PickupListItem_Previews: PreviewProvider {

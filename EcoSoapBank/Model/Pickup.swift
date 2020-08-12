@@ -48,7 +48,8 @@
  }
  */
 
-import Foundation
+import SwiftUI
+import UIKit
 
 
 struct Pickup: Identifiable, PickupBaseContainer {
@@ -126,4 +127,36 @@ extension PickupBaseContainer {
     var status: Pickup.Status { base.status }
     var readyDate: Date { base.readyDate }
     var pickupDate: Date? { base.pickupDate }
+}
+
+// MARK: - Convenience Extensions
+
+extension Pickup.Status {
+    var color: Color {
+        switch self {
+        case .submitted:
+            return .blue
+        case .outForPickup:
+            return .purple
+        case .complete:
+            return .green
+        case .cancelled:
+            return .gray
+        }
+    }
+
+    var display: String {
+        switch self {
+        case .outForPickup: return "Out for Pickup"
+        default: return rawValue.lowercased().capitalized
+        }
+    }
+}
+
+extension Pickup.Carton {
+    var display: String? { contents?.display }
+}
+
+extension Pickup.CartonContents {
+    var display: String { "\(product.rawValue.capitalized): \(weight)g" }
 }
