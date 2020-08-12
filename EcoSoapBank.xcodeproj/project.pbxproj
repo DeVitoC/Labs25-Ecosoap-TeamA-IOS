@@ -91,8 +91,6 @@
 		990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */; };
 		990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */; };
 		991874D424E4B28900F636FB /* UIView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991874D324E4B28900F636FB /* UIView+Subviews.swift */; };
-		9921943024E4844A00E16C16 /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921942F24E4844A00E16C16 /* ConditionalModifier.swift */; };
-		9921943224E49AAB00E16C16 /* AnyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921943124E49AAB00E16C16 /* AnyGestureRecognizer.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
@@ -189,8 +187,6 @@
 		990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Constants.swift"; sourceTree = "<group>"; };
 		991874D324E4B28900F636FB /* UIView+Subviews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Subviews.swift"; path = "EcoSoapBank/Helpers/UIKit/UIView+Subviews.swift"; sourceTree = SOURCE_ROOT; };
-		9921942F24E4844A00E16C16 /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
-		9921943124E49AAB00E16C16 /* AnyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyGestureRecognizer.swift; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
@@ -420,7 +416,6 @@
 				041E1EA624E22B1E0052831D /* Colors.swift */,
 				46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */,
 				990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */,
-				9921943124E49AAB00E16C16 /* AnyGestureRecognizer.swift */,
 				991874D324E4B28900F636FB /* UIView+Subviews.swift */,
 			);
 			path = UIKit;
@@ -475,7 +470,6 @@
 				998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */,
 				9983874B24E4657C00450244 /* KeyboardAvoiding.swift */,
 				9983874D24E4658600450244 /* KeyboardDismissing.swift */,
-				9921942F24E4844A00E16C16 /* ConditionalModifier.swift */,
 				997BF11124E20AAE00A643D8 /* TextView.swift */,
 			);
 			path = SwiftUI;
@@ -689,7 +683,6 @@
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
 				997BF11024E1FA1E00A643D8 /* NewPickupView.swift in Sources */,
-				9921943224E49AAB00E16C16 /* AnyGestureRecognizer.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
 				998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
@@ -713,7 +706,6 @@
 				46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */,
 				463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */,
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
-				9921943024E4844A00E16C16 /* ConditionalModifier.swift in Sources */,
 				04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */,
 				04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
