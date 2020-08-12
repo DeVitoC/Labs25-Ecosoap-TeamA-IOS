@@ -10,7 +10,14 @@ import UIKit
 
 
 class ImpactCoordinator: FlowCoordinator {
-    var rootVC = ImpactViewController()
+    var rootVC = configure(UINavigationController()) {
+        $0.pushViewController(ImpactViewController(), animated: false)
+        $0.navigationBar.prefersLargeTitles = true
+        $0.navigationBar.largeTitleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.montserrat(ofSize: 30, style: .semiBold),
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ]
+    }
     
     func start() {
         let globe = UIImage(
