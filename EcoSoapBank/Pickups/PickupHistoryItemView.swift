@@ -9,7 +9,7 @@
 import SwiftUI
 
 
-struct PickupListItem: View {
+struct PickupHistoryItemView: View {
 
     static let dateFormatter = configure(DateFormatter()) {
         $0.dateStyle = .short
@@ -74,16 +74,6 @@ extension Pickup.CartonContents {
 
 struct PickupListItem_Previews: PreviewProvider {
     static var previews: some View {
-        PickupListItem(pickup: Pickup(
-            id: 0,
-            confirmationCode: "",
-            collectionType: .generatedLabel,
-            status: .outForPickup,
-            readyDate: Date(timeIntervalSinceNow: .days(-5)),
-            pickupDate: Date(),
-            cartons: [
-                .init(id: 0, product: .bottles, weight: 30),
-                .init(id: 1, product: .soap, weight: 349)],
-            notes: ""))
+        PickupHistoryItemView(pickup: .mock())
     }
 }
