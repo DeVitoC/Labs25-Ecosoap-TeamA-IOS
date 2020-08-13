@@ -32,15 +32,10 @@ struct Property: Decodable {
     let collectionType: Pickup.CollectionType
     let logo: URL?
     let phone: String?
-    let billingAddress: Address?
-    let shippingAddress: Address?
-    let coordinates: Coordinate?
     let shippingNote: String?
     let notes: String?
     let impact: ImpactStats?
-    let user: [User]?
     let pickups: [Pickup]?
-    let contract: HospitalityContract?
 
     enum PropertyType: String, Decodable {
         case bedAndBreakfast = "BED_AND_BREAKFAST"
@@ -54,22 +49,6 @@ struct Property: Decodable {
         case credit = "CREDIT"
         case debit = "DEBIT"
         case invoice = "INVOICE"
-    }
-
-    struct HospitalityContract: Decodable {
-        let id: Int
-        let startDate: Date
-        let endDate: Date
-        let paymentStartDate: Date
-        let paymentEndDate: Date
-        let properties: [Property]
-        let paymentFrequency: Date
-        let price: Int?
-        let discount: Float?
-        let billingMethod: BillingMethod?
-        let automatedBilling: Bool
-        let payments: [Payment]?
-        let amountPaid: Int?
     }
 }
 
