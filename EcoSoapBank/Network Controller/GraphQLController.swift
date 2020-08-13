@@ -16,7 +16,7 @@ enum HTTPMethod: String {
 class GraphQLController {
 
     // MARK: - Properties
-    private let session = URLSession.shared
+    private let session: URLSession
     private let url = URL(string: "http://35.208.9.187:9094/ios-api-1/")!
 
     // Setting up the url request
@@ -26,6 +26,11 @@ class GraphQLController {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         return request
     }()
+
+    // MARK: - INIT
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
 
     // MARK: - Request methods
 
