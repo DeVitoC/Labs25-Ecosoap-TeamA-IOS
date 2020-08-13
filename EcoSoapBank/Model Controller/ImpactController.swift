@@ -15,8 +15,7 @@ protocol ImpactDataProvider {
 class ImpactController {
     private(set) var viewModels: [ImpactCellViewModel] = []
     
-    private var dataProvider: ImpactDataProvider
-    
+    private let dataProvider: ImpactDataProvider
     
     /// Gets the latest impact stats from the data provider, which in
     /// turn updates the `viewModels` property accordingly.
@@ -34,6 +33,14 @@ class ImpactController {
             }
         }
     }
+    
+    // MARK: - Init
+    
+    init(dataProvider: ImpactDataProvider) {
+        self.dataProvider = dataProvider
+    }
+    
+    // MARK: - Private Methods
     
     /// This function updates the array of view models for the Impact Cells
     /// using the `ImpactStats` passed in, as well as the unit preference of
@@ -91,10 +98,6 @@ class ImpactController {
                                     image: UIImage(named: "Bottles")!)
             )
         }
-    }
-
-    init(dataProvider: ImpactDataProvider) {
-        self.dataProvider = dataProvider
     }
 }
 
