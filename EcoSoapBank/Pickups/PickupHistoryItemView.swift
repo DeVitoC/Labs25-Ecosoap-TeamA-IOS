@@ -17,22 +17,22 @@ struct PickupHistoryListItem: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(pickup.readyDate.string(from: Self.dateFormatter))
-            }
+        NavigationLink(destination: PickupDetailView(pickup: pickup)) {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Ready:").bold()
+                    Text(pickup.readyDate.string(from: Self.dateFormatter))
+                }
 
-            HStack {
-                Text("Status: ") + (Text("\(pickup.status.display)")
-                    .foregroundColor(pickup.status.color))
-                if pickup.pickupDate != nil {
-                    Text(pickup.pickupDate!.string(from: Self.dateFormatter))
+                HStack {
+                    Text("Status: ").bold()
+                    Text("\(pickup.status.display)")
+                        .foregroundColor(pickup.status.color)
+                    if pickup.pickupDate != nil {
+                        Text(pickup.pickupDate!.string(from: Self.dateFormatter))
+                    }
                 }
             }
-
-            pickup.cartons
-                .compactMap { $0.display }
-                .uiText(separatedBy: ", ")
         }
     }
 }
@@ -45,10 +45,34 @@ extension PickupHistoryListItem {
 }
 
 
+struct PickupDetailView: View {
+    let pickup: Pickup
+
+    var body: some View {
+        VStack {
+            Text("Pickup")
+            pickup.cartons
+                .compactMap { $0.display }
+                .uiText(separatedBy: ", ")
+        }
+    }
+}
+
+
 // MARK: - Previews
+
+private let _previewPickup = Pickup.random()
 
 struct PickupListItem_Previews: PreviewProvider {
     static var previews: some View {
-        PickupHistoryListItem(pickup: .random())
+        PickupHistoryListItem(pickup: _previewPickup)
+            .previewLayout(.sizeThatFits)
+            .padding()
+    }
+}
+
+struct PickupDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        PickupDetailView(pickup: _previewPickup)
     }
 }
