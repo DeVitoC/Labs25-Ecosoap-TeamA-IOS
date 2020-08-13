@@ -62,9 +62,9 @@ struct Pickup: Identifiable, PickupBaseContainer {
 
 // MARK: - SubTypes
 
-extension Pickup {
+extension Pickup: Decodable {
 
-    struct Base {
+    struct Base: Decodable {
         let collectionType: CollectionType
         let status: Status
         let readyDate: Date
@@ -86,12 +86,12 @@ extension Pickup {
         let labelURL: URL
     }
 
-    struct Carton: Identifiable {
+    struct Carton: Identifiable, Decodable {
         let id: UUID
         let contents: CartonContents?
     }
 
-    struct CartonContents: Hashable, Identifiable {
+    struct CartonContents: Hashable, Identifiable, Decodable {
         let product: HospitalityService
         let weight: Int
 
@@ -100,7 +100,7 @@ extension Pickup {
 
     // MARK: Enums
 
-    enum Status: String {
+    enum Status: String, Decodable {
         case submitted = "SUBMITTED"
         case outForPickup = "OUT_FOR_PICKUP"
         case complete = "COMPLETE"
