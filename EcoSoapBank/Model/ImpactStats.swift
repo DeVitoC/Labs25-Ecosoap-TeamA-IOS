@@ -16,21 +16,3 @@ struct ImpactStats: Decodable {
     let peopleServed: Int?
     let womenEmployed: Int?
 }
-
-struct ImpactCellViewModel {
-    let title: String
-    let subtitle: String
-    let image: UIImage
-}
-
-extension ImpactCellViewModel {
-    init(withAmount grams: Int,
-         convertedTo unit: UnitMass,
-         subtitle: String,
-         image: UIImage) {
-        let weightGrams = Measurement(value: Double(grams), unit: UnitMass.grams)
-        self.title = weightGrams.converted(to: unit).string
-        self.subtitle = subtitle
-        self.image = image
-    }
-}
