@@ -95,7 +95,6 @@
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
 		994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* UtilityFunctions.swift */; };
-		994E4B8124DDB67000C12921 /* EcoSoapBankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8024DDB67000C12921 /* EcoSoapBankTests.swift */; };
 		994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8824DDB68700C12921 /* UtilityTests.swift */; };
 		997BF11024E1FA1E00A643D8 /* NewPickupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BF10F24E1FA1E00A643D8 /* NewPickupView.swift */; };
 		997BF11224E20AAE00A643D8 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BF11124E20AAE00A643D8 /* TextView.swift */; };
@@ -192,7 +191,6 @@
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
 		994E4B7824DDB58300C12921 /* UtilityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
 		994E4B7E24DDB67000C12921 /* EcoSoapBankTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcoSoapBankTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		994E4B8024DDB67000C12921 /* EcoSoapBankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSoapBankTests.swift; sourceTree = "<group>"; };
 		994E4B8224DDB67000C12921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		994E4B8824DDB68700C12921 /* UtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityTests.swift; sourceTree = "<group>"; };
 		997BF10F24E1FA1E00A643D8 /* NewPickupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupView.swift; sourceTree = "<group>"; };
@@ -455,7 +453,6 @@
 			isa = PBXGroup;
 			children = (
 				99B5790224E30F140097957D /* PickupTests.swift */,
-				994E4B8024DDB67000C12921 /* EcoSoapBankTests.swift */,
 				994E4B8824DDB68700C12921 /* UtilityTests.swift */,
 				041E1E8724E1F3890052831D /* FontTests.swift */,
 				994E4B8224DDB67000C12921 /* Info.plist */,
@@ -726,7 +723,6 @@
 				994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */,
 				041E1EA924E22DF50052831D /* ColorTests.swift in Sources */,
 				99B5790324E30F140097957D /* PickupTests.swift in Sources */,
-				994E4B8124DDB67000C12921 /* EcoSoapBankTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
