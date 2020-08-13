@@ -18,6 +18,7 @@ class ImpactCell: UICollectionViewCell {
     
     // MARK: - Public Properties
     
+    var viewModel: ImpactCellViewModel? { didSet { updateViews() } }
     var alignment: Alignment = .leading {
         didSet {
             if oldValue != alignment {
@@ -82,14 +83,6 @@ class ImpactCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setUp()
-    }
-    
-    // MARK: - Public Methods
-    
-    func setUp(withTitle title: String?, subtitle: String?, image: UIImage?) {
-        titleLabel.text = title
-        subtitleLabel.text = subtitle
-        imageView.image = image
     }
     
     // MARK: - Overrides
@@ -173,5 +166,12 @@ class ImpactCell: UICollectionViewCell {
             NSLayoutConstraint.activate(trailingConstraints)
             subtitleLabel.textAlignment = .right
         }
+    }
+    
+    private func updateViews() {
+        guard let viewModel = viewModel else { return }
+        titleLabel.text = viewModel.title
+        subtitleLabel.text = viewModel.subtitle
+        imageView.image = viewModel.image
     }
 }

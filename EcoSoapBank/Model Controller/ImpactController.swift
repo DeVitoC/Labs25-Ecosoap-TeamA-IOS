@@ -6,14 +6,14 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ImpactDataProvider {
     func fetchImpactStats(_ completion: (Result<ImpactStats, Error>) -> Void)
 }
 
 class ImpactController {
-    private(set) var impactStats: ImpactStats?
+    private(set) var viewModels: [ImpactCellViewModel] = []
     
     private var dataProvider: ImpactDataProvider
     
@@ -21,12 +21,64 @@ class ImpactController {
         dataProvider.fetchImpactStats { result in
             switch result {
             case .success(let stats):
-                self.impactStats = stats
+                updateViewModels(with: stats)
                 completion(nil)
             case .failure(let error):
                 completion(error)
             }
         }
+    }
+    
+    func updateViewModels(with impactStats: ImpactStats) {
+        viewModels = []
+        
+        if let soapRecycled = impactStats.soapRecycled {
+            viewModels.append(
+                ImpactCellViewModel(withAmount: soapRecycled,
+                                    convertedTo: .pounds,
+                                    subtitle: "soap recycled",
+                                    image: UIImage(named: "Bottles")!)
+            )
+        }
+        if let bottlesRecycled = impactStats.bottlesRecycled {
+            viewModels.append(
+                ImpactCellViewModel(withAmount: bottlesRecycled,
+                                    convertedTo: .pounds,
+                                    subtitle: "bottle amenities\nrecycled",
+                                    image: UIImage(named: "Bottles")!)
+            )
+        }
+        if let linensRecycled = impactStats.linensRecycled {
+            viewModels.append(
+                ImpactCellViewModel(withAmount: linensRecycled,
+                                    convertedTo: .pounds,
+                                    subtitle: "linens recycled",
+                                    image: UIImage(named: "Bottles")!)
+            )
+        }
+        if let paperRecycled = impactStats.paperRecycled {
+            viewModels.append(
+                ImpactCellViewModel(withAmount: paperRecycled,
+                                    convertedTo: .pounds,
+                                    subtitle: "paper recycled",
+                                    image: UIImage(named: "Bottles")!)
+            )
+        }
+        if let peopleServed = impactStats.peopleServed {
+            viewModels.append(
+                ImpactCellViewModel(title: String(peopleServed),
+                                    subtitle: "people served",
+                                    image: UIImage(named: "Bottles")!)
+            )
+        }
+        if let womenEmployed = impactStats.womenEmployed {
+            viewModels.append(
+                ImpactCellViewModel(title: String(womenEmployed),
+                                    subtitle: "women employed",
+                                    image: UIImage(named: "Bottles")!)
+            )
+        }
+        
     }
 
     init(dataProvider: ImpactDataProvider) {
@@ -57,10 +109,12 @@ struct MockImpactDataProvider: ImpactDataProvider {
             completion(.failure(Self.Error.shouldFail))
             return
         }
-        completion(.success(ImpactStats(
-            stats: [
-                .soapRecycled: 1000
-            ]
-        )))
+        
+        completion(.success(ImpactStats(soapRecycled: 13090,
+                                        bottlesRecycled: 1982,
+                                        linensRecycled: 3298,
+                                        paperRecycled: 2948,
+                                        peopleServed: 323,
+                                        womenEmployed: 5)))
     }
 }

@@ -66,20 +66,17 @@ class ImpactViewController: UIViewController {
 
 extension ImpactViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        impactController.impactStats?.stats.count ?? 0
+        impactController.viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImpactCell.reuseIdentifier, for: indexPath) as? ImpactCell else {
             fatalError("Could not cast cell as \(ImpactCell.self)")
         }
-        cell.alignment = indexPath.row % 2 == 0 ? .leading : .trailing
         
-        if let impactStats = impactController.impactStats {
-            let stat = Array(impactStats.stats.keys)[indexPath.row]
-            let title = impactStats.amountString(for: stat)
-            cell.setUp(withTitle: title, subtitle: stat.description, image: stat.image)
-        }
+        cell.alignment = indexPath.row % 2 == 0 ? .leading : .trailing
+        cell.viewModel = impactController.viewModels[indexPath.row]
+       
         return cell
     }
 }
