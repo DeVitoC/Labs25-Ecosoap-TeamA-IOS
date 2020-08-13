@@ -31,7 +31,7 @@ class PickupTests: XCTestCase {
 
     func testPickupControllerSuccess() throws {
         pickupProvider.fetchAllPickups { result in
-            mockDataExpectation.fulfill()
+            self.mockDataReturned()
 
             switch result {
             case .failure(let error):
@@ -40,7 +40,7 @@ class PickupTests: XCTestCase {
                 XCTAssertGreaterThan(pickups.count, 0)
             }
         }
-        waiter.wait(for: [mockDataExpectation], timeout: 5)
+        waitForMockData()
 
         XCTAssertGreaterThan(pickupController.pickups.count, 0)
         XCTAssertNil(pickupController.error)
@@ -51,13 +51,13 @@ class PickupTests: XCTestCase {
         let failingController = PickupController(dataProvider: pickupProvider)
 
         pickupProvider.fetchAllPickups { result in
-            mockDataExpectation.fulfill()
+            self.mockDataReturned()
 
             if case .success = result {
                 XCTFail("Mock pickup provider should have failed but succeeded")
             }
         }
-        waiter.wait(for: [mockDataExpectation], timeout: 5)
+        waitForMockData()
 
         XCTAssert(failingController.pickups.isEmpty)
         XCTAssertNotNil(failingController.error)
@@ -71,6 +71,16 @@ class PickupTests: XCTestCase {
 }
 
 // MARK: - Helpers
+
+extension PickupTests {
+    private func waitForMockData() {
+        waiter.wait(for: [mockDataExpectation], timeout: 5)
+    }
+
+    private func mockDataReturned() {
+        mockDataExpectation.fulfill()
+    }
+}
 
 protocol HostingController {}
 
