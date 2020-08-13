@@ -24,20 +24,13 @@ struct ImpactCellViewModel {
 }
 
 extension ImpactCellViewModel {
-    
     init(withAmount grams: Int,
          convertedTo unit: UnitMass,
          subtitle: String,
          image: UIImage) {
         let weightGrams = Measurement(value: Double(grams), unit: UnitMass.grams)
-        self.title = MeasurementFormatter.shared.string(from: weightGrams.converted(to: unit))
+        self.title = weightGrams.converted(to: unit).string
         self.subtitle = subtitle
         self.image = image
-    }
-}
-
-extension MeasurementFormatter {
-    static let shared = configure(MeasurementFormatter()) {
-        $0.numberFormatter.maximumFractionDigits = 2
     }
 }
