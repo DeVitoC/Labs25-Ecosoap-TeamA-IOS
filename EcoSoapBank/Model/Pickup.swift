@@ -126,6 +126,7 @@ extension PickupBaseContainer {
     var status: Pickup.Status { base.status }
     var readyDate: Date { base.readyDate }
     var pickupDate: Date? { base.pickupDate }
+    var notes: String { base.notes }
 }
 
 // MARK: - Convenience Extensions
