@@ -64,7 +64,7 @@ struct Pickup: Identifiable, PickupBaseContainer {
 
 extension Pickup: Decodable {
 
-    struct Base: Decodable {
+    struct Base: Equatable, Decodable {
         let collectionType: CollectionType
         let status: Status
         let readyDate: Date
