@@ -17,6 +17,12 @@ class ImpactController {
     
     private var dataProvider: ImpactDataProvider
     
+    
+    /// Gets the latest impact stats from the data provider, which in
+    /// turn updates the `viewModels` property accordingly.
+    /// - Parameter completion: A completion closure that passes back
+    /// either an error if something went wrong, or nil if the impact
+    /// stats were properly fetched and the view models updated.
     func getImpactStats(_ completion: (Error?) -> Void) {
         dataProvider.fetchImpactStats { result in
             switch result {
@@ -29,13 +35,20 @@ class ImpactController {
         }
     }
     
-    func updateViewModels(with impactStats: ImpactStats) {
+    /// This function updates the array of view models for the Impact Cells
+    /// using the `ImpactStats` passed in, as well as the unit preference of
+    /// the user. It creates each view model with an appropriate subtitle and
+    /// image that corresponds with the statistic.
+    private func updateViewModels(with impactStats: ImpactStats) {
         viewModels = []
         
+        let unitMass: UnitMass = .pounds // TODO: Get preference of user
+        
+        // TODO: Fill in proper images
         if let soapRecycled = impactStats.soapRecycled {
             viewModels.append(
                 ImpactCellViewModel(withAmount: soapRecycled,
-                                    convertedTo: .pounds,
+                                    convertedTo: unitMass,
                                     subtitle: "soap recycled",
                                     image: UIImage(named: "Bottles")!)
             )
@@ -43,7 +56,7 @@ class ImpactController {
         if let bottlesRecycled = impactStats.bottlesRecycled {
             viewModels.append(
                 ImpactCellViewModel(withAmount: bottlesRecycled,
-                                    convertedTo: .pounds,
+                                    convertedTo: unitMass,
                                     subtitle: "bottle amenities\nrecycled",
                                     image: UIImage(named: "Bottles")!)
             )
@@ -51,7 +64,7 @@ class ImpactController {
         if let linensRecycled = impactStats.linensRecycled {
             viewModels.append(
                 ImpactCellViewModel(withAmount: linensRecycled,
-                                    convertedTo: .pounds,
+                                    convertedTo: unitMass,
                                     subtitle: "linens recycled",
                                     image: UIImage(named: "Bottles")!)
             )
@@ -59,7 +72,7 @@ class ImpactController {
         if let paperRecycled = impactStats.paperRecycled {
             viewModels.append(
                 ImpactCellViewModel(withAmount: paperRecycled,
-                                    convertedTo: .pounds,
+                                    convertedTo: unitMass,
                                     subtitle: "paper recycled",
                                     image: UIImage(named: "Bottles")!)
             )
@@ -78,7 +91,6 @@ class ImpactController {
                                     image: UIImage(named: "Bottles")!)
             )
         }
-        
     }
 
     init(dataProvider: ImpactDataProvider) {
