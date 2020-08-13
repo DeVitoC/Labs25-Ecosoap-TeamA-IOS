@@ -11,13 +11,13 @@ import SwiftUI
 struct TextView: UIViewRepresentable {
     @Binding var text: String
 
-    var textStyle: UIFont.TextStyle
+    var font: UIFont
 
     init(
         text: Binding<String>,
-        textStyle: UIFont.TextStyle = .body
+        font: UIFont = .preferredFont(forTextStyle: .body)
     ) {
-        self.textStyle = textStyle
+        self.font = font
         self._text = text
     }
 
@@ -25,7 +25,7 @@ struct TextView: UIViewRepresentable {
         let textView = UITextView()
 
         textView.delegate = context.coordinator
-        textView.font = UIFont.preferredFont(forTextStyle: textStyle)
+        textView.font = font
         textView.autocapitalizationType = .sentences
         textView.isSelectable = true
         textView.isUserInteractionEnabled = true
@@ -36,7 +36,7 @@ struct TextView: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = text
-        uiView.font = UIFont.preferredFont(forTextStyle: textStyle)
+        uiView.font = font
     }
 
     func makeCoordinator() -> Coordinator {
