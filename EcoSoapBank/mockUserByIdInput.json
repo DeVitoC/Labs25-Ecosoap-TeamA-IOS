@@ -10,17 +10,6 @@
             "email": "email@email.com",
             "phone": "123-456-7890",
             "skype": "skypeID",
-            "address": {
-                "address1": "123 Central Ave",
-                "address2": "Unit 4",
-                "address3": "",
-                "city": "St. Petersburg",
-                "state": "FL",
-                "postalCode": "12345",
-                "country": "United States of America",
-                "formattedAddress": "123 Central Ave \nUnit 4\nSt. Petersburg, FL 12345\nUnited States of America"
-            }
-            "signupTime": 2020-08-12-08:00:00,
             "properties" [
                 {
                     "id": 5,
@@ -36,60 +25,15 @@
                     "collectionType": "COURIER_CONSOLIDATED",
                     "logo": "http://www.logo-url.com",
                     "phone": 123-456-0987,
-                    "billingAddress": {
-                        "address1": "123 Central Ave",
-                        "address2": "Unit 4",
-                        "address3": "",
-                        "city": "St. Petersburg",
-                        "state": "FL",
-                        "postalCode": "12345",
-                        "country": "United States of America",
-                        "formattedAddress": "123 Central Ave \nUnit 4\nSt. Petersburg, FL 12345\nUnited States of America"
-                    },
-                    "shippingAddress": {
-                        "address1": "123 Central Ave",
-                        "address2": "Unit 4",
-                        "address3": "",
-                        "city": "St. Petersburg",
-                        "state": "FL",
-                        "postalCode": "12345",
-                        "country": "United States of America",
-                        "formattedAddress": "123 Central Ave \nUnit 4\nSt. Petersburg, FL 12345\nUnited States of America"
-                    },
-                    "coordinates": {
-                        "latitude": 1.00009,
-                        "longitude": 1.00008
-                    },
                     "shippingNote": "This company ships by UPS",
                     "notes": "This compnay has been donating for 3 years",
-                    "hub": {
-                        "id": 100,
-                        "name": "Hub 1",
-                        "address": {
-                            "address1": "123 Central Ave",
-                            "address2": "Unit 4",
-                            "address3": "",
-                            "city": "St. Petersburg",
-                            "state": "FL",
-                            "postalCode": "12345",
-                            "country": "United States of America",
-                            "formattedAddress": "123 Central Ave \nUnit 4\nSt. Petersburg, FL 12345\nUnited States of America"
-                        },
-                        "email": "hub@hubs.com",
-                        "phone": "123-654-7890",
-                        "coordinates": {
-                            "latitude": 1.00009,
-                            "longitude": 1.00008
-                        },
-                        "workflow": "ENHANCED",
-                        "impact": {
-                            "soapRecycled": 1,
-                            "linensRecycled": 2,
-                            "bottlesRecycled": 3,
-                            "paperRecycled": 4,
-                            "peopleServed": 5,
-                            "womenEmployed": 6
-                        }
+                    "impact": {
+                        "soapRecycled": 1,
+                        "linensRecycled": 2,
+                        "bottlesRecycled": 3,
+                        "paperRecycled": 4,
+                        "peopleServed": 5,
+                        "womenEmployed": 6
                     }
                 }
             ]
