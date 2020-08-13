@@ -57,6 +57,22 @@ extension Array where Element == Pickup {
     }
 }
 
+extension Array where Element == Pickup.CartonContents {
+    static func random() -> [Pickup.CartonContents] {
+        (0 ... .random(in: 1...4)).map { _ in
+            Pickup.CartonContents.random()
+        }
+    }
+}
+
+extension Array where Element == Pickup.Carton {
+    static func random() -> [Pickup.Carton] {
+        [Pickup.CartonContents].random().map {
+            Pickup.Carton(id: UUID(), contents: $0)
+        }
+    }
+}
+
 extension Pickup {
     /// Uses input `base` to construct data from mock "server."
     static func mock(from input: ScheduleInput) -> Self {
@@ -69,6 +85,16 @@ extension Pickup {
         })
     }
 
+    static func random() -> Self {
+        Pickup(
+            base: .random(),
+            id: UUID(),
+            confirmationCode: UUID().uuidString,
+            cartons: .random())
+    }
+}
+
+extension Pickup.Base {
     static func random() -> Self {
         let status = Pickup.Status.random()
         let daysSinceReady = Int.random(in: -14 ... -2)
@@ -86,16 +112,13 @@ extension Pickup {
                     : nil
             }
         }()
-        return Pickup(
-            base: Base(
-                collectionType: .random(),
-                status: status,
-                readyDate: Date(timeIntervalSinceNow: .days(daysSinceReady)),
-                pickupDate: pickupDate,
-                notes: ""),
-            id: UUID(),
-            confirmationCode: UUID().uuidString,
-            cartons: (0 ... .random(in: 1...4)).map { _ in Pickup.Carton.random() })
+
+        return Pickup.Base(
+            collectionType: .random(),
+            status: status,
+            readyDate: Date(timeIntervalSinceNow: .days(daysSinceReady)),
+            pickupDate: pickupDate,
+            notes: "")
     }
 }
 
@@ -138,6 +161,15 @@ extension Pickup.Status {
     }
 
     static func random() -> Self { .init(intValue: .random(in: 0...3)) }
+}
+
+extension Pickup.ScheduleInput {
+    static func random() -> Self {
+        Pickup.ScheduleInput(
+            base: .random(),
+            propertyID: UUID(),
+            cartons: .random())
+    }
 }
 
 extension Pickup.ScheduleResult {
