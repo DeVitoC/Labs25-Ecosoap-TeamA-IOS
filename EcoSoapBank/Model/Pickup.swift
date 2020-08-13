@@ -63,8 +63,7 @@ struct Pickup: Identifiable, PickupBaseContainer {
 // MARK: - SubTypes
 
 extension Pickup {
-
-    struct Base {
+    struct Base: Equatable {
         let collectionType: CollectionType
         let status: Status
         let readyDate: Date
