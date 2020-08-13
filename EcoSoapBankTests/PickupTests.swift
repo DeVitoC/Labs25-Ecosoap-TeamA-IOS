@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SwiftUI
 @testable import EcoSoapBank
 
 
@@ -61,4 +62,16 @@ class PickupTests: XCTestCase {
         XCTAssert(failingController.pickups.isEmpty)
         XCTAssertNotNil(failingController.error)
     }
+
+    func testPickupCoordinator() {
+        pickupCoordinator.start()
+
+        XCTAssertNotNil(pickupCoordinator.rootVC as? HostingController)
+    }
 }
+
+// MARK: - Helpers
+
+protocol HostingController {}
+
+extension UIHostingController: HostingController {}
