@@ -9,6 +9,8 @@
 import SwiftUI
 
 
+// MARK: - Cell
+
 struct PickupHistoryListItem: View {
     let pickup: Pickup
 
@@ -19,18 +21,26 @@ struct PickupHistoryListItem: View {
     var body: some View {
         NavigationLink(destination: PickupDetailView(pickup: pickup)) {
             VStack(alignment: .leading) {
-                HStack {
-                    Text("Ready:").bold()
+                TitledSegment("Ready") {
                     Text(pickup.readyDate.string(from: Self.dateFormatter))
                 }
 
-                HStack {
-                    Text("Status: ").bold()
+                TitledSegment("Status") {
                     Text("\(pickup.status.display)")
                         .foregroundColor(pickup.status.color)
                     if pickup.pickupDate != nil {
                         Text(pickup.pickupDate!.string(from: Self.dateFormatter))
                     }
+                }
+
+                if pickup.pickupDate != nil {
+                    TitledSegment("Picked up") {
+                        Text(pickup.readyDate.string(from: Self.dateFormatter))
+                    }
+                }
+
+                TitledSegment("Cartons") {
+                    Text("\(pickup.cartons.count)")
                 }
             }
         }
@@ -42,8 +52,26 @@ extension PickupHistoryListItem {
         $0.dateStyle = .short
         $0.timeStyle = .short
     }
+
+    struct TitledSegment<Content: View>: View {
+        let title: String
+        let content: Content
+
+        init(_ title: String, @ViewBuilder _ content: () -> Content) {
+            self.title = title
+            self.content = content()
+        }
+
+        var body: some View {
+            HStack {
+                Text(title + ":").bold()
+                content
+            }
+        }
+    }
 }
 
+// MARK: - Detail View
 
 struct PickupDetailView: View {
     let pickup: Pickup
