@@ -14,7 +14,7 @@ struct PickupHistoryView: View {
     var body: some View {
         List {
             ForEach(pickupController.pickups) {
-                PickupHistoryItemView(pickup: $0)
+                PickupHistoryListItem(pickup: $0)
             }
         }.navigationBarTitle("Pickup History", displayMode: .inline)
     }

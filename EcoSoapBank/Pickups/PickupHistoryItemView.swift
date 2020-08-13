@@ -9,7 +9,7 @@
 import SwiftUI
 
 
-struct PickupHistoryItemView: View {
+struct PickupHistoryListItem: View {
     let pickup: Pickup
 
     init(pickup: Pickup) {
@@ -37,7 +37,7 @@ struct PickupHistoryItemView: View {
     }
 }
 
-extension PickupHistoryItemView {
+extension PickupHistoryListItem {
     static let dateFormatter = configure(DateFormatter()) {
         $0.dateStyle = .short
         $0.timeStyle = .short
@@ -49,6 +49,6 @@ extension PickupHistoryItemView {
 
 struct PickupListItem_Previews: PreviewProvider {
     static var previews: some View {
-        PickupHistoryItemView(pickup: .random())
+        PickupHistoryListItem(pickup: .random())
     }
 }
