@@ -118,7 +118,7 @@ extension Pickup.Base {
             status: status,
             readyDate: Date(timeIntervalSinceNow: .days(daysSinceReady)),
             pickupDate: pickupDate,
-            notes: "")
+            notes: Bool.random() ? UUID().uuidString : "")
     }
 }
 
