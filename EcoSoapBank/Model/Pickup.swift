@@ -107,7 +107,7 @@ extension Pickup {
         case cancelled = "CANCELLED"
     }
 
-    enum CollectionType: String {
+    enum CollectionType: String, Decodable {
         case courierConsolidated = "COURIER_CONSOLIDATED"
         case courierDirect = "COURIER_DIRECT"
         case generatedLabel = "GENERATED_LABEL"
