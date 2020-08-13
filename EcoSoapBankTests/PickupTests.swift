@@ -68,6 +68,22 @@ class PickupTests: XCTestCase {
 
         XCTAssertNotNil(pickupCoordinator.rootVC as? HostingController)
     }
+
+    func testSchedulePickup() {
+        let pickupInput = Pickup.ScheduleInput.random()
+
+        pickupController.schedulePickup(pickupInput) { result in
+            self.mockDataReturned()
+            switch result {
+            case .success(let pickupResult):
+                XCTAssertEqual(pickupInput.base, pickupResult.pickup.base)
+            case .failure(let error):
+                XCTFail("schedulePickup returned failure with error: \(error)")
+            }
+        }
+
+        waitForMockData()
+    }
 }
 
 // MARK: - Helpers
