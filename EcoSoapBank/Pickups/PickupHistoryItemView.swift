@@ -23,7 +23,7 @@ struct PickupHistoryItemView: View {
             }
 
             HStack {
-                Text("Status: ") + (Text("\(pickup.status.rawValue.capitalized)")
+                Text("Status: ") + (Text("\(pickup.status.display)")
                     .foregroundColor(pickup.status.color))
                 if pickup.pickupDate != nil {
                     Text(pickup.pickupDate!.string(from: Self.dateFormatter))
