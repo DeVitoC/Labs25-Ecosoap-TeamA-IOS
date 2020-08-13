@@ -17,6 +17,7 @@ import Combine
 extension Image {
     static func plus() -> Image { Image(systemName: "plus") }
     static func cubeBox() -> Image { Image(systemName: "cube.box") }
+    static func notes() -> Image { Image(systemName: "doc.plaintext") }
 }
 
 
