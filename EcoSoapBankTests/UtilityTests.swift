@@ -29,7 +29,7 @@ class UtilityTests: XCTestCase {
         XCTAssertEqual(object.int, 42)
     }
 
-    func testDate() {
+    func testDateConvenienceInit() {
         let date = Date(year: 2020, month: 3, day: 19, hour: 8, minute: 56)
         XCTAssertNotNil(date, "Expected non-nil date from initializer")
 
