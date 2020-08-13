@@ -11,15 +11,54 @@ import XCTest
 
 
 class PickupTests: XCTestCase {
+    private var pickupCoordinator: PickupCoordinator!
+    private var pickupController: PickupController!
+    private var pickupProvider: MockPickupProvider!
+    private var mockDataExpectation: XCTestExpectation!
+    private var waiter: XCTWaiter!
+
+    override func setUp() {
+        super.setUp()
+        pickupProvider = MockPickupProvider()
+        pickupController = PickupController(dataProvider: pickupProvider)
+        pickupCoordinator = PickupCoordinator(pickupController: pickupController)
+        mockDataExpectation = XCTestExpectation(description: "Waiting for mock data")
+        waiter = XCTWaiter(delegate: self)
+    }
+
+    // MARK: - Tests
+
     func testPickupControllerSuccess() throws {
-        let pickupController = PickupController(dataProvider: MockPickupProvider())
-        XCTAssertEqual(pickupController.pickups.count, 3)
+        pickupProvider.fetchAllPickups { result in
+            mockDataExpectation.fulfill()
+
+            switch result {
+            case .failure(let error):
+                XCTFail("Mock pickup provider should have succeeded but failed with error: \(error)")
+            case .success(let pickups):
+                XCTAssertGreaterThan(pickups.count, 0)
+            }
+        }
+        waiter.wait(for: [mockDataExpectation], timeout: 5)
+
+        XCTAssertGreaterThan(pickupController.pickups.count, 0)
         XCTAssertNil(pickupController.error)
     }
 
-    func testPickupControllerFailure() throws {
-        let pickupController = PickupController(dataProvider: MockPickupProvider(shouldFail: true))
-        XCTAssert(pickupController.pickups.isEmpty)
-        XCTAssertNotNil(pickupController.error)
+    func testPickupControllerFailure() {
+        pickupProvider.shouldFail = true
+        let failingController = PickupController(dataProvider: pickupProvider)
+
+        pickupProvider.fetchAllPickups { result in
+            mockDataExpectation.fulfill()
+
+            if case .success = result {
+                XCTFail("Mock pickup provider should have failed but succeeded")
+            }
+        }
+        waiter.wait(for: [mockDataExpectation], timeout: 5)
+
+        XCTAssert(failingController.pickups.isEmpty)
+        XCTAssertNotNil(failingController.error)
     }
 }
