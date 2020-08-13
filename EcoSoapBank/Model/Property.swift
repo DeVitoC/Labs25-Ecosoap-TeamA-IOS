@@ -22,3 +22,33 @@
  */
 
 import Foundation
+
+struct Property: Decodable {
+    let id: Int
+    let name: String
+    let propertyType: PropertyType
+    let rooms: Int
+    let services: [HospitalityService]
+    let collectionType: Pickup.CollectionType
+    let logo: URL?
+    let phone: String?
+    let shippingNote: String?
+    let notes: String?
+    let impact: ImpactStats?
+    let pickups: [Pickup]?
+
+    enum PropertyType: String, Decodable {
+        case bedAndBreakfast = "BED_AND_BREAKFAST"
+        case guesthouse = "GUESTHOUSE"
+        case hotel = "HOTEL"
+        case other = "OTHER"
+    }
+
+    enum BillingMethod: String, Decodable {
+        case ach = "ACH"
+        case credit = "CREDIT"
+        case debit = "DEBIT"
+        case invoice = "INVOICE"
+    }
+}
+
