@@ -11,8 +11,19 @@ import OktaAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         UITabBar.appearance().tintColor = .esbGreen
+
+        configure(UINavigationBar.appearance(), with: {
+            $0.titleTextAttributes = [.font: UIFont.Montserrat.navBarInlineTitle]
+            $0.largeTitleTextAttributes = [
+                .font: UIFont.Montserrat.navBarLargeTitle,
+                .foregroundColor: UIColor.white
+            ]
+        })
         return true
     }
 
@@ -25,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        UISceneConfiguration(name: "Default Configuration",
+                             sessionRole: connectingSceneSession.role)
     }
 }
