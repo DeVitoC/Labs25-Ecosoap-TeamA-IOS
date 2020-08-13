@@ -15,6 +15,13 @@ struct ImpactCellViewModel {
 }
 
 extension ImpactCellViewModel {
+    /// This initializer allows for easy initialization of an impact cell
+    /// view model with a weight based statistic
+    /// - Parameters:
+    ///   - grams: The weight of the statistic in grams as an Int
+    ///   - unit: The desired display unit
+    ///   - subtitle: A description of the statistic displayed
+    ///   - image: An corresponding image to display with the statistic
     init(withAmount grams: Int,
          convertedTo unit: UnitMass,
          subtitle: String,
