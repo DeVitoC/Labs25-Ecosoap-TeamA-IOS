@@ -15,6 +15,7 @@ import Foundation
 ///   - change: A closure that takes in an inout copy of the provided `value`
 /// - Throws: If `change` throws an error, this method will rethrow that error; otherwise no error can or will be thrown
 /// - Returns: The `value` of type `T` with the modifications in `change` applied
+@discardableResult
 public func configure<T>(
     _ value: T,
     with change: (inout T) throws -> Void
