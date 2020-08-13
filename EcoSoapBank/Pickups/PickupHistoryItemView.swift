@@ -20,27 +20,33 @@ struct PickupHistoryListItem: View {
 
     var body: some View {
         NavigationLink(destination: PickupDetailView(pickup: pickup)) {
-            VStack(alignment: .leading) {
-                TitledSegment("Ready") {
-                    Text(pickup.readyDate.string(from: Self.dateFormatter))
-                }
-
-                TitledSegment("Status") {
-                    Text("\(pickup.status.display)")
-                        .foregroundColor(pickup.status.color)
-                    if pickup.pickupDate != nil {
-                        Text(pickup.pickupDate!.string(from: Self.dateFormatter))
-                    }
-                }
-
-                if pickup.pickupDate != nil {
-                    TitledSegment("Picked up") {
+            HStack(alignment: .bottom) {
+                VStack(alignment: .leading) {
+                    TitledSegment("Ready") {
                         Text(pickup.readyDate.string(from: Self.dateFormatter))
                     }
+
+                    TitledSegment("Status") {
+                        Text("\(pickup.status.display)")
+                            .foregroundColor(pickup.status.color)
+                    }
+
+                    if pickup.pickupDate != nil {
+                        TitledSegment("Picked Up") {
+                            Text(pickup.pickupDate!.string(from: Self.dateFormatter))
+                        }
+                    }
+
+                    TitledSegment("Cartons") {
+                        Text("\(pickup.cartons.count)")
+                    }
                 }
 
-                TitledSegment("Cartons") {
-                    Text("\(pickup.cartons.count)")
+                Spacer()
+
+                if !pickup.notes.isEmpty {
+                    Image.notes()
+                        .foregroundColor(Color(.secondaryLabel))
                 }
             }
         }
