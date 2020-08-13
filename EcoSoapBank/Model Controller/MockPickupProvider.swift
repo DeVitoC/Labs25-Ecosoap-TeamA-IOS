@@ -10,7 +10,7 @@ import Foundation
 
 
 /// For placeholder and testing purposes.
-struct MockPickupProvider {
+class MockPickupProvider {
     enum Error: Swift.Error {
         case shouldFail
     }
