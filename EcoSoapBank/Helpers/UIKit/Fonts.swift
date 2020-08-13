@@ -52,3 +52,16 @@ extension UIFont {
         UIFont(name: "Montserrat\(style.rawValue)", size: size)!
     }
 }
+
+
+extension UIFont {
+    enum Montserrat {
+        static var navBarLargeTitle: UIFont {
+            .montserrat(ofSize: 30, style: .semiBold)
+        }
+
+        static var navBarInlineTitle: UIFont {
+            .montserrat(ofSize: 18, style: .semiBold)
+        }
+    }
+}
