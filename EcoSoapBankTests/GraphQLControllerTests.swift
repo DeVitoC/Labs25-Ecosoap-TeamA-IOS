@@ -25,17 +25,23 @@ class GraphQLControllerTests: XCTestCase {
 
         graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery) { result in
 
-            guard let result = try? result.get() else {
+            guard let result = try? result.get(),
+                let soapRecycled = result.soapRecycled,
+                let linensRecycled = result.linensRecycled,
+                let bottlesRecycled = result.bottlesRecycled,
+                let paperRecycled = result.paperRecycled,
+                let peopleServed = result.peopleServed,
+                let womenEmployed = result.womenEmployed else {
                 NSLog("result did not cocntain valid Impact stats")
                 return
             }
 
-            XCTAssert(Int(result.amountString(for: .soapRecycled)!) == 1)
-            XCTAssert(Int(result.amountString(for: .linensRecycled)!) == 2)
-            XCTAssert(Int(result.amountString(for: .bottlesRecycled)!) == 3)
-            XCTAssert(Int(result.amountString(for: .paperRecycled)!) == 4)
-            XCTAssert(Int(result.amountString(for: .peopleServed)!) == 5)
-            XCTAssert(Int(result.amountString(for: .womenEmployed)!) == 6)
+            XCTAssert(soapRecycled == 1)
+            XCTAssert(linensRecycled == 2)
+            XCTAssert(bottlesRecycled == 3)
+            XCTAssert(paperRecycled == 4)
+            XCTAssert(peopleServed == 5)
+            XCTAssert(womenEmployed == 6)
         }
     }
 
