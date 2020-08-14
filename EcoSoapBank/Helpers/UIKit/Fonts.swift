@@ -23,7 +23,7 @@ extension UIFont {
     }
     
     static func muli(ofSize size: CGFloat, typeface: MuliTypeface = .regular) -> UIFont {
-        UIFont(name: "Muli\(typeface.rawValue)", size: size)!.scaled()
+        UIFont(name: .muli + typeface.rawValue, size: size)!.scaled()
     }
     
     enum MontserratTypeface: String, CaseIterable {
@@ -48,7 +48,7 @@ extension UIFont {
     }
     
     static func montserrat(ofSize size: CGFloat, typeface: MontserratTypeface = .regular) -> UIFont {
-        UIFont(name: "Montserrat\(typeface.rawValue)", size: size)!.scaled()
+        UIFont(name: .montserrat + typeface.rawValue, size: size)!.scaled()
     }
 }
 
