@@ -121,8 +121,9 @@
 		E2D302ED24E5B260008A6FAF /* mockImpactStatsByPropertyId.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */; };
 		E2D302EF24E5B489008A6FAF /* mockUserByIdInput.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */; };
 		E2D302F524E5CA32008A6FAF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302F424E5CA32008A6FAF /* User.swift */; };
-		E2D302F924E5DA32008A6FAF /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302F824E5DA32008A6FAF /* URLSessionMock.swift */; };
-		E2D302FB24E5DB1A008A6FAF /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302FA24E5DB1A008A6FAF /* URLSessionDataTaskMock.swift */; };
+		E2D302FD24E5EEA0008A6FAF /* GraphQLControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302FC24E5EEA0008A6FAF /* GraphQLControllerTests.swift */; };
+		E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302FE24E5F464008A6FAF /* DataLoader.swift */; };
+		E2D3030124E5F9B8008A6FAF /* MockDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,8 +227,9 @@
 		E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsByPropertyId.json; sourceTree = "<group>"; };
 		E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockUserByIdInput.json; sourceTree = "<group>"; };
 		E2D302F424E5CA32008A6FAF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		E2D302F824E5DA32008A6FAF /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
-		E2D302FA24E5DB1A008A6FAF /* URLSessionDataTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskMock.swift; sourceTree = "<group>"; };
+		E2D302FC24E5EEA0008A6FAF /* GraphQLControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLControllerTests.swift; sourceTree = "<group>"; };
+		E2D302FE24E5F464008A6FAF /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
+		E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,8 +371,8 @@
 				994E4B7824DDB58300C12921 /* UtilityFunctions.swift */,
 				9921943324E49AC300E16C16 /* UIKit */,
 				9983874F24E4694400450244 /* SwiftUI */,
-				E2D302F824E5DA32008A6FAF /* URLSessionMock.swift */,
-				E2D302FA24E5DB1A008A6FAF /* URLSessionDataTaskMock.swift */,
+				E2D302FE24E5F464008A6FAF /* DataLoader.swift */,
+				E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -480,6 +482,7 @@
 				041E1E8724E1F3890052831D /* FontTests.swift */,
 				994E4B8224DDB67000C12921 /* Info.plist */,
 				041E1EA824E22DF50052831D /* ColorTests.swift */,
+				E2D302FC24E5EEA0008A6FAF /* GraphQLControllerTests.swift */,
 			);
 			path = EcoSoapBankTests;
 			sourceTree = "<group>";
@@ -696,6 +699,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
 				46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */,
 				9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */,
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
@@ -726,10 +730,10 @@
 				9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */,
 				997BF11224E20AAE00A643D8 /* TextView.swift in Sources */,
 				9998716424E1E8C4000A993E /* PickupsView.swift in Sources */,
-				E2D302F924E5DA32008A6FAF /* URLSessionMock.swift in Sources */,
 				998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */,
 				463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
+				E2D3030124E5F9B8008A6FAF /* MockDataLoader.swift in Sources */,
 				46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */,
 				463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */,
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
@@ -743,7 +747,6 @@
 				998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */,
 				466C4276249A8748007D033E /* SceneDelegate.swift in Sources */,
 				991874D424E4B28900F636FB /* UIView+Subviews.swift in Sources */,
-				E2D302FB24E5DB1A008A6FAF /* URLSessionDataTaskMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,6 +756,7 @@
 			files = (
 				041E1E8824E1F3890052831D /* FontTests.swift in Sources */,
 				994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */,
+				E2D302FD24E5EEA0008A6FAF /* GraphQLControllerTests.swift in Sources */,
 				041E1EA924E22DF50052831D /* ColorTests.swift in Sources */,
 				99B5790324E30F140097957D /* PickupTests.swift in Sources */,
 			);
