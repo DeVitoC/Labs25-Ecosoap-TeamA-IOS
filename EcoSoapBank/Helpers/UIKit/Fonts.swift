@@ -21,17 +21,18 @@ extension UIFont {
         case regular = ""
         case lightItalic = "-LightItalic"
     }
-    
-    static func muli(ofSize size: CGFloat, typeface: MuliTypeface = .regular) -> UIFont {
-        UIFont(name: .muli + typeface.rawValue, size: size)!.scaled()
-    }
 
-    static func muli(style: TextStyle, typeface: MuliTypeface = .regular) -> UIFont {
-        muli(
-            ofSize: UIFontDescriptor
-                .preferredFontDescriptor(withTextStyle: style)
-                .pointSize,
-            typeface: typeface)
+    /// Returns a Muli font with the provided style, typeface,  and size (or the default size of the provided style if `nil`).
+    static func muli(
+        ofSize size: CGFloat? = nil,
+        style: TextStyle? = nil,
+        typeface: MuliTypeface = .regular
+    ) -> UIFont {
+        UIFont(
+            name: .muli + typeface.rawValue,
+            size: size ?? UIFontDescriptor
+                .preferredFontDescriptor(withTextStyle: style ?? .body).pointSize
+        )!.scaled(forStyle: style)
     }
     
     enum MontserratTypeface: String, CaseIterable {
@@ -54,21 +55,30 @@ extension UIFont {
         case black = "-Black"
         case semiBold = "-SemiBold"
     }
-    
-    static func montserrat(ofSize size: CGFloat, typeface: MontserratTypeface = .regular) -> UIFont {
-        UIFont(name: .montserrat + typeface.rawValue, size: size)!.scaled()
+
+    /// Returns a Montserrat font with the provided style, typeface,  and size (or the default size of the provided style if `nil`).
+    static func montserrat(
+        ofSize size: CGFloat? = nil,
+        style: TextStyle? = nil,
+        typeface: MontserratTypeface = .regular
+    ) -> UIFont {
+        UIFont(
+            name: .montserrat + typeface.rawValue,
+            size: size ?? UIFontDescriptor
+                .preferredFontDescriptor(withTextStyle: style ?? .body).pointSize
+            )!.scaled(forStyle: style)
     }
 
-    static func montserrat(style: TextStyle, typeface: MontserratTypeface = .regular) -> UIFont {
-        montserrat(
-            ofSize: UIFontDescriptor
-                .preferredFontDescriptor(withTextStyle: style)
-                .pointSize,
-            typeface: typeface)
-    }
-
-    func scaled() -> UIFont {
-        UIFontMetrics.default.scaledFont(for: self)
+    /// Returns a Dynamic Type-adaptive version of the font.
+    func scaled(forStyle style: TextStyle? = nil) -> UIFont {
+        let metrics: UIFontMetrics = {
+            if let style = style {
+                return UIFontMetrics(forTextStyle: style)
+            } else {
+                return .default
+            }
+        }()
+        return metrics.scaledFont(for: self)
     }
 
     static var navBarLargeTitle: UIFont {
