@@ -10,10 +10,10 @@
 
 import Foundation
 
-enum HospitalityService: String {
-    case bottles
-    case linens
-    case other
-    case paper
-    case soap
+enum HospitalityService: String, Decodable {
+    case bottles = "BOTTLES"
+    case linens = "LINENS"
+    case other = "OTHER"
+    case paper = "PAPER"
+    case soap = "SOAP"
 }

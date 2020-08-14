@@ -2,12 +2,22 @@
  type Pickup {
      id: ID!
      confirmationCode: String!
+     collectionType: CollectionType!**
+     status: PickupStatus!**
+     readyDate: Date!**
+     pickupDate: Date**
+     property: Property!^^
+     cartons: [PickupCarton!]!^^
+     notes: String**
+ }
+
+ type SchedulePickupInput {
      collectionType: CollectionType!
      status: PickupStatus!
      readyDate: Date!
      pickupDate: Date
-     property: Property!
-     cartons: [PickupCarton!]!
+     propertyId: ID!
+     cartons: [PickupCartonInput!]!
      notes: String
  }
 
@@ -38,52 +48,115 @@
  }
  */
 
-import Foundation
+import SwiftUI
+import UIKit
 
 
-struct Pickup: Identifiable {
-    let id: Int
+struct Pickup: Identifiable, PickupBaseContainer {
+    let base: Base
+
+    let id: UUID
     let confirmationCode: String
-    let collectionType: CollectionType
-    let status: Status
-    let readyDate: Date
-    let pickupDate: Date?
     let cartons: [Carton]
-    let notes: String
 }
 
+// MARK: - SubTypes
 
-extension Pickup {
-    enum Status: String {
-        case submitted, outForPickup = "out for pickup", complete, cancelled
+extension Pickup: Decodable {
+
+    struct Base: Equatable, Decodable {
+        let collectionType: CollectionType
+        let status: Status
+        let readyDate: Date
+        let pickupDate: Date?
+        let notes: String
     }
 
-    enum CollectionType {
-        case courierConsolidated
-        case courierDirect
-        case generatedLabel
-        case local
-        case other
+    // MARK: Schedule I/O
+
+    struct ScheduleInput: PickupBaseContainer {
+        let base: Base
+
+        let propertyID: UUID
+        let cartons: [CartonContents]
     }
 
-    struct Carton: Identifiable {
-        let id: Int
+    struct ScheduleResult {
+        let pickup: Pickup
+        let labelURL: URL
+    }
+
+    struct Carton: Identifiable, Decodable {
+        let id: UUID
         let contents: CartonContents?
-
-        init(id: Int, product: HospitalityService?, weight: Int?) {
-            self.id = id
-            if let p = product, let w = weight {
-                self.contents = CartonContents(product: p, weight: w)
-            } else {
-                self.contents = nil
-            }
-        }
     }
 
-    struct CartonContents: Hashable, Identifiable {
+    struct CartonContents: Hashable, Identifiable, Decodable {
         let product: HospitalityService
         let weight: Int
 
         var id: Int { self.hashValue }
     }
+
+    // MARK: Enums
+
+    enum Status: String, Decodable {
+        case submitted = "SUBMITTED"
+        case outForPickup = "OUT_FOR_PICKUP"
+        case complete = "COMPLETE"
+        case cancelled = "CANCELLED"
+    }
+
+    enum CollectionType: String, Decodable {
+        case courierConsolidated = "COURIER_CONSOLIDATED"
+        case courierDirect = "COURIER_DIRECT"
+        case generatedLabel = "GENERATED_LABEL"
+        case local = "LOCAL"
+        case other = "OTHER"
+    }
+}
+
+// MARK: Base Container Protocol
+
+protocol PickupBaseContainer {
+    var base: Pickup.Base { get }
+}
+
+extension PickupBaseContainer {
+    var collectionType: Pickup.CollectionType { base.collectionType }
+    var status: Pickup.Status { base.status }
+    var readyDate: Date { base.readyDate }
+    var pickupDate: Date? { base.pickupDate }
+}
+
+// MARK: - Convenience Extensions
+
+extension Pickup.Status {
+    var color: Color {
+        switch self {
+        case .submitted:
+            return .blue
+        case .outForPickup:
+            return .purple
+        case .complete:
+            return .green
+        case .cancelled:
+            return .gray
+        }
+    }
+
+    var display: String {
+        switch self {
+        case .outForPickup: return "Out for Pickup"
+        default: return rawValue.lowercased().capitalized
+        }
+    }
+}
+
+extension Pickup.Carton {
+    var display: String? { contents?.display }
+}
+
+extension Pickup.CartonContents {
+    var display: String { "\(product.rawValue.capitalized): \(weight)g" }
 }

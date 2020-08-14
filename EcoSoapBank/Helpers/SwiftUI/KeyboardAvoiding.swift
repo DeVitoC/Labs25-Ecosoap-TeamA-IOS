@@ -1,57 +1,17 @@
 //
-//  SwiftUI+Extensions.swift
+//  KeyboardAvoiding.swift
 //  EcoSoapBank
 //
-//  Created by Jon Bash on 2020-08-07.
+//  Created by Jon Bash on 2020-08-12.
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
-// swiftlint:disable shorthand_operator
 
 import SwiftUI
-import UIKit
 import Combine
 
 
-// MARK: - Image
-
-extension Image {
-    static func plus() -> Image { Image(systemName: "plus") }
-    static func cubeBox() -> Image { Image(systemName: "cube.box") }
-}
-
-
-// MARK: - Text
-
-extension Text {
-    static func += (lhs: inout Text, rhs: Text) {
-        lhs = lhs + rhs
-    }
-}
-
-
-extension String {
-    func uiText() -> Text { Text(self) }
-}
-
-
-extension Array where Element == String {
-    func uiText(separatedBy separator: String = "") -> Text {
-        self.reduce(into: "") { out, str in
-            if out.isEmpty {
-                out += str
-            } else {
-                out += separator + str
-            }
-        }.uiText()
-    }
-}
-
-
-// MARK: - Keyboard
-
 /// Sets the view to adjust its content based on the keyboard appearing or disappearing.
 public struct KeyboardAvoiding: ViewModifier {
-
     @State var currentHeight: CGFloat = 0
 
     public func body(content: Content) -> some View {
@@ -83,24 +43,5 @@ extension View {
         self.modifier(KeyboardAvoiding())
     }
 
-    /// Dismisses the keyboard.
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(
-            #selector(UIResponder.resignFirstResponder),
-            to: nil,
-            from: nil,
-            for: nil)
-    }
-}
 
-
-// MARK: - Binding
-
-extension Binding {
-    /// Initializes a `Binding` that simply returns the provided value non-dynamically.
-    /// The binding's setter does nothing.
-    /// - Parameter getValue: The value to be returned from the getter.
-    init(getValue: Value) {
-        self.init(get: { getValue }, set: { _ in })
-    }
 }

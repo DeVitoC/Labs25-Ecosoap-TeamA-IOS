@@ -7,10 +7,16 @@
 //
 
 import Foundation
+import Combine
 
 
 protocol PickupDataProvider {
-    func fetchAllPickups(_ completion: (Result<[Pickup], Error>) -> Void)
+    func fetchAllPickups(
+        _ completion: @escaping (Result<[Pickup], Error>) -> Void)
+
+    func schedulePickup(
+        _ pickupInput: Pickup.ScheduleInput,
+        completion: @escaping (Result<Pickup.ScheduleResult, Error>) -> Void)
 }
 
 
@@ -32,64 +38,24 @@ class PickupController: ObservableObject {
             }
         }
     }
-}
 
-
-// MARK: - Mock Data Provider
-
-/// For placeholder and testing purposes.
-struct MockPickupProvider: PickupDataProvider {
-    enum Error: Swift.Error {
-        case shouldFail
-    }
-
-    /// Set to `true` for testing networking failures
-    var shouldFail: Bool
-
-    init(shouldFail: Bool = false) {
-        self.shouldFail = shouldFail
-    }
-
-    /// Simply returns mock Pickups through closure
-    /// (or `MockPickupProvider.Error.shouldFail` if `shouldFail` instance property is set to `true`).
-    func fetchAllPickups(_ completion: (Result<[Pickup], Swift.Error>) -> Void) {
-        guard !shouldFail else {
-            completion(.failure(Self.Error.shouldFail))
-            return
+    func schedulePickup(
+        _ pickupInput: Pickup.ScheduleInput,
+        completion: @escaping (Result<Pickup.ScheduleResult, Error>) -> Void
+    ) {
+        self.dataProvider.schedulePickup(pickupInput) { result in
+            switch result {
+            case .success(let pickupResult):
+                self.pickups.append(pickupResult.pickup)
+                completion(result)
+            case .failure(let error):
+                self.error = error
+                completion(result)
+            }
         }
-        completion(.success([
-            Pickup(
-                id: 0,
-                confirmationCode: UUID().uuidString,
-                collectionType: .generatedLabel,
-                status: .complete,
-                readyDate: Date(timeIntervalSinceNow: .days(-10)),
-                pickupDate: Date(timeIntervalSinceNow: .days(-5)),
-                cartons: [
-                    .init(id: 0, product: .bottles, weight: 20), ],
-                notes: "notes"),
-            Pickup(
-                id: 1,
-                confirmationCode: UUID().uuidString,
-                collectionType: .local,
-                status: .outForPickup,
-                readyDate: Date(timeIntervalSinceNow: .days(-3)),
-                pickupDate: Date(timeIntervalSinceNow: 3600),
-                cartons: [
-                    .init(id: 1, product: .bottles, weight: 123),
-                    .init(id: 2, product: .soap, weight: 93)],
-                notes: "otnuhnotehunohuntoheu"),
-            Pickup(
-                id: 2,
-                confirmationCode: UUID().uuidString,
-                collectionType: .generatedLabel,
-                status: .submitted,
-                readyDate: Date(timeIntervalSinceNow: .days(-10)),
-                pickupDate: nil,
-                cartons: [
-                    .init(id: 0, product: .linens, weight: 20),
-                    .init(id: 4, product: .other, weight: 98)],
-                notes: ""),
-        ]))
+    }
+
+    func clearError() {
+        error = nil
     }
 }

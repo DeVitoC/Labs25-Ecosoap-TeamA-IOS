@@ -7,13 +7,28 @@
 //
 
 import SwiftUI
+import Combine
+
 
 struct NewPickupView: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    @ObservedObject private var pickupController: PickupController
+
     @State private var cartons: [Pickup.CartonContents] = []
     @State private var readyDate: Date = Date()
     @State private var notes: String = ""
 
-    @Environment(\.presentationMode) var presentationMode
+    @State private var pickupSubmitInProgress = false
+    @State private var successfulSubmit = false
+    @State private var shippingLabelURL: URL?
+    @State private var cancellables: Set<AnyCancellable> = []
+
+    init(pickupController: PickupController) {
+        self.pickupController = pickupController
+    }
+
+    // MARK: - Body
 
     var body: some View {
         Form {
@@ -23,13 +38,13 @@ struct NewPickupView: View {
             ) {
                 ForEach(cartons, content: CartonSummaryView.init)
                     .onDelete(perform: removeCartons(in:))
-                Button(action: addAdditionalCarton, label: {
+                Button(action: addAdditionalCarton) {
                     HStack {
                         Image.plus()
                         Image.cubeBox()
                         Text("Add carton")
                     }
-                })
+                }
             }
 
             Section {
@@ -46,7 +61,7 @@ struct NewPickupView: View {
                 VStack(alignment: .leading) {
                     Text("Notes".uppercased())
                         .font(.caption)
-                    TextView(text: $notes, textStyle: .body)
+                    TextView(text: $notes)
                         .frame(maxWidth: .infinity, idealHeight: 120)
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(5)
@@ -57,55 +72,100 @@ struct NewPickupView: View {
                 Button("Submit For Pickup", action: submitPickup)
                     .frame(alignment: .center)
             }
-        }.keyboardAvoiding()
+        }
+        .disabled(pickupSubmitInProgress)
+        .keyboardAvoiding()
+        .keyboardDismissing()
+        .alert(isPresented: $successfulSubmit || hasError) {
+            successfulSubmit ? submitSuccessAlert() : Alert(
+                title: Text("Error!"),
+                message: Text("It seems there's been some sort of error."),
+                dismissButton: .default(Text("Okay?")))
+        }
+    }
+}
+
+// MARK: - Helpers
+
+extension NewPickupView {
+    private var hasError: Binding<Bool> {
+        Binding(get: {
+            self.pickupController.error != nil
+        }, set: { willHaveError in
+            if !willHaveError {
+                self.pickupController.clearError()
+            }
+        })
     }
 
     private func addAdditionalCarton() {
         cartons.append(.init(product: .bottles, weight: 0))
     }
 
+    private func removeCartons(in offsets: IndexSet) {
+        cartons.remove(atOffsets: offsets)
+    }
+
     private func submitPickup() {
-        presentationMode.wrappedValue.dismiss()
+        pickupSubmitInProgress = true // disable UI; show loading indicator?
+
+        pickupController.schedulePickup(
+            Pickup.ScheduleInput(
+                base: Pickup.Base(
+                    collectionType: .local, // WILL BE CHANGED
+                    status: .submitted,
+                    readyDate: readyDate,
+                    pickupDate: nil,
+                    notes: notes),
+                propertyID: UUID(), // WILL BE CHANGED
+                cartons: cartons)
+        ) { result in
+            self.pickupSubmitInProgress = false
+
+            if case .success(let pickupResult) = result {
+                self.shippingLabelURL = pickupResult.labelURL
+                self.successfulSubmit = true // shows alert
+            }
+        }
     }
 
-    private func removeCartons(in indexSet: IndexSet) {
-        indexSet.forEach { cartons.remove(at: $0) }
-    }
-}
+    private func submitSuccessAlert() -> Alert {
+        let success = Text("Success!")
+        let base = "Pickup has been scheduled"
+        let dismiss = {
+            self.presentationMode.wrappedValue.dismiss()
+        }
 
-
-// MARK: - Single Carton
-
-struct CartonSummaryView: View { // "Cell" for each configured carton
-    private var carton: Pickup.CartonContents
-
-    init(_ carton: Pickup.CartonContents) {
-        self.carton = carton
-    }
-
-    var body: some View {
-        HStack {
-            Text(carton.product.rawValue.capitalized)
-            Text("\(carton.weight)g")
+        if let url = self.shippingLabelURL {
+            return Alert(
+                title: Text("Success!"),
+                message: Text("\(base); your shipping label is ready."),
+                primaryButton: .default(
+                    Text("Open in Safari"),
+                    action: {
+                        dismiss()
+                        UIApplication.shared.open(url)
+                }),
+                secondaryButton: .default(Text("Later"), action: {
+                    dismiss()
+                })
+            )
+        } else {
+            return Alert(
+                title: success,
+                message: Text("\(base)."),
+                dismissButton: .default(Text("Okay"), action: {
+                    dismiss()
+                }))
         }
     }
 }
 
-
-// MARK: - Previews
-
-struct CartonSummaryView_Previews: PreviewProvider {
-    static var previews: some View {
-        CartonSummaryView(.init(product: .bottles, weight: 30))
-            .previewLayout(.sizeThatFits)
-            .padding()
-    }
-
-
-}
+// MARK: - Preview
 
 struct NewPickupView_Previews: PreviewProvider {
     static var previews: some View {
-        NewPickupView()
+        NewPickupView(pickupController: PickupController(
+            dataProvider: MockPickupProvider()))
     }
 }

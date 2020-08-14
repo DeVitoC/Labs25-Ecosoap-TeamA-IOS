@@ -28,4 +28,16 @@ class UtilityTests: XCTestCase {
         }
         XCTAssertEqual(object.int, 42)
     }
+
+    func testDateConvenienceInit() {
+        let date = Date(year: 2020, month: 3, day: 19, hour: 8, minute: 56)
+        XCTAssertNotNil(date, "Expected non-nil date from initializer")
+
+        let components = Calendar.current.dateComponents(in: .current, from: date!)
+        XCTAssertEqual(components.year, 2020)
+        XCTAssertEqual(components.month, 3)
+        XCTAssertEqual(components.day, 19)
+        XCTAssertEqual(components.hour, 8)
+        XCTAssertEqual(components.minute, 56)
+    }
 }

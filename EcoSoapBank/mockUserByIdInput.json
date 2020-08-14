@@ -1,0 +1,42 @@
+{
+    "data": {
+        "userById": {
+            "id": 4,
+            "firstName": "Christopher",
+            "middleName": "Brian",
+            "lastName": "DeVito",
+            "title": "Manager",
+            "Company": "Hilton",
+            "email": "email@email.com",
+            "phone": "123-456-7890",
+            "skype": "skypeID",
+            "properties" [
+                {
+                    "id": 5,
+                    "name": "Hilton Hotel",
+                    "propertyType": "HOTEL",
+                    "rooms": 200,
+                    "services": [
+                        "BOTTLES",
+                        "LINENES",
+                        "PAPER",
+                        "SOAP"
+                    ],
+                    "collectionType": "COURIER_CONSOLIDATED",
+                    "logo": "http://www.logo-url.com",
+                    "phone": 123-456-0987,
+                    "shippingNote": "This company ships by UPS",
+                    "notes": "This compnay has been donating for 3 years",
+                    "impact": {
+                        "soapRecycled": 1,
+                        "linensRecycled": 2,
+                        "bottlesRecycled": 3,
+                        "paperRecycled": 4,
+                        "peopleServed": 5,
+                        "womenEmployed": 6
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -11,10 +11,19 @@ import SwiftUI
 
 
 class PickupCoordinator: FlowCoordinator {
-    let pickupController = PickupController(dataProvider: MockPickupProvider())
+    private let pickupController: PickupController
 
     private(set) lazy var rootVC: UIViewController = UIHostingController(
         rootView: PickupsView(pickupController: pickupController))
+
+    init(pickupController: PickupController) {
+        self.pickupController = pickupController
+    }
+
+    convenience init() {
+        self.init(pickupController:
+            PickupController(dataProvider: MockPickupProvider()))
+    }
 
     func start() {
         rootVC.tabBarItem = UITabBarItem(
