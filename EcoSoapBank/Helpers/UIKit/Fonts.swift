@@ -50,22 +50,18 @@ extension UIFont {
     static func montserrat(ofSize size: CGFloat, typeface: MontserratTypeface = .regular) -> UIFont {
         UIFont(name: .montserrat + typeface.rawValue, size: size)!.scaled()
     }
-}
 
 
-extension UIFont {
     func scaled() -> UIFont {
         UIFontMetrics.default.scaledFont(for: self)
     }
 
-    enum Montserrat {
-        static var navBarLargeTitle: UIFont {
-            .montserrat(ofSize: 30, typeface: .semiBold)
-        }
+    static var navBarLargeTitle: UIFont {
+        .montserrat(ofSize: 30, typeface: .semiBold)
+    }
 
-        static var navBarInlineTitle: UIFont {
-            .montserrat(ofSize: 18, typeface: .semiBold)
-        }
+    static var navBarInlineTitle: UIFont {
+        .montserrat(ofSize: 18, typeface: .semiBold)
     }
 }
 
