@@ -21,22 +21,37 @@ struct PickupsView: View {
     var body: some View {
         NavigationView {
             PickupHistoryView(pickupController: pickupController)
-                .navigationBarItems(trailing: newPickupButton())
+                .navigationBarTitle("Pickup History", displayMode: .automatic)
+                .navigationBarItems(trailing: NavigationLink(
+                    destination: NewPickupView(pickupController: pickupController),
+                    label: newPickupButton)
+                    .isDetailLink(false))
         }
     }
 
     private func newPickupButton() -> some View {
-        NavigationLink(
-            destination: NewPickupView(pickupController: pickupController),
-            label: {
-                HStack(spacing: 4) {
-                    Image.plus()
-                    Image.cubeBox()
-                }
-                .padding(4)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke())
-                .accessibility(label: Text("Schedule New Pickup"))
-        }).isDetailLink(false)
+        HStack(spacing: 4) {
+            Image.plus()
+            Image.cubeBox()
+        }
+        .foregroundColor(.white)
+        .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill()
+                .foregroundColor(Color(.link)))
+        .padding(4)
+        .accessibility(label: Text("Schedule New Pickup"))
+    }
+
+    private func gradientBackground() -> some View {
+        LinearGradient(
+            gradient: Gradient(colors: [Color(.esbGreen), Color(.downyBlue)]),
+            startPoint: .top,
+            endPoint: .bottom)
+            .frame(
+                width: UIScreen.main.bounds.width,
+                height: UIScreen.main.bounds.height + 160)
     }
 }
 

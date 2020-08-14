@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 
 // MARK: - Cell
@@ -29,11 +30,8 @@ struct PickupHistoryListItem: View {
                     TitledSegment("Status") {
                         Text("\(pickup.status.display)")
                             .foregroundColor(pickup.status.color)
-                    }
-
-                    if pickup.pickupDate != nil {
-                        TitledSegment("Picked Up") {
-                            Text(pickup.pickupDate!.string(from: Self.dateFormatter))
+                        if pickup.pickupDate != nil {
+                            Text("(\(pickup.pickupDate!.string(from: Self.dateFormatter)))")
                         }
                     }
 
@@ -50,13 +48,14 @@ struct PickupHistoryListItem: View {
                 }
             }
         }
+        .font(Font(UIFont.muli(ofSize: 17, style: .regular)))
     }
 }
 
 extension PickupHistoryListItem {
     static let dateFormatter = configure(DateFormatter()) {
         $0.dateStyle = .short
-        $0.timeStyle = .short
+        $0.timeStyle = .none
     }
 
     struct TitledSegment<Content: View>: View {
@@ -84,11 +83,11 @@ struct PickupDetailView: View {
 
     var body: some View {
         VStack {
-            Text("Pickup")
+            Text("Placeholder")
             pickup.cartons
                 .compactMap { $0.display }
                 .uiText(separatedBy: ", ")
-        }
+        }.navigationBarTitle("Pickup Details")
     }
 }
 

@@ -11,12 +11,19 @@ import SwiftUI
 struct PickupHistoryView: View {
     @ObservedObject var pickupController: PickupController
 
+    init(pickupController: PickupController) {
+        self.pickupController = pickupController
+
+        UITableView.appearance().backgroundColor = .clear
+//        UITableViewCell.appearance().backgroundColor = .clear
+    }
+
     var body: some View {
         List {
             ForEach(pickupController.pickups) {
                 PickupHistoryListItem(pickup: $0)
             }
-        }.navigationBarTitle("Pickup History", displayMode: .inline)
+        }.listBackgroundColor(color: .esbGreen)
     }
 }
 
