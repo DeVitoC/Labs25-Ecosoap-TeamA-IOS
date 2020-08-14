@@ -15,18 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        UITabBar.appearance().tintColor = .esbGreen
-
-        configure(UINavigationBar.appearance(), with: {
-            $0.titleTextAttributes = [.font: UIFont.Montserrat.navBarInlineTitle]
-            $0.largeTitleTextAttributes = [
-                .font: UIFont.Montserrat.navBarLargeTitle,
-                .foregroundColor: UIColor.white
-            ]
-            $0.backgroundColor = .esbGreen
-            // We can use `$0.barTintColor = .esbGreen` if we want the `inline` version of the title bar to be that color
-        })
-        return true
+        true
     }
 
     // MARK: UISceneSession Lifecycle
