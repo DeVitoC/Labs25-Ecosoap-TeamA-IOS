@@ -12,10 +12,10 @@ import UIKit
 class AppFlowCoordinator: FlowCoordinator {
     let window: UIWindow
 
-    let tabBarController = UITabBarController()
+    private(set) lazy var tabBarController = UITabBarController()
 
-    let impactCoord = ImpactCoordinator()
-    let pickupCoord = PickupCoordinator()
+    private(set) lazy var impactCoord = ImpactCoordinator()
+    private(set) lazy var pickupCoord = PickupCoordinator()
 
     init(window: UIWindow) {
         self.window = window

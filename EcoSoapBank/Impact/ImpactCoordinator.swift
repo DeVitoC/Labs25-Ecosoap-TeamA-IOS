@@ -10,7 +10,7 @@ import UIKit
 
 
 class ImpactCoordinator: FlowCoordinator {
-    var rootVC = configure(UINavigationController()) {
+    private(set) lazy var rootVC = configure(UINavigationController()) {
         $0.navigationBar.prefersLargeTitles = true
         $0.navigationBar.layoutMargins.left = 22
         $0.navigationBar.backgroundColor = .clear
