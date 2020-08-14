@@ -13,14 +13,7 @@ class ImpactCoordinator: FlowCoordinator {
     var rootVC = configure(UINavigationController()) {
         $0.navigationBar.prefersLargeTitles = true
         $0.navigationBar.layoutMargins.left = 22
-        $0.navigationBar.largeTitleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.montserrat(ofSize: 30, style: .semiBold),
-            NSAttributedString.Key.foregroundColor: UIColor.white
-        ]
-        
-        $0.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.montserrat(ofSize: 18, style: .semiBold)
-        ]
+        $0.navigationBar.backgroundColor = .clear
     }
     
     func start() {
