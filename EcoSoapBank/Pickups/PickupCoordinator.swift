@@ -27,7 +27,12 @@ class PickupCoordinator: FlowCoordinator {
 
     func start() {
         rootVC.tabBarItem = UITabBarItem(
-            tabBarSystemItem: .history,
+            title: "Pickups",
+            image: UIImage(
+                systemName: "cube.box",
+                withConfiguration: UIImage.SymbolConfiguration(
+                    pointSize: 22,
+                    weight: .regular)),
             tag: 1)
     }
 }

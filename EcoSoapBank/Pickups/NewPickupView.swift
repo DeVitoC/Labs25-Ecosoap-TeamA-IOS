@@ -73,6 +73,7 @@ struct NewPickupView: View {
                     .frame(alignment: .center)
             }
         }
+        .navigationBarTitle("Schedule new pickup")
         .disabled(pickupSubmitInProgress)
         .keyboardAvoiding()
         .keyboardDismissing()
