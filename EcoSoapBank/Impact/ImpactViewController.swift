@@ -11,10 +11,12 @@ import UIKit
 
 class ImpactViewController: UIViewController {
     
-    var collectionView = UICollectionView(
+    private var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
+    
+    private var impactController = ImpactController(dataProvider: MockImpactDataProvider())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,16 @@ class ImpactViewController: UIViewController {
         }
         
         setUpCollectionView()
+        
+        impactController.getImpactStats { error in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            collectionView.reloadData()
+        }
+        
     }
     
     private func setUpCollectionView() {
@@ -54,15 +66,17 @@ class ImpactViewController: UIViewController {
 
 extension ImpactViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        6
+        impactController.viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImpactCell.reuseIdentifier, for: indexPath) as? ImpactCell else {
             fatalError("Could not cast cell as \(ImpactCell.self)")
         }
-        cell.alignment = indexPath.row % 2 == 0 ? .leading : .trailing
         
+        cell.alignment = indexPath.row % 2 == 0 ? .leading : .trailing
+        cell.viewModel = impactController.viewModels[indexPath.row]
+       
         return cell
     }
 }

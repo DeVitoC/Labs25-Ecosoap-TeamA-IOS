@@ -53,3 +53,16 @@ extension TimeInterval {
         Double(count) * 86_400
     }
 }
+
+
+extension Measurement {
+    var string: String {
+        MeasurementFormatter.shared.string(from: self)
+    }
+}
+
+extension MeasurementFormatter {
+    static let shared = configure(MeasurementFormatter()) {
+        $0.numberFormatter.maximumFractionDigits = 2
+    }
+}

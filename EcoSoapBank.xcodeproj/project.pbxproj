@@ -72,6 +72,8 @@
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
+		04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEE1B524E48AB000F51D69 /* ImpactController.swift */; };
+		04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEE1DB24E5E16600F51D69 /* ImpactCellViewModel.swift */; };
 		463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */; };
 		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
 		466C4274249A8748007D033E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4273249A8748007D033E /* AppDelegate.swift */; };
@@ -170,6 +172,8 @@
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		04FEE1B524E48AB000F51D69 /* ImpactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactController.swift; sourceTree = "<group>"; };
+		04FEE1DB24E5E16600F51D69 /* ImpactCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellViewModel.swift; sourceTree = "<group>"; };
 		463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		466C4270249A8748007D033E /* EcoSoapBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoSoapBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -390,6 +394,7 @@
 			children = (
 				46BEB4ED24C98ECC00FE0CD1 /* ProfileController.swift */,
 				998913D024DDFF96009ADBC1 /* PickupController.swift */,
+				04FEE1B524E48AB000F51D69 /* ImpactController.swift */,
 				9983874724E33A0600450244 /* MockPickupProvider.swift */,
 			);
 			path = "Model Controller";
@@ -442,6 +447,7 @@
 				994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */,
 				994E4B7624DDB55E00C12921 /* ImpactViewController.swift */,
 				04D1758824E3453B00F8929C /* ImpactCell.swift */,
+				04FEE1DB24E5E16600F51D69 /* ImpactCellViewModel.swift */,
 			);
 			path = Impact;
 			sourceTree = "<group>";
@@ -698,6 +704,7 @@
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
+				04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
 				997BF11024E1FA1E00A643D8 /* NewPickupView.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
@@ -705,6 +712,7 @@
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
 				990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */,
+				04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */,
 				9983874A24E34C5E00450244 /* CartonSummaryView.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
