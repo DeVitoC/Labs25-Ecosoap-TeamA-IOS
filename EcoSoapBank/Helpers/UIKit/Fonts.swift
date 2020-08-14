@@ -68,3 +68,9 @@ extension UIFont {
         }
     }
 }
+
+
+extension String {
+    static let montserrat = "Montserrat"
+    static let muli = "Muli"
+}
