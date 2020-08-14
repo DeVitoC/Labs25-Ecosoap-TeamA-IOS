@@ -25,6 +25,14 @@ extension UIFont {
     static func muli(ofSize size: CGFloat, typeface: MuliTypeface = .regular) -> UIFont {
         UIFont(name: .muli + typeface.rawValue, size: size)!.scaled()
     }
+
+    static func muli(style: TextStyle, typeface: MuliTypeface = .regular) -> UIFont {
+        muli(
+            ofSize: UIFontDescriptor
+                .preferredFontDescriptor(withTextStyle: style)
+                .pointSize,
+            typeface: typeface)
+    }
     
     enum MontserratTypeface: String, CaseIterable {
         case mediumItalic = "-MediumItalic"
@@ -51,6 +59,13 @@ extension UIFont {
         UIFont(name: .montserrat + typeface.rawValue, size: size)!.scaled()
     }
 
+    static func montserrat(style: TextStyle, typeface: MontserratTypeface = .regular) -> UIFont {
+        montserrat(
+            ofSize: UIFontDescriptor
+                .preferredFontDescriptor(withTextStyle: style)
+                .pointSize,
+            typeface: typeface)
+    }
 
     func scaled() -> UIFont {
         UIFontMetrics.default.scaledFont(for: self)
