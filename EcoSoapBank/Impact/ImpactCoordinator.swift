@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class ImpactCoordinator: FlowCoordinator {
     var rootVC = configure(UINavigationController()) {
         $0.navigationBar.prefersLargeTitles = true
