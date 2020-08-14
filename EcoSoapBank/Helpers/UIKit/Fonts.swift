@@ -54,6 +54,10 @@ extension UIFont {
 
 
 extension UIFont {
+    func scaled() -> UIFont {
+        UIFontMetrics.default.scaledFont(for: self)
+    }
+
     enum Montserrat {
         static var navBarLargeTitle: UIFont {
             .montserrat(ofSize: 30, typeface: .semiBold)
