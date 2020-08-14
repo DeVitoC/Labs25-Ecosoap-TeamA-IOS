@@ -47,7 +47,7 @@ extension UIFont {
         case semiBold = "-SemiBold"
     }
     
-    static func montserrat(ofSize size: CGFloat, typeface: MontserratStyle = .regular) -> UIFont {
+    static func montserrat(ofSize size: CGFloat, typeface: MontserratTypeface = .regular) -> UIFont {
         UIFont(name: "Montserrat\(typeface.rawValue)", size: size)!.scaled()
     }
 }
