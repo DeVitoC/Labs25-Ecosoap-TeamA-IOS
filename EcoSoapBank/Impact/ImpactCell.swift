@@ -31,7 +31,7 @@ class ImpactCell: UICollectionViewCell {
     
     // Views
     private let titleLabel = configure(UILabel()) {
-        $0.font = .montserrat(ofSize: 24, style: .semiBold)
+        $0.font = .montserrat(ofSize: 24, typeface: .semiBold)
         $0.textColor = .white
         $0.text = "34.9 lbs"
     }

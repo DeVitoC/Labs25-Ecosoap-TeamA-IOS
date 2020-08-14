@@ -9,8 +9,7 @@
 import UIKit
 
 extension UIFont {
-    
-    enum MuliStyle: String, CaseIterable {
+    enum MuliTypeface: String, CaseIterable {
         case extraLight = "-ExtraLight"
         case extraLightItalic = "-ExtraLightItalic"
         case boldItalic = "-BoldItalic"
@@ -23,11 +22,11 @@ extension UIFont {
         case lightItalic = "-LightItalic"
     }
     
-    static func muli(ofSize size: CGFloat, style: MuliStyle = .regular) -> UIFont {
-        UIFont(name: "Muli\(style.rawValue)", size: size)!
+    static func muli(ofSize size: CGFloat, typeface: MuliTypeface = .regular) -> UIFont {
+        UIFont(name: "Muli\(typeface.rawValue)", size: size)!.scaled()
     }
     
-    enum MontserratStyle: String, CaseIterable {
+    enum MontserratTypeface: String, CaseIterable {
         case mediumItalic = "-MediumItalic"
         case bold = "-Bold"
         case blackItalic = "-BlackItalic"
@@ -48,8 +47,8 @@ extension UIFont {
         case semiBold = "-SemiBold"
     }
     
-    static func montserrat(ofSize size: CGFloat, style: MontserratStyle = .regular) -> UIFont {
-        UIFont(name: "Montserrat\(style.rawValue)", size: size)!
+    static func montserrat(ofSize size: CGFloat, typeface: MontserratStyle = .regular) -> UIFont {
+        UIFont(name: "Montserrat\(typeface.rawValue)", size: size)!.scaled()
     }
 }
 
@@ -57,11 +56,11 @@ extension UIFont {
 extension UIFont {
     enum Montserrat {
         static var navBarLargeTitle: UIFont {
-            .montserrat(ofSize: 30, style: .semiBold)
+            .montserrat(ofSize: 30, typeface: .semiBold)
         }
 
         static var navBarInlineTitle: UIFont {
-            .montserrat(ofSize: 18, style: .semiBold)
+            .montserrat(ofSize: 18, typeface: .semiBold)
         }
     }
 }
