@@ -10,5 +10,12 @@ import UIKit
 
 extension UIImage {
     static let addBoxSymbol = UIImage(named: "cube.box.plus")!
-    static let navBar = UIImage(named: "NavBar")
+    static let navBar = UIImage(named: "NavBar")!
+    
+    static let soap = UIImage(named: "soap")!
+    static let bottles = UIImage(named: "bottles")!
+    static let linens = UIImage(named: "linens")!
+    static let paper = UIImage(named: "paper")!
+    static let people = UIImage(named: "people")!
+    static let women = UIImage(named: "women")!
 }
