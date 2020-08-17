@@ -28,3 +28,14 @@ class NewCartonViewModel {
         self.carton = carton
     }
 }
+
+extension NewCartonViewModel: Hashable {
+    static func == (lhs: NewCartonViewModel, rhs: NewCartonViewModel) -> Bool {
+        lhs === rhs && lhs.carton == rhs.carton
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
+        hasher.combine(carton)
+    }
+}
