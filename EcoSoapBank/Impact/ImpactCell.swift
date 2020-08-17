@@ -96,7 +96,7 @@ class ImpactCell: UICollectionViewCell {
     // MARK: - Private Methods
 
     private func setUp() {
-        addSubviews(titleLabel, subtitleLabel, circleView, imageView, lineView)
+        addSubviewsUsingAutolayout(titleLabel, subtitleLabel, circleView, imageView, lineView)
         
         addCommonConstraints()
         setUpLeadingConstraints()

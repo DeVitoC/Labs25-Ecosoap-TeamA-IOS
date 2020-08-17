@@ -9,10 +9,9 @@
 import UIKit
 
 extension UIView {
-    // swiftlint:disable function_default_parameter_at_end
-    func addSubviews(usingAutolayout: Bool = true, _ views: UIView...) {
+    func addSubviewsUsingAutolayout(_ views: UIView...) {
         for view in views {
-            view.translatesAutoresizingMaskIntoConstraints = !usingAutolayout
+            view.translatesAutoresizingMaskIntoConstraints = false
             addSubview(view)
         }
     }
