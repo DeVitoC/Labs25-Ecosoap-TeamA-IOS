@@ -12,16 +12,46 @@ import SwiftUI
 // MARK: - Single Carton
 
 struct CartonSummaryView: View { // "Cell" for each configured carton
-    private var carton: Pickup.CartonContents
+    @ObservedObject private var viewModel: CartonViewModel
 
-    init(_ carton: Pickup.CartonContents) {
-        self.carton = carton
+    init(viewModel: CartonViewModel) {
+        self.viewModel = viewModel
     }
 
     var body: some View {
         HStack {
-            Text(carton.product.rawValue.capitalized)
-            Text("\(carton.weight)g")
+            Text(viewModel.product.rawValue.capitalized)
+            Text("\(viewModel.quantity)g")
+        }.onTapGesture {
+            self.viewModel.editing = true
+        }.sheet(isPresented: $viewModel.editing) {
+            EditCartonView(viewModel: self.viewModel)
+        }
+    }
+}
+
+
+struct EditCartonView: View {
+    @ObservedObject private var viewModel: CartonViewModel
+
+    init(viewModel: CartonViewModel) {
+        self.viewModel = viewModel
+    }
+
+    var body: some View {
+        Form {
+            TextField(
+                "Quantity",
+                value: $viewModel.quantity,
+                formatter: NumberFormatter.forMeasurements)
+
+            Picker(selection: $viewModel.product, label: Text(viewModel.product.rawValue.capitalized)) {
+                ForEach(HospitalityService.allCases) {
+                    Text("\($0.rawValue.capitalized)")
+                }
+            }
+            .pickerStyle(WheelPickerStyle())
+            .id(viewModel.id)
         }
     }
 }
@@ -31,7 +61,9 @@ struct CartonSummaryView: View { // "Cell" for each configured carton
 
 struct CartonSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        CartonSummaryView(.init(product: .bottles, weight: 30))
+        CartonSummaryView(viewModel: CartonViewModel(
+            product: .bottles,
+            quantity: 30))
             .previewLayout(.sizeThatFits)
             .padding()
     }
