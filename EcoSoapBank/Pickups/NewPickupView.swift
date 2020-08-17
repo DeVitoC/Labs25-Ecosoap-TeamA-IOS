@@ -15,7 +15,7 @@ struct NewPickupView: View {
 
     @ObservedObject private var pickupController: PickupController
 
-    @State private var cartons: [Pickup.CartonContents] = []
+    @State private var cartons: [CartonViewModel] = []
     @State private var readyDate: Date = Date()
     @State private var notes: String = ""
 
@@ -100,7 +100,7 @@ extension NewPickupView {
     }
 
     private func addAdditionalCarton() {
-        cartons.append(.init(product: .bottles, weight: 0))
+        cartons.append(.init(product: .bottles, quantity: 0))
     }
 
     private func removeCartons(in offsets: IndexSet) {
@@ -119,7 +119,10 @@ extension NewPickupView {
                     pickupDate: nil,
                     notes: notes),
                 propertyID: UUID(), // WILL BE CHANGED
-                cartons: cartons)
+                cartons: cartons.map({
+                    Pickup.CartonContents(product: $0.product,
+                                          weight: $0.quantity)
+                }))
         ) { result in
             self.pickupSubmitInProgress = false
 
