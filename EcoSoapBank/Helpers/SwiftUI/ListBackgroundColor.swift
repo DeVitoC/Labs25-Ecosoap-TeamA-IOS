@@ -21,7 +21,7 @@ struct ListBackgroundColor: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .onAppear() {
+            .onAppear {
                 UITableView.appearance().backgroundColor = self.color
                 if self.withTransparentCells {
                     UITableViewCell.appearance().backgroundColor = self.color

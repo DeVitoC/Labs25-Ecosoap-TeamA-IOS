@@ -25,9 +25,9 @@ class AppFlowCoordinator: FlowCoordinator {
         // set default tabBar/navBar appearance
         UITabBar.appearance().tintColor = .esbGreen
         configure(UINavigationBar.appearance(), with: {
-            $0.titleTextAttributes = [.font: UIFont.Montserrat.navBarInlineTitle]
+            $0.titleTextAttributes = [.font: UIFont.navBarInlineTitle]
             $0.largeTitleTextAttributes = [
-                .font: UIFont.Montserrat.navBarLargeTitle,
+                .font: UIFont.navBarLargeTitle,
                 .foregroundColor: UIColor.white
             ]
             $0.backgroundColor = .esbGreen
