@@ -17,7 +17,7 @@ class NewPickupViewModel {
 
 extension NewPickupViewModel {
     func addCarton() {
-
+        cartons.append(.init())
     }
 }
 

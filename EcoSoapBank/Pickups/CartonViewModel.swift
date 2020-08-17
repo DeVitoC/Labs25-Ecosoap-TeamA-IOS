@@ -17,7 +17,7 @@ class CartonViewModel: ObservableObject, Identifiable {
 
     var id: ObjectIdentifier { .init(self) }
 
-    init(product: HospitalityService, quantity: Int) {
+    init(product: HospitalityService = .soap, quantity: Int = 0) {
         self.product = product
         self.quantity = quantity
     }
