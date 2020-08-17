@@ -14,7 +14,7 @@ class ImpactHeaderView: UICollectionReusableView {
     var title: String? { didSet { updateViews() } }
     
     private var titleLabel = configure(UILabel()) {
-        $0.font = UIFont.Montserrat.navBarLargeTitle
+        $0.font = UIFont.navBarLargeTitle
         $0.textColor = .white
     }
     

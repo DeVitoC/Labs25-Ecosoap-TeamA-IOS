@@ -28,7 +28,7 @@ class AppFlowCoordinator: FlowCoordinator {
         
         configure(UINavigationBar.appearance(), with: {
             $0.titleTextAttributes = [
-                .font: UIFont.Montserrat.navBarInlineTitle,
+                .font: UIFont.navBarInlineTitle,
                 .foregroundColor: UIColor.white
             ]
             $0.largeTitleTextAttributes = [
