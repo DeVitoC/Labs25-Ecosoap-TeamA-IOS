@@ -31,7 +31,7 @@ class ImpactCell: UICollectionViewCell {
     
     // Views
     private let titleLabel = configure(UILabel()) {
-        $0.font = .montserrat(ofSize: 24, style: .semiBold)
+        $0.font = .montserrat(ofSize: 24, typeface: .semiBold)
         $0.textColor = .white
         $0.text = "34.9 lbs"
     }
@@ -96,7 +96,7 @@ class ImpactCell: UICollectionViewCell {
     // MARK: - Private Methods
 
     private func setUp() {
-        addSubviews(titleLabel, subtitleLabel, circleView, imageView, lineView)
+        addSubviewsUsingAutolayout(titleLabel, subtitleLabel, circleView, imageView, lineView)
         
         addCommonConstraints()
         setUpLeadingConstraints()
