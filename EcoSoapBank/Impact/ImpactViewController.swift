@@ -86,25 +86,35 @@ extension ImpactViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - Collection View Delegate
+// MARK: - Flow Layout Delegate
 
-extension ImpactViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+private enum ImpactLayout {
+    static let headerHeight: CGFloat = 80
+    static let cellAspectRatio: CGFloat = 0.31
+    static let sectionInsetTop: CGFloat = 40
+    static let sectionInsetBotttom: CGFloat = 40
+}
+
+extension ImpactViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        CGSize(width: collectionView.frame.width, height: 80)
+        CGSize(width: collectionView.frame.width, height: ImpactLayout.headerHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width
-        return CGSize(width: width, height: width * 0.31)
+        return CGSize(width: width, height: width * ImpactLayout.cellAspectRatio)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 40, left: 0, bottom: 40, right: 0)
+        UIEdgeInsets(top: ImpactLayout.sectionInsetTop,
+                     left: 0,
+                     bottom: ImpactLayout.sectionInsetBotttom,
+                     right: 0)
     }
 }
