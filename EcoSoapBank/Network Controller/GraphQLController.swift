@@ -73,11 +73,16 @@ class GraphQLController {
     private func decodeJSON<T: Decodable>(_ type: T.Type, data: Data) -> Result<T, Error> {
         do {
             // Decode data as ProfileQuery and pass the stored object of type Profile through completion
-            let dict = try JSONDecoder().decode([String: T].self, from: data)
-            guard let result = dict["data"] else {
-                throw GraphQLError.noData
+            guard let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                let dataDict = jsonDict["data"] as? [String: Any],
+                let firstKey = Array(dataDict.keys).first,
+                let object = dataDict[firstKey] as? [String: Any],
+                let objectData = try? JSONSerialization.data(withJSONObject: object, options: []) else {
+                    return .failure(GraphQLError.noData)
             }
-            return .success(result)
+            let dict = try JSONDecoder().decode(T.self, from: objectData)
+            
+            return .success(dict)
         } catch {
             NSLog("\(error)")
             return .failure(error)

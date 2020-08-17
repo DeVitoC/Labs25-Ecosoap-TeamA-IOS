@@ -29,36 +29,4 @@ struct ImpactStats: Decodable {
         self.peopleServed = peopleServed
         self.womenEmployed = womenEmployed
     }
-
-    init(from decoder: Decoder) {
-        let container = try? decoder.container(keyedBy: ImpactStatsQueryKeys.self)
-        let impactStatsContainer = try? container?.nestedContainer(keyedBy: ImpactStatsKeys.self, forKey: .impactStatsByPropertyId)
-
-        let soapRecycled = try? impactStatsContainer?.decodeIfPresent(Int.self, forKey: .soapRecycled)
-        let bottlesRecycled = try? impactStatsContainer?.decodeIfPresent(Int.self, forKey: .bottlesRecycled)
-        let linensRecycled = try? impactStatsContainer?.decodeIfPresent(Int.self, forKey: .linensRecycled)
-        let paperRecycled = try? impactStatsContainer?.decodeIfPresent(Int.self, forKey: .paperRecycled)
-        let peopleServed = try? impactStatsContainer?.decodeIfPresent(Int.self, forKey: .peopleServed)
-        let womenEmployed = try? impactStatsContainer?.decodeIfPresent(Int.self, forKey: .womenEmployed)
-
-        self.soapRecycled = soapRecycled
-        self.bottlesRecycled = bottlesRecycled
-        self.linensRecycled = linensRecycled
-        self.paperRecycled = paperRecycled
-        self.peopleServed = peopleServed
-        self.womenEmployed = womenEmployed
-    }
-
-    enum ImpactStatsKeys: CodingKey {
-        case soapRecycled
-        case bottlesRecycled
-        case linensRecycled
-        case paperRecycled
-        case peopleServed
-        case womenEmployed
-    }
-
-    enum ImpactStatsQueryKeys: CodingKey {
-        case impactStatsByPropertyId
-    }
 }
