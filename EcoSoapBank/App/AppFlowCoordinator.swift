@@ -24,16 +24,23 @@ class AppFlowCoordinator: FlowCoordinator {
     func start() {
         // set default tabBar/navBar appearance
         UITabBar.appearance().tintColor = .esbGreen
+        UITabBar.appearance().backgroundColor = .downyBlue
+        
         configure(UINavigationBar.appearance(), with: {
-            $0.titleTextAttributes = [.font: UIFont.Montserrat.navBarInlineTitle]
+            $0.titleTextAttributes = [
+                .font: UIFont.Montserrat.navBarInlineTitle,
+                .foregroundColor: UIColor.white
+            ]
             $0.largeTitleTextAttributes = [
                 .font: UIFont.Montserrat.navBarLargeTitle,
                 .foregroundColor: UIColor.white
             ]
             $0.backgroundColor = .esbGreen
+            $0.setBackgroundImage(.navBar, for: .default)
+            $0.tintColor = .white
             // We can use `$0.barTintColor = .esbGreen` if we want the `inline` version of the title bar to be that color
         })
-
+        
         // set up tabBarController, start other coordinators
         tabBarController.viewControllers = [
             impactCoord.rootVC,
