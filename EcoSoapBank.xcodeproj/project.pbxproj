@@ -114,6 +114,10 @@
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
 		9998716424E1E8C4000A993E /* PickupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9998716324E1E8C4000A993E /* PickupsView.swift */; };
 		99B5790324E30F140097957D /* PickupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5790224E30F140097957D /* PickupTests.swift */; };
+		99B6175724EAE8A90099664B /* CartonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175624EAE8A90099664B /* CartonViewModel.swift */; };
+		99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175A24EAF0A20099664B /* NewPickupViewController.swift */; };
+		99B6175D24EAF0C70099664B /* NewPickupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */; };
+		99B6175F24EAF1830099664B /* NewPickupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99B6175E24EAF1830099664B /* NewPickupViewController.storyboard */; };
 		E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220C32624E35E59003FF32D /* GraphQLQueries.swift */; };
 		E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */; };
 		E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */; };
@@ -220,6 +224,10 @@
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
 		9998716324E1E8C4000A993E /* PickupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupsView.swift; sourceTree = "<group>"; };
 		99B5790224E30F140097957D /* PickupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupTests.swift; sourceTree = "<group>"; };
+		99B6175624EAE8A90099664B /* CartonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartonViewModel.swift; sourceTree = "<group>"; };
+		99B6175A24EAF0A20099664B /* NewPickupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupViewController.swift; sourceTree = "<group>"; };
+		99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupViewModel.swift; sourceTree = "<group>"; };
+		99B6175E24EAF1830099664B /* NewPickupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewPickupViewController.storyboard; sourceTree = "<group>"; };
 		E220C32624E35E59003FF32D /* GraphQLQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueries.swift; sourceTree = "<group>"; };
 		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
 		E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLMutations.swift; sourceTree = "<group>"; };
@@ -463,6 +471,10 @@
 				998913D424DE0907009ADBC1 /* PickupHistoryItemView.swift */,
 				997BF10F24E1FA1E00A643D8 /* NewPickupView.swift */,
 				9983874924E34C5E00450244 /* CartonSummaryView.swift */,
+				99B6175624EAE8A90099664B /* CartonViewModel.swift */,
+				99B6175A24EAF0A20099664B /* NewPickupViewController.swift */,
+				99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */,
+				99B6175E24EAF1830099664B /* NewPickupViewController.storyboard */,
 			);
 			path = Pickups;
 			sourceTree = "<group>";
@@ -608,6 +620,7 @@
 				041E1E6024E1EA920052831D /* Montserrat-Regular.otf in Resources */,
 				041E1E4B24E1EA920052831D /* SIL Open Font License.txt in Resources */,
 				041E1E7B24E1EA970052831D /* Muli-BoldItalic.ttf in Resources */,
+				99B6175F24EAF1830099664B /* NewPickupViewController.storyboard in Resources */,
 				041E1E5D24E1EA920052831D /* Montserrat-ExtraBoldItalic.otf in Resources */,
 				46BEB4F124C98F0D00FE0CD1 /* Profiles.storyboard in Resources */,
 				041E1E6324E1EA920052831D /* Montserrat-ExtraBold.otf in Resources */,
@@ -712,6 +725,7 @@
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
 				997BF11024E1FA1E00A643D8 /* NewPickupView.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
+				99B6175D24EAF0C70099664B /* NewPickupViewModel.swift in Sources */,
 				998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
@@ -720,6 +734,7 @@
 				9983874A24E34C5E00450244 /* CartonSummaryView.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
+				99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
 				998913D524DE0907009ADBC1 /* PickupHistoryItemView.swift in Sources */,
 				998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */,
@@ -735,6 +750,7 @@
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
 				E2D3030124E5F9B8008A6FAF /* MockDataLoader.swift in Sources */,
 				46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */,
+				99B6175724EAE8A90099664B /* CartonViewModel.swift in Sources */,
 				463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */,
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
 				99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */,
