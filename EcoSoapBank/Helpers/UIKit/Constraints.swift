@@ -31,16 +31,22 @@ extension UIView {
     /// Adds provided subview, and activates constraints equal to the anchors of each of the provided sides.
     ///
     /// Also sets `translatesAutoResizingMaskIntoConstraints` to false.
-    func constrainNewSubview(_ subView: UIView, to sides: Set<LayoutSide>) {
+    func constrainNewSubview(
+        _ subView: UIView,
+        to sides: Set<LayoutSide>,
+        constant: CGFloat = 0
+    ) {
         addSubview(subView)
-        subView.constrain(with: constraints(for: subView, to: sides))
+        subView.constrain(with: constraints(for: subView, to: sides, constant: constant))
     }
 
     /// Adds provided subview and activates constraints to all sides of view.
     ///
     /// Also sets `translatesAutoResizingMaskIntoConstraints` to false.
-    func constrainNewSubviewToSides(_ subView: UIView) {
-        constrainNewSubview(subView, with: constraints(for: subView, to: .all))
+    func constrainNewSubviewToSides(_ subView: UIView, constant: CGFloat = 0) {
+        constrainNewSubview(
+            subView,
+            with: constraints(for: subView, to: .all, constant: constant))
     }
 
     /// Adds provided subview and constrains to anchors equal to provided sides (all by default).
@@ -48,10 +54,13 @@ extension UIView {
     /// Also sets `translatesAutoResizingMaskIntoConstraints` to false.
     func constrainNewSubviewToSafeArea(
         _ subView: UIView,
-        sides: Set<LayoutSide> = .all
+        sides: Set<LayoutSide> = .all,
+        constant: CGFloat = 0
     ) {
-        let constraints = subView
-            .constraints(for: self.safeAreaLayoutGuide, to: sides)
+        let constraints = subView.constraints(
+            for: self.safeAreaLayoutGuide,
+            to: sides,
+            constant: constant)
         constrainNewSubview(subView, with: constraints)
     }
 }
@@ -79,9 +88,12 @@ protocol AutoLayoutConstrainable {
 extension AutoLayoutConstrainable {
     func constraints(
         for constrainable: AutoLayoutConstrainable,
-        to sides: Set<LayoutSide> = .all
+        to sides: Set<LayoutSide> = .all,
+        constant: CGFloat = 0
     ) -> [NSLayoutConstraint] {
-        sides.map { $0.constraint(from: self, to: constrainable) }
+        sides.map {
+            $0.constraint(from: self, to: constrainable, constant: constant)
+        }
     }
 }
 
@@ -98,17 +110,22 @@ enum LayoutSide: CaseIterable {
     /// Returns an "equal to" constraint for this side between each of the provided views.
     func constraint(
         from constrainable: AutoLayoutConstrainable,
-        to other: AutoLayoutConstrainable
+        to other: AutoLayoutConstrainable,
+        constant: CGFloat = 0
     ) -> NSLayoutConstraint {
         switch self {
         case .top:
-            return constrainable.topAnchor.constraint(equalTo: other.topAnchor)
+            return constrainable.topAnchor
+                .constraint(equalTo: other.topAnchor, constant: constant)
         case .leading:
-            return constrainable.leadingAnchor.constraint(equalTo: other.leadingAnchor)
+            return constrainable.leadingAnchor
+                .constraint(equalTo: other.leadingAnchor, constant: constant)
         case .trailing:
-            return constrainable.trailingAnchor.constraint(equalTo: other.trailingAnchor)
+            return constrainable.trailingAnchor
+                .constraint(equalTo: other.trailingAnchor, constant: constant)
         case .bottom:
-            return constrainable.bottomAnchor.constraint(equalTo: other.bottomAnchor)
+            return constrainable.bottomAnchor
+                .constraint(equalTo: other.bottomAnchor, constant: constant)
         }
     }
 }
