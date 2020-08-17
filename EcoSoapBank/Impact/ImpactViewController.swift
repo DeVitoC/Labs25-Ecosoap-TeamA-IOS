@@ -35,39 +35,78 @@ class ImpactViewController: UIViewController {
             
             collectionView.reloadData()
         }
-        
     }
     
     private func setUpCollectionView() {
         collectionView.register(ImpactCell.self, forCellWithReuseIdentifier: ImpactCell.reuseIdentifier)
+        collectionView.register(ImpactHeaderView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: ImpactHeaderView.reuseIdentifier)
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
         
-        view.addSubview(collectionView)
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
+        view.addSubviewsUsingAutolayout(collectionView)
+        collectionView.fillSuperview()
+    }
+}
+
+class ImpactHeaderView: UICollectionReusableView {
+    static let reuseIdentifier = "HeaderView"
+    
+    var title: String? { didSet { updateViews() } }
+    
+    private var titleLabel = configure(UILabel()) {
+        $0.font = UIFont.Montserrat.navBarLargeTitle
+        $0.textColor = .white
+    }
+    
+    private func updateViews() {
+        titleLabel.text = title
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setUp()
+    }
+    
+    private func setUp() {
+        addSubviewsUsingAutolayout(titleLabel)
+        titleLabel.fillSuperview(withPadding: .init(top: 40, left: 20, bottom: 0, right: 0))
     }
 }
 
 // MARK: - Collection View Data Source
 
 extension ImpactViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header = collectionView
+            .dequeueReusableSupplementaryView(ofKind: kind,
+                                              withReuseIdentifier: ImpactHeaderView.reuseIdentifier,
+                                              for: indexPath) as? ImpactHeaderView else {
+            fatalError("Unable to cast view as \(ImpactHeaderView.self)")
+        }
+        header.title = "Impact Summary"
+        return header
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         impactController.viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImpactCell.reuseIdentifier, for: indexPath) as? ImpactCell else {
-            fatalError("Could not cast cell as \(ImpactCell.self)")
+            fatalError("Unable to cast cell as \(ImpactCell.self)")
         }
         
         cell.alignment = indexPath.row % 2 == 0 ? .leading : .trailing
@@ -79,7 +118,13 @@ extension ImpactViewController: UICollectionViewDataSource {
 
 // MARK: - Collection View Delegate
 
-extension ImpactViewController: UICollectionViewDelegateFlowLayout {
+extension ImpactViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
+        CGSize(width: collectionView.frame.width, height: 80)
+    }
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
