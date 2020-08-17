@@ -15,7 +15,7 @@ extension UIView {
                "translatesAutoresizingMaskIntoConstraints must be set to false for view to use autolayout")
         
         guard let superview = superview else {
-            assertionFailure("View has no superview to fill")
+            assertionFailure("\(Self.self) has no superview to fill")
             return
         }
         
