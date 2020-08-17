@@ -24,7 +24,7 @@ struct PickupsView: View {
                 .navigationBarTitle("Pickup History", displayMode: .automatic)
                 .navigationBarItems(trailing: Button(
                     action: { self.makingNewPickup = true },
-                    label: { Image(uiImage: .add) })
+                    label: newPickupButton)
             )
         }.sheet(isPresented: $makingNewPickup,
                 content: presentNewPickupView)
