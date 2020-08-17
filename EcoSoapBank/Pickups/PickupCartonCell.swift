@@ -17,10 +17,8 @@ class PickupCartonCell: UITableViewCell {
     private var cancellables: Set<AnyCancellable> = []
 
     private lazy var cartonLabel = configure(UILabel()) {
-        self.addSubviews(usingAutolayout: true, $0)
-        NSLayoutConstraint.activate([
+        self.constrainNewSubview($0, with: [
             $0.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            
         ])
     }
 
