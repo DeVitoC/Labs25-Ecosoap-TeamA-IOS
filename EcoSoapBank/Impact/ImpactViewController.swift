@@ -21,16 +21,12 @@ class ImpactViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Impact Summary"
-        
-        view = configure(GradientView()) {
-            $0.colors = [.esbGreen, .downyBlue]
-            $0.startPoint = CGPoint(x: 0.2, y: 0.5)
-            $0.endPoint = CGPoint(x: 0.4, y: -0.5)
-        }
-        
+        let background = BackgroundView()
+        view.addSubviewsUsingAutolayout(background)
+        background.fillSuperview()
+                
         setUpCollectionView()
-        
+
         impactController.getImpactStats { error in
             if let error = error {
                 print(error)
