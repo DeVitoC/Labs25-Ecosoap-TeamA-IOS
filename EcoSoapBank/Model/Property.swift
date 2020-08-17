@@ -24,12 +24,38 @@
 import Foundation
 
 struct Property: Decodable {
+    internal init(id: Int,
+                  name: String,
+                  propertyType: String,
+                  rooms: Int,
+                  services: [String],
+                  collectionType: String,
+                  logo: String?,
+                  phone: String?,
+                  shippingNote: String?,
+                  notes: String?,
+                  impact: ImpactStats?,
+                  pickups: [Pickup]?) {
+        self.id = id
+        self.name = name
+        self.propertyType = propertyType
+        self.rooms = rooms
+        self.services = services
+        self.collectionType = collectionType
+        self.logo = logo
+        self.phone = phone
+        self.shippingNote = shippingNote
+        self.notes = notes
+        self.impact = impact
+        self.pickups = pickups
+    }
+    
     let id: Int
     let name: String
-    let propertyType: PropertyType.RawValue
+    let propertyType: String//PropertyType.RawValue
     let rooms: Int
-    let services: [HospitalityService.RawValue]
-    let collectionType: Pickup.CollectionType.RawValue
+    let services: [String]//[HospitalityService.RawValue]
+    let collectionType: String//Pickup.CollectionType.RawValue
     let logo: String?
     let phone: String?
     let shippingNote: String?
