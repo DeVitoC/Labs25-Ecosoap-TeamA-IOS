@@ -10,7 +10,7 @@ import UIKit
 
 
 class NewPickupViewController: UIViewController {
-    typealias DataSource = UITableViewDiffableDataSource<Int, Pickup.CartonContents>
+    typealias DataSource = UITableViewDiffableDataSource<Int, NewCartonViewModel>
 
     var viewModel: NewPickupViewModel
 
@@ -20,7 +20,10 @@ class NewPickupViewController: UIViewController {
     private lazy var dateLabel = configureSectionLabel(titled: "Pickup Date")
     private lazy var notesLabel = configureSectionLabel(titled: "Notes")
 
-    private lazy var tableView = UITableView()
+    private lazy var tableView = configure(UITableView()) {
+        $0.register(NewPickupCartonCell.self,
+                    forCellReuseIdentifier: NewPickupCartonCell.reuseIdentifier)
+    }
     private lazy var dataSource = DataSource(
         tableView: tableView,
         cellProvider: cell(for:at:with:))
@@ -80,7 +83,14 @@ extension NewPickupViewController {
         at indexPath: IndexPath,
         with carton: Pickup.CartonContents
     ) -> UITableViewCell? {
-        return nil
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: NewPickupCartonCell.reuseIdentifier,
+            for: indexPath)
+            as? NewPickupCartonCell
+            else {
+                preconditionFailure("NewPickupViewController.tableView failed to dequeue NewPickupCartonCell.")
+        }
+        cell.configureCell(for: <#T##NewCartonViewModel#>)
     }
 }
 
