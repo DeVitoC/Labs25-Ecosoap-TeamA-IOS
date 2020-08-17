@@ -9,11 +9,7 @@
 import UIKit
 
 class ImpactCoordinator: FlowCoordinator {
-    private(set) lazy var rootVC = configure(UINavigationController()) {
-        $0.navigationBar.prefersLargeTitles = true
-        $0.navigationBar.layoutMargins.left = 22
-        $0.navigationBar.backgroundColor = .clear
-    }
+    private(set) lazy var rootVC = ImpactViewController()
     
     func start() {
         let globe = UIImage(
@@ -21,7 +17,5 @@ class ImpactCoordinator: FlowCoordinator {
             withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular)
         )
         rootVC.tabBarItem = UITabBarItem(title: "Impact", image: globe, tag: 0)
-        
-        rootVC.pushViewController(ImpactViewController(), animated: false)
     }
 }

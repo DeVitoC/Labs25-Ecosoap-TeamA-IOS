@@ -80,14 +80,15 @@ extension UIFont {
         }()
         return metrics.scaledFont(for: self)
     }
-
+    
     static var navBarLargeTitle: UIFont {
         .montserrat(ofSize: 30, typeface: .semiBold)
     }
-
+    
     static var navBarInlineTitle: UIFont {
-        .montserrat(ofSize: 18, typeface: .semiBold)
+        .montserrat(ofSize: 20, typeface: .semiBold)
     }
+    
 }
 
 

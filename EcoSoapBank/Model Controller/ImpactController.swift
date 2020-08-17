@@ -51,13 +51,12 @@ class ImpactController {
         
         let unitMass: UnitMass = .pounds // TODO: Get preference of user
         
-        // TODO: Fill in proper images
         if let soapRecycled = impactStats.soapRecycled {
             viewModels.append(
                 ImpactCellViewModel(withAmount: soapRecycled,
                                     convertedTo: unitMass,
                                     subtitle: "soap recycled",
-                                    image: UIImage(named: "Bottles")!)
+                                    image: .soap)
             )
         }
         if let bottlesRecycled = impactStats.bottlesRecycled {
@@ -65,7 +64,7 @@ class ImpactController {
                 ImpactCellViewModel(withAmount: bottlesRecycled,
                                     convertedTo: unitMass,
                                     subtitle: "bottle amenities\nrecycled",
-                                    image: UIImage(named: "Bottles")!)
+                                    image: .bottles)
             )
         }
         if let linensRecycled = impactStats.linensRecycled {
@@ -73,7 +72,7 @@ class ImpactController {
                 ImpactCellViewModel(withAmount: linensRecycled,
                                     convertedTo: unitMass,
                                     subtitle: "linens recycled",
-                                    image: UIImage(named: "Bottles")!)
+                                    image: .linens)
             )
         }
         if let paperRecycled = impactStats.paperRecycled {
@@ -81,21 +80,21 @@ class ImpactController {
                 ImpactCellViewModel(withAmount: paperRecycled,
                                     convertedTo: unitMass,
                                     subtitle: "paper recycled",
-                                    image: UIImage(named: "Bottles")!)
+                                    image: .paper)
             )
         }
         if let peopleServed = impactStats.peopleServed {
             viewModels.append(
                 ImpactCellViewModel(title: String(peopleServed),
                                     subtitle: "people served",
-                                    image: UIImage(named: "Bottles")!)
+                                    image: .people)
             )
         }
         if let womenEmployed = impactStats.womenEmployed {
             viewModels.append(
                 ImpactCellViewModel(title: String(womenEmployed),
                                     subtitle: "women employed",
-                                    image: UIImage(named: "Bottles")!)
+                                    image: .women)
             )
         }
     }
