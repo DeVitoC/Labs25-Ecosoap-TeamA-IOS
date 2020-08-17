@@ -9,7 +9,12 @@
 import UIKit
 
 extension UIView {
-    
+
+    /// Applies constraints to all sides of superview with constant padding defined by the provided insets.
+    ///
+    /// **REQUIRED PRECONDITIONS**:
+    /// - View must be embedded in a superview
+    /// - `translatesAutoresizingMaskIntoConstraints` must be false
     func fillSuperview(withPadding padding: UIEdgeInsets = .zero) {
         assert(translatesAutoresizingMaskIntoConstraints == false,
                "translatesAutoresizingMaskIntoConstraints must be set to false for view to use autolayout")
