@@ -53,36 +53,6 @@ class ImpactViewController: UIViewController {
     }
 }
 
-class ImpactHeaderView: UICollectionReusableView {
-    static let reuseIdentifier = "HeaderView"
-    
-    var title: String? { didSet { updateViews() } }
-    
-    private var titleLabel = configure(UILabel()) {
-        $0.font = UIFont.Montserrat.navBarLargeTitle
-        $0.textColor = .white
-    }
-    
-    private func updateViews() {
-        titleLabel.text = title
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setUp()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setUp()
-    }
-    
-    private func setUp() {
-        addSubviewsUsingAutolayout(titleLabel)
-        titleLabel.fillSuperview(withPadding: .init(top: 40, left: 20, bottom: 0, right: 0))
-    }
-}
-
 // MARK: - Collection View Data Source
 
 extension ImpactViewController: UICollectionViewDataSource {

@@ -1,0 +1,39 @@
+//
+//  ImpactHeaderView.swift
+//  EcoSoapBank
+//
+//  Created by Shawn Gee on 8/17/20.
+//  Copyright © 2020 Spencer Curtis. All rights reserved.
+//
+
+import UIKit
+
+class ImpactHeaderView: UICollectionReusableView {
+    static let reuseIdentifier = "HeaderView"
+    
+    var title: String? { didSet { updateViews() } }
+    
+    private var titleLabel = configure(UILabel()) {
+        $0.font = UIFont.Montserrat.navBarLargeTitle
+        $0.textColor = .white
+    }
+    
+    private func updateViews() {
+        titleLabel.text = title
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setUp()
+    }
+    
+    private func setUp() {
+        addSubviewsUsingAutolayout(titleLabel)
+        titleLabel.fillSuperview(withPadding: .init(top: 40, left: 20, bottom: 0, right: 0))
+    }
+}
