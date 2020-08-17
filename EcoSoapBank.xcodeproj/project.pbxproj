@@ -118,6 +118,7 @@
 		99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175A24EAF0A20099664B /* NewPickupViewController.swift */; };
 		99B6175D24EAF0C70099664B /* NewPickupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */; };
 		99B6175F24EAF1830099664B /* NewPickupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99B6175E24EAF1830099664B /* NewPickupViewController.storyboard */; };
+		99B6176124EB0C4E0099664B /* NewPickupCartonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176024EB0C4E0099664B /* NewPickupCartonCell.swift */; };
 		99B6176324EB0EB00099664B /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176224EB0EB00099664B /* Constraints.swift */; };
 		E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220C32624E35E59003FF32D /* GraphQLQueries.swift */; };
 		E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */; };
@@ -229,6 +230,7 @@
 		99B6175A24EAF0A20099664B /* NewPickupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupViewController.swift; sourceTree = "<group>"; };
 		99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupViewModel.swift; sourceTree = "<group>"; };
 		99B6175E24EAF1830099664B /* NewPickupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewPickupViewController.storyboard; sourceTree = "<group>"; };
+		99B6176024EB0C4E0099664B /* NewPickupCartonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupCartonCell.swift; sourceTree = "<group>"; };
 		99B6176224EB0EB00099664B /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		E220C32624E35E59003FF32D /* GraphQLQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueries.swift; sourceTree = "<group>"; };
 		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 				9983874924E34C5E00450244 /* CartonSummaryView.swift */,
 				99B6175624EAE8A90099664B /* CartonViewModel.swift */,
 				99B6175A24EAF0A20099664B /* NewPickupViewController.swift */,
+				99B6176024EB0C4E0099664B /* NewPickupCartonCell.swift */,
 				99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */,
 				99B6175E24EAF1830099664B /* NewPickupViewController.storyboard */,
 			);
@@ -716,6 +719,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
+				99B6176124EB0C4E0099664B /* NewPickupCartonCell.swift in Sources */,
 				46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */,
 				9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */,
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
