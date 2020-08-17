@@ -32,7 +32,7 @@ class AppFlowCoordinator: FlowCoordinator {
                 .foregroundColor: UIColor.white
             ]
             $0.largeTitleTextAttributes = [
-                .font: UIFont.Montserrat.navBarLargeTitle,
+                .font: UIFont.navBarLargeTitle,
                 .foregroundColor: UIColor.white
             ]
             $0.backgroundColor = .esbGreen

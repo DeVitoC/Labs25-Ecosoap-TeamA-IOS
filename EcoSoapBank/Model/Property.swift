@@ -51,4 +51,3 @@ struct Property: Decodable {
         case invoice = "INVOICE"
     }
 }
-
