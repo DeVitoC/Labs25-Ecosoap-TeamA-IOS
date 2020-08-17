@@ -69,20 +69,19 @@ class NewPickupViewController: UIViewController {
 extension NewPickupViewController {
     private func setUpViews() {
         // add subviews, basic constraints, `tamic`
-        view.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading])
-        view.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top, .trailing])
+        view.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading], constant: 20)
+        view.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top], constant: 20)
         view.constrainNewSubview(tableView, to: [.leading, .trailing])
-        view.constrainNewSubviewToSafeArea(dateLabel, sides: [.leading, .trailing])
+        view.constrainNewSubviewToSafeArea(dateLabel, sides: [.leading, .trailing], constant: 20)
         view.constrainNewSubview(datePicker, to: [.leading, .trailing])
-        view.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing])
-        view.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing])
-        view.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom])
+        view.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
+        view.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
+        view.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom], constant: 20)
 
         // remaining constraints
         NSLayoutConstraint.activate([
-            addCartonButton.leadingAnchor.constraint(
-                greaterThanOrEqualTo: cartonsLabel.trailingAnchor,
-                constant: 8),
+            addCartonButton.leadingAnchor.constraint(greaterThanOrEqualTo: cartonsLabel.trailingAnchor, constant: 8),
+            addCartonButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
             dateLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
             datePicker.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
