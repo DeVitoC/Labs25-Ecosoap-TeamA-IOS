@@ -31,6 +31,12 @@ class NewPickupViewController: UIViewController {
     private lazy var addCartonButton = configure(UIButton()) {
         $0.setImage(.add, for: .normal)
         $0.addTarget(self, action: #selector(addCarton), for: .touchUpInside)
+        $0.contentEdgeInsets = configure(UIEdgeInsets(), with: { ei in
+            ei.top = 4
+            ei.left = 4
+            ei.right = 4
+            ei.bottom = 4
+        })
     }
 
     private lazy var datePicker = configure(UIDatePicker()) {
@@ -44,6 +50,12 @@ class NewPickupViewController: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = .link
         $0.layer.cornerRadius = 10
+        $0.contentEdgeInsets = configure(UIEdgeInsets(), with: { ei in
+            ei.top = 8
+            ei.left = 8
+            ei.right = 8
+            ei.bottom = 8
+        })
     }
 
     // MARK: - Init / Lifecycle
@@ -76,7 +88,7 @@ extension NewPickupViewController {
         view.constrainNewSubview(datePicker, to: [.leading, .trailing])
         view.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
         view.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
-        view.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom], constant: 20)
+        view.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom], constant: -20)
 
         // remaining constraints
         NSLayoutConstraint.activate([
