@@ -316,6 +316,7 @@
 		04D1758E24E41DF500F8929C /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				04D6D72B24E8444C0003A585 /* BackgroundView.swift */,
 				04D1758C24E4195C00F8929C /* GradientView.swift */,
 			);
 			path = "Custom Views";
@@ -462,7 +463,6 @@
 				994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */,
 				994E4B7624DDB55E00C12921 /* ImpactViewController.swift */,
 				049379AA24EB29160084051B /* ImpactHeaderView.swift */,
-				04D6D72B24E8444C0003A585 /* BackgroundView.swift */,
 				04D1758824E3453B00F8929C /* ImpactCell.swift */,
 				04FEE1DB24E5E16600F51D69 /* ImpactCellViewModel.swift */,
 			);
