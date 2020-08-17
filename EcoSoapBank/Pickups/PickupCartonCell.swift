@@ -1,5 +1,5 @@
 //
-//  NewPickupCartonCell.swift
+//  PickupCartonCell.swift
 //  EcoSoapBank
 //
 //  Created by Jon Bash on 2020-08-17.
@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 
-class NewPickupCartonCell: UITableViewCell {
+class PickupCartonCell: UITableViewCell {
     static var reuseIdentifier: String { String(describing: Self.self) }
     
     private var viewModel: NewCartonViewModel!
@@ -25,6 +25,7 @@ class NewPickupCartonCell: UITableViewCell {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         self.viewModel = nil
         cancellables = []
     }
@@ -33,7 +34,7 @@ class NewPickupCartonCell: UITableViewCell {
         self.viewModel = viewModel
 
         viewModel.$carton.sink { carton in
-
+            self.cartonLabel.text = "\(carton.product) — \(carton.weight)g"
         }.store(in: &cancellables)
     }
 }
