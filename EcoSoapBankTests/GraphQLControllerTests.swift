@@ -32,7 +32,7 @@ class GraphQLControllerTests: XCTestCase {
                 let paperRecycled = result.paperRecycled,
                 let peopleServed = result.peopleServed,
                 let womenEmployed = result.womenEmployed else {
-                NSLog("result did not cocntain valid Impact stats")
+                NSLog("result did not contain valid Impact stats")
                 return
             }
 
@@ -45,7 +45,7 @@ class GraphQLControllerTests: XCTestCase {
         }
     }
 
-    func testQueryRequestWithMockDataFailure() {
+    func testImpactStatsQueryRequestWithMockDataFailure() {
         guard let path = Bundle.main.path(forResource: "mockImpactStatsFailure",
                                           ofType: "json"),
             let mockData = NSData(contentsOfFile: path) else {
@@ -60,7 +60,7 @@ class GraphQLControllerTests: XCTestCase {
         graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery) { result in
 
             guard let result = try? result.get() else {
-                    NSLog("result did not cocntain valid Impact stats")
+                    NSLog("result did not contain valid Impact stats")
                     return
             }
 
@@ -92,25 +92,25 @@ class GraphQLControllerTests: XCTestCase {
                                         error: nil)
         let graphQLController = GraphQLController(session: mockLoader)
 
-        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery) { result in
+        graphQLController.queryRequest(User.self, query: GraphQLQueries.userById) { result in
 
-            guard let result = try? result.get(),
-                let soapRecycled = result.soapRecycled,
-                let linensRecycled = result.linensRecycled,
-                let bottlesRecycled = result.bottlesRecycled,
-                let paperRecycled = result.paperRecycled,
-                let peopleServed = result.peopleServed,
-                let womenEmployed = result.womenEmployed else {
-                    NSLog("result did not cocntain valid Impact stats")
+            guard let result = try? result.get() else {
+                    NSLog("result did not contain valid user data")
                     return
             }
+            let id = result.id
+            let firstName = result.firstName
+            let lastName = result.lastName
+            let title = result.title
+            let company = result.company
+            let email = result.email
 
-            XCTAssert(soapRecycled == 1)
-            XCTAssert(linensRecycled == 2)
-            XCTAssert(bottlesRecycled == 3)
-            XCTAssert(paperRecycled == 4)
-            XCTAssert(peopleServed == 5)
-            XCTAssert(womenEmployed == 6)
+            XCTAssert(id == 4)
+            XCTAssert(firstName == "Christopher")
+            XCTAssert(lastName == "DeVito")
+            XCTAssert(title == "Manager")
+            XCTAssert(company == "Hilton")
+            XCTAssert(email == "email@email.com")
         }
     }
 
