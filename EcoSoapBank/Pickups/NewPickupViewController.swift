@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 
 class NewPickupViewController: UIViewController {
@@ -21,8 +22,8 @@ class NewPickupViewController: UIViewController {
     private lazy var notesLabel = configureSectionLabel(titled: "Notes")
 
     private lazy var tableView = configure(UITableView()) {
-        $0.register(NewPickupCartonCell.self,
-                    forCellReuseIdentifier: NewPickupCartonCell.reuseIdentifier)
+        $0.register(PickupCartonCell.self,
+                    forCellReuseIdentifier: PickupCartonCell.reuseIdentifier)
     }
     private lazy var dataSource = DataSource(
         tableView: tableView,
@@ -37,6 +38,12 @@ class NewPickupViewController: UIViewController {
     }
     private lazy var notesView = configure(UITextView()) {
         $0.delegate = self
+    }
+    private lazy var scheduleButton = configure(UIButton()) {
+        $0.setTitle("Schedule Pickup", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = .link
+        $0.layer.cornerRadius = 10
     }
 
     // MARK: - Init / Lifecycle
@@ -61,12 +68,30 @@ class NewPickupViewController: UIViewController {
 
 extension NewPickupViewController {
     private func setUpViews() {
-        view.addSubviews(
-            usingAutolayout: true,
-            cartonsLabel,
-            dateLabel,
-            notesLabel
-        )
+        // add subviews, basic constraints, `tamic`
+        view.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading])
+        view.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top, .trailing])
+        view.constrainNewSubview(tableView, to: [.leading, .trailing])
+        view.constrainNewSubviewToSafeArea(dateLabel, sides: [.leading, .trailing])
+        view.constrainNewSubview(datePicker, to: [.leading, .trailing])
+        view.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing])
+        view.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing])
+        view.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom])
+
+        // remaining constraints
+        NSLayoutConstraint.activate([
+            addCartonButton.leadingAnchor.constraint(
+                greaterThanOrEqualTo: cartonsLabel.trailingAnchor,
+                constant: 8),
+            tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
+            dateLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
+            datePicker.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
+            notesLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 20),
+            notesView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 8),
+            notesView.heightAnchor.constraint(greaterThanOrEqualToConstant: 150),
+            scheduleButton.topAnchor.constraint(equalTo: notesView.bottomAnchor, constant: 20),
+            scheduleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
 
         tableView.dataSource = dataSource
     }
@@ -81,16 +106,17 @@ extension NewPickupViewController {
     private func cell(
         for tableView: UITableView,
         at indexPath: IndexPath,
-        with carton: Pickup.CartonContents
+        with carton: NewCartonViewModel
     ) -> UITableViewCell? {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: NewPickupCartonCell.reuseIdentifier,
+            withIdentifier: PickupCartonCell.reuseIdentifier,
             for: indexPath)
-            as? NewPickupCartonCell
+            as? PickupCartonCell
             else {
                 preconditionFailure("NewPickupViewController.tableView failed to dequeue NewPickupCartonCell.")
         }
-        cell.configureCell(for: <#T##NewCartonViewModel#>)
+        cell.configureCell(for: viewModel.cartons[indexPath.row])
+        return cell
     }
 }
 
@@ -105,3 +131,24 @@ extension NewPickupViewController {
 // MARK: - Text Delegates
 
 extension NewPickupViewController: UITextViewDelegate {}
+
+// MARK: - ViewControllerRepresentable
+
+struct NewPickupView: UIViewControllerRepresentable {
+    typealias UIViewControllerType = NewPickupViewController
+
+    private var viewModel: NewPickupViewModel
+
+    init(viewModel: NewPickupViewModel) {
+        self.viewModel = viewModel
+    }
+
+    func makeUIViewController(context: Context) -> NewPickupViewController {
+        NewPickupViewController(viewModel: viewModel)
+    }
+
+    func updateUIViewController(
+        _ uiViewController: NewPickupViewController,
+        context: Context
+    ) { }
+}

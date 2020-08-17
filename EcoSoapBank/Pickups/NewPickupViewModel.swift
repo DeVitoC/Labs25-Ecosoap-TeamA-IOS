@@ -10,31 +10,13 @@ import Foundation
 
 
 class NewPickupViewModel {
-    @Published private(set) var cartons: [CartonViewModel] = []
+    @Published private(set) var cartons: [NewCartonViewModel] = []
 }
 
 // MARK: - Public
 
 extension NewPickupViewModel {
     func addCarton() {
-        cartons.append(.init())
-    }
-}
-
-class NewCartonViewModel {
-    @Published var carton: Pickup.CartonContents
-
-    init(carton: Pickup.CartonContents) {
-        self.carton = carton
-    }
-}
-
-extension NewCartonViewModel: Hashable {
-    static func == (lhs: NewCartonViewModel, rhs: NewCartonViewModel) -> Bool {
-        lhs === rhs && lhs.carton == rhs.carton
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(ObjectIdentifier(self))
+        cartons.append(.init(carton: .init(product: .soap, weight: 0)))
     }
 }

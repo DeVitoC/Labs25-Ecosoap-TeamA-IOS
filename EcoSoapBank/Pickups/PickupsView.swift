@@ -22,11 +22,12 @@ struct PickupsView: View {
         NavigationView {
             PickupHistoryView(pickupController: pickupController)
                 .navigationBarTitle("Pickup History", displayMode: .automatic)
-                .navigationBarItems(trailing: NavigationLink(
-                    destination: NewPickupView(pickupController: pickupController),
-                    label: newPickupButton)
-                    .isDetailLink(false))
-        }
+                .navigationBarItems(trailing: Button(
+                    action: { self.makingNewPickup = true },
+                    label: { Image(uiImage: .add) })
+            )
+        }.sheet(isPresented: $makingNewPickup,
+                content: presentNewPickupView)
     }
 
     private func newPickupButton() -> some View {
@@ -52,6 +53,10 @@ struct PickupsView: View {
             .frame(
                 width: UIScreen.main.bounds.width,
                 height: UIScreen.main.bounds.height + 160)
+    }
+
+    private func presentNewPickupView() -> some View {
+        NewPickupView(viewModel: pickupController.viewModelForNewPickup())
     }
 }
 
