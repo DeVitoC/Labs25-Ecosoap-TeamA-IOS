@@ -7,3 +7,24 @@
 //
 
 import Foundation
+
+
+class NewPickupViewModel {
+    @Published private(set) var cartons: [CartonViewModel] = []
+}
+
+// MARK: - Public
+
+extension NewPickupViewModel {
+    func addCarton() {
+
+    }
+}
+
+class NewCartonViewModel {
+    @Published var carton: Pickup.CartonContents
+
+    init(carton: Pickup.CartonContents) {
+        self.carton = carton
+    }
+}
