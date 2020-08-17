@@ -6,11 +6,11 @@
             "middleName": "Brian",
             "lastName": "DeVito",
             "title": "Manager",
-            "Company": "Hilton",
+            "company": "Hilton",
             "email": "email@email.com",
             "phone": "123-456-7890",
             "skype": "skypeID",
-            "properties" [
+            "properties": [
                 {
                     "id": 5,
                     "name": "Hilton Hotel",
@@ -29,8 +29,8 @@
                     "notes": "This compnay has been donating for 3 years",
                     "impact": {
                         "soapRecycled": 1,
-                        "linensRecycled": 2,
-                        "bottlesRecycled": 3,
+                        "bottlesRecycled": 2,
+                        "linensRecycled": 3,
                         "paperRecycled": 4,
                         "peopleServed": 5,
                         "womenEmployed": 6
