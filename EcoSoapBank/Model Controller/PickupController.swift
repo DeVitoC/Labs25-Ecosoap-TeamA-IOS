@@ -26,6 +26,8 @@ class PickupController: ObservableObject {
 
     private var dataProvider: PickupDataProvider
 
+    private var newPickupViewModel: NewPickupViewModel?
+
     init(dataProvider: PickupDataProvider) {
         self.dataProvider = dataProvider
 
@@ -37,6 +39,18 @@ class PickupController: ObservableObject {
                 self?.error = error
             }
         }
+    }
+
+    /// Returns a view model for use with new pickup views.
+    ///
+    /// The PickupController holds a reference to the view model for later reuse and/or for use with SwiftUI
+    /// (where views may inadvertantly reinitialize objects if a reference is not held elsewhere).
+    func viewModelForNewPickup() -> NewPickupViewModel {
+        if let vm = newPickupViewModel {
+            return vm
+        }
+        newPickupViewModel = NewPickupViewModel()
+        return newPickupViewModel!
     }
 
     func schedulePickup(
