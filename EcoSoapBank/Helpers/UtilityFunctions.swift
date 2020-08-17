@@ -66,3 +66,9 @@ extension MeasurementFormatter {
         $0.numberFormatter.maximumFractionDigits = 2
     }
 }
+
+extension NumberFormatter {
+    static var forMeasurements: NumberFormatter {
+        MeasurementFormatter.shared.numberFormatter
+    }
+}
