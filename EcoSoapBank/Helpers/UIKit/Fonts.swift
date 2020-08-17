@@ -61,7 +61,7 @@ extension UIFont {
         }
 
         static var navBarInlineTitle: UIFont {
-            .montserrat(ofSize: 18, style: .semiBold)
+            .montserrat(ofSize: 20, style: .semiBold)
         }
     }
 }
