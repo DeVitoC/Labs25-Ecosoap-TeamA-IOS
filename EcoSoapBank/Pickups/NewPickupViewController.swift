@@ -8,12 +8,17 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 
 class NewPickupViewController: UIViewController {
-    typealias DataSource = UITableViewDiffableDataSource<Int, NewCartonViewModel>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, NewCartonViewModel>
 
-    var viewModel: NewPickupViewModel
+    private var viewModel: NewPickupViewModel
+    private var cancellables: Set<AnyCancellable> = []
+
+    private lazy var tableViewHeight: NSLayoutConstraint =
+        tableView.heightAnchor.constraint(equalToConstant: 0)
 
     // MARK: - Views
 
@@ -24,6 +29,7 @@ class NewPickupViewController: UIViewController {
     private lazy var tableView = configure(UITableView()) {
         $0.register(PickupCartonCell.self,
                     forCellReuseIdentifier: PickupCartonCell.reuseIdentifier)
+        $0.delegate = self
     }
     private lazy var dataSource = DataSource(
         tableView: tableView,
@@ -73,6 +79,12 @@ class NewPickupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
+
+        // subscribe to view model cartons, update data source on change
+        viewModel.$cartons
+            .sink(receiveValue: updateDataSource(with:))
+            .store(in: &cancellables)
+        updateDataSource(with: viewModel.cartons)
     }
 }
 
@@ -80,6 +92,8 @@ class NewPickupViewController: UIViewController {
 
 extension NewPickupViewController {
     private func setUpViews() {
+        view.backgroundColor = .secondarySystemBackground
+
         // add subviews, basic constraints, `tamic`
         view.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading], constant: 20)
         view.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top], constant: 20)
@@ -88,13 +102,14 @@ extension NewPickupViewController {
         view.constrainNewSubview(datePicker, to: [.leading, .trailing])
         view.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
         view.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
-        view.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom], constant: -20)
+        view.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom], constant: 20)
 
         // remaining constraints
         NSLayoutConstraint.activate([
             addCartonButton.leadingAnchor.constraint(greaterThanOrEqualTo: cartonsLabel.trailingAnchor, constant: 8),
             addCartonButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
+            tableViewHeight,
             dateLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
             datePicker.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
             notesLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 20),
@@ -119,15 +134,31 @@ extension NewPickupViewController {
         at indexPath: IndexPath,
         with carton: NewCartonViewModel
     ) -> UITableViewCell? {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: PickupCartonCell.reuseIdentifier,
-            for: indexPath)
-            as? PickupCartonCell
+        guard
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: PickupCartonCell.reuseIdentifier,
+                for: indexPath)
+                as? PickupCartonCell
             else {
                 preconditionFailure("NewPickupViewController.tableView failed to dequeue NewPickupCartonCell.")
         }
-        cell.configureCell(for: viewModel.cartons[indexPath.row])
+        cell.configureCell(for: carton)
         return cell
+    }
+
+    private func updateDataSource(with cartons: [NewCartonViewModel]) {
+        let snapshot = configure(Snapshot()) {
+            $0.appendSections([0])
+            $0.appendItems(cartons, toSection: 0)
+        }
+        dataSource.apply(snapshot)
+        UIView.animate(withDuration: 0.2) { [unowned tableViewHeight, unowned tableView] in
+            guard !cartons.isEmpty else {
+                tableViewHeight.constant = 0
+                return
+            }
+            tableViewHeight.constant = tableView.contentSize.height - CGFloat(cartons.count * 6)
+        }
     }
 }
 
@@ -137,29 +168,69 @@ extension NewPickupViewController {
     @objc private func addCarton() {
         viewModel.addCarton()
     }
+
+    @objc private func schedulePickup() {
+        viewModel.schedulePickup()
+    }
 }
 
-// MARK: - Text Delegates
+// MARK: - Delegates
 
 extension NewPickupViewController: UITextViewDelegate {}
 
+extension NewPickupViewController: UITableViewDelegate {
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        // set up swipe to delete
+
+        let delete = UIContextualAction(
+            style: .destructive,
+            title: "Remove",
+            handler: { [unowned viewModel] _, _, completion in
+                viewModel.removeCarton(at: indexPath.row)
+                completion(true)
+        })
+        delete.backgroundColor = .systemRed
+
+        let config = UISwipeActionsConfiguration(actions: [delete])
+        config.performsFirstActionWithFullSwipe = true
+
+        return config
+    }
+}
+
 // MARK: - ViewControllerRepresentable
 
-struct NewPickupView: UIViewControllerRepresentable {
-    typealias UIViewControllerType = NewPickupViewController
+extension NewPickupViewController {
+    struct Representable: UIViewControllerRepresentable {
+        private var viewModel: NewPickupViewModel
 
-    private var viewModel: NewPickupViewModel
+        init(viewModel: NewPickupViewModel) {
+            self.viewModel = viewModel
+        }
 
-    init(viewModel: NewPickupViewModel) {
-        self.viewModel = viewModel
+        func makeUIViewController(context: Context) -> NewPickupViewController {
+            NewPickupViewController(viewModel: viewModel)
+        }
+
+        func updateUIViewController(
+            _ uiViewController: NewPickupViewController,
+            context: Context
+        ) { }
     }
+}
 
-    func makeUIViewController(context: Context) -> NewPickupViewController {
-        NewPickupViewController(viewModel: viewModel)
+// MARK: - Data Source
+
+extension NewPickupViewController {
+    class DataSource: UITableViewDiffableDataSource<Int, NewCartonViewModel> {
+        override func tableView(
+            _ tableView: UITableView,
+            canEditRowAt indexPath: IndexPath
+        ) -> Bool {
+            true
+        }
     }
-
-    func updateUIViewController(
-        _ uiViewController: NewPickupViewController,
-        context: Context
-    ) { }
 }
