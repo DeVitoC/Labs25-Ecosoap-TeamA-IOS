@@ -26,6 +26,7 @@ class PickupCoordinator: FlowCoordinator {
             .handleError(handleError(_:))
             .sink(receiveValue: handlePickupScheduleResult(_:))
             .store(in: &cancellables)
+
         pickupController.presentNewPickup
             .sink(receiveValue: presentNewPickupView)
             .store(in: &cancellables)

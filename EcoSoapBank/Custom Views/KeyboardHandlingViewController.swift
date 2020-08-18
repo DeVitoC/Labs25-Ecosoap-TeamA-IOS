@@ -13,10 +13,7 @@ import Combine
 /// A view controller that expands to fit content vertically
 /// and responds to keyboard showing in order to not obscure text inputs.
 ///
-/// Add all of your subviews to contentView. If your content should extend beyond the size of the scrollview,
-/// be sure to fully define the contentView's height through use of constraints.
-/// This view controller also adds an inputAccessoryView to each textField or textView in the content view.
-/// This facilitates easy navigation between text inputs.
+/// **Important note:** Add all of your subviews to `contentView` rather than `view`
 
 class KeyboardHandlingViewController: UIViewController {
 

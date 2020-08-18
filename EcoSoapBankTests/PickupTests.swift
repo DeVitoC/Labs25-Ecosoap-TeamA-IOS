@@ -8,6 +8,7 @@
 
 import XCTest
 import SwiftUI
+import Combine
 @testable import EcoSoapBank
 
 
@@ -71,16 +72,16 @@ class PickupTests: XCTestCase {
 
     func testSchedulePickup() {
         let pickupInput = Pickup.ScheduleInput.random()
-
-        pickupController.schedulePickup(pickupInput) { result in
-            self.mockDataReturned()
-            switch result {
-            case .success(let pickupResult):
-                XCTAssertEqual(pickupInput.base, pickupResult.pickup.base)
-            case .failure(let error):
-                XCTFail("schedulePickup returned failure with error: \(error)")
-            }
-        }
+        var bag = Set<AnyCancellable>()
+        pickupController.schedulePickup(pickupInput)
+            .sink(receiveCompletion: { completion in
+                if case .failure = completion {
+                    XCTFail("Should succeed")
+                }
+            }, receiveValue: { result in
+                self.mockDataReturned()
+                XCTAssertEqual(pickupInput.base, result.pickup.base)
+            }).store(in: &bag)
 
         waitForMockData()
     }
