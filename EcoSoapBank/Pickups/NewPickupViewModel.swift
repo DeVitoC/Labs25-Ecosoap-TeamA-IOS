@@ -15,14 +15,14 @@ class NewPickupViewModel {
     @Published var readyDate: Date = Date()
     @Published var notes: String = ""
 
-    private var schedulePickupPassthrough = PassthroughSubject<Pickup.ScheduleInput, Never>()
+    private var schedulePickupPassthrough = PassthroughSubject<Pickup.ScheduleInput, Error>()
 }
 
 // MARK: - Public
 
 extension NewPickupViewModel {
     /// Publishes pickup input when pickup is scheduled by caller of `schedulePickup`.
-    var pickupInput: AnyPublisher<Pickup.ScheduleInput, Never> {
+    var pickupInput: AnyPublisher<Pickup.ScheduleInput, Error> {
         schedulePickupPassthrough.eraseToAnyPublisher()
     }
 
