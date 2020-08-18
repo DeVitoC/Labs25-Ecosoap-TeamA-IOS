@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import OktaAuth
 
 
 class AppFlowCoordinator: FlowCoordinator {
@@ -16,7 +17,16 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private(set) lazy var impactCoord = ImpactCoordinator()
     private(set) lazy var pickupCoord = PickupCoordinator()
-    private(set) lazy var loginCoord = LoginCoordinator(root: tabBarController)
+    private(set) lazy var loginCoord = LoginCoordinator(
+        root: tabBarController,
+        delegate: self)
+
+    let oktaAuth = OktaAuth(
+        baseURL: URL(string: "https://auth.lambdalabs.dev/")!,
+        clientID: "0oalwkxvqtKeHBmLI4x6",
+        redirectURI: "labs://scaffolding/implicit/callback")
+
+    private let networkController = GraphQLController()
 
     init(window: UIWindow) {
         self.window = window
@@ -47,15 +57,31 @@ class AppFlowCoordinator: FlowCoordinator {
             impactCoord.rootVC,
             pickupCoord.rootVC
         ]
-        impactCoord.start()
-        pickupCoord.start()
 
         // set up window and make visible
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
 
-        if ProfileController.shared.authenticatedUserProfile == nil {
+        if networkController.loggedIn {
+            impactCoord.start()
+            pickupCoord.start()
+        } else {
             loginCoord.start()
         }
+    }
+}
+
+extension AppFlowCoordinator: LoginCoordinatorDelegate {
+    var loginURL: URL? { oktaAuth.identityAuthURL() }
+
+    func loginDidComplete() {
+        guard let token = try? oktaAuth.credentialsIfAvailable().accessToken else {
+            preconditionFailure("Auth missing after successful login")
+            // TODO: handle missing token after login
+        }
+        networkController.provideToken(token)
+        impactCoord.start()
+        pickupCoord.start()
+        tabBarController.dismiss(animated: true, completion: nil)
     }
 }
