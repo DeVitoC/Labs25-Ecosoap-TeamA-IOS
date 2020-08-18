@@ -52,13 +52,26 @@ class PickupCoordinator: FlowCoordinator {
 
 extension PickupCoordinator {
     private func presentNewPickupView() {
-        rootVC.present(
-            configure(NewPickupViewController(
-                viewModel: pickupController.newPickupViewModel), with: {
-                    $0.modalPresentationStyle = .fullScreen
-            }),
-            animated: true,
-            completion: nil)
+        let newPickupVC = configure(NewPickupViewController(
+            viewModel: pickupController.newPickupViewModel)) {
+                let cancel = UIBarButtonItem(
+                    barButtonSystemItem: .cancel,
+                    target: self,
+                    action: #selector(cancelNewPickup(_:)))
+                cancel.tintColor = UIColor.codGrey
+                $0.navigationItem.setLeftBarButton(cancel, animated: false)
+                $0.title = "Schedule New Pickup"
+        }
+        let navVC = configure(
+            UINavigationController(rootViewController: newPickupVC),
+            with: {
+                $0.modalPresentationStyle = .fullScreen
+        })
+        rootVC.present(navVC, animated: true, completion: nil)
+    }
+
+    @objc private func cancelNewPickup(_ sender: Any) {
+        rootVC.dismiss(animated: true, completion: nil)
     }
 
     private func handleError(_ error: Error) {
