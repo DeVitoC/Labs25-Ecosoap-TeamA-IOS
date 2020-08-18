@@ -202,7 +202,8 @@ extension NewPickupViewController {
 
 // MARK: - Delegates
 
-extension NewPickupViewController: UITextViewDelegate {
+// TextViewDelegate (superclass already conforms)
+extension NewPickupViewController {
     func textViewDidChange(_ textView: UITextView) {
         viewModel.notes = textView.text
     }

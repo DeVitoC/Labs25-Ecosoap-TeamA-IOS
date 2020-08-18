@@ -90,3 +90,17 @@ class KeyboardHandlingViewController: UIViewController {
         }
     }
 }
+
+extension KeyboardHandlingViewController: UITextViewDelegate, UITextFieldDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        DispatchQueue.main.async { [weak scrollView] in
+            scrollView?.scrollRectToVisible(textView.frame, animated: true)
+        }
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        DispatchQueue.main.async { [weak scrollView] in
+            scrollView?.scrollRectToVisible(textField.frame, animated: true)
+        }
+    }
+}
