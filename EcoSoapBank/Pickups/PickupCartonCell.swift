@@ -17,9 +17,8 @@ class PickupCartonCell: UITableViewCell {
     private var cancellables: Set<AnyCancellable> = []
 
     private lazy var cartonLabel = configure(UILabel()) {
-        self.constrainNewSubview($0, with: [
-            $0.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-        ])
+        self.constrainNewSubviewToSafeArea($0, sides: [.top, .bottom], constant: 8)
+        NSLayoutConstraint.activate($0.constraints(for: safeAreaLayoutGuide, to: [.leading, .trailing], constant: 20))
     }
 
     override func prepareForReuse() {
@@ -32,7 +31,7 @@ class PickupCartonCell: UITableViewCell {
         self.viewModel = viewModel
 
         viewModel.$carton.sink { carton in
-            self.cartonLabel.text = "\(carton.product) — \(carton.weight)g"
+            self.cartonLabel.text = "\(carton.product.rawValue.capitalized) — \(carton.weight)g"
         }.store(in: &cancellables)
     }
 }
