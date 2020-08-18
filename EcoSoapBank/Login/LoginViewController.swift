@@ -10,7 +10,6 @@ import UIKit
 import OktaAuth
 
 class LoginViewController: UIViewController {
-    
     let profileController = ProfileController.shared
 
     var observers: [NSObjectProtocol] = []

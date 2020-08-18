@@ -12,7 +12,10 @@ import UIKit
 class LoginCoordinator: FlowCoordinator {
     private var rootVC: UIViewController
 
-    private var loginVC = LoginViewController()
+    private var loginVC = UIStoryboard.main.instantiateViewController(
+        identifier: LoginViewController.storyboardID) { coder in
+            LoginViewController(coder: coder)
+    }
 
     init(root: UIViewController) {
         self.rootVC = root
