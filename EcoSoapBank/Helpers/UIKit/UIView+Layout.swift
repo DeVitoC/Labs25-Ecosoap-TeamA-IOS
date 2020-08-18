@@ -144,10 +144,10 @@ enum LayoutSide: CaseIterable {
                 .constraint(equalTo: other.leadingAnchor, constant: constant)
         case .trailing:
             return constrainable.trailingAnchor
-                .constraint(equalTo: other.trailingAnchor, constant: constant)
+                .constraint(equalTo: other.trailingAnchor, constant: -constant)
         case .bottom:
             return constrainable.bottomAnchor
-                .constraint(equalTo: other.bottomAnchor, constant: constant)
+                .constraint(equalTo: other.bottomAnchor, constant: -constant)
         }
     }
 }
