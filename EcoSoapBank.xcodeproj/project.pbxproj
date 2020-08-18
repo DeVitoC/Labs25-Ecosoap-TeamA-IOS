@@ -119,7 +119,6 @@
 		99B5790324E30F140097957D /* PickupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5790224E30F140097957D /* PickupTests.swift */; };
 		99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175A24EAF0A20099664B /* NewPickupViewController.swift */; };
 		99B6175D24EAF0C70099664B /* NewPickupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */; };
-		99B6175F24EAF1830099664B /* NewPickupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99B6175E24EAF1830099664B /* NewPickupViewController.storyboard */; };
 		99B6176124EB0C4E0099664B /* PickupCartonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176024EB0C4E0099664B /* PickupCartonCell.swift */; };
 		99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176424EB256D0099664B /* NewCartonViewModel.swift */; };
 		99B6176724EB25B40099664B /* PickupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176624EB25B40099664B /* PickupDetailView.swift */; };
@@ -234,7 +233,6 @@
 		99B5790224E30F140097957D /* PickupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupTests.swift; sourceTree = "<group>"; };
 		99B6175A24EAF0A20099664B /* NewPickupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupViewController.swift; sourceTree = "<group>"; };
 		99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupViewModel.swift; sourceTree = "<group>"; };
-		99B6175E24EAF1830099664B /* NewPickupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewPickupViewController.storyboard; sourceTree = "<group>"; };
 		99B6176024EB0C4E0099664B /* PickupCartonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCartonCell.swift; sourceTree = "<group>"; };
 		99B6176424EB256D0099664B /* NewCartonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCartonViewModel.swift; sourceTree = "<group>"; };
 		99B6176624EB25B40099664B /* PickupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupDetailView.swift; sourceTree = "<group>"; };
@@ -489,7 +487,6 @@
 				99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */,
 				99B6176024EB0C4E0099664B /* PickupCartonCell.swift */,
 				99B6176424EB256D0099664B /* NewCartonViewModel.swift */,
-				99B6175E24EAF1830099664B /* NewPickupViewController.storyboard */,
 			);
 			path = Pickups;
 			sourceTree = "<group>";
@@ -636,7 +633,6 @@
 				041E1E4B24E1EA920052831D /* SIL Open Font License.txt in Resources */,
 				049379A924EB25600084051B /* Images.xcassets in Resources */,
 				041E1E7B24E1EA970052831D /* Muli-BoldItalic.ttf in Resources */,
-				99B6175F24EAF1830099664B /* NewPickupViewController.storyboard in Resources */,
 				041E1E5D24E1EA920052831D /* Montserrat-ExtraBoldItalic.otf in Resources */,
 				46BEB4F124C98F0D00FE0CD1 /* Profiles.storyboard in Resources */,
 				041E1E6324E1EA920052831D /* Montserrat-ExtraBold.otf in Resources */,
