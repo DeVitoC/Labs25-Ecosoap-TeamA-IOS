@@ -11,7 +11,7 @@ import SwiftUI
 import Combine
 
 
-class NewPickupViewController: UIViewController {
+class NewPickupViewController: FormViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, NewCartonViewModel>
 
     private var viewModel: NewPickupViewModel
@@ -97,19 +97,19 @@ extension NewPickupViewController {
         view.backgroundColor = .secondarySystemBackground
 
         // add subviews, basic constraints, `tamic`
-        view.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading], constant: 20)
-        view.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top], constant: 20)
-        view.constrainNewSubview(tableView, to: [.leading, .trailing])
-        view.constrainNewSubviewToSafeArea(dateLabel, sides: [.leading, .trailing], constant: 20)
-        view.constrainNewSubview(datePicker, to: [.leading, .trailing])
-        view.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
-        view.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
-        view.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom], constant: 20)
+        contentView.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading], constant: 20)
+        contentView.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top], constant: 20)
+        contentView.constrainNewSubview(tableView, to: [.leading, .trailing])
+        contentView.constrainNewSubviewToSafeArea(dateLabel, sides: [.leading, .trailing], constant: 20)
+        contentView.constrainNewSubview(datePicker, to: [.leading, .trailing])
+        contentView.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
+        contentView.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
+        contentView.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom], constant: 20)
 
         // remaining constraints
         NSLayoutConstraint.activate([
             addCartonButton.leadingAnchor.constraint(greaterThanOrEqualTo: cartonsLabel.trailingAnchor, constant: 8),
-            addCartonButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            addCartonButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             addCartonButton.widthAnchor.constraint(equalToConstant: 40),
             addCartonButton.heightAnchor.constraint(equalToConstant: 30),
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
@@ -121,7 +121,7 @@ extension NewPickupViewController {
             notesView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 8),
             notesView.heightAnchor.constraint(greaterThanOrEqualToConstant: 150),
             scheduleButton.topAnchor.constraint(equalTo: notesView.bottomAnchor, constant: 20),
-            scheduleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scheduleButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
 
         tableView.dataSource = dataSource
