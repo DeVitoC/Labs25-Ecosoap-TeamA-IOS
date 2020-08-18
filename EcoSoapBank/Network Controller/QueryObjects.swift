@@ -30,10 +30,6 @@ enum QueryObjects {
     password
     phone
     skype
-    address {
-        \(address)
-    }
-    signupTime
     properties {
         \(property)
     }
