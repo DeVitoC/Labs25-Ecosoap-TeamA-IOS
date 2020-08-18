@@ -15,18 +15,4 @@ struct ImpactStats: Decodable {
     let paperRecycled: Int?
     let peopleServed: Int?
     let womenEmployed: Int?
-
-    init(soapRecycled: Int? = nil,
-         bottlesRecycled: Int? = nil,
-         linensRecycled: Int? = nil,
-         paperRecycled: Int? = nil,
-         peopleServed: Int? = nil,
-         womenEmployed: Int? = nil) {
-        self.soapRecycled = soapRecycled
-        self.bottlesRecycled = bottlesRecycled
-        self.linensRecycled = linensRecycled
-        self.paperRecycled = paperRecycled
-        self.peopleServed = peopleServed
-        self.womenEmployed = womenEmployed
-    }
 }
