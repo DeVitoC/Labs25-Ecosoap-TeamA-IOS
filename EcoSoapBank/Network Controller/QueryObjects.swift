@@ -50,7 +50,6 @@ enum QueryObjects {
     // Property and Pickup have a possible circular reference
     // Permanently removed contract from Property.
     // Permanently removed pickups from Property.
-
     static let property = """
     id
     name
