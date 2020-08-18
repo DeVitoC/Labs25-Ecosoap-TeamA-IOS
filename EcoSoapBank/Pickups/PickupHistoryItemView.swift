@@ -76,28 +76,6 @@ extension PickupHistoryListItem {
     }
 }
 
-// MARK: - Detail View
-
-struct PickupDetailView: View {
-    let pickup: Pickup
-
-    var body: some View {
-        ZStack {
-            Color(.esbGreen)
-                .edgesIgnoringSafeArea(.all)
-            Color(.systemGroupedBackground)
-                .edgesIgnoringSafeArea([.leading, .trailing])
-            VStack {
-                Text("Placeholder")
-                pickup.cartons
-                    .compactMap { $0.display }
-                    .uiText(separatedBy: ", ")
-            }
-        }
-        .navigationBarTitle("Pickup Details")
-    }
-}
-
 
 // MARK: - Previews
 
