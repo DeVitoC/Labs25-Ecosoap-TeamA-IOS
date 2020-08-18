@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 
 class PickupCoordinator: FlowCoordinator {
@@ -16,8 +17,19 @@ class PickupCoordinator: FlowCoordinator {
     private(set) lazy var rootVC: UIViewController = UIHostingController(
         rootView: PickupsView(pickupController: pickupController))
 
+    private var cancellables = Set<AnyCancellable>()
+
     init(pickupController: PickupController) {
         self.pickupController = pickupController
+
+        pickupController.pickupScheduleResult
+            .handleError(handleError(_:))
+            .sink(receiveValue: handlePickupScheduleResult(_:))
+            .store(in: &cancellables)
+
+        pickupController.presentNewPickup
+            .sink(receiveValue: presentNewPickupView)
+            .store(in: &cancellables)
     }
 
     convenience init() {
@@ -34,5 +46,65 @@ class PickupCoordinator: FlowCoordinator {
                     pointSize: 22,
                     weight: .regular)),
             tag: 1)
+    }
+}
+
+// MARK: - Event handlers
+
+extension PickupCoordinator {
+    private func presentNewPickupView() {
+        let newPickupVC = configure(NewPickupViewController(
+            viewModel: pickupController.newPickupViewModel)) {
+                let cancel = UIBarButtonItem(
+                    barButtonSystemItem: .cancel,
+                    target: self,
+                    action: #selector(cancelNewPickup(_:)))
+                cancel.tintColor = UIColor.codGrey
+                $0.navigationItem.setLeftBarButton(cancel, animated: false)
+                $0.title = "Schedule New Pickup"
+        }
+        let navVC = configure(
+            UINavigationController(rootViewController: newPickupVC),
+            with: {
+                $0.modalPresentationStyle = .fullScreen
+        })
+        rootVC.present(navVC, animated: true, completion: nil)
+    }
+
+    @objc private func cancelNewPickup(_ sender: Any) {
+        rootVC.dismiss(animated: true, completion: nil)
+    }
+
+    private func handleError(_ error: Error) {
+        print(error)
+        // TODO: handle errors
+    }
+
+    private func handlePickupScheduleResult(_ pickupResult: Pickup.ScheduleResult) {
+        let alert = successAlert(for: pickupResult)
+        rootVC.dismiss(animated: true) { [weak rootVC] in
+            rootVC?.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    private func successAlert(for pickupResult: Pickup.ScheduleResult) -> UIAlertController {
+        let alert = UIAlertController(
+            title: "Success!",
+            message: "Your pickup has been scheduled. You may now view/print your shipping label.",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(
+            title: "Later",
+            style: .default,
+            handler: nil))
+        alert.addAction(UIAlertAction(
+            title: "View Shipping Label",
+            style: .default,
+            handler: { _ in
+                UIApplication.shared.open(
+                    pickupResult.labelURL,
+                    options: [:],
+                    completionHandler: nil)
+        }))
+        return alert
     }
 }
