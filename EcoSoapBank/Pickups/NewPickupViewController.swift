@@ -35,7 +35,11 @@ class NewPickupViewController: UIViewController {
         tableView: tableView,
         cellProvider: cell(for:at:with:))
     private lazy var addCartonButton = configure(UIButton()) {
-        $0.setImage(.add, for: .normal)
+        $0.setImage(UIImage.addBoxSymbol.withTintColor(.white), for: .normal) // TODO: replace with simple + button
+        $0.tintColor = .white
+        $0.imageView?.contentMode = .scaleAspectFit
+        $0.layer.cornerRadius = 5
+        $0.backgroundColor = .esbGreen
         $0.addTarget(self, action: #selector(addCarton), for: .touchUpInside)
         $0.contentEdgeInsets = configure(UIEdgeInsets(), with: { ei in
             ei.top = 4
@@ -62,6 +66,9 @@ class NewPickupViewController: UIViewController {
             ei.right = 8
             ei.bottom = 8
         })
+        $0.addTarget(self,
+                     action: #selector(schedulePickup),
+                     for: .touchUpInside)
     }
 
     // MARK: - Init / Lifecycle
@@ -79,16 +86,11 @@ class NewPickupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
-
-        // subscribe to view model cartons, update data source on change
-        viewModel.$cartons
-            .sink(receiveValue: updateDataSource(with:))
-            .store(in: &cancellables)
-        updateDataSource(with: viewModel.cartons)
+        bindToViewModel()
     }
 }
 
-// MARK: - View Setup / Update
+// MARK: - Setup / Update
 
 extension NewPickupViewController {
     private func setUpViews() {
@@ -108,7 +110,10 @@ extension NewPickupViewController {
         NSLayoutConstraint.activate([
             addCartonButton.leadingAnchor.constraint(greaterThanOrEqualTo: cartonsLabel.trailingAnchor, constant: 8),
             addCartonButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            addCartonButton.widthAnchor.constraint(equalToConstant: 40),
+            addCartonButton.heightAnchor.constraint(equalToConstant: 30),
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
+            tableView.topAnchor.constraint(equalTo: addCartonButton.bottomAnchor, constant: 8),
             tableViewHeight,
             dateLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
             datePicker.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
@@ -120,6 +125,20 @@ extension NewPickupViewController {
         ])
 
         tableView.dataSource = dataSource
+    }
+
+    private func bindToViewModel() {
+        notesView.text = viewModel.notes
+        datePicker.date = viewModel.readyDate
+        datePicker.addTarget(self,
+                             action: #selector(setReadyDate(_:)),
+                             for: .valueChanged)
+
+        // subscribe to view model cartons, update data source on change
+        viewModel.$cartons
+            .sink(receiveValue: updateDataSource(with:))
+            .store(in: &cancellables)
+        updateDataSource(with: viewModel.cartons)
     }
 
     private func configureSectionLabel(titled title: String) -> UILabel {
@@ -165,18 +184,26 @@ extension NewPickupViewController {
 // MARK: - Actions
 
 extension NewPickupViewController {
-    @objc private func addCarton() {
+    @objc private func addCarton(_ sender: Any) {
         viewModel.addCarton()
     }
 
-    @objc private func schedulePickup() {
+    @objc private func schedulePickup(_ sender: Any) {
         viewModel.schedulePickup()
+    }
+
+    @objc private func setReadyDate(_ sender: UIDatePicker) {
+        viewModel.readyDate = sender.date
     }
 }
 
 // MARK: - Delegates
 
-extension NewPickupViewController: UITextViewDelegate {}
+extension NewPickupViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        viewModel.notes = textView.text
+    }
+}
 
 extension NewPickupViewController: UITableViewDelegate {
     func tableView(
