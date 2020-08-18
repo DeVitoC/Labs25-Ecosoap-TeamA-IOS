@@ -10,6 +10,7 @@ import Combine
 
 
 extension Publisher {
+    /// Handles the error case of a publisher and passes on a type-erased Publisher that never fails.
     func handleError(_ handle: @escaping (Error) -> Void) -> AnyPublisher<Output, Never> {
         self.handleEvents(
             receiveSubscription: nil,
