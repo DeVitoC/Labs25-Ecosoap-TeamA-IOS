@@ -12,17 +12,29 @@ import UIKit
 class LoginCoordinator: FlowCoordinator {
     private var rootVC: UIViewController
 
-    private var loginVC = UIStoryboard.main.instantiateViewController(
+    private lazy var loginVC = UIStoryboard.main.instantiateViewController(
         identifier: LoginViewController.storyboardID) { coder in
-            LoginViewController(coder: coder)
+            LoginViewController(coder: coder, delegate: self)
     }
 
     init(root: UIViewController) {
         self.rootVC = root
-        rootVC.modalPresentationStyle = .fullScreen
+        loginVC.modalPresentationStyle = .fullScreen
     }
 
     func start() {
         rootVC.present(loginVC, animated: true, completion: nil)
+    }
+}
+
+
+extension LoginCoordinator: LoginViewControllerDelegate {
+    func loginDidFinish(_ success: Bool) {
+        if success {
+            rootVC.dismiss(animated: true, completion: nil)
+        } else {
+            print("login failed!")
+            // TODO: show alert that login failed
+        }
     }
 }

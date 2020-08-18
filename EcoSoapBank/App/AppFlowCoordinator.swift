@@ -53,5 +53,9 @@ class AppFlowCoordinator: FlowCoordinator {
         // set up window and make visible
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
+
+        if ProfileController.shared.authenticatedUserProfile == nil {
+            loginCoord.start()
+        }
     }
 }
