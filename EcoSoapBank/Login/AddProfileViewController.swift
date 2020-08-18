@@ -45,27 +45,7 @@ class AddProfileViewController: UIViewController {
     }
     
     @IBAction func addProfile(_ sender: Any) {
-        
-        guard let name = nameTextField.text,
-            let email = emailTextField.text,
-            let avatarURLString = avatarURLTextField.text,
-            let avatarURL = URL(string: avatarURLString),
-            let profile = profileController.createProfile(with: email, name: name, avatarURL: avatarURL) else {
-                NSLog("Fields missing information. Present alert to notify user to enter all information.")
-                return
-        }
-        
-        activityIndicator.startAnimating()
-        
-        profileController.addProfile(profile) { [weak self] in
-            
-            guard let self = self else { return }
-            
-            self.activityIndicator.stopAnimating()
-            self.dismiss(animated: true, completion: {
-                self.delegate?.profileWasAdded()
-            })
-        }
+        NSLog("removed 2020-08-18")
     }
     
     // MARK: - Private Methods

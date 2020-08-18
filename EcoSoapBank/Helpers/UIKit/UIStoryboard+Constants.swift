@@ -12,3 +12,7 @@ import UIKit
 extension UIStoryboard {
     static let main = UIStoryboard(name: "Main", bundle: nil)
 }
+
+extension UIViewController {
+    static var storyboardID: String { String(describing: Self.self) }
+}

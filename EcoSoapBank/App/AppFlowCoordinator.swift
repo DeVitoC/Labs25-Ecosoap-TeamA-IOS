@@ -16,6 +16,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private(set) lazy var impactCoord = ImpactCoordinator()
     private(set) lazy var pickupCoord = PickupCoordinator()
+    private(set) lazy var loginCoord = LoginCoordinator(root: tabBarController)
 
     init(window: UIWindow) {
         self.window = window
@@ -52,5 +53,9 @@ class AppFlowCoordinator: FlowCoordinator {
         // set up window and make visible
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
+
+        if ProfileController.shared.authenticatedUserProfile == nil {
+            loginCoord.start()
+        }
     }
 }

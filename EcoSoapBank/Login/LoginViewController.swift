@@ -9,12 +9,26 @@
 import UIKit
 import OktaAuth
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func loginDidFinish(_ success: Bool)
+}
+
 class LoginViewController: UIViewController {
-    
     let profileController = ProfileController.shared
 
+    weak var delegate: LoginViewControllerDelegate?
+
     var observers: [NSObjectProtocol] = []
-    
+
+    init?(coder: NSCoder, delegate: LoginViewControllerDelegate) {
+        super.init(coder: coder)
+        self.delegate = delegate
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,16 +76,8 @@ class LoginViewController: UIViewController {
     }
     
     private func checkForExistingProfile() {
-        profileController.checkForExistingAuthenticatedUserProfile { [weak self] exists in
-            
-            guard let self = self,
-                self.presentedViewController == nil else { return }
-            
-            if exists {
-                self.performSegue(withIdentifier: "ShowDetailProfileList", sender: nil)
-            } else {
-                self.performSegue(withIdentifier: "ModalAddProfile", sender: nil)
-            }
+        profileController.checkForExistingAuthenticatedUserProfile { [weak delegate] exists in
+            delegate?.loginDidFinish(exists)
         }
     }
     
