@@ -21,9 +21,13 @@ class PickupCoordinator: FlowCoordinator {
 
     init(pickupController: PickupController) {
         self.pickupController = pickupController
+
         pickupController.pickupScheduleResult
             .handleError(handleError(_:))
             .sink(receiveValue: handlePickupScheduleResult(_:))
+            .store(in: &cancellables)
+        pickupController.presentNewPickup
+            .sink(receiveValue: presentNewPickupView)
             .store(in: &cancellables)
     }
 
@@ -42,6 +46,20 @@ class PickupCoordinator: FlowCoordinator {
                     weight: .regular)),
             tag: 1)
     }
+}
+
+// MARK: - Event handlers
+
+extension PickupCoordinator {
+    private func presentNewPickupView() {
+        rootVC.present(
+            configure(NewPickupViewController(
+                viewModel: pickupController.newPickupViewModel), with: {
+                    $0.modalPresentationStyle = .fullScreen
+            }),
+            animated: true,
+            completion: nil)
+    }
 
     private func handleError(_ error: Error) {
         print(error)
@@ -49,7 +67,30 @@ class PickupCoordinator: FlowCoordinator {
     }
 
     private func handlePickupScheduleResult(_ pickupResult: Pickup.ScheduleResult) {
-        print(pickupResult)
-        // TODO: handle new pickup result
+        let alert = successAlert(for: pickupResult)
+        rootVC.dismiss(animated: true) { [weak rootVC] in
+            rootVC?.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    private func successAlert(for pickupResult: Pickup.ScheduleResult) -> UIAlertController {
+        let alert = UIAlertController(
+            title: "Success!",
+            message: "Your pickup has been scheduled. You may now view/print your shipping label.",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(
+            title: "Later",
+            style: .default,
+            handler: nil))
+        alert.addAction(UIAlertAction(
+            title: "View Shipping Label",
+            style: .default,
+            handler: { _ in
+                UIApplication.shared.open(
+                    pickupResult.labelURL,
+                    options: [:],
+                    completionHandler: nil)
+        }))
+        return alert
     }
 }

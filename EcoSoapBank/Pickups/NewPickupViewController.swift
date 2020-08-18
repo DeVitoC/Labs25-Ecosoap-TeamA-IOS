@@ -11,7 +11,7 @@ import SwiftUI
 import Combine
 
 
-class NewPickupViewController: FormViewController {
+class NewPickupViewController: KeyboardHandlingViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, NewCartonViewModel>
 
     private var viewModel: NewPickupViewModel
@@ -171,12 +171,15 @@ extension NewPickupViewController {
             $0.appendItems(cartons, toSection: 0)
         }
         dataSource.apply(snapshot)
-        UIView.animate(withDuration: 0.2) { [unowned tableViewHeight, unowned tableView] in
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            defer { self.view.layoutIfNeeded() }
             guard !cartons.isEmpty else {
-                tableViewHeight.constant = 0
+                self.tableViewHeight.constant = 0
                 return
             }
-            tableViewHeight.constant = tableView.contentSize.height - CGFloat(cartons.count * 6)
+            self.tableViewHeight.constant =
+                self.tableView.contentSize.height
+                - CGFloat(cartons.count * 8)
         }
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 
 struct PickupsView: View {
@@ -21,13 +22,12 @@ struct PickupsView: View {
     var body: some View {
         NavigationView {
             PickupHistoryView(pickupController: pickupController)
-                .navigationBarTitle("Pickup History", displayMode: .automatic)
+                .navigationBarTitle("Pickup History", displayMode: .inline)
                 .navigationBarItems(trailing: Button(
-                    action: { self.makingNewPickup = true },
+                    action: newPickup,
                     label: newPickupButton)
             )
-        }.sheet(isPresented: $makingNewPickup,
-                content: presentNewPickupView)
+        }
     }
 
     private func newPickupButton() -> some View {
@@ -58,6 +58,10 @@ struct PickupsView: View {
     private func presentNewPickupView() -> some View {
         NewPickupViewController.Representable(
             viewModel: pickupController.newPickupViewModel)
+    }
+
+    private func newPickup() {
+        pickupController.presentNewPickup.send()
     }
 }
 

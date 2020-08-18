@@ -24,6 +24,9 @@ class PickupController: ObservableObject {
     @Published private(set) var pickups: [Pickup] = []
     @Published private(set) var error: Error?
 
+    /// Signals to subscriber (`PickupCoordinator`) that the new pickup view should be shown.
+    var presentNewPickup = PassthroughSubject<Void, Never>()
+
     /// A view model for use with new pickup views.
     ///
     /// The PickupController holds a reference to the view model for later reuse and/or for use with SwiftUI
