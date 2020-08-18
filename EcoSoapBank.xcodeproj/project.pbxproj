@@ -126,6 +126,7 @@
 		99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177024EC3D000099664B /* Publisher+HandleError.swift */; };
 		E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220C32624E35E59003FF32D /* GraphQLQueries.swift */; };
 		E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */; };
+		E2AEB12624E7460600C42ACD /* mockImpactStatsFailure.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */; };
 		E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */; };
 		E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B324E45BF800C5DF8B /* QueryObjects.swift */; };
 		E2D302ED24E5B260008A6FAF /* mockImpactStatsByPropertyId.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */; };
@@ -242,6 +243,7 @@
 		99B6177024EC3D000099664B /* Publisher+HandleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+HandleError.swift"; sourceTree = "<group>"; };
 		E220C32624E35E59003FF32D /* GraphQLQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueries.swift; sourceTree = "<group>"; };
 		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
+		E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsFailure.json; sourceTree = "<group>"; };
 		E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLMutations.swift; sourceTree = "<group>"; };
 		E2B961B324E45BF800C5DF8B /* QueryObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryObjects.swift; sourceTree = "<group>"; };
 		E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsByPropertyId.json; sourceTree = "<group>"; };
@@ -381,8 +383,6 @@
 				04D1758E24E41DF500F8929C /* Custom Views */,
 				466C4281249A8749007D033E /* Info.plist */,
 				466C4287249A889F007D033E /* File Organization.md */,
-				E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */,
-				E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */,
 			);
 			path = EcoSoapBank;
 			sourceTree = "<group>";
@@ -507,6 +507,7 @@
 		994E4B7F24DDB67000C12921 /* EcoSoapBankTests */ = {
 			isa = PBXGroup;
 			children = (
+				E2AEB12324E736E300C42ACD /* Mock Data */,
 				99B5790224E30F140097957D /* PickupTests.swift */,
 				994E4B8824DDB68700C12921 /* UtilityTests.swift */,
 				041E1E8724E1F3890052831D /* FontTests.swift */,
@@ -538,6 +539,16 @@
 				E2B961B324E45BF800C5DF8B /* QueryObjects.swift */,
 			);
 			path = "Network Controller";
+			sourceTree = "<group>";
+		};
+		E2AEB12324E736E300C42ACD /* Mock Data */ = {
+			isa = PBXGroup;
+			children = (
+				E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */,
+				E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */,
+				E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */,
+			);
+			path = "Mock Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -659,6 +670,7 @@
 				041E1E8224E1EA970052831D /* Muli.ttf in Resources */,
 				041E1E7E24E1EA970052831D /* Muli-Bold.ttf in Resources */,
 				041E1E5124E1EA920052831D /* Montserrat-ThinItalic.otf in Resources */,
+				E2AEB12624E7460600C42ACD /* mockImpactStatsFailure.json in Resources */,
 				041E1E7D24E1EA970052831D /* Muli-Semi-BoldItalic.ttf in Resources */,
 				041E1E5C24E1EA920052831D /* Montserrat-SemiBoldItalic.otf in Resources */,
 				041E1E8024E1EA970052831D /* Muli-SemiBold.ttf in Resources */,

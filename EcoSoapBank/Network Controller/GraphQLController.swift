@@ -36,44 +36,16 @@ class GraphQLController {
 
     /// Method for GraphQL query requests
     /// - Parameters:
-    ///   - query: The intended query in string format
-    ///   - completion: Completion handler that passes back a Result of type Profile or Error
     ///   - type: The Model Type for the JSON Decoder to decode
-    func queryRequest<T: Decodable>(_ type: T.Type,
-                                  query: String,
-                                  completion: @escaping (Result<T, Error>) -> Void) {
-        // Add body to query request
-        let body: [String: String] = ["query": query]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
-
-        session.loadData(with: request) { data, _, error in
-            if let error = error {
-                NSLog("\(error)")
-                completion(.failure(error))
-                return
-            }
-
-            guard let data = data else {
-                NSLog("Data is nil")
-                return
-            }
-
-            completion(self.decodeJSON(type, data: data))
-        }
-    }
-
-    /// Method for GraphQL mutation requests
-    /// - Parameters:
-    ///   - mutationQuery: The intended mutation query in string format
+    ///   - query: The intended query in string format
     ///   - variables: The variables to be passed in the request
     ///   - completion: Completion handler that passes back a Result of type Profile or Error
-    ///   - type: The Model Type for the JSON Decoder to decode
-    func mutationRequest<T: Decodable>(_ type: T.Type,
-                         mutationQuery: String,
-                         variables: [Any] = [],
-                         completion: @escaping (Result<T, Error>) -> Void) {
-        // Add body to mutate request
-        let body: [String: Any] = ["mutation": mutationQuery, "variables": variables]
+    func queryRequest<T: Decodable>(_ type: T.Type,
+                                    query: String,
+                                    variables: [Any] = [],
+                                    completion: @escaping (Result<T, Error>) -> Void) {
+        // Add body to query request
+        let body: [String: Any] = ["query": query, "variables": variables]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
 
         session.loadData(with: request) { data, _, error in
@@ -101,11 +73,16 @@ class GraphQLController {
     private func decodeJSON<T: Decodable>(_ type: T.Type, data: Data) -> Result<T, Error> {
         do {
             // Decode data as ProfileQuery and pass the stored object of type Profile through completion
-            let dict = try JSONDecoder().decode([String: T].self, from: data)
-            guard let result = dict["data"] else {
-                throw GraphQLError.noData
+            guard let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                let dataDict = jsonDict["data"] as? [String: Any],
+                let firstKey = Array(dataDict.keys).first,
+                let object = dataDict[firstKey] as? [String: Any],
+                let objectData = try? JSONSerialization.data(withJSONObject: object, options: []) else {
+                    return .failure(GraphQLError.noData)
             }
-            return .success(result)
+            let dict = try JSONDecoder().decode(T.self, from: objectData)
+            
+            return .success(dict)
         } catch {
             NSLog("\(error)")
             return .failure(error)
