@@ -9,28 +9,6 @@
 import Foundation
 
 struct User: Decodable {
-    internal init(id: Int,
-                  firstName: String,
-                  middleName: String,
-                  lastName: String,
-                  title: String,
-                  company: String,
-                  email: String,
-                  phone: String,
-                  skype: String,
-                  properties: [Property]) {
-        self.id = id
-        self.firstName = firstName
-        self.middleName = middleName
-        self.lastName = lastName
-        self.title = title
-        self.company = company
-        self.email = email
-        self.phone = phone
-        self.skype = skype
-        self.properties = properties
-    }
-    
     let id: Int
     let firstName: String
     let middleName: String
