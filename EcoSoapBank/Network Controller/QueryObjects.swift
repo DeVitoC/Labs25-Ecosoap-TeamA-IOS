@@ -27,6 +27,7 @@ enum QueryObjects {
     title
     company
     email
+    password
     phone
     skype
     address {
@@ -49,18 +50,11 @@ enum QueryObjects {
     formattedAddress
     """
 
-    // Property and Contract have an unresolved circular reference - required field
-    // Property and Pickup have an unresolved circular reference - required field
-    /* temporarily removed Contract from Property. if needed put this back in after users/pickups:
-     contract {
-     \(contract)
-     }
-     */
-    /* temporarily removed Pickup from Property. if needed put this back in after users:
-     pickups {
-     \(pickup)
-     }
-     */
+    // Property and Contract have a possible circular reference
+    // Property and Pickup have a possible circular reference
+    // Permanently removed contract from Property.
+    // Permanently removed pickups from Property.
+
     static let property = """
     id
     name
@@ -119,15 +113,10 @@ enum QueryObjects {
     firstName
     lastName
     email
+    password
     phone
     """
 
-    // Pickup and Property have an unresolved circular reference
-    /* temporarily removed property from pickup. if needed put this back in after pickupDate:
-     property {
-     \(property)
-     }
-     */
     static let pickup = """
     id
     confirmationCode
@@ -135,6 +124,9 @@ enum QueryObjects {
     status
     readyDate
     pickupDate
+    property {
+        \(property)
+    }
     cartons {
         \(carton)
     }
