@@ -10,7 +10,7 @@
         <!--ProfileViewer-->
         <scene sceneID="6M8-Hn-aJP">
             <objects>
-                <viewController id="4a7-cC-Xlp" customClass="LoginViewController" customModule="EcoSoapBank" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="4a7-cC-Xlp" customClass="LoginViewController" customModule="EcoSoapBank" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="INU-fS-Snd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
