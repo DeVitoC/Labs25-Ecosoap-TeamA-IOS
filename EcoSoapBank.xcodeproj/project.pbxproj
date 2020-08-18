@@ -104,10 +104,8 @@
 		994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* UtilityFunctions.swift */; };
 		994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8824DDB68700C12921 /* UtilityTests.swift */; };
 		99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */; };
-		997BF11024E1FA1E00A643D8 /* NewPickupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BF10F24E1FA1E00A643D8 /* NewPickupView.swift */; };
 		997BF11224E20AAE00A643D8 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BF11124E20AAE00A643D8 /* TextView.swift */; };
 		9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874724E33A0600450244 /* MockPickupProvider.swift */; };
-		9983874A24E34C5E00450244 /* CartonSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874924E34C5E00450244 /* CartonSummaryView.swift */; };
 		9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874B24E4657C00450244 /* KeyboardAvoiding.swift */; };
 		9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874D24E4658600450244 /* KeyboardDismissing.swift */; };
 		998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */; };
@@ -119,6 +117,11 @@
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
 		9998716424E1E8C4000A993E /* PickupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9998716324E1E8C4000A993E /* PickupsView.swift */; };
 		99B5790324E30F140097957D /* PickupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5790224E30F140097957D /* PickupTests.swift */; };
+		99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175A24EAF0A20099664B /* NewPickupViewController.swift */; };
+		99B6175D24EAF0C70099664B /* NewPickupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */; };
+		99B6176124EB0C4E0099664B /* PickupCartonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176024EB0C4E0099664B /* PickupCartonCell.swift */; };
+		99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176424EB256D0099664B /* NewCartonViewModel.swift */; };
+		99B6176724EB25B40099664B /* PickupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176624EB25B40099664B /* PickupDetailView.swift */; };
 		E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220C32624E35E59003FF32D /* GraphQLQueries.swift */; };
 		E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */; };
 		E2AEB12624E7460600C42ACD /* mockImpactStatsFailure.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */; };
@@ -216,10 +219,8 @@
 		994E4B8224DDB67000C12921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		994E4B8824DDB68700C12921 /* UtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityTests.swift; sourceTree = "<group>"; };
 		99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBackgroundColor.swift; sourceTree = "<group>"; };
-		997BF10F24E1FA1E00A643D8 /* NewPickupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupView.swift; sourceTree = "<group>"; };
 		997BF11124E20AAE00A643D8 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		9983874724E33A0600450244 /* MockPickupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPickupProvider.swift; sourceTree = "<group>"; };
-		9983874924E34C5E00450244 /* CartonSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartonSummaryView.swift; sourceTree = "<group>"; };
 		9983874B24E4657C00450244 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
 		9983874D24E4658600450244 /* KeyboardDismissing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDismissing.swift; sourceTree = "<group>"; };
 		998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryView.swift; sourceTree = "<group>"; };
@@ -231,6 +232,11 @@
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
 		9998716324E1E8C4000A993E /* PickupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupsView.swift; sourceTree = "<group>"; };
 		99B5790224E30F140097957D /* PickupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupTests.swift; sourceTree = "<group>"; };
+		99B6175A24EAF0A20099664B /* NewPickupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupViewController.swift; sourceTree = "<group>"; };
+		99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupViewModel.swift; sourceTree = "<group>"; };
+		99B6176024EB0C4E0099664B /* PickupCartonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCartonCell.swift; sourceTree = "<group>"; };
+		99B6176424EB256D0099664B /* NewCartonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCartonViewModel.swift; sourceTree = "<group>"; };
+		99B6176624EB25B40099664B /* PickupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupDetailView.swift; sourceTree = "<group>"; };
 		E220C32624E35E59003FF32D /* GraphQLQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueries.swift; sourceTree = "<group>"; };
 		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
 		E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsFailure.json; sourceTree = "<group>"; };
@@ -476,8 +482,11 @@
 				9998716324E1E8C4000A993E /* PickupsView.swift */,
 				998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */,
 				998913D424DE0907009ADBC1 /* PickupHistoryItemView.swift */,
-				997BF10F24E1FA1E00A643D8 /* NewPickupView.swift */,
-				9983874924E34C5E00450244 /* CartonSummaryView.swift */,
+				99B6176624EB25B40099664B /* PickupDetailView.swift */,
+				99B6175A24EAF0A20099664B /* NewPickupViewController.swift */,
+				99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */,
+				99B6176024EB0C4E0099664B /* PickupCartonCell.swift */,
+				99B6176424EB256D0099664B /* NewCartonViewModel.swift */,
 			);
 			path = Pickups;
 			sourceTree = "<group>";
@@ -728,6 +737,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
+				99B6176124EB0C4E0099664B /* PickupCartonCell.swift in Sources */,
 				46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */,
 				9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */,
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
@@ -740,17 +750,17 @@
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
 				04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
-				997BF11024E1FA1E00A643D8 /* NewPickupView.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
+				99B6175D24EAF0C70099664B /* NewPickupViewModel.swift in Sources */,
 				998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
 				990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */,
 				04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */,
 				04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */,
-				9983874A24E34C5E00450244 /* CartonSummaryView.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
+				99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
 				998913D524DE0907009ADBC1 /* PickupHistoryItemView.swift in Sources */,
 				998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */,
@@ -758,6 +768,7 @@
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				E2D302F524E5CA32008A6FAF /* User.swift in Sources */,
 				46BEB4E924C98DAF00FE0CD1 /* ProfileListViewController.swift in Sources */,
+				99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */,
 				9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */,
 				997BF11224E20AAE00A643D8 /* TextView.swift in Sources */,
 				9998716424E1E8C4000A993E /* PickupsView.swift in Sources */,
@@ -770,6 +781,7 @@
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
 				99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */,
 				04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */,
+				99B6176724EB25B40099664B /* PickupDetailView.swift in Sources */,
 				04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
 				E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */,

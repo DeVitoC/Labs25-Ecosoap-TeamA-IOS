@@ -92,8 +92,8 @@ extension Pickup: Decodable {
     }
 
     struct CartonContents: Hashable, Identifiable, Decodable {
-        let product: HospitalityService
-        let weight: Int
+        var product: HospitalityService
+        var weight: Int
 
         var id: Int { self.hashValue }
     }
