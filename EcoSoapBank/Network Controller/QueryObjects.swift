@@ -115,4 +115,9 @@ enum QueryObjects {
     product
     weight
     """
+
+    static let successPayload = """
+    success
+    error
+    """
 }
