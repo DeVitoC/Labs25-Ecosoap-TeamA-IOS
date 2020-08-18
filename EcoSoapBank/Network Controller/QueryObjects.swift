@@ -60,26 +60,8 @@ enum QueryObjects {
     collectionType
     logo
     phone
-    billingAddress {
-        \(address)
-    }
-    shippingAddress {
-        \(address)
-    }
-    coordinates {
-        \(coordinates)
-    }
     shippingNote
     notes
-    hub {
-        \(hub)
-    }
-    impact {
-        \(impactStats)
-    }
-    users {
-        \(userWithOnlyRequiredFields)
-    }
     """
 
     static let coordinates = """
