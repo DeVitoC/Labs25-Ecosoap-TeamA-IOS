@@ -23,7 +23,17 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let button = ESBButton()
+        button.setTitle("SIGN IN WITH OKTA", for: .normal)
+        button.addTarget(self, action: #selector(signIn(_:)), for: .touchUpInside)
         
+        view.addSubviewsUsingAutolayout(button)
+        
+        button.centerVerticallyInSuperview(multiplier: 1.7)
+        button.constrain(with: [
+            LayoutSide.leading.constraint(from: button, to: view, constant: 20),
+            LayoutSide.trailing.constraint(from: button, to: view, constant: 20)
+        ])
     }
     
     init(delegate: LoginViewControllerDelegate) {
@@ -37,7 +47,25 @@ class LoginViewController: UIViewController {
     
     // MARK: - Actions
     
-    @objc func signIn(_ sender: Any) {
+    @objc func signIn(_ sender: UIButton) {
         delegate?.login()
+    }
+}
+
+class ESBButton: UIButton {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setUp()
+    }
+    
+    private func setUp() {
+        backgroundColor = .white
+        setTitleColor(.esbGreen, for: .normal)
+        
     }
 }
