@@ -15,19 +15,29 @@ protocol LoginViewControllerDelegate: AnyObject {
 
 class LoginViewController: UIViewController {
     weak var delegate: LoginViewControllerDelegate?
-
-    init?(coder: NSCoder, delegate: LoginViewControllerDelegate) {
-        super.init(coder: coder)
+    
+    override func loadView() {
+        view = BackgroundView()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
+    
+    init(delegate: LoginViewControllerDelegate) {
+        super.init(nibName: nil, bundle: nil)
         self.delegate = delegate
     }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    
+    @available(*, unavailable) required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Actions
     
-    @IBAction func signIn(_ sender: Any) {
+    @objc func signIn(_ sender: Any) {
         delegate?.login()
     }
 }
