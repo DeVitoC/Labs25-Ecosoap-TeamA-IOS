@@ -18,8 +18,14 @@ class ImpactViewController: UIViewController {
     
     private var impactController = ImpactController(dataProvider: MockImpactDataProvider())
     
+    var massUnitObserver: UserDefaultsObservation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        massUnitObserver = UserDefaults.$massUnit.observe { [weak self] _, _ in
+            self?.collectionView.reloadData()
+        }
         
         let background = BackgroundView()
         view.addSubviewsUsingAutolayout(background)
