@@ -82,7 +82,18 @@ extension Pickup {
             confirmationCode: UUID().uuidString,
             cartons: input.cartons.map {
                 Pickup.Carton(id: UUID(), contents: $0)
-        })
+            },
+            property: Property(id: 4,
+                               name: "Hilton",
+                               propertyType: "GUESTHOUSE",
+                               rooms: 2,
+                               services: [],
+                               collectionType: "LOCAL",
+                               logo: nil,
+                               phone: nil,
+                               shippingNote: nil,
+                               notes: nil)
+        )
     }
 
     static func random() -> Self {
@@ -90,7 +101,18 @@ extension Pickup {
             base: .random(),
             id: UUID(),
             confirmationCode: UUID().uuidString,
-            cartons: .random())
+            cartons: .random(),
+            property: Property(id: 4,
+                               name: "Hilton",
+                               propertyType: "GUESTHOUSE",
+                               rooms: 2,
+                               services: [],
+                               collectionType: "LOCAL",
+                               logo: nil,
+                               phone: nil,
+                               shippingNote: nil,
+                               notes: nil)
+        )
     }
 }
 
