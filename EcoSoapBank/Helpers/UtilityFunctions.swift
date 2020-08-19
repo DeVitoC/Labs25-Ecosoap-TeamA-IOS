@@ -93,6 +93,6 @@ extension MeasurementFormatter {
 
 extension NumberFormatter {
     static var forMeasurements: NumberFormatter {
-        MeasurementFormatter.shared.numberFormatter
+        MeasurementFormatter.providedUnits.numberFormatter
     }
 }
