@@ -36,7 +36,7 @@ extension UIView {
         constant: CGFloat = 0
     ) {
         addSubview(subView)
-        subView.constrain(with: constraints(for: subView, to: sides, constant: constant))
+        subView.constrain(with: constraints(from: subView, toSides: sides, constant: constant))
     }
 
     /// Adds provided subview and activates constraints to all sides of view.
@@ -45,7 +45,7 @@ extension UIView {
     func constrainNewSubviewToSides(_ subView: UIView, constant: CGFloat = 0) {
         constrainNewSubview(
             subView,
-            with: constraints(for: subView, to: .all, constant: constant))
+            with: constraints(from: subView, toSides: .all, constant: constant))
     }
 
     /// Adds provided subview and constrains to anchors equal to provided sides (all by default).
@@ -57,8 +57,8 @@ extension UIView {
         constant: CGFloat = 0
     ) {
         let constraints = subView.constraints(
-            for: self.safeAreaLayoutGuide,
-            to: sides,
+            from: self.safeAreaLayoutGuide,
+            toSides: sides,
             constant: constant)
         constrainNewSubview(subView, with: constraints)
     }
@@ -73,7 +73,7 @@ extension UIView {
             return
         }
         
-        self.constrain(with: constraints(for: superview, to: .all, constant: 0))
+        self.constrain(with: constraints(from: superview, toSides: .all, constant: 0))
     }
     
     /// Centers a view horizontally in it's superview with specified multiplier
@@ -145,8 +145,8 @@ protocol AutoLayoutConstrainable {
 
 extension AutoLayoutConstrainable {
     func constraints(
-        for constrainable: AutoLayoutConstrainable,
-        to sides: Set<LayoutSide> = .all,
+        from constrainable: AutoLayoutConstrainable,
+        toSides sides: Set<LayoutSide> = .all,
         constant: CGFloat = 0
     ) -> [NSLayoutConstraint] {
         sides.map {

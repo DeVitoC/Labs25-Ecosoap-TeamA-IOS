@@ -40,7 +40,7 @@ class ESBButton: UIButton {
         }
 
         addSubview(backgroundView)
-        backgroundView.constrain(with: backgroundView.constraints(for: self, to: .all, constant: 6))
+        backgroundView.constrain(with: backgroundView.constraints(from: self, toSides: .all, constant: 6))
         
         setTitleColor(.esbGreen, for: .normal)
     }

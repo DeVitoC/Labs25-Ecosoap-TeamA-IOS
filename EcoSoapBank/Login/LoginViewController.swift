@@ -23,6 +23,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let logo = ESBCircularImageView(image: UIImage(named: "esbLogo")!)
+        
         let button = ESBButton()
         button.setTitle("SIGN IN WITH OKTA", for: .normal)
         button.addTarget(self, action: #selector(signIn(_:)), for: .touchUpInside)
@@ -30,10 +32,9 @@ class LoginViewController: UIViewController {
         view.addSubviewsUsingAutolayout(button)
         
         button.centerVerticallyInSuperview(multiplier: 1.7)
-        button.constrain(with: [
-            LayoutSide.leading.constraint(from: button, to: view, constant: 40),
-            LayoutSide.trailing.constraint(from: button, to: view, constant: 40)
-        ])
+        button.constrain(with: button.constraints(from: view,
+                                                  toSides: [LayoutSide.leading, LayoutSide.trailing],
+                                                  constant: 40))
     }
     
     init(delegate: LoginViewControllerDelegate) {
@@ -52,4 +53,26 @@ class LoginViewController: UIViewController {
     }
 }
 
-
+class ESBCircularImageView: UIView {
+    let imageView: UIImageView
+    
+    init(image: UIImage) {
+        self.imageView = UIImageView(image: image)
+        super.init(frame: .zero)
+        
+        setUp()
+    }
+    
+    @available(*, unavailable) required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        self.layer.cornerRadius = self.frame.size.width / 2
+    }
+    
+    func setUp() {
+        addSubview(imageView)
+        imageView.constrain(with: imageView.constraints(from: self, toSides: .all, constant: 6))
+    }
+}
