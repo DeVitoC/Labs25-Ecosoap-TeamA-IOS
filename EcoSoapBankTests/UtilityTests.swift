@@ -40,4 +40,28 @@ class UtilityTests: XCTestCase {
         XCTAssertEqual(components.hour, 8)
         XCTAssertEqual(components.minute, 56)
     }
+    
+    func testWeightStringDefaultsToLocale() {
+        UserDefaults.massUnit = nil
+        
+        let weightString = Measurement(value: 1000, unit: UnitMass.grams).string
+        
+        XCTAssertEqual(weightString, "2.2 lb")
+    }
+    
+    func testWeightIsDisplayedAsKilograms() {
+        UserDefaults.massUnit = UnitMass.kilograms.symbol
+        
+        let weightString = Measurement(value: 1000, unit: UnitMass.grams).string
+        
+        XCTAssertEqual(weightString, "1 kg")
+    }
+    
+    func testWeightIsDisplayedAsPounds() {
+        UserDefaults.massUnit = UnitMass.pounds.symbol
+        
+        let weightString = Measurement(value: 1000, unit: UnitMass.grams).string
+        
+        XCTAssertEqual(weightString, "2.2 lb")
+    }
 }
