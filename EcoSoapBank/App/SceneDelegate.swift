@@ -12,7 +12,7 @@ import OktaAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
-    var appCoordinator: FlowCoordinator?
+    var appCoordinator: AppFlowCoordinator?
 
     func scene(
         _ scene: UIScene,
@@ -27,16 +27,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        
-        guard let context = URLContexts.first else { return }
+        guard let url = URLContexts.first?.url else { return }
 
-        let url = context.url
-        ProfileController.shared.oktaAuth.receiveCredentials(fromCallbackURL: url) { result in
-            
+        appCoordinator?.oktaAuth.receiveCredentials(fromCallbackURL: url) { [weak self] result in
             let notificationName: Notification.Name
             do {
                 try result.get()
-                guard (try? ProfileController.shared.oktaAuth.credentialsIfAvailable()) != nil else { return }
+                guard (try? self?.appCoordinator?.oktaAuth.credentialsIfAvailable()) != nil
+                    else { return }
                 notificationName = .oktaAuthenticationSuccessful
             } catch {
                 notificationName = .oktaAuthenticationFailed
