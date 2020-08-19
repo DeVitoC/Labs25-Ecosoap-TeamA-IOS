@@ -72,6 +72,7 @@
 		0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04924EC648E00A0A665 /* UserDefaults.swift */; };
 		0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */; };
 		0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04D24EDD9C700A0A665 /* ESBButton.swift */; };
+		0445F05024EDEA7F00A0A665 /* ESBCircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */; };
 		049379A524EAE7140084051B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A424EAE7140084051B /* Images.swift */; };
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
@@ -181,6 +182,7 @@
 		0445F04924EC648E00A0A665 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsObservation.swift; sourceTree = "<group>"; };
 		0445F04D24EDD9C700A0A665 /* ESBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBButton.swift; sourceTree = "<group>"; };
+		0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBCircularImageView.swift; sourceTree = "<group>"; };
 		049379A424EAE7140084051B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				04D6D72B24E8444C0003A585 /* BackgroundView.swift */,
+				0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */,
 				04D1758C24E4195C00F8929C /* GradientView.swift */,
 				99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */,
 				0445F04D24EDD9C700A0A665 /* ESBButton.swift */,
@@ -760,6 +763,7 @@
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
 				998913D524DE0907009ADBC1 /* PickupHistoryItemView.swift in Sources */,
 				0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */,
+				0445F05024EDEA7F00A0A665 /* ESBCircularImageView.swift in Sources */,
 				998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */,
 				998913D724DE0C34009ADBC1 /* Property.swift in Sources */,
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,

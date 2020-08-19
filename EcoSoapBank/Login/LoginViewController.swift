@@ -23,13 +23,20 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logo = ESBCircularImageView(image: UIImage(named: "esbLogo")!)
+        let logo = ESBCircularImageView(image: UIImage(named: "esbLogoWhite")!)
+        view.addSubview(logo)
         
-        let button = ESBButton()
-        button.setTitle("SIGN IN WITH OKTA", for: .normal)
-        button.addTarget(self, action: #selector(signIn(_:)), for: .touchUpInside)
+        logo.centerHorizontallyInSuperview()
+        logo.centerVerticallyInSuperview(multiplier: 0.5)
+        logo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
         
-        view.addSubviewsUsingAutolayout(button)
+        
+        let button = configure(ESBButton()) {
+            $0.setTitle("SIGN IN WITH OKTA", for: .normal)
+            $0.addTarget(self, action: #selector(signIn(_:)), for: .touchUpInside)
+        }
+        
+        view.addSubview(button)
         
         button.centerVerticallyInSuperview(multiplier: 1.7)
         button.constrain(with: button.constraints(from: view,
@@ -50,29 +57,5 @@ class LoginViewController: UIViewController {
     
     @objc func signIn(_ sender: UIButton) {
         delegate?.login()
-    }
-}
-
-class ESBCircularImageView: UIView {
-    let imageView: UIImageView
-    
-    init(image: UIImage) {
-        self.imageView = UIImageView(image: image)
-        super.init(frame: .zero)
-        
-        setUp()
-    }
-    
-    @available(*, unavailable) required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        self.layer.cornerRadius = self.frame.size.width / 2
-    }
-    
-    func setUp() {
-        addSubview(imageView)
-        imageView.constrain(with: imageView.constraints(from: self, toSides: .all, constant: 6))
     }
 }
