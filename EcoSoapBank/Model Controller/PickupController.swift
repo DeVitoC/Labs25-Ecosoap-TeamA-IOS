@@ -24,7 +24,24 @@ class PickupController: ObservableObject {
     @Published private(set) var pickups: [Pickup] = []
     @Published private(set) var error: Error?
 
+    /// Signals to subscriber (`PickupCoordinator`) that the new pickup view should be shown.
+    var presentNewPickup = PassthroughSubject<Void, Never>()
+
+    /// A view model for use with new pickup views.
+    ///
+    /// The PickupController holds a reference to the view model for later reuse and/or for use with SwiftUI
+    /// (where views may inadvertantly reinitialize objects if a reference is not held elsewhere).
+    private(set) var newPickupViewModel: NewPickupViewModel = NewPickupViewModel()
+
+    /// Publishes result of `schedulePickup(_:)` call when data task is completed.
+    var pickupScheduleResult: AnyPublisher<Pickup.ScheduleResult, Error> {
+        newPickupViewModel.pickupInput
+            .flatMap(schedulePickup(_:))
+            .eraseToAnyPublisher()
+    }
+
     private var dataProvider: PickupDataProvider
+    private var cancellables: Set<AnyCancellable> = []
 
     init(dataProvider: PickupDataProvider) {
         self.dataProvider = dataProvider
@@ -40,19 +57,21 @@ class PickupController: ObservableObject {
     }
 
     func schedulePickup(
-        _ pickupInput: Pickup.ScheduleInput,
-        completion: @escaping (Result<Pickup.ScheduleResult, Error>) -> Void
-    ) {
-        self.dataProvider.schedulePickup(pickupInput) { result in
-            switch result {
-            case .success(let pickupResult):
-                self.pickups.append(pickupResult.pickup)
-                completion(result)
-            case .failure(let error):
-                self.error = error
-                completion(result)
+        _ pickupInput: Pickup.ScheduleInput
+    ) -> AnyPublisher<Pickup.ScheduleResult, Error> {
+        Future { completion in
+            self.dataProvider.schedulePickup(pickupInput) { [weak self] result in
+                switch result {
+                case .success(let pickupResult):
+                    self?.pickups.append(pickupResult.pickup)
+                    self?.newPickupViewModel = NewPickupViewModel()
+                    completion(result)
+                case .failure(let error):
+                    self?.error = error
+                    completion(result)
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     func clearError() {

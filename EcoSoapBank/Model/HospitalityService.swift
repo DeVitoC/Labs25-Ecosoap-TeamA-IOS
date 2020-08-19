@@ -10,10 +10,12 @@
 
 import Foundation
 
-enum HospitalityService: String, Decodable {
+enum HospitalityService: String, Decodable, CaseIterable, Identifiable {
     case bottles = "BOTTLES"
     case linens = "LINENS"
     case other = "OTHER"
     case paper = "PAPER"
     case soap = "SOAP"
+
+    var id: String { rawValue }
 }

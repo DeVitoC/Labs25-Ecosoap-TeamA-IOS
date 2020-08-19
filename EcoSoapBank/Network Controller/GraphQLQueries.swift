@@ -12,6 +12,13 @@ enum GraphQLQueries {
     // MARK: - Queries
 
 
+    /* works with variables as:
+     {
+        "input": {
+            "propertyId": "4" or 4
+        }
+     }
+     */
     static let impactStatsByPropery = """
     query ImpactStatsByPropertyIdInput($input:ImpactStatsByPropertyIdInput) {
         impactStatsByPropertyId(input:$input) {
@@ -21,14 +28,14 @@ enum GraphQLQueries {
         }
     }
     """
+
     /* works with variables as:
      {
         "input": {
-            "propertyId": "4" or 4
+            "userId": "4" or 4
         }
      }
      */
-
     static let userById = """
     query UserByIdInput($input:UserByIdInput) {
         userById(input:$input) {
@@ -38,14 +45,14 @@ enum GraphQLQueries {
         }
     }
     """
+
     /* works with variables as:
      {
         "input": {
-            "userId": "4" or 4
+            "propertyId": "4" or 4
         }
      }
      */
-
     static let hubByPropertyId = """
     query HubByPropertyIdInput($input:HubByPropertyIdInput) {
         hubByPropertyId(input:$input) {
@@ -57,9 +64,6 @@ enum GraphQLQueries {
                 }
                 email
                 phone
-                coordinates {
-                    \(QueryObjects.coordinates)
-                }
                 properties {
                     \(QueryObjects.property)
                 }
@@ -71,14 +75,14 @@ enum GraphQLQueries {
         }
     }
     """
+
     /* works with variables as:
      {
         "input": {
-            "propertyId": "4" or 4
+            "userId": "4" or 4
         }
      }
      */
-
     static let propertiesByUserId = """
     query PropertiesByUserIdInput($input: PropertiesByUserIdInput) {
         propertiesByUserId(input:$input) {
@@ -88,12 +92,21 @@ enum GraphQLQueries {
         }
     }
     """
-    /* works with variables as:
-     {
-        "input": {
-            "userId": "4" or 4
-        }
-     }
-     */
 
+    /* works with variables as:
+    {
+        "input": {
+            "propertyId": "4" or 4
+        }
+    }
+    */
+    static let pickupsByPropertyId = """
+    query PickupsByPropertyIdInput($input: PickupsByPropertyIdInput) {
+        pickupsByPropertyId(input:$input) {
+            pickups {
+                \(QueryObjects.pickup)
+            }
+        }
+    }
+    """
 }

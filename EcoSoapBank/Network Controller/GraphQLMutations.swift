@@ -10,6 +10,15 @@ import Foundation
 
 enum GraphQLMutations {
     // MARK: - Mutations
+
+    /* works with variables as:
+     {
+        "input": {
+            "email": "email@here.com",
+            "password": "passwordHere"
+        }
+     }
+     */
     static let login = """
     mutation LoginInput($input: LogInInput) {
         login(input:$input) {
@@ -19,29 +28,14 @@ enum GraphQLMutations {
                 firstName
                 lastName
                 email
+                password
             }
         }
     }
     """
+
     /* works with variables as:
      {
-        "input": {
-            "email": "email@here.com",
-            "password": "passwordHere"
-        }
-     }
-     */
-
-    static let schedulePickup = """
-    mutation SchedulePickupInput($input: SchedulePickupInput) {
-        schedulePickup(input:$input) {
-            \(QueryObjects.pickup)
-            label
-        }
-    }
-    """
-    /* works with variables as:
-    {
         "input": {
             "collectionType":"enum:Pickup.CollectionType",
             "status":"enum:Pickup.Status",
@@ -55,5 +49,51 @@ enum GraphQLMutations {
             "notes":"NotesGoHere"?
         }
      }
+     */
+    static let schedulePickup = """
+    mutation SchedulePickupInput($input: SchedulePickupInput) {
+        schedulePickup(input:$input) {
+            \(QueryObjects.pickup)
+            label
+        }
+    }
+    """
+
+    /* works with variables as:
+    {
+        "input": {
+            "pickupId": "4" or 4
+            "confirmationCode: "CodeGoesHere"
+        }
+    }
+     */
+    static let cancelPickup = """
+    mutation CancelPickupInput($input: CancelPickupInput) {
+        cancelPickup(input:$input) {
+            \(QueryObjects.pickup)
+        }
+    }
+    """
+
+    /* takes no variables - put nil value*/
+    static let seedDatabase = """
+    mutation {
+        seedDatabase {
+            \(QueryObjects.successPayload)
+        }
+    }
+    """
+
+    /* works with variables as:
+    {
+        "input": "DELETE"
+    }
     */
+    static let wipeDatabase = """
+    mutation WipeDatabaseInput($input: String) {
+        wipeDatabase(input:$input) {
+            \(QueryObjects.successPayload)
+        }
+    }
+    """
 }

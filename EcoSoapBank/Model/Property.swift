@@ -34,8 +34,6 @@ struct Property: Decodable {
     let phone: String?
     let shippingNote: String?
     let notes: String?
-    let impact: ImpactStats?
-    let pickups: [Pickup]?
 
     enum PropertyType: String, Decodable {
         case bedAndBreakfast = "BED_AND_BREAKFAST"

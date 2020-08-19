@@ -8,6 +8,7 @@
 // swiftlint:disable nesting
 
 import XCTest
+import Combine
 @testable import EcoSoapBank
 
 
@@ -40,6 +41,32 @@ class UtilityTests: XCTestCase {
         XCTAssertEqual(components.hour, 8)
         XCTAssertEqual(components.minute, 56)
     }
+
+    func testPublisherHandleError() {
+        var hitSuccess = false
+        var hitFailure = false
+        var cancellables = Set<AnyCancellable>()
+
+        Just(100)
+            .map { String($0) }
+            .handleError { _ in XCTFail("Should never reach") }
+            .map { $0 + "!" }
+            .sink {
+                XCTAssertEqual($0, "100!")
+                hitSuccess = true
+            }.store(in: &cancellables)
+
+        XCTAssert(hitSuccess, "Did not reach success sink")
+
+        Future<Int, TestError> { $0(.failure(TestError.oops)) }
+            .handleError { error in
+                XCTAssertEqual(error, TestError.oops)
+                hitFailure = true
+            }.sink { _ in XCTFail("Should never reach") }
+            .store(in: &cancellables)
+
+        XCTAssert(hitFailure, "Did not reach failure")
+    }
     
     func testWeightStringDefaultsToLocale() {
         UserDefaults.massUnit = nil
@@ -64,4 +91,8 @@ class UtilityTests: XCTestCase {
         
         XCTAssertEqual(weightString, "2.2 lb")
     }
+}
+
+enum TestError: Error {
+    case oops
 }

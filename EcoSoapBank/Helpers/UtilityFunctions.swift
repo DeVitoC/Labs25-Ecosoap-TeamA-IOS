@@ -90,3 +90,9 @@ extension MeasurementFormatter {
         $0.unitOptions = .providedUnit
     }
 }
+
+extension NumberFormatter {
+    static var forMeasurements: NumberFormatter {
+        MeasurementFormatter.shared.numberFormatter
+    }
+}
