@@ -55,15 +55,39 @@ extension TimeInterval {
 }
 
 
-extension Measurement {
+extension Measurement where UnitType == UnitMass {
     var string: String {
-        MeasurementFormatter.shared.string(from: self)
+        
+        guard let unitString = UserDefaults.massUnit else {
+            return MeasurementFormatter.localUnits.string(from: self)
+        }
+        
+        let unit: UnitMass
+        
+        // Create appropriate UnitMass from unit's symbol stored as string
+        switch unitString {
+        case "kg":
+            unit = .kilograms
+        case "lb":
+            unit = .pounds
+        default:
+            unit = .pounds
+        }
+        
+        return MeasurementFormatter.providedUnits.string(from: self.converted(to: unit))
     }
 }
 
 extension MeasurementFormatter {
-    static let shared = configure(MeasurementFormatter()) {
+    /// Defaults to appropriate units based on the users locale
+    static let localUnits = configure(MeasurementFormatter()) {
         $0.numberFormatter.maximumFractionDigits = 2
+    }
+    
+    /// For use when user has selected a certain unit
+    static let providedUnits = configure(MeasurementFormatter()) {
+        $0.numberFormatter.maximumFractionDigits = 2
+        $0.unitOptions = .providedUnit
     }
 }
 

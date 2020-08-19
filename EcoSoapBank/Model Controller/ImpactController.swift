@@ -49,50 +49,50 @@ class ImpactController {
     private func updateViewModels(with impactStats: ImpactStats) {
         viewModels = []
         
-        let unitMass: UnitMass = .pounds // TODO: Get preference of user
-        
         if let soapRecycled = impactStats.soapRecycled {
             viewModels.append(
-                ImpactCellViewModel(withAmount: soapRecycled,
-                                    convertedTo: unitMass,
+                ImpactCellViewModel(amount: soapRecycled,
+                                    unit: .grams,
                                     subtitle: "soap recycled",
                                     image: .soap)
             )
         }
         if let bottlesRecycled = impactStats.bottlesRecycled {
             viewModels.append(
-                ImpactCellViewModel(withAmount: bottlesRecycled,
-                                    convertedTo: unitMass,
+                ImpactCellViewModel(amount: bottlesRecycled,
+                                    unit: .grams,
                                     subtitle: "bottle amenities\nrecycled",
                                     image: .bottles)
             )
         }
         if let linensRecycled = impactStats.linensRecycled {
             viewModels.append(
-                ImpactCellViewModel(withAmount: linensRecycled,
-                                    convertedTo: unitMass,
+                ImpactCellViewModel(amount: linensRecycled,
+                                    unit: .grams,
                                     subtitle: "linens recycled",
                                     image: .linens)
             )
         }
         if let paperRecycled = impactStats.paperRecycled {
             viewModels.append(
-                ImpactCellViewModel(withAmount: paperRecycled,
-                                    convertedTo: unitMass,
+                ImpactCellViewModel(amount: paperRecycled,
+                                    unit: .grams,
                                     subtitle: "paper recycled",
                                     image: .paper)
             )
         }
         if let peopleServed = impactStats.peopleServed {
             viewModels.append(
-                ImpactCellViewModel(title: String(peopleServed),
+                ImpactCellViewModel(amount: peopleServed,
+                                    unit: .people,
                                     subtitle: "people served",
                                     image: .people)
             )
         }
         if let womenEmployed = impactStats.womenEmployed {
             viewModels.append(
-                ImpactCellViewModel(title: String(womenEmployed),
+                ImpactCellViewModel(amount: womenEmployed,
+                                    unit: .people,
                                     subtitle: "women employed",
                                     image: .women)
             )

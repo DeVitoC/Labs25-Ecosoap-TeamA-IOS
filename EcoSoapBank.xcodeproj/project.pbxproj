@@ -69,6 +69,8 @@
 		041E1EA524E1F7970052831D /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 041E1E4724E1EA920052831D /* Montserrat-SemiBold.otf */; };
 		041E1EA724E22B1E0052831D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E1EA624E22B1E0052831D /* Colors.swift */; };
 		041E1EA924E22DF50052831D /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E1EA824E22DF50052831D /* ColorTests.swift */; };
+		0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04924EC648E00A0A665 /* UserDefaults.swift */; };
+		0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */; };
 		049379A524EAE7140084051B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A424EAE7140084051B /* Images.swift */; };
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
@@ -79,8 +81,6 @@
 		04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6D72B24E8444C0003A585 /* BackgroundView.swift */; };
 		04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEE1B524E48AB000F51D69 /* ImpactController.swift */; };
 		04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEE1DB24E5E16600F51D69 /* ImpactCellViewModel.swift */; };
-		463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */; };
-		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
 		466C4274249A8748007D033E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4273249A8748007D033E /* AppDelegate.swift */; };
 		466C4276249A8748007D033E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4275249A8748007D033E /* SceneDelegate.swift */; };
 		466C427B249A8748007D033E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466C4279249A8748007D033E /* Main.storyboard */; };
@@ -89,11 +89,7 @@
 		46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E024C9828800FE0CD1 /* Profile.swift */; };
 		46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */; };
 		46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E624C98D8900FE0CD1 /* Notifications.swift */; };
-		46BEB4E924C98DAF00FE0CD1 /* ProfileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E824C98DAF00FE0CD1 /* ProfileListViewController.swift */; };
-		46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4ED24C98ECC00FE0CD1 /* ProfileController.swift */; };
-		46BEB4F124C98F0D00FE0CD1 /* Profiles.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46BEB4F024C98F0D00FE0CD1 /* Profiles.storyboard */; };
 		46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */; };
-		46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C2BC9124D432F90077E49D /* ProfileTabBarViewController.swift */; };
 		990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */; };
 		990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */; };
 		990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */; };
@@ -182,6 +178,8 @@
 		041E1E8724E1F3890052831D /* FontTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontTests.swift; sourceTree = "<group>"; };
 		041E1EA624E22B1E0052831D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		041E1EA824E22DF50052831D /* ColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
+		0445F04924EC648E00A0A665 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsObservation.swift; sourceTree = "<group>"; };
 		049379A424EAE7140084051B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -192,8 +190,6 @@
 		04D6D72B24E8444C0003A585 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		04FEE1B524E48AB000F51D69 /* ImpactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactController.swift; sourceTree = "<group>"; };
 		04FEE1DB24E5E16600F51D69 /* ImpactCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellViewModel.swift; sourceTree = "<group>"; };
-		463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
-		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		466C4270249A8748007D033E /* EcoSoapBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoSoapBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		466C4273249A8748007D033E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		466C4275249A8748007D033E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -205,11 +201,7 @@
 		46BEB4E024C9828800FE0CD1 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		46BEB4E624C98D8900FE0CD1 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
-		46BEB4E824C98DAF00FE0CD1 /* ProfileListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListViewController.swift; sourceTree = "<group>"; };
-		46BEB4ED24C98ECC00FE0CD1 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
-		46BEB4F024C98F0D00FE0CD1 /* Profiles.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profiles.storyboard; sourceTree = "<group>"; };
 		46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+SimpleAlert.swift"; sourceTree = "<group>"; };
-		46C2BC9124D432F90077E49D /* ProfileTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabBarViewController.swift; sourceTree = "<group>"; };
 		990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Constants.swift"; sourceTree = "<group>"; };
@@ -394,6 +386,8 @@
 			children = (
 				46BEB4E624C98D8900FE0CD1 /* Notifications.swift */,
 				994E4B7824DDB58300C12921 /* UtilityFunctions.swift */,
+				0445F04924EC648E00A0A665 /* UserDefaults.swift */,
+				0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */,
 				9921943324E49AC300E16C16 /* UIKit */,
 				9983874F24E4694400450244 /* SwiftUI */,
 				E2D302FE24E5F464008A6FAF /* DataLoader.swift */,
@@ -420,7 +414,6 @@
 		46BEB4EC24C98EBB00FE0CD1 /* Model Controller */ = {
 			isa = PBXGroup;
 			children = (
-				46BEB4ED24C98ECC00FE0CD1 /* ProfileController.swift */,
 				998913D024DDFF96009ADBC1 /* PickupController.swift */,
 				04FEE1B524E48AB000F51D69 /* ImpactController.swift */,
 				9983874724E33A0600450244 /* MockPickupProvider.swift */,
@@ -433,9 +426,7 @@
 			children = (
 				99B6177224EC743F0099664B /* LoginCoordinator.swift */,
 				46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */,
-				463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */,
 				466C4279249A8748007D033E /* Main.storyboard */,
-				46C2BC9124D432F90077E49D /* ProfileTabBarViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -443,9 +434,6 @@
 		46BEB4F224C98F1100FE0CD1 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				46BEB4E824C98DAF00FE0CD1 /* ProfileListViewController.swift */,
-				463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */,
-				46BEB4F024C98F0D00FE0CD1 /* Profiles.storyboard */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -654,7 +642,6 @@
 				049379A924EB25600084051B /* Images.xcassets in Resources */,
 				041E1E7B24E1EA970052831D /* Muli-BoldItalic.ttf in Resources */,
 				041E1E5D24E1EA920052831D /* Montserrat-ExtraBoldItalic.otf in Resources */,
-				46BEB4F124C98F0D00FE0CD1 /* Profiles.storyboard in Resources */,
 				041E1E6324E1EA920052831D /* Montserrat-ExtraBold.otf in Resources */,
 				041E1E6924E1EA920052831D /* Montserrat-Black.otf in Resources */,
 				041E1E8124E1EA970052831D /* Muli-Light.ttf in Resources */,
@@ -747,7 +734,6 @@
 			files = (
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
 				99B6176124EB0C4E0099664B /* PickupCartonCell.swift in Sources */,
-				46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */,
 				9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */,
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
 				04D1758D24E4195C00F8929C /* GradientView.swift in Sources */,
@@ -774,22 +760,20 @@
 				99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
 				998913D524DE0907009ADBC1 /* PickupHistoryItemView.swift in Sources */,
+				0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */,
 				998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */,
 				998913D724DE0C34009ADBC1 /* Property.swift in Sources */,
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
 				E2D302F524E5CA32008A6FAF /* User.swift in Sources */,
-				46BEB4E924C98DAF00FE0CD1 /* ProfileListViewController.swift in Sources */,
 				99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */,
 				9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */,
 				997BF11224E20AAE00A643D8 /* TextView.swift in Sources */,
+				0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */,
 				9998716424E1E8C4000A993E /* PickupsView.swift in Sources */,
 				998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */,
-				463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
 				E2D3030124E5F9B8008A6FAF /* MockDataLoader.swift in Sources */,
-				46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */,
-				463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */,
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
 				99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */,
 				04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */,
