@@ -58,6 +58,7 @@ struct Pickup: Identifiable, PickupBaseContainer {
     let id: UUID
     let confirmationCode: String
     let cartons: [Carton]
+    let property: Property
 }
 
 // MARK: - SubTypes
@@ -69,7 +70,7 @@ extension Pickup: Decodable {
         let status: Status
         let readyDate: Date
         let pickupDate: Date?
-        let notes: String
+        let notes: String?
     }
 
     // MARK: Schedule I/O
@@ -127,7 +128,7 @@ extension PickupBaseContainer {
     var status: Pickup.Status { base.status }
     var readyDate: Date { base.readyDate }
     var pickupDate: Date? { base.pickupDate }
-    var notes: String { base.notes }
+    var notes: String { base.notes ?? "" }
 }
 
 // MARK: - Convenience Extensions

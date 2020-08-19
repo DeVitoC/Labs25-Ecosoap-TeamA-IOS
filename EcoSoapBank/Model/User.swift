@@ -11,12 +11,13 @@ import Foundation
 struct User: Decodable {
     let id: Int
     let firstName: String
-    let middleName: String
+    let middleName: String?
     let lastName: String
-    let title: String
-    let company: String
+    let title: String?
+    let company: String?
     let email: String
-    let phone: String
-    let skype: String
-    let properties: [Property]
+    let password: String
+    let phone: String?
+    let skype: String?
+    let properties: [Property]?
 }
