@@ -13,7 +13,7 @@ import Foundation
 /// an onChange closure that is passed in on initialization.
 /// - Example Usage:
 ///   ```
-///   var observation = Defaults.someDefault.observe { old, new in
+///   var observation = UserDefaults.$someDefault.observe { old, new in
 ///       print("Changed from: \(old) to \(new)")
 ///   }
 ///   ```
