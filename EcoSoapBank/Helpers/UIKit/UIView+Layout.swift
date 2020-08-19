@@ -90,10 +90,10 @@ extension UIView {
         self.constrain(with: [
             NSLayoutConstraint(
                 item: self,
-                attribute: .centerY,
+                attribute: .centerX,
                 relatedBy: .equal,
                 toItem: superview,
-                attribute: .centerY,
+                attribute: .centerX,
                 multiplier: multiplier,
                 constant: 0)
         ])
