@@ -48,7 +48,7 @@ struct PickupHistoryListItem: View {
                 }
             }
         }
-        .font(Font(UIFont.muli(ofSize: 17, typeface: .regular)))
+        .font(Font(UIFont.muli(style: .body)))
     }
 }
 
