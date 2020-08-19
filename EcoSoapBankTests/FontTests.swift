@@ -13,7 +13,7 @@ class FontTests: XCTestCase {
 
     func testMuliFontsInitializeProperly() {
         // given
-        for style in UIFont.MuliStyle.allCases {
+        for style in UIFont.MuliTypeface.allCases {
             
             // when
             let font = UIFont(name: "Muli\(style.rawValue)", size: 20)
@@ -28,7 +28,7 @@ class FontTests: XCTestCase {
         let desiredFontName = "Muli-BoldItalic"
         
         // when
-        let font: UIFont = .muli(ofSize: 20, style: .boldItalic)
+        let font: UIFont = .muli(ofSize: 20, typeface: .boldItalic)
         
         // then
         XCTAssertEqual(font.fontName, desiredFontName)
@@ -36,7 +36,7 @@ class FontTests: XCTestCase {
     
     func testMontserratFontsInitializeProperly() {
         // given
-        for style in UIFont.MontserratStyle.allCases {
+        for style in UIFont.MontserratTypeface.allCases {
             
             // when
             let font = UIFont(name: "Montserrat\(style.rawValue)", size: 20)
@@ -51,7 +51,7 @@ class FontTests: XCTestCase {
         let desiredFontName = "Montserrat-BoldItalic"
         
         // when
-        let font: UIFont = .montserrat(ofSize: 20, style: .boldItalic)
+        let font: UIFont = .montserrat(ofSize: 20, typeface: .boldItalic)
         
         // then
         XCTAssertEqual(font.fontName, desiredFontName)
