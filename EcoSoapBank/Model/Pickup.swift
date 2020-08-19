@@ -52,13 +52,19 @@ import SwiftUI
 import UIKit
 
 
-struct Pickup: Identifiable, PickupBaseContainer {
+struct Pickup: Identifiable, PickupBaseContainer, Equatable {
     let base: Base
 
     let id: UUID
     let confirmationCode: String
     let cartons: [Carton]
     let property: Property
+
+    static func == (lhs: Pickup, rhs: Pickup) -> Bool {
+        lhs.id == rhs.id
+            && lhs.confirmationCode == rhs.confirmationCode
+            && lhs.property.id == rhs.property.id
+    }
 }
 
 // MARK: - SubTypes
