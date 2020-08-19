@@ -35,7 +35,7 @@ class ESBButton: UIButton {
         
         let backgroundView = configure(UIView()) {
             $0.backgroundColor = .white
-            $0.layer.cornerRadius = 6.0
+            $0.layer.cornerRadius = 5.0
             $0.isUserInteractionEnabled = false
         }
 
