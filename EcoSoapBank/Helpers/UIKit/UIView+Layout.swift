@@ -9,29 +9,6 @@
 import UIKit
 
 extension UIView {
-
-    /// Applies constraints to all sides of superview with constant padding defined by the provided insets.
-    ///
-    /// **REQUIRED PRECONDITIONS**:
-    /// - View must be embedded in a superview
-    /// - `translatesAutoresizingMaskIntoConstraints` must be false
-    func fillSuperview(withPadding padding: UIEdgeInsets = .zero) {
-        assert(translatesAutoresizingMaskIntoConstraints == false,
-               "translatesAutoresizingMaskIntoConstraints must be set to false for view to use autolayout")
-        
-        guard let superview = superview else {
-            assertionFailure("\(Self.self) has no superview to fill")
-            return
-        }
-        
-        NSLayoutConstraint.activate([
-            self.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: padding.left),
-            self.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: padding.right),
-            self.topAnchor.constraint(equalTo: superview.topAnchor, constant: padding.top),
-            self.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: padding.bottom),
-        ])
-    }
-
     /// Set view's `translatesAutoResizingMaskIntoConstraints` to false
     /// and activates the provided constraints.
     func constrain(with constraints: [NSLayoutConstraint]) {
@@ -85,6 +62,65 @@ extension UIView {
             constant: constant)
         constrainNewSubview(subView, with: constraints)
     }
+    
+    /// Fills the view's superview completely.
+    ///
+    /// Also sets `translatesAutoResizingMaskIntoConstraints` to false.
+    /// - Precondition: View must be embedded in a superview.
+    func fillSuperview() {
+        guard let superview = superview else {
+            assertionFailure("\(Self.self) has no superview to fill")
+            return
+        }
+        
+        self.constrain(with: constraints(for: superview, to: .all, constant: 0))
+    }
+    
+    /// Centers a view horizontally in it's superview with specified multiplier
+    /// providing a relative offset.
+    ///
+    /// Also sets `translatesAutoResizingMaskIntoConstraints` to false.
+    /// - Precondition: View must be embedded in a superview.
+    func centerHorizontallyInSuperview(multiplier: CGFloat = 1.0) {
+        guard let superview = superview else {
+            assertionFailure("\(Self.self) has no superview to fill")
+            return
+        }
+        
+        self.constrain(with: [
+            NSLayoutConstraint(
+                item: self,
+                attribute: .centerY,
+                relatedBy: .equal,
+                toItem: superview,
+                attribute: .centerY,
+                multiplier: multiplier,
+                constant: 0)
+        ])
+    }
+    
+    /// Centers a view vertically in it's superview with specified multiplier
+    /// providing a relative offset.
+    ///
+    /// Also sets `translatesAutoResizingMaskIntoConstraints` to false.
+    /// - Precondition: View must be embedded in a superview.
+    func centerVerticallyInSuperview(multiplier: CGFloat = 1.0) {
+        guard let superview = superview else {
+            assertionFailure("\(Self.self) has no superview to fill")
+            return
+        }
+        
+        self.constrain(with: [
+            NSLayoutConstraint(
+                item: self,
+                attribute: .centerY,
+                relatedBy: .equal,
+                toItem: superview,
+                attribute: .centerY,
+                multiplier: multiplier,
+                constant: 0)
+        ])
+    }
 }
 
 
@@ -121,7 +157,6 @@ extension AutoLayoutConstrainable {
 
 extension UIView: AutoLayoutConstrainable {}
 extension UILayoutGuide: AutoLayoutConstrainable {}
-
 
 enum LayoutSide: CaseIterable {
     case top

@@ -20,16 +20,17 @@ class ImpactViewController: UIViewController {
     
     var massUnitObserver: UserDefaultsObservation?
     
+    
+    override func loadView() {
+        view = BackgroundView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         massUnitObserver = UserDefaults.$massUnit.observe { [weak self] _, _ in
             self?.collectionView.reloadData()
         }
-        
-        let background = BackgroundView()
-        view.addSubviewsUsingAutolayout(background)
-        background.fillSuperview()
                 
         setUpCollectionView()
 
