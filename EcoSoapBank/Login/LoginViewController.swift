@@ -31,8 +31,8 @@ class LoginViewController: UIViewController {
         
         button.centerVerticallyInSuperview(multiplier: 1.7)
         button.constrain(with: [
-            LayoutSide.leading.constraint(from: button, to: view, constant: 20),
-            LayoutSide.trailing.constraint(from: button, to: view, constant: 20)
+            LayoutSide.leading.constraint(from: button, to: view, constant: 40),
+            LayoutSide.trailing.constraint(from: button, to: view, constant: 40)
         ])
     }
     
@@ -52,20 +52,4 @@ class LoginViewController: UIViewController {
     }
 }
 
-class ESBButton: UIButton {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setUp()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setUp()
-    }
-    
-    private func setUp() {
-        backgroundColor = .white
-        setTitleColor(.esbGreen, for: .normal)
-        
-    }
-}
+
