@@ -108,7 +108,7 @@
 		998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */; };
 		998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D024DDFF96009ADBC1 /* PickupController.swift */; };
 		998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D224DDFFA8009ADBC1 /* Pickup.swift */; };
-		998913D524DE0907009ADBC1 /* PickupHistoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D424DE0907009ADBC1 /* PickupHistoryItemView.swift */; };
+		998913D524DE0907009ADBC1 /* PickupHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */; };
 		998913D724DE0C34009ADBC1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D624DE0C33009ADBC1 /* Property.swift */; };
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
@@ -223,7 +223,7 @@
 		998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryView.swift; sourceTree = "<group>"; };
 		998913D024DDFF96009ADBC1 /* PickupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupController.swift; sourceTree = "<group>"; };
 		998913D224DDFFA8009ADBC1 /* Pickup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pickup.swift; sourceTree = "<group>"; };
-		998913D424DE0907009ADBC1 /* PickupHistoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryItemView.swift; sourceTree = "<group>"; };
+		998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryCell.swift; sourceTree = "<group>"; };
 		998913D624DE0C33009ADBC1 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
@@ -481,7 +481,7 @@
 				994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */,
 				9998716324E1E8C4000A993E /* PickupsView.swift */,
 				998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */,
-				998913D424DE0907009ADBC1 /* PickupHistoryItemView.swift */,
+				998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */,
 				99B6176624EB25B40099664B /* PickupDetailView.swift */,
 				99B6175A24EAF0A20099664B /* NewPickupViewController.swift */,
 				99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */,
@@ -763,7 +763,7 @@
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
 				99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
-				998913D524DE0907009ADBC1 /* PickupHistoryItemView.swift in Sources */,
+				998913D524DE0907009ADBC1 /* PickupHistoryCell.swift in Sources */,
 				0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */,
 				998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */,
 				998913D724DE0C34009ADBC1 /* Property.swift in Sources */,

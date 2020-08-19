@@ -12,7 +12,7 @@ import UIKit
 
 // MARK: - Cell
 
-struct PickupHistoryListItem: View {
+struct PickupHistoryCell: View {
     let pickup: Pickup
 
     init(pickup: Pickup) {
@@ -52,7 +52,7 @@ struct PickupHistoryListItem: View {
     }
 }
 
-extension PickupHistoryListItem {
+extension PickupHistoryCell {
     static let dateFormatter = configure(DateFormatter()) {
         $0.dateStyle = .short
         $0.timeStyle = .none
@@ -83,7 +83,7 @@ private let _previewPickup = Pickup.random()
 
 struct PickupListItem_Previews: PreviewProvider {
     static var previews: some View {
-        PickupHistoryListItem(pickup: _previewPickup)
+        PickupHistoryCell(pickup: _previewPickup)
             .previewLayout(.sizeThatFits)
             .padding()
     }
