@@ -67,6 +67,30 @@ class UtilityTests: XCTestCase {
 
         XCTAssert(hitFailure, "Did not reach failure")
     }
+    
+    func testWeightStringDefaultsToLocale() {
+        UserDefaults.massUnit = nil
+        
+        let weightString = Measurement(value: 1000, unit: UnitMass.grams).string
+        
+        XCTAssertEqual(weightString, "2.2 lb")
+    }
+    
+    func testWeightIsDisplayedAsKilograms() {
+        UserDefaults.massUnit = UnitMass.kilograms.symbol
+        
+        let weightString = Measurement(value: 1000, unit: UnitMass.grams).string
+        
+        XCTAssertEqual(weightString, "1 kg")
+    }
+    
+    func testWeightIsDisplayedAsPounds() {
+        UserDefaults.massUnit = UnitMass.pounds.symbol
+        
+        let weightString = Measurement(value: 1000, unit: UnitMass.grams).string
+        
+        XCTAssertEqual(weightString, "2.2 lb")
+    }
 }
 
 enum TestError: Error {
