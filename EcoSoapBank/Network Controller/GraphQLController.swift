@@ -77,7 +77,7 @@ class GraphQLController {
             guard let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                 let dataDict = jsonDict["data"] as? [String: Any],
                 let firstKey = Array(dataDict.keys).first,
-                let object = dataDict[firstKey] as? [String: Any],
+                let object: Any = dataDict[firstKey] as? [String: Any] ?? dataDict[firstKey] as? [Any],
                 let objectData = try? JSONSerialization.data(withJSONObject: object, options: []) else {
                     return .failure(GraphQLError.noData)
             }

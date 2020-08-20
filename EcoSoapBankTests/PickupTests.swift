@@ -23,7 +23,7 @@ class PickupTests: XCTestCase {
         super.setUp()
         pickupProvider = MockPickupProvider()
         pickupController = PickupController(dataProvider: pickupProvider)
-        pickupCoordinator = PickupCoordinator(pickupController: pickupController)
+        pickupCoordinator = PickupCoordinator(dataProvider: pickupProvider)
         mockDataExpectation = XCTestExpectation(description: "Waiting for mock data")
         waiter = XCTWaiter(delegate: self)
     }
