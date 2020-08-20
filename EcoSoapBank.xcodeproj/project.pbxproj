@@ -71,6 +71,8 @@
 		041E1EA924E22DF50052831D /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E1EA824E22DF50052831D /* ColorTests.swift */; };
 		0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04924EC648E00A0A665 /* UserDefaults.swift */; };
 		0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */; };
+		0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04D24EDD9C700A0A665 /* ESBButton.swift */; };
+		0445F05024EDEA7F00A0A665 /* ESBCircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */; };
 		049379A524EAE7140084051B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A424EAE7140084051B /* Images.swift */; };
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
@@ -83,7 +85,6 @@
 		04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEE1DB24E5E16600F51D69 /* ImpactCellViewModel.swift */; };
 		466C4274249A8748007D033E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4273249A8748007D033E /* AppDelegate.swift */; };
 		466C4276249A8748007D033E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4275249A8748007D033E /* SceneDelegate.swift */; };
-		466C427B249A8748007D033E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466C4279249A8748007D033E /* Main.storyboard */; };
 		466C427D249A8749007D033E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 466C427C249A8749007D033E /* Colors.xcassets */; };
 		466C4280249A8749007D033E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466C427E249A8749007D033E /* LaunchScreen.storyboard */; };
 		46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E024C9828800FE0CD1 /* Profile.swift */; };
@@ -94,6 +95,14 @@
 		990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */; };
 		990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */; };
 		991874D424E4B28900F636FB /* UIView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991874D324E4B28900F636FB /* UIView+Subviews.swift */; };
+		992BB63424ED930600638AA4 /* SortDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63324ED930600638AA4 /* SortDescriptor.swift */; };
+		992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */; };
+		992BB63C24EDD01F00638AA4 /* PickupDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */; };
+		992BB63E24EEE21300638AA4 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63D24EEE21300638AA4 /* UserController.swift */; };
+		992BB64024EEE58700638AA4 /* AppQuerier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63F24EEE58600638AA4 /* AppQuerier.swift */; };
+		992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64224EEFBAD00638AA4 /* Errors.swift */; };
+		992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64424EF021600638AA4 /* MockLoginProvider.swift */; };
+		992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
@@ -107,7 +116,7 @@
 		998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */; };
 		998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D024DDFF96009ADBC1 /* PickupController.swift */; };
 		998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D224DDFFA8009ADBC1 /* Pickup.swift */; };
-		998913D524DE0907009ADBC1 /* PickupHistoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D424DE0907009ADBC1 /* PickupHistoryItemView.swift */; };
+		998913D524DE0907009ADBC1 /* PickupHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */; };
 		998913D724DE0C34009ADBC1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D624DE0C33009ADBC1 /* Property.swift */; };
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
@@ -117,7 +126,6 @@
 		99B6175D24EAF0C70099664B /* NewPickupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */; };
 		99B6176124EB0C4E0099664B /* PickupCartonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176024EB0C4E0099664B /* PickupCartonCell.swift */; };
 		99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176424EB256D0099664B /* NewCartonViewModel.swift */; };
-		99B6176724EB25B40099664B /* PickupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176624EB25B40099664B /* PickupDetailView.swift */; };
 		99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */; };
 		99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177024EC3D000099664B /* Publisher+HandleError.swift */; };
 		99B6177324EC743F0099664B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177224EC743F0099664B /* LoginCoordinator.swift */; };
@@ -182,6 +190,8 @@
 		041E1EA824E22DF50052831D /* ColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
 		0445F04924EC648E00A0A665 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsObservation.swift; sourceTree = "<group>"; };
+		0445F04D24EDD9C700A0A665 /* ESBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBButton.swift; sourceTree = "<group>"; };
+		0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBCircularImageView.swift; sourceTree = "<group>"; };
 		049379A424EAE7140084051B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -195,7 +205,6 @@
 		466C4270249A8748007D033E /* EcoSoapBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoSoapBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		466C4273249A8748007D033E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		466C4275249A8748007D033E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		466C427A249A8748007D033E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		466C427C249A8749007D033E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		466C427F249A8749007D033E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		466C4281249A8749007D033E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -208,6 +217,14 @@
 		990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Constants.swift"; sourceTree = "<group>"; };
 		991874D324E4B28900F636FB /* UIView+Subviews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Subviews.swift"; path = "EcoSoapBank/Helpers/UIKit/UIView+Subviews.swift"; sourceTree = SOURCE_ROOT; };
+		992BB63324ED930600638AA4 /* SortDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDescriptor.swift; sourceTree = "<group>"; };
+		992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupDetailViewController.swift; sourceTree = "<group>"; };
+		992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PickupDetailViewController.storyboard; sourceTree = "<group>"; };
+		992BB63D24EEE21300638AA4 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		992BB63F24EEE58600638AA4 /* AppQuerier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppQuerier.swift; sourceTree = "<group>"; };
+		992BB64224EEFBAD00638AA4 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		992BB64424EF021600638AA4 /* MockLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoginProvider.swift; sourceTree = "<group>"; };
+		992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OktaAuth+Shared.swift"; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
@@ -223,7 +240,7 @@
 		998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryView.swift; sourceTree = "<group>"; };
 		998913D024DDFF96009ADBC1 /* PickupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupController.swift; sourceTree = "<group>"; };
 		998913D224DDFFA8009ADBC1 /* Pickup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pickup.swift; sourceTree = "<group>"; };
-		998913D424DE0907009ADBC1 /* PickupHistoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryItemView.swift; sourceTree = "<group>"; };
+		998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryCell.swift; sourceTree = "<group>"; };
 		998913D624DE0C33009ADBC1 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
@@ -233,7 +250,6 @@
 		99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupViewModel.swift; sourceTree = "<group>"; };
 		99B6176024EB0C4E0099664B /* PickupCartonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCartonCell.swift; sourceTree = "<group>"; };
 		99B6176424EB256D0099664B /* NewCartonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCartonViewModel.swift; sourceTree = "<group>"; };
-		99B6176624EB25B40099664B /* PickupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupDetailView.swift; sourceTree = "<group>"; };
 		99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingViewController.swift; sourceTree = "<group>"; };
 		99B6177024EC3D000099664B /* Publisher+HandleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+HandleError.swift"; sourceTree = "<group>"; };
 		99B6177224EC743F0099664B /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -326,8 +342,10 @@
 			isa = PBXGroup;
 			children = (
 				04D6D72B24E8444C0003A585 /* BackgroundView.swift */,
+				0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */,
 				04D1758C24E4195C00F8929C /* GradientView.swift */,
 				99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */,
+				0445F04D24EDD9C700A0A665 /* ESBButton.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -388,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				46BEB4E624C98D8900FE0CD1 /* Notifications.swift */,
+				992BB63324ED930600638AA4 /* SortDescriptor.swift */,
 				994E4B7824DDB58300C12921 /* UtilityFunctions.swift */,
 				0445F04924EC648E00A0A665 /* UserDefaults.swift */,
 				0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */,
@@ -396,6 +415,7 @@
 				E2D302FE24E5F464008A6FAF /* DataLoader.swift */,
 				E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */,
 				99B6177024EC3D000099664B /* Publisher+HandleError.swift */,
+				992BB64224EEFBAD00638AA4 /* Errors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -417,9 +437,10 @@
 		46BEB4EC24C98EBB00FE0CD1 /* Model Controller */ = {
 			isa = PBXGroup;
 			children = (
-				998913D024DDFF96009ADBC1 /* PickupController.swift */,
 				04FEE1B524E48AB000F51D69 /* ImpactController.swift */,
-				9983874724E33A0600450244 /* MockPickupProvider.swift */,
+				998913D024DDFF96009ADBC1 /* PickupController.swift */,
+				992BB63D24EEE21300638AA4 /* UserController.swift */,
+				992BB64624EF08E400638AA4 /* Mock Providers */,
 			);
 			path = "Model Controller";
 			sourceTree = "<group>";
@@ -429,7 +450,6 @@
 			children = (
 				99B6177224EC743F0099664B /* LoginCoordinator.swift */,
 				46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */,
-				466C4279249A8748007D033E /* Main.storyboard */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -463,6 +483,15 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
+		992BB64624EF08E400638AA4 /* Mock Providers */ = {
+			isa = PBXGroup;
+			children = (
+				9983874724E33A0600450244 /* MockPickupProvider.swift */,
+				992BB64424EF021600638AA4 /* MockLoginProvider.swift */,
+			);
+			path = "Mock Providers";
+			sourceTree = "<group>";
+		};
 		994E4B6D24DDAEA800C12921 /* Impact */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,8 +510,9 @@
 				994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */,
 				9998716324E1E8C4000A993E /* PickupsView.swift */,
 				998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */,
-				998913D424DE0907009ADBC1 /* PickupHistoryItemView.swift */,
-				99B6176624EB25B40099664B /* PickupDetailView.swift */,
+				998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */,
+				992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */,
+				992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */,
 				99B6175A24EAF0A20099664B /* NewPickupViewController.swift */,
 				99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */,
 				99B6176024EB0C4E0099664B /* PickupCartonCell.swift */,
@@ -531,6 +561,8 @@
 				E220C32624E35E59003FF32D /* GraphQLQueries.swift */,
 				E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */,
 				E2B961B324E45BF800C5DF8B /* QueryObjects.swift */,
+				992BB63F24EEE58600638AA4 /* AppQuerier.swift */,
+				992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */,
 			);
 			path = "Network Controller";
 			sourceTree = "<group>";
@@ -651,7 +683,6 @@
 				041E1E8124E1EA970052831D /* Muli-Light.ttf in Resources */,
 				041E1E5E24E1EA920052831D /* Montserrat-Italic.otf in Resources */,
 				041E1E5424E1EA920052831D /* Montserrat-ExtraLight.otf in Resources */,
-				466C427B249A8748007D033E /* Main.storyboard in Resources */,
 				041E1E7A24E1EA970052831D /* Muli-ExtraLightItalic.ttf in Resources */,
 				041E1E5A24E1EA920052831D /* Montserrat-Medium.otf in Resources */,
 				E2D302ED24E5B260008A6FAF /* mockImpactStatsByPropertyId.json in Resources */,
@@ -666,6 +697,7 @@
 				041E1E5124E1EA920052831D /* Montserrat-ThinItalic.otf in Resources */,
 				E2AEB12624E7460600C42ACD /* mockImpactStatsFailure.json in Resources */,
 				041E1E7D24E1EA970052831D /* Muli-Semi-BoldItalic.ttf in Resources */,
+				992BB63C24EDD01F00638AA4 /* PickupDetailViewController.storyboard in Resources */,
 				041E1E5C24E1EA920052831D /* Montserrat-SemiBoldItalic.otf in Resources */,
 				E2D04F8E24EEE94D00515831 /* mockPickupsByPropertyIdSuccess.json in Resources */,
 				041E1E8024E1EA970052831D /* Muli-SemiBold.ttf in Resources */,
@@ -738,16 +770,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
+				992BB64024EEE58700638AA4 /* AppQuerier.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
+				992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */,
 				99B6176124EB0C4E0099664B /* PickupCartonCell.swift in Sources */,
 				9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */,
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
 				04D1758D24E4195C00F8929C /* GradientView.swift in Sources */,
 				049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */,
+				992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
 				049379AB24EB29160084051B /* ImpactHeaderView.swift in Sources */,
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
+				992BB63424ED930600638AA4 /* SortDescriptor.swift in Sources */,
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
 				04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
@@ -762,15 +799,18 @@
 				04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */,
 				04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
+				992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
 				99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
-				998913D524DE0907009ADBC1 /* PickupHistoryItemView.swift in Sources */,
+				998913D524DE0907009ADBC1 /* PickupHistoryCell.swift in Sources */,
 				0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */,
+				0445F05024EDEA7F00A0A665 /* ESBCircularImageView.swift in Sources */,
 				998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */,
 				998913D724DE0C34009ADBC1 /* Property.swift in Sources */,
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
+				992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */,
 				E2D302F524E5CA32008A6FAF /* User.swift in Sources */,
 				99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */,
 				9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */,
@@ -783,9 +823,9 @@
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
 				99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */,
 				04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */,
-				99B6176724EB25B40099664B /* PickupDetailView.swift in Sources */,
 				04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
+				0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */,
 				E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */,
 				998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */,
 				E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */,
@@ -819,14 +859,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		466C4279249A8748007D033E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				466C427A249A8748007D033E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		466C427E249A8749007D033E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

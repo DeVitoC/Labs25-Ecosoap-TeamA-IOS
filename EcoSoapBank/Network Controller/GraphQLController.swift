@@ -16,12 +16,9 @@ enum HTTPMethod: String {
 class GraphQLController {
 
     // MARK: - Properties
-    var loggedIn: Bool { token != nil }
 
     private let session: DataLoader
     private let url = URL(string: "http://35.208.9.187:9094/ios-api-1/")!
-
-    private var token: String?
 
     // Setting up the url request
     private lazy var request: URLRequest = {
@@ -36,10 +33,6 @@ class GraphQLController {
         self.session = session
     }
 
-    func provideToken(_ token: String) {
-        self.token = token
-    }
-
     // MARK: - Request methods
 
     /// Method for GraphQL query requests
@@ -50,7 +43,7 @@ class GraphQLController {
     ///   - completion: Completion handler that passes back a Result of type Profile or Error
     func queryRequest<T: Decodable>(_ type: T.Type,
                                     query: String,
-                                    variables: [Any] = [],
+                                    variables: [String: Any] = [:],
                                     completion: @escaping (Result<T, Error>) -> Void) {
         // Add body to query request
         let body: [String: Any] = ["query": query, "variables": variables]

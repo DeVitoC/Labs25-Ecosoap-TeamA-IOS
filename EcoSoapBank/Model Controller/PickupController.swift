@@ -12,11 +12,11 @@ import Combine
 
 protocol PickupDataProvider {
     func fetchAllPickups(
-        _ completion: @escaping (Result<[Pickup], Error>) -> Void)
+        _ completion: @escaping ResultHandler<[Pickup]>)
 
     func schedulePickup(
         _ pickupInput: Pickup.ScheduleInput,
-        completion: @escaping (Result<Pickup.ScheduleResult, Error>) -> Void)
+        completion: @escaping ResultHandler<Pickup.ScheduleResult>)
 }
 
 
@@ -43,17 +43,24 @@ class PickupController: ObservableObject {
     private var dataProvider: PickupDataProvider
     private var cancellables: Set<AnyCancellable> = []
 
+    private static let pickupSorter = sortDescriptor(keypath: \Pickup.readyDate,
+                                                     by: >)
+
     init(dataProvider: PickupDataProvider) {
         self.dataProvider = dataProvider
+        fetchAllPickups()
+            .handleError { [weak self] error in self?.error = error }
+            .sink { [weak self] pickups in
+                self?.pickups = pickups.sorted(by: Self.pickupSorter)
+        }.store(in: &cancellables)
+    }
 
-        self.dataProvider.fetchAllPickups { [weak self] result in
-            switch result {
-            case .success(let pickups):
-                self?.pickups = pickups
-            case .failure(let error):
-                self?.error = error
+    func fetchAllPickups() -> AnyPublisher<[Pickup], Error> {
+        Future { promise in
+            self.dataProvider.fetchAllPickups { result in
+                promise(result)
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     func schedulePickup(

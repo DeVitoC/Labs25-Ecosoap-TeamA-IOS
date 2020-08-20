@@ -52,7 +52,7 @@ import SwiftUI
 import UIKit
 
 
-struct Pickup: Identifiable, PickupBaseContainer {
+struct Pickup: Identifiable, PickupBaseContainer, Equatable {
     let base: Base
 
     let id: UUID
@@ -93,6 +93,12 @@ struct Pickup: Identifiable, PickupBaseContainer {
         self.id = id
         self.property = property
         self.confirmationCode = confirmationCode
+    }
+
+    static func == (lhs: Pickup, rhs: Pickup) -> Bool {
+        lhs.id == rhs.id
+            && lhs.confirmationCode == rhs.confirmationCode
+            && lhs.property.id == rhs.property.id
     }
 }
 
@@ -206,7 +212,7 @@ extension PickupBaseContainer {
 // MARK: - Convenience Extensions
 
 extension Pickup.Status {
-    var color: Color {
+    var color: UIColor {
         switch self {
         case .submitted:
             return .blue

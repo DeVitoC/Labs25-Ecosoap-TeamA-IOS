@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IRB-uG-CNi">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Muli-Bold.ttf">
+            <string>Muli-Bold</string>
+        </array>
+        <array key="Muli.ttf">
+            <string>Muli</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Pickup Detail View Controller-->
+        <scene sceneID="W1C-zS-kDU">
+            <objects>
+                <viewController id="IRB-uG-CNi" customClass="PickupDetailViewController" customModule="EcoSoapBank" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="foM-tI-Vnl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jOn-OL-d3H">
+                                <rect key="frame" x="20" y="124" width="374" height="752"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hha-Gt-cuf">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="27"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmation Code" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19H-bG-2Or">
+                                                <rect key="frame" x="0.0" y="0.0" width="187" height="27"/>
+                                                <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BNT-O9-yQt">
+                                                <rect key="frame" x="203" y="0.0" width="171" height="27"/>
+                                                <fontDescription key="fontDescription" name="Muli" family="Muli" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="st4-KQ-Yyz">
+                                        <rect key="frame" x="0.0" y="43" width="374" height="27"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7J-ib-vKm">
+                                                <rect key="frame" x="0.0" y="0.0" width="187" height="27"/>
+                                                <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nv-2C-j9I">
+                                                <rect key="frame" x="203" y="0.0" width="171" height="27"/>
+                                                <fontDescription key="fontDescription" name="Muli" family="Muli" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="LLF-a3-rwB">
+                                        <rect key="frame" x="0.0" y="86" width="374" height="27"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEP-6T-l63">
+                                                <rect key="frame" x="0.0" y="0.0" width="187" height="27"/>
+                                                <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zax-dq-Rbe">
+                                                <rect key="frame" x="203" y="0.0" width="171" height="27"/>
+                                                <fontDescription key="fontDescription" name="Muli" family="Muli" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Nsw-yV-TCs">
+                                        <rect key="frame" x="0.0" y="129" width="374" height="27"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pickup Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ryc-PR-AVy">
+                                                <rect key="frame" x="0.0" y="0.0" width="187" height="27"/>
+                                                <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMi-c0-Dqr">
+                                                <rect key="frame" x="203" y="0.0" width="171" height="27"/>
+                                                <fontDescription key="fontDescription" name="Muli" family="Muli" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EES-Ui-fRQ">
+                                        <rect key="frame" x="0.0" y="172" width="374" height="58"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ueA-Vw-wYx">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cartons" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFO-ya-QVm">
+                                                        <rect key="frame" x="0.0" y="0.0" width="187" height="50"/>
+                                                        <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" verticalCompressionResistancePriority="748" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3CB-6p-hGr">
+                                                        <rect key="frame" x="187" y="0.0" width="187" height="50"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="247" verticalCompressionResistancePriority="749" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="awl-2k-jj9">
+                                                <rect key="frame" x="0.0" y="58" width="374" height="0.0"/>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="753" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZeJ-Bj-laE">
+                                        <rect key="frame" x="0.0" y="246" width="374" height="506"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="256" verticalCompressionResistancePriority="749" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Hyz-uM-2Y2">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="27"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="256" verticalCompressionResistancePriority="749" text="Notes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrQ-aX-X2v">
+                                                        <rect key="frame" x="0.0" y="0.0" width="187" height="27"/>
+                                                        <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="256" verticalCompressionResistancePriority="749" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1g-AX-yMc">
+                                                        <rect key="frame" x="187" y="0.0" width="187" height="27"/>
+                                                        <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="755" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YRN-f7-3T7">
+                                                <rect key="frame" x="0.0" y="35" width="374" height="471"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="19H-bG-2Or" firstAttribute="trailing" secondItem="dFO-ya-QVm" secondAttribute="trailing" id="M8p-3Q-F4T"/>
+                                    <constraint firstItem="s7J-ib-vKm" firstAttribute="trailing" secondItem="19H-bG-2Or" secondAttribute="trailing" id="QBc-na-kd6"/>
+                                    <constraint firstItem="QEP-6T-l63" firstAttribute="trailing" secondItem="19H-bG-2Or" secondAttribute="trailing" id="ZNc-Sf-46S"/>
+                                    <constraint firstItem="RrQ-aX-X2v" firstAttribute="trailing" secondItem="19H-bG-2Or" secondAttribute="trailing" id="iyA-zC-VMD"/>
+                                    <constraint firstItem="Ryc-PR-AVy" firstAttribute="trailing" secondItem="19H-bG-2Or" secondAttribute="trailing" id="yhS-Xf-Kx1"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jOn-OL-d3H" firstAttribute="leading" secondItem="fWd-1u-ZFX" secondAttribute="leading" constant="20" id="3up-I6-xWh"/>
+                            <constraint firstItem="jOn-OL-d3H" firstAttribute="top" secondItem="fWd-1u-ZFX" secondAttribute="top" constant="80" id="A3X-r6-VVj"/>
+                            <constraint firstAttribute="bottom" secondItem="jOn-OL-d3H" secondAttribute="bottom" constant="20" id="V4f-wV-OJn"/>
+                            <constraint firstItem="fWd-1u-ZFX" firstAttribute="trailing" secondItem="jOn-OL-d3H" secondAttribute="trailing" constant="20" id="zPI-gX-uYA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fWd-1u-ZFX"/>
+                    </view>
+                    <connections>
+                        <outlet property="cartonStack" destination="awl-2k-jj9" id="PZy-ay-cDv"/>
+                        <outlet property="confirmationCodeLabel" destination="BNT-O9-yQt" id="Lhw-eh-JDF"/>
+                        <outlet property="notesView" destination="YRN-f7-3T7" id="zfy-7p-Oax"/>
+                        <outlet property="pickupDateLabel" destination="OMi-c0-Dqr" id="n6r-0n-3B2"/>
+                        <outlet property="readyDateLabel" destination="Zax-dq-Rbe" id="iLt-9u-pf8"/>
+                        <outlet property="statusLabel" destination="2nv-2C-j9I" id="oPa-Np-kiT"/>
+                        <outletCollection property="headingLabels" destination="19H-bG-2Or" collectionClass="NSMutableArray" id="ljh-3L-UuY"/>
+                        <outletCollection property="headingLabels" destination="s7J-ib-vKm" collectionClass="NSMutableArray" id="JgL-Vz-G19"/>
+                        <outletCollection property="headingLabels" destination="QEP-6T-l63" collectionClass="NSMutableArray" id="789-rA-KXH"/>
+                        <outletCollection property="headingLabels" destination="Ryc-PR-AVy" collectionClass="NSMutableArray" id="6aX-d4-qA4"/>
+                        <outletCollection property="headingLabels" destination="dFO-ya-QVm" collectionClass="NSMutableArray" id="iFX-nz-rpi"/>
+                        <outletCollection property="headingLabels" destination="RrQ-aX-X2v" collectionClass="NSMutableArray" id="tib-Tn-g5Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CaQ-D1-9Fm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>
+        </scene>
+    </scenes>
+</document>

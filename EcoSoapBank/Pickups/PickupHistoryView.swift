@@ -13,15 +13,12 @@ struct PickupHistoryView: View {
 
     init(pickupController: PickupController) {
         self.pickupController = pickupController
-
-        UITableView.appearance().backgroundColor = .clear
-//        UITableViewCell.appearance().backgroundColor = .clear
     }
 
     var body: some View {
         List {
             ForEach(pickupController.pickups) {
-                PickupHistoryListItem(pickup: $0)
+                PickupHistoryCell(pickup: $0)
             }
         }.listBackgroundColor(color: .esbGreen)
     }

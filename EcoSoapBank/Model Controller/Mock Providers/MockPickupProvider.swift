@@ -11,10 +11,6 @@ import Foundation
 
 /// For placeholder and testing purposes.
 class MockPickupProvider {
-    enum Error: Swift.Error {
-        case shouldFail
-    }
-
     /// Set to `true` for testing networking failures
     var shouldFail: Bool
 
@@ -29,7 +25,7 @@ extension MockPickupProvider: PickupDataProvider {
     /// (or `MockPickupProvider.Error.shouldFail` if `shouldFail` instance property is set to `true`).
     func fetchAllPickups(_ completion: @escaping (Result<[Pickup], Swift.Error>) -> Void) {
         guard !shouldFail else {
-            completion(.failure(Self.Error.shouldFail))
+            completion(.mockFailure())
             return
         }
         completion(.success(.random()))
@@ -41,7 +37,7 @@ extension MockPickupProvider: PickupDataProvider {
     ) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             guard !self.shouldFail else {
-                completion(.failure(Self.Error.shouldFail))
+                completion(.mockFailure())
                 return
             }
             completion(.success(.mock(from: pickupInput)))
@@ -79,7 +75,7 @@ extension Pickup {
         Pickup(
             base: input.base,
             id: UUID(),
-            confirmationCode: UUID().uuidString,
+            confirmationCode: mockConfirmationCode(),
             cartons: input.cartons.map {
                 Pickup.Carton(id: UUID(), contents: $0)
             },
@@ -100,7 +96,7 @@ extension Pickup {
         Pickup(
             base: .random(),
             id: UUID(),
-            confirmationCode: UUID().uuidString,
+            confirmationCode: mockConfirmationCode(),
             cartons: .random(),
             property: Property(id: 4,
                                name: "Hilton",
@@ -140,7 +136,7 @@ extension Pickup.Base {
             status: status,
             readyDate: Date(timeIntervalSinceNow: .days(daysSinceReady)),
             pickupDate: pickupDate,
-            notes: Bool.random() ? UUID().uuidString : "")
+            notes: mockNotes())
     }
 }
 
@@ -211,5 +207,21 @@ extension Pickup.CartonContents {
 extension Pickup.Carton {
     static func random() -> Pickup.Carton {
         Pickup.Carton(id: UUID(), contents: .random())
+    }
+}
+
+// swiftlint:disable private_over_fileprivate
+fileprivate func mockConfirmationCode() -> String {
+    let longCode = UUID().uuidString
+    return String(longCode.dropLast(longCode.count - 7))
+}
+
+fileprivate func mockNotes() -> String {
+    let hasNotes = Bool.random()
+
+    guard hasNotes else { return "" }
+
+    return (1...10).reduce(into: "") { result, _ in
+        result += UUID().uuidString
     }
 }

@@ -27,6 +27,10 @@ extension Text {
     static func += (lhs: inout Text, rhs: Text) {
         lhs = lhs + rhs
     }
+
+    func font(_ uiFont: UIFont) -> Text {
+        font(Font(uiFont))
+    }
 }
 
 
@@ -46,6 +50,14 @@ extension Array where Element == String {
         }.uiText()
     }
 }
+
+
+extension View {
+    func font(_ uiFont: UIFont) -> some View {
+        font(Font(uiFont))
+    }
+}
+
 
 // MARK: - Binding
 

@@ -91,6 +91,23 @@ class UtilityTests: XCTestCase {
         
         XCTAssertEqual(weightString, "2.2 lb")
     }
+
+    func testSortDescriptors() {
+        let strings = ["blep", "a", "zephyr", "quizaciously"]
+        let empty = [String]()
+        let mockPickups = [Pickup].random()
+
+        let sortByStringCount = sortDescriptor(keypath: \String.count)
+        let sortByReadyDate = sortDescriptor(keypath: \Pickup.readyDate,
+                                             ascending: false)
+        XCTAssertEqual(
+            strings.sorted(by: sortByStringCount),
+            ["a", "blep", "zephyr", "quizaciously"])
+        XCTAssertEqual(empty.sorted(by: sortByStringCount), empty)
+        XCTAssertEqual(
+            mockPickups.sorted(by: sortByReadyDate),
+            mockPickups.sorted(by: { $0.readyDate > $1.readyDate }))
+    }
 }
 
 enum TestError: Error {

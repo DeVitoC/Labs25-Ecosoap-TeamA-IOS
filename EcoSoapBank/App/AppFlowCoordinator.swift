@@ -16,17 +16,15 @@ class AppFlowCoordinator: FlowCoordinator {
     private(set) lazy var tabBarController = UITabBarController()
 
     private(set) lazy var impactCoord = ImpactCoordinator()
+    // when backend ready: PickupCoordinator(dataProvider: appQuerier)
     private(set) lazy var pickupCoord = PickupCoordinator()
     private(set) lazy var loginCoord = LoginCoordinator(
         root: tabBarController,
-        delegate: self)
+        userController: userController,
+        onLoginComplete: { [weak self] in self?.onLoginComplete() })
+    private(set) var userController = UserController(dataLoader: MockLoginProvider())
 
-    let oktaAuth = OktaAuth(
-        baseURL: URL(string: "https://auth.lambdalabs.dev/")!,
-        clientID: "0oalwkxvqtKeHBmLI4x6",
-        redirectURI: "labs://scaffolding/implicit/callback")
-
-    private let networkController = GraphQLController()
+    private var appQuerier = AppQuerier()
 
     init(window: UIWindow) {
         self.window = window
@@ -62,26 +60,39 @@ class AppFlowCoordinator: FlowCoordinator {
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
 
-        if networkController.loggedIn {
-            impactCoord.start()
-            pickupCoord.start()
+        if appQuerier.loggedIn {
+            onLoginComplete()
         } else {
             loginCoord.start()
         }
     }
-}
 
-extension AppFlowCoordinator: LoginCoordinatorDelegate {
-    var loginURL: URL? { oktaAuth.identityAuthURL() }
-
-    func loginDidComplete() {
-        guard let token = try? oktaAuth.credentialsIfAvailable().accessToken else {
-            preconditionFailure("Auth missing after successful login")
-            // TODO: handle missing token after login
+    func presentLoginFailAlert(error: Error? = nil) {
+        let userError = error as? UserFacingError
+        if tabBarController.presentedViewController != nil {
+            tabBarController.dismiss(animated: true) { [weak self] in
+                self?.presentLoginFailAlert(error: error)
+            }
         }
-        networkController.provideToken(token)
-        impactCoord.start()
-        pickupCoord.start()
-        tabBarController.dismiss(animated: true, completion: nil)
+        let message = userError?.userFacingDescription
+            ?? "An unknown error occurred while logging in. Please try again."
+        tabBarController.presentSimpleAlert(
+            with: "Login failed",
+            message: message,
+            preferredStyle: .alert,
+            dismissText: "OK"
+        ) { [weak self] _ in
+            self?.loginCoord.start()
+        }
+    }
+
+    private func onLoginComplete() {
+        DispatchQueue.main.async { [weak self] in
+            self?.impactCoord.start()
+            self?.pickupCoord.start()
+            if self?.tabBarController.presentedViewController != nil {
+                self?.tabBarController.dismiss(animated: true, completion: nil)
+            }
+        }
     }
 }
