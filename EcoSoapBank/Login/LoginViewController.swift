@@ -27,8 +27,8 @@ class LoginViewController: UIViewController {
         view.addSubview(logo)
         
         logo.centerHorizontallyInSuperview()
-        logo.centerVerticallyInSuperview(multiplier: 0.5)
-        logo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        logo.centerVerticallyInSuperview(multiplier: 0.7)
+        logo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.45).isActive = true
         
         
         let button = configure(ESBButton()) {

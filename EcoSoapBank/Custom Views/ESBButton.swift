@@ -47,7 +47,7 @@ class ESBButton: UIButton {
     
     override var intrinsicContentSize: CGSize {
         var size = super.intrinsicContentSize
-        size.height = 44
+        size.height = 50
         return size
     }
 }
