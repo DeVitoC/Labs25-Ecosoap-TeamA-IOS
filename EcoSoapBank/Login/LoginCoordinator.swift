@@ -7,13 +7,33 @@
 //
 
 import UIKit
-import OktaAuth
+import Combine
 
 
-protocol LoginCoordinatorDelegate: AnyObject {
-    var loginURL: URL? { get }
-    
-    func loginDidComplete()
+enum LoginError: UserFacingError {
+    case notLoggedIn
+    case loginFailed
+    case expiredCredentials
+    case oktaFailure
+    case other(Error)
+    case unknown
+
+    var userFacingDescription: String? {
+        switch self {
+        case .notLoggedIn:
+            return "You're currently logged out."
+        case .loginFailed:
+            return "Login failed."
+        case .expiredCredentials:
+            return "Your Okta credentials have expired."
+        case .oktaFailure:
+            return "There's a problem with Okta's service."
+        case .other(let otherError):
+            return (otherError as? UserFacingError)?.userFacingDescription
+        case .unknown:
+            return nil
+        }
+    }
 }
 
 
@@ -21,29 +41,37 @@ class LoginCoordinator: FlowCoordinator {
     private var rootVC: UIViewController
     private lazy var loginVC = LoginViewController(delegate: self)
 
-    private weak var delegate: LoginCoordinatorDelegate?
+    private var userController: UserController
 
     private var observers: [NSObjectProtocol] = []
+    private var cancellables = Set<AnyCancellable>()
+
+    private var onLoginComplete: () -> Void
 
     // MARK: - Init/Start
 
-    init(root: UIViewController, delegate: LoginCoordinatorDelegate) {
+    init(
+        root: UIViewController,
+        userController: UserController,
+        onLoginComplete: @escaping () -> Void
+    ) {
         self.rootVC = root
-        self.delegate = delegate
-
-        loginVC.modalPresentationStyle = .fullScreen
+        self.userController = userController
+        self.onLoginComplete = onLoginComplete
         
-        let authSuccessObserver = NotificationCenter.default.addObserver(
-            forName: .oktaAuthenticationSuccessful,
-            object: nil,
-            queue: .main,
-            using: loginDidComplete)
-        let authExpiredObserver = NotificationCenter.default.addObserver(
-            forName: .oktaAuthenticationExpired,
-            object: nil,
-            queue: .main,
-            using: alertUserOfExpiredCredentials)
-        observers.append(contentsOf: [authSuccessObserver, authExpiredObserver])
+        loginVC.modalPresentationStyle = .fullScreen
+
+        NotificationCenter.default
+            .publisher(for: .oktaAuthenticationExpired)
+            .map { _ in LoginError.expiredCredentials }
+            .sink(receiveValue: alertUserOfLoginError(_:))
+            .store(in: &cancellables)
+        userController.userPublisher
+            .handleError(alertUserOfLoginError(_:))
+            .compactMap { $0 }
+            .map { _ in () }
+            .sink(receiveValue: onLoginComplete)
+            .store(in: &cancellables)
     }
 
     deinit {
@@ -62,21 +90,17 @@ extension LoginCoordinator {
         rootVC.present(loginVC, animated: true, completion: nil)
     }
 
-    private func alertUserOfExpiredCredentials(_ notification: Notification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak rootVC] in
-            rootVC?.presentSimpleAlert(
-                with: "Your Okta credentials have expired",
-                message: "Please sign in again",
+    private func alertUserOfLoginError(_ error: Error) {
+        let message = "Please log in."
+        let title = (error as? UserFacingError)?.userFacingDescription
+                        ?? "Login failed"
+        (self.rootVC.presentedViewController ?? self.rootVC)?
+            .presentSimpleAlert(
+                with: title,
+                message: message,
                 preferredStyle: .alert,
-                dismissText: "OK") { [weak self] _ in
-                    self?.showLoginScreen()
-            }
-
-        }
-    }
-
-    private func loginDidComplete(_ notification: Notification) {
-        delegate?.loginDidComplete()
+                dismissText: "OK",
+                completionUponDismissal: { [weak self] _ in self?.start() })
     }
 }
 
@@ -84,9 +108,8 @@ extension LoginCoordinator {
 
 extension LoginCoordinator: LoginViewControllerDelegate {
     func login() {
-        guard let loginURL = delegate?.loginURL else {
-            NSLog("Cannot get login URL for Okta Auth")
-            return // TODO: handle faulty login URL?
+        guard let loginURL = userController.oktaLoginURL else {
+            return alertUserOfLoginError(LoginError.oktaFailure)
         }
         UIApplication.shared.open(loginURL)
     }

@@ -12,11 +12,11 @@ import Combine
 
 protocol PickupDataProvider {
     func fetchAllPickups(
-        _ completion: @escaping (Result<[Pickup], Error>) -> Void)
+        _ completion: @escaping ResultHandler<[Pickup]>)
 
     func schedulePickup(
         _ pickupInput: Pickup.ScheduleInput,
-        completion: @escaping (Result<Pickup.ScheduleResult, Error>) -> Void)
+        completion: @escaping ResultHandler<Pickup.ScheduleResult>)
 }
 
 
