@@ -36,23 +36,9 @@ class AppQuerier {
     func provideToken(_ token: String) {
         self.token = token
     }
-
-    private func query<T: Decodable>(
-        expecting resultType: T.Type,
-        query: String,
-        options: [String: Any] = [:],
-        completion: @escaping NetworkCompletion<T>
-    ) {
-        guard let token = token else {
-            completion(.failure(AppQueryError.noToken))
-            return
-        }
-        var variables: [String: Any] = ["token": token]
-        options.forEach { key, value in variables[key] = value }
-        networkService.queryRequest(T.self, query: query, completion: completion)
-    }
 }
 
+// MARK: - Data Loader Conformance
 
 extension AppQuerier: UserDataProvider {
     func logIn(_ completion: @escaping ResultHandler<User>) {
@@ -75,5 +61,26 @@ extension AppQuerier: PickupDataProvider {
     ) {
         completion(.failure(AppQueryError.unimplemented))
         // TODO
+    }
+}
+
+// MARK: - Private
+
+extension AppQuerier {
+    private func query<T: Decodable>(
+        expecting resultType: T.Type,
+        query: String,
+        options: [String: Any] = [:],
+        completion: @escaping ResultHandler<T>
+    ) {
+        guard let token = token else {
+            return completion(.failure(AppQueryError.noToken))
+        }
+        var finalVariables: [String: Any] = ["token": token]
+        options.forEach { key, value in finalVariables[key] = value }
+        networkService.queryRequest(T.self,
+                                    query: query,
+                                    variables: finalVariables,
+                                    completion: completion)
     }
 }
