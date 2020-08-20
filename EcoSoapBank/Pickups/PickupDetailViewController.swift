@@ -112,7 +112,7 @@ extension PickupDetailViewController {
         let pickup: Pickup
 
         func makeUIViewController(context: Context) -> PickupDetailViewController {
-            UIStoryboard.forViewController(PickupDetailViewController.self)
+            UIStoryboard.for(PickupDetailViewController.self)
                 .instantiateInitialViewController { coder in
                     PickupDetailViewController(coder: coder, pickup: self.pickup)!
                 }!

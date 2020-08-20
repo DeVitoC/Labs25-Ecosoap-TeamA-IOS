@@ -12,7 +12,7 @@ import UIKit
 extension UIStoryboard {
     static let main = UIStoryboard(name: "Main", bundle: nil)
 
-    static func forViewController<VC: UIViewController>(
+    static func `for`<VC: UIViewController>(
         _ viewController: VC.Type
     ) -> UIStoryboard {
         UIStoryboard(name: String(describing: VC.self), bundle: nil)
