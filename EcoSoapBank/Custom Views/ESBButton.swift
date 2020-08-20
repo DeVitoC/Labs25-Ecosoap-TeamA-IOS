@@ -20,34 +20,15 @@ class ESBButton: UIButton {
     }
     
     private func setUp() {
-        let borderView = configure(GradientView()) {
-            $0.startPoint = CGPoint(x: 0, y: 0)
-            $0.endPoint = CGPoint(x: 1, y: 0)
-            $0.colors = [.esbGreen, .downyBlue]
-            $0.layer.borderColor = UIColor.white.cgColor
-            $0.layer.borderWidth = 2.0
-            $0.layer.cornerRadius = 8.0
-            $0.isUserInteractionEnabled = false
-        }
-        
-        addSubview(borderView)
-        borderView.fillSuperview()
-        
-        let backgroundView = configure(UIView()) {
-            $0.backgroundColor = .white
-            $0.layer.cornerRadius = 5.0
-            $0.isUserInteractionEnabled = false
-        }
-
-        addSubview(backgroundView)
-        backgroundView.constrain(with: backgroundView.constraints(from: self, toSides: .all, constant: 6))
-        
         setTitleColor(.esbGreen, for: .normal)
+        backgroundColor = .white
+        layer.cornerRadius = 8.0
+        titleLabel?.font = .muli( style: .body, typeface: .semiBold)
     }
     
     override var intrinsicContentSize: CGSize {
         var size = super.intrinsicContentSize
-        size.height = 50
+        size.height = 46
         return size
     }
 }
