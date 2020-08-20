@@ -17,13 +17,31 @@ protocol LoginViewControllerDelegate: AnyObject {
 class LoginViewController: UIViewController {
     weak var delegate: LoginViewControllerDelegate?
     
+    // MARK: - Init
+    
+    init(delegate: LoginViewControllerDelegate?) {
+        super.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+    }
+    
+    @available(*, unavailable) required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - View Lifecycle
+    
     override func loadView() {
         view = BackgroundView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setUpSubviews()
+    }
+    
+    // MARK: - Private Methods
+    
+    func setUpSubviews() {
         let logo = ESBCircularImageView(image: UIImage(named: "esbLogoWhite")!)
         view.addSubview(logo)
         
@@ -48,27 +66,17 @@ class LoginViewController: UIViewController {
         missionStatementLabel.centerHorizontallyInSuperview()
         missionStatementLabel.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 40).isActive = true
         
-        
-        let button = configure(ESBButton()) {
+        let signInButton = configure(ESBButton()) {
             $0.setTitle("SIGN IN WITH OKTA", for: .normal)
             $0.addTarget(self, action: #selector(signIn(_:)), for: .touchUpInside)
         }
         
-        view.addSubview(button)
+        view.addSubview(signInButton)
         
-        button.centerVerticallyInSuperview(multiplier: 1.7)
-        button.constrain(with: button.constraints(from: view,
+        signInButton.centerVerticallyInSuperview(multiplier: 1.7)
+        signInButton.constrain(with: signInButton.constraints(from: view,
                                                   toSides: [LayoutSide.leading, LayoutSide.trailing],
                                                   constant: 40))
-    }
-    
-    init(delegate: LoginViewControllerDelegate?) {
-        super.init(nibName: nil, bundle: nil)
-        self.delegate = delegate
-    }
-    
-    @available(*, unavailable) required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Actions
