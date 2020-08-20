@@ -99,6 +99,7 @@
 		992BB63C24EDD01F00638AA4 /* PickupDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */; };
 		992BB63E24EEE21300638AA4 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63D24EEE21300638AA4 /* UserController.swift */; };
 		992BB64024EEE58700638AA4 /* AppQuerier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63F24EEE58600638AA4 /* AppQuerier.swift */; };
+		992BB64324EEFBAD00638AA4 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64224EEFBAD00638AA4 /* UserFacingError.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
@@ -215,6 +216,7 @@
 		992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PickupDetailViewController.storyboard; sourceTree = "<group>"; };
 		992BB63D24EEE21300638AA4 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		992BB63F24EEE58600638AA4 /* AppQuerier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppQuerier.swift; sourceTree = "<group>"; };
+		992BB64224EEFBAD00638AA4 /* UserFacingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFacingError.swift; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				E2D302FE24E5F464008A6FAF /* DataLoader.swift */,
 				E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */,
 				99B6177024EC3D000099664B /* Publisher+HandleError.swift */,
+				992BB64224EEFBAD00638AA4 /* UserFacingError.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -782,6 +785,7 @@
 				998913D724DE0C34009ADBC1 /* Property.swift in Sources */,
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
+				992BB64324EEFBAD00638AA4 /* UserFacingError.swift in Sources */,
 				E2D302F524E5CA32008A6FAF /* User.swift in Sources */,
 				99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */,
 				9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */,
