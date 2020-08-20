@@ -13,14 +13,15 @@ import Combine
 
 class PickupCoordinator: FlowCoordinator {
     private let pickupController: PickupController
+    private var user: User?
 
     private(set) lazy var rootVC: UIViewController = UIHostingController(
         rootView: PickupsView(pickupController: pickupController))
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(pickupController: PickupController) {
-        self.pickupController = pickupController
+    init(dataProvider: PickupDataProvider) {
+        self.pickupController = PickupController(dataProvider: dataProvider)
 
         pickupController.pickupScheduleResult
             .handleError(handleError(_:))
@@ -33,8 +34,7 @@ class PickupCoordinator: FlowCoordinator {
     }
 
     convenience init() {
-        self.init(pickupController:
-            PickupController(dataProvider: MockPickupProvider()))
+        self.init(dataProvider: MockPickupProvider())
     }
 
     func start() {
@@ -46,6 +46,10 @@ class PickupCoordinator: FlowCoordinator {
                     pointSize: 22,
                     weight: .regular)),
             tag: 1)
+    }
+
+    func provideUser(_ user: User) {
+        self.user = user
     }
 }
 
