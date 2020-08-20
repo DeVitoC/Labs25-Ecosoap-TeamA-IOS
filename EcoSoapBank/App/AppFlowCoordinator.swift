@@ -26,7 +26,7 @@ class AppFlowCoordinator: FlowCoordinator {
         clientID: "0oalwkxvqtKeHBmLI4x6",
         redirectURI: "labs://scaffolding/implicit/callback")
 
-    private let networkController = GraphQLController()
+    private var appQuerier = AppQuerier()
 
     init(window: UIWindow) {
         self.window = window
@@ -62,7 +62,7 @@ class AppFlowCoordinator: FlowCoordinator {
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
 
-        if networkController.loggedIn {
+        if appQuerier.loggedIn {
             impactCoord.start()
             pickupCoord.start()
         } else {
@@ -79,7 +79,7 @@ extension AppFlowCoordinator: LoginCoordinatorDelegate {
             preconditionFailure("Auth missing after successful login")
             // TODO: handle missing token after login
         }
-        networkController.provideToken(token)
+        appQuerier.provideToken(token)
         impactCoord.start()
         pickupCoord.start()
         tabBarController.dismiss(animated: true, completion: nil)

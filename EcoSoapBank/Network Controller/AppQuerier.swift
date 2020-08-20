@@ -13,11 +13,19 @@ typealias NetworkCompletion<T> = (Result<T, Error>) -> Void
 
 
 class AppQuerier {
+    private var token: String?
     private var networkService: GraphQLController
-    private var token: String
 
-    init(networkService: GraphQLController, token: String) {
+    var loggedIn: Bool { token != nil }
+
+    init(token: String? = nil,
+         networkService: GraphQLController = GraphQLController()
+    ) {
+        self.token = token
         self.networkService = networkService
+    }
+
+    func provideToken(_ token: String) {
         self.token = token
     }
 
@@ -27,11 +35,16 @@ class AppQuerier {
         options: [String: Any] = [:],
         completion: @escaping NetworkCompletion<T>
     ) {
+        guard let token = token else {
+            completion(.failure(AppQueryError.noToken))
+            return
+        }
         var variables: [String: Any] = ["token": token]
         options.forEach { key, value in variables[key] = value }
         networkService.queryRequest(T.self, query: query, completion: completion)
     }
 }
+
 
 extension AppQuerier: UserDataProvider {
     func logIn(_ completion: @escaping NetworkCompletion<User>) {
@@ -41,15 +54,25 @@ extension AppQuerier: UserDataProvider {
     }
 }
 
+
 extension AppQuerier: PickupDataProvider {
     func fetchAllPickups(_ completion: @escaping NetworkCompletion<[Pickup]>) {
-        fatalError("TODO")
+        completion(.failure(AppQueryError.unknown))
+        // TODO
     }
 
     func schedulePickup(
         _ pickupInput: Pickup.ScheduleInput,
         completion: @escaping NetworkCompletion<Pickup.ScheduleResult>
     ) {
-        fatalError("TODO")
+        completion(.failure(AppQueryError.unknown))
+        // TODO
     }
+}
+
+
+enum AppQueryError: Error {
+    case noToken
+    case other(Error)
+    case unknown
 }

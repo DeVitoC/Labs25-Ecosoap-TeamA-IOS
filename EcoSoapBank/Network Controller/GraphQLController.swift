@@ -16,12 +16,9 @@ enum HTTPMethod: String {
 class GraphQLController {
 
     // MARK: - Properties
-    var loggedIn: Bool { token != nil }
 
     private let session: DataLoader
     private let url = URL(string: "http://35.208.9.187:9094/ios-api-1/")!
-
-    private var token: String?
 
     // Setting up the url request
     private lazy var request: URLRequest = {
@@ -34,10 +31,6 @@ class GraphQLController {
     // MARK: - INIT
     init(session: DataLoader = URLSession.shared) {
         self.session = session
-    }
-
-    func provideToken(_ token: String) {
-        self.token = token
     }
 
     // MARK: - Request methods
