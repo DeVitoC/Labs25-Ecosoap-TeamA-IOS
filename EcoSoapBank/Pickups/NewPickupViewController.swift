@@ -179,7 +179,7 @@ extension NewPickupViewController {
             }
             self.tableViewHeight.constant =
                 self.tableView.contentSize.height
-                - CGFloat(cartons.count * 8)
+                - (CGFloat(cartons.count) * 7.5)
         }
     }
 }
