@@ -12,5 +12,17 @@ import Foundation
 /// An error that may be presented to the user.
 protocol UserFacingError: Error {
     /// A short description of the error to be displayed to the user. Should be short and layperson-friendly.
-    var userFacingDescription: String { get }
+    var userFacingDescription: String? { get }
+}
+
+
+enum MockError: Error {
+    case shouldFail
+}
+
+
+extension Result where Failure == Error {
+    static func mockFailure() -> Result<Success, Failure> {
+        Result.failure(MockError.shouldFail)
+    }
 }

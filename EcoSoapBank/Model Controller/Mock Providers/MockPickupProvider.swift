@@ -11,10 +11,6 @@ import Foundation
 
 /// For placeholder and testing purposes.
 class MockPickupProvider {
-    enum Error: Swift.Error {
-        case shouldFail
-    }
-
     /// Set to `true` for testing networking failures
     var shouldFail: Bool
 
@@ -29,7 +25,7 @@ extension MockPickupProvider: PickupDataProvider {
     /// (or `MockPickupProvider.Error.shouldFail` if `shouldFail` instance property is set to `true`).
     func fetchAllPickups(_ completion: @escaping (Result<[Pickup], Swift.Error>) -> Void) {
         guard !shouldFail else {
-            completion(.failure(Self.Error.shouldFail))
+            completion(.mockFailure())
             return
         }
         completion(.success(.random()))
@@ -41,7 +37,7 @@ extension MockPickupProvider: PickupDataProvider {
     ) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             guard !self.shouldFail else {
-                completion(.failure(Self.Error.shouldFail))
+                completion(.mockFailure())
                 return
             }
             completion(.success(.mock(from: pickupInput)))

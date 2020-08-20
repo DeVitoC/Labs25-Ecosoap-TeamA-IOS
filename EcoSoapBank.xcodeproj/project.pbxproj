@@ -100,7 +100,9 @@
 		992BB63C24EDD01F00638AA4 /* PickupDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */; };
 		992BB63E24EEE21300638AA4 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63D24EEE21300638AA4 /* UserController.swift */; };
 		992BB64024EEE58700638AA4 /* AppQuerier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63F24EEE58600638AA4 /* AppQuerier.swift */; };
-		992BB64324EEFBAD00638AA4 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64224EEFBAD00638AA4 /* UserFacingError.swift */; };
+		992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64224EEFBAD00638AA4 /* Errors.swift */; };
+		992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64424EF021600638AA4 /* MockLoginProvider.swift */; };
+		992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
@@ -218,7 +220,9 @@
 		992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PickupDetailViewController.storyboard; sourceTree = "<group>"; };
 		992BB63D24EEE21300638AA4 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		992BB63F24EEE58600638AA4 /* AppQuerier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppQuerier.swift; sourceTree = "<group>"; };
-		992BB64224EEFBAD00638AA4 /* UserFacingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFacingError.swift; sourceTree = "<group>"; };
+		992BB64224EEFBAD00638AA4 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		992BB64424EF021600638AA4 /* MockLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoginProvider.swift; sourceTree = "<group>"; };
+		992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OktaAuth+Shared.swift"; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
@@ -408,7 +412,7 @@
 				E2D302FE24E5F464008A6FAF /* DataLoader.swift */,
 				E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */,
 				99B6177024EC3D000099664B /* Publisher+HandleError.swift */,
-				992BB64224EEFBAD00638AA4 /* UserFacingError.swift */,
+				992BB64224EEFBAD00638AA4 /* Errors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -430,10 +434,10 @@
 		46BEB4EC24C98EBB00FE0CD1 /* Model Controller */ = {
 			isa = PBXGroup;
 			children = (
-				998913D024DDFF96009ADBC1 /* PickupController.swift */,
 				04FEE1B524E48AB000F51D69 /* ImpactController.swift */,
-				9983874724E33A0600450244 /* MockPickupProvider.swift */,
+				998913D024DDFF96009ADBC1 /* PickupController.swift */,
 				992BB63D24EEE21300638AA4 /* UserController.swift */,
+				992BB64624EF08E400638AA4 /* Mock Providers */,
 			);
 			path = "Model Controller";
 			sourceTree = "<group>";
@@ -474,6 +478,15 @@
 				049379A624EAE9FF0084051B /* UIView+Layout.swift */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		992BB64624EF08E400638AA4 /* Mock Providers */ = {
+			isa = PBXGroup;
+			children = (
+				9983874724E33A0600450244 /* MockPickupProvider.swift */,
+				992BB64424EF021600638AA4 /* MockLoginProvider.swift */,
+			);
+			path = "Mock Providers";
 			sourceTree = "<group>";
 		};
 		994E4B6D24DDAEA800C12921 /* Impact */ = {
@@ -546,6 +559,7 @@
 				E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */,
 				E2B961B324E45BF800C5DF8B /* QueryObjects.swift */,
 				992BB63F24EEE58600638AA4 /* AppQuerier.swift */,
+				992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */,
 			);
 			path = "Network Controller";
 			sourceTree = "<group>";
@@ -753,6 +767,7 @@
 				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
 				992BB64024EEE58700638AA4 /* AppQuerier.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
+				992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */,
 				99B6176124EB0C4E0099664B /* PickupCartonCell.swift in Sources */,
 				9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */,
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
@@ -778,6 +793,7 @@
 				04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */,
 				04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
+				992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
 				99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
@@ -788,7 +804,7 @@
 				998913D724DE0C34009ADBC1 /* Property.swift in Sources */,
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
-				992BB64324EEFBAD00638AA4 /* UserFacingError.swift in Sources */,
+				992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */,
 				E2D302F524E5CA32008A6FAF /* User.swift in Sources */,
 				99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */,
 				9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */,
