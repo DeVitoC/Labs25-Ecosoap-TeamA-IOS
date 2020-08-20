@@ -1,7 +1,7 @@
 {
     "data": {
         "userById": {
-            "id": 4,
+            "id": "4",
             "firstName": "Christopher",
             "middleName": "Brian",
             "lastName": "DeVito",
@@ -12,7 +12,7 @@
             "skype": "skypeID",
             "properties": [
                 {
-                    "id": 5,
+                    "id": "5",
                     "name": "Hilton Hotel",
                     "propertyType": "HOTEL",
                     "rooms": 200,

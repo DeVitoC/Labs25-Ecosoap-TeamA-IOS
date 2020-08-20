@@ -11,7 +11,7 @@
             "readyDate": "2020-08-20",
             "pickupDate": "2020-08-20",
             "property": {
-                "id": 5,
+                "id": "5",
                 "name": "Hilton1",
                 "propertyType": "HOTEL",
                 "rooms": 200,
@@ -42,7 +42,7 @@
             "readyDate": "2020-08-21",
             "pickupDate": "2020-08-21",
             "property": {
-                "id": 5,
+                "id": "5",
                 "name": "Hilton1",
                 "propertyType": "HOTEL",
                 "rooms": 200,
