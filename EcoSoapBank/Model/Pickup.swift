@@ -55,12 +55,12 @@ import UIKit
 struct Pickup: Identifiable, PickupBaseContainer, Equatable {
     let base: Base
 
-    let id: UUID
+    let id: String
     let confirmationCode: String
     let cartons: [Carton]
     let property: Property
 
-    internal init(base: Pickup.Base, id: UUID, confirmationCode: String, cartons: [Pickup.Carton], property: Property) {
+    internal init(base: Pickup.Base, id: String, confirmationCode: String, cartons: [Pickup.Carton], property: Property) {
         self.base = base
         self.id = id
         self.confirmationCode = confirmationCode
@@ -73,7 +73,7 @@ struct Pickup: Identifiable, PickupBaseContainer, Equatable {
         let container = try decoder.container(keyedBy: PickupKeys.self)
 
         // Decodes all top level values from JSON
-        let id = try container.decode(UUID.self, forKey: .id)
+        let id = try container.decode(String.self, forKey: .id)
         let confirmationCode = try container.decode(String.self, forKey: .confirmationCode)
         let collectionType = try container.decode(CollectionType.self, forKey: .collectionType)
         let status = try container.decode(Status.self, forKey: .status)
