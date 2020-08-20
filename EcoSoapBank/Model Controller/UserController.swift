@@ -21,7 +21,6 @@ class UserController {
     private var dataLoader: UserDataProvider
 
     private var userSubject = CurrentValueSubject<User?, Error>(nil)
-
     private var cancellables: Set<AnyCancellable> = []
 
     init(dataLoader: UserDataProvider) {
@@ -34,13 +33,14 @@ class UserController {
     }
 }
 
+// MARK: - Public
 
 extension UserController {
-    var oktaLoginURL: URL? { oktaAuth.identityAuthURL() }
     var user: User? { userSubject.value }
     var userPublisher: AnyPublisher<User?, Error> {
         userSubject.eraseToAnyPublisher()
     }
+    var oktaLoginURL: URL? { oktaAuth.identityAuthURL() }
 
     func logInWithBearer() -> Future<User, Error> {
         Future { promise in
@@ -54,6 +54,7 @@ extension UserController {
     }
 }
 
+// MARK: - Private
 
 extension UserController {
     private var oktaAuth: OktaAuth { OktaAuth.shared }
