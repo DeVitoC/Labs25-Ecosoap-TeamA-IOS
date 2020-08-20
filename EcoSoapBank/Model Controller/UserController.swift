@@ -60,8 +60,7 @@ extension UserController {
     
     private func loginDidComplete(_ notification: Notification) {
         guard let token = try? oktaAuth.credentialsIfAvailable().accessToken else {
-            preconditionFailure("Auth missing after successful login")
-            // TODO: handle missing token after login
+            return userSubject.send(completion: .failure(LoginError.loginFailed))
         }
         dataLoader.provideToken(token)
         dataLoader.logIn { [weak userSubject] result in

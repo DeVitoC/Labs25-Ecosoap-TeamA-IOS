@@ -12,6 +12,7 @@ import Combine
 
 enum LoginError: UserFacingError {
     case notLoggedIn
+    case loginFailed
     case expiredCredentials
     case oktaFailure
     case other(Error)
@@ -21,6 +22,8 @@ enum LoginError: UserFacingError {
         switch self {
         case .notLoggedIn:
             return "You're currently logged out."
+        case .loginFailed:
+            return "Login failed."
         case .expiredCredentials:
             return "Your Okta credentials have expired."
         case .oktaFailure:
