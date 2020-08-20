@@ -34,6 +34,9 @@ class ImpactHeaderView: UICollectionReusableView {
     
     private func setUp() {
         addSubviewsUsingAutolayout(titleLabel)
-        titleLabel.fillSuperview(withPadding: .init(top: 40, left: 20, bottom: 0, right: 0))
+        titleLabel.constrain(with: [
+            LayoutSide.leading.constraint(from: titleLabel, to: self, constant: 20),
+            LayoutSide.top.constraint(from: titleLabel, to: self, constant: 40)
+        ])
     }
 }

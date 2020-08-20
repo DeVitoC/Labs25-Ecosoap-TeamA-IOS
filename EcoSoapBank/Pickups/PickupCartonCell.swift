@@ -18,7 +18,9 @@ class PickupCartonCell: UITableViewCell {
 
     private lazy var cartonLabel = configure(UILabel()) {
         self.constrainNewSubviewToSafeArea($0, sides: [.top, .bottom], constant: 8)
-        NSLayoutConstraint.activate($0.constraints(for: safeAreaLayoutGuide, to: [.leading, .trailing], constant: 20))
+        NSLayoutConstraint.activate($0.constraints(from: safeAreaLayoutGuide,
+                                                   toSides: [.leading, .trailing],
+                                                   constant: 20))
     }
 
     override func prepareForReuse() {

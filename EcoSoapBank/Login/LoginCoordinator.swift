@@ -19,10 +19,7 @@ protocol LoginCoordinatorDelegate: AnyObject {
 
 class LoginCoordinator: FlowCoordinator {
     private var rootVC: UIViewController
-    private lazy var loginVC = UIStoryboard.main.instantiateViewController(
-        identifier: LoginViewController.storyboardID) { coder in
-            LoginViewController(coder: coder, delegate: self)
-    }
+    private lazy var loginVC = LoginViewController(delegate: self)
 
     private weak var delegate: LoginCoordinatorDelegate?
 
