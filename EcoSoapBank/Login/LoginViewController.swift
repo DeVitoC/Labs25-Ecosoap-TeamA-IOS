@@ -75,8 +75,8 @@ class LoginViewController: UIViewController {
         
         signInButton.centerVerticallyInSuperview(multiplier: 1.7)
         signInButton.constrain(with: signInButton.constraints(from: view,
-                                                  toSides: [LayoutSide.leading, LayoutSide.trailing],
-                                                  constant: 40))
+                                                              toSides: [LayoutSide.leading, LayoutSide.trailing],
+                                                              constant: 40))
     }
     
     // MARK: - Actions
