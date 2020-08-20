@@ -13,7 +13,7 @@ import OktaAuth
 protocol LoginCoordinatorDelegate: AnyObject {
     var loginURL: URL? { get }
     
-    func loginDidComplete()
+    func oktaLoginDidComplete()
 }
 
 
@@ -74,12 +74,11 @@ extension LoginCoordinator {
                 dismissText: "OK") { [weak self] _ in
                     self?.showLoginScreen()
             }
-
         }
     }
 
     private func loginDidComplete(_ notification: Notification) {
-        delegate?.loginDidComplete()
+        delegate?.oktaLoginDidComplete()
     }
 }
 

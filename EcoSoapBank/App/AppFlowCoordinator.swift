@@ -92,14 +92,21 @@ class AppFlowCoordinator: FlowCoordinator {
 extension AppFlowCoordinator: LoginCoordinatorDelegate {
     var loginURL: URL? { oktaAuth.identityAuthURL() }
 
-    func loginDidComplete() {
+    func oktaLoginDidComplete() {
         guard let token = try? oktaAuth.credentialsIfAvailable().accessToken else {
             preconditionFailure("Auth missing after successful login")
             // TODO: handle missing token after login
         }
         appQuerier.provideToken(token)
-        impactCoord.start()
-        pickupCoord.start()
-        tabBarController.dismiss(animated: true, completion: nil)
+        appQuerier.logIn { [weak self] result in
+            switch result {
+            case .success:
+                self?.impactCoord.start()
+                self?.pickupCoord.start()
+                self?.tabBarController.dismiss(animated: true, completion: nil)
+            case .failure(let error):
+                self?.presentLoginFailAlert(error: error as? UserFacingError)
+            }
+        }
     }
 }
