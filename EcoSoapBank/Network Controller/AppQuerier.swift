@@ -7,14 +7,28 @@
 //
 
 import Foundation
+import OktaAuth
 
 
 typealias NetworkCompletion<T> = (Result<T, Error>) -> Void
 
 
+enum AppQueryError: Error {
+    case noToken
+    case other(Error)
+    case unimplemented
+    case unknown
+}
+
+
 class AppQuerier {
     private var token: String?
     private var networkService: GraphQLController
+
+    private let oktaAuth = OktaAuth(
+        baseURL: URL(string: "https://auth.lambdalabs.dev/")!,
+        clientID: "0oalwkxvqtKeHBmLI4x6",
+        redirectURI: "labs://scaffolding/implicit/callback")
 
     var loggedIn: Bool { token != nil }
 
@@ -57,7 +71,7 @@ extension AppQuerier: UserDataProvider {
 
 extension AppQuerier: PickupDataProvider {
     func fetchAllPickups(_ completion: @escaping NetworkCompletion<[Pickup]>) {
-        completion(.failure(AppQueryError.unknown))
+        completion(.failure(AppQueryError.unimplemented))
         // TODO
     }
 
@@ -65,14 +79,7 @@ extension AppQuerier: PickupDataProvider {
         _ pickupInput: Pickup.ScheduleInput,
         completion: @escaping NetworkCompletion<Pickup.ScheduleResult>
     ) {
-        completion(.failure(AppQueryError.unknown))
+        completion(.failure(AppQueryError.unimplemented))
         // TODO
     }
-}
-
-
-enum AppQueryError: Error {
-    case noToken
-    case other(Error)
-    case unknown
 }
