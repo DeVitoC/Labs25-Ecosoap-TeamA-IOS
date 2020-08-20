@@ -24,12 +24,12 @@
 import Foundation
 
 struct Property: Decodable {
-    let id: Int
+    let id: String
     let name: String
-    let propertyType: String//PropertyType.RawValue
+    let propertyType: PropertyType.RawValue
     let rooms: Int
-    let services: [String]//[HospitalityService.RawValue]
-    let collectionType: String//Pickup.CollectionType.RawValue
+    let services: [HospitalityService.RawValue]
+    let collectionType: Pickup.CollectionType.RawValue
     let logo: String?
     let phone: String?
     let shippingNote: String?
