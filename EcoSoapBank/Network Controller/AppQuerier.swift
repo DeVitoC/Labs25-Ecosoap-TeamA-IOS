@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import OktaAuth
 
 
 typealias NetworkCompletion<T> = (Result<T, Error>) -> Void
@@ -24,11 +23,6 @@ enum AppQueryError: Error {
 class AppQuerier {
     private var token: String?
     private var networkService: GraphQLController
-
-    private let oktaAuth = OktaAuth(
-        baseURL: URL(string: "https://auth.lambdalabs.dev/")!,
-        clientID: "0oalwkxvqtKeHBmLI4x6",
-        redirectURI: "labs://scaffolding/implicit/callback")
 
     var loggedIn: Bool { token != nil }
 
