@@ -9,6 +9,9 @@
 import UIKit
 
 extension UIImage {
+    static let esbLogo = UIImage(named: "esbLogo")!
+    static let esbLogoWhite = UIImage(named: "esbLogoWhite")!
+    
     static let addBoxSymbol = UIImage(named: "cube.box.plus")!
     static let navBar = UIImage(named: "navBar")!
     
