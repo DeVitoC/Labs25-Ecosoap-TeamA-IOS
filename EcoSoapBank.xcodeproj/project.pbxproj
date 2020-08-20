@@ -126,7 +126,8 @@
 		E2AEB12624E7460600C42ACD /* mockImpactStatsFailure.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */; };
 		E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */; };
 		E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B324E45BF800C5DF8B /* QueryObjects.swift */; };
-		E2D04F8D24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F8C24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json */; };
+		E2D04F8E24EEE94D00515831 /* mockPickupsByPropertyIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F8C24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json */; };
+		E2D04F8F24EEE95100515831 /* mockPickupsByPropertyIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F8C24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json */; };
 		E2D302ED24E5B260008A6FAF /* mockImpactStatsByPropertyId.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */; };
 		E2D302EF24E5B489008A6FAF /* mockUserByIdInput.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */; };
 		E2D302F524E5CA32008A6FAF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302F424E5CA32008A6FAF /* User.swift */; };
@@ -666,6 +667,7 @@
 				E2AEB12624E7460600C42ACD /* mockImpactStatsFailure.json in Resources */,
 				041E1E7D24E1EA970052831D /* Muli-Semi-BoldItalic.ttf in Resources */,
 				041E1E5C24E1EA920052831D /* Montserrat-SemiBoldItalic.otf in Resources */,
+				E2D04F8E24EEE94D00515831 /* mockPickupsByPropertyIdSuccess.json in Resources */,
 				041E1E8024E1EA970052831D /* Muli-SemiBold.ttf in Resources */,
 				041E1E4A24E1EA920052831D /* Montserrat-BlackItalic.otf in Resources */,
 				041E1E6C24E1EA920052831D /* Montserrat-SemiBold.otf in Resources */,
@@ -702,7 +704,7 @@
 				041E1EA424E1F7970052831D /* Montserrat-Black.otf in Resources */,
 				041E1E9724E1F7970052831D /* Montserrat-BoldItalic.otf in Resources */,
 				041E1E8B24E1F78D0052831D /* Muli-ExtraLightItalic.ttf in Resources */,
-				E2D04F8D24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json in Resources */,
+				E2D04F8F24EEE95100515831 /* mockPickupsByPropertyIdSuccess.json in Resources */,
 				041E1E9B24E1F7970052831D /* Montserrat-ExtraLight.otf in Resources */,
 				041E1E9524E1F7970052831D /* Montserrat-Bold.otf in Resources */,
 			);

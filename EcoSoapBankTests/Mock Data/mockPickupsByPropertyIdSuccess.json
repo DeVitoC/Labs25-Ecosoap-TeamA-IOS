@@ -2,13 +2,14 @@
 
 {
     "data": {
-        "pickupsByPropertyId": {
-            "id": 4,
+        "pickupsByPropertyId": [
+        {
+            "id": "4",
             "confirmationCode": "Success",
             "collectionType": "LOCAL",
             "status": "COMPLETE",
-            "readyDate": 2020-08-20,
-            "pickupDate": 2020-08-20,
+            "readyDate": "2020-08-20",
+            "pickupDate": "2020-08-20",
             "property": {
                 "id": 5,
                 "name": "Hilton1",
@@ -24,20 +25,22 @@
                 "shippingNote": "Shipping note1 here",
                 "notes": "Note1 here"
             },
-            "cartons": {
-                "id": 6,
-                "product": "SOAP",
-                "weight": 10
-            },
+            "cartons": [
+                {
+                    "id": "6",
+                    "product": "SOAP",
+                    "weight": 10
+                }
+            ],
             "notes": "Pickup notes here"
         },
         {
-            "id": 7,
+            "id": "7",
             "confirmationCode": "Success",
             "collectionType": "COURIER_CONSOLIDATED",
             "status": "OUT_FOR_PICKUP",
-            "readyDate": 2020-08-21,
-            "pickupDate": 2020-08-21,
+            "readyDate": "2020-08-21",
+            "pickupDate": "2020-08-21",
             "property": {
                 "id": 5,
                 "name": "Hilton1",
@@ -53,12 +56,15 @@
                 "shippingNote": "Shipping note1 here",
                 "notes": "Note1 here"
             },
-            "cartons": {
-                "id": 8,
-                "product": "LINENS",
-                "weight": 4
-            },
+            "cartons": [
+                {
+                    "id": "8",
+                    "product": "LINENS",
+                    "weight": 4
+                }
+            ],
             "notes": "Pickup2 notes here"
         }
+        ]
     }
 }
