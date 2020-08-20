@@ -42,7 +42,7 @@ extension Date {
         self = date
     }
 
-    func string(from formatter: DateFormatter) -> String {
+    func string(from formatter: DateFormatter = .default) -> String {
         formatter.string(from: self)
     }
 }
@@ -94,5 +94,12 @@ extension MeasurementFormatter {
 extension NumberFormatter {
     static var forMeasurements: NumberFormatter {
         MeasurementFormatter.providedUnits.numberFormatter
+    }
+}
+
+extension DateFormatter {
+    static let `default`: DateFormatter = configure(DateFormatter()) {
+        $0.dateStyle = .medium
+        $0.timeStyle = .none
     }
 }
