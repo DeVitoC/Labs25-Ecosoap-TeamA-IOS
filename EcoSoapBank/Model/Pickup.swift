@@ -140,7 +140,7 @@ extension PickupBaseContainer {
 // MARK: - Convenience Extensions
 
 extension Pickup.Status {
-    var color: Color {
+    var color: UIColor {
         switch self {
         case .submitted:
             return .blue
