@@ -1,0 +1,64 @@
+
+
+{
+    "data": {
+        "pickupsByPropertyId": {
+            "id": 4,
+            "confirmationCode": "Success",
+            "collectionType": "LOCAL",
+            "status": "COMPLETE",
+            "readyDate": 2020-08-20,
+            "pickupDate": 2020-08-20,
+            "property": {
+                "id": 5,
+                "name": "Hilton1",
+                "propertyType": "HOTEL",
+                "rooms": 200,
+                "services": [
+                    "SOAP",
+                    "PAPER"
+                ],
+                "collectionType": "LOCAL",
+                "logo": "http://www.logo1.com",
+                "phone": "123-456-7890",
+                "shippingNote": "Shipping note1 here",
+                "notes": "Note1 here"
+            },
+            "cartons": {
+                "id": 6,
+                "product": "SOAP",
+                "weight": 10
+            },
+            "notes": "Pickup notes here"
+        },
+        {
+            "id": 7,
+            "confirmationCode": "Success",
+            "collectionType": "COURIER_CONSOLIDATED",
+            "status": "OUT_FOR_PICKUP",
+            "readyDate": 2020-08-21,
+            "pickupDate": 2020-08-21,
+            "property": {
+                "id": 5,
+                "name": "Hilton1",
+                "propertyType": "HOTEL",
+                "rooms": 200,
+                "services": [
+                    "SOAP",
+                    "PAPER"
+                ],
+                "collectionType": "LOCAL",
+                "logo": "http://www.logo1.com",
+                "phone": "123-456-7890",
+                "shippingNote": "Shipping note1 here",
+                "notes": "Note1 here"
+            },
+            "cartons": {
+                "id": 8,
+                "product": "LINENS",
+                "weight": 4
+            },
+            "notes": "Pickup2 notes here"
+        }
+    }
+}
