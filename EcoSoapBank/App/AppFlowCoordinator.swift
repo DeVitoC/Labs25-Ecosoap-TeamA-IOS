@@ -69,6 +69,24 @@ class AppFlowCoordinator: FlowCoordinator {
             loginCoord.start()
         }
     }
+
+    func presentLoginFailAlert(error: UserFacingError? = nil) {
+        if tabBarController.presentedViewController != nil {
+            tabBarController.dismiss(animated: true) { [weak self] in
+                self?.presentLoginFailAlert(error: error)
+            }
+        }
+        let message = error?.userFacingDescription
+            ?? "An unknown error occurred while logging in. Please try again."
+        tabBarController.presentSimpleAlert(
+            with: "Login failed",
+            message: message,
+            preferredStyle: .alert,
+            dismissText: "OK"
+        ) { [weak self] _ in
+            self?.loginCoord.start()
+        }
+    }
 }
 
 extension AppFlowCoordinator: LoginCoordinatorDelegate {
