@@ -50,7 +50,7 @@ class GraphQLController {
     ///   - completion: Completion handler that passes back a Result of type Profile or Error
     func queryRequest<T: Decodable>(_ type: T.Type,
                                     query: String,
-                                    variables: [Any] = [],
+                                    variables: [String: Any] = [:],
                                     completion: @escaping (Result<T, Error>) -> Void) {
         // Add body to query request
         let body: [String: Any] = ["query": query, "variables": variables]
