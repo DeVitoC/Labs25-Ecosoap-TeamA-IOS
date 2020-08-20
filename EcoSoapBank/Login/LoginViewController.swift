@@ -6,8 +6,9 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
-import UIKit
 import OktaAuth
+import SwiftUI
+import UIKit
 
 protocol LoginViewControllerDelegate: AnyObject {
     func login()
@@ -30,6 +31,23 @@ class LoginViewController: UIViewController {
         logo.centerVerticallyInSuperview(multiplier: 0.7)
         logo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.45).isActive = true
         
+        let missionStatementLabel = configure(UILabel()) {
+            $0.text =
+            """
+            Saving, sanitizing, and supplying
+            RECYCLED SOAP
+            for the developing world
+            """
+            $0.textAlignment = .center
+            $0.numberOfLines = 0
+            $0.textColor = .white
+            $0.font = .montserrat(style: .body, typeface: .semiBold)
+        }
+        view.addSubview(missionStatementLabel)
+        
+        missionStatementLabel.centerHorizontallyInSuperview()
+        missionStatementLabel.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 40).isActive = true
+        
         
         let button = configure(ESBButton()) {
             $0.setTitle("SIGN IN WITH OKTA", for: .normal)
@@ -44,7 +62,7 @@ class LoginViewController: UIViewController {
                                                   constant: 40))
     }
     
-    init(delegate: LoginViewControllerDelegate) {
+    init(delegate: LoginViewControllerDelegate?) {
         super.init(nibName: nil, bundle: nil)
         self.delegate = delegate
     }
@@ -57,5 +75,20 @@ class LoginViewController: UIViewController {
     
     @objc func signIn(_ sender: UIButton) {
         delegate?.login()
+    }
+}
+
+struct LoginVCWrapper: UIViewRepresentable {
+    func makeUIView(context: UIViewRepresentableContext<LoginVCWrapper>) -> UIView {
+        LoginViewController(delegate: nil).view
+    }
+    
+    func updateUIView(_ uiView: LoginVCWrapper.UIViewType, context: UIViewRepresentableContext<LoginVCWrapper>) {
+    }
+}
+
+struct LoginVCWrapper_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginVCWrapper().edgesIgnoringSafeArea(.all)
     }
 }
