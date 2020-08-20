@@ -15,33 +15,39 @@ import UIKit
 struct PickupHistoryCell: View {
     let pickup: Pickup
 
+    @State var titleColumnWidth: CGFloat?
+
     init(pickup: Pickup) {
         self.pickup = pickup
     }
 
     var body: some View {
-        NavigationLink(destination: PickupDetailView(pickup: pickup)) {
-            HStack(alignment: .bottom) {
-                VStack(alignment: .leading) {
-                    TitledSegment("Ready") {
-                        Text(pickup.readyDate.string(from: Self.dateFormatter))
-                    }
+        NavigationLink(destination:
+            PickupDetailViewController.Representable(pickup: pickup)
+                .navigationBarTitle("Pickup Details")
+        ) {
+            ZStack(alignment: .bottomTrailing) {
+                HStack(alignment: .bottom) {
+                    VStack(alignment: .leading) {
+                        TitledView("Ready") {
+                            Text(pickup.readyDate.string())
+                        }
 
-                    TitledSegment("Status") {
-                        Text("\(pickup.status.display)")
-                            .foregroundColor(pickup.status.color)
-                        if pickup.pickupDate != nil {
-                            Text("(\(pickup.pickupDate!.string(from: Self.dateFormatter)))")
+                        TitledView("Status") {
+                            Text("\(pickup.status.display)")
+                                .foregroundColor(Color(pickup.status.color))
+                            if pickup.pickupDate != nil {
+                                Text("(\(pickup.pickupDate!.string()))")
+                            }
+                        }
+
+                        TitledView("Cartons") {
+                            Text("\(pickup.cartons.count)")
                         }
                     }
 
-                    TitledSegment("Cartons") {
-                        Text("\(pickup.cartons.count)")
-                    }
+                    Spacer()
                 }
-
-                Spacer()
-
                 if !pickup.notes.isEmpty {
                     Image.notes()
                         .foregroundColor(Color(.secondaryLabel))
@@ -53,12 +59,7 @@ struct PickupHistoryCell: View {
 }
 
 extension PickupHistoryCell {
-    static let dateFormatter = configure(DateFormatter()) {
-        $0.dateStyle = .short
-        $0.timeStyle = .none
-    }
-
-    struct TitledSegment<Content: View>: View {
+    private struct TitledView<Content: View>: View {
         let title: String
         let content: Content
 
@@ -69,8 +70,11 @@ extension PickupHistoryCell {
 
         var body: some View {
             HStack {
-                Text(title + ":").bold()
+                Text(title + ":")
+                    .bold()
+                    .frame(alignment: .trailing)
                 content
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
     }
@@ -79,18 +83,10 @@ extension PickupHistoryCell {
 
 // MARK: - Previews
 
-private let _previewPickup = Pickup.random()
-
 struct PickupListItem_Previews: PreviewProvider {
     static var previews: some View {
-        PickupHistoryCell(pickup: _previewPickup)
+        PickupHistoryCell(pickup: .random())
             .previewLayout(.sizeThatFits)
             .padding()
-    }
-}
-
-struct PickupDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        PickupDetailView(pickup: _previewPickup)
     }
 }
