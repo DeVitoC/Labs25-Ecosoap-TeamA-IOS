@@ -20,7 +20,7 @@ struct MockLoginProvider: UserDataProvider {
         print("token: \(token)")
     }
 
-    func logIn(_ completion: @escaping NetworkCompletion<User>) {
+    func logIn(_ completion: @escaping ResultHandler<User>) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
             if self.shouldFail {
                 completion(.mockFailure())

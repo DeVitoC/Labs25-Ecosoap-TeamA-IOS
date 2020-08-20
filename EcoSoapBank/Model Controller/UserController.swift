@@ -12,7 +12,7 @@ import OktaAuth
 
 
 protocol UserDataProvider {
-    func logIn(_ completion: @escaping NetworkCompletion<User>)
+    func logIn(_ completion: @escaping ResultHandler<User>)
     func provideToken(_ token: String)
 }
 

@@ -9,7 +9,7 @@
 import Foundation
 
 
-typealias NetworkCompletion<T> = (Result<T, Error>) -> Void
+typealias ResultHandler<T> = (Result<T, Error>) -> Void
 
 
 enum AppQueryError: Error {
@@ -55,7 +55,7 @@ class AppQuerier {
 
 
 extension AppQuerier: UserDataProvider {
-    func logIn(_ completion: @escaping NetworkCompletion<User>) {
+    func logIn(_ completion: @escaping ResultHandler<User>) {
         query(expecting: User.self,
               query: GraphQLMutations.login,
               completion: completion)
@@ -64,14 +64,14 @@ extension AppQuerier: UserDataProvider {
 
 
 extension AppQuerier: PickupDataProvider {
-    func fetchAllPickups(_ completion: @escaping NetworkCompletion<[Pickup]>) {
+    func fetchAllPickups(_ completion: @escaping ResultHandler<[Pickup]>) {
         completion(.failure(AppQueryError.unimplemented))
         // TODO
     }
 
     func schedulePickup(
         _ pickupInput: Pickup.ScheduleInput,
-        completion: @escaping NetworkCompletion<Pickup.ScheduleResult>
+        completion: @escaping ResultHandler<Pickup.ScheduleResult>
     ) {
         completion(.failure(AppQueryError.unimplemented))
         // TODO
