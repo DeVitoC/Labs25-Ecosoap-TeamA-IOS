@@ -23,7 +23,7 @@ class NewPickupViewController: KeyboardHandlingViewController {
     // MARK: - Views
 
     private lazy var cartonsLabel = configureSectionLabel(titled: "Cartons")
-    private lazy var dateLabel = configureSectionLabel(titled: "Pickup Date")
+    private lazy var readyDate = configureSectionLabel(titled: "Ready Date")
     private lazy var notesLabel = configureSectionLabel(titled: "Notes")
 
     private lazy var tableView = configure(UITableView()) {
@@ -100,7 +100,7 @@ extension NewPickupViewController {
         contentView.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading], constant: 20)
         contentView.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top], constant: 20)
         contentView.constrainNewSubview(tableView, to: [.leading, .trailing])
-        contentView.constrainNewSubviewToSafeArea(dateLabel, sides: [.leading, .trailing], constant: 20)
+        contentView.constrainNewSubviewToSafeArea(readyDate, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubview(datePicker, to: [.leading, .trailing])
         contentView.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
@@ -115,8 +115,8 @@ extension NewPickupViewController {
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
             tableView.topAnchor.constraint(equalTo: addCartonButton.bottomAnchor, constant: 8),
             tableViewHeight,
-            dateLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
-            datePicker.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
+            readyDate.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
+            datePicker.topAnchor.constraint(equalTo: readyDate.bottomAnchor, constant: 8),
             notesLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 20),
             notesView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 8),
             notesView.heightAnchor.constraint(greaterThanOrEqualToConstant: 150),
@@ -179,7 +179,7 @@ extension NewPickupViewController {
             }
             self.tableViewHeight.constant =
                 self.tableView.contentSize.height
-                - CGFloat(cartons.count * 8)
+                - (CGFloat(cartons.count) * 7.5)
         }
     }
 }
@@ -210,12 +210,11 @@ extension NewPickupViewController {
 }
 
 extension NewPickupViewController: UITableViewDelegate {
+    // set up swipe to delete
     func tableView(
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        // set up swipe to delete
-
         let delete = UIContextualAction(
             style: .destructive,
             title: "Remove",
@@ -235,6 +234,7 @@ extension NewPickupViewController: UITableViewDelegate {
 // MARK: - ViewControllerRepresentable
 
 extension NewPickupViewController {
+    // Enables use with SwiftUI
     struct Representable: UIViewControllerRepresentable {
         private var viewModel: NewPickupViewModel
 
@@ -257,6 +257,7 @@ extension NewPickupViewController {
 
 extension NewPickupViewController {
     class DataSource: UITableViewDiffableDataSource<Int, NewCartonViewModel> {
+        // allows user deletion of cells
         override func tableView(
             _ tableView: UITableView,
             canEditRowAt indexPath: IndexPath

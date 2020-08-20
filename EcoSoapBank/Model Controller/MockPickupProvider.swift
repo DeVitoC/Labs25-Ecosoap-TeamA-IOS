@@ -79,7 +79,7 @@ extension Pickup {
         Pickup(
             base: input.base,
             id: UUID(),
-            confirmationCode: UUID().uuidString,
+            confirmationCode: mockConfirmationCode(),
             cartons: input.cartons.map {
                 Pickup.Carton(id: UUID(), contents: $0)
             },
@@ -100,7 +100,7 @@ extension Pickup {
         Pickup(
             base: .random(),
             id: UUID(),
-            confirmationCode: UUID().uuidString,
+            confirmationCode: mockConfirmationCode(),
             cartons: .random(),
             property: Property(id: 4,
                                name: "Hilton",
@@ -140,7 +140,7 @@ extension Pickup.Base {
             status: status,
             readyDate: Date(timeIntervalSinceNow: .days(daysSinceReady)),
             pickupDate: pickupDate,
-            notes: Bool.random() ? UUID().uuidString : "")
+            notes: mockNotes())
     }
 }
 
@@ -211,5 +211,21 @@ extension Pickup.CartonContents {
 extension Pickup.Carton {
     static func random() -> Pickup.Carton {
         Pickup.Carton(id: UUID(), contents: .random())
+    }
+}
+
+// swiftlint:disable private_over_fileprivate
+fileprivate func mockConfirmationCode() -> String {
+    let longCode = UUID().uuidString
+    return String(longCode.dropLast(longCode.count - 7))
+}
+
+fileprivate func mockNotes() -> String {
+    let hasNotes = Bool.random()
+
+    guard hasNotes else { return "" }
+
+    return (1...10).reduce(into: "") { result, _ in
+        result += UUID().uuidString
     }
 }
