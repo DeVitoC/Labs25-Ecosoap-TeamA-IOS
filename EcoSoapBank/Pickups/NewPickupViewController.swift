@@ -221,6 +221,8 @@ extension NewPickupViewController: UITableViewDelegate {
         }
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.editCarton(atIndex: indexPath.row)
     }
 }
 

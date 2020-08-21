@@ -75,6 +75,11 @@ extension PickupCoordinator {
         rootVC.present(navVC, animated: true, completion: nil)
     }
 
+    private func editCarton(_ cartonVM: NewCartonViewModel) {
+        guard newPickupVC.isBeingPresented else { return }
+        newPickupVC.present(EditCartonViewController(), animated: true, completion: nil)
+    }
+
     @objc private func cancelNewPickup(_ sender: Any) {
         rootVC.dismiss(animated: true, completion: nil)
     }
