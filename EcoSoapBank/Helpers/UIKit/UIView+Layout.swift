@@ -121,6 +121,17 @@ extension UIView {
                 constant: 0)
         ])
     }
+
+    /// Sets constraints for `widthAnchor` and `heightAnchor` based on provided `size`.
+    ///
+    /// Sets `translatesAutoresizingMaskIntoConstraints` to false if necessary.
+    func constrainToSize(_ size: CGSize) {
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: size.width),
+            heightAnchor.constraint(equalToConstant: size.height)
+        ])
+    }
 }
 
 
