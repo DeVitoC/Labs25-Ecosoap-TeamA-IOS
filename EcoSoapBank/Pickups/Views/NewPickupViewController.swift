@@ -48,6 +48,7 @@ class NewPickupViewController: KeyboardHandlingViewController {
 
     private lazy var datePicker = configure(UIDatePicker()) {
         $0.datePickerMode = .date
+        $0.minimumDate = Date()
     }
     private lazy var notesView = configure(UITextView()) {
         $0.delegate = self
