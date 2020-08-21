@@ -52,6 +52,7 @@ class NewPickupViewController: KeyboardHandlingViewController {
     }
     private lazy var notesView = configure(UITextView()) {
         $0.delegate = self
+        $0.font = .muli(style: .body)
     }
     private lazy var scheduleButton = configure(UIButton()) {
         $0.setTitle("Schedule Pickup", for: .normal)
