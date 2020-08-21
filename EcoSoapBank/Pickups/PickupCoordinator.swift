@@ -17,7 +17,7 @@ class PickupCoordinator: FlowCoordinator {
 
     private(set) lazy var rootVC: UIViewController = UIHostingController(
         rootView: PickupsView(pickupController: pickupController))
-    private lazy var newPickupVC: UIViewController = configure(NewPickupViewController(
+    private lazy var newPickupVC = configure(NewPickupViewController(
         viewModel: pickupController.newPickupViewModel)) {
             let cancel = UIBarButtonItem(
                 barButtonSystemItem: .cancel,
@@ -26,7 +26,6 @@ class PickupCoordinator: FlowCoordinator {
             cancel.tintColor = UIColor.codGrey
             $0.navigationItem.setLeftBarButton(cancel, animated: false)
             $0.title = "Schedule New Pickup"
-            $0.modalPresentationStyle = .formSheet
     }
     private lazy var newPickupNavController = configure(
         UINavigationController(rootViewController: newPickupVC),
@@ -80,8 +79,11 @@ extension PickupCoordinator {
     }
 
     private func editCarton(_ cartonVM: NewCartonViewModel) {
-        guard newPickupVC.isBeingPresented else { return }
-        newPickupVC.present(EditCartonViewController(), animated: true, completion: nil)
+        guard newPickupVC.isViewLoaded else { return }
+        let popover = editCartonVC()
+        popover.popoverPresentationController?.sourceView =
+            newPickupVC.sourceViewForCartonEditingPopover()
+        newPickupVC.present(popover, animated: true, completion: nil)
     }
 
     @objc private func cancelNewPickup(_ sender: Any) {
@@ -119,5 +121,14 @@ extension PickupCoordinator {
                     completionHandler: nil)
         }))
         return alert
+    }
+}
+
+extension PickupCoordinator {
+    private func editCartonVC() -> EditCartonViewController {
+        configure(EditCartonViewController()) {
+            $0.modalPresentationStyle = .popover
+            $0.popoverPresentationController?.delegate = newPickupVC
+        }
     }
 }

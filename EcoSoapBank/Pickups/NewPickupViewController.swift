@@ -223,6 +223,26 @@ extension NewPickupViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - Public
+
+extension NewPickupViewController {
+    func sourceViewForCartonEditingPopover() -> UIView {
+        guard
+            let idx = tableView.indexPathForSelectedRow,
+            let selectedCell = tableView.cellForRow(at: idx)
+            else { return tableView }
+        return selectedCell
+    }
+
+    func popoverPresentationControllerDidDismissPopover(
+        _ popoverPresentationController: UIPopoverPresentationController
+    ) {
+        tableView.indexPathsForSelectedRows?.forEach {
+            tableView.deselectRow(at: $0, animated: true)
+        }
+    }
+}
+
 // MARK: - ViewControllerRepresentable
 
 extension NewPickupViewController {
