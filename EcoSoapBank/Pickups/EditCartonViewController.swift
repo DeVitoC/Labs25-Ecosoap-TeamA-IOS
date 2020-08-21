@@ -9,39 +9,69 @@
 import UIKit
 
 
-protocol EditCartonViewDelegate: AnyObject {
-    func editCartonViewControllerDidDisappear(_ editCartonVC: EditCartonViewController)
-}
-
-
 class EditCartonViewController: UIViewController {
-    let label = configure(UILabel()) {
-        $0.text = "Hello, world!"
+    private lazy var productPickerView = configure(UIPickerView()) {
+        $0.dataSource = self
+        $0.delegate = self
     }
 
-    weak var delegate: EditCartonViewDelegate?
+    private var viewModel: NewCartonViewModel
 
+    // MARK: - Init / Lifecycle
+
+    init(viewModel: NewCartonViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable, message: "Use init(viewModel:delegate:)")
+    required init?(coder: NSCoder) {
+        fatalError("`init(coder:)` not implemented. Use `init(viewModel:delegate:)`.")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        view.constrainNewSubviewToSides(label)
 
-        preferredContentSize = CGSize(width: 300, height: 200)
+        view.constrainNewSubviewToSides(productPickerView)
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: preferredContentSize.width),
-            view.heightAnchor.constraint(equalToConstant: preferredContentSize.height)
+            view.widthAnchor.constraint(equalToConstant: productPickerView.intrinsicContentSize.width),
+            view.heightAnchor.constraint(equalToConstant: productPickerView.intrinsicContentSize.height)
         ])
+        productPickerView.selectRow(
+            HospitalityService.allCases.firstIndex(of: viewModel.carton.product)!,
+            inComponent: 0,
+            animated: false)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        delegate?.editCartonViewControllerDidDisappear(self)
     }
 }
 
+// MARK: - Delegate / Data Source
 
-extension UIViewController: UIPopoverPresentationControllerDelegate {
-    public func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        .none
+extension EditCartonViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        viewModel.carton.product = HospitalityService.allCases[row]
+    }
+
+    func pickerView(
+        _ pickerView: UIPickerView,
+        titleForRow row: Int,
+        forComponent component: Int
+    ) -> String? {
+        HospitalityService.allCases[row].rawValue.capitalized
+    }
+}
+
+extension EditCartonViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { 1 }
+
+    func pickerView(
+        _ pickerView: UIPickerView,
+        numberOfRowsInComponent component: Int
+    ) -> Int {
+        HospitalityService.allCases.count
     }
 }
