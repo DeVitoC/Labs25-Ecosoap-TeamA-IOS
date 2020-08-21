@@ -20,5 +20,15 @@ extension UIStoryboard {
 }
 
 extension UIViewController {
-    static var storyboardID: String { String(describing: Self.self) }
+    class var storyboardID: String { String(describing: Self.self) }
+
+    class func storyboard() -> UIStoryboard {
+        UIStoryboard(name: self.storyboardID, bundle: nil)
+    }
+
+    class func fromStoryboard<VC: UIViewController>(
+        with initializer: @escaping (NSCoder) -> VC
+    ) -> VC {
+        self.storyboard().instantiateInitialViewController(creator: initializer)!
+    }
 }
