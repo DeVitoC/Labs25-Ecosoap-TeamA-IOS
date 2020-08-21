@@ -17,17 +17,36 @@ class PickupCoordinator: FlowCoordinator {
 
     private(set) lazy var rootVC: UIViewController = UIHostingController(
         rootView: PickupsView(pickupController: pickupController))
+    private lazy var newPickupVC: UIViewController = configure(NewPickupViewController(
+        viewModel: pickupController.newPickupViewModel)) {
+            let cancel = UIBarButtonItem(
+                barButtonSystemItem: .cancel,
+                target: self,
+                action: #selector(cancelNewPickup(_:)))
+            cancel.tintColor = UIColor.codGrey
+            $0.navigationItem.setLeftBarButton(cancel, animated: false)
+            $0.title = "Schedule New Pickup"
+            $0.modalPresentationStyle = .formSheet
+    }
+    private lazy var newPickupNavController = configure(
+        UINavigationController(rootViewController: newPickupVC),
+        with: {
+            $0.modalPresentationStyle = .fullScreen
+    })
 
     private var cancellables = Set<AnyCancellable>()
 
     init(dataProvider: PickupDataProvider) {
         self.pickupController = PickupController(dataProvider: dataProvider)
 
+        // subscribe to and respond to model controller messages
+        pickupController.editCarton
+            .sink(receiveValue: editCarton(_:))
+            .store(in: &cancellables)
         pickupController.pickupScheduleResult
             .handleError(handleError(_:))
             .sink(receiveValue: handlePickupScheduleResult(_:))
             .store(in: &cancellables)
-
         pickupController.presentNewPickup
             .sink(receiveValue: presentNewPickupView)
             .store(in: &cancellables)
@@ -57,22 +76,7 @@ class PickupCoordinator: FlowCoordinator {
 
 extension PickupCoordinator {
     private func presentNewPickupView() {
-        let newPickupVC = configure(NewPickupViewController(
-            viewModel: pickupController.newPickupViewModel)) {
-                let cancel = UIBarButtonItem(
-                    barButtonSystemItem: .cancel,
-                    target: self,
-                    action: #selector(cancelNewPickup(_:)))
-                cancel.tintColor = UIColor.codGrey
-                $0.navigationItem.setLeftBarButton(cancel, animated: false)
-                $0.title = "Schedule New Pickup"
-        }
-        let navVC = configure(
-            UINavigationController(rootViewController: newPickupVC),
-            with: {
-                $0.modalPresentationStyle = .fullScreen
-        })
-        rootVC.present(navVC, animated: true, completion: nil)
+        rootVC.present(newPickupNavController, animated: true, completion: nil)
     }
 
     private func editCarton(_ cartonVM: NewCartonViewModel) {
