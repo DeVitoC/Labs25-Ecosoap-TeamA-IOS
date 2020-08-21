@@ -13,6 +13,7 @@ extension UIImage {
     static let esbLogoWhite = UIImage(named: "esbLogoWhite")!
     
     static let addBoxSymbol = UIImage(named: "cube.box.plus")!
+    static let plusSquareFill = UIImage(systemName: "plus.square.fill")!
     static let navBar = UIImage(named: "navBar")!
     
     static let soap = UIImage(named: "soap")!
