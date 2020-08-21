@@ -127,8 +127,9 @@ extension PickupCoordinator {
 extension PickupCoordinator {
     private func editCartonVC(for viewModel: NewCartonViewModel) -> EditCartonViewController {
         configure(EditCartonViewController(viewModel: viewModel)) {
-                $0.modalPresentationStyle = .popover
-                $0.popoverPresentationController?.delegate = newPickupVC
+            $0.modalPresentationStyle = .popover
+            $0.popoverPresentationController?.delegate = newPickupVC
+            $0.preferredContentSize = CGSize(width: 300, height: 250)
         }
     }
 }
