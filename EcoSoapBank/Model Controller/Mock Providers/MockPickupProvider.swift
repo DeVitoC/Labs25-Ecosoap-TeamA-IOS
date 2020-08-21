@@ -64,7 +64,7 @@ extension Array where Element == Pickup.CartonContents {
 extension Array where Element == Pickup.Carton {
     static func random() -> [Pickup.Carton] {
         [Pickup.CartonContents].random().map {
-            Pickup.Carton(id: UUID(), contents: $0)
+            Pickup.Carton(id: UUID().uuidString, contents: $0)
         }
     }
 }
@@ -77,7 +77,7 @@ extension Pickup {
             id: UUID().uuidString,
             confirmationCode: mockConfirmationCode(),
             cartons: input.cartons.map {
-                Pickup.Carton(id: UUID(), contents: $0)
+                Pickup.Carton(id: UUID().uuidString, contents: $0)
             },
             property: Property(id: "4",
                                name: "Hilton",
@@ -206,7 +206,7 @@ extension Pickup.CartonContents {
 
 extension Pickup.Carton {
     static func random() -> Pickup.Carton {
-        Pickup.Carton(id: UUID(), contents: .random())
+        Pickup.Carton(id: UUID().uuidString, contents: .random())
     }
 }
 

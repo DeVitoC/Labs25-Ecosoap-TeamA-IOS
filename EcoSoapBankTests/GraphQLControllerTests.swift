@@ -133,13 +133,13 @@ class GraphQLControllerTests: XCTestCase {
             XCTAssert(confirmationCode1 == "Success")
             XCTAssert(collectionType1.rawValue == "LOCAL")
             XCTAssert(property1ID == "5")
-            XCTAssert(cartons1ID.uuidString == "6")
+            XCTAssert(cartons1ID == "6")
             XCTAssert(notes1 == "Pickup notes here")
             XCTAssert(id2 == "7")
             XCTAssert(confirmationCode2 == "Success")
             XCTAssert(collectionType2.rawValue == "COURIER_CONSOLIDATED")
             XCTAssert(property2ID == "5")
-            XCTAssert(cartons2ID.uuidString == "8")
+            XCTAssert(cartons2ID == "8")
             XCTAssert(notes2 == "Pickup2 notes here")
         }
     }

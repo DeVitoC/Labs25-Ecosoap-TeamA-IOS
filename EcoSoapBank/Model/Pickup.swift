@@ -141,10 +141,10 @@ extension Pickup: Decodable {
     }
 
     struct Carton: Identifiable, Decodable {
-        let id: UUID
+        let id: String
         let contents: CartonContents?
 
-        internal init(id: UUID, contents: Pickup.CartonContents?) {
+        internal init(id: String, contents: Pickup.CartonContents?) {
             self.id = id
             self.contents = contents
         }
@@ -152,7 +152,7 @@ extension Pickup: Decodable {
         // Decode Carton and CartonContents
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CartonKeys.self)
-            let id = try container.decode(UUID.self, forKey: .id)
+            let id = try container.decode(String.self, forKey: .id)
             let product = try container.decodeIfPresent(HospitalityService.self, forKey: .product)
             let weight = try container.decodeIfPresent(Int.self, forKey: .weight)
 
