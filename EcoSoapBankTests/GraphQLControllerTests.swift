@@ -15,7 +15,7 @@ class GraphQLControllerTests: XCTestCase {
         guard let path = Bundle.main.path(forResource: "mockImpactStatsByPropertyId",
                                           ofType: "json"),
             let mockData = NSData(contentsOfFile: path) else {
-                NSLog("Unable to get data from mockImpactStatsByPropertyId.json")
+                XCTFail("Unable to get mock impact stats data from path")
                 return
         }
         let data = Data(mockData)
@@ -32,8 +32,8 @@ class GraphQLControllerTests: XCTestCase {
                 let paperRecycled = result.paperRecycled,
                 let peopleServed = result.peopleServed,
                 let womenEmployed = result.womenEmployed else {
-                NSLog("result did not contain valid Impact stats")
-                return
+                    XCTFail("Unable to get valid impact stats from returned data")
+                    return
             }
 
             XCTAssert(soapRecycled == 1)
@@ -49,7 +49,7 @@ class GraphQLControllerTests: XCTestCase {
         guard let path = Bundle.main.path(forResource: "mockImpactStatsFailure",
                                           ofType: "json"),
             let mockData = NSData(contentsOfFile: path) else {
-                NSLog("Unable to get data from mockImpactStatsByPropertyId.json")
+                XCTFail("Unable to get mock impact stats datafrom path")
                 return
         }
         let data = Data(mockData)
@@ -67,7 +67,7 @@ class GraphQLControllerTests: XCTestCase {
         guard let path = Bundle.main.path(forResource: "mockUserByIdInput",
                                           ofType: "json"),
             let mockData = NSData(contentsOfFile: path) else {
-                NSLog("Unable to get data from mockImpactStatsByPropertyId.json")
+                XCTFail("Unable to get mock User data from path")
                 return
         }
         let data = Data(mockData)
@@ -78,8 +78,8 @@ class GraphQLControllerTests: XCTestCase {
         graphQLController.queryRequest(User.self, query: GraphQLQueries.userById) { result in
 
             guard let result = try? result.get() else {
-                    NSLog("result did not contain valid user data")
-                    return
+                XCTFail("Unable to get valid User from returned data")
+                return
             }
             let id = result.id
             let firstName = result.firstName
@@ -101,7 +101,7 @@ class GraphQLControllerTests: XCTestCase {
         guard let path = Bundle.main.path(forResource: "mockPickupsByPropertyIdSuccess",
                                           ofType: "json"),
             let mockData = NSData(contentsOfFile: path) else {
-                NSLog("Unable to get data from mockImpactStatsByPropertyId.json")
+                XCTFail("Unable to get pickup data from path")
                 return
         }
         let data = Data(mockData)
@@ -112,7 +112,7 @@ class GraphQLControllerTests: XCTestCase {
         graphQLController.queryRequest([Pickup].self, query: GraphQLQueries.pickupsByPropertyId) { result in
 
             guard let result = try? result.get() else {
-                NSLog("result did not contain valid pickup data")
+                XCTFail("Unable to get Pickup from returned data")
                 return
             }
 
