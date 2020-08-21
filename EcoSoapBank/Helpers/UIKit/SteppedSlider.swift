@@ -12,6 +12,8 @@ import UIKit
 class SteppedSlider: UISlider {
     var stepSize: Float = 1
 
+    var onValueChange: ((Float) -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
@@ -29,7 +31,8 @@ class SteppedSlider: UISlider {
     }
 
     @objc private func sliderValueDidChange(sender: UISlider) {
-        setValue((sender.value / stepSize).rounded() * stepSize,
-                 animated: false)
+        let roundedValue = (sender.value / stepSize).rounded() * stepSize
+        setValue(roundedValue, animated: false)
+        onValueChange?(roundedValue)
     }
 }
