@@ -10,12 +10,30 @@ import UIKit
 
 
 class EditCartonViewController: UIViewController {
+    private var viewModel: NewCartonViewModel
+
+    // MARK: - Subviews
+
     private lazy var productPickerView = configure(UIPickerView()) {
         $0.dataSource = self
         $0.delegate = self
+        $0.selectRow(
+            HospitalityService.allCases
+                .firstIndex(of: viewModel.carton.product)!,
+            inComponent: 0,
+            animated: false)
     }
-
-    private var viewModel: NewCartonViewModel
+    private lazy var percentageSlider = configure(SteppedSlider()) {
+        $0.minimumValue = 0
+        $0.maximumValue = 100
+        $0.minimumValueImage = .cubeBox
+        $0.maximumValueImage = .cubeBoxFill
+        $0.stepSize = 5
+        $0.value = Float(viewModel.carton.weight)
+        $0.onValueChange = { [unowned self] newValue in
+            self.sliderValueDidChange(newValue)
+        }
+    }
 
     // MARK: - Init / Lifecycle
 
@@ -24,28 +42,46 @@ class EditCartonViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    @available(*, unavailable, message: "Use init(viewModel:delegate:)")
+    @available(*, unavailable, message: "Use init(viewModel:)")
     required init?(coder: NSCoder) {
-        fatalError("`init(coder:)` not implemented. Use `init(viewModel:delegate:)`.")
+        fatalError("`init(coder:)` not implemented. Use `init(viewModel:)`.")
     }
-    
+
+    override func loadView() {
+        view = UIView()
+        view.backgroundColor = .white
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
 
-        view.constrainNewSubviewToSides(productPickerView)
+        // constrain views
+        view.constrainNewSubviewToSafeArea(productPickerView,
+                                           sides: [.top, .leading, .trailing])
+        view.constrainNewSubviewToSafeArea(percentageSlider,
+                                           sides: [.leading, .trailing, .bottom],
+                                           constant: 20)
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: productPickerView.intrinsicContentSize.width),
-            view.heightAnchor.constraint(equalToConstant: productPickerView.intrinsicContentSize.height)
+            percentageSlider.topAnchor.constraint(
+                greaterThanOrEqualTo: productPickerView.bottomAnchor,
+                constant: 8),
+            percentageSlider.topAnchor.constraint(
+                lessThanOrEqualTo: productPickerView.bottomAnchor,
+                constant: 20),
         ])
-        productPickerView.selectRow(
-            HospitalityService.allCases.firstIndex(of: viewModel.carton.product)!,
-            inComponent: 0,
-            animated: false)
+
+    }
+}
+
+// MARK: - Private Helpers
+
+extension EditCartonViewController {
+    private func percentString(from number: Float) -> String {
+        NumberFormatter.forPercentage
+            .string(from: NSNumber(value: number * 0.01))!
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    private func sliderValueDidChange(_ newValue: Float) {
+        viewModel.carton.weight = Int(newValue)
     }
 }
 
@@ -54,14 +90,6 @@ class EditCartonViewController: UIViewController {
 extension EditCartonViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         viewModel.carton.product = HospitalityService.allCases[row]
-    }
-
-    func pickerView(
-        _ pickerView: UIPickerView,
-        titleForRow row: Int,
-        forComponent component: Int
-    ) -> String? {
-        HospitalityService.allCases[row].rawValue.capitalized
     }
 }
 
@@ -73,5 +101,13 @@ extension EditCartonViewController: UIPickerViewDataSource {
         numberOfRowsInComponent component: Int
     ) -> Int {
         HospitalityService.allCases.count
+    }
+
+    func pickerView(
+        _ pickerView: UIPickerView,
+        titleForRow row: Int,
+        forComponent component: Int
+    ) -> String? {
+        HospitalityService.allCases[row].rawValue.capitalized
     }
 }
