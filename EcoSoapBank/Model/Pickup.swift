@@ -213,13 +213,13 @@ extension Pickup.Status {
     var color: UIColor {
         switch self {
         case .submitted:
-            return .blue
+            return .systemBlue
         case .outForPickup:
-            return .purple
+            return .systemOrange
         case .complete:
-            return .green
+            return .esbGreen
         case .cancelled:
-            return .gray
+            return .systemRed
         }
     }
 
