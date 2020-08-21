@@ -133,9 +133,9 @@ extension NewPickupViewController {
 
         // subscribe to view model cartons, update data source on change
         viewModel.$cartons
-            .sink(receiveValue: updateDataSource(with:))
+            .sink(receiveValue: update(fromCartons:))
             .store(in: &cancellables)
-        updateDataSource(with: viewModel.cartons)
+        update(fromCartons: viewModel.cartons)
     }
 
     private func configureSectionLabel(titled title: String) -> UILabel {
@@ -162,7 +162,8 @@ extension NewPickupViewController {
         return cell
     }
 
-    private func updateDataSource(with cartons: [NewCartonViewModel]) {
+    private func update(fromCartons cartons: [NewCartonViewModel]) {
+        // update table view data source
         let snapshot = configure(Snapshot()) {
             $0.appendSections([0])
             $0.appendItems(cartons, toSection: 0)
@@ -223,9 +224,7 @@ extension NewPickupViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - Public
-
-extension NewPickupViewController {
+extension NewPickupViewController: UIPopoverPresentationControllerDelegate {
     func sourceViewForCartonEditingPopover() -> UIView {
         guard
             let idx = tableView.indexPathForSelectedRow,
@@ -240,6 +239,13 @@ extension NewPickupViewController {
         tableView.indexPathsForSelectedRows?.forEach {
             tableView.deselectRow(at: $0, animated: true)
         }
+    }
+
+    func adaptivePresentationStyle(
+        for controller: UIPresentationController,
+        traitCollection: UITraitCollection
+    ) -> UIModalPresentationStyle {
+        .none
     }
 }
 

@@ -80,7 +80,7 @@ extension PickupCoordinator {
 
     private func editCarton(_ cartonVM: NewCartonViewModel) {
         guard newPickupVC.isViewLoaded else { return }
-        let popover = editCartonVC()
+        let popover = editCartonVC(for: cartonVM)
         popover.popoverPresentationController?.sourceView =
             newPickupVC.sourceViewForCartonEditingPopover()
         newPickupVC.present(popover, animated: true, completion: nil)
@@ -125,10 +125,10 @@ extension PickupCoordinator {
 }
 
 extension PickupCoordinator {
-    private func editCartonVC() -> EditCartonViewController {
-        configure(EditCartonViewController()) {
-            $0.modalPresentationStyle = .popover
-            $0.popoverPresentationController?.delegate = newPickupVC
+    private func editCartonVC(for viewModel: NewCartonViewModel) -> EditCartonViewController {
+        configure(EditCartonViewController(viewModel: viewModel)) {
+                $0.modalPresentationStyle = .popover
+                $0.popoverPresentationController?.delegate = newPickupVC
         }
     }
 }
