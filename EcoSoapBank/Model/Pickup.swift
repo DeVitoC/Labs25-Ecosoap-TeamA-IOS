@@ -152,11 +152,9 @@ extension Pickup: Decodable {
         }
     }
 
-    struct CartonContents: Hashable, Identifiable, Decodable {
+    struct CartonContents: Hashable, Decodable {
         var product: HospitalityService
         var weight: Int
-
-        var id: Int { self.hashValue }
     }
 
     // MARK: Enums
