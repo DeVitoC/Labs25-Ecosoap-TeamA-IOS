@@ -57,7 +57,7 @@ extension UserController {
 // MARK: - Private
 
 extension UserController {
-    private var oktaAuth: OktaAuth { OktaAuth.shared }
+    private var oktaAuth: OktaAuth { OktaAuth.lambda }
     
     private func loginDidComplete(_ notification: Notification) {
         guard let token = try? oktaAuth.credentialsIfAvailable().accessToken else {
