@@ -95,13 +95,12 @@ struct Pickup: Identifiable, PickupBaseContainer, Equatable {
 
         // Decodes Cartons based on Carton decoder
         var cartonsArrayContainer = try container.nestedUnkeyedContainer(forKey: .cartons)
-        let cartonsDict = try cartonsArrayContainer.decode([String: Pickup.Carton].self)
-        let cartons = Array(cartonsDict.values)
+        let cartonsDict = try cartonsArrayContainer.decode(Pickup.Carton.self)
 
         let base = Base(collectionType: collectionType, status: status, readyDate: readyDate, pickupDate: pickupDate, notes: notes)
 
         self.base = base
-        self.cartons = cartons
+        self.cartons = [cartonsDict]
         self.id = id
         self.property = property
         self.confirmationCode = confirmationCode
