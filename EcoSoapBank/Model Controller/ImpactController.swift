@@ -8,25 +8,25 @@
 
 import UIKit
 
-protocol ImpactDataProvider {
-    func fetchImpactStats(_ completion: (Result<ImpactStats, Error>) -> Void)
+protocol ImpactProvider {
+    func fetchImpactStats(_ completion: @escaping (Result<ImpactStats, Error>) -> Void)
 }
 
 class ImpactController {
     private(set) var viewModels: [ImpactCellViewModel] = []
     
-    private let dataProvider: ImpactDataProvider
+    private let dataProvider: ImpactProvider
     
     /// Gets the latest impact stats from the data provider, which in
     /// turn updates the `viewModels` property accordingly.
     /// - Parameter completion: A completion closure that passes back
     /// either an error if something went wrong, or nil if the impact
     /// stats were properly fetched and the view models updated.
-    func getImpactStats(_ completion: (Error?) -> Void) {
-        dataProvider.fetchImpactStats { result in
+    func getImpactStats(_ completion: @escaping (Error?) -> Void) {
+        dataProvider.fetchImpactStats { [weak self] result in
             switch result {
             case .success(let stats):
-                updateViewModels(with: stats)
+                self?.updateViewModels(with: stats)
                 completion(nil)
             case .failure(let error):
                 completion(error)
@@ -36,7 +36,7 @@ class ImpactController {
     
     // MARK: - Init
     
-    init(dataProvider: ImpactDataProvider) {
+    init(dataProvider: ImpactProvider) {
         self.dataProvider = dataProvider
     }
     
@@ -100,10 +100,10 @@ class ImpactController {
     }
 }
 
-// MARK: - Mock Data Provider
+// MARK: - Mock Impact Provider
 
 /// For placeholder and testing purposes
-struct MockImpactDataProvider: ImpactDataProvider {
+struct MockImpactProvider: ImpactProvider {
     enum Error: Swift.Error {
         case shouldFail
     }

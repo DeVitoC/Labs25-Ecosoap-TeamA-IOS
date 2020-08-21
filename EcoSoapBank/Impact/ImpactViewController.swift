@@ -16,7 +16,7 @@ class ImpactViewController: UIViewController {
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
-    private var impactController = ImpactController(dataProvider: MockImpactDataProvider())
+    private var impactController = ImpactController(dataProvider: MockImpactProvider())
     
     var massUnitObserver: UserDefaultsObservation?
     
@@ -34,13 +34,14 @@ class ImpactViewController: UIViewController {
                 
         setUpCollectionView()
 
-        impactController.getImpactStats { error in
+        impactController.getImpactStats { [weak self] error in
             if let error = error {
+                // TODO: Proper error handling
                 print(error)
                 return
             }
             
-            collectionView.reloadData()
+            self?.collectionView.reloadData()
         }
     }
     
