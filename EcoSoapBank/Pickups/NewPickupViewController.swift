@@ -215,19 +215,12 @@ extension NewPickupViewController: UITableViewDelegate {
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(
-            style: .destructive,
-            title: "Remove",
-            handler: { [unowned viewModel] _, _, completion in
-                viewModel.removeCarton(at: indexPath.row)
-                completion(true)
-        })
-        delete.backgroundColor = .systemRed
+        .remove { [unowned viewModel] _, _, completion in
+            viewModel.removeCarton(atIndex: indexPath.row)
+            completion(true)
+        }
+    }
 
-        let config = UISwipeActionsConfiguration(actions: [delete])
-        config.performsFirstActionWithFullSwipe = true
-
-        return config
     }
 }
 
