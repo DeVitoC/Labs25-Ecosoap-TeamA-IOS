@@ -29,11 +29,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let url = URLContexts.first?.url else { return }
 
-        OktaAuth.lambda.receiveCredentials(fromCallbackURL: url) { result in
+        OktaAuth.shared.receiveCredentials(fromCallbackURL: url) { result in
             let notificationName: Notification.Name
             do {
                 try result.get()
-                guard (try? OktaAuth.lambda.credentialsIfAvailable()) != nil
+                guard (try? OktaAuth.shared.credentialsIfAvailable()) != nil
                     else { return }
                 notificationName = .oktaAuthenticationSuccessful
             } catch {
