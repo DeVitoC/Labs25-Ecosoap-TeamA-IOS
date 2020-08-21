@@ -35,18 +35,15 @@ class NewPickupViewController: KeyboardHandlingViewController {
         tableView: tableView,
         cellProvider: cell(for:at:with:))
     private lazy var addCartonButton = configure(UIButton()) {
-        $0.setImage(UIImage.addBoxSymbol.withTintColor(.white), for: .normal) // TODO: replace with simple + button
-        $0.tintColor = .white
+        $0.setPreferredSymbolConfiguration(
+            UIImage.SymbolConfiguration(pointSize: 30),
+            forImageIn: .normal)
+        $0.setImage(UIImage.plusSquareFill.withTintColor(.esbGreen), for: .normal)
+        $0.tintColor = .esbGreen
         $0.imageView?.contentMode = .scaleAspectFit
+        $0.imageEdgeInsets = .zero
         $0.layer.cornerRadius = 5
-        $0.backgroundColor = .esbGreen
         $0.addTarget(self, action: #selector(addCarton), for: .touchUpInside)
-        $0.contentEdgeInsets = configure(UIEdgeInsets(), with: { ei in
-            ei.top = 4
-            ei.left = 4
-            ei.right = 4
-            ei.bottom = 4
-        })
     }
 
     private lazy var datePicker = configure(UIDatePicker()) {
@@ -110,7 +107,7 @@ extension NewPickupViewController {
         NSLayoutConstraint.activate([
             addCartonButton.leadingAnchor.constraint(greaterThanOrEqualTo: cartonsLabel.trailingAnchor, constant: 8),
             addCartonButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            addCartonButton.widthAnchor.constraint(equalToConstant: 40),
+            addCartonButton.widthAnchor.constraint(equalToConstant: 30),
             addCartonButton.heightAnchor.constraint(equalToConstant: 30),
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
             tableView.topAnchor.constraint(equalTo: addCartonButton.bottomAnchor, constant: 8),
@@ -259,5 +256,16 @@ extension NewPickupViewController {
         ) -> Bool {
             true
         }
+    }
+}
+
+
+// MARK: - Preview
+
+
+struct NewPickupViewController_Previews: PreviewProvider {
+    static var previews: some View {
+        NewPickupViewController.Representable(
+            viewModel: NewPickupViewModel())
     }
 }

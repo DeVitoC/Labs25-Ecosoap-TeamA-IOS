@@ -40,6 +40,11 @@ class PickupController: ObservableObject {
             .eraseToAnyPublisher()
     }
 
+    /// Forwards `newPickupViewModel`'s message to edit the given carton.
+    var editCarton: AnyPublisher<NewCartonViewModel, Never> {
+        newPickupViewModel.editingCarton
+    }
+
     private var dataProvider: PickupDataProvider
     private var cancellables: Set<AnyCancellable> = []
 
