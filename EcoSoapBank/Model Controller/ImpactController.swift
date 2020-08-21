@@ -100,35 +100,3 @@ class ImpactController {
     }
 }
 
-// MARK: - Mock Impact Provider
-
-/// For placeholder and testing purposes
-struct MockImpactProvider: ImpactProvider {
-    enum Error: Swift.Error {
-        case shouldFail
-    }
-
-    /// Set to `true` for testing networking failures
-    var shouldFail: Bool
-
-    init(shouldFail: Bool = false) {
-        self.shouldFail = shouldFail
-    }
-    
-    /// Simply returns mock ImpactStats through closure
-    /// or `MockImpactStatsProvider.Error.shouldFail` if `shouldFail`
-    /// instance property is set to `true`
-    func fetchImpactStats(_ completion: (Result<ImpactStats, Swift.Error>) -> Void) {
-        guard !shouldFail else {
-            completion(.failure(Self.Error.shouldFail))
-            return
-        }
-        
-        completion(.success(ImpactStats(soapRecycled: 13090,
-                                        bottlesRecycled: 1982,
-                                        linensRecycled: 3298,
-                                        paperRecycled: 2948,
-                                        peopleServed: 323,
-                                        womenEmployed: 5)))
-    }
-}
