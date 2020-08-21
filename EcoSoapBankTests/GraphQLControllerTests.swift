@@ -59,24 +59,7 @@ class GraphQLControllerTests: XCTestCase {
 
         graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery) { result in
 
-            guard let result = try? result.get() else {
-                    NSLog("result did not contain valid Impact stats")
-                    return
-            }
-
-            let soapRecycled = result.soapRecycled
-            let linensRecycled = result.linensRecycled
-            let bottlesRecycled = result.bottlesRecycled
-            let paperRecycled = result.paperRecycled
-            let peopleServed = result.peopleServed
-            let womenEmployed = result.womenEmployed
-
-            XCTAssertNil(soapRecycled)
-            XCTAssertNil(linensRecycled)
-            XCTAssertNil(bottlesRecycled)
-            XCTAssertNil(paperRecycled)
-            XCTAssertNil(peopleServed)
-            XCTAssertNil(womenEmployed)
+            XCTAssertNil(try? result.get())
         }
     }
 
@@ -105,7 +88,7 @@ class GraphQLControllerTests: XCTestCase {
             let company = result.company
             let email = result.email
 
-            XCTAssert(id == 4)
+            XCTAssert(id == "4")
             XCTAssert(firstName == "Christopher")
             XCTAssert(lastName == "DeVito")
             XCTAssert(title == "Manager")
@@ -146,16 +129,16 @@ class GraphQLControllerTests: XCTestCase {
             let cartons2ID = result[1].cartons[0].id
             let notes2 = result[1].notes
 
-            XCTAssert(id1.uuidString == "4")
+            XCTAssert(id1 == "4")
             XCTAssert(confirmationCode1 == "Success")
             XCTAssert(collectionType1.rawValue == "LOCAL")
-            XCTAssert(property1ID == 5)
+            XCTAssert(property1ID == "5")
             XCTAssert(cartons1ID.uuidString == "6")
             XCTAssert(notes1 == "Pickup notes here")
-            XCTAssert(id2.uuidString == "7")
+            XCTAssert(id2 == "7")
             XCTAssert(confirmationCode2 == "Success")
             XCTAssert(collectionType2.rawValue == "COURIER_CONSOLIDATED")
-            XCTAssert(property2ID == 5)
+            XCTAssert(property2ID == "5")
             XCTAssert(cartons2ID.uuidString == "8")
             XCTAssert(notes2 == "Pickup2 notes here")
         }

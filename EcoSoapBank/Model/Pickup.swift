@@ -70,6 +70,12 @@ struct Pickup: Identifiable, PickupBaseContainer, Equatable {
 
     // Decodes Pickup and the base object
     init(from decoder: Decoder) throws {
+        let formatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-mm-dd"
+            return formatter
+        }()
+
         let container = try decoder.container(keyedBy: PickupKeys.self)
 
         // Decodes all top level values from JSON
@@ -77,14 +83,20 @@ struct Pickup: Identifiable, PickupBaseContainer, Equatable {
         let confirmationCode = try container.decode(String.self, forKey: .confirmationCode)
         let collectionType = try container.decode(CollectionType.self, forKey: .collectionType)
         let status = try container.decode(Status.self, forKey: .status)
-        let readyDate = try container.decode(Date.self, forKey: .readyDate)
-        let pickupDate = try container.decodeIfPresent(Date.self, forKey: .pickupDate)
+        let readyDateString = try container.decode(String.self, forKey: .readyDate)
+        guard let readyDate = formatter.date(from: readyDateString) else { fatalError("unable to formate readyDate") }
+        let pickupDateString = try container.decodeIfPresent(String.self, forKey: .pickupDate)
+        var pickupDate: Date?
+        if let pickupDateStringUnwrapped = pickupDateString {
+            pickupDate = formatter.date(from: pickupDateStringUnwrapped)
+        }
         let property = try container.decode(Property.self, forKey: .property)
         let notes = try container.decodeIfPresent(String.self, forKey: .notes)
 
         // Decodes Cartons based on Carton decoder
         var cartonsArrayContainer = try container.nestedUnkeyedContainer(forKey: .cartons)
-        let cartons = try cartonsArrayContainer.decode([Carton].self)
+        let cartonsDict = try cartonsArrayContainer.decode([String: Pickup.Carton].self)
+        let cartons = Array(cartonsDict.values)
 
         let base = Base(collectionType: collectionType, status: status, readyDate: readyDate, pickupDate: pickupDate, notes: notes)
 

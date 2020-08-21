@@ -74,12 +74,12 @@ extension Pickup {
     static func mock(from input: ScheduleInput) -> Self {
         Pickup(
             base: input.base,
-            id: UUID(),
+            id: UUID().uuidString,
             confirmationCode: mockConfirmationCode(),
             cartons: input.cartons.map {
                 Pickup.Carton(id: UUID(), contents: $0)
             },
-            property: Property(id: 4,
+            property: Property(id: "4",
                                name: "Hilton",
                                propertyType: "GUESTHOUSE",
                                rooms: 2,
@@ -95,10 +95,10 @@ extension Pickup {
     static func random() -> Self {
         Pickup(
             base: .random(),
-            id: UUID(),
+            id: UUID().uuidString,
             confirmationCode: mockConfirmationCode(),
             cartons: .random(),
-            property: Property(id: 4,
+            property: Property(id: "4",
                                name: "Hilton",
                                propertyType: "GUESTHOUSE",
                                rooms: 2,
