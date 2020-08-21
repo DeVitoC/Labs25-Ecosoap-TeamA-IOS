@@ -18,7 +18,7 @@ class EditCartonViewController: UIViewController {
         $0.dataSource = self
         $0.delegate = self
         $0.selectRow(
-            HospitalityService.allCases
+            HospitalityService.displayOptions
                 .firstIndex(of: viewModel.carton.product)!,
             inComponent: 0,
             animated: false)
@@ -89,7 +89,7 @@ extension EditCartonViewController {
 
 extension EditCartonViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        viewModel.carton.product = HospitalityService.allCases[row]
+        viewModel.carton.product = HospitalityService.displayOptions[row]
     }
 }
 
@@ -100,7 +100,7 @@ extension EditCartonViewController: UIPickerViewDataSource {
         _ pickerView: UIPickerView,
         numberOfRowsInComponent component: Int
     ) -> Int {
-        HospitalityService.allCases.count
+        HospitalityService.displayOptions.count
     }
 
     func pickerView(
@@ -108,6 +108,6 @@ extension EditCartonViewController: UIPickerViewDataSource {
         titleForRow row: Int,
         forComponent component: Int
     ) -> String? {
-        HospitalityService.allCases[row].rawValue.capitalized
+        HospitalityService.displayOptions[row].rawValue.capitalized
     }
 }

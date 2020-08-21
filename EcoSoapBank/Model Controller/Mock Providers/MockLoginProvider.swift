@@ -51,12 +51,23 @@ extension User {
                     name: "Boobly Inn",
                     propertyType: Property.PropertyType.hotel.rawValue,
                     rooms: 20,
-                    services: HospitalityService.allCases.map { $0.rawValue },
+                    services: HospitalityService.displayOptions.map { $0.rawValue },
                     collectionType: Pickup.CollectionType.random().rawValue,
                     logo: nil,
                     phone: "555-124-3333",
                     shippingNote: "Blep",
-                    notes: "bloop")
+                    notes: "bloop"),
+                Property(
+                    id: Int.random(in: Int.min ... Int.max),
+                    name: "Blep Hotel",
+                    propertyType: Property.PropertyType.hotel.rawValue,
+                    rooms: 42,
+                    services: HospitalityService.displayOptions.map { $0.rawValue },
+                    collectionType: Pickup.CollectionType.random().rawValue,
+                    logo: nil,
+                    phone: "555-124-3213",
+                    shippingNote: "oenuthonetuh",
+                    notes: ",.prcg,.rpgc,.r")
         ])
     }
 }

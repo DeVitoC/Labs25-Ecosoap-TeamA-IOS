@@ -18,4 +18,8 @@ enum HospitalityService: String, Decodable, CaseIterable, Identifiable {
     case soap = "SOAP"
 
     var id: String { rawValue }
+
+    static let displayOptions: [HospitalityService] = [
+        .soap, .bottles, .linens, .paper, .other
+    ]
 }
