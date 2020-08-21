@@ -20,7 +20,7 @@ struct MockLoginProvider: UserDataProvider {
         print("token: \(token)")
     }
 
-    func logIn(_ completion: @escaping NetworkCompletion<User>) {
+    func logIn(_ completion: @escaping ResultHandler<User>) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
             if self.shouldFail {
                 completion(.mockFailure())
@@ -45,29 +45,40 @@ extension User {
             password: "I@m5uper$m@R7",
             phone: "555-123-4444",
             skype: nil,
-            properties: [
-                Property(
-                    id: Int.random(in: Int.min ... Int.max),
-                    name: "Boobly Inn",
-                    propertyType: Property.PropertyType.hotel.rawValue,
-                    rooms: 20,
-                    services: HospitalityService.displayOptions.map { $0.rawValue },
-                    collectionType: Pickup.CollectionType.random().rawValue,
-                    logo: nil,
-                    phone: "555-124-3333",
-                    shippingNote: "Blep",
-                    notes: "bloop"),
-                Property(
-                    id: Int.random(in: Int.min ... Int.max),
-                    name: "Blep Hotel",
-                    propertyType: Property.PropertyType.hotel.rawValue,
-                    rooms: 42,
-                    services: HospitalityService.displayOptions.map { $0.rawValue },
-                    collectionType: Pickup.CollectionType.random().rawValue,
-                    logo: nil,
-                    phone: "555-124-3213",
-                    shippingNote: "oenuthonetuh",
-                    notes: ",.prcg,.rpgc,.r")
-        ])
+            properties: .placeholders())
+    }
+}
+
+
+extension Array where Element == Property {
+    static func placeholders() -> [Property] {
+        [
+            Property(
+                id: 3498,
+                name: "Boobly Inn",
+                propertyType: Property.PropertyType.hotel.rawValue,
+                rooms: 20,
+                services: HospitalityService.allCases.map { $0.rawValue },
+                collectionType: Pickup.CollectionType.random().rawValue,
+                logo: nil,
+                phone: "555-124-3333",
+                shippingNote: "Blep",
+                notes: "bloop"),
+            Property(
+                id: 9377,
+                name: "Blep Bed & Breakfast",
+                propertyType: Property.PropertyType.bedAndBreakfast.rawValue,
+                rooms: 5,
+                services: [
+                    HospitalityService.bottles,
+                    HospitalityService.soap
+                    ].map { $0.rawValue },
+                collectionType: Pickup.CollectionType.random().rawValue,
+                logo: nil,
+                phone: "555-124-3333",
+                shippingNote: "Blep",
+                notes: "bloop"),
+
+        ]
     }
 }

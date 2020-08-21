@@ -13,8 +13,6 @@ struct PickupHistoryView: View {
 
     init(pickupController: PickupController) {
         self.pickupController = pickupController
-
-//        UITableView.appearance().backgroundColor = .clear
     }
 
     var body: some View {
