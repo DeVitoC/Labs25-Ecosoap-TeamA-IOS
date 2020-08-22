@@ -32,6 +32,8 @@ struct Property: Decodable {
     let collectionType: Pickup.CollectionType
     let logo: String?
     let phone: String?
+    let billingAddress: String?
+    let shippingAddress: String?
     let shippingNote: String?
     let notes: String?
 
