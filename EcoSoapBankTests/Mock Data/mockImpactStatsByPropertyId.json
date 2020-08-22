@@ -2,12 +2,14 @@
 {
     "data": {
         "impactStatsByPropertyId": {
-            "soapRecycled": 1,
-            "linensRecycled": 2,
-            "bottlesRecycled": 3,
-            "paperRecycled": 4,
-            "peopleServed": 5,
-            "womenEmployed": 6
+            "impactStats": {
+                "soapRecycled": 1,
+                "linensRecycled": 2,
+                "bottlesRecycled": 3,
+                "paperRecycled": 4,
+                "peopleServed": 5,
+                "womenEmployed": 6
+            }
         }
     }
 }

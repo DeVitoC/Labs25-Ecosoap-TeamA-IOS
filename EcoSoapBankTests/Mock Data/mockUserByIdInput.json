@@ -1,35 +1,37 @@
 {
     "data": {
         "userById": {
-            "id": "4",
-            "firstName": "Christopher",
-            "middleName": "Brian",
-            "lastName": "DeVito",
-            "title": "Manager",
-            "company": "Hilton",
-            "email": "email@email.com",
-            "password": "password1",
-            "phone": "123-456-7890",
-            "skype": "skypeID",
-            "properties": [
-                {
-                    "id": "5",
-                    "name": "Hilton Hotel",
-                    "propertyType": "HOTEL",
-                    "rooms": 200,
-                    "services": [
-                        "BOTTLES",
-                        "LINENS",
-                        "PAPER",
-                        "SOAP"
-                    ],
-                    "collectionType": "COURIER_CONSOLIDATED",
-                    "logo": "http://www.logo-url.com",
-                    "phone": "123-456-0987",
-                    "shippingNote": "This company ships by UPS",
-                    "notes": "This compnay has been donating for 3 years"
-                }
-            ]
+            "user": {
+                "id": "4",
+                "firstName": "Christopher",
+                "middleName": "Brian",
+                "lastName": "DeVito",
+                "title": "Manager",
+                "company": "Hilton",
+                "email": "email@email.com",
+                "password": "password1",
+                "phone": "123-456-7890",
+                "skype": "skypeID",
+                "properties": [
+                    {
+                        "id": "5",
+                        "name": "Hilton Hotel",
+                        "propertyType": "HOTEL",
+                        "rooms": 200,
+                        "services": [
+                            "BOTTLES",
+                            "LINENS",
+                            "PAPER",
+                            "SOAP"
+                        ],
+                        "collectionType": "COURIER_CONSOLIDATED",
+                        "logo": "http://www.logo-url.com",
+                        "phone": "123-456-0987",
+                        "shippingNote": "This company ships by UPS",
+                        "notes": "This compnay has been donating for 3 years"
+                    }
+                ]
+            }
         }
     }
 }
