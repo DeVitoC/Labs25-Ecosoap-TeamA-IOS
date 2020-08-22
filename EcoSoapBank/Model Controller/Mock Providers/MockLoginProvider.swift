@@ -62,6 +62,8 @@ extension Array where Element == Property {
                 collectionType: Pickup.CollectionType.random(),
                 logo: nil,
                 phone: "555-124-3333",
+                billingAddress: nil,
+                shippingAddress: nil,
                 shippingNote: "Blep",
                 notes: "bloop"),
             Property(
@@ -76,6 +78,8 @@ extension Array where Element == Property {
                 collectionType: Pickup.CollectionType.random(),
                 logo: nil,
                 phone: "555-124-3333",
+                billingAddress: nil,
+                shippingAddress: nil,
                 shippingNote: "Blep",
                 notes: "bloop"),
 

@@ -87,6 +87,8 @@ extension Pickup {
                                collectionType: .local,
                                logo: nil,
                                phone: nil,
+                               billingAddress: nil,
+                               shippingAddress: nil,
                                shippingNote: nil,
                                notes: nil)
         )
@@ -106,6 +108,8 @@ extension Pickup {
                                collectionType: .local,
                                logo: nil,
                                phone: nil,
+                               billingAddress: nil,
+                               shippingAddress: nil,
                                shippingNote: nil,
                                notes: nil)
         )
