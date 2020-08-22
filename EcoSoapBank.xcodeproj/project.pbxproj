@@ -138,6 +138,7 @@
 		E2D04F8F24EEE95100515831 /* mockPickupsByPropertyIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F8C24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json */; };
 		E2D04F9124F0B7C300515831 /* mockPropertiesByUserIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */; };
 		E2D04F9324F0D50600515831 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9224F0D50600515831 /* Address.swift */; };
+		E2D04F9424F0DAC900515831 /* mockPropertiesByUserIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */; };
 		E2D302ED24E5B260008A6FAF /* mockImpactStatsByPropertyId.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */; };
 		E2D302EF24E5B489008A6FAF /* mockUserByIdInput.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */; };
 		E2D302F524E5CA32008A6FAF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302F424E5CA32008A6FAF /* User.swift */; };
@@ -705,6 +706,7 @@
 				041E1E7D24E1EA970052831D /* Muli-Semi-BoldItalic.ttf in Resources */,
 				992BB63C24EDD01F00638AA4 /* PickupDetailViewController.storyboard in Resources */,
 				041E1E5C24E1EA920052831D /* Montserrat-SemiBoldItalic.otf in Resources */,
+				E2D04F9424F0DAC900515831 /* mockPropertiesByUserIdSuccess.json in Resources */,
 				E2D04F8E24EEE94D00515831 /* mockPickupsByPropertyIdSuccess.json in Resources */,
 				041E1E8024E1EA970052831D /* Muli-SemiBold.ttf in Resources */,
 				041E1E4A24E1EA920052831D /* Montserrat-BlackItalic.otf in Resources */,
