@@ -134,7 +134,7 @@ extension Pickup: Decodable {
         let cartons: [CartonContents]
     }
 
-    struct ScheduleResult {
+    struct ScheduleResult: Decodable {
         let pickup: Pickup
         let labelURL: URL
     }
