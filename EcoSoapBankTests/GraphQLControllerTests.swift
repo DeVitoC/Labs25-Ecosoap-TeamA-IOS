@@ -143,4 +143,51 @@ class GraphQLControllerTests: XCTestCase {
             XCTAssert(notes2 == "Pickup2 notes here")
         }
     }
+
+    func testPropertiesByUserIdSuccess() {
+        guard let path = Bundle.main.path(forResource: "mockPropertiesByUserIdSuccess",
+                                          ofType: "json"),
+            let mockData = NSData(contentsOfFile: path) else {
+                XCTFail("Unable to get propertie data from path")
+                return
+        }
+        let data = Data(mockData)
+        let mockLoader = MockDataLoader(data: data,
+                                        error: nil)
+        let graphQLController = GraphQLController(session: mockLoader)
+
+        graphQLController.queryRequest([Property].self, query: GraphQLQueries.propertiesByUserId) { result in
+
+            guard let result = try? result.get() else {
+                XCTFail("Unable to get Properties from returned data")
+                return
+            }
+
+            let id1 = result[0].id
+            let propertyType = result[0].propertyType
+            let rooms = result[0].rooms
+            let services = result[0].services
+            let phone = result[0].phone
+            let billingAddress = result[0].add
+            let id2 = result[1].id
+            let confirmationCode2 = result[1].confirmationCode
+            let collectionType2 = result[1].collectionType
+            let property2ID = result[1].property.id
+            let cartons2ID = result[1].cartons[0].id
+            let notes2 = result[1].notes
+
+            XCTAssert(id1 == "4")
+            XCTAssert(confirmationCode1 == "Success")
+            XCTAssert(collectionType1.rawValue == "LOCAL")
+            XCTAssert(property1ID == "5")
+            XCTAssert(cartons1ID == "6")
+            XCTAssert(notes1 == "Pickup notes here")
+            XCTAssert(id2 == "7")
+            XCTAssert(confirmationCode2 == "Success")
+            XCTAssert(collectionType2.rawValue == "COURIER_CONSOLIDATED")
+            XCTAssert(property2ID == "5")
+            XCTAssert(cartons2ID == "8")
+            XCTAssert(notes2 == "Pickup2 notes here")
+        }
+    }
 }
