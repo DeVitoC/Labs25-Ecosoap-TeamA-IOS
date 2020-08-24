@@ -130,7 +130,7 @@ extension Pickup: Decodable {
     struct ScheduleInput: PickupBaseContainer {
         let base: Base
 
-        let propertyID: UUID
+        let propertyID: String
         let cartons: [CartonContents]
     }
 

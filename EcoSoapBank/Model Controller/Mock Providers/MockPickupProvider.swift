@@ -189,7 +189,7 @@ extension Pickup.ScheduleInput {
     static func random() -> Self {
         Pickup.ScheduleInput(
             base: .random(),
-            propertyID: UUID(),
+            propertyID: "0",
             cartons: .random())
     }
 }

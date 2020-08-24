@@ -1,5 +1,5 @@
 //
-//  NewPickupViewController.swift
+//  SchedulePickupViewController.swift
 //  EcoSoapBank
 //
 //  Created by Jon Bash on 2020-08-17.
@@ -11,10 +11,10 @@ import SwiftUI
 import Combine
 
 
-class NewPickupViewController: KeyboardHandlingViewController {
+class SchedulePickupViewController: KeyboardHandlingViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, NewCartonViewModel>
 
-    private var viewModel: NewPickupViewModel
+    private var viewModel: SchedulePickupViewModel
     private var cancellables: Set<AnyCancellable> = []
 
     private lazy var tableViewHeight: NSLayoutConstraint =
@@ -23,12 +23,13 @@ class NewPickupViewController: KeyboardHandlingViewController {
     // MARK: - Views
 
     private lazy var cartonsLabel = configureSectionLabel(titled: "Cartons")
-    private lazy var readyDate = configureSectionLabel(titled: "Ready Date")
+    private lazy var propertyLabel = configureSectionLabel(titled: "Property")
+    private lazy var readyDateLabel = configureSectionLabel(titled: "Ready Date")
     private lazy var notesLabel = configureSectionLabel(titled: "Notes")
 
     private lazy var tableView = configure(UITableView()) {
-        $0.register(PickupCartonCell.self,
-                    forCellReuseIdentifier: PickupCartonCell.reuseIdentifier)
+        $0.register(NewCartonCell.self,
+                    forCellReuseIdentifier: NewCartonCell.reuseIdentifier)
         $0.delegate = self
     }
     private lazy var dataSource = DataSource(
@@ -44,6 +45,18 @@ class NewPickupViewController: KeyboardHandlingViewController {
         $0.imageEdgeInsets = .zero
         $0.layer.cornerRadius = 5
         $0.addTarget(self, action: #selector(addCarton), for: .touchUpInside)
+    }
+    private lazy var propertyField = configure(CursorlessTextField()) {
+        $0.inputView = propertyPicker
+        $0.backgroundColor = .white
+        $0.borderStyle = .roundedRect
+        $0.text = viewModel.selectedProperty.name
+    }
+    private lazy var propertyPicker = configure(InputPickerView(
+        data: viewModel.properties,
+        onSelect: { [weak self] in self?.setProperty($0) })
+    ) {
+        $0.backgroundColor = .tertiarySystemBackground
     }
 
     private lazy var datePicker = configure(UIDatePicker()) {
@@ -68,7 +81,7 @@ class NewPickupViewController: KeyboardHandlingViewController {
         fatalError("`init(coder:)` not implemented. Use `init(viewModel:)`.")
     }
 
-    init(viewModel: NewPickupViewModel) {
+    init(viewModel: SchedulePickupViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -82,7 +95,7 @@ class NewPickupViewController: KeyboardHandlingViewController {
 
 // MARK: - Setup / Update
 
-extension NewPickupViewController {
+extension SchedulePickupViewController {
     private func setUpViews() {
         view.backgroundColor = .secondarySystemBackground
 
@@ -90,14 +103,13 @@ extension NewPickupViewController {
         contentView.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading], constant: 20)
         contentView.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top], constant: 20)
         contentView.constrainNewSubview(tableView, to: [.leading, .trailing])
-        contentView.constrainNewSubviewToSafeArea(readyDate, sides: [.leading, .trailing], constant: 20)
+        contentView.constrainNewSubviewToSafeArea(readyDateLabel, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubview(datePicker, to: [.leading, .trailing])
         contentView.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom], constant: 20)
 
-        // remaining constraints
-        NSLayoutConstraint.activate([
+        var remainingConstraints = [
             addCartonButton.leadingAnchor.constraint(greaterThanOrEqualTo: cartonsLabel.trailingAnchor, constant: 8),
             addCartonButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             addCartonButton.widthAnchor.constraint(equalToConstant: 30),
@@ -105,14 +117,32 @@ extension NewPickupViewController {
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
             tableView.topAnchor.constraint(equalTo: addCartonButton.bottomAnchor, constant: 8),
             tableViewHeight,
-            readyDate.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
-            datePicker.topAnchor.constraint(equalTo: readyDate.bottomAnchor, constant: 8),
+
+            datePicker.topAnchor.constraint(equalTo: readyDateLabel.bottomAnchor, constant: 8),
             notesLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 20),
             notesView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 8),
             notesView.heightAnchor.constraint(greaterThanOrEqualToConstant: 150),
             scheduleButton.topAnchor.constraint(equalTo: notesView.bottomAnchor, constant: 20),
             scheduleButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-        ])
+        ]
+
+        if viewModel.properties.count > 1 {
+            contentView.constrainNewSubviewToSafeArea(propertyLabel, sides: [.leading, .trailing], constant: 20)
+            contentView.constrainNewSubviewToSafeArea(propertyField, sides: [.leading, .trailing], constant: 20)
+            remainingConstraints += [
+                propertyLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
+                propertyField.topAnchor.constraint(equalTo: propertyLabel.bottomAnchor, constant: 8),
+                readyDateLabel.topAnchor.constraint(equalTo: propertyField.bottomAnchor, constant: 20)
+
+            ]
+        } else {
+            remainingConstraints += [
+                readyDateLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
+            ]
+        }
+
+        // remaining constraints
+        NSLayoutConstraint.activate(remainingConstraints)
 
         tableView.dataSource = dataSource
     }
@@ -145,9 +175,9 @@ extension NewPickupViewController {
     ) -> UITableViewCell? {
         guard
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: PickupCartonCell.reuseIdentifier,
+                withIdentifier: NewCartonCell.reuseIdentifier,
                 for: indexPath)
-                as? PickupCartonCell
+                as? NewCartonCell
             else {
                 preconditionFailure("NewPickupViewController.tableView failed to dequeue NewPickupCartonCell.")
         }
@@ -177,7 +207,7 @@ extension NewPickupViewController {
 
 // MARK: - Actions
 
-extension NewPickupViewController {
+extension SchedulePickupViewController {
     @objc private func addCarton(_ sender: Any) {
         viewModel.addCarton()
     }
@@ -189,18 +219,23 @@ extension NewPickupViewController {
     @objc private func setReadyDate(_ sender: UIDatePicker) {
         viewModel.readyDate = sender.date
     }
+
+    private func setProperty(_ selectedProperty: Property) {
+        viewModel.selectedProperty = selectedProperty
+        propertyField.text = selectedProperty.name
+    }
 }
 
 // MARK: - Delegates
 
 // TextViewDelegate (superclass already conforms)
-extension NewPickupViewController {
+extension SchedulePickupViewController {
     func textViewDidChange(_ textView: UITextView) {
         viewModel.notes = textView.text
     }
 }
 
-extension NewPickupViewController: UITableViewDelegate {
+extension SchedulePickupViewController: UITableViewDelegate {
     // set up swipe to delete
     func tableView(
         _ tableView: UITableView,
@@ -217,7 +252,7 @@ extension NewPickupViewController: UITableViewDelegate {
     }
 }
 
-extension NewPickupViewController: UIPopoverPresentationControllerDelegate {
+extension SchedulePickupViewController: UIPopoverPresentationControllerDelegate {
     func sourceViewForCartonEditingPopover() -> UIView {
         guard
             let idx = tableView.indexPathForSelectedRow,
@@ -244,21 +279,21 @@ extension NewPickupViewController: UIPopoverPresentationControllerDelegate {
 
 // MARK: - ViewControllerRepresentable
 
-extension NewPickupViewController {
+extension SchedulePickupViewController {
     // Enables use with SwiftUI
     struct Representable: UIViewControllerRepresentable {
-        private var viewModel: NewPickupViewModel
+        private var viewModel: SchedulePickupViewModel
 
-        init(viewModel: NewPickupViewModel) {
+        init(viewModel: SchedulePickupViewModel) {
             self.viewModel = viewModel
         }
 
-        func makeUIViewController(context: Context) -> NewPickupViewController {
-            NewPickupViewController(viewModel: viewModel)
+        func makeUIViewController(context: Context) -> SchedulePickupViewController {
+            SchedulePickupViewController(viewModel: viewModel)
         }
 
         func updateUIViewController(
-            _ uiViewController: NewPickupViewController,
+            _ uiViewController: SchedulePickupViewController,
             context: Context
         ) { }
     }
@@ -266,7 +301,7 @@ extension NewPickupViewController {
 
 // MARK: - Data Source
 
-extension NewPickupViewController {
+extension SchedulePickupViewController {
     class DataSource: UITableViewDiffableDataSource<Int, NewCartonViewModel> {
         // allows user deletion of cells
         override func tableView(
@@ -284,7 +319,7 @@ extension NewPickupViewController {
 
 struct NewPickupViewController_Previews: PreviewProvider {
     static var previews: some View {
-        NewPickupViewController.Representable(
-            viewModel: NewPickupViewModel())
+        SchedulePickupViewController.Representable(
+            viewModel: SchedulePickupViewModel(user: .placeholder()))
     }
 }
