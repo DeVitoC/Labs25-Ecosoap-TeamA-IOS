@@ -135,8 +135,8 @@ extension Pickup: Decodable {
     }
 
     struct ScheduleResult: Decodable {
-        let pickup: Pickup
-        let labelURL: URL
+        let pickup: Pickup?
+        let labelURL: URL?
     }
 
     struct Carton: Identifiable, Decodable {
@@ -156,7 +156,7 @@ extension Pickup: Decodable {
             let weight = try container.decodeIfPresent(Int.self, forKey: .weight)
 
             // Create the CartonContents object
-            let cartonContents = CartonContents(product: product ?? HospitalityService.other, weight: weight ?? 0)
+            let cartonContents = CartonContents(product: product ?? HospitalityService.other, percentFull: weight ?? 0)
 
             self.id = id
             self.contents = cartonContents
@@ -165,7 +165,7 @@ extension Pickup: Decodable {
 
     struct CartonContents: Hashable, Identifiable, Decodable {
         var product: HospitalityService
-        var weight: Int
+        var percentFull: Int
 
         var id: Int { self.hashValue }
     }
@@ -249,5 +249,5 @@ extension Pickup.Carton {
 }
 
 extension Pickup.CartonContents {
-    var display: String { "\(product.rawValue.capitalized): \(weight)g" }
+    var display: String { "\(product.rawValue.capitalized): \(percentFull)g" }
 }

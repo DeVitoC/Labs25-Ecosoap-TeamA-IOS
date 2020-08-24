@@ -86,7 +86,7 @@ extension PickupDetailViewController {
         (cartonView.arrangedSubviews[0] as? UILabel)?.text =
             carton.contents?.product.rawValue.capitalized ?? "<empty>"
         (cartonView.arrangedSubviews[1] as? UILabel)?.text = Measurement(
-            value: Double(carton.contents?.weight ?? 0),
+            value: Double(carton.contents?.percentFull ?? 0),
             unit: UnitMass.grams)
             .string
 

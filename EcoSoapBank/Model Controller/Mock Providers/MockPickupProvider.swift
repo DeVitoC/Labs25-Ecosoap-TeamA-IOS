@@ -204,7 +204,7 @@ extension Pickup.ScheduleResult {
 
 extension Pickup.CartonContents {
     static func random() -> Pickup.CartonContents {
-        Pickup.CartonContents(product: .random(), weight: .random(in: 1...100))
+        Pickup.CartonContents(product: .random(), percentFull: .random(in: 1...100))
     }
 }
 

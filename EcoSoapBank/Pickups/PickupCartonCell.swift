@@ -33,7 +33,7 @@ class PickupCartonCell: UITableViewCell {
         self.viewModel = viewModel
 
         viewModel.$carton.sink { carton in
-            self.cartonLabel.text = "\(carton.product.rawValue.capitalized) — \(carton.weight)g"
+            self.cartonLabel.text = "\(carton.product.rawValue.capitalized) — \(carton.percentFull)g"
         }.store(in: &cancellables)
     }
 }
