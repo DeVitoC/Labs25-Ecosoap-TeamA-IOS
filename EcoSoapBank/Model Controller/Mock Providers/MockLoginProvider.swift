@@ -35,7 +35,7 @@ struct MockLoginProvider: UserDataProvider {
 extension User {
     static func placeholder() -> User {
         User(
-            id: Int.random(in: Int.min ... Int.max),
+            id: String(Int.random(in: Int.min ... Int.max)),
             firstName: "Bibbly",
             middleName: "Chrumbus",
             lastName: "Boobly",
@@ -54,28 +54,32 @@ extension Array where Element == Property {
     static func placeholders() -> [Property] {
         [
             Property(
-                id: 3498,
+                id: "3498",
                 name: "Boobly Inn",
-                propertyType: Property.PropertyType.hotel.rawValue,
+                propertyType: Property.PropertyType.hotel,
                 rooms: 20,
-                services: HospitalityService.allCases.map { $0.rawValue },
-                collectionType: Pickup.CollectionType.random().rawValue,
+                services: HospitalityService.allCases,
+                collectionType: Pickup.CollectionType.random(),
                 logo: nil,
                 phone: "555-124-3333",
+                billingAddress: nil,
+                shippingAddress: nil,
                 shippingNote: "Blep",
                 notes: "bloop"),
             Property(
-                id: 9377,
+                id: "9377",
                 name: "Blep Bed & Breakfast",
-                propertyType: Property.PropertyType.bedAndBreakfast.rawValue,
+                propertyType: Property.PropertyType.bedAndBreakfast,
                 rooms: 5,
                 services: [
                     HospitalityService.bottles,
                     HospitalityService.soap
-                    ].map { $0.rawValue },
-                collectionType: Pickup.CollectionType.random().rawValue,
+                ],
+                collectionType: Pickup.CollectionType.random(),
                 logo: nil,
                 phone: "555-124-3333",
+                billingAddress: nil,
+                shippingAddress: nil,
                 shippingNote: "Blep",
                 notes: "bloop"),
 
