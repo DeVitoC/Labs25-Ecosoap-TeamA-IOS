@@ -40,7 +40,7 @@ extension User {
             middleName: "Chrumbus",
             lastName: "Boobly",
             title: nil,
-            company: "Boobly Inc.",
+            company: "Bobbly Inc.",
             email: "Bibbly@Boobly.zone",
             password: "I@m5uper$m@R7",
             phone: "555-123-4444",
@@ -55,7 +55,7 @@ extension Array where Element == Property {
         [
             Property(
                 id: "3498",
-                name: "Boobly Inn",
+                name: "Bobbly Inn",
                 propertyType: Property.PropertyType.hotel,
                 rooms: 20,
                 services: HospitalityService.allCases,
