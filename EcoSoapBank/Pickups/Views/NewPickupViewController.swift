@@ -1,5 +1,5 @@
 //
-//  NewPickupViewController.swift
+//  SchedulePickupViewController.swift
 //  EcoSoapBank
 //
 //  Created by Jon Bash on 2020-08-17.
@@ -23,7 +23,8 @@ class NewPickupViewController: KeyboardHandlingViewController {
     // MARK: - Views
 
     private lazy var cartonsLabel = configureSectionLabel(titled: "Cartons")
-    private lazy var readyDate = configureSectionLabel(titled: "Ready Date")
+    private lazy var propertyLabel = configureSectionLabel(titled: "Property")
+    private lazy var readyDateLabel = configureSectionLabel(titled: "Ready Date")
     private lazy var notesLabel = configureSectionLabel(titled: "Notes")
 
     private lazy var tableView = configure(UITableView()) {
@@ -45,6 +46,10 @@ class NewPickupViewController: KeyboardHandlingViewController {
         $0.layer.cornerRadius = 5
         $0.addTarget(self, action: #selector(addCarton), for: .touchUpInside)
     }
+    private lazy var propertyField = configure(UITextField()) {
+        $0.inputView = propertyPicker
+    }
+    private lazy var propertyPicker = InputPickerView(data: viewModel.user.properties ?? [])
 
     private lazy var datePicker = configure(UIDatePicker()) {
         $0.datePickerMode = .date
@@ -99,14 +104,13 @@ extension NewPickupViewController {
         contentView.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading], constant: 20)
         contentView.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top], constant: 20)
         contentView.constrainNewSubview(tableView, to: [.leading, .trailing])
-        contentView.constrainNewSubviewToSafeArea(readyDate, sides: [.leading, .trailing], constant: 20)
+        contentView.constrainNewSubviewToSafeArea(readyDateLabel, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubview(datePicker, to: [.leading, .trailing])
         contentView.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom], constant: 20)
 
-        // remaining constraints
-        NSLayoutConstraint.activate([
+        var remainingConstraints = [
             addCartonButton.leadingAnchor.constraint(greaterThanOrEqualTo: cartonsLabel.trailingAnchor, constant: 8),
             addCartonButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             addCartonButton.widthAnchor.constraint(equalToConstant: 30),
@@ -114,14 +118,32 @@ extension NewPickupViewController {
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
             tableView.topAnchor.constraint(equalTo: addCartonButton.bottomAnchor, constant: 8),
             tableViewHeight,
-            readyDate.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
-            datePicker.topAnchor.constraint(equalTo: readyDate.bottomAnchor, constant: 8),
+
+            datePicker.topAnchor.constraint(equalTo: readyDateLabel.bottomAnchor, constant: 8),
             notesLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 20),
             notesView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 8),
             notesView.heightAnchor.constraint(greaterThanOrEqualToConstant: 150),
             scheduleButton.topAnchor.constraint(equalTo: notesView.bottomAnchor, constant: 20),
             scheduleButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-        ])
+        ]
+
+        if let properties = viewModel.user.properties, properties.count > 1 {
+            contentView.constrainNewSubviewToSafeArea(propertyField, sides: [.leading, .trailing], constant: 20)
+            contentView.constrainNewSubviewToSafeArea(propertyLabel, sides: [.leading, .trailing], constant: 20)
+            remainingConstraints += [
+                propertyLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
+                propertyField.topAnchor.constraint(equalTo: propertyLabel.bottomAnchor, constant: 8),
+                readyDateLabel.topAnchor.constraint(equalTo: propertyField.bottomAnchor, constant: 20)
+
+            ]
+        } else {
+            remainingConstraints += [
+                readyDateLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
+            ]
+        }
+
+        // remaining constraints
+        NSLayoutConstraint.activate(remainingConstraints)
 
         tableView.dataSource = dataSource
     }

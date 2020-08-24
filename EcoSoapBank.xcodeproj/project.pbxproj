@@ -535,7 +535,6 @@
 				994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */,
 				99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */,
 				99B6176424EB256D0099664B /* NewCartonViewModel.swift */,
-				992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */,
 				9985ED1324F08BC5009F108F /* Views */,
 			);
 			path = Pickups;
@@ -582,6 +581,7 @@
 				998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */,
 				998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */,
 				992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */,
+				992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */,
 				99B6175A24EAF0A20099664B /* NewPickupViewController.swift */,
 				99B6176024EB0C4E0099664B /* PickupCartonCell.swift */,
 				992BB64924F0319D00638AA4 /* EditCartonViewController.swift */,
