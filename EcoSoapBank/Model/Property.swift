@@ -51,3 +51,7 @@ struct Property: Decodable {
         case invoice = "INVOICE"
     }
 }
+
+extension Property: CustomStringConvertible {
+    var description: String { name }
+}

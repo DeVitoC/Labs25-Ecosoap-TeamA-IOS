@@ -46,10 +46,18 @@ class NewPickupViewController: KeyboardHandlingViewController {
         $0.layer.cornerRadius = 5
         $0.addTarget(self, action: #selector(addCarton), for: .touchUpInside)
     }
-    private lazy var propertyField = configure(UITextField()) {
+    private lazy var propertyField = configure(CursorlessTextField()) {
         $0.inputView = propertyPicker
+        $0.backgroundColor = .white
+        $0.borderStyle = .roundedRect
+        $0.text = viewModel.selectedProperty?.name ?? ""
     }
-    private lazy var propertyPicker = InputPickerView(data: viewModel.user.properties ?? [])
+    private lazy var propertyPicker = configure(InputPickerView(
+        data: viewModel.properties,
+        onSelect: { [weak self] in self?.setProperty($0) })
+    ) {
+        $0.backgroundColor = .tertiarySystemBackground
+    }
 
     private lazy var datePicker = configure(UIDatePicker()) {
         $0.datePickerMode = .date
@@ -64,12 +72,7 @@ class NewPickupViewController: KeyboardHandlingViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = .link
         $0.layer.cornerRadius = 10
-        $0.contentEdgeInsets = configure(UIEdgeInsets(), with: { ei in
-            ei.top = 8
-            ei.left = 8
-            ei.right = 8
-            ei.bottom = 8
-        })
+        $0.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         $0.addTarget(self,
                      action: #selector(schedulePickup),
                      for: .touchUpInside)
@@ -127,9 +130,9 @@ extension NewPickupViewController {
             scheduleButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ]
 
-        if let properties = viewModel.user.properties, properties.count > 1 {
-            contentView.constrainNewSubviewToSafeArea(propertyField, sides: [.leading, .trailing], constant: 20)
+        if viewModel.properties.count > 1 {
             contentView.constrainNewSubviewToSafeArea(propertyLabel, sides: [.leading, .trailing], constant: 20)
+            contentView.constrainNewSubviewToSafeArea(propertyField, sides: [.leading, .trailing], constant: 20)
             remainingConstraints += [
                 propertyLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
                 propertyField.topAnchor.constraint(equalTo: propertyLabel.bottomAnchor, constant: 8),
@@ -219,6 +222,11 @@ extension NewPickupViewController {
 
     @objc private func setReadyDate(_ sender: UIDatePicker) {
         viewModel.readyDate = sender.date
+    }
+
+    private func setProperty(_ selectedProperty: Property) {
+        viewModel.selectedProperty = selectedProperty
+        propertyField.text = selectedProperty.name
     }
 }
 
