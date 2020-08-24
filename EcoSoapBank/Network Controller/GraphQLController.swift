@@ -77,12 +77,28 @@ class GraphQLController {
             guard let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                 let dataDict = jsonDict["data"] as? [String: Any],
                 let returnType = Array(dataDict.keys).first,
-                let returnData = dataDict[returnType] as? [String: Any],
-                let methodType = Array(returnData.keys).first,
-                let object: Any = returnData[methodType] as? [String: Any] ?? returnData[methodType] as? [Any],
-                let objectData = try? JSONSerialization.data(withJSONObject: object, options: []) else {
+                let returnData = dataDict[returnType] as? [String: Any]
+            else {
                     return .failure(GraphQLError.noData)
             }
+
+            var objectData: Data
+            if returnType != "schedulePickupInput" {
+                guard let methodType = Array(returnData.keys).first,
+                    let object: Any = returnData[methodType] as? [String: Any] ?? returnData[methodType] as? [Any],
+                    let objectDataUnwrapped = try? JSONSerialization.data(withJSONObject: object, options: [])
+                    else {
+                        return .failure(GraphQLError.noData)
+                }
+                objectData = objectDataUnwrapped
+            } else {
+                guard let objectDataUnwrapped = try? JSONSerialization.data(withJSONObject: returnData, options: []) else {
+                    return .failure(GraphQLError.noData)
+                }
+                objectData = objectDataUnwrapped
+            }
+
+
             let dict = try JSONDecoder().decode(T.self, from: objectData)
             
             return .success(dict)

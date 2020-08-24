@@ -82,7 +82,7 @@ class PickupTests: XCTestCase {
                 }
             }, receiveValue: { result in
                 self.mockDataReturned()
-                XCTAssertEqual(pickupInput.base, result.pickup.base)
+                XCTAssertEqual(pickupInput.base, result.pickup?.base)
             }).store(in: &bag)
 
         waitForMockData()

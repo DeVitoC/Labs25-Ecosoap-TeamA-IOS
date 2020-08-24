@@ -20,6 +20,11 @@ protocol PickupDataProvider {
 }
 
 
+enum PickupError: Error {
+    case noResult
+}
+
+
 class PickupController: ObservableObject {
     @Published private(set) var pickups: [Pickup] = []
     @Published private(set) var error: Error?
@@ -75,7 +80,10 @@ class PickupController: ObservableObject {
                 guard let self = self else { return }
                 switch result {
                 case .success(let pickupResult):
-                    self.pickups.append(pickupResult.pickup)
+                    guard let pickup = pickupResult.pickup else {
+                        return completion(.failure(PickupError.noResult))
+                    }
+                    self.pickups.append(pickup)
                     self.newPickupViewModel = self.makeSchedulePickupVM()
                     completion(result)
                 case .failure(let error):

@@ -34,7 +34,7 @@ class NewCartonCell: UITableViewCell {
 
         viewModel.$carton.sink { carton in
             self.cartonLabel.text = carton.product.rawValue.capitalized + " — "
-                + carton.weight.percentString + " full"
+                + carton.percentFull.percentString + " full"
         }.store(in: &cancellables)
     }
 }

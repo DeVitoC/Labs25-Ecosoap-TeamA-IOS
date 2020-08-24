@@ -125,7 +125,7 @@ extension PickupCoordinator {
             style: .default,
             handler: { _ in
                 UIApplication.shared.open(
-                    pickupResult.labelURL,
+                    pickupResult.labelURL!,
                     options: [:],
                     completionHandler: nil)
         }))

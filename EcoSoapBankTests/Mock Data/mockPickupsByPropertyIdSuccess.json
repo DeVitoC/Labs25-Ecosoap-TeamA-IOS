@@ -30,7 +30,7 @@
                         {
                             "id": "6",
                             "product": "SOAP",
-                            "weight": 10
+                            "percentFull": 10
                         }
                     ],
                     "notes": "Pickup notes here"
@@ -61,7 +61,7 @@
                         {
                             "id": "8",
                             "product": "LINENS",
-                            "weight": 4
+                            "percentFull": 4
                         }
                     ],
                     "notes": "Pickup2 notes here"
