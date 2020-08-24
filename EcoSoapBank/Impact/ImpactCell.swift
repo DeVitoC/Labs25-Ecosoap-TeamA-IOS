@@ -43,19 +43,7 @@ class ImpactCell: UICollectionViewCell {
         $0.text = "bottle amenities\nrecycled"
     }
     
-    private let imageView = configure(UIImageView()) {
-        $0.contentMode = .scaleAspectFill
-        $0.clipsToBounds = true
-        $0.image = UIImage(named: "Bottles")
-    }
-    
-    private lazy var circleView = configure(GradientView()) {
-        $0.colors = [.esbGreen, .downyBlue]
-        $0.startPoint = CGPoint(x: 0, y: 1)
-        $0.endPoint = CGPoint(x: 1, y: 0)
-        $0.layer.borderColor = UIColor.white.cgColor
-        $0.layer.borderWidth = self.strokeWidth
-    }
+    private let circleView = ESBCircularImageView()
     
     private let lineView = configure(UIView()) {
         $0.backgroundColor = .white
@@ -85,18 +73,10 @@ class ImpactCell: UICollectionViewCell {
         setUp()
     }
     
-    // MARK: - Overrides
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        circleView.layer.cornerRadius = circleView.frame.width / 2
-        imageView.layer.cornerRadius = imageView.frame.width / 2
-    }
-    
     // MARK: - Private Methods
 
     private func setUp() {
-        addSubviewsUsingAutolayout(titleLabel, subtitleLabel, circleView, imageView, lineView)
+        contentView.addSubviewsUsingAutolayout(titleLabel, subtitleLabel, circleView, lineView)
         
         addCommonConstraints()
         setUpLeadingConstraints()
@@ -107,16 +87,9 @@ class ImpactCell: UICollectionViewCell {
     
     private func addCommonConstraints() {
         NSLayoutConstraint.activate([
-            circleView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            circleView.heightAnchor.constraint(equalTo: heightAnchor,
+            circleView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            circleView.heightAnchor.constraint(equalTo: contentView.heightAnchor,
                                                multiplier: circleHeightMultiplier),
-            circleView.widthAnchor.constraint(equalTo: circleView.heightAnchor),
-            
-            imageView.centerXAnchor.constraint(equalTo: circleView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: circleView.centerYAnchor),
-            imageView.heightAnchor.constraint(equalTo: circleView.heightAnchor,
-                                              constant: -imagePadding),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
             
             lineView.centerYAnchor.constraint(equalTo: circleView.centerYAnchor),
             lineView.heightAnchor.constraint(equalToConstant: strokeWidth),
@@ -130,7 +103,7 @@ class ImpactCell: UICollectionViewCell {
     
     private func setUpLeadingConstraints() {
         leadingConstraints = [
-            circleView.leadingAnchor.constraint(equalTo: leadingAnchor,
+            circleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                 constant: circlePadding),
             
             lineView.leadingAnchor.constraint(equalTo: circleView.trailingAnchor),
@@ -144,7 +117,7 @@ class ImpactCell: UICollectionViewCell {
     
     private func setUpTrailingConstraints() {
         trailingConstraints = [
-            circleView.trailingAnchor.constraint(equalTo: trailingAnchor,
+            circleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                  constant: -circlePadding),
             
             lineView.trailingAnchor.constraint(equalTo: circleView.leadingAnchor),
@@ -172,6 +145,6 @@ class ImpactCell: UICollectionViewCell {
         guard let viewModel = viewModel else { return }
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
-        imageView.image = viewModel.image
+        circleView.image = viewModel.image
     }
 }
