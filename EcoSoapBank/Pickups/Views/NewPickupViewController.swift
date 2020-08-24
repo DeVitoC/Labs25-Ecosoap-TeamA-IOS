@@ -54,17 +54,8 @@ class NewPickupViewController: KeyboardHandlingViewController {
         $0.delegate = self
         $0.font = .muli(style: .body)
     }
-    private lazy var scheduleButton = configure(UIButton()) {
+    private lazy var scheduleButton = configure(ESBButton()) {
         $0.setTitle("Schedule Pickup", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = .link
-        $0.layer.cornerRadius = 10
-        $0.contentEdgeInsets = configure(UIEdgeInsets(), with: { ei in
-            ei.top = 8
-            ei.left = 8
-            ei.right = 8
-            ei.bottom = 8
-        })
         $0.addTarget(self,
                      action: #selector(schedulePickup),
                      for: .touchUpInside)
