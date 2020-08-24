@@ -22,8 +22,8 @@ class PickupTests: XCTestCase {
     override func setUp() {
         super.setUp()
         pickupProvider = MockPickupProvider()
-        pickupController = PickupController(dataProvider: pickupProvider)
-        pickupCoordinator = PickupCoordinator(dataProvider: pickupProvider)
+        pickupController = PickupController(user: .placeholder(), dataProvider: pickupProvider)
+        pickupCoordinator = PickupCoordinator(user: .placeholder(), dataProvider: pickupProvider)
         mockDataExpectation = XCTestExpectation(description: "Waiting for mock data")
         waiter = XCTWaiter(delegate: self)
     }
@@ -49,7 +49,9 @@ class PickupTests: XCTestCase {
 
     func testPickupControllerFailure() {
         pickupProvider.shouldFail = true
-        let failingController = PickupController(dataProvider: pickupProvider)
+        let failingController = PickupController(
+            user: .placeholder(),
+            dataProvider: pickupProvider)
 
         pickupProvider.fetchAllPickups { result in
             self.mockDataReturned()
