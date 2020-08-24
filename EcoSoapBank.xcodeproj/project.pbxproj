@@ -103,6 +103,8 @@
 		992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64224EEFBAD00638AA4 /* Errors.swift */; };
 		992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64424EF021600638AA4 /* MockLoginProvider.swift */; };
 		992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */; };
+		992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64924F0319D00638AA4 /* EditCartonViewController.swift */; };
+		992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
@@ -113,6 +115,7 @@
 		9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874724E33A0600450244 /* MockPickupProvider.swift */; };
 		9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874B24E4657C00450244 /* KeyboardAvoiding.swift */; };
 		9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874D24E4658600450244 /* KeyboardDismissing.swift */; };
+		9985ED1224F06E39009F108F /* SteppedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9985ED1124F06E39009F108F /* SteppedSlider.swift */; };
 		998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */; };
 		998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D024DDFF96009ADBC1 /* PickupController.swift */; };
 		998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D224DDFFA8009ADBC1 /* Pickup.swift */; };
@@ -223,6 +226,8 @@
 		992BB64224EEFBAD00638AA4 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		992BB64424EF021600638AA4 /* MockLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoginProvider.swift; sourceTree = "<group>"; };
 		992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OktaAuth+Shared.swift"; sourceTree = "<group>"; };
+		992BB64924F0319D00638AA4 /* EditCartonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCartonViewController.swift; sourceTree = "<group>"; };
+		992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISwipeActionsConfiguration+Constants.swift"; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +240,7 @@
 		9983874724E33A0600450244 /* MockPickupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPickupProvider.swift; sourceTree = "<group>"; };
 		9983874B24E4657C00450244 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
 		9983874D24E4658600450244 /* KeyboardDismissing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDismissing.swift; sourceTree = "<group>"; };
+		9985ED1124F06E39009F108F /* SteppedSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteppedSlider.swift; sourceTree = "<group>"; };
 		998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryView.swift; sourceTree = "<group>"; };
 		998913D024DDFF96009ADBC1 /* PickupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupController.swift; sourceTree = "<group>"; };
 		998913D224DDFFA8009ADBC1 /* Pickup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pickup.swift; sourceTree = "<group>"; };
@@ -476,6 +482,8 @@
 				990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */,
 				991874D324E4B28900F636FB /* UIView+Subviews.swift */,
 				049379A624EAE9FF0084051B /* UIView+Layout.swift */,
+				992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */,
+				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -505,15 +513,10 @@
 			isa = PBXGroup;
 			children = (
 				994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */,
-				9998716324E1E8C4000A993E /* PickupsView.swift */,
-				998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */,
-				998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */,
-				992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */,
-				992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */,
-				99B6175A24EAF0A20099664B /* NewPickupViewController.swift */,
 				99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */,
-				99B6176024EB0C4E0099664B /* PickupCartonCell.swift */,
 				99B6176424EB256D0099664B /* NewCartonViewModel.swift */,
+				992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */,
+				9985ED1324F08BC5009F108F /* Views */,
 			);
 			path = Pickups;
 			sourceTree = "<group>";
@@ -549,6 +552,20 @@
 				99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */,
 			);
 			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		9985ED1324F08BC5009F108F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9998716324E1E8C4000A993E /* PickupsView.swift */,
+				998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */,
+				998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */,
+				992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */,
+				99B6175A24EAF0A20099664B /* NewPickupViewController.swift */,
+				99B6176024EB0C4E0099664B /* PickupCartonCell.swift */,
+				992BB64924F0319D00638AA4 /* EditCartonViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		E27B4B1924E1ECE800148E4E /* Network Controller */ = {
@@ -767,6 +784,7 @@
 				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
 				992BB64024EEE58700638AA4 /* AppQuerier.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
+				992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */,
 				992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */,
 				99B6176124EB0C4E0099664B /* PickupCartonCell.swift in Sources */,
 				9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */,
@@ -801,6 +819,7 @@
 				0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */,
 				0445F05024EDEA7F00A0A665 /* ESBCircularImageView.swift in Sources */,
 				998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */,
+				992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */,
 				998913D724DE0C34009ADBC1 /* Property.swift in Sources */,
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
@@ -826,6 +845,7 @@
 				998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */,
 				049379A524EAE7140084051B /* Images.swift in Sources */,
 				466C4276249A8748007D033E /* SceneDelegate.swift in Sources */,
+				9985ED1224F06E39009F108F /* SteppedSlider.swift in Sources */,
 				991874D424E4B28900F636FB /* UIView+Subviews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,18 +31,20 @@ struct PickupsView: View {
     }
 
     private func newPickupButton() -> some View {
-        HStack(spacing: 4) {
-            Image.plus()
-            Image.cubeBox()
-        }
-        .foregroundColor(.white)
-        .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill()
-                .foregroundColor(Color(.link)))
-        .padding(4)
-        .accessibility(label: Text("Schedule New Pickup"))
+        Image(uiImage: .addBoxSymbol)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .foregroundColor(.white)
+            .padding(EdgeInsets(top: 5,
+                                leading: 11,
+                                bottom: 5,
+                                trailing: 9))
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill()
+                    .foregroundColor(Color(.link)))
+            .frame(height: 36)
+            .accessibility(label: Text("Schedule New Pickup"))
     }
 
     private func gradientBackground() -> some View {
