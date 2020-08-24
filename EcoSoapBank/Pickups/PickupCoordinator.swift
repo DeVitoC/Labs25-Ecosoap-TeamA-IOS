@@ -17,7 +17,7 @@ class PickupCoordinator: FlowCoordinator {
 
     private(set) lazy var rootVC: UIViewController = UIHostingController(
         rootView: PickupsView(pickupController: pickupController))
-    private lazy var newPickupVC = configure(NewPickupViewController(
+    private lazy var newPickupVC = configure(SchedulePickupViewController(
         viewModel: pickupController.newPickupViewModel)) {
             let cancel = UIBarButtonItem(
                 barButtonSystemItem: .cancel,

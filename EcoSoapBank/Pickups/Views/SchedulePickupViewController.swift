@@ -11,10 +11,10 @@ import SwiftUI
 import Combine
 
 
-class NewPickupViewController: KeyboardHandlingViewController {
+class SchedulePickupViewController: KeyboardHandlingViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, NewCartonViewModel>
 
-    private var viewModel: NewPickupViewModel
+    private var viewModel: SchedulePickupViewModel
     private var cancellables: Set<AnyCancellable> = []
 
     private lazy var tableViewHeight: NSLayoutConstraint =
@@ -28,8 +28,8 @@ class NewPickupViewController: KeyboardHandlingViewController {
     private lazy var notesLabel = configureSectionLabel(titled: "Notes")
 
     private lazy var tableView = configure(UITableView()) {
-        $0.register(PickupCartonCell.self,
-                    forCellReuseIdentifier: PickupCartonCell.reuseIdentifier)
+        $0.register(NewCartonCell.self,
+                    forCellReuseIdentifier: NewCartonCell.reuseIdentifier)
         $0.delegate = self
     }
     private lazy var dataSource = DataSource(
@@ -85,7 +85,7 @@ class NewPickupViewController: KeyboardHandlingViewController {
         fatalError("`init(coder:)` not implemented. Use `init(viewModel:)`.")
     }
 
-    init(viewModel: NewPickupViewModel) {
+    init(viewModel: SchedulePickupViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -99,7 +99,7 @@ class NewPickupViewController: KeyboardHandlingViewController {
 
 // MARK: - Setup / Update
 
-extension NewPickupViewController {
+extension SchedulePickupViewController {
     private func setUpViews() {
         view.backgroundColor = .secondarySystemBackground
 
@@ -179,9 +179,9 @@ extension NewPickupViewController {
     ) -> UITableViewCell? {
         guard
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: PickupCartonCell.reuseIdentifier,
+                withIdentifier: NewCartonCell.reuseIdentifier,
                 for: indexPath)
-                as? PickupCartonCell
+                as? NewCartonCell
             else {
                 preconditionFailure("NewPickupViewController.tableView failed to dequeue NewPickupCartonCell.")
         }
@@ -211,7 +211,7 @@ extension NewPickupViewController {
 
 // MARK: - Actions
 
-extension NewPickupViewController {
+extension SchedulePickupViewController {
     @objc private func addCarton(_ sender: Any) {
         viewModel.addCarton()
     }
@@ -233,13 +233,13 @@ extension NewPickupViewController {
 // MARK: - Delegates
 
 // TextViewDelegate (superclass already conforms)
-extension NewPickupViewController {
+extension SchedulePickupViewController {
     func textViewDidChange(_ textView: UITextView) {
         viewModel.notes = textView.text
     }
 }
 
-extension NewPickupViewController: UITableViewDelegate {
+extension SchedulePickupViewController: UITableViewDelegate {
     // set up swipe to delete
     func tableView(
         _ tableView: UITableView,
@@ -256,7 +256,7 @@ extension NewPickupViewController: UITableViewDelegate {
     }
 }
 
-extension NewPickupViewController: UIPopoverPresentationControllerDelegate {
+extension SchedulePickupViewController: UIPopoverPresentationControllerDelegate {
     func sourceViewForCartonEditingPopover() -> UIView {
         guard
             let idx = tableView.indexPathForSelectedRow,
@@ -283,21 +283,21 @@ extension NewPickupViewController: UIPopoverPresentationControllerDelegate {
 
 // MARK: - ViewControllerRepresentable
 
-extension NewPickupViewController {
+extension SchedulePickupViewController {
     // Enables use with SwiftUI
     struct Representable: UIViewControllerRepresentable {
-        private var viewModel: NewPickupViewModel
+        private var viewModel: SchedulePickupViewModel
 
-        init(viewModel: NewPickupViewModel) {
+        init(viewModel: SchedulePickupViewModel) {
             self.viewModel = viewModel
         }
 
-        func makeUIViewController(context: Context) -> NewPickupViewController {
-            NewPickupViewController(viewModel: viewModel)
+        func makeUIViewController(context: Context) -> SchedulePickupViewController {
+            SchedulePickupViewController(viewModel: viewModel)
         }
 
         func updateUIViewController(
-            _ uiViewController: NewPickupViewController,
+            _ uiViewController: SchedulePickupViewController,
             context: Context
         ) { }
     }
@@ -305,7 +305,7 @@ extension NewPickupViewController {
 
 // MARK: - Data Source
 
-extension NewPickupViewController {
+extension SchedulePickupViewController {
     class DataSource: UITableViewDiffableDataSource<Int, NewCartonViewModel> {
         // allows user deletion of cells
         override func tableView(
@@ -323,7 +323,7 @@ extension NewPickupViewController {
 
 struct NewPickupViewController_Previews: PreviewProvider {
     static var previews: some View {
-        NewPickupViewController.Representable(
-            viewModel: NewPickupViewModel(user: .placeholder()))
+        SchedulePickupViewController.Representable(
+            viewModel: SchedulePickupViewModel(user: .placeholder()))
     }
 }

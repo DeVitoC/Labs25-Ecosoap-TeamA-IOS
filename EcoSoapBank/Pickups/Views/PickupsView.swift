@@ -58,7 +58,7 @@ struct PickupsView: View {
     }
 
     private func presentNewPickupView() -> some View {
-        NewPickupViewController.Representable(
+        SchedulePickupViewController.Representable(
             viewModel: pickupController.newPickupViewModel)
     }
 

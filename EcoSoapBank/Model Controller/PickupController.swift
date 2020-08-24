@@ -90,8 +90,8 @@ class PickupController: ObservableObject {
         error = nil
     }
 
-    private func makeSchedulePickupVM() -> NewPickupViewModel {
-        let newVM = NewPickupViewModel(user: user)
+    private func makeSchedulePickupVM() -> SchedulePickupViewModel {
+        let newVM = SchedulePickupViewModel(user: user)
         
         schedulePickupCancellables = []
         newVM.pickupInput

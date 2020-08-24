@@ -127,9 +127,9 @@
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
 		9998716424E1E8C4000A993E /* PickupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9998716324E1E8C4000A993E /* PickupsView.swift */; };
 		99B5790324E30F140097957D /* PickupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5790224E30F140097957D /* PickupTests.swift */; };
-		99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175A24EAF0A20099664B /* NewPickupViewController.swift */; };
-		99B6175D24EAF0C70099664B /* NewPickupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */; };
-		99B6176124EB0C4E0099664B /* PickupCartonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176024EB0C4E0099664B /* PickupCartonCell.swift */; };
+		99B6175B24EAF0A20099664B /* SchedulePickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175A24EAF0A20099664B /* SchedulePickupViewController.swift */; };
+		99B6175D24EAF0C70099664B /* SchedulePickupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175C24EAF0C70099664B /* SchedulePickupViewModel.swift */; };
+		99B6176124EB0C4E0099664B /* NewCartonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176024EB0C4E0099664B /* NewCartonCell.swift */; };
 		99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176424EB256D0099664B /* NewCartonViewModel.swift */; };
 		99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */; };
 		99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177024EC3D000099664B /* Publisher+HandleError.swift */; };
@@ -264,9 +264,9 @@
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
 		9998716324E1E8C4000A993E /* PickupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupsView.swift; sourceTree = "<group>"; };
 		99B5790224E30F140097957D /* PickupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupTests.swift; sourceTree = "<group>"; };
-		99B6175A24EAF0A20099664B /* NewPickupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupViewController.swift; sourceTree = "<group>"; };
-		99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPickupViewModel.swift; sourceTree = "<group>"; };
-		99B6176024EB0C4E0099664B /* PickupCartonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCartonCell.swift; sourceTree = "<group>"; };
+		99B6175A24EAF0A20099664B /* SchedulePickupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePickupViewController.swift; sourceTree = "<group>"; };
+		99B6175C24EAF0C70099664B /* SchedulePickupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePickupViewModel.swift; sourceTree = "<group>"; };
+		99B6176024EB0C4E0099664B /* NewCartonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCartonCell.swift; sourceTree = "<group>"; };
 		99B6176424EB256D0099664B /* NewCartonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCartonViewModel.swift; sourceTree = "<group>"; };
 		99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingViewController.swift; sourceTree = "<group>"; };
 		99B6177024EC3D000099664B /* Publisher+HandleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+HandleError.swift"; sourceTree = "<group>"; };
@@ -536,7 +536,7 @@
 			isa = PBXGroup;
 			children = (
 				994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */,
-				99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */,
+				99B6175C24EAF0C70099664B /* SchedulePickupViewModel.swift */,
 				99B6176424EB256D0099664B /* NewCartonViewModel.swift */,
 				9985ED1324F08BC5009F108F /* Views */,
 			);
@@ -585,8 +585,8 @@
 				998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */,
 				992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */,
 				992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */,
-				99B6175A24EAF0A20099664B /* NewPickupViewController.swift */,
-				99B6176024EB0C4E0099664B /* PickupCartonCell.swift */,
+				99B6175A24EAF0A20099664B /* SchedulePickupViewController.swift */,
+				99B6176024EB0C4E0099664B /* NewCartonCell.swift */,
 				992BB64924F0319D00638AA4 /* EditCartonViewController.swift */,
 			);
 			path = Views;
@@ -822,7 +822,7 @@
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
 				992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */,
 				992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */,
-				99B6176124EB0C4E0099664B /* PickupCartonCell.swift in Sources */,
+				99B6176124EB0C4E0099664B /* NewCartonCell.swift in Sources */,
 				9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */,
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
 				04D1758D24E4195C00F8929C /* GradientView.swift in Sources */,
@@ -838,7 +838,7 @@
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
 				99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
-				99B6175D24EAF0C70099664B /* NewPickupViewModel.swift in Sources */,
+				99B6175D24EAF0C70099664B /* SchedulePickupViewModel.swift in Sources */,
 				998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
@@ -851,7 +851,7 @@
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
-				99B6175B24EAF0A20099664B /* NewPickupViewController.swift in Sources */,
+				99B6175B24EAF0A20099664B /* SchedulePickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
 				998913D524DE0907009ADBC1 /* PickupHistoryCell.swift in Sources */,
 				0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */,

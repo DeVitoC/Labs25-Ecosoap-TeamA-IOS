@@ -1,5 +1,5 @@
 //
-//  NewPickupViewModel.swift
+//  SchedulePickupViewModel.swift
 //  EcoSoapBank
 //
 //  Created by Jon Bash on 2020-08-17.
@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 
-class NewPickupViewModel {
+class SchedulePickupViewModel {
     @Published private(set) var cartons: [NewCartonViewModel] = []
     @Published var readyDate: Date = Date()
     @Published var notes: String = ""
@@ -28,7 +28,7 @@ class NewPickupViewModel {
 
 // MARK: - Public
 
-extension NewPickupViewModel {
+extension SchedulePickupViewModel {
     var properties: [Property] { user.properties ?? [] }
 
     /// Publishes pickup input when pickup is scheduled by caller of `schedulePickup`.
