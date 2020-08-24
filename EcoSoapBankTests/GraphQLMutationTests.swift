@@ -83,7 +83,7 @@ class GraphQLMutationTests: XCTestCase {
     }
 
     func testCancelPickupRequest() {
-        guard let path = Bundle.main.path(forResource: "mockUserByIdInput",
+        guard let path = Bundle.main.path(forResource: "mockCancelPickupSuccess",
                                           ofType: "json"),
             let mockData = NSData(contentsOfFile: path) else {
                 XCTFail("Unable to get mock impact stats data from path")
@@ -94,25 +94,26 @@ class GraphQLMutationTests: XCTestCase {
                                         error: nil)
         let graphQLController = GraphQLController(session: mockLoader)
 
-        graphQLController.queryRequest(User.self, query: GraphQLMutations.login) { result in
+        graphQLController.queryRequest(Pickup.self, query: GraphQLMutations.cancelPickup) { result in
 
-            guard let result = try? result.get(),
-                let propertyId = result.properties?[0].id,
-                let services = result.properties?[0].services,
-                let collectionType = result.properties?[0].collectionType else {
-                    XCTFail("Unable to get valid impact stats from returned data")
-                    return
+            guard let result = try? result.get() else {
+                XCTFail("Unable to get valid impact stats from returned data")
+                return
             }
-            let userId = result.id
-            let firstName = result.firstName
-            let lastName = result.lastName
 
-            XCTAssert(userId == "4")
-            XCTAssert(firstName == "Christopher")
-            XCTAssert(lastName == "DeVito")
-            XCTAssert(propertyId == "5")
-            XCTAssert(services == [.bottles, .linens, .paper, .soap])
-            XCTAssert(collectionType == .courierConsolidated)
+            let pickupId = result.id
+            let confirmationCode = result.confirmationCode
+            let collectionType = result.collectionType
+            let propertyId = result.property.id
+            let cartonId = result.cartons[0].id
+            let cartonPercentFull = result.cartons[0].contents?.percentFull
+
+            XCTAssert(pickupId == "PickupId1")
+            XCTAssert(confirmationCode == "Success")
+            XCTAssert(collectionType == .local)
+            XCTAssert(propertyId == "PropertyId1")
+            XCTAssert(cartonId == "CartonId1")
+            XCTAssert(cartonPercentFull == 100)
         }
     }
 
