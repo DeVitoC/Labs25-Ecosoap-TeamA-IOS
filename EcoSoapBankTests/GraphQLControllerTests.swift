@@ -11,17 +11,21 @@ import XCTest
 
 class GraphQLControllerTests: XCTestCase {
 
-    func testImpactStatsQueryRequestWithMockDataSuccess() {
-        guard let path = Bundle.main.path(forResource: "mockImpactStatsByPropertyId",
+    func setDataLoader(file: String) -> GraphQLController {
+        guard let path = Bundle.main.path(forResource: file,
                                           ofType: "json"),
             let mockData = NSData(contentsOfFile: path) else {
-                XCTFail("Unable to get mock impact stats data from path")
-                return
+                XCTFail("Unable to get mock data from path")
+                return GraphQLController()
         }
         let data = Data(mockData)
         let mockLoader = MockDataLoader(data: data,
                                         error: nil)
-        let graphQLController = GraphQLController(session: mockLoader)
+        return GraphQLController(session: mockLoader)
+    }
+
+    func testImpactStatsQueryRequestWithMockDataSuccess() {
+        let graphQLController = setDataLoader(file: "mockImpactStatsByPropertyId")
 
         graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery) { result in
 
@@ -97,7 +101,7 @@ class GraphQLControllerTests: XCTestCase {
         }
     }
 
-    func testPickupsByPropertyIdSuccess() {
+    func testPickupsByPropertyIdWithMockDataSuccess() {
         guard let path = Bundle.main.path(forResource: "mockPickupsByPropertyIdSuccess",
                                           ofType: "json"),
             let mockData = NSData(contentsOfFile: path) else {
@@ -144,7 +148,7 @@ class GraphQLControllerTests: XCTestCase {
         }
     }
 
-    func testPropertiesByUserIdSuccess() {
+    func testPropertiesByUserIdWithMockDataSuccess() {
         guard let path = Bundle.main.path(forResource: "mockPropertiesByUserIdSuccess",
                                           ofType: "json"),
             let mockData = NSData(contentsOfFile: path) else {

@@ -29,7 +29,7 @@ class EditCartonViewController: UIViewController {
         $0.minimumValueImage = .cubeBox
         $0.maximumValueImage = .cubeBoxFill
         $0.stepSize = 5
-        $0.value = Float(viewModel.carton.weight)
+        $0.value = Float(viewModel.carton.percentFull)
         $0.onValueChange = { [unowned self] newValue in
             self.sliderValueDidChange(newValue)
         }
@@ -81,7 +81,7 @@ extension EditCartonViewController {
     }
 
     private func sliderValueDidChange(_ newValue: Float) {
-        viewModel.carton.weight = Int(newValue)
+        viewModel.carton.percentFull = Int(newValue)
     }
 }
 
