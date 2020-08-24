@@ -77,6 +77,11 @@
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
 		049379AB24EB29160084051B /* ImpactHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379AA24EB29160084051B /* ImpactHeaderView.swift */; };
+		04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */; };
+		04BE6D0324F041E700DFC47D /* ImpactControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */; };
+		04BE6D0524F045C800DFC47D /* MockImpactProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0424F045C800DFC47D /* MockImpactProvider.swift */; };
+		04BE6D0924F05A3100DFC47D /* ImpactCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0824F05A3100DFC47D /* ImpactCellTests.swift */; };
+		04BE6D0B24F05A6300DFC47D /* ImpactViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0A24F05A6300DFC47D /* ImpactViewControllerTests.swift */; };
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
@@ -103,6 +108,8 @@
 		992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64224EEFBAD00638AA4 /* Errors.swift */; };
 		992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64424EF021600638AA4 /* MockLoginProvider.swift */; };
 		992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */; };
+		992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64924F0319D00638AA4 /* EditCartonViewController.swift */; };
+		992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
@@ -113,6 +120,7 @@
 		9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874724E33A0600450244 /* MockPickupProvider.swift */; };
 		9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874B24E4657C00450244 /* KeyboardAvoiding.swift */; };
 		9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874D24E4658600450244 /* KeyboardDismissing.swift */; };
+		9985ED1224F06E39009F108F /* SteppedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9985ED1124F06E39009F108F /* SteppedSlider.swift */; };
 		998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */; };
 		998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D024DDFF96009ADBC1 /* PickupController.swift */; };
 		998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D224DDFFA8009ADBC1 /* Pickup.swift */; };
@@ -204,6 +212,11 @@
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		049379AA24EB29160084051B /* ImpactHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactHeaderView.swift; sourceTree = "<group>"; };
+		04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellViewModelTests.swift; sourceTree = "<group>"; };
+		04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactControllerTests.swift; sourceTree = "<group>"; };
+		04BE6D0424F045C800DFC47D /* MockImpactProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImpactProvider.swift; sourceTree = "<group>"; };
+		04BE6D0824F05A3100DFC47D /* ImpactCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellTests.swift; sourceTree = "<group>"; };
+		04BE6D0A24F05A6300DFC47D /* ImpactViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewControllerTests.swift; sourceTree = "<group>"; };
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -233,6 +246,8 @@
 		992BB64224EEFBAD00638AA4 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		992BB64424EF021600638AA4 /* MockLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoginProvider.swift; sourceTree = "<group>"; };
 		992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OktaAuth+Shared.swift"; sourceTree = "<group>"; };
+		992BB64924F0319D00638AA4 /* EditCartonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCartonViewController.swift; sourceTree = "<group>"; };
+		992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISwipeActionsConfiguration+Constants.swift"; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +260,7 @@
 		9983874724E33A0600450244 /* MockPickupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPickupProvider.swift; sourceTree = "<group>"; };
 		9983874B24E4657C00450244 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
 		9983874D24E4658600450244 /* KeyboardDismissing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDismissing.swift; sourceTree = "<group>"; };
+		9985ED1124F06E39009F108F /* SteppedSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteppedSlider.swift; sourceTree = "<group>"; };
 		998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupHistoryView.swift; sourceTree = "<group>"; };
 		998913D024DDFF96009ADBC1 /* PickupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupController.swift; sourceTree = "<group>"; };
 		998913D224DDFFA8009ADBC1 /* Pickup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pickup.swift; sourceTree = "<group>"; };
@@ -349,6 +365,17 @@
 				041E1E2224E1EA920052831D /* montserrat */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		04BE6D0C24F05ABB00DFC47D /* Impact Tests */ = {
+			isa = PBXGroup;
+			children = (
+				04BE6D0824F05A3100DFC47D /* ImpactCellTests.swift */,
+				04BE6D0A24F05A6300DFC47D /* ImpactViewControllerTests.swift */,
+				04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */,
+				04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */,
+			);
+			path = "Impact Tests";
 			sourceTree = "<group>";
 		};
 		04D1758E24E41DF500F8929C /* Custom Views */ = {
@@ -493,6 +520,8 @@
 				990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */,
 				991874D324E4B28900F636FB /* UIView+Subviews.swift */,
 				049379A624EAE9FF0084051B /* UIView+Layout.swift */,
+				992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */,
+				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -501,6 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				9983874724E33A0600450244 /* MockPickupProvider.swift */,
+				04BE6D0424F045C800DFC47D /* MockImpactProvider.swift */,
 				992BB64424EF021600638AA4 /* MockLoginProvider.swift */,
 			);
 			path = "Mock Providers";
@@ -522,15 +552,10 @@
 			isa = PBXGroup;
 			children = (
 				994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */,
-				9998716324E1E8C4000A993E /* PickupsView.swift */,
-				998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */,
-				998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */,
-				992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */,
-				992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */,
-				99B6175A24EAF0A20099664B /* NewPickupViewController.swift */,
 				99B6175C24EAF0C70099664B /* NewPickupViewModel.swift */,
-				99B6176024EB0C4E0099664B /* PickupCartonCell.swift */,
 				99B6176424EB256D0099664B /* NewCartonViewModel.swift */,
+				992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */,
+				9985ED1324F08BC5009F108F /* Views */,
 			);
 			path = Pickups;
 			sourceTree = "<group>";
@@ -548,6 +573,7 @@
 				E2AEB12324E736E300C42ACD /* Mock Data */,
 				99B5790224E30F140097957D /* PickupTests.swift */,
 				994E4B8824DDB68700C12921 /* UtilityTests.swift */,
+				04BE6D0C24F05ABB00DFC47D /* Impact Tests */,
 				041E1E8724E1F3890052831D /* FontTests.swift */,
 				994E4B8224DDB67000C12921 /* Info.plist */,
 				041E1EA824E22DF50052831D /* ColorTests.swift */,
@@ -567,6 +593,20 @@
 				99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */,
 			);
 			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		9985ED1324F08BC5009F108F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9998716324E1E8C4000A993E /* PickupsView.swift */,
+				998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */,
+				998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */,
+				992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */,
+				99B6175A24EAF0A20099664B /* NewPickupViewController.swift */,
+				99B6176024EB0C4E0099664B /* PickupCartonCell.swift */,
+				992BB64924F0319D00638AA4 /* EditCartonViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		E27B4B1924E1ECE800148E4E /* Network Controller */ = {
@@ -797,6 +837,7 @@
 				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
 				992BB64024EEE58700638AA4 /* AppQuerier.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
+				992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */,
 				992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */,
 				99B6176124EB0C4E0099664B /* PickupCartonCell.swift in Sources */,
 				9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */,
@@ -831,7 +872,9 @@
 				0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */,
 				0445F05024EDEA7F00A0A665 /* ESBCircularImageView.swift in Sources */,
 				998913CF24DDFE54009ADBC1 /* PickupHistoryView.swift in Sources */,
+				992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */,
 				998913D724DE0C34009ADBC1 /* Property.swift in Sources */,
+				04BE6D0524F045C800DFC47D /* MockImpactProvider.swift in Sources */,
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
 				992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */,
@@ -857,6 +900,7 @@
 				998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */,
 				049379A524EAE7140084051B /* Images.swift in Sources */,
 				466C4276249A8748007D033E /* SceneDelegate.swift in Sources */,
+				9985ED1224F06E39009F108F /* SteppedSlider.swift in Sources */,
 				991874D424E4B28900F636FB /* UIView+Subviews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -867,9 +911,13 @@
 			files = (
 				041E1E8824E1F3890052831D /* FontTests.swift in Sources */,
 				994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */,
+				04BE6D0324F041E700DFC47D /* ImpactControllerTests.swift in Sources */,
+				04BE6D0924F05A3100DFC47D /* ImpactCellTests.swift in Sources */,
 				E2D04F9624F1653000515831 /* GraphQLMutationTests.swift in Sources */,
 				E2D302FD24E5EEA0008A6FAF /* GraphQLControllerTests.swift in Sources */,
 				041E1EA924E22DF50052831D /* ColorTests.swift in Sources */,
+				04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */,
+				04BE6D0B24F05A6300DFC47D /* ImpactViewControllerTests.swift in Sources */,
 				99B5790324E30F140097957D /* PickupTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,6 +16,7 @@ class NewPickupViewModel {
     @Published var notes: String = ""
 
     private var schedulePickupPassthrough = PassthroughSubject<Pickup.ScheduleInput, Error>()
+    private var editCartonPassthrough = PassthroughSubject<NewCartonViewModel, Never>()
 }
 
 // MARK: - Public
@@ -26,14 +27,24 @@ extension NewPickupViewModel {
         schedulePickupPassthrough.eraseToAnyPublisher()
     }
 
+    var editingCarton: AnyPublisher<NewCartonViewModel, Never> {
+        editCartonPassthrough.eraseToAnyPublisher()
+    }
+
     func addCarton() {
         cartons.append(.init(carton: .init(product: .soap, percentFull: 0)))
     }
 
-    func removeCarton(at index: Int) {
-        assert((0..<cartons.count).contains(index),
+    func editCarton(atIndex cartonIndex: Int) {
+        assert((0..<cartons.count).contains(cartonIndex),
+               "Attempted to edit index outside of range for NewPickupViewModel.cartons")
+        editCartonPassthrough.send(cartons[cartonIndex])
+    }
+
+    func removeCarton(atIndex cartonIndex: Int) {
+        assert((0..<cartons.count).contains(cartonIndex),
                "Attempted to remove index outside of range for NewPickupViewModel.cartons")
-        cartons.remove(at: index)
+        cartons.remove(at: cartonIndex)
     }
 
     func schedulePickup() {

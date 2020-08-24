@@ -170,7 +170,7 @@ extension Pickup: Decodable {
         }
     }
 
-    struct CartonContents: Hashable, Identifiable, Decodable {
+    struct CartonContents: Hashable, Decodable {
         var product: HospitalityService
         var percentFull: Int
 
@@ -233,13 +233,13 @@ extension Pickup.Status {
     var color: UIColor {
         switch self {
         case .submitted:
-            return .blue
+            return .systemBlue
         case .outForPickup:
-            return .purple
+            return .systemOrange
         case .complete:
-            return .green
+            return .esbGreen
         case .cancelled:
-            return .gray
+            return .systemRed
         }
     }
 

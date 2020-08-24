@@ -37,6 +37,7 @@ class GradientView: UIView {
     // MARK: - Private Methods
     
     private func setUp() {
+        isUserInteractionEnabled = false
         updateColors()
         updateStartPoint()
         updateEndPoint()

@@ -21,4 +21,8 @@ extension UIImage {
     static let paper = UIImage(named: "paper")!
     static let people = UIImage(named: "people")!
     static let women = UIImage(named: "women")!
+
+    static let plusSquareFill = UIImage(systemName: "plus.square.fill")!
+    static let cubeBox = UIImage(systemName: "cube.box")!
+    static let cubeBoxFill = UIImage(systemName: "cube.box.fill")!
 }
