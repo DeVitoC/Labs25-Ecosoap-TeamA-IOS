@@ -70,9 +70,11 @@ class PickupController: ObservableObject {
             self.dataProvider.schedulePickup(pickupInput) { [weak self] result in
                 switch result {
                 case .success(let pickupResult):
-                    self?.pickups.append(pickupResult.pickup)
-                    self?.newPickupViewModel = NewPickupViewModel()
-                    completion(result)
+                    if let pickup = pickupResult.pickup {
+                        self?.pickups.append(pickup)
+                        self?.newPickupViewModel = NewPickupViewModel()
+                        completion(result)
+                    }
                 case .failure(let error):
                     self?.error = error
                     completion(result)
