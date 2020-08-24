@@ -11,15 +11,14 @@ import UIKit
 
 class ImpactViewController: UIViewController {
     
-    private var collectionView = UICollectionView(
+    var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
-    private var impactController = ImpactController(dataProvider: MockImpactProvider())
+    var impactController = ImpactController(dataProvider: MockImpactProvider())
     
-    var massUnitObserver: UserDefaultsObservation?
-    
+    private var massUnitObserver: UserDefaultsObservation?
     
     override func loadView() {
         view = BackgroundView()
