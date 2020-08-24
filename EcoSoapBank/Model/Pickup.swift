@@ -137,6 +137,11 @@ extension Pickup: Decodable {
     struct ScheduleResult: Decodable {
         let pickup: Pickup?
         let labelURL: URL?
+
+        enum ScheduleResultKeys: String, CodingKey {
+            case pickup
+            case labelURL = "label"
+        }
     }
 
     struct Carton: Identifiable, Decodable {
@@ -153,10 +158,10 @@ extension Pickup: Decodable {
             let container = try decoder.container(keyedBy: CartonKeys.self)
             let id = try container.decode(String.self, forKey: .id)
             let product = try container.decodeIfPresent(HospitalityService.self, forKey: .product)
-            let weight = try container.decodeIfPresent(Int.self, forKey: .weight)
+            let percentFull = try container.decodeIfPresent(Int.self, forKey: .percentFull)
 
             // Create the CartonContents object
-            let cartonContents = CartonContents(product: product ?? HospitalityService.other, percentFull: weight ?? 0)
+            let cartonContents = CartonContents(product: product ?? HospitalityService.other, percentFull: percentFull ?? 0)
 
             self.id = id
             self.contents = cartonContents
@@ -202,7 +207,7 @@ extension Pickup: Decodable {
     enum CartonKeys: CodingKey {
         case id
         case product
-        case weight
+        case percentFull
     }
 }
 

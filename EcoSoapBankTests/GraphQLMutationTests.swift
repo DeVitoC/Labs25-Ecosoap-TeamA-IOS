@@ -75,10 +75,10 @@ class GraphQLMutationTests: XCTestCase {
             XCTAssert(pickupId == "PickupId1")
             XCTAssert(confirmationCode == "Success")
             XCTAssert(status == .complete)
-            XCTAssert(cartonId == "PropertyId1")
+            XCTAssert(cartonId == "CartonId1")
             XCTAssert(cartonPercentFull == 100)
             XCTAssert(collectionType == .local)
-            XCTAssert(label == URL(string: "www.labelurl.com"))
+            XCTAssert(label?.absoluteString == "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf")
         }
     }
 
