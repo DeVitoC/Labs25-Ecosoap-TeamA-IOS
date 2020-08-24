@@ -54,6 +54,7 @@ class ESBButton: UIButton {
             setTitleColor(.esbGreen, for: .normal)
             backgroundColor = .white
             backgroundGradient?.removeFromSuperview()
+            backgroundGradient = nil
         case .whiteOnGradient:
             setTitleColor(.white, for: .normal)
             backgroundGradient = configure(GradientView()) {
@@ -63,7 +64,6 @@ class ESBButton: UIButton {
             }
             addSubview(backgroundGradient!)
             backgroundGradient?.fillSuperview()
-            sendSubviewToBack(backgroundGradient!)
         }
     }
     
