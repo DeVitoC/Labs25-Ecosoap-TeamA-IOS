@@ -316,6 +316,6 @@ extension NewPickupViewController {
 struct NewPickupViewController_Previews: PreviewProvider {
     static var previews: some View {
         NewPickupViewController.Representable(
-            viewModel: NewPickupViewModel())
+            viewModel: NewPickupViewModel(user: .placeholder()))
     }
 }

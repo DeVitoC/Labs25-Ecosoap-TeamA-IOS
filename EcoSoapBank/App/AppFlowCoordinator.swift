@@ -16,8 +16,7 @@ class AppFlowCoordinator: FlowCoordinator {
     private(set) lazy var tabBarController = UITabBarController()
 
     private(set) lazy var impactCoord = ImpactCoordinator()
-    // when backend ready: PickupCoordinator(dataProvider: appQuerier)
-    private(set) lazy var pickupCoord = PickupCoordinator()
+    private(set) var pickupCoord: PickupCoordinator?
     private(set) lazy var loginCoord = LoginCoordinator(
         root: tabBarController,
         userController: userController,
@@ -52,8 +51,7 @@ class AppFlowCoordinator: FlowCoordinator {
         
         // set up tabBarController, start other coordinators
         tabBarController.viewControllers = [
-            impactCoord.rootVC,
-            pickupCoord.rootVC
+            impactCoord.rootVC
         ]
 
         // set up window and make visible
@@ -88,10 +86,18 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private func onLoginComplete() {
         DispatchQueue.main.async { [weak self] in
-            self?.impactCoord.start()
-            self?.pickupCoord.start()
-            if self?.tabBarController.presentedViewController != nil {
-                self?.tabBarController.dismiss(animated: true, completion: nil)
+            guard let self = self else { return }
+            // when backend ready: PickupCoordinator(dataProvider: appQuerier)
+            self.pickupCoord = PickupCoordinator()
+            self.tabBarController.setViewControllers([
+                self.impactCoord.rootVC, self.pickupCoord!.rootVC
+            ], animated: true)
+
+            self.impactCoord.start()
+            self.pickupCoord!.start()
+
+            if self.tabBarController.presentedViewController != nil {
+                self.tabBarController.dismiss(animated: true, completion: nil)
             }
         }
     }

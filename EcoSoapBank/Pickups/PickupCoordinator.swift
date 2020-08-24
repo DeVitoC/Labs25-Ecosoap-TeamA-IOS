@@ -13,7 +13,7 @@ import Combine
 
 class PickupCoordinator: FlowCoordinator {
     private let pickupController: PickupController
-    private var user: User?
+    private var user: User
 
     private(set) lazy var rootVC: UIViewController = UIHostingController(
         rootView: PickupsView(pickupController: pickupController))
@@ -35,8 +35,9 @@ class PickupCoordinator: FlowCoordinator {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(dataProvider: PickupDataProvider) {
-        self.pickupController = PickupController(dataProvider: dataProvider)
+    init(user: User, dataProvider: PickupDataProvider) {
+        self.user = user
+        self.pickupController = PickupController(user: user, dataProvider: dataProvider)
 
         // subscribe to and respond to model controller messages
         pickupController.editCarton
@@ -52,7 +53,7 @@ class PickupCoordinator: FlowCoordinator {
     }
 
     convenience init() {
-        self.init(dataProvider: MockPickupProvider())
+        self.init(user: .placeholder(), dataProvider: MockPickupProvider())
     }
 
     func start() {
@@ -75,7 +76,15 @@ class PickupCoordinator: FlowCoordinator {
 
 extension PickupCoordinator {
     private func presentNewPickupView() {
-        rootVC.present(newPickupNavController, animated: true, completion: nil)
+        if user.properties?.first == nil {
+            rootVC.presentSimpleAlert(
+                with: "No properties to schedule pickups for!",
+                message: "Please contact us to set up your properties for container pickups.",
+                preferredStyle: .alert,
+                dismissText: "OK")
+        } else {
+            rootVC.present(newPickupNavController, animated: true, completion: nil)
+        }
     }
 
     private func editCarton(_ cartonVM: NewCartonViewModel) {
