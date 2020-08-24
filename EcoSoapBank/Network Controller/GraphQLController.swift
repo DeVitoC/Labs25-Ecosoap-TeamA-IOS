@@ -76,8 +76,10 @@ class GraphQLController {
             // Decode data as ProfileQuery and pass the stored object of type Profile through completion
             guard let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                 let dataDict = jsonDict["data"] as? [String: Any],
-                let firstKey = Array(dataDict.keys).first,
-                let object = dataDict[firstKey] as? [String: Any],
+                let returnType = Array(dataDict.keys).first,
+                let returnData = dataDict[returnType] as? [String: Any],
+                let methodType = Array(returnData.keys).first,
+                let object: Any = returnData[methodType] as? [String: Any] ?? returnData[methodType] as? [Any],
                 let objectData = try? JSONSerialization.data(withJSONObject: object, options: []) else {
                     return .failure(GraphQLError.noData)
             }

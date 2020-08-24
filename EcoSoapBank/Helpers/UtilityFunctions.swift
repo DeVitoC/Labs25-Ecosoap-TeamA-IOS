@@ -95,6 +95,23 @@ extension NumberFormatter {
     static var forMeasurements: NumberFormatter {
         MeasurementFormatter.providedUnits.numberFormatter
     }
+
+    static var forPercentage: NumberFormatter = configure(NumberFormatter()) {
+        $0.numberStyle = .percent
+        $0.allowsFloats = false
+    }
+}
+
+extension Float {
+    var percentString: String {
+        NumberFormatter.forPercentage.string(from: NSNumber(value: self))!
+    }
+}
+
+extension Int {
+    var percentString: String {
+        NumberFormatter.forPercentage.string(from: NSNumber(value: Double(self) * 0.01))!
+    }
 }
 
 extension DateFormatter {
