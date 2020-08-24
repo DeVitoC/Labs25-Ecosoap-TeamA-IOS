@@ -32,7 +32,7 @@ extension NewPickupViewModel {
     }
 
     func addCarton() {
-        cartons.append(.init(carton: .init(product: .soap, weight: 0)))
+        cartons.append(.init(carton: .init(product: .soap, percentFull: 0)))
     }
 
     func editCarton(atIndex cartonIndex: Int) {

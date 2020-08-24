@@ -85,8 +85,9 @@ extension PickupDetailViewController {
 
         (cartonView.arrangedSubviews[0] as? UILabel)?.text =
             carton.contents?.product.rawValue.capitalized ?? "<empty>"
+
         (cartonView.arrangedSubviews[1] as? UILabel)?.text =
-            carton.contents?.weight.percentString ?? ""
+            carton.contents?.percentFull.percentString ?? ""
 
         return cartonView
     }

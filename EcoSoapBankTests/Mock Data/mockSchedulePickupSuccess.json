@@ -27,12 +27,12 @@
                     {
                         "id": "CartonId1",
                         "product": "SOAP",
-                        "weight": 10
+                        "percentFull": 100
                     }
                 ],
                 "notes": "Pickup notes here"
             },
-            "label": "www.labelurl.com"
+            "label": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
         }
     }
 }
