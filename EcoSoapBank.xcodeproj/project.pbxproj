@@ -106,6 +106,7 @@
 		992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64924F0319D00638AA4 /* EditCartonViewController.swift */; };
 		992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */; };
 		993B15CC24F42D8C00529517 /* InputPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B15CB24F42D8C00529517 /* InputPickerView.swift */; };
+		993B15CE24F4575500529517 /* CursorlessTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B15CD24F4575500529517 /* CursorlessTextField.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
@@ -240,6 +241,7 @@
 		992BB64924F0319D00638AA4 /* EditCartonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCartonViewController.swift; sourceTree = "<group>"; };
 		992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISwipeActionsConfiguration+Constants.swift"; sourceTree = "<group>"; };
 		993B15CB24F42D8C00529517 /* InputPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputPickerView.swift; sourceTree = "<group>"; };
+		993B15CD24F4575500529517 /* CursorlessTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorlessTextField.swift; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */,
 				0445F04D24EDD9C700A0A665 /* ESBButton.swift */,
 				993B15CB24F42D8C00529517 /* InputPickerView.swift */,
+				993B15CD24F4575500529517 /* CursorlessTextField.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -839,6 +842,7 @@
 				998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
+				993B15CE24F4575500529517 /* CursorlessTextField.swift in Sources */,
 				99B6177324EC743F0099664B /* LoginCoordinator.swift in Sources */,
 				990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */,
 				04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */,
