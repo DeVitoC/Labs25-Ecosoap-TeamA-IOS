@@ -9,21 +9,45 @@
 import UIKit
 
 class ESBCircularImageView: GradientView {
-    let imageView = configure(UIImageView()) {
+    
+    // MARK: - Public Properties
+    
+    var image: UIImage? {
+        get {
+            imageView.image
+        }
+        set {
+            imageView.image = newValue
+        }
+    }
+    
+    var borderWidth: CGFloat = 2 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
+    
+    // MARK: - Private Properties
+    
+    private let imageView = configure(UIImageView()) {
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
     }
     
-    init(image: UIImage) {
-        self.imageView.image = image
+    // MARK: - Init
+    
+    init(image: UIImage? = nil, inset: CGFloat = 8.0, borderWidth: CGFloat = 2.0) {
         super.init(frame: .zero)
-        
-        setUp()
+        self.image = image
+        self.borderWidth = borderWidth
+        setUp(withInset: inset)
     }
     
     @available(*, unavailable) required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Overrides
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -31,16 +55,18 @@ class ESBCircularImageView: GradientView {
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
     }
     
-    func setUp() {
-        startPoint = CGPoint(x: 0, y: 0)
+    // MARK: - Private methods
+    
+    func setUp(withInset inset: CGFloat) {
+        startPoint = CGPoint(x: 0, y: 1)
         endPoint = CGPoint(x: 1, y: 0)
         colors = [.esbGreen, .downyBlue]
         layer.borderColor = UIColor.white.cgColor
-        layer.borderWidth = 2.0
+        layer.borderWidth = borderWidth
         isUserInteractionEnabled = false
         
         addSubview(imageView)
-        imageView.constrain(with: imageView.constraints(from: self, toSides: .all, constant: 10))
+        imageView.constrain(with: imageView.constraints(from: self, toSides: .all, constant: inset))
     
         widthAnchor.constraint(equalTo: heightAnchor).isActive = true
     }
