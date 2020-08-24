@@ -137,6 +137,16 @@
 		E2AEB12624E7460600C42ACD /* mockImpactStatsFailure.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */; };
 		E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */; };
 		E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B324E45BF800C5DF8B /* QueryObjects.swift */; };
+		E2D04F8E24EEE94D00515831 /* mockPickupsByPropertyIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F8C24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json */; };
+		E2D04F8F24EEE95100515831 /* mockPickupsByPropertyIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F8C24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json */; };
+		E2D04F9124F0B7C300515831 /* mockPropertiesByUserIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */; };
+		E2D04F9324F0D50600515831 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9224F0D50600515831 /* Address.swift */; };
+		E2D04F9424F0DAC900515831 /* mockPropertiesByUserIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */; };
+		E2D04F9624F1653000515831 /* GraphQLMutationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9524F1653000515831 /* GraphQLMutationTests.swift */; };
+		E2D04F9824F16C1E00515831 /* mockSchedulePickupSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9724F16C1D00515831 /* mockSchedulePickupSuccess.json */; };
+		E2D04F9924F16C1E00515831 /* mockSchedulePickupSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9724F16C1D00515831 /* mockSchedulePickupSuccess.json */; };
+		E2D04F9B24F1726A00515831 /* mockCancelPickupSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9A24F1726A00515831 /* mockCancelPickupSuccess.json */; };
+		E2D04F9C24F1726A00515831 /* mockCancelPickupSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9A24F1726A00515831 /* mockCancelPickupSuccess.json */; };
 		E2D302ED24E5B260008A6FAF /* mockImpactStatsByPropertyId.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */; };
 		E2D302EF24E5B489008A6FAF /* mockUserByIdInput.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */; };
 		E2D302F524E5CA32008A6FAF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302F424E5CA32008A6FAF /* User.swift */; };
@@ -262,6 +272,12 @@
 		E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsFailure.json; sourceTree = "<group>"; };
 		E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLMutations.swift; sourceTree = "<group>"; };
 		E2B961B324E45BF800C5DF8B /* QueryObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryObjects.swift; sourceTree = "<group>"; };
+		E2D04F8C24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockPickupsByPropertyIdSuccess.json; sourceTree = "<group>"; };
+		E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockPropertiesByUserIdSuccess.json; sourceTree = "<group>"; };
+		E2D04F9224F0D50600515831 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		E2D04F9524F1653000515831 /* GraphQLMutationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLMutationTests.swift; sourceTree = "<group>"; };
+		E2D04F9724F16C1D00515831 /* mockSchedulePickupSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockSchedulePickupSuccess.json; sourceTree = "<group>"; };
+		E2D04F9A24F1726A00515831 /* mockCancelPickupSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockCancelPickupSuccess.json; sourceTree = "<group>"; };
 		E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsByPropertyId.json; sourceTree = "<group>"; };
 		E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockUserByIdInput.json; sourceTree = "<group>"; };
 		E2D302F424E5CA32008A6FAF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -433,6 +449,7 @@
 				04D1758624E317FB00F8929C /* ImpactStats.swift */,
 				990CA24024DB6A6C002B5FA4 /* Protocols */,
 				E2D302F424E5CA32008A6FAF /* User.swift */,
+				E2D04F9224F0D50600515831 /* Address.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -538,6 +555,7 @@
 				994E4B8224DDB67000C12921 /* Info.plist */,
 				041E1EA824E22DF50052831D /* ColorTests.swift */,
 				E2D302FC24E5EEA0008A6FAF /* GraphQLControllerTests.swift */,
+				E2D04F9524F1653000515831 /* GraphQLMutationTests.swift */,
 			);
 			path = EcoSoapBankTests;
 			sourceTree = "<group>";
@@ -587,6 +605,10 @@
 				E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */,
 				E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */,
 				E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */,
+				E2D04F8C24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json */,
+				E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */,
+				E2D04F9724F16C1D00515831 /* mockSchedulePickupSuccess.json */,
+				E2D04F9A24F1726A00515831 /* mockCancelPickupSuccess.json */,
 			);
 			path = "Mock Data";
 			sourceTree = "<group>";
@@ -696,10 +718,12 @@
 				041E1E8124E1EA970052831D /* Muli-Light.ttf in Resources */,
 				041E1E5E24E1EA920052831D /* Montserrat-Italic.otf in Resources */,
 				041E1E5424E1EA920052831D /* Montserrat-ExtraLight.otf in Resources */,
+				E2D04F9B24F1726A00515831 /* mockCancelPickupSuccess.json in Resources */,
 				041E1E7A24E1EA970052831D /* Muli-ExtraLightItalic.ttf in Resources */,
 				041E1E5A24E1EA920052831D /* Montserrat-Medium.otf in Resources */,
 				E2D302ED24E5B260008A6FAF /* mockImpactStatsByPropertyId.json in Resources */,
 				041E1E5224E1EA920052831D /* Montserrat-Thin.otf in Resources */,
+				E2D04F9824F16C1E00515831 /* mockSchedulePickupSuccess.json in Resources */,
 				041E1E4924E1EA920052831D /* Montserrat-Bold.otf in Resources */,
 				041E1E6424E1EA920052831D /* Montserrat-ExtraLightItalic.otf in Resources */,
 				041E1E8324E1EA970052831D /* Muli-LightItalic.ttf in Resources */,
@@ -712,6 +736,8 @@
 				041E1E7D24E1EA970052831D /* Muli-Semi-BoldItalic.ttf in Resources */,
 				992BB63C24EDD01F00638AA4 /* PickupDetailViewController.storyboard in Resources */,
 				041E1E5C24E1EA920052831D /* Montserrat-SemiBoldItalic.otf in Resources */,
+				E2D04F9424F0DAC900515831 /* mockPropertiesByUserIdSuccess.json in Resources */,
+				E2D04F8E24EEE94D00515831 /* mockPickupsByPropertyIdSuccess.json in Resources */,
 				041E1E8024E1EA970052831D /* Muli-SemiBold.ttf in Resources */,
 				041E1E4A24E1EA920052831D /* Montserrat-BlackItalic.otf in Resources */,
 				041E1E6C24E1EA920052831D /* Montserrat-SemiBold.otf in Resources */,
@@ -743,11 +769,15 @@
 				041E1E9E24E1F7970052831D /* Montserrat-SemiBoldItalic.otf in Resources */,
 				041E1E9C24E1F7970052831D /* Montserrat-LightItalic.otf in Resources */,
 				041E1E9224E1F78D0052831D /* Muli.ttf in Resources */,
+				E2D04F9124F0B7C300515831 /* mockPropertiesByUserIdSuccess.json in Resources */,
 				041E1E9124E1F78D0052831D /* Muli-Light.ttf in Resources */,
+				E2D04F9924F16C1E00515831 /* mockSchedulePickupSuccess.json in Resources */,
 				041E1E9424E1F7970052831D /* Montserrat-MediumItalic.otf in Resources */,
+				E2D04F9C24F1726A00515831 /* mockCancelPickupSuccess.json in Resources */,
 				041E1EA424E1F7970052831D /* Montserrat-Black.otf in Resources */,
 				041E1E9724E1F7970052831D /* Montserrat-BoldItalic.otf in Resources */,
 				041E1E8B24E1F78D0052831D /* Muli-ExtraLightItalic.ttf in Resources */,
+				E2D04F8F24EEE95100515831 /* mockPickupsByPropertyIdSuccess.json in Resources */,
 				041E1E9B24E1F7970052831D /* Montserrat-ExtraLight.otf in Resources */,
 				041E1E9524E1F7970052831D /* Montserrat-Bold.otf in Resources */,
 			);
@@ -829,6 +859,7 @@
 				9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */,
 				997BF11224E20AAE00A643D8 /* TextView.swift in Sources */,
 				0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */,
+				E2D04F9324F0D50600515831 /* Address.swift in Sources */,
 				9998716424E1E8C4000A993E /* PickupsView.swift in Sources */,
 				998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
@@ -856,6 +887,7 @@
 			files = (
 				041E1E8824E1F3890052831D /* FontTests.swift in Sources */,
 				994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */,
+				E2D04F9624F1653000515831 /* GraphQLMutationTests.swift in Sources */,
 				E2D302FD24E5EEA0008A6FAF /* GraphQLControllerTests.swift in Sources */,
 				041E1EA924E22DF50052831D /* ColorTests.swift in Sources */,
 				99B5790324E30F140097957D /* PickupTests.swift in Sources */,

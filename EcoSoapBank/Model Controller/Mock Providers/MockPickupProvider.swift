@@ -64,7 +64,7 @@ extension Array where Element == Pickup.CartonContents {
 extension Array where Element == Pickup.Carton {
     static func random() -> [Pickup.Carton] {
         [Pickup.CartonContents].random().map {
-            Pickup.Carton(id: UUID(), contents: $0)
+            Pickup.Carton(id: UUID().uuidString, contents: $0)
         }
     }
 }
@@ -74,19 +74,21 @@ extension Pickup {
     static func mock(from input: ScheduleInput) -> Self {
         Pickup(
             base: input.base,
-            id: UUID(),
+            id: UUID().uuidString,
             confirmationCode: mockConfirmationCode(),
             cartons: input.cartons.map {
-                Pickup.Carton(id: UUID(), contents: $0)
+                Pickup.Carton(id: UUID().uuidString, contents: $0)
             },
-            property: Property(id: 4,
+            property: Property(id: "4",
                                name: "Hilton",
-                               propertyType: "GUESTHOUSE",
+                               propertyType: .guesthouse,
                                rooms: 2,
                                services: [],
-                               collectionType: "LOCAL",
+                               collectionType: .local,
                                logo: nil,
                                phone: nil,
+                               billingAddress: nil,
+                               shippingAddress: nil,
                                shippingNote: nil,
                                notes: nil)
         )
@@ -95,17 +97,19 @@ extension Pickup {
     static func random() -> Self {
         Pickup(
             base: .random(),
-            id: UUID(),
+            id: UUID().uuidString,
             confirmationCode: mockConfirmationCode(),
             cartons: .random(),
-            property: Property(id: 4,
+            property: Property(id: "4",
                                name: "Hilton",
-                               propertyType: "GUESTHOUSE",
+                               propertyType: .guesthouse,
                                rooms: 2,
                                services: [],
-                               collectionType: "LOCAL",
+                               collectionType: .local,
                                logo: nil,
                                phone: nil,
+                               billingAddress: nil,
+                               shippingAddress: nil,
                                shippingNote: nil,
                                notes: nil)
         )
@@ -206,7 +210,7 @@ extension Pickup.CartonContents {
 
 extension Pickup.Carton {
     static func random() -> Pickup.Carton {
-        Pickup.Carton(id: UUID(), contents: .random())
+        Pickup.Carton(id: UUID().uuidString, contents: .random())
     }
 }
 
