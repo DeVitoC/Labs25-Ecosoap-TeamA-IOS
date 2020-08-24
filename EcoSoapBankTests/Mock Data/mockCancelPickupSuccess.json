@@ -27,7 +27,7 @@
                     {
                         "id": "CartonId1",
                         "product": "SOAP",
-                        "weight": 10
+                        "percentFull": 10
                     }
                 ],
                 "notes": "Pickup notes here"
