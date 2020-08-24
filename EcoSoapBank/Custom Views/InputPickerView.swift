@@ -18,9 +18,11 @@ UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
     var selectedValue: DataItem {
         data[selectedRow(inComponent: 0)]
     }
+    var onSelect: (DataItem) -> Void
 
-    init(data: [DataItem]) {
+    init(data: [DataItem], onSelect: @escaping (DataItem) -> Void) {
         self.data = data
+        self.onSelect = onSelect
         super.init(frame: .zero)
 
         delegate = self
@@ -50,5 +52,9 @@ UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
         forComponent component: Int
     ) -> String? {
         "\(data[row])"
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        onSelect(data[row])
     }
 }
