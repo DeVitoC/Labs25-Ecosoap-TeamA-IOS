@@ -138,10 +138,12 @@ extension Pickup: Decodable {
         let pickup: Pickup?
         let labelURL: URL?
 
-        enum ScheduleResultKeys: String, CodingKey {
+        // swiftlint:disable nesting
+        enum CodingKeys: String, CodingKey {
             case pickup
             case labelURL = "label"
         }
+        // swiftling:enable nesting
     }
 
     struct Carton: Identifiable, Decodable {
