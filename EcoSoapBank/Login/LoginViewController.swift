@@ -67,6 +67,7 @@ class LoginViewController: UIViewController {
         missionStatementLabel.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 40).isActive = true
         
         let signInButton = configure(ESBButton()) {
+            $0.colorScheme = .greenOnWhite
             $0.setTitle("SIGN IN WITH OKTA", for: .normal)
             $0.addTarget(self, action: #selector(signIn(_:)), for: .touchUpInside)
         }

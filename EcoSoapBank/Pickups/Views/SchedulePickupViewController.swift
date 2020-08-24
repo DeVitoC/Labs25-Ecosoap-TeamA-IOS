@@ -50,7 +50,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.inputView = propertyPicker
         $0.backgroundColor = .white
         $0.borderStyle = .roundedRect
-        $0.text = viewModel.selectedProperty?.name ?? ""
+        $0.text = viewModel.selectedProperty.name
     }
     private lazy var propertyPicker = configure(InputPickerView(
         data: viewModel.properties,
@@ -67,12 +67,8 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.delegate = self
         $0.font = .muli(style: .body)
     }
-    private lazy var scheduleButton = configure(UIButton()) {
+    private lazy var scheduleButton = configure(ESBButton()) {
         $0.setTitle("Schedule Pickup", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = .link
-        $0.layer.cornerRadius = 10
-        $0.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         $0.addTarget(self,
                      action: #selector(schedulePickup),
                      for: .touchUpInside)

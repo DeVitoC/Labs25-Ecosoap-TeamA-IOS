@@ -14,7 +14,7 @@ class SchedulePickupViewModel {
     @Published private(set) var cartons: [NewCartonViewModel] = []
     @Published var readyDate: Date = Date()
     @Published var notes: String = ""
-    lazy var selectedProperty = properties.first
+    lazy var selectedProperty = properties.first!
 
     private var user: User
 
@@ -59,12 +59,12 @@ extension SchedulePickupViewModel {
     func schedulePickup() {
         schedulePickupPassthrough.send(Pickup.ScheduleInput(
             base: Pickup.Base(
-                collectionType: selectedProperty?.collectionType, // TODO: actual value
+                collectionType: selectedProperty.collectionType, // TODO: actual value
                 status: .submitted,
                 readyDate: readyDate,
                 pickupDate: nil, // TODO: move out of base
                 notes: notes),
-            propertyID: selectedProperty?.id ?? "",
+            propertyID: selectedProperty.id,
             cartons: cartons.map { $0.carton }))
     }
 }
