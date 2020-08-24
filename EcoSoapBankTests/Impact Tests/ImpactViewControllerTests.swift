@@ -6,28 +6,50 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
+@testable import EcoSoapBank
+import ObjectiveC
 import XCTest
 
-class ImpactViewControllerTests: XCTestCase {
+class ImpactViewControllerTest: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var impactVC: ImpactViewController!
+    
+    override func setUp() {
+        super.setUp()
+        
+        impactVC = ImpactViewController()
+        impactVC.impactController = ImpactController(dataProvider: MockImpactProvider())
+        // load view hierarchy
+        _ = impactVC.view
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testCanInstantiateViewController() {
+        XCTAssertNotNil(impactVC)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testCollectionViewIsNotNilAfterViewDidLoad() {
+        XCTAssertNotNil(impactVC.collectionView)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testShouldSetCollectionViewDataSource() {
+        XCTAssertNotNil(impactVC.collectionView.dataSource)
     }
-
+    
+    func testConformsToCollectionViewDataSource() {
+        XCTAssert(ImpactViewController.conforms(to: UICollectionViewDataSource.self))
+        XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:viewForSupplementaryElementOfKind:at:))))
+        XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:numberOfItemsInSection:))))
+        XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:cellForItemAt:))))
+    }
+    
+    func testShouldSetCollectionViewDelegate() {
+        XCTAssertNotNil(impactVC.collectionView.delegate)
+    }
+    
+    func testConformsToCollectionViewDelegateFlowLayout () {
+        XCTAssertTrue(impactVC.conforms(to: UICollectionViewDelegateFlowLayout.self))
+        XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:layout:referenceSizeForHeaderInSection:))))
+        XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:layout:sizeForItemAt:))))
+        XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:layout:insetForSectionAt:))))
+    }
 }
