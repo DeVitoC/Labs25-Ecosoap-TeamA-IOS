@@ -117,7 +117,7 @@ struct Pickup: Identifiable, PickupBaseContainer, Equatable {
 
 extension Pickup: Decodable {
 
-    struct Base: Equatable, Decodable {
+    struct Base: Equatable, Codable {
         let collectionType: CollectionType
         let status: Status
         let readyDate: Date
@@ -127,7 +127,7 @@ extension Pickup: Decodable {
 
     // MARK: Schedule I/O
 
-    struct ScheduleInput: PickupBaseContainer {
+    struct ScheduleInput: PickupBaseContainer, Encodable {
         let base: Base
 
         let propertyID: UUID
@@ -170,7 +170,7 @@ extension Pickup: Decodable {
         }
     }
 
-    struct CartonContents: Hashable, Decodable {
+    struct CartonContents: Hashable, Codable {
         var product: HospitalityService
         var percentFull: Int
 
@@ -179,14 +179,14 @@ extension Pickup: Decodable {
 
     // MARK: Enums
 
-    enum Status: String, Decodable {
+    enum Status: String, Codable {
         case submitted = "SUBMITTED"
         case outForPickup = "OUT_FOR_PICKUP"
         case complete = "COMPLETE"
         case cancelled = "CANCELLED"
     }
 
-    enum CollectionType: String, Decodable {
+    enum CollectionType: String, Codable {
         case courierConsolidated = "COURIER_CONSOLIDATED"
         case courierDirect = "COURIER_DIRECT"
         case generatedLabel = "GENERATED_LABEL"
