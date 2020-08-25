@@ -47,7 +47,8 @@ class GraphQLController {
                                     variables: VariableType,
                                     completion: @escaping (Result<T, Error>) -> Void) {
         // Add body to query request
-        let body: [String: Any] = ["query": query, "variables": variables]
+        let variablesJSON = setVariables(variablesInput: variables)
+        let body: [String: Any] = ["query": query, "variables": variablesJSON]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
 
         session.loadData(with: request) { data, _, error in
