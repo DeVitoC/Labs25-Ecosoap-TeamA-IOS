@@ -18,7 +18,9 @@ class PickupCoordinator: FlowCoordinator {
     internal lazy var schedulePickupVM = SchedulePickupViewModel(user: user, delegate: self)
 
     private(set) lazy var rootVC: UIViewController = UIHostingController(
-        rootView: PickupsView(pickupController: pickupController, delegate: self))
+        rootView: PickupsView(
+            pickupController: pickupController,
+            schedulePickup: { [weak self] in self?.scheduleNewPickup() }))
     private lazy var newPickupVC = configure(SchedulePickupViewController(viewModel: schedulePickupVM)) {
             let cancel = UIBarButtonItem(
                 barButtonSystemItem: .cancel,
@@ -69,11 +71,10 @@ class PickupCoordinator: FlowCoordinator {
 
 extension PickupCoordinator {
     private func presentNewPickupView() {
-        if user.properties?.first == nil {
-
-        } else {
-            rootVC.present(newPickupNavController, animated: true, completion: nil)
+        guard user.properties?.first != nil else {
+            return handleError(PickupError.noProperties)
         }
+        rootVC.present(newPickupNavController, animated: true, completion: nil)
     }
 
     @objc private func cancelNewPickup(_ sender: Any) {
@@ -94,7 +95,11 @@ extension PickupCoordinator {
             message = ""
         }
 
-        rootVC.presentSimpleAlert(with: title, message: message, preferredStyle: .alert, dismissText: "OK")
+        rootVC.presentSimpleAlert(
+            with: title,
+            message: message,
+            preferredStyle: .alert,
+            dismissText: "OK")
     }
 
     private func handlePickupScheduleResult(_ pickupResult: Pickup.ScheduleResult) {

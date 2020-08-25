@@ -22,10 +22,11 @@ struct PickupsView: View {
 
     @State private var makingNewPickup = false
 
-    weak var delegate: PickupsViewDelegate?
+    private var schedulePickup: () -> Void
 
-    init(pickupController: PickupController, delegate: PickupsViewDelegate?) {
+    init(pickupController: PickupController, schedulePickup: @escaping () -> Void) {
         self.pickupController = pickupController
+        self.schedulePickup = schedulePickup
     }
 
     var body: some View {
@@ -33,7 +34,7 @@ struct PickupsView: View {
             PickupHistoryView(pickupController: pickupController)
                 .navigationBarTitle("Pickup History", displayMode: .inline)
                 .navigationBarItems(trailing: Button(
-                    action: delegate?.scheduleNewPickup ?? {},
+                    action: schedulePickup,
                     label: newPickupButton)
             )
         }
@@ -73,7 +74,7 @@ struct PickupsView_Previews: PreviewProvider {
             pickupController: PickupController(
                 user: .placeholder(),
                 dataProvider: MockPickupProvider()),
-            delegate: nil
+            schedulePickup: {}
         )
     }
 }
