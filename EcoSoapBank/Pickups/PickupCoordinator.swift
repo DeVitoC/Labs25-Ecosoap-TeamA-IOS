@@ -52,10 +52,6 @@ class PickupCoordinator: FlowCoordinator {
             .store(in: &cancellables)
     }
 
-    convenience init() {
-        self.init(user: .placeholder(), dataProvider: MockPickupProvider())
-    }
-
     func start() {
         rootVC.tabBarItem = UITabBarItem(
             title: "Pickups",

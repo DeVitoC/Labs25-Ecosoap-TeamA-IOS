@@ -16,6 +16,7 @@ class ImpactController {
     private(set) var viewModels: [ImpactCellViewModel] = []
     
     private let dataProvider: ImpactDataProvider
+    private let user: User
     
     /// Gets the latest impact stats from the data provider, which in
     /// turn updates the `viewModels` property accordingly.
@@ -36,7 +37,8 @@ class ImpactController {
     
     // MARK: - Init
     
-    init(dataProvider: ImpactDataProvider) {
+    init(user: User, dataProvider: ImpactDataProvider) {
+        self.user = user
         self.dataProvider = dataProvider
     }
     

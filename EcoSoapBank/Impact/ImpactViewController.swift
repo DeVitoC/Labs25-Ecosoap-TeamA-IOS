@@ -16,7 +16,7 @@ class ImpactViewController: UIViewController {
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
-    var impactController = ImpactController(dataProvider: MockImpactProvider())
+    var impactController: ImpactController?
     
     private var massUnitObserver: UserDefaultsObservation?
     
@@ -33,7 +33,7 @@ class ImpactViewController: UIViewController {
                 
         setUpCollectionView()
 
-        impactController.getImpactStats { [weak self] error in
+        impactController?.getImpactStats { [weak self] error in
             if let error = error {
                 // TODO: Proper error handling
                 print(error)
@@ -78,7 +78,7 @@ extension ImpactViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        impactController.viewModels.count
+        impactController?.viewModels.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -87,7 +87,7 @@ extension ImpactViewController: UICollectionViewDataSource {
         }
         
         cell.alignment = indexPath.row % 2 == 0 ? .leading : .trailing
-        cell.viewModel = impactController.viewModels[indexPath.row]
+        cell.viewModel = impactController?.viewModels[indexPath.row]
        
         return cell
     }
