@@ -27,7 +27,6 @@ enum PickupError: Error {
 
 class PickupController: ObservableObject {
     @Published private(set) var pickups: [Pickup] = []
-    @Published private(set) var error: Error?
 
     var user: User
 
@@ -51,9 +50,10 @@ class PickupController: ObservableObject {
         self.user = user
 
         fetchAllPickups()
-            .handleError { [weak self] error in self?.error = error }
-            .sink { [weak self] pickups in
-                self?.pickups = pickups.sorted(by: Self.pickupSorter)
+            .handleError { [weak self] in
+                self?.pickupScheduleResult.send(completion: .failure($0))
+        }.sink { [weak self] pickups in
+            self?.pickups = pickups.sorted(by: Self.pickupSorter)
         }.store(in: &cancellables)
     }
 
@@ -63,10 +63,6 @@ class PickupController: ObservableObject {
                 promise(result)
             }
         }.eraseToAnyPublisher()
-    }
-
-    func clearError() {
-        error = nil
     }
 
     // MARK: - Private
@@ -93,7 +89,6 @@ extension PickupController: SchedulePickupViewModelDelegate {
                 self.schedulePickupViewModel = SchedulePickupViewModel(user: self.user, delegate: self)
                 self.pickupScheduleResult.send(pickupResult)
             case .failure(let error):
-                self.error = error
                 self.pickupScheduleResult.send(completion: .failure(error))
             }
         }
