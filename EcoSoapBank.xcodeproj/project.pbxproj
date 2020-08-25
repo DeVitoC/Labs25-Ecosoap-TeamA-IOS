@@ -69,6 +69,7 @@
 		041E1EA524E1F7970052831D /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 041E1E4724E1EA920052831D /* Montserrat-SemiBold.otf */; };
 		041E1EA724E22B1E0052831D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E1EA624E22B1E0052831D /* Colors.swift */; };
 		041E1EA924E22DF50052831D /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E1EA824E22DF50052831D /* ColorTests.swift */; };
+		042CD96024F585AA00ADFCB5 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 042CD95F24F585AA00ADFCB5 /* KeychainAccess */; };
 		0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04924EC648E00A0A665 /* UserDefaults.swift */; };
 		0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */; };
 		0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04D24EDD9C700A0A665 /* ESBButton.swift */; };
@@ -305,6 +306,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042CD96024F585AA00ADFCB5 /* KeychainAccess in Frameworks */,
 				041E1E2124E1E1510052831D /* OktaAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -661,6 +663,7 @@
 			name = EcoSoapBank;
 			packageProductDependencies = (
 				041E1E2024E1E1510052831D /* OktaAuth */,
+				042CD95F24F585AA00ADFCB5 /* KeychainAccess */,
 			);
 			productName = LabsScaffolding;
 			productReference = 466C4270249A8748007D033E /* EcoSoapBank.app */;
@@ -714,6 +717,7 @@
 			mainGroup = 466C4267249A8748007D033E;
 			packageReferences = (
 				041E1E1F24E1E1510052831D /* XCRemoteSwiftPackageReference "OktaAuth" */,
+				042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = 466C4271249A8748007D033E /* Products */;
 			projectDirPath = "";
@@ -1183,6 +1187,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1190,6 +1202,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 041E1E1F24E1E1510052831D /* XCRemoteSwiftPackageReference "OktaAuth" */;
 			productName = OktaAuth;
+		};
+		042CD95F24F585AA00ADFCB5 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
