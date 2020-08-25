@@ -44,16 +44,8 @@ struct PickupsView: View {
         Image(uiImage: .addBoxSymbol)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .foregroundColor(.white)
-            .padding(EdgeInsets(top: 5,
-                                leading: 11,
-                                bottom: 5,
-                                trailing: 9))
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill()
-                    .foregroundColor(Color(.link)))
-            .frame(height: 36)
+            .foregroundColor(Color(.white))
+            .frame(height: 28)
             .accessibility(label: Text("Schedule New Pickup"))
     }
 
