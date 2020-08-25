@@ -130,6 +130,3 @@ protocol VariableType {}
 
 extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
 extension Pickup.ScheduleInput: VariableType {}
-
-
-
