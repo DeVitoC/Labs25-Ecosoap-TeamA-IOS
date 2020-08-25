@@ -10,12 +10,21 @@ import SwiftUI
 import Combine
 
 
+protocol PickupsViewDelegate: AnyObject {
+    var schedulePickupVM: SchedulePickupViewModel { get }
+
+    func scheduleNewPickup()
+}
+
+
 struct PickupsView: View {
     @ObservedObject private var pickupController: PickupController
 
     @State private var makingNewPickup = false
 
-    init(pickupController: PickupController) {
+    weak var delegate: PickupsViewDelegate?
+
+    init(pickupController: PickupController, delegate: PickupsViewDelegate?) {
         self.pickupController = pickupController
     }
 
@@ -24,7 +33,7 @@ struct PickupsView: View {
             PickupHistoryView(pickupController: pickupController)
                 .navigationBarTitle("Pickup History", displayMode: .inline)
                 .navigationBarItems(trailing: Button(
-                    action: newPickup,
+                    action: delegate?.scheduleNewPickup ?? {},
                     label: newPickupButton)
             )
         }
@@ -56,21 +65,15 @@ struct PickupsView: View {
                 width: UIScreen.main.bounds.width,
                 height: UIScreen.main.bounds.height + 160)
     }
-
-    private func presentNewPickupView() -> some View {
-        SchedulePickupViewController.Representable(
-            viewModel: pickupController.schedulePickupViewModel)
-    }
-
-    private func newPickup() {
-        pickupController.presentNewPickup.send()
-    }
 }
 
 struct PickupsView_Previews: PreviewProvider {
     static var previews: some View {
-        PickupsView(pickupController: PickupController(
-            user: .placeholder(),
-            dataProvider: MockPickupProvider()))
+        PickupsView(
+            pickupController: PickupController(
+                user: .placeholder(),
+                dataProvider: MockPickupProvider()),
+            delegate: nil
+        )
     }
 }
