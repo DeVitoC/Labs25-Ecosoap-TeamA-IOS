@@ -109,14 +109,55 @@ class GraphQLController {
         }
     }
 
+    /// Method converts the input variables into json to send to server
+    /// - Parameter variablesInput: This takes a value of type VariableType described by the valid input types in GraphQL queries and mutaitons
+    /// - Returns: Returns JSON in the form of Data
+    private func setVariables(variablesInput: VariableType) -> Data {
+        var variableDict: [String: VariableValues] = [:]
+        if let variables = variablesInput as? [InputTypes: String] {
+            variableDict = ["input": .dictionary(variables)]
+        } else if let variables = variablesInput as? Pickup.ScheduleInput {
+            variableDict = ["input": .scheduleInput(variables)]
+        }
+
+        do {
+            return try JSONEncoder().encode(variableDict)
+        } catch {
+            NSLog("\(error)")
+            return Data()
+        }
+
+    }
+
+
     // MARK: - Enums
+
+    private enum VariableValues: Encodable {
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            switch self {
+            case .dictionary(let dict):
+                try container.encode(dict, forKey: .input)
+            case .scheduleInput(let input):
+                try container.encode(input, forKey: .input)
+            }
+        }
+        //swiftlint:disable nesting
+        private enum CodingKeys: String, CodingKey {
+            case input
+        }
+        //swiftline:enable nesting
+
+        case dictionary([InputTypes: String])
+        case scheduleInput(Pickup.ScheduleInput)
+    }
 
     /// Enum describing the possible errors we can get back from
     private enum GraphQLError: Error {
         case noData
     }
 
-    enum InputTypes: String {
+    enum InputTypes: String, Encodable {
         case propertyId
         case userId
         case token
@@ -130,6 +171,3 @@ protocol VariableType {}
 
 extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
 extension Pickup.ScheduleInput: VariableType {}
-
-
-
