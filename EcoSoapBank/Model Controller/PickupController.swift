@@ -47,7 +47,7 @@ class PickupController: ObservableObject {
         Future { promise in
             self.dataProvider.fetchAllPickups { [weak self] result in
                 if case .success(let pickups) = result {
-                    self?.pickups = pickups
+                    DispatchQueue.main.async { self?.pickups = pickups }
                 }
                 promise(result)
             }
@@ -64,14 +64,10 @@ class PickupController: ObservableObject {
                     guard let pickup = pickupResult.pickup else {
                         return promise(.failure(PickupError.noResult))
                     }
-                    self.pickups.append(pickup)
+                    DispatchQueue.main.async { self.pickups.append(pickup) }
                 }
                 promise(result)
             }
         }
-    }
-
-    private func handlePickupFetch(_ newPickups: [Pickup]) {
-        pickups = newPickups.sorted(by: Self.pickupSorter)
     }
 }

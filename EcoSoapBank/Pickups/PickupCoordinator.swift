@@ -46,6 +46,7 @@ class PickupCoordinator: FlowCoordinator {
 
         // subscribe to and respond to model controller messages
         pickupController.fetchAllPickups()
+            .receive(on: DispatchQueue.main)
             .handleError(handleError(_:))
             .sink { _ in }
             .store(in: &cancellables)
@@ -144,6 +145,7 @@ extension PickupCoordinator {
 extension PickupCoordinator: SchedulePickupViewModelDelegate {
     func schedulePickup(for input: Pickup.ScheduleInput) {
         pickupController.schedulePickup(for: input)
+            .receive(on: DispatchQueue.main)
             .handleError(handleError(_:))
             .sink(receiveValue: handlePickupScheduleResult(_:))
             .store(in: &cancellables)
