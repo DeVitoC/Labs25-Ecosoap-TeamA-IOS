@@ -38,20 +38,13 @@ class PickupController: ObservableObject {
     ///
     /// The PickupController holds a reference to the view model for later reuse and/or for use with SwiftUI
     /// (where views may inadvertantly reinitialize objects if a reference is not held elsewhere).
-    private(set) lazy var newPickupViewModel = makeSchedulePickupVM()
+    private(set) lazy var schedulePickupViewModel = SchedulePickupViewModel(user: user, delegate: self)
 
     /// Publishes result of `schedulePickup(_:)` call when data task is completed.
     let pickupScheduleResult = PassthroughSubject<Pickup.ScheduleResult, Error>()
 
     /// Forwards `newPickupViewModel`'s message to edit the given carton.
     var editCarton = PassthroughSubject<NewCartonViewModel, Never>()
-
-    private var dataProvider: PickupDataProvider
-    private var schedulePickupCancellables: Set<AnyCancellable> = []
-    private var cancellables: Set<AnyCancellable> = []
-
-    private static let pickupSorter = sortDescriptor(keypath: \Pickup.readyDate,
-                                                     by: >)
 
     init(user: User, dataProvider: PickupDataProvider) {
         self.dataProvider = dataProvider
@@ -72,45 +65,41 @@ class PickupController: ObservableObject {
         }.eraseToAnyPublisher()
     }
 
-    func schedulePickup(
-        _ pickupInput: Pickup.ScheduleInput
-    ) -> AnyPublisher<Pickup.ScheduleResult, Error> {
-        Future { completion in
-            self.dataProvider.schedulePickup(pickupInput) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let pickupResult):
-                    guard let pickup = pickupResult.pickup else {
-                        return completion(.failure(PickupError.noResult))
-                    }
-                    self.pickups.append(pickup)
-                    self.newPickupViewModel = self.makeSchedulePickupVM()
-                    completion(result)
-                case .failure(let error):
-                    self.error = error
-                    completion(result)
-                }
-            }
-        }.eraseToAnyPublisher()
-    }
-
     func clearError() {
         error = nil
     }
 
-    private func makeSchedulePickupVM() -> SchedulePickupViewModel {
-        let newVM = SchedulePickupViewModel(user: user)
-        
-        schedulePickupCancellables = []
-        newVM.pickupInput
-            .flatMap(schedulePickup(_:))
-            .sink(receiveCompletion: pickupScheduleResult.send(completion:),
-                  receiveValue: pickupScheduleResult.send(_:))
-            .store(in: &schedulePickupCancellables)
-        newVM.editingCarton
-            .sink(receiveValue: editCarton.send(_:))
-            .store(in: &schedulePickupCancellables)
+    // MARK: - Private
 
-        return newVM
+    private var dataProvider: PickupDataProvider
+    private var schedulePickupCancellables: Set<AnyCancellable> = []
+    private var cancellables: Set<AnyCancellable> = []
+
+    private static let pickupSorter = sortDescriptor(keypath: \Pickup.readyDate, by: >)
+}
+
+extension PickupController: SchedulePickupViewModelDelegate {
+    func schedulePickup(
+        for pickupInput: Pickup.ScheduleInput
+    ) {
+        dataProvider.schedulePickup(pickupInput) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let pickupResult):
+                guard let pickup = pickupResult.pickup else {
+                    return self.pickupScheduleResult.send(completion: .failure(PickupError.noResult))
+                }
+                self.pickups.append(pickup)
+                self.schedulePickupViewModel = SchedulePickupViewModel(user: self.user, delegate: self)
+                self.pickupScheduleResult.send(pickupResult)
+            case .failure(let error):
+                self.error = error
+                self.pickupScheduleResult.send(completion: .failure(error))
+            }
+        }
+    }
+
+    func editCarton(for viewModel: NewCartonViewModel) {
+        editCarton.send(viewModel)
     }
 }

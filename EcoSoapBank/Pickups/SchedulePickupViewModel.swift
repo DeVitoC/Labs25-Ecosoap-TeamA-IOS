@@ -7,22 +7,26 @@
 //
 
 import Foundation
-import Combine
+
+
+protocol SchedulePickupViewModelDelegate: AnyObject {
+    func schedulePickup(for input: Pickup.ScheduleInput)
+    func editCarton(for viewModel: NewCartonViewModel)
+}
 
 
 class SchedulePickupViewModel {
     @Published private(set) var cartons: [NewCartonViewModel] = []
-    @Published var readyDate: Date = Date()
-    @Published var notes: String = ""
+    var readyDate: Date = Date()
+    var notes: String = ""
     lazy var selectedProperty = properties.first!
 
     private var user: User
+    private weak var delegate: SchedulePickupViewModelDelegate?
 
-    private var schedulePickupPassthrough = PassthroughSubject<Pickup.ScheduleInput, Error>()
-    private var editCartonPassthrough = PassthroughSubject<NewCartonViewModel, Never>()
-
-    init(user: User) {
+    init(user: User, delegate: SchedulePickupViewModelDelegate? = nil) {
         self.user = user
+        self.delegate = delegate
     }
 }
 
@@ -31,15 +35,6 @@ class SchedulePickupViewModel {
 extension SchedulePickupViewModel {
     var properties: [Property] { user.properties ?? [] }
 
-    /// Publishes pickup input when pickup is scheduled by caller of `schedulePickup`.
-    var pickupInput: AnyPublisher<Pickup.ScheduleInput, Error> {
-        schedulePickupPassthrough.eraseToAnyPublisher()
-    }
-
-    var editingCarton: AnyPublisher<NewCartonViewModel, Never> {
-        editCartonPassthrough.eraseToAnyPublisher()
-    }
-
     func addCarton() {
         cartons.append(.init(carton: .init(product: .soap, percentFull: 0)))
     }
@@ -47,7 +42,7 @@ extension SchedulePickupViewModel {
     func editCarton(atIndex cartonIndex: Int) {
         assert((0..<cartons.count).contains(cartonIndex),
                "Attempted to edit index outside of range for NewPickupViewModel.cartons")
-        editCartonPassthrough.send(cartons[cartonIndex])
+        delegate?.editCarton(for: cartons[cartonIndex])
     }
 
     func removeCarton(atIndex cartonIndex: Int) {
@@ -57,9 +52,9 @@ extension SchedulePickupViewModel {
     }
 
     func schedulePickup() {
-        schedulePickupPassthrough.send(Pickup.ScheduleInput(
+        delegate?.schedulePickup(for: Pickup.ScheduleInput(
             base: Pickup.Base(
-                collectionType: selectedProperty.collectionType, // TODO: actual value
+                collectionType: selectedProperty.collectionType,
                 status: .submitted,
                 readyDate: readyDate,
                 pickupDate: nil, // TODO: move out of base
