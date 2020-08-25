@@ -23,7 +23,7 @@ class AppFlowCoordinator: FlowCoordinator {
         onLoginComplete: { [weak self] in self?.onLoginComplete() })
     private(set) var userController = UserController(dataLoader: MockLoginProvider())
 
-    private var appQuerier = AppQuerier()
+    private var graphQLController = GraphQLController()
 
     init(window: UIWindow) {
         self.window = window
@@ -58,7 +58,7 @@ class AppFlowCoordinator: FlowCoordinator {
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
 
-        if appQuerier.loggedIn {
+        if graphQLController.loggedIn {
             onLoginComplete()
         } else {
             loginCoord.start()

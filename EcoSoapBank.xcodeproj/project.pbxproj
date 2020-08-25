@@ -104,7 +104,7 @@
 		992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */; };
 		992BB63C24EDD01F00638AA4 /* PickupDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */; };
 		992BB63E24EEE21300638AA4 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63D24EEE21300638AA4 /* UserController.swift */; };
-		992BB64024EEE58700638AA4 /* AppQuerier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63F24EEE58600638AA4 /* AppQuerier.swift */; };
+		992BB64024EEE58700638AA4 /* GraphQLController+DataProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63F24EEE58600638AA4 /* GraphQLController+DataProviders.swift */; };
 		992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64224EEFBAD00638AA4 /* Errors.swift */; };
 		992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64424EF021600638AA4 /* MockLoginProvider.swift */; };
 		992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */; };
@@ -244,7 +244,7 @@
 		992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupDetailViewController.swift; sourceTree = "<group>"; };
 		992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PickupDetailViewController.storyboard; sourceTree = "<group>"; };
 		992BB63D24EEE21300638AA4 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
-		992BB63F24EEE58600638AA4 /* AppQuerier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppQuerier.swift; sourceTree = "<group>"; };
+		992BB63F24EEE58600638AA4 /* GraphQLController+DataProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphQLController+DataProviders.swift"; sourceTree = "<group>"; };
 		992BB64224EEFBAD00638AA4 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		992BB64424EF021600638AA4 /* MockLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoginProvider.swift; sourceTree = "<group>"; };
 		992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OktaAuth+Shared.swift"; sourceTree = "<group>"; };
@@ -619,10 +619,10 @@
 			isa = PBXGroup;
 			children = (
 				E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */,
+				992BB63F24EEE58600638AA4 /* GraphQLController+DataProviders.swift */,
 				E220C32624E35E59003FF32D /* GraphQLQueries.swift */,
 				E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */,
 				E2B961B324E45BF800C5DF8B /* QueryObjects.swift */,
-				992BB63F24EEE58600638AA4 /* AppQuerier.swift */,
 				992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */,
 			);
 			path = "Network Controller";
@@ -841,7 +841,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
-				992BB64024EEE58700638AA4 /* AppQuerier.swift in Sources */,
+				992BB64024EEE58700638AA4 /* GraphQLController+DataProviders.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
 				992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */,
 				992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */,
