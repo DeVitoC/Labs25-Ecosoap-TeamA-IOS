@@ -45,6 +45,10 @@ class PickupController: ObservableObject {
     /// Forwards `newPickupViewModel`'s message to edit the given carton.
     var editCarton = PassthroughSubject<NewCartonViewModel, Never>()
 
+    private var dataProvider: PickupDataProvider
+    private var schedulePickupCancellables: Set<AnyCancellable> = []
+    private var cancellables: Set<AnyCancellable> = []
+
     init(user: User, dataProvider: PickupDataProvider) {
         self.dataProvider = dataProvider
         self.user = user
@@ -57,24 +61,18 @@ class PickupController: ObservableObject {
         }.store(in: &cancellables)
     }
 
-    func fetchAllPickups() -> AnyPublisher<[Pickup], Error> {
-        Future { promise in
-            self.dataProvider.fetchAllPickups { result in
-                promise(result)
-            }
-        }.eraseToAnyPublisher()
-    }
-
-    // MARK: - Private
-
-    private var dataProvider: PickupDataProvider
-    private var schedulePickupCancellables: Set<AnyCancellable> = []
-    private var cancellables: Set<AnyCancellable> = []
-
     private static let pickupSorter = sortDescriptor(keypath: \Pickup.readyDate, by: >)
 }
 
 extension PickupController: SchedulePickupViewModelDelegate {
+    func fetchAllPickups() -> Future<[Pickup], Error> {
+        Future { promise in
+            self.dataProvider.fetchAllPickups { result in
+                promise(result)
+            }
+        }
+    }
+    
     func schedulePickup(
         for pickupInput: Pickup.ScheduleInput
     ) {
