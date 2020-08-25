@@ -58,7 +58,12 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     ) {
         $0.backgroundColor = .tertiarySystemBackground
     }
-
+    private lazy var readyDateField = configure(CursorlessTextField()) {
+        $0.inputView = datePicker
+        $0.backgroundColor = .white
+        $0.borderStyle = .roundedRect
+        $0.text = viewModel.readyDate.string()
+    }
     private lazy var datePicker = configure(UIDatePicker()) {
         $0.datePickerMode = .date
         $0.minimumDate = Date()
@@ -104,7 +109,7 @@ extension SchedulePickupViewController {
         contentView.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top], constant: 20)
         contentView.constrainNewSubview(tableView, to: [.leading, .trailing])
         contentView.constrainNewSubviewToSafeArea(readyDateLabel, sides: [.leading, .trailing], constant: 20)
-        contentView.constrainNewSubview(datePicker, to: [.leading, .trailing])
+        contentView.constrainNewSubviewToSafeArea(readyDateField, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom], constant: 20)
@@ -118,8 +123,8 @@ extension SchedulePickupViewController {
             tableView.topAnchor.constraint(equalTo: addCartonButton.bottomAnchor, constant: 8),
             tableViewHeight,
 
-            datePicker.topAnchor.constraint(equalTo: readyDateLabel.bottomAnchor, constant: 8),
-            notesLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 20),
+            readyDateField.topAnchor.constraint(equalTo: readyDateLabel.bottomAnchor, constant: 8),
+            notesLabel.topAnchor.constraint(equalTo: readyDateField.bottomAnchor, constant: 20),
             notesView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 8),
             notesView.heightAnchor.constraint(greaterThanOrEqualToConstant: 150),
             scheduleButton.topAnchor.constraint(equalTo: notesView.bottomAnchor, constant: 20),
@@ -218,6 +223,7 @@ extension SchedulePickupViewController {
 
     @objc private func setReadyDate(_ sender: UIDatePicker) {
         viewModel.readyDate = sender.date
+        readyDateField.text = sender.date.string()
     }
 
     private func setProperty(_ selectedProperty: Property) {
