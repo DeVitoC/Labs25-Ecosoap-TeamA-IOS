@@ -23,7 +23,7 @@ class GraphQLControllerTests: XCTestCase {
                                         error: nil)
         let graphQLController = GraphQLController(session: mockLoader)
 
-        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery) { result in
+        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropertyId) { result in
 
             guard let result = try? result.get(),
                 let soapRecycled = result.soapRecycled,
@@ -57,7 +57,7 @@ class GraphQLControllerTests: XCTestCase {
                                         error: nil)
         let graphQLController = GraphQLController(session: mockLoader)
 
-        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery) { result in
+        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropertyId) { result in
 
             XCTAssertNil(try? result.get())
         }
