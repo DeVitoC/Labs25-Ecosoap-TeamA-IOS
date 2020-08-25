@@ -112,7 +112,7 @@ extension SchedulePickupViewController {
         contentView.constrainNewSubviewToSafeArea(readyDateField, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
-        contentView.constrainNewSubviewToSafeArea(scheduleButton, sides: [.bottom], constant: 20)
+        contentView.addSubviewsUsingAutolayout(scheduleButton)
 
         var remainingConstraints = [
             addCartonButton.leadingAnchor.constraint(greaterThanOrEqualTo: cartonsLabel.trailingAnchor, constant: 8),
@@ -126,9 +126,10 @@ extension SchedulePickupViewController {
             readyDateField.topAnchor.constraint(equalTo: readyDateLabel.bottomAnchor, constant: 8),
             notesLabel.topAnchor.constraint(equalTo: readyDateField.bottomAnchor, constant: 20),
             notesView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 8),
-            notesView.heightAnchor.constraint(greaterThanOrEqualToConstant: 150),
+            notesView.heightAnchor.constraint(equalToConstant: 150),
             scheduleButton.topAnchor.constraint(equalTo: notesView.bottomAnchor, constant: 20),
             scheduleButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            scheduleButton.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: 20)
         ]
 
         if viewModel.properties.count > 1 {
