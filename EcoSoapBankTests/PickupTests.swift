@@ -41,8 +41,6 @@ class PickupTests: XCTestCase {
             exp.fulfill()
         }
         wait(for: exp)
-
-        XCTAssertNil(pickupController.error)
     }
 
     func testPickupControllerFetchAllFailure() {
@@ -62,13 +60,9 @@ class PickupTests: XCTestCase {
         wait(for: exp)
 
         XCTAssert(failingController.pickups.isEmpty)
-        XCTAssertNotNil(failingController.error)
     }
 
     func testPickupCoordinatorStart() {
-        pickupCoordinator.start()
-
-        pickupCoordinator.provideUser(User.placeholder())
         pickupCoordinator.start()
     }
 
@@ -76,31 +70,17 @@ class PickupTests: XCTestCase {
         var bag = Set<AnyCancellable>()
 
         let exp1 = XCTestExpectation(description: "Waiting for mock data 1")
-        let exp2 = XCTestExpectation(description: "Waiting for mock data 2")
 
-        pickupController.pickupScheduleResult
+        let input = Pickup.ScheduleInput.random()
+
+        pickupController.schedulePickup(for: input)
             .sink(
                 receiveCompletion: handleCompletion(_:),
                 receiveValue: { _ in
                     exp1.fulfill()
             }).store(in: &bag)
 
-        pickupController.schedulePickupViewModel.schedulePickup()
-
         wait(for: exp1)
-        let input = Pickup.ScheduleInput.random()
-        bag = []
-
-        pickupController.pickupScheduleResult
-            .sink(
-                receiveCompletion: handleCompletion(_:),
-                receiveValue: { result in
-                    XCTAssertEqual(input.base, result.pickup?.base)
-                    exp2.fulfill()
-            }).store(in: &bag)
-        pickupController.schedulePickup(for: input)
-
-        wait(for: exp2)
     }
 }
 
