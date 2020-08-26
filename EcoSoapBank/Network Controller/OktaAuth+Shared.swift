@@ -21,5 +21,5 @@ extension OktaAuth {
     private static let ecoSoapBank = OktaAuth(
         baseURL: URL(string: "https://dev-668428.okta.com")!,
         clientID: "0oapaqacafrGUTfKx4x6",
-        redirectURI: "org.ecosoapbank.ESBPortal:/login")
+        redirectURI: "labs://scaffolding/implicit/callback")
 }
