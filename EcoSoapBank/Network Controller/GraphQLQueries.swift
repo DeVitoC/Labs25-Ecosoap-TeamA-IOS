@@ -19,7 +19,7 @@ enum GraphQLQueries {
         }
      }
      */
-    static let impactStatsByPropery = """
+    static let impactStatsByPropertyId = """
     query ImpactStatsByPropertyIdInput($input:ImpactStatsByPropertyIdInput) {
         impactStatsByPropertyId(input:$input) {
             impactStats {

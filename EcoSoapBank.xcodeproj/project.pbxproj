@@ -69,6 +69,7 @@
 		041E1EA524E1F7970052831D /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 041E1E4724E1EA920052831D /* Montserrat-SemiBold.otf */; };
 		041E1EA724E22B1E0052831D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E1EA624E22B1E0052831D /* Colors.swift */; };
 		041E1EA924E22DF50052831D /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E1EA824E22DF50052831D /* ColorTests.swift */; };
+		042CD96024F585AA00ADFCB5 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 042CD95F24F585AA00ADFCB5 /* KeychainAccess */; };
 		0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04924EC648E00A0A665 /* UserDefaults.swift */; };
 		0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */; };
 		0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04D24EDD9C700A0A665 /* ESBButton.swift */; };
@@ -86,6 +87,7 @@
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
 		04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6D72B24E8444C0003A585 /* BackgroundView.swift */; };
+		04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */; };
 		04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEE1B524E48AB000F51D69 /* ImpactController.swift */; };
 		04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEE1DB24E5E16600F51D69 /* ImpactCellViewModel.swift */; };
 		466C4274249A8748007D033E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4273249A8748007D033E /* AppDelegate.swift */; };
@@ -104,7 +106,7 @@
 		992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */; };
 		992BB63C24EDD01F00638AA4 /* PickupDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */; };
 		992BB63E24EEE21300638AA4 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63D24EEE21300638AA4 /* UserController.swift */; };
-		992BB64024EEE58700638AA4 /* AppQuerier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63F24EEE58600638AA4 /* AppQuerier.swift */; };
+		992BB64024EEE58700638AA4 /* GraphQLController+DataProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63F24EEE58600638AA4 /* GraphQLController+DataProviders.swift */; };
 		992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64224EEFBAD00638AA4 /* Errors.swift */; };
 		992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64424EF021600638AA4 /* MockLoginProvider.swift */; };
 		992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */; };
@@ -224,6 +226,7 @@
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		04D6D72B24E8444C0003A585 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+Okta.swift"; sourceTree = "<group>"; };
 		04FEE1B524E48AB000F51D69 /* ImpactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactController.swift; sourceTree = "<group>"; };
 		04FEE1DB24E5E16600F51D69 /* ImpactCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellViewModel.swift; sourceTree = "<group>"; };
 		466C4270249A8748007D033E /* EcoSoapBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoSoapBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,7 +248,7 @@
 		992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupDetailViewController.swift; sourceTree = "<group>"; };
 		992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PickupDetailViewController.storyboard; sourceTree = "<group>"; };
 		992BB63D24EEE21300638AA4 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
-		992BB63F24EEE58600638AA4 /* AppQuerier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppQuerier.swift; sourceTree = "<group>"; };
+		992BB63F24EEE58600638AA4 /* GraphQLController+DataProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphQLController+DataProviders.swift"; sourceTree = "<group>"; };
 		992BB64224EEFBAD00638AA4 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		992BB64424EF021600638AA4 /* MockLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoginProvider.swift; sourceTree = "<group>"; };
 		992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OktaAuth+Shared.swift"; sourceTree = "<group>"; };
@@ -307,6 +310,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042CD96024F585AA00ADFCB5 /* KeychainAccess in Frameworks */,
 				041E1E2124E1E1510052831D /* OktaAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,11 +634,12 @@
 			isa = PBXGroup;
 			children = (
 				E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */,
+				992BB63F24EEE58600638AA4 /* GraphQLController+DataProviders.swift */,
 				E220C32624E35E59003FF32D /* GraphQLQueries.swift */,
 				E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */,
 				E2B961B324E45BF800C5DF8B /* QueryObjects.swift */,
-				992BB63F24EEE58600638AA4 /* AppQuerier.swift */,
 				992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */,
+				04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */,
 			);
 			path = "Network Controller";
 			sourceTree = "<group>";
@@ -672,6 +677,7 @@
 			name = EcoSoapBank;
 			packageProductDependencies = (
 				041E1E2024E1E1510052831D /* OktaAuth */,
+				042CD95F24F585AA00ADFCB5 /* KeychainAccess */,
 			);
 			productName = LabsScaffolding;
 			productReference = 466C4270249A8748007D033E /* EcoSoapBank.app */;
@@ -725,6 +731,7 @@
 			mainGroup = 466C4267249A8748007D033E;
 			packageReferences = (
 				041E1E1F24E1E1510052831D /* XCRemoteSwiftPackageReference "OktaAuth" */,
+				042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = 466C4271249A8748007D033E /* Products */;
 			projectDirPath = "";
@@ -852,7 +859,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
-				992BB64024EEE58700638AA4 /* AppQuerier.swift in Sources */,
+				992BB64024EEE58700638AA4 /* GraphQLController+DataProviders.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
 				992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */,
 				992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */,
@@ -862,6 +869,7 @@
 				04D1758D24E4195C00F8929C /* GradientView.swift in Sources */,
 				049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */,
 				992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */,
+				04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
 				049379AB24EB29160084051B /* ImpactHeaderView.swift in Sources */,
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,
@@ -1195,6 +1203,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1202,6 +1218,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 041E1E1F24E1E1510052831D /* XCRemoteSwiftPackageReference "OktaAuth" */;
 			productName = OktaAuth;
+		};
+		042CD95F24F585AA00ADFCB5 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -13,7 +13,6 @@ import OktaAuth
 
 protocol UserDataProvider {
     func logIn(_ completion: @escaping ResultHandler<User>)
-    func provideToken(_ token: String)
 }
 
 
@@ -40,7 +39,8 @@ extension UserController {
     var userPublisher: AnyPublisher<User?, Error> {
         userSubject.eraseToAnyPublisher()
     }
-    var oktaLoginURL: URL? { oktaAuth.identityAuthURL() }
+    
+    var oktaLoginURL: URL? { OktaAuth.shared.identityAuthURL() }
 
     func logInWithBearer() -> Future<User, Error> {
         Future { promise in
@@ -57,13 +57,7 @@ extension UserController {
 // MARK: - Private
 
 extension UserController {
-    private var oktaAuth: OktaAuth { OktaAuth.shared }
-    
     private func loginDidComplete(_ notification: Notification) {
-        guard let token = try? oktaAuth.credentialsIfAvailable().accessToken else {
-            return userSubject.send(completion: .failure(LoginError.loginFailed))
-        }
-        dataLoader.provideToken(token)
         dataLoader.logIn { [weak userSubject] result in
             switch result {
             case .success(let user):
