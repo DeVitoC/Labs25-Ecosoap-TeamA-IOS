@@ -7,20 +7,22 @@
 //
 
 import Foundation
+import KeychainAccess
 
 
-struct MockLoginProvider: UserDataProvider {
+class MockLoginProvider: UserDataProvider {
     var shouldFail: Bool
 
     init(shouldFail: Bool = false) {
         self.shouldFail = shouldFail
     }
 
-    func provideToken(_ token: String) {
-        print("token: \(token)")
-    }
-
     func logIn(_ completion: @escaping ResultHandler<User>) {
+        guard let token = Keychain.Okta.getToken() else {
+            return completion(.mockFailure())
+        }
+        print(token)
+
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
             if self.shouldFail {
                 completion(.mockFailure())
