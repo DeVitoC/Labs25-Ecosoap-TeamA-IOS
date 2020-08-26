@@ -16,7 +16,7 @@ class GraphQLControllerTests: XCTestCase {
         let graphQLController = GraphQLController()
         let variables: [String: String] = ["propertyId": "PropertyId1"]
 
-        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery, variables: variables) { result in
+        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropertyId, variables: variables) { result in
 
             guard let result = try? result.get(),
                 let soapRecycled = result.soapRecycled,
@@ -47,7 +47,7 @@ class GraphQLControllerTests: XCTestCase {
         let graphQLController = GraphQLController()
         let variables: [String: String] = ["propertyIid": "PropertyId1"]
 
-        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery, variables: variables) { result in
+        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropertyId, variables: variables) { result in
 
             XCTAssertNil(try? result.get())
             expectation.fulfill()

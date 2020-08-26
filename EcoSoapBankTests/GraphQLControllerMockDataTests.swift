@@ -28,7 +28,7 @@ class GraphQLControllerMockDataTests: XCTestCase {
         let graphQLController = setDataLoader(file: "mockImpactStatsByPropertyId")
 
         graphQLController.queryRequest(ImpactStats.self,
-                                       query: GraphQLQueries.impactStatsByPropery,
+                                       query: GraphQLQueries.impactStatsByPropertyId,
                                        variables: ["propertyId": "PropertyId1"]) { result in
 
             guard let result = try? result.get(),
@@ -54,7 +54,7 @@ class GraphQLControllerMockDataTests: XCTestCase {
     func testImpactStatsQueryRequestWithMockDataFailure() {
         let graphQLController = setDataLoader(file: "mockImpactStatsFailure")
 
-        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery, variables: [:]) { result in
+        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropertyId, variables: [:]) { result in
 
             XCTAssertNil(try? result.get())
         }
