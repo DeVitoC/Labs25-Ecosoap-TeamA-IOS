@@ -9,7 +9,14 @@
 import UIKit
 
 class ImpactCoordinator: FlowCoordinator {
-    private(set) lazy var rootVC = ImpactViewController()
+    
+    init(user: User, dataProvider: ImpactDataProvider) {
+        rootVC = configure(ImpactViewController()) {
+            $0.impactController = ImpactController(user: user, dataProvider: dataProvider)
+        }
+    }
+    
+    let rootVC: ImpactViewController
     
     func start() {
         let globe = UIImage(

@@ -6,6 +6,7 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
+import KeychainAccess
 import UIKit
 import OktaAuth
 
@@ -15,7 +16,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private(set) lazy var tabBarController = UITabBarController()
 
-    private(set) lazy var impactCoord = ImpactCoordinator()
+    private(set) var impactCoord: ImpactCoordinator?
     private(set) var pickupCoord: PickupCoordinator?
     private(set) lazy var loginCoord = LoginCoordinator(
         root: tabBarController,
@@ -23,7 +24,7 @@ class AppFlowCoordinator: FlowCoordinator {
         onLoginComplete: { [weak self] in self?.onLoginComplete() })
     private(set) var userController = UserController(dataLoader: MockLoginProvider())
 
-    private var appQuerier = AppQuerier()
+    private var graphQLController = GraphQLController()
 
     init(window: UIWindow) {
         self.window = window
@@ -48,17 +49,12 @@ class AppFlowCoordinator: FlowCoordinator {
             $0.tintColor = .white
             // We can use `$0.barTintColor = .esbGreen` if we want the `inline` version of the title bar to be that color
         })
-        
-        // set up tabBarController, start other coordinators
-        tabBarController.viewControllers = [
-            impactCoord.rootVC
-        ]
 
         // set up window and make visible
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
 
-        if appQuerier.loggedIn {
+        if Keychain.Okta.isLoggedIn {
             onLoginComplete()
         } else {
             loginCoord.start()
@@ -87,13 +83,16 @@ class AppFlowCoordinator: FlowCoordinator {
     private func onLoginComplete() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            // when backend ready: PickupCoordinator(dataProvider: appQuerier)
-            self.pickupCoord = PickupCoordinator()
+            
+            self.pickupCoord = PickupCoordinator(user: .placeholder(), dataProvider: MockPickupProvider())
+            self.impactCoord = ImpactCoordinator(user: .placeholder(), dataProvider: MockImpactProvider())
+            
             self.tabBarController.setViewControllers([
-                self.impactCoord.rootVC, self.pickupCoord!.rootVC
-            ], animated: true)
+                self.impactCoord!.rootVC,
+                self.pickupCoord!.rootVC
+            ], animated: false)
 
-            self.impactCoord.start()
+            self.impactCoord!.start()
             self.pickupCoord!.start()
 
             if self.tabBarController.presentedViewController != nil {

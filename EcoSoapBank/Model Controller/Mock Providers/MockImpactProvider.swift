@@ -9,7 +9,7 @@
 import Foundation
 
 /// For placeholder and testing purposes
-struct MockImpactProvider: ImpactProvider {
+struct MockImpactProvider: ImpactDataProvider {
     /// Set to `true` for testing networking failures
     var shouldFail: Bool
 

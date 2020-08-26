@@ -13,13 +13,13 @@ class ImpactControllerTests: XCTestCase {
     
     func testViewModelsEmptyOnInit() {
         let dataProvider = MockImpactProvider()
-        let impactController = ImpactController(dataProvider: dataProvider)
+        let impactController = ImpactController(user: .placeholder(), dataProvider: dataProvider)
         
         XCTAssertTrue(impactController.viewModels.isEmpty)
     }
     
     func testImpactProviderSuccess() {
-        let impactController = ImpactController(dataProvider: MockImpactProvider())
+        let impactController = ImpactController(user: .placeholder(), dataProvider: MockImpactProvider())
         let expectation = XCTestExpectation(description: "Wait for mock data")
         
         impactController.getImpactStats { error in
@@ -32,7 +32,7 @@ class ImpactControllerTests: XCTestCase {
     }
     
     func testImpactProviderFailure() {
-        let impactController = ImpactController(dataProvider: MockImpactProvider(shouldFail: true))
+        let impactController = ImpactController(user: .placeholder(), dataProvider: MockImpactProvider(shouldFail: true))
         let expectation = XCTestExpectation(description: "Wait for mock data")
         
         impactController.getImpactStats { error in
