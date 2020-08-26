@@ -53,7 +53,9 @@ enum GraphQLMutations {
     static let schedulePickup = """
     mutation SchedulePickupInput($input: SchedulePickupInput) {
         schedulePickup(input:$input) {
-            \(QueryObjects.pickup)
+            pickup {
+                \(QueryObjects.pickup)
+            }
             label
         }
     }
@@ -70,7 +72,9 @@ enum GraphQLMutations {
     static let cancelPickup = """
     mutation CancelPickupInput($input: CancelPickupInput) {
         cancelPickup(input:$input) {
-            \(QueryObjects.pickup)
+            pickup {
+                \(QueryObjects.pickup)
+            }
         }
     }
     """
