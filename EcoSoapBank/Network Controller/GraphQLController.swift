@@ -42,14 +42,13 @@ class GraphQLController {
     ///   - query: The intended query in string format
     ///   - variables: The variables to be passed in the request
     ///   - completion: Completion handler that passes back a Result of type Profile or Error
-    func queryRequest<T: Decodable>(_ type: T.Type,
+    func queryRequest<T: Decodable, V: VariableType>(_ type: T.Type,
                                     query: String,
-                                    variables: VariableType,
+                                    variables: V,
                                     completion: @escaping (Result<T, Error>) -> Void) {
         // Add body to query request
-        let variablesJSON = setVariables(variablesInput: variables)
-        let body: [String: Any] = ["query": query, "variables": variablesJSON]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        let body = QueryInput(query: query, variables: variables)
+        request.httpBody = try? JSONEncoder().encode(body)
 
         session.loadData(with: request) { data, _, error in
             if let error = error {
