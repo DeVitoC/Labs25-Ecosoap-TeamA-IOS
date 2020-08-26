@@ -59,7 +59,7 @@ extension Array where Element == Property {
                 propertyType: Property.PropertyType.hotel,
                 rooms: 20,
                 services: HospitalityService.allCases,
-                collectionType: Pickup.CollectionType.random(),
+                collectionType: .random(),
                 logo: nil,
                 phone: "555-124-3333",
                 billingAddress: nil,
@@ -75,7 +75,7 @@ extension Array where Element == Property {
                     HospitalityService.bottles,
                     HospitalityService.soap
                 ],
-                collectionType: Pickup.CollectionType.random(),
+                collectionType: .random(),
                 logo: nil,
                 phone: "555-124-3333",
                 billingAddress: nil,

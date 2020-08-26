@@ -328,6 +328,7 @@ extension SchedulePickupViewController {
 struct NewPickupViewController_Previews: PreviewProvider {
     static var previews: some View {
         SchedulePickupViewController.Representable(
-            viewModel: SchedulePickupViewModel(user: .placeholder()))
+            viewModel: SchedulePickupViewModel(user: .placeholder(),
+                                               delegate: nil))
     }
 }

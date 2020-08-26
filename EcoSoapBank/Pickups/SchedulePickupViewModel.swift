@@ -27,7 +27,7 @@ class SchedulePickupViewModel {
     private var user: User
     private weak var delegate: SchedulePickupViewModelDelegate?
 
-    init(user: User, delegate: SchedulePickupViewModelDelegate? = nil) {
+    init(user: User, delegate: SchedulePickupViewModelDelegate?) {
         self.user = user
         self.delegate = delegate
     }

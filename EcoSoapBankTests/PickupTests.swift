@@ -24,9 +24,10 @@ class PickupTests: XCTestCase {
     override func setUp() {
         super.setUp()
         bag = []
+        let user = User.placeholder()
         pickupProvider = MockPickupProvider()
-        pickupController = PickupController(user: .placeholder(), dataProvider: pickupProvider)
-        pickupCoordinator = PickupCoordinator(user: .placeholder(), dataProvider: pickupProvider)
+        pickupController = PickupController(user: user, dataProvider: pickupProvider)
+        pickupCoordinator = PickupCoordinator(user: user, dataProvider: pickupProvider)
     }
 
     // MARK: - Tests
@@ -84,7 +85,7 @@ class PickupTests: XCTestCase {
         wait(for: exp1)
     }
 
-    func testCoordinatorSchedulePickupVMIsReset() throws {
+    func testCoordinatorScheduleVMIsResetOnSchedule() throws {
         let exp = newMockExpectation()
         let firstVM = pickupCoordinator.schedulePickupVM
 
@@ -100,6 +101,20 @@ class PickupTests: XCTestCase {
         }
 
         wait(for: exp)
+    }
+
+    func testCoordinatorScheduleVMIsNotResetOnCancel() {
+        let firstVM = pickupCoordinator.schedulePickupVM
+
+        pickupCoordinator.scheduleNewPickup()
+        pickupCoordinator.cancelNewPickup()
+
+        XCTAssert(firstVM === pickupCoordinator.schedulePickupVM)
+    }
+
+    func testUserPropertiesTransferredProperly() {
+        XCTAssertEqual(pickupCoordinator.schedulePickupVM.properties,
+                       pickupController.user.properties)
     }
 }
 
@@ -128,3 +143,26 @@ extension XCTestCase {
         wait(for: [expectation], timeout: timeout)
     }
 }
+
+
+protocol KeyPathListable {
+    var allKeyPaths: [PartialKeyPath<Self>] { get }
+}
+
+extension KeyPathListable {
+    var allKeyPaths: [PartialKeyPath<Self>] {
+        let mirror = Mirror(reflecting: self)
+
+        return mirror.children
+            .reduce(into: [PartialKeyPath<Self>]()) { keyPaths, labelValuePair in
+                guard let key = labelValuePair.label else { return }
+                keyPaths.append(\Self.[checkedMirrorDescendent: key] as PartialKeyPath)
+        }
+    }
+
+    private subscript(checkedMirrorDescendent key: String) -> Any {
+        Mirror(reflecting: self).descendant(key)!
+    }
+}
+
+extension Property: KeyPathListable {}
