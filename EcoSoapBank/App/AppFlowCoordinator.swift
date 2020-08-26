@@ -82,11 +82,24 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private func onLoginComplete() {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                var topLevelVC = UIApplication.shared.windows
+                    .first(where: { !$0.isHidden && $0.isKeyWindow })?
+                    .rootViewController
+                if let presentedVC = topLevelVC?.presentedViewController {
+                    topLevelVC = presentedVC
+                }
+                topLevelVC?.presentSimpleAlert(
+                    with: "Sorry! An unknown error occurred!",
+                    message: "Please contact the app developers with information about how you got here. Thanks!",
+                    preferredStyle: .alert,
+                    dismissText: "OK")
+                return assertionFailure("AppFlowCoordinator unexpectedly deinitialized before login completion")
+            }
             guard let user = self.userController.user else {
                 return self.presentLoginFailAlert()
             }
-            
+
             // when backend ready, use graphQL controller as data provider
             self.pickupCoord = PickupCoordinator(user: user, dataProvider: MockPickupProvider())
             self.impactCoord = ImpactCoordinator(user: user, dataProvider: MockImpactProvider())
