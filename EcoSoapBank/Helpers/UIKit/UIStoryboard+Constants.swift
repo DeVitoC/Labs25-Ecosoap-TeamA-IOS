@@ -27,8 +27,8 @@ extension UIViewController {
     }
 
     class func fromStoryboard<VC: UIViewController>(
-        with initializer: @escaping (NSCoder) -> VC
-    ) -> VC {
-        self.storyboard().instantiateInitialViewController(creator: initializer)!
+        with initializer: @escaping (NSCoder) -> VC?
+    ) -> VC? {
+        self.storyboard().instantiateInitialViewController(creator: initializer)
     }
 }
