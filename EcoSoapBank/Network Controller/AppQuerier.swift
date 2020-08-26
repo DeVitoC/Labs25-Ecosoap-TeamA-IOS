@@ -70,13 +70,13 @@ extension AppQuerier {
     private func query<T: Decodable>(
         expecting resultType: T.Type,
         query: String,
-        options: [GraphQLController.InputTypes: String] = [:],
+        options: [String: String] = [:],
         completion: @escaping ResultHandler<T>
     ) {
         guard let token = token else {
             return completion(.failure(AppQueryError.noToken))
         }
-        var finalVariables: [GraphQLController.InputTypes: String] = [.token: token]
+        var finalVariables: [String: String] = ["token": token]
         options.forEach { key, value in finalVariables[key] = value }
         networkService.queryRequest(T.self,
                                     query: query,

@@ -110,27 +110,6 @@ class GraphQLController {
         }
     }
 
-    /// Method converts the input variables into json to send to server
-    /// - Parameter variablesInput: This takes a value of type VariableType described by the valid input types in GraphQL queries and mutaitons
-    /// - Returns: Returns JSON in the form of Data
-    private func setVariables(variablesInput: VariableType) -> Data {
-        var variableDict: [String: VariableValues] = [:]
-        if let variables = variablesInput as? [InputTypes: String] {
-            variableDict = ["input": .dictionary(variables)]
-        } else if let variables = variablesInput as? Pickup.ScheduleInput {
-            variableDict = ["input": .scheduleInput(variables)]
-        }
-
-        do {
-            return try JSONEncoder().encode(variableDict)
-        } catch {
-            NSLog("\(error)")
-            return Data()
-        }
-
-    }
-
-
     // MARK: - Enums
 
     private enum VariableValues: Encodable {
