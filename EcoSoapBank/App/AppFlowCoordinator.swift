@@ -87,8 +87,12 @@ class AppFlowCoordinator: FlowCoordinator {
     private func onLoginComplete() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            // when backend ready: PickupCoordinator(dataProvider: appQuerier)
-            self.pickupCoord = PickupCoordinator()
+            guard let user = self.userController.user else {
+                return self.presentLoginFailAlert()
+            }
+            // when backend ready, use graphQL controller as data provider
+            self.pickupCoord = PickupCoordinator(user: user,
+                                                 dataProvider: MockPickupProvider())
             self.tabBarController.setViewControllers([
                 self.impactCoord.rootVC, self.pickupCoord!.rootVC
             ], animated: true)
