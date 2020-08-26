@@ -442,7 +442,6 @@
 				994E4B6D24DDAEA800C12921 /* Impact */,
 				994E4B6E24DDAEB100C12921 /* Pickups */,
 				994E4B6F24DDAEB700C12921 /* Payment */,
-				46BEB4F224C98F1100FE0CD1 /* Profile */,
 				46BEB4EF24C98ED900FE0CD1 /* Login */,
 				46BEB4EB24C98EB400FE0CD1 /* Model */,
 				46BEB4EC24C98EBB00FE0CD1 /* Model Controller */,
@@ -507,13 +506,6 @@
 				46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		46BEB4F224C98F1100FE0CD1 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Profile;
 			sourceTree = "<group>";
 		};
 		990CA24024DB6A6C002B5FA4 /* Protocols */ = {
