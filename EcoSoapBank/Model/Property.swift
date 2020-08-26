@@ -37,14 +37,14 @@ struct Property: Decodable, Equatable {
     let shippingNote: String?
     let notes: String?
 
-    enum PropertyType: String, Decodable {
+    enum PropertyType: String, Decodable, CaseIterable {
         case bedAndBreakfast = "BED_AND_BREAKFAST"
         case guesthouse = "GUESTHOUSE"
         case hotel = "HOTEL"
         case other = "OTHER"
     }
 
-    enum BillingMethod: String, Decodable {
+    enum BillingMethod: String, Decodable, CaseIterable {
         case ach = "ACH"
         case credit = "CREDIT"
         case debit = "DEBIT"

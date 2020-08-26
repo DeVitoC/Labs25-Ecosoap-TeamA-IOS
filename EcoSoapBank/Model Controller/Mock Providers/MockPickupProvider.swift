@@ -81,18 +81,7 @@ extension Pickup {
             cartons: input.cartons.map {
                 Pickup.Carton(id: UUID().uuidString, contents: $0)
             },
-            property: Property(id: "4",
-                               name: "Hilton",
-                               propertyType: .guesthouse,
-                               rooms: 2,
-                               services: [],
-                               collectionType: .local,
-                               logo: nil,
-                               phone: nil,
-                               billingAddress: nil,
-                               shippingAddress: nil,
-                               shippingNote: nil,
-                               notes: nil)
+            property: .random(withID: input.propertyID)
         )
     }
 
@@ -102,23 +91,33 @@ extension Pickup {
             id: UUID().uuidString,
             confirmationCode: mockConfirmationCode(),
             cartons: .random(),
-            property: Property(id: "4",
-                               name: "Hilton",
-                               propertyType: .guesthouse,
-                               rooms: 2,
-                               services: [],
-                               collectionType: .local,
-                               logo: nil,
-                               phone: nil,
-                               billingAddress: nil,
-                               shippingAddress: nil,
-                               shippingNote: nil,
-                               notes: nil)
+            property: .random()
         )
     }
 }
 
-extension Pickup.Base {
+extension Property: Randomizable {
+    static func random() -> Self {
+        random(withID: nil)
+    }
+
+    static func random(withID id: String?) -> Property {
+        Property(id: id ?? UUID().uuidString,
+                 name: UUID().uuidString,
+                 propertyType: .random(),
+                 rooms: Int.random(in: 10...100),
+                 services: HospitalityService.allCases,
+                 collectionType: .random(),
+                 logo: nil,
+                 phone: nil,
+                 billingAddress: nil,
+                 shippingAddress: nil,
+                 shippingNote: mockNotes(),
+                 notes: mockNotes())
+    }
+}
+
+extension Pickup.Base: Randomizable {
     static func random() -> Self {
         let status = Pickup.Status.random()
         let daysSinceReady = Int.random(in: -14 ... -2)
@@ -144,52 +143,11 @@ extension Pickup.Base {
     }
 }
 
-extension HospitalityService {
-    init(intValue: Int) {
-        switch intValue {
-        case 0: self = .bottles
-        case 1: self = .linens
-        case 2: self = .paper
-        case 3: self = .soap
-        default: self = .other
-        }
-    }
-
-    static func random() -> Self { .init(intValue: .random(in: 0...4)) }
-}
-
-extension Pickup.CollectionType {
-    init(intValue: Int) {
-        switch intValue {
-        case 0: self = .courierConsolidated
-        case 1: self = .courierDirect
-        case 2: self = .generatedLabel
-        case 3: self = .local
-        default: self = .other
-        }
-    }
-
-    static func random() -> Self { .init(intValue: .random(in: 0...4)) }
-}
-
-extension Pickup.Status {
-    init(intValue: Int) {
-        switch intValue {
-        case 0: self = .cancelled
-        case 1: self = .complete
-        case 2: self = .outForPickup
-        default: self = .submitted
-        }
-    }
-
-    static func random() -> Self { .init(intValue: .random(in: 0...3)) }
-}
-
-extension Pickup.ScheduleInput {
+extension Pickup.ScheduleInput: Randomizable {
     static func random() -> Self {
         Pickup.ScheduleInput(
             base: .random(),
-            propertyID: "0",
+            propertyID: UUID().uuidString,
             cartons: .random())
     }
 }
@@ -202,13 +160,13 @@ extension Pickup.ScheduleResult {
     }
 }
 
-extension Pickup.CartonContents {
+extension Pickup.CartonContents: Randomizable {
     static func random() -> Pickup.CartonContents {
         Pickup.CartonContents(product: .random(), percentFull: .random(in: 1...100))
     }
 }
 
-extension Pickup.Carton {
+extension Pickup.Carton: Randomizable {
     static func random() -> Pickup.Carton {
         Pickup.Carton(id: UUID().uuidString, contents: .random())
     }
@@ -229,3 +187,8 @@ fileprivate func mockNotes() -> String {
         result += UUID().uuidString
     }
 }
+
+extension Property.PropertyType: Randomizable {}
+extension HospitalityService: Randomizable {}
+extension Pickup.Status: Randomizable {}
+extension Pickup.CollectionType: Randomizable {}

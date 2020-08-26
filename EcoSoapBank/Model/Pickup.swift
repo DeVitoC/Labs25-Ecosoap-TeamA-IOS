@@ -179,14 +179,14 @@ extension Pickup: Decodable {
 
     // MARK: Enums
 
-    enum Status: String, Decodable {
+    enum Status: String, Decodable, CaseIterable {
         case submitted = "SUBMITTED"
         case outForPickup = "OUT_FOR_PICKUP"
         case complete = "COMPLETE"
         case cancelled = "CANCELLED"
     }
 
-    enum CollectionType: String, Decodable, Equatable {
+    enum CollectionType: String, Decodable, Equatable, CaseIterable {
         case courierConsolidated = "COURIER_CONSOLIDATED"
         case courierDirect = "COURIER_DIRECT"
         case generatedLabel = "GENERATED_LABEL"
