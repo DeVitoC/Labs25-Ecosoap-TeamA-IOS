@@ -29,6 +29,7 @@ class GraphQLController {
     }()
 
     // MARK: - INIT
+    /// Allows GraphQLController to be set up with mock data for testing
     init(session: DataLoader = URLSession.shared) {
         self.session = session
     }
@@ -43,7 +44,7 @@ class GraphQLController {
     ///   - completion: Completion handler that passes back a Result of type Profile or Error
     func queryRequest<T: Decodable>(_ type: T.Type,
                                     query: String,
-                                    variables: [String: Any] = [:],
+                                    variables: VariableType,
                                     completion: @escaping (Result<T, Error>) -> Void) {
         // Add body to query request
         let body: [String: Any] = ["query": query, "variables": variables]
@@ -107,8 +108,25 @@ class GraphQLController {
             return .failure(error)
         }
     }
+
+    // MARK: - Enums
+
+    /// Enum describing the possible errors we can get back from
+    private enum GraphQLError: Error {
+        case noData
+    }
+
+    enum InputTypes: String {
+        case propertyId
+        case userId
+        case token
+        case pickupId
+        case confirmationCode
+    }
 }
 
-enum GraphQLError: Error {
-    case noData
-}
+/// Protocol to set conformance to possible input types for GraphQL query and mutation variables
+protocol VariableType {}
+
+extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
+extension Pickup.ScheduleInput: VariableType {}

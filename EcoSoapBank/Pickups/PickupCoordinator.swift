@@ -15,10 +15,13 @@ class PickupCoordinator: FlowCoordinator {
     private let pickupController: PickupController
     private var user: User
 
+    internal lazy var schedulePickupVM = SchedulePickupViewModel(user: user, delegate: self)
+
     private(set) lazy var rootVC: UIViewController = UIHostingController(
-        rootView: PickupsView(pickupController: pickupController))
-    private lazy var newPickupVC = configure(SchedulePickupViewController(
-        viewModel: pickupController.schedulePickupViewModel)) {
+        rootView: PickupsView(
+            pickupController: pickupController,
+            schedulePickup: { [weak self] in self?.scheduleNewPickup() }))
+    private lazy var newPickupVC = configure(SchedulePickupViewController(viewModel: schedulePickupVM)) {
             let cancel = UIBarButtonItem(
                 barButtonSystemItem: .cancel,
                 target: self,
@@ -37,18 +40,15 @@ class PickupCoordinator: FlowCoordinator {
 
     init(user: User, dataProvider: PickupDataProvider) {
         self.user = user
-        self.pickupController = PickupController(user: user, dataProvider: dataProvider)
+        self.pickupController = PickupController(
+            user: user,
+            dataProvider: dataProvider)
 
         // subscribe to and respond to model controller messages
-        pickupController.editCarton
-            .sink(receiveValue: editCarton(_:))
-            .store(in: &cancellables)
-        pickupController.pickupScheduleResult
+        pickupController.fetchAllPickups()
+            .receive(on: DispatchQueue.main)
             .handleError(handleError(_:))
-            .sink(receiveValue: handlePickupScheduleResult(_:))
-            .store(in: &cancellables)
-        pickupController.presentNewPickup
-            .sink(receiveValue: presentNewPickupView)
+            .sink { _ in }
             .store(in: &cancellables)
     }
 
@@ -66,33 +66,16 @@ class PickupCoordinator: FlowCoordinator {
                     weight: .regular)),
             tag: 1)
     }
-
-    func provideUser(_ user: User) {
-        self.user = user
-    }
 }
 
 // MARK: - Event handlers
 
 extension PickupCoordinator {
     private func presentNewPickupView() {
-        if user.properties?.first == nil {
-            rootVC.presentSimpleAlert(
-                with: "No properties to schedule pickups for!",
-                message: "Please contact us to set up your properties for container pickups.",
-                preferredStyle: .alert,
-                dismissText: "OK")
-        } else {
-            rootVC.present(newPickupNavController, animated: true, completion: nil)
+        guard user.properties?.first != nil else {
+            return handleError(PickupError.noProperties)
         }
-    }
-
-    private func editCarton(_ cartonVM: NewCartonViewModel) {
-        guard newPickupVC.isViewLoaded else { return }
-        let popover = editCartonVC(for: cartonVM)
-        popover.popoverPresentationController?.sourceView =
-            newPickupVC.sourceViewForCartonEditingPopover()
-        newPickupVC.present(popover, animated: true, completion: nil)
+        rootVC.present(newPickupNavController, animated: true, completion: nil)
     }
 
     @objc private func cancelNewPickup(_ sender: Any) {
@@ -100,8 +83,24 @@ extension PickupCoordinator {
     }
 
     private func handleError(_ error: Error) {
-        print(error)
-        // TODO: handle errors
+        let title: String
+        let message: String
+
+        switch error {
+        case .noProperties as PickupError:
+            title = "No properties to schedule pickups for!"
+            message = "Please contact us to set up your properties for container pickups."
+        default:
+            // TODO: handle more errors
+            title = "An unknown error occurred"
+            message = ""
+        }
+
+        rootVC.presentSimpleAlert(
+            with: title,
+            message: message,
+            preferredStyle: .alert,
+            dismissText: "OK")
     }
 
     private func handlePickupScheduleResult(_ pickupResult: Pickup.ScheduleResult) {
@@ -131,14 +130,38 @@ extension PickupCoordinator {
         }))
         return alert
     }
-}
 
-extension PickupCoordinator {
     private func editCartonVC(for viewModel: NewCartonViewModel) -> EditCartonViewController {
         configure(EditCartonViewController(viewModel: viewModel)) {
             $0.modalPresentationStyle = .popover
             $0.popoverPresentationController?.delegate = newPickupVC
             $0.preferredContentSize = CGSize(width: 300, height: 250)
         }
+    }
+}
+
+// MARK: - Delegate conformance
+
+extension PickupCoordinator: SchedulePickupViewModelDelegate {
+    func schedulePickup(for input: Pickup.ScheduleInput) {
+        pickupController.schedulePickup(for: input)
+            .receive(on: DispatchQueue.main)
+            .handleError(handleError(_:))
+            .sink(receiveValue: handlePickupScheduleResult(_:))
+            .store(in: &cancellables)
+    }
+
+    func editCarton(for cartonVM: NewCartonViewModel) {
+        guard newPickupVC.isViewLoaded else { return }
+        let popover = editCartonVC(for: cartonVM)
+        popover.popoverPresentationController?.sourceView =
+            newPickupVC.sourceViewForCartonEditingPopover()
+        newPickupVC.present(popover, animated: true, completion: nil)
+    }
+}
+
+extension PickupCoordinator: PickupsViewDelegate {
+    func scheduleNewPickup() {
+        presentNewPickupView()
     }
 }
