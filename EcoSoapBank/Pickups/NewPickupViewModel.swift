@@ -55,7 +55,7 @@ extension NewPickupViewModel {
                 readyDate: readyDate,
                 pickupDate: nil, // TODO: move out of base
                 notes: notes),
-            propertyID: UUID(), // TODO: actual value
+            propertyID: "", // TODO: actual value
             cartons: cartons.map { $0.carton }))
     }
 }
