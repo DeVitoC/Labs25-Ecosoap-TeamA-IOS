@@ -104,9 +104,10 @@ extension PickupCoordinator {
     }
 
     private func handlePickupScheduleResult(_ pickupResult: Pickup.ScheduleResult) {
+        schedulePickupVM = SchedulePickupViewModel(user: user, delegate: self)
         let alert = successAlert(for: pickupResult)
-        rootVC.dismiss(animated: true) { [weak rootVC] in
-            rootVC?.present(alert, animated: true, completion: nil)
+        rootVC.dismiss(animated: true) { [unowned rootVC] in
+            rootVC.present(alert, animated: true, completion: nil)
         }
     }
 
@@ -143,12 +144,19 @@ extension PickupCoordinator {
 // MARK: - Delegate conformance
 
 extension PickupCoordinator: SchedulePickupViewModelDelegate {
-    func schedulePickup(for input: Pickup.ScheduleInput) {
+    func schedulePickup(
+        for input: Pickup.ScheduleInput,
+        completion: @escaping ResultHandler<Pickup.ScheduleResult>
+    ) {
         pickupController.schedulePickup(for: input)
             .receive(on: DispatchQueue.main)
-            .handleError(handleError(_:))
-            .sink(receiveValue: handlePickupScheduleResult(_:))
-            .store(in: &cancellables)
+            .handleError({ [weak self] error in
+                self?.handleError(error)
+                completion(.failure(error))
+            }).sink(receiveValue: { [weak self] result in
+                self?.handlePickupScheduleResult(result)
+                completion(.success(result))
+            }).store(in: &cancellables)
     }
 
     func editCarton(for cartonVM: NewCartonViewModel) {
