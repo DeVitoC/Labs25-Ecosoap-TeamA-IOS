@@ -54,7 +54,7 @@ extension SchedulePickupViewModel {
         cartons.remove(at: cartonIndex)
     }
 
-    func schedulePickup() {
+    func schedulePickup(_ completion: ResultHandler<Pickup.ScheduleResult>? = nil) {
         delegate?.schedulePickup(
             for: Pickup.ScheduleInput(
                 base: Pickup.Base(
@@ -65,6 +65,6 @@ extension SchedulePickupViewModel {
                     notes: notes),
                 propertyID: selectedProperty.id,
                 cartons: cartons.map { $0.carton }),
-            completion: { _ in })
+            completion: completion ?? { _ in })
     }
 }
