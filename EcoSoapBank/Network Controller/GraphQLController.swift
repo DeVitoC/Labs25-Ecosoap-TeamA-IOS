@@ -21,7 +21,7 @@ class GraphQLController {
 
     private let session: DataLoader
     private let url = URL(string: "http://35.208.9.187:9094/ios-api-1/")!
-    private var token: String?
+    private var token: String? { Keychain.Okta.getToken() }
 
     // Setting up the url request
     private lazy var request: URLRequest = {
