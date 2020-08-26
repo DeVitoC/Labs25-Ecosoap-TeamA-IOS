@@ -9,9 +9,10 @@
 import UIKit
 
 
-class InputPickerView<DataItem: CustomStringConvertible>:
+class InputPickerView<DataItem>:
 UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
-    private var data: [DataItem]
+    var data: [DataItem]
+    var rowLabel: KeyPath<DataItem, String>
 
     var editingTextField: UITextField?
 
@@ -20,8 +21,10 @@ UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     var onSelect: (DataItem) -> Void
 
-    init(data: [DataItem], onSelect: @escaping (DataItem) -> Void) {
+    /// Uses value at keyPath `rowLabel` on each `DataItem`  as the display text for each picker row.
+    init(data: [DataItem], rowLabel: KeyPath<DataItem, String>, onSelect: @escaping (DataItem) -> Void) {
         self.data = data
+        self.rowLabel = rowLabel
         self.onSelect = onSelect
         super.init(frame: .zero)
 
@@ -51,10 +54,17 @@ UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
         titleForRow row: Int,
         forComponent component: Int
     ) -> String? {
-        "\(data[row])"
+        data[row][keyPath: rowLabel]
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         onSelect(data[row])
+    }
+}
+
+extension InputPickerView where DataItem: CustomStringConvertible {
+    /// Uses `description` as the text for each `DataItem`'s picker row.
+    convenience init(data: [DataItem], onSelect: @escaping (DataItem) -> Void) {
+        self.init(data: data, rowLabel: \DataItem.description, onSelect: onSelect)
     }
 }

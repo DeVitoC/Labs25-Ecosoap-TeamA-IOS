@@ -452,13 +452,13 @@
 		46BEB4EA24C98EA300FE0CD1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				9921943324E49AC300E16C16 /* UIKit */,
+				9983874F24E4694400450244 /* SwiftUI */,
 				46BEB4E624C98D8900FE0CD1 /* Notifications.swift */,
 				992BB63324ED930600638AA4 /* SortDescriptor.swift */,
 				994E4B7824DDB58300C12921 /* UtilityFunctions.swift */,
 				0445F04924EC648E00A0A665 /* UserDefaults.swift */,
 				0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */,
-				9921943324E49AC300E16C16 /* UIKit */,
-				9983874F24E4694400450244 /* SwiftUI */,
 				E2D302FE24E5F464008A6FAF /* DataLoader.swift */,
 				E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */,
 				99B6177024EC3D000099664B /* Publisher+HandleError.swift */,
