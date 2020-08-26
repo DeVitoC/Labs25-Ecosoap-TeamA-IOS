@@ -42,9 +42,7 @@ class AppQuerier {
 
 extension AppQuerier: UserDataProvider {
     func logIn(_ completion: @escaping ResultHandler<User>) {
-        query(expecting: User.self,
-              query: GraphQLMutations.login,
-              completion: completion)
+        // TODO
     }
 }
 
@@ -61,26 +59,5 @@ extension AppQuerier: PickupDataProvider {
     ) {
         completion(.failure(AppQueryError.unimplemented))
         // TODO
-    }
-}
-
-// MARK: - Private
-
-extension AppQuerier {
-    private func query<T: Decodable>(
-        expecting resultType: T.Type,
-        query: String,
-        options: [String: Any] = [:],
-        completion: @escaping ResultHandler<T>
-    ) {
-        guard let token = token else {
-            return completion(.failure(AppQueryError.noToken))
-        }
-        var finalVariables: [String: Any] = ["token": token]
-        options.forEach { key, value in finalVariables[key] = value }
-        networkService.queryRequest(T.self,
-                                    query: query,
-                                    variables: finalVariables,
-                                    completion: completion)
     }
 }

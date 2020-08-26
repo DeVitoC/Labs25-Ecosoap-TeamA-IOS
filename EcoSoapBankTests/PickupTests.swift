@@ -16,91 +16,96 @@ class PickupTests: XCTestCase {
     private var pickupCoordinator: PickupCoordinator!
     private var pickupController: PickupController!
     private var pickupProvider: MockPickupProvider!
-    private var mockDataExpectation: XCTestExpectation!
-    private var waiter: XCTWaiter!
+
+    private var expectationsCount = 0
 
     override func setUp() {
         super.setUp()
         pickupProvider = MockPickupProvider()
         pickupController = PickupController(user: .placeholder(), dataProvider: pickupProvider)
         pickupCoordinator = PickupCoordinator(user: .placeholder(), dataProvider: pickupProvider)
-        mockDataExpectation = XCTestExpectation(description: "Waiting for mock data")
-        waiter = XCTWaiter(delegate: self)
     }
 
     // MARK: - Tests
 
-    func testPickupControllerSuccess() throws {
+    func testPickupControllerFetchAllSuccess() throws {
+        let exp = newMockExpectation()
         pickupProvider.fetchAllPickups { result in
-            self.mockDataReturned()
-
             switch result {
             case .failure(let error):
                 XCTFail("Mock pickup provider should have succeeded but failed with error: \(error)")
             case .success(let pickups):
                 XCTAssertGreaterThan(pickups.count, 0)
             }
-        }
-        waitForMockData()
 
-        XCTAssertGreaterThan(pickupController.pickups.count, 0)
-        XCTAssertNil(pickupController.error)
+            exp.fulfill()
+        }
+        wait(for: exp)
     }
 
-    func testPickupControllerFailure() {
+    func testPickupControllerFetchAllFailure() {
         pickupProvider.shouldFail = true
         let failingController = PickupController(
             user: .placeholder(),
             dataProvider: pickupProvider)
 
-        pickupProvider.fetchAllPickups { result in
-            self.mockDataReturned()
+        let exp = newMockExpectation()
 
+        pickupProvider.fetchAllPickups { result in
             if case .success = result {
                 XCTFail("Mock pickup provider should have failed but succeeded")
             }
+            exp.fulfill()
         }
-        waitForMockData()
+        wait(for: exp)
 
         XCTAssert(failingController.pickups.isEmpty)
-        XCTAssertNotNil(failingController.error)
     }
 
-    func testPickupCoordinator() {
+    func testPickupCoordinatorStart() {
         pickupCoordinator.start()
-
-        XCTAssertNotNil(pickupCoordinator.rootVC as? HostingController)
     }
 
     func testSchedulePickup() {
-        let pickupInput = Pickup.ScheduleInput.random()
         var bag = Set<AnyCancellable>()
-        pickupController.schedulePickup(pickupInput)
-            .sink(receiveCompletion: { completion in
-                if case .failure = completion {
-                    XCTFail("Should succeed")
-                }
-            }, receiveValue: { result in
-                self.mockDataReturned()
-                XCTAssertEqual(pickupInput.base, result.pickup?.base)
+
+        let exp1 = XCTestExpectation(description: "Waiting for mock data 1")
+
+        let input = Pickup.ScheduleInput.random()
+
+        pickupController.schedulePickup(for: input)
+            .sink(
+                receiveCompletion: handleCompletion(_:),
+                receiveValue: { _ in
+                    exp1.fulfill()
             }).store(in: &bag)
 
-        waitForMockData()
+        wait(for: exp1)
     }
 }
 
 // MARK: - Helpers
 
 extension PickupTests {
-    private func waitForMockData() {
-        waiter.wait(for: [mockDataExpectation], timeout: 5)
+    private func newMockExpectation() -> XCTestExpectation {
+        expectationsCount += 1
+        return XCTestExpectation(
+            description: "Waiting for mock data \(expectationsCount)")
     }
 
-    private func mockDataReturned() {
-        mockDataExpectation.fulfill()
+    private func handleCompletion(_ completion: Subscribers.Completion<Error>) {
+        if case .failure(let error) = completion {
+            XCTFail("completed with error: \(error)")
+        }
     }
 }
 
 protocol HostingController {}
 
 extension UIHostingController: HostingController {}
+
+extension XCTestCase {
+    func wait(for expectation: XCTestExpectation, timeout: TimeInterval = 5) {
+        wait(for: [expectation], timeout: timeout)
+    }
+}
