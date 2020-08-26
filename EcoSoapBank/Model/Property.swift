@@ -23,7 +23,7 @@
 
 import Foundation
 
-struct Property: Decodable {
+struct Property: Decodable, Equatable {
     let id: String
     let name: String
     let propertyType: PropertyType
