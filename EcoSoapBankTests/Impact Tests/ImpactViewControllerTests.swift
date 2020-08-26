@@ -18,7 +18,7 @@ class ImpactViewControllerTest: XCTestCase {
         super.setUp()
         
         impactVC = ImpactViewController()
-        impactVC.impactController = ImpactController(dataProvider: MockImpactProvider())
+        impactVC.impactController = ImpactController(user: .placeholder(), dataProvider: MockImpactProvider())
         // load view hierarchy
         _ = impactVC.view
     }

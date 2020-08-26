@@ -8,14 +8,15 @@
 
 import UIKit
 
-protocol ImpactProvider {
-    func fetchImpactStats(_ completion: @escaping (Result<ImpactStats, Error>) -> Void)
+protocol ImpactDataProvider {
+    func fetchImpactStats(_ completion: @escaping ResultHandler<ImpactStats>)
 }
 
 class ImpactController {
     private(set) var viewModels: [ImpactCellViewModel] = []
     
-    private let dataProvider: ImpactProvider
+    private let dataProvider: ImpactDataProvider
+    private let user: User
     
     /// Gets the latest impact stats from the data provider, which in
     /// turn updates the `viewModels` property accordingly.
@@ -36,7 +37,8 @@ class ImpactController {
     
     // MARK: - Init
     
-    init(dataProvider: ImpactProvider) {
+    init(user: User, dataProvider: ImpactDataProvider) {
+        self.user = user
         self.dataProvider = dataProvider
     }
     

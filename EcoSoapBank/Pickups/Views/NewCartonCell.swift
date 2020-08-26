@@ -1,5 +1,5 @@
 //
-//  PickupCartonCell.swift
+//  NewCartonCell.swift
 //  EcoSoapBank
 //
 //  Created by Jon Bash on 2020-08-17.
@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 
-class PickupCartonCell: UITableViewCell {
+class NewCartonCell: UITableViewCell {
     static var reuseIdentifier: String { String(describing: Self.self) }
     
     private var viewModel: NewCartonViewModel!

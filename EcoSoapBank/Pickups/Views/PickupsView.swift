@@ -10,13 +10,23 @@ import SwiftUI
 import Combine
 
 
+protocol PickupsViewDelegate: AnyObject {
+    var schedulePickupVM: SchedulePickupViewModel { get }
+
+    func scheduleNewPickup()
+}
+
+
 struct PickupsView: View {
     @ObservedObject private var pickupController: PickupController
 
     @State private var makingNewPickup = false
 
-    init(pickupController: PickupController) {
+    private var schedulePickup: () -> Void
+
+    init(pickupController: PickupController, schedulePickup: @escaping () -> Void) {
         self.pickupController = pickupController
+        self.schedulePickup = schedulePickup
     }
 
     var body: some View {
@@ -24,7 +34,7 @@ struct PickupsView: View {
             PickupHistoryView(pickupController: pickupController)
                 .navigationBarTitle("Pickup History", displayMode: .inline)
                 .navigationBarItems(trailing: Button(
-                    action: newPickup,
+                    action: schedulePickup,
                     label: newPickupButton)
             )
         }
@@ -34,16 +44,8 @@ struct PickupsView: View {
         Image(uiImage: .addBoxSymbol)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .foregroundColor(.white)
-            .padding(EdgeInsets(top: 5,
-                                leading: 11,
-                                bottom: 5,
-                                trailing: 9))
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill()
-                    .foregroundColor(Color(.link)))
-            .frame(height: 36)
+            .foregroundColor(Color(.white))
+            .frame(height: 28)
             .accessibility(label: Text("Schedule New Pickup"))
     }
 
@@ -56,20 +58,15 @@ struct PickupsView: View {
                 width: UIScreen.main.bounds.width,
                 height: UIScreen.main.bounds.height + 160)
     }
-
-    private func presentNewPickupView() -> some View {
-        NewPickupViewController.Representable(
-            viewModel: pickupController.newPickupViewModel)
-    }
-
-    private func newPickup() {
-        pickupController.presentNewPickup.send()
-    }
 }
 
 struct PickupsView_Previews: PreviewProvider {
     static var previews: some View {
-        PickupsView(pickupController: PickupController(
-            dataProvider: MockPickupProvider()))
+        PickupsView(
+            pickupController: PickupController(
+                user: .placeholder(),
+                dataProvider: MockPickupProvider()),
+            schedulePickup: {}
+        )
     }
 }

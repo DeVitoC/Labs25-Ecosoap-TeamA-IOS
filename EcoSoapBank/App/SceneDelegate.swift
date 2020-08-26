@@ -6,6 +6,7 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
+import KeychainAccess
 import UIKit
 import OktaAuth
 
@@ -33,8 +34,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let notificationName: Notification.Name
             do {
                 try result.get()
-                guard (try? OktaAuth.shared.credentialsIfAvailable()) != nil
-                    else { return }
+                let credentials = try OktaAuth.shared.credentialsIfAvailable()
+                Keychain.Okta.setToken(credentials.accessToken, expiresIn: credentials.expiresIn)
+                
                 notificationName = .oktaAuthenticationSuccessful
             } catch {
                 notificationName = .oktaAuthenticationFailed

@@ -51,3 +51,7 @@ struct Property: Codable {
         case invoice = "INVOICE"
     }
 }
+
+extension Property: CustomStringConvertible {
+    var description: String { name }
+}
