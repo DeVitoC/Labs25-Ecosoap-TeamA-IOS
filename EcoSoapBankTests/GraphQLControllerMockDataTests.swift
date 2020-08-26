@@ -27,7 +27,9 @@ class GraphQLControllerMockDataTests: XCTestCase {
     func testImpactStatsQueryRequestWithMockDataSuccess() {
         let graphQLController = setDataLoader(file: "mockImpactStatsByPropertyId")
 
-        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery) { result in
+        graphQLController.queryRequest(ImpactStats.self,
+                                       query: GraphQLQueries.impactStatsByPropery,
+                                       variables: ["propertyId": "PropertyId1"]) { result in
 
             guard let result = try? result.get(),
                 let soapRecycled = result.soapRecycled,
@@ -52,7 +54,7 @@ class GraphQLControllerMockDataTests: XCTestCase {
     func testImpactStatsQueryRequestWithMockDataFailure() {
         let graphQLController = setDataLoader(file: "mockImpactStatsFailure")
 
-        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery) { result in
+        graphQLController.queryRequest(ImpactStats.self, query: GraphQLQueries.impactStatsByPropery, variables: [:]) { result in
 
             XCTAssertNil(try? result.get())
         }
@@ -61,7 +63,7 @@ class GraphQLControllerMockDataTests: XCTestCase {
     func testUserByIdQueryRequestWithMockDataSuccess() {
         let graphQLController = setDataLoader(file: "mockUserByIdInput")
 
-        graphQLController.queryRequest(User.self, query: GraphQLQueries.userById) { result in
+        graphQLController.queryRequest(User.self, query: GraphQLQueries.userById, variables: [:]) { result in
 
             guard let result = try? result.get() else {
                 XCTFail("Unable to get valid User from returned data")
@@ -86,7 +88,7 @@ class GraphQLControllerMockDataTests: XCTestCase {
     func testPickupsByPropertyIdWithMockDataSuccess() {
         let graphQLController = setDataLoader(file: "mockPickupsByPropertyIdSuccess")
 
-        graphQLController.queryRequest([Pickup].self, query: GraphQLQueries.pickupsByPropertyId) { result in
+        graphQLController.queryRequest([Pickup].self, query: GraphQLQueries.pickupsByPropertyId, variables: [:]) { result in
 
             guard let result = try? result.get() else {
                 XCTFail("Unable to get Pickup from returned data")
@@ -124,7 +126,7 @@ class GraphQLControllerMockDataTests: XCTestCase {
     func testPropertiesByUserIdWithMockDataSuccess() {
         let graphQLController = setDataLoader(file: "mockPropertiesByUserIdSuccess")
 
-        graphQLController.queryRequest([Property].self, query: GraphQLQueries.propertiesByUserId) { result in
+        graphQLController.queryRequest([Property].self, query: GraphQLQueries.propertiesByUserId, variables: [:]) { result in
 
             guard let result = try? result.get() else {
                 XCTFail("Unable to get Properties from returned data")
@@ -154,7 +156,7 @@ class GraphQLControllerMockDataTests: XCTestCase {
     func testLoginWithMockData() {
         let graphQLController = setDataLoader(file: "mockUserByIdInput")
 
-        graphQLController.queryRequest(User.self, query: GraphQLMutations.login) { result in
+        graphQLController.queryRequest(User.self, query: GraphQLMutations.login, variables: [:]) { result in
 
             guard let result = try? result.get(),
                 let propertyId = result.properties?[0].id,
@@ -179,7 +181,7 @@ class GraphQLControllerMockDataTests: XCTestCase {
     func testSchedulePickupWithMockData() {
         let graphQLController = setDataLoader(file: "mockSchedulePickupSuccess")
 
-        graphQLController.queryRequest(Pickup.ScheduleResult.self, query: GraphQLMutations.schedulePickup) { result in
+        graphQLController.queryRequest(Pickup.ScheduleResult.self, query: GraphQLMutations.schedulePickup, variables: [:]) { result in
 
             guard let result = try? result.get() else {
                 XCTFail("Unable to get valid impact stats from returned data")
@@ -207,7 +209,7 @@ class GraphQLControllerMockDataTests: XCTestCase {
     func testCancelPickupRequestWithMockData() {
         let graphQLController = setDataLoader(file: "mockCancelPickupSuccess")
 
-        graphQLController.queryRequest(Pickup.self, query: GraphQLMutations.cancelPickup) { result in
+        graphQLController.queryRequest(Pickup.self, query: GraphQLMutations.cancelPickup, variables: [:]) { result in
 
             guard let result = try? result.get() else {
                 XCTFail("Unable to get valid impact stats from returned data")

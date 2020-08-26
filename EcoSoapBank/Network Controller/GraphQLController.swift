@@ -137,7 +137,7 @@ class GraphQLController {
 }
 
 /// Protocol to set conformance to possible input types for GraphQL query and mutation variables
-protocol VariableType {}
+protocol VariableType: Encodable {}
 
 //extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
 extension Dictionary: VariableType where Key == String, Value == String {}
