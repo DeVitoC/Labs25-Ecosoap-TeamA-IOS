@@ -258,27 +258,6 @@ extension Pickup: Decodable {
         self.property = property
         self.confirmationCode = confirmationCode
     }
-
-//    func encode(to encoder: Encoder) throws {
-//        // Encode top level values to JSON
-//        var container = encoder.container(keyedBy: PickupKeys.self)
-//        try container.encode(collectionType, forKey: .collectionType)
-//        try container.encode(id, forKey: .id)
-//        try container.encode(confirmationCode, forKey: .confirmationCode)
-//        try container.encode(collectionType, forKey: .collectionType)
-//        try container.encode(status, forKey: .status)
-//        // Encode and convert dates to Date
-//        try container.encode(formatter.string(from: self.readyDate), forKey: .readyDate)
-//        if let pickupDate = self.pickupDate {
-//            try container.encode(formatter.string(from: pickupDate), forKey: .pickupDate)
-//        }
-//        try container.encode(property, forKey: .property)
-//        try container.encodeIfPresent(notes, forKey: .notes)
-//
-//        //Encode Cartons in Carton container
-//        var cartonContainer = container.nestedUnkeyedContainer(forKey: .cartons)
-//        try cartonContainer.encode(cartons)
-//    }
 }
 
 // MARK: Base Container Protocol
