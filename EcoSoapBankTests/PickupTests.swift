@@ -19,8 +19,11 @@ class PickupTests: XCTestCase {
 
     private var expectationsCount = 0
 
+    private var bag = Set<AnyCancellable>()
+
     override func setUp() {
         super.setUp()
+        bag = []
         pickupProvider = MockPickupProvider()
         pickupController = PickupController(user: .placeholder(), dataProvider: pickupProvider)
         pickupCoordinator = PickupCoordinator(user: .placeholder(), dataProvider: pickupProvider)
@@ -67,8 +70,6 @@ class PickupTests: XCTestCase {
     }
 
     func testSchedulePickup() {
-        var bag = Set<AnyCancellable>()
-
         let exp1 = XCTestExpectation(description: "Waiting for mock data 1")
 
         let input = Pickup.ScheduleInput.random()
