@@ -6,6 +6,7 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
+import KeychainAccess
 import UIKit
 import OktaAuth
 
@@ -53,7 +54,7 @@ class AppFlowCoordinator: FlowCoordinator {
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
 
-        if graphQLController.loggedIn {
+        if Keychain.Okta.isLoggedIn {
             onLoginComplete()
         } else {
             loginCoord.start()
@@ -82,10 +83,9 @@ class AppFlowCoordinator: FlowCoordinator {
     private func onLoginComplete() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            guard let user = self.userController.user else { return }
             
-            self.pickupCoord = PickupCoordinator(user: user, dataProvider: MockPickupProvider())
-            self.impactCoord = ImpactCoordinator(user: user, dataProvider: MockImpactProvider())
+            self.pickupCoord = PickupCoordinator(user: .placeholder(), dataProvider: MockPickupProvider())
+            self.impactCoord = ImpactCoordinator(user: .placeholder(), dataProvider: MockImpactProvider())
             
             self.tabBarController.setViewControllers([
                 self.impactCoord!.rootVC,
