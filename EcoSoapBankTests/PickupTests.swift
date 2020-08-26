@@ -161,6 +161,15 @@ class PickupTests: XCTestCase {
 
         wait(for: exp)
     }
+
+    func testStoryboardInit() throws {
+        let pickup = Pickup.random()
+        let detailVC = PickupDetailViewController.fromStoryboard { coder in
+            PickupDetailViewController(coder: coder, pickup: pickup)
+        }
+        XCTAssertNotNil(detailVC)
+        XCTAssertEqual(detailVC?.pickup, pickup)
+    }
 }
 
 // MARK: - Helpers
