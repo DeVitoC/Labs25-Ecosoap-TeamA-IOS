@@ -100,6 +100,29 @@ extension Pickup {
 
         let propertyID: String
         let cartons: [CartonContents]
+
+        var formatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-mm-dd"
+            return formatter
+        }()
+
+        func encode(to encoder: Encoder) throws {
+            // Encode top level values to JSON
+            var container = encoder.container(keyedBy: PickupKeys.self)
+            try container.encode(collectionType, forKey: .collectionType)
+            try container.encode(status, forKey: .status)
+            // Encode and convert dates to Date
+            try container.encode(formatter.string(from: self.readyDate), forKey: .readyDate)
+            if let pickupDate = self.pickupDate {
+                try container.encode(formatter.string(from: pickupDate), forKey: .pickupDate)
+            }
+            try container.encode(propertyID, forKey: .propertyId)
+            try container.encodeIfPresent(notes, forKey: .notes)
+
+            //Encode Cartons in Carton container
+            try container.encode(cartons, forKey: .cartons)
+        }
     }
 
     struct ScheduleResult: Decodable {
