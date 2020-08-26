@@ -84,7 +84,7 @@ class GraphQLController {
             }
 
             var objectData: Data
-            if returnType != "schedulePickupInput" {
+            if returnType != "schedulePickup" {
                 guard let methodType = Array(returnData.keys).first,
                     let object: Any = returnData[methodType] as? [String: Any] ?? returnData[methodType] as? [Any],
                     let objectDataUnwrapped = try? JSONSerialization.data(withJSONObject: object, options: [])
