@@ -112,42 +112,34 @@ class GraphQLController {
 
     // MARK: - Enums
 
-    private enum VariableValues: Encodable {
-        func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            switch self {
-            case .dictionary(let dict):
-                try container.encode(dict, forKey: .input)
-            case .scheduleInput(let input):
-                try container.encode(input, forKey: .input)
-            }
-        }
-        //swiftlint:disable nesting
-        private enum CodingKeys: String, CodingKey {
-            case input
-        }
-        //swiftline:enable nesting
-
-        case dictionary([InputTypes: String])
-        case scheduleInput(Pickup.ScheduleInput)
-    }
-
     /// Enum describing the possible errors we can get back from
     private enum GraphQLError: Error {
         case noData
     }
 
-    enum InputTypes: String, Encodable {
-        case propertyId
-        case userId
-        case token
-        case pickupId
-        case confirmationCode
+    private struct QueryInput<V: VariableType>: Encodable {
+        let query: String
+        let variables: V
+
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(query, forKey: .query)
+            var variablesContainer = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .variables)
+            try variablesContainer.encode(variables, forKey: .input)
+        }
+
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case query
+        case variables
+        case input
     }
 }
 
 /// Protocol to set conformance to possible input types for GraphQL query and mutation variables
 protocol VariableType {}
 
-extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
+//extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
+extension Dictionary: VariableType where Key == String, Value == String {}
 extension Pickup.ScheduleInput: VariableType {}
