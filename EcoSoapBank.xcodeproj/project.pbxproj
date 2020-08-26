@@ -392,6 +392,7 @@
 				0445F04D24EDD9C700A0A665 /* ESBButton.swift */,
 				993B15CB24F42D8C00529517 /* InputPickerView.swift */,
 				993B15CD24F4575500529517 /* CursorlessTextField.swift */,
+				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -527,7 +528,6 @@
 				991874D324E4B28900F636FB /* UIView+Subviews.swift */,
 				049379A624EAE9FF0084051B /* UIView+Layout.swift */,
 				992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */,
-				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -540,6 +540,16 @@
 				992BB64424EF021600638AA4 /* MockLoginProvider.swift */,
 			);
 			path = "Mock Providers";
+			sourceTree = "<group>";
+		};
+		992C928F24F6EFF6004FCBBB /* Helper Tests */ = {
+			isa = PBXGroup;
+			children = (
+				994E4B8824DDB68700C12921 /* UtilityTests.swift */,
+				041E1E8724E1F3890052831D /* FontTests.swift */,
+				041E1EA824E22DF50052831D /* ColorTests.swift */,
+			);
+			path = "Helper Tests";
 			sourceTree = "<group>";
 		};
 		994E4B6D24DDAEA800C12921 /* Impact */ = {
@@ -575,13 +585,11 @@
 		994E4B7F24DDB67000C12921 /* EcoSoapBankTests */ = {
 			isa = PBXGroup;
 			children = (
-				E2AEB12324E736E300C42ACD /* Mock Data */,
-				99B5790224E30F140097957D /* PickupTests.swift */,
-				994E4B8824DDB68700C12921 /* UtilityTests.swift */,
-				04BE6D0C24F05ABB00DFC47D /* Impact Tests */,
-				041E1E8724E1F3890052831D /* FontTests.swift */,
 				994E4B8224DDB67000C12921 /* Info.plist */,
-				041E1EA824E22DF50052831D /* ColorTests.swift */,
+				E2AEB12324E736E300C42ACD /* Mock Data */,
+				992C928F24F6EFF6004FCBBB /* Helper Tests */,
+				04BE6D0C24F05ABB00DFC47D /* Impact Tests */,
+				99B5790224E30F140097957D /* PickupTests.swift */,
 				E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */,
 				E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */,
 			);
