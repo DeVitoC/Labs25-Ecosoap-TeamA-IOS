@@ -151,7 +151,7 @@
 		E2D04F9124F0B7C300515831 /* mockPropertiesByUserIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */; };
 		E2D04F9324F0D50600515831 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9224F0D50600515831 /* Address.swift */; };
 		E2D04F9424F0DAC900515831 /* mockPropertiesByUserIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */; };
-		E2D04F9624F1653000515831 /* GraphQLMutationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9524F1653000515831 /* GraphQLMutationTests.swift */; };
+		E2D04F9624F1653000515831 /* GraphQLControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */; };
 		E2D04F9824F16C1E00515831 /* mockSchedulePickupSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9724F16C1D00515831 /* mockSchedulePickupSuccess.json */; };
 		E2D04F9924F16C1E00515831 /* mockSchedulePickupSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9724F16C1D00515831 /* mockSchedulePickupSuccess.json */; };
 		E2D04F9B24F1726A00515831 /* mockCancelPickupSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9A24F1726A00515831 /* mockCancelPickupSuccess.json */; };
@@ -159,7 +159,7 @@
 		E2D302ED24E5B260008A6FAF /* mockImpactStatsByPropertyId.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */; };
 		E2D302EF24E5B489008A6FAF /* mockUserByIdInput.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */; };
 		E2D302F524E5CA32008A6FAF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302F424E5CA32008A6FAF /* User.swift */; };
-		E2D302FD24E5EEA0008A6FAF /* GraphQLControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302FC24E5EEA0008A6FAF /* GraphQLControllerTests.swift */; };
+		E2D302FD24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */; };
 		E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302FE24E5F464008A6FAF /* DataLoader.swift */; };
 		E2D3030124E5F9B8008A6FAF /* MockDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */; };
 /* End PBXBuildFile section */
@@ -292,13 +292,13 @@
 		E2D04F8C24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockPickupsByPropertyIdSuccess.json; sourceTree = "<group>"; };
 		E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockPropertiesByUserIdSuccess.json; sourceTree = "<group>"; };
 		E2D04F9224F0D50600515831 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
-		E2D04F9524F1653000515831 /* GraphQLMutationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLMutationTests.swift; sourceTree = "<group>"; };
+		E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLControllerTests.swift; sourceTree = "<group>"; };
 		E2D04F9724F16C1D00515831 /* mockSchedulePickupSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockSchedulePickupSuccess.json; sourceTree = "<group>"; };
 		E2D04F9A24F1726A00515831 /* mockCancelPickupSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockCancelPickupSuccess.json; sourceTree = "<group>"; };
 		E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsByPropertyId.json; sourceTree = "<group>"; };
 		E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockUserByIdInput.json; sourceTree = "<group>"; };
 		E2D302F424E5CA32008A6FAF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		E2D302FC24E5EEA0008A6FAF /* GraphQLControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLControllerTests.swift; sourceTree = "<group>"; };
+		E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLControllerMockDataTests.swift; sourceTree = "<group>"; };
 		E2D302FE24E5F464008A6FAF /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -586,8 +586,8 @@
 				041E1E8724E1F3890052831D /* FontTests.swift */,
 				994E4B8224DDB67000C12921 /* Info.plist */,
 				041E1EA824E22DF50052831D /* ColorTests.swift */,
-				E2D302FC24E5EEA0008A6FAF /* GraphQLControllerTests.swift */,
-				E2D04F9524F1653000515831 /* GraphQLMutationTests.swift */,
+				E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */,
+				E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */,
 			);
 			path = EcoSoapBankTests;
 			sourceTree = "<group>";
@@ -929,8 +929,8 @@
 				994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */,
 				04BE6D0324F041E700DFC47D /* ImpactControllerTests.swift in Sources */,
 				04BE6D0924F05A3100DFC47D /* ImpactCellTests.swift in Sources */,
-				E2D04F9624F1653000515831 /* GraphQLMutationTests.swift in Sources */,
-				E2D302FD24E5EEA0008A6FAF /* GraphQLControllerTests.swift in Sources */,
+				E2D04F9624F1653000515831 /* GraphQLControllerTests.swift in Sources */,
+				E2D302FD24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift in Sources */,
 				041E1EA924E22DF50052831D /* ColorTests.swift in Sources */,
 				04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */,
 				04BE6D0B24F05A6300DFC47D /* ImpactViewControllerTests.swift in Sources */,

@@ -24,18 +24,20 @@ extension MockPickupProvider: PickupDataProvider {
     /// Simply returns mock Pickups through closure
     /// (or `MockPickupProvider.Error.shouldFail` if `shouldFail` instance property is set to `true`).
     func fetchAllPickups(_ completion: @escaping (Result<[Pickup], Swift.Error>) -> Void) {
-        guard !shouldFail else {
-            completion(.mockFailure())
-            return
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+            guard !self.shouldFail else {
+                completion(.mockFailure())
+                return
+            }
+            completion(.success(.random()))
         }
-        completion(.success(.random()))
     }
 
     func schedulePickup(
         _ pickupInput: Pickup.ScheduleInput,
         completion: @escaping (Result<Pickup.ScheduleResult, Swift.Error>) -> Void
     ) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             guard !self.shouldFail else {
                 completion(.mockFailure())
                 return
@@ -123,15 +125,13 @@ extension Pickup.Base {
         let pickupDate: Date? = {
             switch status {
             case .outForPickup:
-                return Date()
+                return nil
             case .complete:
                 return Date(timeIntervalSinceNow: .days(.random(in: daysSinceReady ... -1)))
             case .cancelled:
                 return nil
             case .submitted:
-                return Bool.random() ?
-                    Date(timeIntervalSinceNow: .days(.random(in: 1...10)))
-                    : nil
+                return nil
             }
         }()
 

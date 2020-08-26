@@ -22,95 +22,52 @@ protocol PickupDataProvider {
 
 enum PickupError: Error {
     case noResult
+    case noProperties
 }
 
 
 class PickupController: ObservableObject {
     @Published private(set) var pickups: [Pickup] = []
-    @Published private(set) var error: Error?
 
-    var user: User
-
-    /// Signals to subscriber (`PickupCoordinator`) that the new pickup view should be shown.
-    var presentNewPickup = PassthroughSubject<Void, Never>()
-
-    /// A view model for use with new pickup views.
-    ///
-    /// The PickupController holds a reference to the view model for later reuse and/or for use with SwiftUI
-    /// (where views may inadvertantly reinitialize objects if a reference is not held elsewhere).
-    private(set) lazy var newPickupViewModel = makeSchedulePickupVM()
-
-    /// Publishes result of `schedulePickup(_:)` call when data task is completed.
-    let pickupScheduleResult = PassthroughSubject<Pickup.ScheduleResult, Error>()
-
-    /// Forwards `newPickupViewModel`'s message to edit the given carton.
-    var editCarton = PassthroughSubject<NewCartonViewModel, Never>()
+    private(set) var user: User
 
     private var dataProvider: PickupDataProvider
     private var schedulePickupCancellables: Set<AnyCancellable> = []
     private var cancellables: Set<AnyCancellable> = []
 
-    private static let pickupSorter = sortDescriptor(keypath: \Pickup.readyDate,
-                                                     by: >)
+    private static let pickupSorter = sortDescriptor(keypath: \Pickup.readyDate, by: >)
 
     init(user: User, dataProvider: PickupDataProvider) {
         self.dataProvider = dataProvider
         self.user = user
-
-        fetchAllPickups()
-            .handleError { [weak self] error in self?.error = error }
-            .sink { [weak self] pickups in
-                self?.pickups = pickups.sorted(by: Self.pickupSorter)
-        }.store(in: &cancellables)
     }
 
-    func fetchAllPickups() -> AnyPublisher<[Pickup], Error> {
+    @discardableResult
+    func fetchAllPickups() -> Future<[Pickup], Error> {
         Future { promise in
-            self.dataProvider.fetchAllPickups { result in
+            self.dataProvider.fetchAllPickups { [weak self] result in
+                if case .success(let pickups) = result {
+                    DispatchQueue.main.async { self?.pickups = pickups }
+                }
                 promise(result)
             }
-        }.eraseToAnyPublisher()
+        }
     }
 
     func schedulePickup(
-        _ pickupInput: Pickup.ScheduleInput
-    ) -> AnyPublisher<Pickup.ScheduleResult, Error> {
-        Future { completion in
+        for pickupInput: Pickup.ScheduleInput
+    ) -> Future<Pickup.ScheduleResult, Error> {
+        Future { [unowned self] promise in
             self.dataProvider.schedulePickup(pickupInput) { [weak self] result in
                 guard let self = self else { return }
-                switch result {
-                case .success(let pickupResult):
+                if case .success(let pickupResult) = result {
                     guard let pickup = pickupResult.pickup else {
-                        return completion(.failure(PickupError.noResult))
+                        return promise(.failure(PickupError.noResult))
                     }
-                    self.pickups.append(pickup)
-                    self.newPickupViewModel = self.makeSchedulePickupVM()
-                    completion(result)
-                case .failure(let error):
-                    self.error = error
-                    completion(result)
+                    DispatchQueue.main.async { self.pickups.append(pickup) }
                 }
+                promise(result)
             }
-        }.eraseToAnyPublisher()
-    }
-
-    func clearError() {
-        error = nil
-    }
-
-    private func makeSchedulePickupVM() -> SchedulePickupViewModel {
-        let newVM = SchedulePickupViewModel(user: user)
-        
-        schedulePickupCancellables = []
-        newVM.pickupInput
-            .flatMap(schedulePickup(_:))
-            .sink(receiveCompletion: pickupScheduleResult.send(completion:),
-                  receiveValue: pickupScheduleResult.send(_:))
-            .store(in: &schedulePickupCancellables)
-        newVM.editingCarton
-            .sink(receiveValue: editCarton.send(_:))
-            .store(in: &schedulePickupCancellables)
-
-        return newVM
+        }
     }
 }
