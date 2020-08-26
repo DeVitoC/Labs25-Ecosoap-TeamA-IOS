@@ -23,6 +23,7 @@ protocol PickupDataProvider {
 enum PickupError: Error {
     case noResult
     case noProperties
+    case unknown
 }
 
 
