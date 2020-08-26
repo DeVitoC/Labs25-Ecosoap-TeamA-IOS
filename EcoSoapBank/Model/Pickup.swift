@@ -137,7 +137,7 @@ extension Pickup {
         // swiftling:enable nesting
     }
 
-    struct Carton: Identifiable, Decodable {
+    struct Carton: Identifiable, Codable {
         let id: String
         let contents: CartonContents?
 
@@ -158,6 +158,13 @@ extension Pickup {
 
             self.id = id
             self.contents = cartonContents
+        }
+
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CartonKeys.self)
+            try container.encode(id, forKey: .id)
+            try container.encodeIfPresent(contents?.product, forKey: .product)
+            try container.encodeIfPresent(contents?.percentFull, forKey: .percentFull)
         }
     }
 
@@ -195,6 +202,7 @@ extension Pickup {
         case property
         case cartons
         case notes
+        case propertyId
     }
 
     enum CartonKeys: CodingKey {
