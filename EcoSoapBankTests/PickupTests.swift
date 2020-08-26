@@ -83,6 +83,24 @@ class PickupTests: XCTestCase {
 
         wait(for: exp1)
     }
+
+    func testCoordinatorSchedulePickupVMIsReset() throws {
+        let exp = newMockExpectation()
+        let firstVM = pickupCoordinator.schedulePickupVM
+
+        let input = Pickup.ScheduleInput.random()
+
+        pickupCoordinator.schedulePickup(for: input) { result in
+            let pickupResult = try? XCTUnwrap(try? result.get())
+
+            XCTAssertEqual(pickupResult?.pickup?.base, input.base)
+            XCTAssert(self.pickupCoordinator.schedulePickupVM !== firstVM)
+
+            exp.fulfill()
+        }
+
+        wait(for: exp)
+    }
 }
 
 // MARK: - Helpers
