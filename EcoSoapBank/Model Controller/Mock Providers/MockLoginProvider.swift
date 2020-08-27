@@ -7,20 +7,22 @@
 //
 
 import Foundation
+import KeychainAccess
 
 
-struct MockLoginProvider: UserDataProvider {
+class MockLoginProvider: UserDataProvider {
     var shouldFail: Bool
 
     init(shouldFail: Bool = false) {
         self.shouldFail = shouldFail
     }
 
-    func provideToken(_ token: String) {
-        print("token: \(token)")
-    }
-
     func logIn(_ completion: @escaping ResultHandler<User>) {
+        guard let token = Keychain.Okta.getToken() else {
+            return completion(.mockFailure())
+        }
+        print(token)
+
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
             if self.shouldFail {
                 completion(.mockFailure())
@@ -56,7 +58,7 @@ extension Array where Element == Property {
             Property(
                 id: "3498",
                 name: "Bobbly Inn",
-                propertyType: Property.PropertyType.hotel,
+                propertyType: .hotel,
                 rooms: 20,
                 services: HospitalityService.allCases,
                 collectionType: .random(),
@@ -69,12 +71,9 @@ extension Array where Element == Property {
             Property(
                 id: "9377",
                 name: "Blep Bed & Breakfast",
-                propertyType: Property.PropertyType.bedAndBreakfast,
+                propertyType: .bedAndBreakfast,
                 rooms: 5,
-                services: [
-                    HospitalityService.bottles,
-                    HospitalityService.soap
-                ],
+                services: [.bottles, .soap],
                 collectionType: .random(),
                 logo: nil,
                 phone: "555-124-3333",

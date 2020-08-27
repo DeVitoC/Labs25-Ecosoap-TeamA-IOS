@@ -19,7 +19,8 @@ protocol UserDataProvider {
 class UserController {
     private var dataLoader: UserDataProvider
 
-    private var userSubject = CurrentValueSubject<User?, Error>(nil)
+    @Published private(set) var user: User?
+    
     private var cancellables: Set<AnyCancellable> = []
 
     init(dataLoader: UserDataProvider) {
@@ -35,21 +36,14 @@ class UserController {
 // MARK: - Public
 
 extension UserController {
-    var user: User? { userSubject.value }
-    var userPublisher: AnyPublisher<User?, Error> {
-        userSubject.eraseToAnyPublisher()
-    }
-    
     var oktaLoginURL: URL? { OktaAuth.shared.identityAuthURL() }
 
-    func logInWithBearer() -> Future<User, Error> {
-        Future { promise in
-            self.dataLoader.logIn { [weak self] result in
-                if case .success(let user) = result {
-                    self?.userSubject.send(user)
-                }
-                promise(result)
+    func logInWithBearer(completion: @escaping ResultHandler<User>) {
+        self.dataLoader.logIn { [weak self] result in
+            if case .success(let user) = result {
+                self?.user = user
             }
+            completion(result)
         }
     }
 }
@@ -58,12 +52,12 @@ extension UserController {
 
 extension UserController {
     private func loginDidComplete(_ notification: Notification) {
-        dataLoader.logIn { [weak userSubject] result in
+        dataLoader.logIn { [weak self] result in
             switch result {
             case .success(let user):
-                userSubject?.send(user)
-            case .failure(let error):
-                userSubject?.send(completion: .failure(error))
+                self?.user = user
+            case .failure:
+                self?.user = nil
             }
         }
     }

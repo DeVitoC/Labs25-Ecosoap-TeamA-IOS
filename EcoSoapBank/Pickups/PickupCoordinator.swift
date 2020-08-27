@@ -68,7 +68,8 @@ class PickupCoordinator: FlowCoordinator {
 
 extension PickupCoordinator {
     @objc func cancelNewPickup(_ sender: Any? = nil) {
-        guard (rootVC.presentedViewController as? SchedulePickupViewController) != nil
+        guard let nav = rootVC.presentedViewController as? UINavigationController,
+            nav.viewControllers.first as? SchedulePickupViewController != nil
             else { return }
         rootVC.dismiss(animated: true, completion: sender as? () -> Void)
     }
