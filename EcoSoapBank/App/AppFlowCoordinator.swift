@@ -52,6 +52,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
         // set up window and make visible
         window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
 
         if Keychain.Okta.isLoggedIn {
             userController.logInWithBearer { [weak self] result in
@@ -66,11 +67,12 @@ class AppFlowCoordinator: FlowCoordinator {
         } else {
             loginCoord.start()
         }
-
-        window.makeKeyAndVisible()
     }
 
     func presentLoginFailAlert(error: Error? = nil) {
+        if let error = error {
+            NSLog("Error occurred: \(error)")
+        }
         let userError = error as? UserFacingError
         if tabBarController.presentedViewController != nil {
             tabBarController.dismiss(animated: true) { [weak self] in
