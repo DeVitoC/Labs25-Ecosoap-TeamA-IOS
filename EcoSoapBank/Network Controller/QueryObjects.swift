@@ -113,7 +113,7 @@ enum QueryObjects {
     static let carton = """
     id
     product
-    weight
+    percentFull
     """
 
     static let successPayload = """

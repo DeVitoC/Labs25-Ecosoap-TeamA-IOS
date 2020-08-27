@@ -1,6 +1,6 @@
 {
     "data": {
-        "schedulePickupInput": {
+        "schedulePickup": {
             "pickup": {
                 "id": "PickupId1",
                 "confirmationCode": "Success",

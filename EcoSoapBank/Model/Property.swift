@@ -23,7 +23,7 @@
 
 import Foundation
 
-struct Property: Decodable, Equatable {
+struct Property: Codable, Equatable {
     let id: String
     let name: String
     let propertyType: PropertyType
@@ -37,14 +37,14 @@ struct Property: Decodable, Equatable {
     let shippingNote: String?
     let notes: String?
 
-    enum PropertyType: String, Decodable, CaseIterable {
+    enum PropertyType: String, Codable, CaseIterable {
         case bedAndBreakfast = "BED_AND_BREAKFAST"
         case guesthouse = "GUESTHOUSE"
         case hotel = "HOTEL"
         case other = "OTHER"
     }
 
-    enum BillingMethod: String, Decodable, CaseIterable {
+    enum BillingMethod: String, Codable, CaseIterable {
         case ach = "ACH"
         case credit = "CREDIT"
         case debit = "DEBIT"

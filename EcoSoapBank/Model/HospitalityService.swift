@@ -10,7 +10,7 @@
 
 import Foundation
 
-enum HospitalityService: String, Decodable, CaseIterable, Identifiable, Equatable {
+enum HospitalityService: String, Codable, CaseIterable, Identifiable, Equatable {
     case bottles = "BOTTLES"
     case linens = "LINENS"
     case other = "OTHER"
