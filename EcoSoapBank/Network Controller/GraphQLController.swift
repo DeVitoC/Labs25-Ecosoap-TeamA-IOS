@@ -165,33 +165,38 @@ extension GraphQLController: UserDataProvider {
 }
 
 extension GraphQLController: ImpactDataProvider {
-    func fetchImpactStats(forUser user: User, _ completion: @escaping ResultHandler<ImpactStats>) {
+    func fetchImpactStats(
+        forPropertyID propertyID: String,
+        _ completion: @escaping ResultHandler<ImpactStats>
+    ) {
         // TODO: may need to add token later
-
         queryRequest(ImpactStats.self,
                      query: GraphQLQueries.impactStatsByPropertyId,
-                     variables: ["propertyId": user.id],
+                     variables: ["propertyId": propertyID],
                      completion: completion)
     }
 }
 
 extension GraphQLController: PickupDataProvider {
-    func fetchAllPickups(_ completion: @escaping ResultHandler<[Pickup]>) {
+    func fetchPickups(
+        forPropertyID propertyID: String,
+        _ completion: @escaping ResultHandler<[Pickup]>
+    ) {
         // TODO: may need to add token later
-
-        queryRequest(ImpactStats.self,
-                     query: GraphQLQueries.impactStatsByPropertyId,
-                     variables: ["propertyId": user.id],
+        queryRequest([Pickup].self,
+                     query: GraphQLQueries.pickupsByPropertyId,
+                     variables: ["propertyId": propertyID],
                      completion: completion)
     }
 
-    func schedulePickup(_ pickupInput: Pickup.ScheduleInput,
-                        completion: @escaping ResultHandler<Pickup.ScheduleResult>) {
+    func schedulePickup(
+        _ pickupInput: Pickup.ScheduleInput,
+        completion: @escaping ResultHandler<Pickup.ScheduleResult>
+    ) {
         // TODO: may need to add token later
-        queryRequest([String: [Pickup]],
+        queryRequest(Pickup.ScheduleResult.self,
                      query: GraphQLQueries.impactStatsByPropertyId,
-                     variables: ["propertyId": user.id],
+                     variables: pickupInput,
                      completion: completion)
     }
 }
-

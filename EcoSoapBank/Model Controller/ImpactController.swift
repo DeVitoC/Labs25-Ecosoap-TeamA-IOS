@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ImpactDataProvider {
-    func fetchImpactStats(forUser user: User, _ completion: @escaping ResultHandler<ImpactStats>)
+        func fetchImpactStats(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<ImpactStats>)
 }
 
 class ImpactController {
@@ -17,6 +17,8 @@ class ImpactController {
     
     private let dataProvider: ImpactDataProvider
     private let user: User
+
+    var viewingProperty: Property? { user.properties?.first }
     
     /// Gets the latest impact stats from the data provider, which in
     /// turn updates the `viewModels` property accordingly.
@@ -24,7 +26,10 @@ class ImpactController {
     /// either an error if something went wrong, or nil if the impact
     /// stats were properly fetched and the view models updated.
     func getImpactStats(_ completion: @escaping (Error?) -> Void) {
-        dataProvider.fetchImpactStats(forUser: user) { [weak self] result in
+        guard let property = viewingProperty else {
+            return completion(UserError.noProperties)
+        }
+        dataProvider.fetchImpactStats(forPropertyID: property.id) { [weak self] result in
             switch result {
             case .success(let stats):
                 self?.updateViewModels(with: stats)

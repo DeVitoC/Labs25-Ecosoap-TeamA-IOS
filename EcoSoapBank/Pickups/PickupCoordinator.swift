@@ -45,7 +45,7 @@ class PickupCoordinator: FlowCoordinator {
             dataProvider: dataProvider)
 
         // subscribe to and respond to model controller messages
-        pickupController.fetchAllPickups()
+        pickupController.fetchPickupsForAllProperties()
             .receive(on: DispatchQueue.main)
             .handleError(handleError(_:))
             .sink { _ in }
@@ -79,7 +79,7 @@ extension PickupCoordinator {
         let message: String
 
         switch error {
-        case .noProperties as PickupError:
+        case .noProperties as UserError:
             title = "No properties to schedule pickups for!"
             message = "Please contact us to set up your properties for container pickups."
         default:
@@ -163,7 +163,7 @@ extension PickupCoordinator: SchedulePickupViewModelDelegate {
 extension PickupCoordinator: PickupsViewDelegate {
     func scheduleNewPickup() {
         guard user.properties?.first != nil else {
-            return handleError(PickupError.noProperties)
+            return handleError(UserError.noProperties)
         }
         rootVC.present(newPickupNavController, animated: true, completion: nil)
     }

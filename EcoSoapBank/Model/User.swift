@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum UserError: Error {
+    case noProperties
+}
+
 struct User: Decodable {
     let id: String
     let firstName: String

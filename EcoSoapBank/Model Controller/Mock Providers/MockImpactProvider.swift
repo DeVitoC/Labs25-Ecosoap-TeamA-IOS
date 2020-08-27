@@ -20,7 +20,8 @@ struct MockImpactProvider: ImpactDataProvider {
     /// Simply returns mock ImpactStats through closure
     /// or `MockError.shouldFail` if `shouldFail`
     /// instance property is set to `true`
-    func fetchImpactStats(_ completion: (Result<ImpactStats, Swift.Error>) -> Void) {
+    func fetchImpactStats(forPropertyID propertyID: String,
+                          _ completion: (Result<ImpactStats, Swift.Error>) -> Void) {
         guard !shouldFail else {
             completion(.mockFailure())
             return

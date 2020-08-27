@@ -175,10 +175,6 @@ extension Pickup {
         var id: Int { self.hashValue }
     }
 
-    struct PickupsByPropertyIDResult {
-        let pickups: [Pickup]
-    }
-
     // MARK: Enums
 
     enum Status: String, Codable, CaseIterable {
