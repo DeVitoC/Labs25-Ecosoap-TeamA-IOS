@@ -66,8 +66,7 @@ class LoginCoordinator: FlowCoordinator {
             .map { _ in LoginError.expiredCredentials }
             .sink(receiveValue: alertUserOfLoginError(_:))
             .store(in: &cancellables)
-        userController.userPublisher
-            .handleError(alertUserOfLoginError(_:))
+        userController.$user
             .compactMap { $0 }
             .map { _ in () }
             .sink(receiveValue: onLoginComplete)

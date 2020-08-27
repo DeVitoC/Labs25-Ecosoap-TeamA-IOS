@@ -54,6 +54,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     }
     private lazy var propertyPicker = configure(InputPickerView(
         data: viewModel.properties,
+        rowLabel: \.name,
         onSelect: { [weak self] in self?.setProperty($0) })
     ) {
         $0.backgroundColor = .tertiarySystemBackground
@@ -327,6 +328,7 @@ extension SchedulePickupViewController {
 struct NewPickupViewController_Previews: PreviewProvider {
     static var previews: some View {
         SchedulePickupViewController.Representable(
-            viewModel: SchedulePickupViewModel(user: .placeholder()))
+            viewModel: SchedulePickupViewModel(user: .placeholder(),
+                                               delegate: nil))
     }
 }

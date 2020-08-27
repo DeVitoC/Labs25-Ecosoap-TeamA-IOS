@@ -177,14 +177,14 @@ extension Pickup {
 
     // MARK: Enums
 
-    enum Status: String, Codable {
+    enum Status: String, Codable, CaseIterable {
         case submitted = "SUBMITTED"
         case outForPickup = "OUT_FOR_PICKUP"
         case complete = "COMPLETE"
         case cancelled = "CANCELLED"
     }
 
-    enum CollectionType: String, Codable {
+    enum CollectionType: String, Codable, Equatable, CaseIterable {
         case courierConsolidated = "COURIER_CONSOLIDATED"
         case courierDirect = "COURIER_DIRECT"
         case generatedLabel = "GENERATED_LABEL"

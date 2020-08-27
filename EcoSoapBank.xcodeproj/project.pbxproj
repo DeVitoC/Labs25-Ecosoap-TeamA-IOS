@@ -112,6 +112,7 @@
 		992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */; };
 		992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64924F0319D00638AA4 /* EditCartonViewController.swift */; };
 		992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */; };
+		992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C929024F70B0C004FCBBB /* Randomizable.swift */; };
 		993B15CC24F42D8C00529517 /* InputPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B15CB24F42D8C00529517 /* InputPickerView.swift */; };
 		993B15CE24F4575500529517 /* CursorlessTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B15CD24F4575500529517 /* CursorlessTextField.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
@@ -253,6 +254,7 @@
 		992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OktaAuth+Shared.swift"; sourceTree = "<group>"; };
 		992BB64924F0319D00638AA4 /* EditCartonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCartonViewController.swift; sourceTree = "<group>"; };
 		992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISwipeActionsConfiguration+Constants.swift"; sourceTree = "<group>"; };
+		992C929024F70B0C004FCBBB /* Randomizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomizable.swift; sourceTree = "<group>"; };
 		993B15CB24F42D8C00529517 /* InputPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputPickerView.swift; sourceTree = "<group>"; };
 		993B15CD24F4575500529517 /* CursorlessTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorlessTextField.swift; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				0445F04D24EDD9C700A0A665 /* ESBButton.swift */,
 				993B15CB24F42D8C00529517 /* InputPickerView.swift */,
 				993B15CD24F4575500529517 /* CursorlessTextField.swift */,
+				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -439,7 +442,6 @@
 				994E4B6D24DDAEA800C12921 /* Impact */,
 				994E4B6E24DDAEB100C12921 /* Pickups */,
 				994E4B6F24DDAEB700C12921 /* Payment */,
-				46BEB4F224C98F1100FE0CD1 /* Profile */,
 				46BEB4EF24C98ED900FE0CD1 /* Login */,
 				46BEB4EB24C98EB400FE0CD1 /* Model */,
 				46BEB4EC24C98EBB00FE0CD1 /* Model Controller */,
@@ -455,17 +457,18 @@
 		46BEB4EA24C98EA300FE0CD1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				9921943324E49AC300E16C16 /* UIKit */,
+				9983874F24E4694400450244 /* SwiftUI */,
 				46BEB4E624C98D8900FE0CD1 /* Notifications.swift */,
 				992BB63324ED930600638AA4 /* SortDescriptor.swift */,
 				994E4B7824DDB58300C12921 /* UtilityFunctions.swift */,
 				0445F04924EC648E00A0A665 /* UserDefaults.swift */,
 				0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */,
-				9921943324E49AC300E16C16 /* UIKit */,
-				9983874F24E4694400450244 /* SwiftUI */,
 				E2D302FE24E5F464008A6FAF /* DataLoader.swift */,
 				E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */,
 				99B6177024EC3D000099664B /* Publisher+HandleError.swift */,
 				992BB64224EEFBAD00638AA4 /* Errors.swift */,
+				992C929024F70B0C004FCBBB /* Randomizable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -505,13 +508,6 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		46BEB4F224C98F1100FE0CD1 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
 		990CA24024DB6A6C002B5FA4 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,7 +527,6 @@
 				991874D324E4B28900F636FB /* UIView+Subviews.swift */,
 				049379A624EAE9FF0084051B /* UIView+Layout.swift */,
 				992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */,
-				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -544,6 +539,16 @@
 				992BB64424EF021600638AA4 /* MockLoginProvider.swift */,
 			);
 			path = "Mock Providers";
+			sourceTree = "<group>";
+		};
+		992C928F24F6EFF6004FCBBB /* Helper Tests */ = {
+			isa = PBXGroup;
+			children = (
+				994E4B8824DDB68700C12921 /* UtilityTests.swift */,
+				041E1E8724E1F3890052831D /* FontTests.swift */,
+				041E1EA824E22DF50052831D /* ColorTests.swift */,
+			);
+			path = "Helper Tests";
 			sourceTree = "<group>";
 		};
 		994E4B6D24DDAEA800C12921 /* Impact */ = {
@@ -579,13 +584,11 @@
 		994E4B7F24DDB67000C12921 /* EcoSoapBankTests */ = {
 			isa = PBXGroup;
 			children = (
-				E2AEB12324E736E300C42ACD /* Mock Data */,
-				99B5790224E30F140097957D /* PickupTests.swift */,
-				994E4B8824DDB68700C12921 /* UtilityTests.swift */,
-				04BE6D0C24F05ABB00DFC47D /* Impact Tests */,
-				041E1E8724E1F3890052831D /* FontTests.swift */,
 				994E4B8224DDB67000C12921 /* Info.plist */,
-				041E1EA824E22DF50052831D /* ColorTests.swift */,
+				E2AEB12324E736E300C42ACD /* Mock Data */,
+				992C928F24F6EFF6004FCBBB /* Helper Tests */,
+				04BE6D0C24F05ABB00DFC47D /* Impact Tests */,
+				99B5790224E30F140097957D /* PickupTests.swift */,
 				E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */,
 				E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */,
 			);
@@ -910,6 +913,7 @@
 				04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
 				0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */,
+				992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */,
 				E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */,
 				998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */,
 				E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */,

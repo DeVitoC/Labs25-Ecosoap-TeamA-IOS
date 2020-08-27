@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import Combine
 
 
 protocol SchedulePickupViewModelDelegate: AnyObject {
-    func schedulePickup(for input: Pickup.ScheduleInput)
+    func schedulePickup(
+        for input: Pickup.ScheduleInput,
+        completion: @escaping ResultHandler<Pickup.ScheduleResult>)
     func editCarton(for viewModel: NewCartonViewModel)
 }
 
@@ -24,7 +27,7 @@ class SchedulePickupViewModel {
     private var user: User
     private weak var delegate: SchedulePickupViewModelDelegate?
 
-    init(user: User, delegate: SchedulePickupViewModelDelegate? = nil) {
+    init(user: User, delegate: SchedulePickupViewModelDelegate?) {
         self.user = user
         self.delegate = delegate
     }
@@ -51,15 +54,17 @@ extension SchedulePickupViewModel {
         cartons.remove(at: cartonIndex)
     }
 
-    func schedulePickup() {
-        delegate?.schedulePickup(for: Pickup.ScheduleInput(
-            base: Pickup.Base(
-                collectionType: selectedProperty.collectionType,
-                status: .submitted,
-                readyDate: readyDate,
-                pickupDate: nil, // TODO: move out of base
-                notes: notes),
-            propertyID: selectedProperty.id,
-            cartons: cartons.map { $0.carton }))
+    func schedulePickup(_ completion: ResultHandler<Pickup.ScheduleResult>? = nil) {
+        delegate?.schedulePickup(
+            for: Pickup.ScheduleInput(
+                base: Pickup.Base(
+                    collectionType: selectedProperty.collectionType,
+                    status: .submitted,
+                    readyDate: readyDate,
+                    pickupDate: nil, // TODO: move out of base
+                    notes: notes),
+                propertyID: selectedProperty.id,
+                cartons: cartons.map { $0.carton }),
+            completion: completion ?? { _ in })
     }
 }
