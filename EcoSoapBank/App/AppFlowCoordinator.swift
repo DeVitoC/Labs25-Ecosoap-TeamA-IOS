@@ -56,11 +56,13 @@ class AppFlowCoordinator: FlowCoordinator {
 
         if Keychain.Okta.isLoggedIn {
             userController.logInWithBearer { [weak self] result in
-                switch result {
-                case .failure(let error):
-                    self?.presentLoginFailAlert(error: error)
-                case .success:
-                    self?.onLoginComplete()
+                DispatchQueue.main.async {
+                    switch result {
+                    case .failure(let error):
+                        self?.presentLoginFailAlert(error: error)
+                    case .success:
+                        self?.onLoginComplete()
+                    }
                 }
             }
             // TODO: show loading screen while logging in
