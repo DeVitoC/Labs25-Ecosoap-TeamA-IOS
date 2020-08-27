@@ -20,9 +20,8 @@ enum GraphQLMutations {
      }
      */
     static let login = """
-    mutation LoginInput($input: LogInInput) {
-        login(input:$input) {
-            token
+    mutation LogInInput($input: LogInInput) {
+        logIn(input:$input) {
             user {
                 id
                 firstName
