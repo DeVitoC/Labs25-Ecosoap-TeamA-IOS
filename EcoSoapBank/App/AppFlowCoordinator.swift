@@ -22,7 +22,7 @@ class AppFlowCoordinator: FlowCoordinator {
         root: tabBarController,
         userController: userController,
         onLoginComplete: { [weak self] in self?.onLoginComplete() })
-    private(set) var userController = UserController(dataLoader: MockLoginProvider())
+    private(set) lazy var userController = UserController(dataLoader: graphQLController)
 
     private var graphQLController = GraphQLController()
 
@@ -112,8 +112,8 @@ class AppFlowCoordinator: FlowCoordinator {
             }
 
             // when backend ready, use graphQL controller as data provider
-            self.pickupCoord = PickupCoordinator(user: user, dataProvider: MockPickupProvider())
-            self.impactCoord = ImpactCoordinator(user: user, dataProvider: MockImpactProvider())
+            self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.graphQLController)
+            self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.graphQLController)
 
             self.tabBarController.setViewControllers([
                 self.impactCoord!.rootVC,
