@@ -467,6 +467,7 @@
 				99B6177024EC3D000099664B /* Publisher+HandleError.swift */,
 				992BB64224EEFBAD00638AA4 /* Errors.swift */,
 				992C929024F70B0C004FCBBB /* Randomizable.swift */,
+				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -479,7 +480,6 @@
 				998913D824DE0C90009ADBC1 /* HospitalityService.swift */,
 				998913D624DE0C33009ADBC1 /* Property.swift */,
 				04D1758624E317FB00F8929C /* ImpactStats.swift */,
-				990CA24024DB6A6C002B5FA4 /* Protocols */,
 				E2D302F424E5CA32008A6FAF /* User.swift */,
 				E2D04F9224F0D50600515831 /* Address.swift */,
 			);
@@ -504,14 +504,6 @@
 				46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		990CA24024DB6A6C002B5FA4 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		9921943324E49AC300E16C16 /* UIKit */ = {
