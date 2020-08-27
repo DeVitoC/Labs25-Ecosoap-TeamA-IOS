@@ -22,9 +22,17 @@ class AppFlowCoordinator: FlowCoordinator {
         root: tabBarController,
         userController: userController,
         onLoginComplete: { [weak self] in self?.onLoginComplete() })
-    private(set) lazy var userController = UserController(dataLoader: graphQLController)
+    private(set) lazy var userController = UserController(dataLoader: userProvider)
+
+    // MARK: - Data Providers
 
     private var graphQLController = GraphQLController()
+
+    private lazy var userProvider: UserDataProvider = useMock ? MockLoginProvider() : graphQLController
+    private lazy var pickupProvider: PickupDataProvider = useMock ? MockPickupProvider() : graphQLController
+    private lazy var impactProvider: ImpactDataProvider = useMock ? MockImpactProvider() : graphQLController
+
+    // MARK: - Init / Start
 
     init(window: UIWindow) {
         self.window = window
@@ -71,6 +79,8 @@ class AppFlowCoordinator: FlowCoordinator {
         }
     }
 
+    // MARK: - Methods
+
     func presentLoginFailAlert(error: Error? = nil) {
         if let error = error {
             NSLog("Error occurred: \(error)")
@@ -114,8 +124,8 @@ class AppFlowCoordinator: FlowCoordinator {
             }
 
             // when backend ready, use graphQL controller as data provider
-            self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.graphQLController)
-            self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.graphQLController)
+            self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
+            self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.impactProvider)
 
             self.tabBarController.setViewControllers([
                 self.impactCoord!.rootVC,
@@ -131,3 +141,8 @@ class AppFlowCoordinator: FlowCoordinator {
         }
     }
 }
+
+
+// MARK: - Use Mock
+
+let useMock: Bool = true
