@@ -58,7 +58,7 @@ extension Array where Element == Property {
             Property(
                 id: "3498",
                 name: "Bobbly Inn",
-                propertyType: Property.PropertyType.hotel,
+                propertyType: .hotel,
                 rooms: 20,
                 services: HospitalityService.allCases,
                 collectionType: .random(),
@@ -71,12 +71,9 @@ extension Array where Element == Property {
             Property(
                 id: "9377",
                 name: "Blep Bed & Breakfast",
-                propertyType: Property.PropertyType.bedAndBreakfast,
+                propertyType: .bedAndBreakfast,
                 rooms: 5,
-                services: [
-                    HospitalityService.bottles,
-                    HospitalityService.soap
-                ],
+                services: [.bottles, .soap],
                 collectionType: .random(),
                 logo: nil,
                 phone: "555-124-3333",
