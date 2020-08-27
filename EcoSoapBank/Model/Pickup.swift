@@ -68,56 +68,24 @@ struct Pickup: Identifiable, PickupBaseContainer, Equatable {
         self.property = property
     }
 
-    // Decodes Pickup and the base object
-    init(from decoder: Decoder) throws {
-        let formatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-mm-dd"
-            return formatter
-        }()
-
-        let container = try decoder.container(keyedBy: PickupKeys.self)
-
-        // Decodes all top level values from JSON
-        let id = try container.decode(String.self, forKey: .id)
-        let confirmationCode = try container.decode(String.self, forKey: .confirmationCode)
-        let collectionType = try container.decode(CollectionType.self, forKey: .collectionType)
-        let status = try container.decode(Status.self, forKey: .status)
-        let readyDateString = try container.decode(String.self, forKey: .readyDate)
-        guard let readyDate = formatter.date(from: readyDateString) else { fatalError("unable to formate readyDate") }
-        let pickupDateString = try container.decodeIfPresent(String.self, forKey: .pickupDate)
-        var pickupDate: Date?
-        if let pickupDateStringUnwrapped = pickupDateString {
-            pickupDate = formatter.date(from: pickupDateStringUnwrapped)
-        }
-        let property = try container.decode(Property.self, forKey: .property)
-        let notes = try container.decodeIfPresent(String.self, forKey: .notes)
-
-        // Decodes Cartons based on Carton decoder
-        var cartonsArrayContainer = try container.nestedUnkeyedContainer(forKey: .cartons)
-        let cartonsDict = try cartonsArrayContainer.decode(Pickup.Carton.self)
-
-        let base = Base(collectionType: collectionType, status: status, readyDate: readyDate, pickupDate: pickupDate, notes: notes)
-
-        self.base = base
-        self.cartons = [cartonsDict]
-        self.id = id
-        self.property = property
-        self.confirmationCode = confirmationCode
-    }
-
     static func == (lhs: Pickup, rhs: Pickup) -> Bool {
         lhs.id == rhs.id
             && lhs.confirmationCode == rhs.confirmationCode
             && lhs.property.id == rhs.property.id
     }
+
+    var formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-mm-dd"
+        return formatter
+    }()
 }
 
 // MARK: - SubTypes
 
-extension Pickup: Decodable {
+extension Pickup {
 
-    struct Base: Equatable, Decodable {
+    struct Base: Equatable, Codable {
         let collectionType: CollectionType
         let status: Status
         let readyDate: Date
@@ -127,11 +95,34 @@ extension Pickup: Decodable {
 
     // MARK: Schedule I/O
 
-    struct ScheduleInput: PickupBaseContainer {
+    struct ScheduleInput: PickupBaseContainer, Encodable {
         let base: Base
 
         let propertyID: String
         let cartons: [CartonContents]
+
+        var formatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-mm-dd"
+            return formatter
+        }()
+
+        func encode(to encoder: Encoder) throws {
+            // Encode top level values to JSON
+            var container = encoder.container(keyedBy: PickupKeys.self)
+            try container.encode(collectionType, forKey: .collectionType)
+            try container.encode(status, forKey: .status)
+            // Encode and convert dates to Date
+            try container.encode(formatter.string(from: self.readyDate), forKey: .readyDate)
+            if let pickupDate = self.pickupDate {
+                try container.encode(formatter.string(from: pickupDate), forKey: .pickupDate)
+            }
+            try container.encode(propertyID, forKey: .propertyId)
+            try container.encodeIfPresent(notes, forKey: .notes)
+
+            //Encode Cartons in Carton container
+            try container.encode(cartons, forKey: .cartons)
+        }
     }
 
     struct ScheduleResult: Decodable {
@@ -146,7 +137,7 @@ extension Pickup: Decodable {
         // swiftling:enable nesting
     }
 
-    struct Carton: Identifiable, Decodable {
+    struct Carton: Identifiable, Codable {
         let id: String
         let contents: CartonContents?
 
@@ -168,9 +159,16 @@ extension Pickup: Decodable {
             self.id = id
             self.contents = cartonContents
         }
+
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CartonKeys.self)
+            try container.encode(id, forKey: .id)
+            try container.encodeIfPresent(contents?.product, forKey: .product)
+            try container.encodeIfPresent(contents?.percentFull, forKey: .percentFull)
+        }
     }
 
-    struct CartonContents: Hashable, Decodable {
+    struct CartonContents: Hashable, Codable {
         var product: HospitalityService
         var percentFull: Int
 
@@ -179,14 +177,14 @@ extension Pickup: Decodable {
 
     // MARK: Enums
 
-    enum Status: String, Decodable {
+    enum Status: String, Codable {
         case submitted = "SUBMITTED"
         case outForPickup = "OUT_FOR_PICKUP"
         case complete = "COMPLETE"
         case cancelled = "CANCELLED"
     }
 
-    enum CollectionType: String, Decodable {
+    enum CollectionType: String, Codable {
         case courierConsolidated = "COURIER_CONSOLIDATED"
         case courierDirect = "COURIER_DIRECT"
         case generatedLabel = "GENERATED_LABEL"
@@ -204,12 +202,61 @@ extension Pickup: Decodable {
         case property
         case cartons
         case notes
+        case propertyId
     }
 
     enum CartonKeys: CodingKey {
         case id
         case product
         case percentFull
+    }
+}
+
+extension Pickup: Decodable {
+
+    // Decodes Pickup and the base object
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: PickupKeys.self)
+
+        // Decodes all top level values from JSON
+        let id = try container.decode(String.self, forKey: .id)
+        let confirmationCode = try container.decode(String.self, forKey: .confirmationCode)
+        let collectionType = try container.decode(CollectionType.self, forKey: .collectionType)
+        let status = try container.decode(Status.self, forKey: .status)
+
+        // Decode and convert Date string to Date.
+        let readyDateString = try container.decode(String.self, forKey: .readyDate)
+        var readyDate: Date = Date()
+        if let readyDate1 = formatter.date(from: readyDateString) {
+            readyDate = readyDate1
+        } else {
+            let year = readyDateString.dropLast(4)
+            let month = readyDateString.dropFirst(4).dropLast(2)
+            let day = readyDateString.dropFirst(6)
+            if let readyDate2 = formatter.date(from: "\(year)-\(month)-\(day)") {
+                readyDate = readyDate2
+            }
+        }
+
+        let pickupDateString = try container.decodeIfPresent(String.self, forKey: .pickupDate)
+        var pickupDate: Date?
+        if let pickupDateStringUnwrapped = pickupDateString {
+            pickupDate = formatter.date(from: pickupDateStringUnwrapped)
+        }
+        let property = try container.decode(Property.self, forKey: .property)
+        let notes = try container.decodeIfPresent(String.self, forKey: .notes)
+
+        // Decodes Cartons based on Carton decoder
+        var cartonsArrayContainer = try container.nestedUnkeyedContainer(forKey: .cartons)
+        let cartonsDict = try cartonsArrayContainer.decode(Pickup.Carton.self)
+
+        let base = Base(collectionType: collectionType, status: status, readyDate: readyDate, pickupDate: pickupDate, notes: notes)
+
+        self.base = base
+        self.cartons = [cartonsDict]
+        self.id = id
+        self.property = property
+        self.confirmationCode = confirmationCode
     }
 }
 

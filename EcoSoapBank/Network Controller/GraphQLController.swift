@@ -45,13 +45,13 @@ class GraphQLController {
     ///   - query: The intended query in string format
     ///   - variables: The variables to be passed in the request
     ///   - completion: Completion handler that passes back a Result of type Profile or Error
-    func queryRequest<T: Decodable>(_ type: T.Type,
+    func queryRequest<T: Decodable, V: VariableType>(_ type: T.Type,
                                     query: String,
-                                    variables: VariableType,
+                                    variables: V,
                                     completion: @escaping (Result<T, Error>) -> Void) {
         // Add body to query request
-        let body: [String: Any] = ["query": query, "variables": variables]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        let body = QueryInput(query: query, variables: variables)
+        request.httpBody = try? JSONEncoder().encode(body)
 
         session.loadData(with: request) { data, _, error in
             if let error = error {
@@ -87,7 +87,7 @@ class GraphQLController {
             }
 
             var objectData: Data
-            if returnType != "schedulePickupInput" {
+            if returnType != "schedulePickup" {
                 guard let methodType = Array(returnData.keys).first,
                     let object: Any = returnData[methodType] as? [String: Any] ?? returnData[methodType] as? [Any],
                     let objectDataUnwrapped = try? JSONSerialization.data(withJSONObject: object, options: [])
@@ -112,12 +112,26 @@ class GraphQLController {
         }
     }
 
-    enum InputTypes: String {
-        case propertyId
-        case userId
-        case token
-        case pickupId
-        case confirmationCode
+    // MARK: - Enums
+
+    /// Enum describing the possible errors we can get back from
+    private struct QueryInput<V: VariableType>: Encodable {
+        let query: String
+        let variables: V
+
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(query, forKey: .query)
+            var variablesContainer = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .variables)
+            try variablesContainer.encode(variables, forKey: .input)
+        }
+
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case query
+        case variables
+        case input
     }
 }
     
@@ -128,7 +142,8 @@ enum GraphQLError: Error {
 }
 
 /// Protocol to set conformance to possible input types for GraphQL query and mutation variables
-protocol VariableType {}
+protocol VariableType: Encodable {}
 
-extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
+//extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
+extension Dictionary: VariableType where Key == String, Value == String {}
 extension Pickup.ScheduleInput: VariableType {}
