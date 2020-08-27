@@ -10,6 +10,8 @@ import Foundation
 import KeychainAccess
 import OktaAuth
 
+typealias ResultHandler<T> = (Result<T, Error>) -> Void
+
 enum HTTPMethod: String {
     case post = "POST"
 }
@@ -147,3 +149,49 @@ protocol VariableType: Encodable {}
 //extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
 extension Dictionary: VariableType where Key == String, Value == String {}
 extension Pickup.ScheduleInput: VariableType {}
+
+// MARK: - Data Providers
+
+extension GraphQLController: UserDataProvider {
+    func logIn(_ completion: @escaping ResultHandler<User>) {
+        guard let token = self.token else {
+            return completion(.failure(GraphQLError.noToken))
+        }
+        queryRequest(User.self,
+                     query: GraphQLMutations.login,
+                     variables: ["token": token],
+                     completion: completion)
+    }
+}
+
+extension GraphQLController: ImpactDataProvider {
+    func fetchImpactStats(forUser user: User, _ completion: @escaping ResultHandler<ImpactStats>) {
+        // TODO: may need to add token later
+
+        queryRequest(ImpactStats.self,
+                     query: GraphQLQueries.impactStatsByPropertyId,
+                     variables: ["propertyId": user.id],
+                     completion: completion)
+    }
+}
+
+extension GraphQLController: PickupDataProvider {
+    func fetchAllPickups(_ completion: @escaping ResultHandler<[Pickup]>) {
+        // TODO: may need to add token later
+
+        queryRequest(ImpactStats.self,
+                     query: GraphQLQueries.impactStatsByPropertyId,
+                     variables: ["propertyId": user.id],
+                     completion: completion)
+    }
+
+    func schedulePickup(_ pickupInput: Pickup.ScheduleInput,
+                        completion: @escaping ResultHandler<Pickup.ScheduleResult>) {
+        // TODO: may need to add token later
+        queryRequest([String: [Pickup]],
+                     query: GraphQLQueries.impactStatsByPropertyId,
+                     variables: ["propertyId": user.id],
+                     completion: completion)
+    }
+}
+
