@@ -35,16 +35,16 @@ class PickupTests: XCTestCase {
 
     func testPickupControllerFetchAllSuccess() throws {
         let exp = newMockExpectation()
-        pickupProvider.fetchAllPickups { result in
-            switch result {
-            case .failure(let error):
-                XCTFail("Mock pickup provider should have succeeded but failed with error: \(error)")
-            case .success(let pickups):
+        pickupController.fetchPickupsForAllProperties()
+            .sink(receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    XCTFail("Mock pickup provider should have succeeded but failed with error: \(error)")
+                }
+                exp.fulfill()
+            }, receiveValue: { pickups in
                 XCTAssertGreaterThan(pickups.count, 0)
-            }
-
-            exp.fulfill()
-        }
+                exp.fulfill()
+            }).store(in: &bag)
         wait(for: exp)
     }
 
@@ -56,19 +56,20 @@ class PickupTests: XCTestCase {
 
         let exp = newMockExpectation()
 
-        pickupProvider.fetchAllPickups { result in
-            if case .success = result {
-                XCTFail("Mock pickup provider should have failed but succeeded")
-            }
-            exp.fulfill()
-        }
+        failingController.fetchPickupsForAllProperties()
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    XCTFail("Mock provider should have failed but succeeded")
+                case .failure:
+                    exp.fulfill()
+                }
+            }, receiveValue: { _ in
+                XCTFail("Mock provider should have failed but succeeded")
+            }).store(in: &bag)
         wait(for: exp)
 
         XCTAssert(failingController.pickups.isEmpty)
-    }
-
-    func testPickupCoordinatorStart() {
-        pickupCoordinator.start()
     }
 
     func testSchedulePickup() {

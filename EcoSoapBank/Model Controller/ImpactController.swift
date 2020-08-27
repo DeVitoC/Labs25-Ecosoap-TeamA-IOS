@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ImpactDataProvider {
-        func fetchImpactStats(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<ImpactStats>)
+    func fetchImpactStats(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<ImpactStats>)
 }
 
 class ImpactController {
