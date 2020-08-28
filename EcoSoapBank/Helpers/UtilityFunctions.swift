@@ -121,6 +121,13 @@ extension DateFormatter {
     }
 }
 
+/// Alternatively, `?<-`?
+/// (`let x = self.point?.x ?<- CGPoint.zero` vs.
+/// `let x = self.point?.x ??= CGPoint.zero`)
+///
+/// See `Optional.orSettingIfNil` to see use in practice.
+infix operator ??=
+
 extension Optional {
     /// If nil, sets wrapped value to the new value and then returns it. If non-nil, ignores the new value
     /// and simply returns the wrapped value.
@@ -139,8 +146,3 @@ extension Optional {
         lhs.orSettingIfNil(rhs)
     }
 }
-
-/// Alternatively, `?<-`?
-/// `let x = self.point?.x ?<- CGPoint.zero` vs.
-/// `let x = self.point?.x ??= CGPoint.zero`
-infix operator ??=
