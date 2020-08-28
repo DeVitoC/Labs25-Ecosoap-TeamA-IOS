@@ -11,7 +11,8 @@ import Combine
 
 
 protocol PickupDataProvider {
-    func fetchAllPickups(
+    func fetchPickups(
+        forPropertyID propertyID: String,
         _ completion: @escaping ResultHandler<[Pickup]>)
 
     func schedulePickup(
@@ -22,13 +23,15 @@ protocol PickupDataProvider {
 
 enum PickupError: Error {
     case noResult
-    case noProperties
     case unknown
 }
 
 
 class PickupController: ObservableObject {
     @Published private(set) var pickups: [Pickup] = []
+    var properties: [Property]? {
+        user.properties
+    }
 
     private(set) var user: User
 
@@ -44,15 +47,29 @@ class PickupController: ObservableObject {
     }
 
     @discardableResult
-    func fetchAllPickups() -> Future<[Pickup], Error> {
+    func fetchPickups(forPropertyID propertyID: String) -> Future<[Pickup], Error> {
+
         Future { promise in
-            self.dataProvider.fetchAllPickups { [weak self] result in
+            self.dataProvider.fetchPickups(forPropertyID: propertyID) { [weak self] result in
                 if case .success(let pickups) = result {
                     DispatchQueue.main.async { self?.pickups = pickups }
                 }
                 promise(result)
             }
         }
+    }
+
+    func fetchPickupsForAllProperties() -> AnyPublisher<[Pickup], Error> {
+        guard let properties = properties, !properties.isEmpty else {
+            return Future { $0(.failure(UserError.noProperties)) }
+                .eraseToAnyPublisher()
+        }
+        var futures = properties.map { fetchPickups(forPropertyID: $0.id) }
+        var combined = futures.popLast()!.eraseToAnyPublisher()
+        while let future = futures.popLast() {
+            combined = combined.append(future).eraseToAnyPublisher()
+        }
+        return combined
     }
 
     func schedulePickup(

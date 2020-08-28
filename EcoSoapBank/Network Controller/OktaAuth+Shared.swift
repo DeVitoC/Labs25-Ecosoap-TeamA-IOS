@@ -11,7 +11,7 @@ import OktaAuth
 
 
 extension OktaAuth {
-    static var shared: OktaAuth { .ecoSoapBank }
+    static var shared: OktaAuth { useMock ? lambda : ecoSoapBank }
 
     private static let lambda = OktaAuth(
         baseURL: URL(string: "https://auth.lambdalabs.dev/")!,

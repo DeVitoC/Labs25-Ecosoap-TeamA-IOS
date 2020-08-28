@@ -66,6 +66,11 @@ class LoginCoordinator: FlowCoordinator {
             .map { _ in LoginError.expiredCredentials }
             .sink(receiveValue: alertUserOfLoginError(_:))
             .store(in: &cancellables)
+        NotificationCenter.default
+            .publisher(for: .oktaAuthenticationFailed)
+            .map { _ in LoginError.loginFailed }
+            .sink(receiveValue: alertUserOfLoginError(_:))
+            .store(in: &cancellables)
         userController.$user
             .compactMap { $0 }
             .map { _ in () }

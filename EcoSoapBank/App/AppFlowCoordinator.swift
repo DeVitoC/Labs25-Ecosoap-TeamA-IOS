@@ -22,9 +22,17 @@ class AppFlowCoordinator: FlowCoordinator {
         root: tabBarController,
         userController: userController,
         onLoginComplete: { [weak self] in self?.onLoginComplete() })
-    private(set) var userController = UserController(dataLoader: MockLoginProvider())
+    private(set) lazy var userController = UserController(dataLoader: userProvider)
+
+    // MARK: - Data Providers
 
     private var graphQLController = GraphQLController()
+
+    private lazy var userProvider: UserDataProvider = useMock ? MockLoginProvider() : graphQLController
+    private lazy var pickupProvider: PickupDataProvider = useMock ? MockPickupProvider() : graphQLController
+    private lazy var impactProvider: ImpactDataProvider = useMock ? MockImpactProvider() : graphQLController
+
+    // MARK: - Init / Start
 
     init(window: UIWindow) {
         self.window = window
@@ -56,11 +64,13 @@ class AppFlowCoordinator: FlowCoordinator {
 
         if Keychain.Okta.isLoggedIn {
             userController.logInWithBearer { [weak self] result in
-                switch result {
-                case .failure(let error):
-                    self?.presentLoginFailAlert(error: error)
-                case .success:
-                    self?.onLoginComplete()
+                DispatchQueue.main.async {
+                    switch result {
+                    case .failure(let error):
+                        self?.presentLoginFailAlert(error: error)
+                    case .success:
+                        self?.onLoginComplete()
+                    }
                 }
             }
             // TODO: show loading screen while logging in
@@ -68,6 +78,8 @@ class AppFlowCoordinator: FlowCoordinator {
             loginCoord.start()
         }
     }
+
+    // MARK: - Methods
 
     func presentLoginFailAlert(error: Error? = nil) {
         if let error = error {
@@ -112,8 +124,8 @@ class AppFlowCoordinator: FlowCoordinator {
             }
 
             // when backend ready, use graphQL controller as data provider
-            self.pickupCoord = PickupCoordinator(user: user, dataProvider: MockPickupProvider())
-            self.impactCoord = ImpactCoordinator(user: user, dataProvider: MockImpactProvider())
+            self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
+            self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.impactProvider)
 
             self.tabBarController.setViewControllers([
                 self.impactCoord!.rootVC,
@@ -129,3 +141,8 @@ class AppFlowCoordinator: FlowCoordinator {
         }
     }
 }
+
+
+// MARK: - Use Mock
+
+let useMock: Bool = true

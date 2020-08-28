@@ -17,9 +17,13 @@ protocol UserDataProvider {
 
 
 class UserController {
-    private var dataLoader: UserDataProvider
-
     @Published private(set) var user: User?
+
+    var viewingProperty: Property? {
+        user?.properties?.first
+    }
+
+    private var dataLoader: UserDataProvider
     
     private var cancellables: Set<AnyCancellable> = []
 
