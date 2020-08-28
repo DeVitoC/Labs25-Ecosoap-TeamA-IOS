@@ -14,43 +14,43 @@ import UIKit
 ///
 /// If subclasses or adding subviews, you must use `contentView` rather than view, as the root `view`
 /// is a `UIVisualEffectView`; adding subviews to this will cause a crash.
-class LoadingViewController: UIViewController {
-    let loadingIndicator = UIActivityIndicatorView(style: .large)
-    let loadingLabel = configure(UILabel()) {
-        $0.numberOfLines = 0
-        $0.textAlignment = .center
-        $0.font = .montserrat(ofSize: 36, style: .title2, typeface: .bold)
-    }
-
-    var loadingText: String? {
+public class LoadingViewController: UIViewController {
+    public var loadingText: String? {
         get { loadingLabel.text }
         set { loadingLabel.text = newValue }
     }
 
-    var loadingColor: UIColor {
+    public var loadingColor: UIColor {
         get { loadingIndicator.color }
         set { loadingIndicator.color = newValue }
     }
-
-    private var blurEffect: UIBlurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
 
     public var contentView: UIView! {
         (view as! UIVisualEffectView).contentView
     }
 
+    public let loadingIndicator = UIActivityIndicatorView(style: .large)
+    public let loadingLabel = configure(UILabel()) {
+        $0.numberOfLines = 0
+        $0.textAlignment = .center
+        $0.font = .montserrat(ofSize: 36, style: .title2, typeface: .bold)
+    }
+
+    private var blurEffect: UIBlurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+
     // MARK: - Init
 
-    convenience init(loadingText: String? = nil) {
+    public convenience init(loadingText: String? = nil) {
         self.init(nibName: nil, bundle: nil)
         self.loadingText = loadingText
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         commonInit()
     }
 
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
     }
@@ -63,12 +63,12 @@ class LoadingViewController: UIViewController {
 
     // MARK: - View Lifecycle
 
-    override func loadView() {
+    public override func loadView() {
         view = UIVisualEffectView(effect: blurEffect)
         view.backgroundColor = .clear
     }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         contentView.constrainNewSubviewToCenter(loadingIndicator)
@@ -79,13 +79,13 @@ class LoadingViewController: UIViewController {
         ])
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         loadingIndicator.startAnimating()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         loadingIndicator.stopAnimating()
