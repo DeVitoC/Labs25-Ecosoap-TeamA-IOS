@@ -43,7 +43,6 @@ class LoginCoordinator: FlowCoordinator {
 
     private var userController: UserController
 
-    private var observers: [NSObjectProtocol] = []
     private var cancellables = Set<AnyCancellable>()
 
     private var onLoginComplete: () -> Void
@@ -76,10 +75,6 @@ class LoginCoordinator: FlowCoordinator {
             .map { _ in () }
             .sink(receiveValue: onLoginComplete)
             .store(in: &cancellables)
-    }
-
-    deinit {
-        observers.forEach(NotificationCenter.default.removeObserver(_:))
     }
 
     func start() {
