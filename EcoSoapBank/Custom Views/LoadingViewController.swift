@@ -45,7 +45,7 @@ public class LoadingViewController: UIViewController {
         self.loadingText = loadingText
     }
 
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         commonInit()
     }
@@ -63,12 +63,12 @@ public class LoadingViewController: UIViewController {
 
     // MARK: - View Lifecycle
 
-    public override func loadView() {
+    override public func loadView() {
         view = UIVisualEffectView(effect: blurEffect)
         view.backgroundColor = .clear
     }
 
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         contentView.constrainNewSubviewToCenter(loadingIndicator)
@@ -79,13 +79,13 @@ public class LoadingViewController: UIViewController {
         ])
     }
 
-    public override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         loadingIndicator.startAnimating()
     }
 
-    public override func viewDidDisappear(_ animated: Bool) {
+    override public func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         loadingIndicator.stopAnimating()
