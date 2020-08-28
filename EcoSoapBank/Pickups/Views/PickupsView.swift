@@ -10,13 +10,6 @@ import SwiftUI
 import Combine
 
 
-protocol PickupsViewDelegate: AnyObject {
-    var schedulePickupVM: SchedulePickupViewModel { get }
-
-    func scheduleNewPickup()
-}
-
-
 struct PickupsView: View {
     @ObservedObject private var pickupController: PickupController
 
