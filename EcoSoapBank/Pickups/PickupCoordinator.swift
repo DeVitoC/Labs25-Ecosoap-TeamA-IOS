@@ -22,7 +22,7 @@ class PickupCoordinator: FlowCoordinator {
 
     private var cancellables = Set<AnyCancellable>()
     private var scheduleVC: SchedulePickupViewController?
-    private var scheduleVM: SchedulePickupViewModel?
+    var scheduleVM: SchedulePickupViewModel?
 
     init(user: User, dataProvider: PickupDataProvider) {
         self.user = user
@@ -96,11 +96,10 @@ extension PickupCoordinator {
     private func handlePickupScheduleResult(_ pickupResult: Pickup.ScheduleResult) {
         let alert = successAlert(for: pickupResult)
         rootVC.dismiss(animated: true) { [unowned rootVC] in
-            rootVC.present(alert, animated: true, completion: { [unowned self] in
-                self.scheduleVC = nil
-                self.scheduleVM = nil
-            })
+            rootVC.present(alert, animated: true)
         }
+        self.scheduleVC = nil
+        self.scheduleVM = nil
     }
 
     private func successAlert(for pickupResult: Pickup.ScheduleResult) -> UIAlertController {
@@ -154,20 +153,19 @@ extension PickupCoordinator: SchedulePickupViewModelDelegate {
         for input: Pickup.ScheduleInput,
         completion: @escaping ResultHandler<Pickup.ScheduleResult>
     ) {
-        rootVC.presentedViewController?.present(
+        (rootVC.presentedViewController ?? rootVC).present(
             LoadingViewController(loadingText: "Scheduling pickup..."),
-            animated: true
-        ) {
-            self.pickupController.schedulePickup(for: input)
-                .receive(on: DispatchQueue.main)
-                .handleError({ [weak self] error in
-                    self?.handleError(error)
-                    completion(.failure(error))
-                }).sink(receiveValue: { [weak self] result in
-                    self?.handlePickupScheduleResult(result)
-                    completion(.success(result))
-                }).store(in: &self.cancellables)
-        }
+            animated: true)
+
+        self.pickupController.schedulePickup(for: input)
+            .receive(on: DispatchQueue.main)
+            .handleError({ [weak self] error in
+                self?.handleError(error)
+                completion(.failure(error))
+            }).sink(receiveValue: { [weak self] result in
+                self?.handlePickupScheduleResult(result)
+                completion(.success(result))
+            }).store(in: &self.cancellables)
     }
 
     func editCarton(for cartonVM: NewCartonViewModel) {
