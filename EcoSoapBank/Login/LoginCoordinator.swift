@@ -110,6 +110,8 @@ extension LoginCoordinator: LoginViewControllerDelegate {
         guard let loginURL = userController.oktaLoginURL else {
             return alertUserOfLoginError(LoginError.oktaFailure)
         }
-        UIApplication.shared.open(loginURL)
+        loginVC.present(LoadingViewController(loadingText: "Logging in..."), animated: true) {
+            UIApplication.shared.open(loginURL)
+        }
     }
 }
