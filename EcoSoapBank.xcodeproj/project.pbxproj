@@ -133,6 +133,7 @@
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
 		9998716424E1E8C4000A993E /* PickupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9998716324E1E8C4000A993E /* PickupsView.swift */; };
+		999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */; };
 		99B5790324E30F140097957D /* PickupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5790224E30F140097957D /* PickupTests.swift */; };
 		99B6175B24EAF0A20099664B /* SchedulePickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175A24EAF0A20099664B /* SchedulePickupViewController.swift */; };
 		99B6175D24EAF0C70099664B /* SchedulePickupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175C24EAF0C70099664B /* SchedulePickupViewModel.swift */; };
@@ -276,6 +277,7 @@
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
 		9998716324E1E8C4000A993E /* PickupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupsView.swift; sourceTree = "<group>"; };
+		999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		99B5790224E30F140097957D /* PickupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupTests.swift; sourceTree = "<group>"; };
 		99B6175A24EAF0A20099664B /* SchedulePickupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePickupViewController.swift; sourceTree = "<group>"; };
 		99B6175C24EAF0C70099664B /* SchedulePickupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePickupViewModel.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				993B15CB24F42D8C00529517 /* InputPickerView.swift */,
 				993B15CD24F4575500529517 /* CursorlessTextField.swift */,
 				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
+				999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -857,6 +860,7 @@
 				992BB63424ED930600638AA4 /* SortDescriptor.swift in Sources */,
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
 				04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */,
+				999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
 				99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
