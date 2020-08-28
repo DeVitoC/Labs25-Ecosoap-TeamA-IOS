@@ -108,6 +108,26 @@ class UtilityTests: XCTestCase {
             mockPickups.sorted(by: sortByReadyDate),
             mockPickups.sorted(by: { $0.readyDate > $1.readyDate }))
     }
+
+    func testAxis() {
+        let h = LayoutAxis.horizontal
+        let v = LayoutAxis.vertical
+        let b = LayoutAxis.both
+        let empty = LayoutAxis.none
+
+        XCTAssert(b.contains(h))
+        XCTAssert(b.contains(v))
+        XCTAssertEqual([h, v], b)
+
+        XCTAssertFalse(h.contains(b))
+        XCTAssertFalse(h.contains(v))
+        XCTAssertFalse(v.contains(b))
+        XCTAssertFalse(v.contains(h))
+
+        XCTAssertFalse(empty.contains(h))
+        XCTAssertFalse(empty.contains(v))
+        XCTAssertFalse(empty.contains(b))
+    }
 }
 
 enum TestError: Error {

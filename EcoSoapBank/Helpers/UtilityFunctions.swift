@@ -120,3 +120,27 @@ extension DateFormatter {
         $0.timeStyle = .none
     }
 }
+
+extension Optional {
+    /// If nil, sets wrapped value to the new value and then returns it. If non-nil, ignores the new value
+    /// and simply returns the wrapped value.
+    ///
+    /// Similar to the nil-coalescing operator (`??`), but additionally sets the wrapped value if non-nil.
+    mutating func orSettingIfNil(_ newValueIfNil: Wrapped) -> Wrapped {
+        if self == nil { self = newValueIfNil }
+        return self!
+    }
+
+    /// If nil, sets wrapped value to the new value and then returns it. If non-nil, ignores the new value
+    /// and simply returns the wrapped value.
+    ///
+    /// Similar to the nil-coalescing operator (`??`), but additionally sets the left-hand value if non-nil.
+    static func ??=(lhs: inout Wrapped?, rhs: Wrapped) -> Wrapped {
+        lhs.orSettingIfNil(rhs)
+    }
+}
+
+/// Alternatively, `?<-`?
+/// `let x = self.point?.x ?<- CGPoint.zero` vs.
+/// `let x = self.point?.x ??= CGPoint.zero`
+infix operator ??=
