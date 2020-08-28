@@ -63,6 +63,7 @@ class AppFlowCoordinator: FlowCoordinator {
         window.makeKeyAndVisible()
 
         if Keychain.Okta.isLoggedIn {
+            tabBarController.present(LoadingViewController(loadingText: "Logging in..."), animated: false, completion: nil)
             userController.logInWithBearer { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
@@ -73,7 +74,6 @@ class AppFlowCoordinator: FlowCoordinator {
                     }
                 }
             }
-            // TODO: show loading screen while logging in
         } else {
             loginCoord.start()
         }

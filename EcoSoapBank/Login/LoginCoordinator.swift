@@ -43,7 +43,6 @@ class LoginCoordinator: FlowCoordinator {
 
     private var userController: UserController
 
-    private var observers: [NSObjectProtocol] = []
     private var cancellables = Set<AnyCancellable>()
 
     private var onLoginComplete: () -> Void
@@ -76,10 +75,6 @@ class LoginCoordinator: FlowCoordinator {
             .map { _ in () }
             .sink(receiveValue: onLoginComplete)
             .store(in: &cancellables)
-    }
-
-    deinit {
-        observers.forEach(NotificationCenter.default.removeObserver(_:))
     }
 
     func start() {
@@ -115,6 +110,8 @@ extension LoginCoordinator: LoginViewControllerDelegate {
         guard let loginURL = userController.oktaLoginURL else {
             return alertUserOfLoginError(LoginError.oktaFailure)
         }
-        UIApplication.shared.open(loginURL)
+        loginVC.present(LoadingViewController(loadingText: "Logging in..."), animated: true) {
+            UIApplication.shared.open(loginURL)
+        }
     }
 }
