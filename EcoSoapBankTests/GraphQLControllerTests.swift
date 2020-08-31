@@ -54,36 +54,35 @@ class GraphQLControllerTests: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-//    func testUserByIdQuerySuccess() {
-//        let expectation = XCTestExpectation(description: "Get response from backend API")
-//        let graphQLController = GraphQLController()
-//        let variables: [String: String] = ["userId": "UserId1"]
-//
-//        graphQLController.queryRequest(User.self, query: GraphQLQueries.userById, variables: variables) { result in
-//
-//            guard let result = try? result.get() else {
-//                XCTFail("Unable to get valid User from returned data")
-//                return
-//            }
-//            let id = result.id
-//            let firstName = result.firstName
-//            let lastName = result.lastName
-//            let title = result.title
-//            let company = result.company
-//            let email = result.email
-//
-//            XCTAssert(id == "UserId1")
-//            XCTAssert(firstName == "First Name 1")
-//            XCTAssert(lastName == "Last Name 1")
-//            XCTAssert(title == "Title 1")
-//            XCTAssert(company == "Company 1")
-//            XCTAssert(email == "Email 1")
-//
-//            expectation.fulfill()
-//        }
-//
-//        wait(for: [expectation], timeout: 5.0)
-//    }
+    func testUserByIdQuerySuccess() {
+        let expectation = XCTestExpectation(description: "Get response from backend API")
+        let graphQLController = GraphQLController()
+
+        graphQLController.fetchUser(byID: "UserId1") { result in
+
+            guard let result = try? result.get() else {
+                XCTFail("Unable to get valid User from returned data")
+                return
+            }
+            let id = result.id
+            let firstName = result.firstName
+            let lastName = result.lastName
+            let title = result.title
+            let company = result.company
+            let email = result.email
+
+            XCTAssert(id == "UserId1")
+            XCTAssert(firstName == "First Name 1")
+            XCTAssert(lastName == "Last Name 1")
+            XCTAssert(title == "Title 1")
+            XCTAssert(company == "Company 1")
+            XCTAssert(email == "Email 1")
+
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
 
     func testPickupsByPropertyIdSuccess() {
         let expectation = XCTestExpectation(description: "Get response from backend API")
@@ -128,37 +127,36 @@ class GraphQLControllerTests: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-//    func testPropertiesByUserIdSuccess() {
-//        let expectation = XCTestExpectation(description: "Get response from backend API")
-//        let graphQLController = GraphQLController()
-//        let variables: [String: String] = ["userId": "UserId1"]
-//
-//        graphQLController.queryRequest([Property].self, query: GraphQLQueries.propertiesByUserId, variables: variables) { result in
-//
-//            guard let result = try? result.get() else {
-//                XCTFail("Unable to get Properties from returned data")
-//                return
-//            }
-//
-//            let propertyId = result[0].id
-//            let propertyType = result[0].propertyType
-//            let rooms = result[0].rooms
-//            let services = result[0].services
-//            let phone = result[0].phone
-//            let shippingNote = result[0].shippingNote
-//
-//            XCTAssert(propertyId == "PropertyId1")
-//            XCTAssert(propertyType == .hotel)
-//            XCTAssert(rooms == 111)
-//            XCTAssert(services == [.soap, .linens])
-//            XCTAssert(phone == "111-111-1111")
-//            XCTAssert(shippingNote == "Shipping note 1.")
-//
-//            expectation.fulfill()
-//        }
-//
-//        wait(for: [expectation], timeout: 5.0)
-//    }
+    func testPropertiesByUserIdSuccess() {
+        let expectation = XCTestExpectation(description: "Get response from backend API")
+        let graphQLController = GraphQLController()
+
+        graphQLController.fetchProperties(forUserID: "UserId1") { result in
+
+            guard let result = try? result.get() else {
+                XCTFail("Unable to get Properties from returned data")
+                return
+            }
+
+            let propertyId = result[0].id
+            let propertyType = result[0].propertyType
+            let rooms = result[0].rooms
+            let services = result[0].services
+            let phone = result[0].phone
+            let shippingNote = result[0].shippingNote
+
+            XCTAssert(propertyId == "PropertyId1")
+            XCTAssert(propertyType == .hotel)
+            XCTAssert(rooms == 111)
+            XCTAssert(services == [.soap, .linens])
+            XCTAssert(phone == "111-111-1111")
+            XCTAssert(shippingNote == "Shipping note 1.")
+
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
 
     func testSchedulePickup() {
         let expectation = XCTestExpectation(description: "Get response from backend API")

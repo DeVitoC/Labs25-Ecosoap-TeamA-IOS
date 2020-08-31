@@ -10,10 +10,10 @@ import Foundation
 
 enum GraphQLOperation {
     // Queries
-    case impactStatsByPropertyId(id: String)
-    case pickupsByPropertyId(id: String)
-    case propertiesByUserId(id: String)
-    case userById(id: String)
+    case impactStatsByPropertyID(id: String)
+    case pickupsByPropertyID(id: String)
+    case propertiesByUserID(id: String)
+    case userByID(id: String)
     
     // Mutations
     case login(token: String)
@@ -39,13 +39,13 @@ enum GraphQLOperation {
     
     private var operationString: String {
         switch self {
-        case .impactStatsByPropertyId:
+        case .impactStatsByPropertyID:
             return GraphQLQueries.impactStatsByPropertyId
-        case .pickupsByPropertyId:
+        case .pickupsByPropertyID:
             return GraphQLQueries.pickupsByPropertyId
-        case .propertiesByUserId:
+        case .propertiesByUserID:
             return GraphQLQueries.propertiesByUserId
-        case .userById:
+        case .userByID:
             return GraphQLQueries.userById
         case .login:
             return GraphQLMutations.login
@@ -70,9 +70,9 @@ extension GraphQLOperation: Encodable {
         var variablesContainer = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .variables)
         
         switch self {
-        case .impactStatsByPropertyId(let id), .pickupsByPropertyId(let id):
+        case .impactStatsByPropertyID(let id), .pickupsByPropertyID(let id):
             try variablesContainer.encode(["propertyId": id], forKey: .input)
-        case .propertiesByUserId(let id), .userById(let id):
+        case .propertiesByUserID(let id), .userByID(let id):
             try variablesContainer.encode(["userId": id], forKey: .input)
         case .login(let token):
             try variablesContainer.encode(token, forKey: .input)

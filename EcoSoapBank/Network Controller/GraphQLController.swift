@@ -39,13 +39,23 @@ class GraphQLController {
     func fetchImpactStats(forPropertyID propertyID: String,
                           _ completion: @escaping ResultHandler<ImpactStats>) {
         // TODO: may need to add token later
-        performOperation(.impactStatsByPropertyId(id: propertyID), completion: completion)
+        performOperation(.impactStatsByPropertyID(id: propertyID), completion: completion)
     }
     
     func fetchPickups(forPropertyID propertyID: String,
                       _ completion: @escaping ResultHandler<[Pickup]>) {
         // TODO: may need to add token later
-        performOperation(.pickupsByPropertyId(id: propertyID), completion: completion)
+        performOperation(.pickupsByPropertyID(id: propertyID), completion: completion)
+    }
+    
+    func fetchProperties(forUserID userID: String,
+                         completion: @escaping ResultHandler<[Property]>) {
+        performOperation(.propertiesByUserID(id: userID), completion: completion)
+    }
+    
+    func fetchUser(byID userID: String,
+                   completion: @escaping ResultHandler<User>) {
+        performOperation(.userByID(id: userID), completion: completion)
     }
     
     func schedulePickup(_ pickupInput: Pickup.ScheduleInput,
