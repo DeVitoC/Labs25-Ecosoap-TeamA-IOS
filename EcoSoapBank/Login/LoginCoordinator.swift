@@ -62,14 +62,14 @@ class LoginCoordinator: FlowCoordinator {
 
     private var cancellables = Set<AnyCancellable>()
 
-    private var onLoginComplete: () -> Void
+    private var onLoginComplete: (User) -> Void
 
     // MARK: - Init/Start
 
     init(
         root: UIViewController,
         userController: UserController,
-        onLoginComplete: @escaping () -> Void
+        onLoginComplete: @escaping (User) -> Void
     ) {
         self.rootVC = root
         self.userController = userController
@@ -89,7 +89,6 @@ class LoginCoordinator: FlowCoordinator {
             .store(in: &cancellables)
         userController.$user
             .compactMap { $0 }
-            .map { _ in () }
             .sink(receiveValue: onLoginComplete)
             .store(in: &cancellables)
     }
