@@ -211,11 +211,11 @@ extension GraphQLController: PickupDataProvider {
 }
 
 extension GraphQLController: PaymentDataProvider {
-    func fetchPaymentsByPropertyId(_ completion: @escaping ResultHandler<[Payment]>) {
+    func fetchPayments(forPropertyId propertyId: String, _ completion: @escaping ResultHandler<[Payment]>) {
         completion(.failure(GraphQLError.unimplemented))
     }
 
-    func makePayment(_ completion: @escaping ResultHandler<Payment>) {
+    func makePayment(_ paymentInput: Payment, completion: @escaping ResultHandler<Payment>) {
         completion(.failure(GraphQLError.unimplemented))
     }
 }

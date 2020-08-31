@@ -35,5 +35,3 @@ enum PaymentMethod: String, Codable {
     case wire = "WIRE"
     case other = "OTHER"
 }
-
-
