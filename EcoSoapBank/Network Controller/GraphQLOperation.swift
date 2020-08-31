@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Encapsulates the required info to perform a GraphQL operation.
+/// Handles generating the appropriate url request.
 enum GraphQLOperation {
     // Queries
     case impactStatsByPropertyID(id: String)
@@ -22,6 +24,9 @@ enum GraphQLOperation {
     
     // MARK: - Public
     
+    /// Generates a URL request for the operation.
+    /// Handles encoding the appropriate query or mutation string, as well as
+    /// the variables which are stored in the associated data of each case
     func getURLRequest() throws -> URLRequest {
         var request = URLRequest(url: url)
         
