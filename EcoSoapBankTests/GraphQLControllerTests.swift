@@ -101,25 +101,13 @@ class GraphQLControllerTests: XCTestCase {
             let property1ID = result[0].property.id
             let cartons1ID = result[0].cartons[0].id
             let notes1 = result[0].notes
-//            let id2 = result[1].id
-//            let confirmationCode2 = result[1].confirmationCode
-//            let collectionType2 = result[1].collectionType
-//            let property2 ID = result[1].property.id
-//            let cartons2ID = result[1].cartons[0].id
-//            let notes2 = result[1].notes
-
+            
             XCTAssert(id1 == "PickupId1")
             XCTAssert(confirmationCode1 == "PickupConfirmationCode1")
             XCTAssert(collectionType1 == .generatedLabel)
             XCTAssert(property1ID == "PropertyId1")
             XCTAssert(cartons1ID == "PickupCartonId1")
             XCTAssert(notes1 == "Pickup Notes 1")
-//            XCTAssert(id2 == "9bdf94cd-8e79-4135-84a4-3be7478961e2-1598228267804")
-//            XCTAssert(confirmationCode2 == "9A65-A900")
-//            XCTAssert(collectionType2 == .generatedLabel)
-//            XCTAssert(property2ID == "PropertyId1")
-//            XCTAssert(cartons2ID == "56935312-99a9-429b-93a5-337e53dc14cb-1598228267804")
-//            XCTAssert(notes2 == "undefined")
 
             expectation.fulfill()
         }
@@ -173,62 +161,60 @@ class GraphQLControllerTests: XCTestCase {
                                                 propertyID: "PropertyId1",
                                                 cartons: [Pickup.CartonContents(product: .soap,
                                                                                 percentFull: 100)])
-
+        
         graphQLController.schedulePickup(scheuleInput) { result in
-
-            switch result {
-            case .success(let scheduleResult):
-                let status = scheduleResult.pickup?.status
-                let cartonProduct = scheduleResult.pickup?.cartons[0].contents?.product
-                let cartonPercentFull = scheduleResult.pickup?.cartons[0].contents?.percentFull
-                let collectionType = scheduleResult.pickup?.collectionType
-                let label = scheduleResult.labelURL
-
-                XCTAssertEqual(status, .submitted)
-                XCTAssertEqual(cartonProduct, .soap)
-                XCTAssertEqual(cartonPercentFull, 100)
-                XCTAssertEqual(collectionType, .generatedLabel)
-                XCTAssertEqual(label?.absoluteString, "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf")
-
-                expectation.fulfill()
-            case .failure(let error):
-                print(error)
+            
+            guard let result = try? result.get() else {
                 XCTFail("Unable to get valid Pickup data from returned data")
+                return
             }
+            
+            let status = result.pickup?.status
+            let cartonProduct = result.pickup?.cartons[0].contents?.product
+            let cartonPercentFull = result.pickup?.cartons[0].contents?.percentFull
+            let collectionType = result.pickup?.collectionType
+            let label = result.labelURL
+            
+            XCTAssertEqual(status, .submitted)
+            XCTAssertEqual(cartonProduct, .soap)
+            XCTAssertEqual(cartonPercentFull, 100)
+            XCTAssertEqual(collectionType, .generatedLabel)
+            XCTAssertEqual(label?.absoluteString, "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf")
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testCancelPickupRequest() {
+        let expectation = XCTestExpectation(description: "Get response from backend API")
+        let graphQLController = GraphQLController()
+
+        graphQLController.cancelPickup("PickupId1") { result in
+
+            guard let result = try? result.get() else {
+                XCTFail("Unable to get valid Pickup from returned data")
+                return
+            }
+
+            let pickupId = result.id
+            let confirmationCode = result.confirmationCode
+            let collectionType = result.collectionType
+            let propertyId = result.property.id
+            let cartonId = result.cartons[0].id
+            let cartonPercentFull = result.cartons[0].contents?.percentFull
+
+            XCTAssert(pickupId == "PickupId1")
+            XCTAssert(confirmationCode == "PickupConfirmationCode1")
+            XCTAssert(collectionType == .generatedLabel)
+            XCTAssert(propertyId == "PropertyId1")
+            XCTAssert(cartonId == "PickupCartonId1")
+            XCTAssert(cartonPercentFull == 11)
+
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
-
-//    func testCancelPickupRequest() {
-//        let expectation = XCTestExpectation(description: "Get response from backend API")
-//        let graphQLController = GraphQLController()
-//        let variables: [String: String] = ["pickupId": "PickupId1"]
-//
-//        graphQLController.queryRequest(Pickup.self, query: GraphQLMutations.cancelPickup, variables: variables) { result in
-//
-//            guard let result = try? result.get() else {
-//                XCTFail("Unable to get valid Pickup from returned data")
-//                return
-//            }
-//
-//            let pickupId = result.id
-//            let confirmationCode = result.confirmationCode
-//            let collectionType = result.collectionType
-//            let propertyId = result.property.id
-//            let cartonId = result.cartons[0].id
-//            let cartonPercentFull = result.cartons[0].contents?.percentFull
-//
-//            XCTAssert(pickupId == "PickupId1")
-//            XCTAssert(confirmationCode == "PickupConfirmationCode1")
-//            XCTAssert(collectionType == .generatedLabel)
-//            XCTAssert(propertyId == "PropertyId1")
-//            XCTAssert(cartonId == "PickupCartonId1")
-//            XCTAssert(cartonPercentFull == 11)
-//
-//            expectation.fulfill()
-//        }
-//
-//        wait(for: [expectation], timeout: 5.0)
-//    }
 }

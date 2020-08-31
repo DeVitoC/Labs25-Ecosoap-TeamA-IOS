@@ -18,6 +18,7 @@ enum GraphQLOperation {
     // Mutations
     case login(token: String)
     case schedulePickup(input: Pickup.ScheduleInput)
+    case cancelPickup(id: String)
     
     // MARK: - Public
     
@@ -51,6 +52,8 @@ enum GraphQLOperation {
             return GraphQLMutations.login
         case .schedulePickup:
             return GraphQLMutations.schedulePickup
+        case .cancelPickup:
+            return GraphQLMutations.cancelPickup
         }
     }
 }
@@ -74,6 +77,8 @@ extension GraphQLOperation: Encodable {
             try variablesContainer.encode(["propertyId": id], forKey: .input)
         case .propertiesByUserID(let id), .userByID(let id):
             try variablesContainer.encode(["userId": id], forKey: .input)
+        case .cancelPickup(let id):
+            try variablesContainer.encode(["pickupId": id], forKey: .input)
         case .login(let token):
             try variablesContainer.encode(token, forKey: .input)
         case .schedulePickup(let input):

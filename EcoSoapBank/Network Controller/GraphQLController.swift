@@ -64,6 +64,11 @@ class GraphQLController {
         performOperation(.schedulePickup(input: pickupInput), completion: completion)
     }
     
+    func cancelPickup(_ pickupID: String, completion: @escaping ResultHandler<Pickup>) {
+        // TODO: may need to add token later
+        performOperation(.cancelPickup(id: pickupID), completion: completion)
+    }
+    
     // MARK: - Private Methods
     
     /// Performs the desired GraphQLOperation
