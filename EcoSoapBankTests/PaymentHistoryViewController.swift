@@ -10,7 +10,7 @@ import UIKit
 
 class PaymentHistoryViewController: UIViewController {
 
-    private var paymentController: PaymentController?
+    var paymentController: PaymentController?
 
     override func viewDidLoad() {
         super.viewDidLoad()

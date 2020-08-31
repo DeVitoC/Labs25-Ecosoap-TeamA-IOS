@@ -10,13 +10,13 @@ import UIKit
 
 class PaymentCoordinator: FlowCoordinator {
 
-    init(user: User, dataProvider: ImpactDataProvider) {
-        rootVC = configure(PaymentViewController()) {
+    init(user: User, dataProvider: PaymentDataProvider) {
+        rootVC = configure(PaymentHistoryViewController()) {
             $0.paymentController = PaymentController(user: user, dataProvider: dataProvider)
         }
     }
 
-    let rootVC: PaymentViewController
+    let rootVC: PaymentHistoryViewController
 
     func start() {
         let globe = UIImage(
