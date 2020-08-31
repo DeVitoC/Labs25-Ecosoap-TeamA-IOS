@@ -19,7 +19,6 @@ struct Payment: Decodable {
     let invoicePeriodEndDate: Date?
     let dueDate: Date?
     let paymentMethod: PaymentMethod
-
 }
 
 struct PaymentInput: Encodable {
