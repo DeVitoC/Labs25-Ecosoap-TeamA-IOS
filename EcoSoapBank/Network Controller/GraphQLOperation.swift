@@ -38,7 +38,7 @@ enum GraphQLOperation {
         URL(string: "http://35.208.9.187:9094/ios-api-1/")!
     }
     
-    private var operationString: String {
+    private var queryString: String {
         switch self {
         case .impactStatsByPropertyID:
             return GraphQLQueries.impactStatsByPropertyId
@@ -69,7 +69,7 @@ extension GraphQLOperation: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(operationString, forKey: .query)
+        try container.encode(queryString, forKey: .query)
         var variablesContainer = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .variables)
         
         switch self {
