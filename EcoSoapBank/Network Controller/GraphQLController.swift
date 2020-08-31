@@ -36,26 +36,20 @@ class GraphQLController {
         performOperation(.login(token: token), completion: completion)
     }
     
-    func fetchImpactStats(
-        forPropertyID propertyID: String,
-        _ completion: @escaping ResultHandler<ImpactStats>
-    ) {
+    func fetchImpactStats(forPropertyID propertyID: String,
+                          _ completion: @escaping ResultHandler<ImpactStats>) {
         // TODO: may need to add token later
         performOperation(.impactStatsByPropertyId(id: propertyID), completion: completion)
     }
     
-    func fetchPickups(
-        forPropertyID propertyID: String,
-        _ completion: @escaping ResultHandler<[Pickup]>
-    ) {
+    func fetchPickups(forPropertyID propertyID: String,
+                      _ completion: @escaping ResultHandler<[Pickup]>) {
         // TODO: may need to add token later
         performOperation(.pickupsByPropertyId(id: propertyID), completion: completion)
     }
-
-    func schedulePickup(
-        _ pickupInput: Pickup.ScheduleInput,
-        completion: @escaping ResultHandler<Pickup.ScheduleResult>
-    ) {
+    
+    func schedulePickup(_ pickupInput: Pickup.ScheduleInput,
+                        completion: @escaping ResultHandler<Pickup.ScheduleResult>) {
         // TODO: may need to add token later
         performOperation(.schedulePickup(input: pickupInput), completion: completion)
     }
