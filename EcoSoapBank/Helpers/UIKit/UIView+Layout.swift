@@ -62,6 +62,17 @@ extension UIView {
             constant: constant)
         constrainNewSubview(subView, with: constraints)
     }
+
+    func constrainNewSubviewToCenter(_ subView: UIView, axes: LayoutAxis = .both) {
+        var constraints = [NSLayoutConstraint]()
+        if axes.contains(.horizontal) {
+            constraints.append(self.centerXAnchor.constraint(equalTo: subView.centerXAnchor))
+        }
+        if axes.contains(.vertical) {
+            constraints.append(self.centerYAnchor.constraint(equalTo: subView.centerYAnchor))
+        }
+        constrainNewSubview(subView, with: constraints)
+    }
     
     /// Fills the view's superview completely.
     ///
@@ -200,4 +211,21 @@ enum LayoutSide: CaseIterable {
 
 extension ExpressibleByArrayLiteral where ArrayLiteralElement == LayoutSide {
     static var all: Self { [.top, .leading, .trailing, .bottom] }
+}
+
+// MARK: - Axis
+
+/// I found `UIAxis` but apparently it's only available in iOS13.4?! How bizarre.
+/// Anyways, this is a reimplementation of that for one method. -_-
+struct LayoutAxis: OptionSet {
+    let rawValue: UInt8
+
+    init(rawValue: UInt8) {
+        self.rawValue = rawValue
+    }
+
+    static let none: LayoutAxis = []
+    static let horizontal = LayoutAxis(rawValue: 1)
+    static let vertical = LayoutAxis(rawValue: 2)
+    static let both = LayoutAxis(rawValue: 3)
 }

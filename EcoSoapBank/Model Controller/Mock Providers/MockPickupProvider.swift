@@ -23,7 +23,7 @@ class MockPickupProvider {
 extension MockPickupProvider: PickupDataProvider {
     /// Simply returns mock Pickups through closure
     /// (or `MockPickupProvider.Error.shouldFail` if `shouldFail` instance property is set to `true`).
-    func fetchAllPickups(_ completion: @escaping (Result<[Pickup], Swift.Error>) -> Void) {
+    func fetchPickups(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<[Pickup]>) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             guard !self.shouldFail else {
                 completion(.mockFailure())

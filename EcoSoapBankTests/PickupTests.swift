@@ -35,16 +35,16 @@ class PickupTests: XCTestCase {
 
     func testPickupControllerFetchAllSuccess() throws {
         let exp = newMockExpectation()
-        pickupProvider.fetchAllPickups { result in
-            switch result {
-            case .failure(let error):
-                XCTFail("Mock pickup provider should have succeeded but failed with error: \(error)")
-            case .success(let pickups):
+        pickupController.fetchPickupsForAllProperties()
+            .sink(receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    XCTFail("Mock pickup provider should have succeeded but failed with error: \(error)")
+                }
+                exp.fulfill()
+            }, receiveValue: { pickups in
                 XCTAssertGreaterThan(pickups.count, 0)
-            }
-
-            exp.fulfill()
-        }
+                exp.fulfill()
+            }).store(in: &bag)
         wait(for: exp)
     }
 
@@ -56,19 +56,20 @@ class PickupTests: XCTestCase {
 
         let exp = newMockExpectation()
 
-        pickupProvider.fetchAllPickups { result in
-            if case .success = result {
-                XCTFail("Mock pickup provider should have failed but succeeded")
-            }
-            exp.fulfill()
-        }
+        failingController.fetchPickupsForAllProperties()
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    XCTFail("Mock provider should have failed but succeeded")
+                case .failure:
+                    exp.fulfill()
+                }
+            }, receiveValue: { _ in
+                XCTFail("Mock provider should have failed but succeeded")
+            }).store(in: &bag)
         wait(for: exp)
 
         XCTAssert(failingController.pickups.isEmpty)
-    }
-
-    func testPickupCoordinatorStart() {
-        pickupCoordinator.start()
     }
 
     func testSchedulePickup() {
@@ -88,15 +89,17 @@ class PickupTests: XCTestCase {
 
     func testCoordinatorScheduleVMIsResetOnSchedule() throws {
         let exp = newMockExpectation()
-        let firstVM = pickupCoordinator.schedulePickupVM
-
         let input = Pickup.ScheduleInput.random()
+        
+        pickupCoordinator.scheduleNewPickup()
+
+        let firstVM = pickupCoordinator.scheduleVM
 
         pickupCoordinator.schedulePickup(for: input) { result in
             let pickupResult = try? XCTUnwrap(try? result.get())
 
             XCTAssertEqual(pickupResult?.pickup?.base, input.base)
-            XCTAssert(self.pickupCoordinator.schedulePickupVM !== firstVM)
+            XCTAssert(self.pickupCoordinator.scheduleVM !== firstVM)
 
             exp.fulfill()
         }
@@ -105,21 +108,24 @@ class PickupTests: XCTestCase {
     }
 
     func testCoordinatorScheduleVMIsNotResetOnCancel() {
-        let firstVM = pickupCoordinator.schedulePickupVM
+        let firstVM = pickupCoordinator.scheduleVM
 
         pickupCoordinator.scheduleNewPickup()
         pickupCoordinator.cancelNewPickup()
 
-        XCTAssert(firstVM === pickupCoordinator.schedulePickupVM)
+        XCTAssert(firstVM === pickupCoordinator.scheduleVM
+            || (firstVM == nil && pickupCoordinator.scheduleVM != nil))
     }
 
     func testUserPropertiesTransferredProperly() {
-        XCTAssertEqual(pickupCoordinator.schedulePickupVM.properties,
+        pickupCoordinator.scheduleNewPickup()
+        XCTAssertEqual(pickupCoordinator.scheduleVM?.properties,
                        pickupController.user.properties)
     }
 
     func testSchedulePickupAttributes() throws {
-        let vm = pickupCoordinator.schedulePickupVM
+        let delegate = MockScheduleVMDelegate()
+        let vm = SchedulePickupViewModel(user: .placeholder(), delegate: delegate)
 
         let in4Days = Date(timeIntervalSinceNow: .days(4))
         let notes = "This is a note"
@@ -220,3 +226,21 @@ extension KeyPathListable {
 }
 
 extension Property: KeyPathListable {}
+
+class MockScheduleVMDelegate: SchedulePickupViewModelDelegate {
+    var shouldFail: Bool = false
+
+    func schedulePickup(for input: Pickup.ScheduleInput, completion: @escaping ResultHandler<Pickup.ScheduleResult>) {
+        DispatchQueue.global().async {
+            if self.shouldFail {
+                completion(.failure(MockError.shouldFail))
+            } else {
+                completion(.success(.mock(from: input)))
+            }
+        }
+    }
+
+    func editCarton(for viewModel: NewCartonViewModel) {
+        NSLog("Editing carton...")
+    }
+}

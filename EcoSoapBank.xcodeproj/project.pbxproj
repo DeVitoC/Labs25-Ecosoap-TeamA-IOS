@@ -106,7 +106,6 @@
 		992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */; };
 		992BB63C24EDD01F00638AA4 /* PickupDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */; };
 		992BB63E24EEE21300638AA4 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63D24EEE21300638AA4 /* UserController.swift */; };
-		992BB64024EEE58700638AA4 /* GraphQLController+DataProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63F24EEE58600638AA4 /* GraphQLController+DataProviders.swift */; };
 		992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64224EEFBAD00638AA4 /* Errors.swift */; };
 		992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64424EF021600638AA4 /* MockLoginProvider.swift */; };
 		992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */; };
@@ -134,6 +133,8 @@
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
 		9998716424E1E8C4000A993E /* PickupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9998716324E1E8C4000A993E /* PickupsView.swift */; };
+		999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */; };
+		999CBA3D24F9AFF100CDF0F3 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */; };
 		99B5790324E30F140097957D /* PickupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5790224E30F140097957D /* PickupTests.swift */; };
 		99B6175B24EAF0A20099664B /* SchedulePickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175A24EAF0A20099664B /* SchedulePickupViewController.swift */; };
 		99B6175D24EAF0C70099664B /* SchedulePickupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6175C24EAF0C70099664B /* SchedulePickupViewModel.swift */; };
@@ -252,7 +253,6 @@
 		992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupDetailViewController.swift; sourceTree = "<group>"; };
 		992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PickupDetailViewController.storyboard; sourceTree = "<group>"; };
 		992BB63D24EEE21300638AA4 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
-		992BB63F24EEE58600638AA4 /* GraphQLController+DataProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphQLController+DataProviders.swift"; sourceTree = "<group>"; };
 		992BB64224EEFBAD00638AA4 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		992BB64424EF021600638AA4 /* MockLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoginProvider.swift; sourceTree = "<group>"; };
 		992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OktaAuth+Shared.swift"; sourceTree = "<group>"; };
@@ -282,6 +282,10 @@
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
 		9998716324E1E8C4000A993E /* PickupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupsView.swift; sourceTree = "<group>"; };
+		999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = Carthage/Build/iOS/Stripe.framework; sourceTree = "<group>"; };
+		999CBA4124F9B08600CDF0F3 /* input.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = input.xcfilelist; sourceTree = "<group>"; };
+		999CBA4224F9B09200CDF0F3 /* output.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = output.xcfilelist; sourceTree = "<group>"; };
 		99B5790224E30F140097957D /* PickupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupTests.swift; sourceTree = "<group>"; };
 		99B6175A24EAF0A20099664B /* SchedulePickupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePickupViewController.swift; sourceTree = "<group>"; };
 		99B6175C24EAF0C70099664B /* SchedulePickupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePickupViewModel.swift; sourceTree = "<group>"; };
@@ -320,6 +324,7 @@
 			files = (
 				042CD96024F585AA00ADFCB5 /* KeychainAccess in Frameworks */,
 				041E1E2124E1E1510052831D /* OktaAuth in Frameworks */,
+				999CBA3D24F9AFF100CDF0F3 /* Stripe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +412,7 @@
 				993B15CB24F42D8C00529517 /* InputPickerView.swift */,
 				993B15CD24F4575500529517 /* CursorlessTextField.swift */,
 				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
+				999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -431,6 +437,9 @@
 				466C4272249A8748007D033E /* EcoSoapBank */,
 				994E4B7F24DDB67000C12921 /* EcoSoapBankTests */,
 				466C4271249A8748007D033E /* Products */,
+				999CBA3B24F9AFF100CDF0F3 /* Frameworks */,
+				999CBA4124F9B08600CDF0F3 /* input.xcfilelist */,
+				999CBA4224F9B09200CDF0F3 /* output.xcfilelist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -477,6 +486,7 @@
 				99B6177024EC3D000099664B /* Publisher+HandleError.swift */,
 				992BB64224EEFBAD00638AA4 /* Errors.swift */,
 				992C929024F70B0C004FCBBB /* Randomizable.swift */,
+				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -489,7 +499,6 @@
 				998913D824DE0C90009ADBC1 /* HospitalityService.swift */,
 				998913D624DE0C33009ADBC1 /* Property.swift */,
 				04D1758624E317FB00F8929C /* ImpactStats.swift */,
-				990CA24024DB6A6C002B5FA4 /* Protocols */,
 				E2D302F424E5CA32008A6FAF /* User.swift */,
 				E2D04F9224F0D50600515831 /* Address.swift */,
 				E2E2F0E924F838170050BFCF /* Payment.swift */,
@@ -516,14 +525,6 @@
 				46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		990CA24024DB6A6C002B5FA4 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		9921943324E49AC300E16C16 /* UIKit */ = {
@@ -634,11 +635,18 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		999CBA3B24F9AFF100CDF0F3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E27B4B1924E1ECE800148E4E /* Network Controller */ = {
 			isa = PBXGroup;
 			children = (
 				E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */,
-				992BB63F24EEE58600638AA4 /* GraphQLController+DataProviders.swift */,
 				E220C32624E35E59003FF32D /* GraphQLQueries.swift */,
 				E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */,
 				E2B961B324E45BF800C5DF8B /* QueryObjects.swift */,
@@ -673,6 +681,7 @@
 				466C426D249A8748007D033E /* Frameworks */,
 				466C426E249A8748007D033E /* Resources */,
 				9998716224E1AD26000A993E /* SwiftLint */,
+				999CBA4024F9B02800CDF0F3 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -731,6 +740,30 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
+				"zh-Hans",
+				ja,
+				nb,
+				es,
+				it,
+				fr,
+				fi,
+				nl,
+				"zh-HK",
+				mt,
+				"en-GB",
+				da,
+				"es-419",
+				"nn-NO",
+				"fr-CA",
+				sv,
+				ko,
+				"zh-Hant",
+				hu,
+				tr,
+				"pt-BR",
+				ru,
+				"pt-PT",
 			);
 			mainGroup = 466C4267249A8748007D033E;
 			packageReferences = (
@@ -855,6 +888,26 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		999CBA4024F9B02800CDF0F3 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"$(SRCROOT)/input.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = Carthage;
+			outputFileListPaths = (
+				"$(SRCROOT)/output.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -863,7 +916,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
-				992BB64024EEE58700638AA4 /* GraphQLController+DataProviders.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
 				992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */,
 				992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */,
@@ -882,6 +934,7 @@
 				992BB63424ED930600638AA4 /* SortDescriptor.swift in Sources */,
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
 				04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */,
+				999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
 				99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
@@ -1099,6 +1152,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = EcoSoapBank/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1117,6 +1174,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = EcoSoapBank/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

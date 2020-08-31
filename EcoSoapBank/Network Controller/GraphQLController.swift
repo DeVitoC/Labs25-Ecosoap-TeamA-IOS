@@ -10,6 +10,8 @@ import Foundation
 import KeychainAccess
 import OktaAuth
 
+typealias ResultHandler<T> = (Result<T, Error>) -> Void
+
 enum HTTPMethod: String {
     case post = "POST"
 }
@@ -51,7 +53,11 @@ class GraphQLController {
                                     completion: @escaping (Result<T, Error>) -> Void) {
         // Add body to query request
         let body = QueryInput(query: query, variables: variables)
-        request.httpBody = try? JSONEncoder().encode(body)
+        do {
+            request.httpBody = try JSONEncoder().encode(body)
+        } catch {
+            return completion(.failure(error))
+        }
 
         session.loadData(with: request) { data, _, error in
             if let error = error {
@@ -61,8 +67,7 @@ class GraphQLController {
             }
 
             guard let data = data else {
-                NSLog("Data is nil")
-                return
+                return completion(.failure(GraphQLError.noData))
             }
 
             completion(self.decodeJSON(type, data: data))
@@ -78,12 +83,20 @@ class GraphQLController {
     private func decodeJSON<T: Decodable>(_ type: T.Type, data: Data) -> Result<T, Error> {
         do {
             // Decode data as ProfileQuery and pass the stored object of type Profile through completion
-            guard let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                let dataDict = jsonDict["data"] as? [String: Any],
+            let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+
+            guard let dataDict = jsonDict?["data"] as? [String: Any],
                 let returnType = Array(dataDict.keys).first,
                 let returnData = dataDict[returnType] as? [String: Any]
             else {
-                    return .failure(GraphQLError.noData)
+                if let errors = jsonDict?["errors"] as? [[String: Any]] {
+                    let errorMessages = errors.compactMap {
+                        $0["message"] as? String
+                    }
+                    errorMessages.forEach { NSLog($0) }
+                    return .failure(GraphQLError.backendMessages(errorMessages))
+                }
+                return .failure(GraphQLError.invalidData)
             }
 
             var objectData: Data
@@ -92,16 +105,12 @@ class GraphQLController {
                     let object: Any = returnData[methodType] as? [String: Any] ?? returnData[methodType] as? [Any],
                     let objectDataUnwrapped = try? JSONSerialization.data(withJSONObject: object, options: [])
                     else {
-                        return .failure(GraphQLError.noData)
+                        return .failure(GraphQLError.invalidData)
                 }
                 objectData = objectDataUnwrapped
             } else {
-                guard let objectDataUnwrapped = try? JSONSerialization.data(withJSONObject: returnData, options: []) else {
-                    return .failure(GraphQLError.noData)
-                }
-                objectData = objectDataUnwrapped
+                objectData = try JSONSerialization.data(withJSONObject: returnData, options: [])
             }
-
 
             let dict = try JSONDecoder().decode(T.self, from: objectData)
             
@@ -137,8 +146,10 @@ class GraphQLController {
     
 enum GraphQLError: Error {
     case noData
+    case invalidData
     case noToken
     case unimplemented
+    case backendMessages([String])
 }
 
 /// Protocol to set conformance to possible input types for GraphQL query and mutation variables
@@ -147,3 +158,54 @@ protocol VariableType: Encodable {}
 //extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
 extension Dictionary: VariableType where Key == String, Value == String {}
 extension Pickup.ScheduleInput: VariableType {}
+
+// MARK: - Data Providers
+
+extension GraphQLController: UserDataProvider {
+    func logIn(_ completion: @escaping ResultHandler<User>) {
+        guard let token = self.token else {
+            return completion(.failure(GraphQLError.noToken))
+        }
+        queryRequest(User.self,
+                     query: GraphQLMutations.login,
+                     variables: ["token": token],
+                     completion: completion)
+    }
+}
+
+extension GraphQLController: ImpactDataProvider {
+    func fetchImpactStats(
+        forPropertyID propertyID: String,
+        _ completion: @escaping ResultHandler<ImpactStats>
+    ) {
+        // TODO: may need to add token later
+        queryRequest(ImpactStats.self,
+                     query: GraphQLQueries.impactStatsByPropertyId,
+                     variables: ["propertyId": propertyID],
+                     completion: completion)
+    }
+}
+
+extension GraphQLController: PickupDataProvider {
+    func fetchPickups(
+        forPropertyID propertyID: String,
+        _ completion: @escaping ResultHandler<[Pickup]>
+    ) {
+        // TODO: may need to add token later
+        queryRequest([Pickup].self,
+                     query: GraphQLQueries.pickupsByPropertyId,
+                     variables: ["propertyId": propertyID],
+                     completion: completion)
+    }
+
+    func schedulePickup(
+        _ pickupInput: Pickup.ScheduleInput,
+        completion: @escaping ResultHandler<Pickup.ScheduleResult>
+    ) {
+        // TODO: may need to add token later
+        queryRequest(Pickup.ScheduleResult.self,
+                     query: GraphQLQueries.impactStatsByPropertyId,
+                     variables: pickupInput,
+                     completion: completion)
+    }
+}
