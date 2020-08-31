@@ -20,11 +20,47 @@ class GraphQLController {
     private let session: DataLoader
     private var token: String? { Keychain.Okta.getToken() }
 
-    // MARK: - INIT
+    // MARK: - Init
+    
     /// Allows GraphQLController to be set up with mock data for testing
     init(session: DataLoader = URLSession.shared) {
         self.session = session
     }
+    
+    // MARK: - Public Methods
+    
+    func logIn(_ completion: @escaping ResultHandler<User>) {
+        guard let token = self.token else {
+            return completion(.failure(GraphQLError.noToken))
+        }
+        performOperation(.login(token: token), completion: completion)
+    }
+    
+    func fetchImpactStats(
+        forPropertyID propertyID: String,
+        _ completion: @escaping ResultHandler<ImpactStats>
+    ) {
+        // TODO: may need to add token later
+        performOperation(.impactStatsByPropertyId(id: propertyID), completion: completion)
+    }
+    
+    func fetchPickups(
+        forPropertyID propertyID: String,
+        _ completion: @escaping ResultHandler<[Pickup]>
+    ) {
+        // TODO: may need to add token later
+        performOperation(.pickupsByPropertyId(id: propertyID), completion: completion)
+    }
+
+    func schedulePickup(
+        _ pickupInput: Pickup.ScheduleInput,
+        completion: @escaping ResultHandler<Pickup.ScheduleResult>
+    ) {
+        // TODO: may need to add token later
+        performOperation(.schedulePickup(input: pickupInput), completion: completion)
+    }
+    
+    // MARK: - Private Methods
     
     /// Performs the desired GraphQLOperation
     /// - Parameters:
@@ -56,8 +92,6 @@ class GraphQLController {
             completion(self.decodeJSON(T.self, data: data))
         }
     }
-
-    // MARK: - Helper Methods
 
     /// Method to decode JSON Data to usable Type
     /// - Parameter data: The JSON Data returned from the request
@@ -107,39 +141,6 @@ class GraphQLController {
 
 // MARK: - Data Providers
 
-extension GraphQLController: UserDataProvider {
-    func logIn(_ completion: @escaping ResultHandler<User>) {
-        guard let token = self.token else {
-            return completion(.failure(GraphQLError.noToken))
-        }
-        performOperation(.login(token: token), completion: completion)
-    }
-}
-
-extension GraphQLController: ImpactDataProvider {
-    func fetchImpactStats(
-        forPropertyID propertyID: String,
-        _ completion: @escaping ResultHandler<ImpactStats>
-    ) {
-        // TODO: may need to add token later
-        performOperation(.impactStatsByPropertyId(id: propertyID), completion: completion)
-    }
-}
-
-extension GraphQLController: PickupDataProvider {
-    func fetchPickups(
-        forPropertyID propertyID: String,
-        _ completion: @escaping ResultHandler<[Pickup]>
-    ) {
-        // TODO: may need to add token later
-        performOperation(.pickupsByPropertyId(id: propertyID), completion: completion)
-    }
-
-    func schedulePickup(
-        _ pickupInput: Pickup.ScheduleInput,
-        completion: @escaping ResultHandler<Pickup.ScheduleResult>
-    ) {
-        // TODO: may need to add token later
-        performOperation(.schedulePickup(input: pickupInput), completion: completion)
-    }
-}
+extension GraphQLController: UserDataProvider {}
+extension GraphQLController: ImpactDataProvider {}
+extension GraphQLController: PickupDataProvider {}
