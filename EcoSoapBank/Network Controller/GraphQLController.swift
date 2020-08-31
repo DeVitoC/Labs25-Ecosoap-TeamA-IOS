@@ -50,11 +50,13 @@ class GraphQLController {
     
     func fetchProperties(forUserID userID: String,
                          completion: @escaping ResultHandler<[Property]>) {
+        // TODO: may need to add token later
         performOperation(.propertiesByUserID(id: userID), completion: completion)
     }
     
     func fetchUser(byID userID: String,
                    completion: @escaping ResultHandler<User>) {
+        // TODO: may need to add token later
         performOperation(.userByID(id: userID), completion: completion)
     }
     
