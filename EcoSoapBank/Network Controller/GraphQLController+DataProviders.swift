@@ -32,3 +32,13 @@ extension GraphQLController: PickupDataProvider {
         completion(.failure(GraphQLError.unimplemented))
     }
 }
+
+extension GraphQLController: PaymentDataProvider {
+    func fetchPaymentsByPropertyId(_ completion: @escaping ResultHandler<[Payment]>) {
+        completion(.failure(GraphQLError.unimplemented))
+    }
+
+    func makePayment(_ completion: @escaping ResultHandler<Payment>) {
+        completion(.failure(GraphQLError.unimplemented))
+    }
+}
