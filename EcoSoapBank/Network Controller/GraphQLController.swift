@@ -12,51 +12,34 @@ import OktaAuth
 
 typealias ResultHandler<T> = (Result<T, Error>) -> Void
 
-enum HTTPMethod: String {
-    case post = "POST"
-}
-
 /// Class containing methods for communicating with GraphQL backend
 class GraphQLController {
 
     // MARK: - Properties
 
     private let session: DataLoader
-    private let url = URL(string: "http://35.208.9.187:9094/ios-api-1/")!
     private var token: String? { Keychain.Okta.getToken() }
-
-    // Setting up the url request
-    private lazy var request: URLRequest = {
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        return request
-    }()
 
     // MARK: - INIT
     /// Allows GraphQLController to be set up with mock data for testing
     init(session: DataLoader = URLSession.shared) {
         self.session = session
     }
-
-    // MARK: - Request methods
-
-    /// Method for GraphQL query requests
+    
+    /// Performs the desired GraphQLOperation
     /// - Parameters:
-    ///   - type: The Model Type for the JSON Decoder to decode
-    ///   - query: The intended query in string format
-    ///   - variables: The variables to be passed in the request
-    ///   - completion: Completion handler that passes back a Result of type Profile or Error
-    func queryRequest<T: Decodable, V: VariableType>(_ type: T.Type,
-                                    query: String,
-                                    variables: V,
-                                    completion: @escaping (Result<T, Error>) -> Void) {
-        // Add body to query request
-        let body = QueryInput(query: query, variables: variables)
+    ///   - operation: The GraphQLOperation to perform
+    ///   - completion: A completion handler that will be called on a background thread
+    ///                 with a Result containing either a decoded object of type T, or an Error
+    private func performOperation<T: Decodable>(_ operation: GraphQLOperation,
+                                                completion: @escaping ResultHandler<T>) {
+        let request: URLRequest
+        
         do {
-            request.httpBody = try JSONEncoder().encode(body)
+            try request = operation.getURLRequest()
         } catch {
-            return completion(.failure(error))
+            completion(.failure(GraphQLError.encodingError(error)))
+            return
         }
 
         session.loadData(with: request) { data, _, error in
@@ -65,12 +48,12 @@ class GraphQLController {
                 completion(.failure(error))
                 return
             }
-
+            
             guard let data = data else {
                 return completion(.failure(GraphQLError.noData))
             }
-
-            completion(self.decodeJSON(type, data: data))
+            
+            completion(self.decodeJSON(T.self, data: data))
         }
     }
 
@@ -120,44 +103,7 @@ class GraphQLController {
             return .failure(error)
         }
     }
-
-    // MARK: - Enums
-
-    /// Enum describing the possible errors we can get back from
-    private struct QueryInput<V: VariableType>: Encodable {
-        let query: String
-        let variables: V
-
-        func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(query, forKey: .query)
-            var variablesContainer = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .variables)
-            try variablesContainer.encode(variables, forKey: .input)
-        }
-
-    }
-
-    private enum CodingKeys: String, CodingKey {
-        case query
-        case variables
-        case input
-    }
 }
-    
-enum GraphQLError: Error {
-    case noData
-    case invalidData
-    case noToken
-    case unimplemented
-    case backendMessages([String])
-}
-
-/// Protocol to set conformance to possible input types for GraphQL query and mutation variables
-protocol VariableType: Encodable {}
-
-//extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
-extension Dictionary: VariableType where Key == String, Value == String {}
-extension Pickup.ScheduleInput: VariableType {}
 
 // MARK: - Data Providers
 
@@ -166,10 +112,7 @@ extension GraphQLController: UserDataProvider {
         guard let token = self.token else {
             return completion(.failure(GraphQLError.noToken))
         }
-        queryRequest(User.self,
-                     query: GraphQLMutations.login,
-                     variables: ["token": token],
-                     completion: completion)
+        performOperation(.login(token: token), completion: completion)
     }
 }
 
@@ -179,10 +122,7 @@ extension GraphQLController: ImpactDataProvider {
         _ completion: @escaping ResultHandler<ImpactStats>
     ) {
         // TODO: may need to add token later
-        queryRequest(ImpactStats.self,
-                     query: GraphQLQueries.impactStatsByPropertyId,
-                     variables: ["propertyId": propertyID],
-                     completion: completion)
+        performOperation(.impactStatsByPropertyId(id: propertyID), completion: completion)
     }
 }
 
@@ -192,10 +132,7 @@ extension GraphQLController: PickupDataProvider {
         _ completion: @escaping ResultHandler<[Pickup]>
     ) {
         // TODO: may need to add token later
-        queryRequest([Pickup].self,
-                     query: GraphQLQueries.pickupsByPropertyId,
-                     variables: ["propertyId": propertyID],
-                     completion: completion)
+        performOperation(.pickupsByPropertyId(id: propertyID), completion: completion)
     }
 
     func schedulePickup(
@@ -203,9 +140,6 @@ extension GraphQLController: PickupDataProvider {
         completion: @escaping ResultHandler<Pickup.ScheduleResult>
     ) {
         // TODO: may need to add token later
-        queryRequest(Pickup.ScheduleResult.self,
-                     query: GraphQLQueries.impactStatsByPropertyId,
-                     variables: pickupInput,
-                     completion: completion)
+        performOperation(.schedulePickup(input: pickupInput), completion: completion)
     }
 }
