@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import OktaAuth
+import Stripe
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        true
+        Stripe.setDefaultPublishableKey("pk_test_51HLF1UKa1YnGlDrRQFihKS3jQGrbOCryI29gKBdXLJUt3lWKaKTRTjhBXxsIFV4xQiCh15gYM4PiJwQaaiN6BiHk00blUGhoiG")
+        return true
     }
 
     // MARK: UISceneSession Lifecycle

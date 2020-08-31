@@ -142,7 +142,7 @@ extension Optional {
     /// and simply returns the wrapped value.
     ///
     /// Similar to the nil-coalescing operator (`??`), but additionally sets the left-hand value if non-nil.
-    static func ??=(lhs: inout Wrapped?, rhs: Wrapped) -> Wrapped {
+    static func ??= (lhs: inout Wrapped?, rhs: Wrapped) -> Wrapped {
         lhs.orSettingIfNil(rhs)
     }
 }
