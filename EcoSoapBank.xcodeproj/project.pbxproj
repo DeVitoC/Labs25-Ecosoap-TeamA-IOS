@@ -132,6 +132,7 @@
 		998913D724DE0C34009ADBC1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D624DE0C33009ADBC1 /* Property.swift */; };
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
+		9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E024F9B78C00DD16B5 /* StripeController.swift */; };
 		9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */; };
 		9998716424E1E8C4000A993E /* PickupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9998716324E1E8C4000A993E /* PickupsView.swift */; };
 		999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */; };
@@ -278,6 +279,7 @@
 		998913D624DE0C33009ADBC1 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
+		9990F6E024F9B78C00DD16B5 /* StripeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeController.swift; sourceTree = "<group>"; };
 		9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlert.swift"; sourceTree = "<group>"; };
 		9998716324E1E8C4000A993E /* PickupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupsView.swift; sourceTree = "<group>"; };
 		999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 				04FEE1B524E48AB000F51D69 /* ImpactController.swift */,
 				998913D024DDFF96009ADBC1 /* PickupController.swift */,
 				992BB63D24EEE21300638AA4 /* UserController.swift */,
+				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
 				992BB64624EF08E400638AA4 /* Mock Providers */,
 			);
 			path = "Model Controller";
@@ -918,6 +921,7 @@
 				992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */,
 				04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
+				9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */,
 				049379AB24EB29160084051B /* ImpactHeaderView.swift in Sources */,
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
