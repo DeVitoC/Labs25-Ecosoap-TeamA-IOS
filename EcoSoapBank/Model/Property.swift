@@ -61,3 +61,16 @@ struct Property: Codable, Equatable, Identifiable, Hashable {
         case invoice = "INVOICE"
     }
 }
+
+enum PropertySelection {
+    case select(Property)
+    case all
+
+    var property: Property? {
+        if case .select(let property) = self {
+            return property
+        }
+        return nil
+    }
+    var display: String { property?.name ?? "All" }
+}
