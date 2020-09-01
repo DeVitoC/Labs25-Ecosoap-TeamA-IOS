@@ -22,12 +22,12 @@ class GraphQLController {
     // MARK: - Properties
 
     private let session: DataLoader
-    private let url = URL(string: "http://35.208.9.187:9094/ios-api-1/")!
+    static let url = URL(string: "http://35.208.9.187:9094/ios-api-1/")!
     private var token: String? { Keychain.Okta.getToken() }
 
     // Setting up the url request
     private lazy var request: URLRequest = {
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: Self.url)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         return request
