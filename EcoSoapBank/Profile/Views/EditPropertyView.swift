@@ -27,18 +27,11 @@ struct EditPropertyView: View {
         Form {
             Section {
                 TextField("Name", text: $viewModel.propertyInfo.name)
-                Picker("Property Type",
-                       selection: propertyType
-                ) {
+                Picker("Property Type", selection: propertyType) {
                     ForEach(0..<viewModel.propertyTypes.count) {
                         Text(self.viewModel.propertyTypes[$0].display)
                     }
                 }
-//                Picker("Property Type", selection: $viewModel.propertyInfo.type) {
-//                    ForEach(Property.PropertyType.allCases) {
-//                        Text($0.display)
-//                    }
-//                }
                 TextField("Phone", text: $viewModel.propertyInfo.phone)
             }
 
