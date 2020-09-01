@@ -28,7 +28,7 @@ struct PaymentInput: Encodable {
     let hospitalityContractId: String
 }
 
-enum PaymentMethod: String, Codable {
+enum PaymentMethod: String, Codable, CaseIterable {
     case ach = "ACH"
     case credit = "CREDIT"
     case debit = "DEBIT"
