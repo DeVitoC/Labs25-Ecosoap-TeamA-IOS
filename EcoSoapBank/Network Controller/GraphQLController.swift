@@ -44,6 +44,11 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
         performOperation(.userByID(id: userID), completion: completion)
     }
     
+    func updateUserProfile(with user: User,
+                           completion: @escaping ResultHandler<User>) {
+        completion(.failure(GraphQLError.unimplemented))
+    }
+    
     // Impact
     
     func fetchImpactStats(forPropertyID propertyID: String,
