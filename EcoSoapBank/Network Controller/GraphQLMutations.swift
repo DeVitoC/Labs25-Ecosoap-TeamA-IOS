@@ -87,26 +87,4 @@ enum GraphQLMutations {
         }
     }
     """
-
-    /* takes no variables - put nil value*/
-    static let seedDatabase = """
-    mutation SeedDatabase{
-        seedDatabase {
-            \(QueryObjects.successPayload)
-        }
-    }
-    """
-
-    /* works with variables as:
-    {
-        "input": "DELETE"
-    }
-    */
-    static let wipeDatabase = """
-    mutation WipeDatabase($input: String) {
-        wipeDatabase(input: $input) {
-            \(QueryObjects.successPayload)
-        }
-    }
-    """
 }
