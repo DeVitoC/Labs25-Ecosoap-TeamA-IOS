@@ -13,7 +13,7 @@ import OktaAuth
 typealias ResultHandler<T> = (Result<T, Error>) -> Void
 
 /// Class containing methods for communicating with GraphQL backend
-class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvider {
+class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvider, PaymentDataProvider {
 
     // MARK: - Properties
 
@@ -69,6 +69,16 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     func cancelPickup(_ pickupID: String, completion: @escaping ResultHandler<Pickup>) {
         // TODO: may need to add token later
         performOperation(.cancelPickup(id: pickupID), completion: completion)
+    }
+    
+    // Payments
+    
+    func fetchPayments(forPropertyId propertyId: String, _ completion: @escaping ResultHandler<[Payment]>) {
+        completion(.failure(GraphQLError.unimplemented))
+    }
+
+    func makePayment(_ paymentInput: Payment, completion: @escaping ResultHandler<Payment>) {
+        completion(.failure(GraphQLError.unimplemented))
     }
     
     // Properties
@@ -157,4 +167,3 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
         }
     }
 }
-
