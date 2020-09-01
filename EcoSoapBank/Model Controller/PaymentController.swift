@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 protocol PaymentDataProvider {
-    func fetchPayments(forPropertyId propertyId: String,
+    func fetchPayments(forPropertyID propertyId: String,
                        _ completion: @escaping ResultHandler<[Payment]>)
     func makePayment(_ paymentInput: Payment,
                      completion: @escaping ResultHandler<Payment>)
@@ -32,7 +32,7 @@ class PaymentController {
     func fetchAllPayments(forPropertyId propertyId: String) -> Future<[Payment], Error> {
 
         Future { promise in
-            self.dataProvider.fetchPayments(forPropertyId: propertyId) { [weak self] result in
+            self.dataProvider.fetchPayments(forPropertyID: propertyId) { [weak self] result in
                 if case .success(let payments) = result {
                     DispatchQueue.main.async {
                         self?.payments = payments

@@ -157,13 +157,33 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
             } else {
                 objectData = try JSONSerialization.data(withJSONObject: returnData, options: [])
             }
-
-            let dict = try JSONDecoder().decode(T.self, from: objectData)
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .custom { decoder -> Date in
+                let container = try decoder.singleValueContainer()
+                let dateString = try container.decode(String.self).replacingOccurrences(of: "−", with: "-")
+                guard let date = ISO8601DateFormatter.shared.date(from: dateString) else {
+                    throw NSError(domain: "Unable to parse date", code: 0)
+                }
+                return date
+            }
+            
+            let dict = try decoder.decode(T.self, from: objectData)
             
             return .success(dict)
         } catch {
             NSLog("\(error)")
             return .failure(error)
         }
+    }
+}
+
+extension ISO8601DateFormatter {
+    static let shared = ISO8601DateFormatter()
+}
+
+extension Date {
+    var iso8601String: String {
+        ISO8601DateFormatter.shared.string(from: self)
     }
 }
