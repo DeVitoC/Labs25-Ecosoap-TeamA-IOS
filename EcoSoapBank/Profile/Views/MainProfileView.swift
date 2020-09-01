@@ -46,11 +46,15 @@ struct MainProfileView: View {
                             label: HStack {
                                 Image.property()
                                     .resizable()
-                                    .padding(2)
+                                    .padding(EdgeInsets(
+                                        top: (iconWidth ?? 10) * 0.3,
+                                        leading: 2,
+                                        bottom: 2,
+                                        trailing: 2))
                                     .background(
                                         Color.green.clipShape(
                                             RoundedRectangle(
-                                                cornerRadius: 3,
+                                                cornerRadius: 2,
                                                 style: .circular)
                                         ).aspectRatio(CGSize(width: 1, height: 1),
                                                       contentMode: .fit))
