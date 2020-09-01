@@ -23,7 +23,7 @@
 
 import Foundation
 
-struct Property: Codable, Equatable {
+struct Property: Codable, Equatable, Identifiable, Hashable {
     let id: String
     let name: String
     let propertyType: PropertyType
