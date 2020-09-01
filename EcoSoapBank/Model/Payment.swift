@@ -12,8 +12,8 @@ struct Payment: Decodable {
     let id: String
     let invoiceCode: String?
     let invoice: String?
-    let amountPaid: String
-    let amountDue: String
+    let amountPaid: Int
+    let amountDue: Int
     let date: Date
     let invoicePeriodStartDate: Date?
     let invoicePeriodEndDate: Date?
