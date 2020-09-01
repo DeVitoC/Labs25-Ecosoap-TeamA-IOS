@@ -32,6 +32,16 @@ enum GraphQLMutations {
         }
     }
     """
+    
+    static let updateUserProfile = """
+    mutation UpdateUserProfile($input: UpdateUserProfileInput) {
+        updateUserProfile(input: $input) {
+            user {
+                \(QueryObjects.user)
+            }
+        }
+    }
+    """
 
     /* works with variables as:
      {
