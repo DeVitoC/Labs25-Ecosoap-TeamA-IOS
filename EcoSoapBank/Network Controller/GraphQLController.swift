@@ -162,8 +162,10 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
             decoder.dateDecodingStrategy = .custom { decoder -> Date in
                 let container = try decoder.singleValueContainer()
                 let dateString = try container.decode(String.self).replacingOccurrences(of: "−", with: "-")
-                guard let date = ISO8601DateFormatter.shared.date(from: dateString) else {
-                    throw NSError(domain: "Unable to parse date", code: 0)
+                print("Decoding date: \(dateString)")
+                guard let date = ISO8601DateFormatter.shared.date(from: dateString) ??
+                    DateFormatter.yyyyMMdd.date(from: dateString) else {
+                        throw NSError(domain: "Unable to parse date", code: 0)
                 }
                 return date
             }
@@ -180,6 +182,15 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
 
 extension ISO8601DateFormatter {
     static let shared = ISO8601DateFormatter()
+}
+
+extension DateFormatter {
+    static let yyyyMMdd = configure(DateFormatter()) {
+        $0.dateFormat = "yyyy-MM-dd"
+        $0.calendar = Calendar(identifier: .iso8601)
+        $0.timeZone = TimeZone(secondsFromGMT: 0)
+        $0.locale = Locale(identifier: "en_US_POSIX")
+    }
 }
 
 extension Date {
