@@ -11,9 +11,16 @@ import UIKit
 class PaymentHistoryViewController: UIViewController {
 
     var paymentController: PaymentController?
+    private var paymentCollectionView: UICollectionView?
+
+    override func loadView() {
+        view = BackgroundView()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        paymentCollectionView?.register(PaymentHistoryCollectionViewCell.self, forCellWithReuseIdentifier: "PaymentCell")
+        paymentCollectionView?.backgroundColor = .clear
 
         // Do any additional setup after loading the view.
     }
