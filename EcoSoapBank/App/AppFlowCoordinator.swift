@@ -18,6 +18,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private(set) var impactCoord: ImpactCoordinator?
     private(set) var pickupCoord: PickupCoordinator?
+    private(set) var paymentCoord: PaymentCoordinator?
     private(set) lazy var loginCoord = LoginCoordinator(
         root: tabBarController,
         userController: userController,
@@ -31,6 +32,7 @@ class AppFlowCoordinator: FlowCoordinator {
     private lazy var userProvider: UserDataProvider = useMock ? MockLoginProvider() : graphQLController
     private lazy var pickupProvider: PickupDataProvider = useMock ? MockPickupProvider() : graphQLController
     private lazy var impactProvider: ImpactDataProvider = useMock ? MockImpactProvider() : graphQLController
+    private lazy var paymentProvider: PaymentDataProvider = graphQLController
 
     // MARK: - Init / Start
 
@@ -126,14 +128,17 @@ class AppFlowCoordinator: FlowCoordinator {
             // when backend ready, use graphQL controller as data provider
             self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
             self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.impactProvider)
+            self.paymentCoord = PaymentCoordinator(user: user, dataProvider: self.paymentProvider)
 
             self.tabBarController.setViewControllers([
                 self.impactCoord!.rootVC,
-                self.pickupCoord!.rootVC
+                self.pickupCoord!.rootVC,
+                self.paymentCoord!.rootVC
             ], animated: false)
 
             self.impactCoord!.start()
             self.pickupCoord!.start()
+            self.paymentCoord!.start()
 
             if self.tabBarController.presentedViewController != nil {
                 self.tabBarController.dismiss(animated: true, completion: nil)
