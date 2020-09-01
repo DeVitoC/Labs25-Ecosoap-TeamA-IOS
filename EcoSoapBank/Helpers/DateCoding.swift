@@ -13,8 +13,8 @@ extension JSONDecoder.DateDecodingStrategy {
         let container = try decoder.singleValueContainer()
         let dateString = try container.decode(String.self).replacingOccurrences(of: "−", with: "-")
         print("Decoding date: \(dateString)")
-        guard let date = ISO8601DateFormatter.shared.date(from: dateString) ??
-            DateFormatter.yyyyMMdd.date(from: dateString) else {
+        guard let date = ISO8601DateFormatter.full.date(from: dateString) ??
+            ISO8601DateFormatter.short.date(from: dateString) else {
                 throw NSError(domain: "Unable to parse date", code: 0)
         }
         return date
@@ -22,20 +22,14 @@ extension JSONDecoder.DateDecodingStrategy {
 }
 
 extension ISO8601DateFormatter {
-    static let shared = ISO8601DateFormatter()
-}
-
-extension DateFormatter {
-    static let yyyyMMdd = configure(DateFormatter()) {
-        $0.dateFormat = "yyyy-MM-dd"
-        $0.calendar = Calendar(identifier: .iso8601)
-        $0.timeZone = TimeZone(secondsFromGMT: 0)
-        $0.locale = Locale(identifier: "en_US_POSIX")
+    static let full = ISO8601DateFormatter()
+    static let short = configure(ISO8601DateFormatter()) {
+        $0.formatOptions = [.withFullDate, .withDashSeparatorInDate]
     }
 }
 
 extension Date {
     var iso8601String: String {
-        ISO8601DateFormatter.shared.string(from: self)
+        ISO8601DateFormatter.full.string(from: self)
     }
 }
