@@ -20,7 +20,6 @@ extension Image {
     static func notes() -> Image { Image(systemName: "doc.plaintext") }
 }
 
-
 // MARK: - Text
 
 extension Text {
@@ -33,11 +32,9 @@ extension Text {
     }
 }
 
-
 extension String {
     func uiText() -> Text { Text(self) }
 }
-
 
 extension Array where Element == String {
     func uiText(separatedBy separator: String = "") -> Text {
@@ -51,13 +48,11 @@ extension Array where Element == String {
     }
 }
 
-
 extension View {
     func font(_ uiFont: UIFont) -> some View {
         font(Font(uiFont))
     }
 }
-
 
 // MARK: - Binding
 

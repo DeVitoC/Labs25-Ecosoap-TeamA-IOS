@@ -156,6 +156,7 @@
 		99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467724FD8AF200E2B005 /* MainProfileView.swift */; };
 		99C0467A24FD8B9200E2B005 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467924FD8B9200E2B005 /* EditProfileView.swift */; };
 		99C0467C24FD8BB700E2B005 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467B24FD8BB700E2B005 /* EditProfileViewModel.swift */; };
+		99D0166024FEA6D9001A7555 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D0165F24FEA6D8001A7555 /* With.swift */; };
 		E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220C32624E35E59003FF32D /* GraphQLQueries.swift */; };
 		E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */; };
 		E2AEB12624E7460600C42ACD /* mockImpactStatsFailure.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */; };
@@ -316,6 +317,7 @@
 		99C0467724FD8AF200E2B005 /* MainProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileView.swift; sourceTree = "<group>"; };
 		99C0467924FD8B9200E2B005 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		99C0467B24FD8BB700E2B005 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		99D0165F24FEA6D8001A7555 /* With.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
 		E220C32624E35E59003FF32D /* GraphQLQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueries.swift; sourceTree = "<group>"; };
 		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
 		E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsFailure.json; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				997BF11124E20AAE00A643D8 /* TextView.swift */,
 				99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */,
 				992FBC8624FDABE10099C32D /* ESBForm.swift */,
+				99D0165F24FEA6D8001A7555 /* With.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -969,6 +972,7 @@
 				04D1758D24E4195C00F8929C /* GradientView.swift in Sources */,
 				049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */,
 				992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */,
+				99D0166024FEA6D9001A7555 /* With.swift in Sources */,
 				04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
 				992FBC8B24FDB67D0099C32D /* EditPropertyViewModel.swift in Sources */,
