@@ -37,3 +37,22 @@ class PaymentHistoryViewController: UIViewController {
     */
 
 }
+
+extension PaymentHistoryViewController: UICollectionViewDelegate { }
+
+extension PaymentHistoryViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        paymentController?.payments.count ?? 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PaymentCell", for: indexPath) as? PaymentHistoryCollectionViewCell else { return UICollectionViewCell() }
+
+        return cell
+    }
+
+
+}
