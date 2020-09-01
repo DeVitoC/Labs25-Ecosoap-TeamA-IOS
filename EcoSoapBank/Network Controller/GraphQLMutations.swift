@@ -20,8 +20,8 @@ enum GraphQLMutations {
      }
      */
     static let login = """
-    mutation LogInInput($input: LogInInput) {
-        logIn(input:$input) {
+    mutation LogIn($input: LogInInput) {
+        logIn(input: $input) {
             user {
                 id
                 firstName
@@ -60,8 +60,8 @@ enum GraphQLMutations {
      }
      */
     static let schedulePickup = """
-    mutation SchedulePickupInput($input: SchedulePickupInput) {
-        schedulePickup(input:$input) {
+    mutation SchedulePickup($input: SchedulePickupInput) {
+        schedulePickup(input: $input) {
             pickup {
                 \(QueryObjects.pickup)
             }
@@ -79,8 +79,8 @@ enum GraphQLMutations {
     }
      */
     static let cancelPickup = """
-    mutation CancelPickupInput($input: CancelPickupInput) {
-        cancelPickup(input:$input) {
+    mutation CancelPickup($input: CancelPickupInput) {
+        cancelPickup(input: $input) {
             pickup {
                 \(QueryObjects.pickup)
             }
@@ -90,7 +90,7 @@ enum GraphQLMutations {
 
     /* takes no variables - put nil value*/
     static let seedDatabase = """
-    mutation {
+    mutation SeedDatabase{
         seedDatabase {
             \(QueryObjects.successPayload)
         }
@@ -103,8 +103,8 @@ enum GraphQLMutations {
     }
     */
     static let wipeDatabase = """
-    mutation WipeDatabaseInput($input: String) {
-        wipeDatabase(input:$input) {
+    mutation WipeDatabase($input: String) {
+        wipeDatabase(input: $input) {
             \(QueryObjects.successPayload)
         }
     }
