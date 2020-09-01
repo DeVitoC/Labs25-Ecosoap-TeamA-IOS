@@ -59,6 +59,8 @@ struct EditPropertyView: View {
         )
     }
 
+    // MARK: - Subviews
+
     func textField(title: String, text: Binding<String>) -> some View {
         LabelAlignedTextField(title: title, labelWidth: $labelWidth, text: text)
     }
@@ -77,6 +79,8 @@ struct EditPropertyView: View {
         TextField("Country", text: address.country)
     }
 }
+
+// MARK: - Preview
 
 struct EditPropertyView_Previews: PreviewProvider {
     static let property = User.placeholder().properties!.first!
