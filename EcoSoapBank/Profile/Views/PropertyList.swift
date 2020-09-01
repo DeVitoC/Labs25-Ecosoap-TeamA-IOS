@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-
+/// Currently unused; may be removed entirely.
 struct PropertyList: View {
     @ObservedObject var viewModel: PropertyListViewModel
 
     var body: some View {
         Form {
-            Section(header: Text("EDIT PROPERTY")) {
+            Section(header: Text("Edit Property")) {
                 ForEach(viewModel.properties) { propertyVM in
                     NavigationLink(
                         destination: EditPropertyView(viewModel: propertyVM)
