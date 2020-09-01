@@ -28,7 +28,13 @@ struct EditProfileView: View {
                     self.textField(title: "Phone", text: profile.phone)
                 }
             }
-        }.navigationBarTitle("Edit Profile")
+        }
+        .keyboardAvoiding()
+        .navigationBarTitle("Edit Profile")
+        .navigationBarItems(trailing: Button(
+            action: viewModel.commitChanges,
+            label: { Text("Save") })
+        )
     }
 
     func textField(title: String, text: Binding<String>) -> some View {
