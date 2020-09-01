@@ -109,4 +109,14 @@ enum GraphQLQueries {
         }
     }
     """
+    
+    static let paymentsByPropertyId = """
+    query PaymentsByPropertyId($input: PaymentsByPropertyIdInput) {
+        paymentsByPropertyId(input:$input) {
+            payments {
+                \(QueryObjects.payment)
+            }
+        }
+    }
+    """
 }

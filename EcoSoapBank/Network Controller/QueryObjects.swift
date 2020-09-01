@@ -120,4 +120,17 @@ enum QueryObjects {
     success
     error
     """
+    
+    static let payment = """
+    id
+    invoiceCode
+    invoice
+    amountPaid
+    amountDue
+    date
+    invoicePeriodStartDate
+    invoicePeriodEndDate
+    dueDate
+    paymentMethod
+    """
 }

@@ -14,6 +14,7 @@ enum GraphQLOperation {
     // Queries
     case impactStatsByPropertyID(id: String)
     case pickupsByPropertyID(id: String)
+    case paymentsByPropertyID(id: String)
     case propertiesByUserID(id: String)
     case userByID(id: String)
     
@@ -32,7 +33,11 @@ enum GraphQLOperation {
         
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONEncoder().encode(self)
+        
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        
+        request.httpBody = try encoder.encode(self)
         
         return request
     }
@@ -49,6 +54,8 @@ enum GraphQLOperation {
             return GraphQLQueries.impactStatsByPropertyId
         case .pickupsByPropertyID:
             return GraphQLQueries.pickupsByPropertyId
+        case .paymentsByPropertyID:
+            return GraphQLQueries.paymentsByPropertyId
         case .propertiesByUserID:
             return GraphQLQueries.propertiesByUserId
         case .userByID:
@@ -78,7 +85,7 @@ extension GraphQLOperation: Encodable {
         var variablesContainer = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .variables)
         
         switch self {
-        case .impactStatsByPropertyID(let id), .pickupsByPropertyID(let id):
+        case .impactStatsByPropertyID(let id), .pickupsByPropertyID(let id), .paymentsByPropertyID(let id):
             try variablesContainer.encode(["propertyId": id], forKey: .input)
         case .propertiesByUserID(let id), .userByID(let id):
             try variablesContainer.encode(["userId": id], forKey: .input)
