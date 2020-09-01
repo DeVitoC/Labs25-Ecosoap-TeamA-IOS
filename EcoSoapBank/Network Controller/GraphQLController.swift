@@ -13,7 +13,7 @@ import OktaAuth
 typealias ResultHandler<T> = (Result<T, Error>) -> Void
 
 /// Class containing methods for communicating with GraphQL backend
-class GraphQLController {
+class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvider {
 
     // MARK: - Properties
 
@@ -29,6 +29,8 @@ class GraphQLController {
     
     // MARK: - Public Methods
     
+    // User
+    
     func logIn(_ completion: @escaping ResultHandler<User>) {
         guard let token = self.token else {
             return completion(.failure(GraphQLError.noToken))
@@ -36,28 +38,26 @@ class GraphQLController {
         performOperation(.login(token: token), completion: completion)
     }
     
+    func fetchUser(byID userID: String,
+                   completion: @escaping ResultHandler<User>) {
+        // TODO: may need to add token later
+        performOperation(.userByID(id: userID), completion: completion)
+    }
+    
+    // Impact
+    
     func fetchImpactStats(forPropertyID propertyID: String,
                           _ completion: @escaping ResultHandler<ImpactStats>) {
         // TODO: may need to add token later
         performOperation(.impactStatsByPropertyID(id: propertyID), completion: completion)
     }
     
+    // Pickups
+    
     func fetchPickups(forPropertyID propertyID: String,
                       _ completion: @escaping ResultHandler<[Pickup]>) {
         // TODO: may need to add token later
         performOperation(.pickupsByPropertyID(id: propertyID), completion: completion)
-    }
-    
-    func fetchProperties(forUserID userID: String,
-                         completion: @escaping ResultHandler<[Property]>) {
-        // TODO: may need to add token later
-        performOperation(.propertiesByUserID(id: userID), completion: completion)
-    }
-    
-    func fetchUser(byID userID: String,
-                   completion: @escaping ResultHandler<User>) {
-        // TODO: may need to add token later
-        performOperation(.userByID(id: userID), completion: completion)
     }
     
     func schedulePickup(_ pickupInput: Pickup.ScheduleInput,
@@ -71,6 +71,14 @@ class GraphQLController {
         performOperation(.cancelPickup(id: pickupID), completion: completion)
     }
     
+    // Properties
+    
+    func fetchProperties(forUserID userID: String,
+                         completion: @escaping ResultHandler<[Property]>) {
+        // TODO: may need to add token later
+        performOperation(.propertiesByUserID(id: userID), completion: completion)
+    }
+
     // MARK: - Private Methods
     
     /// Performs the desired GraphQLOperation
@@ -150,8 +158,3 @@ class GraphQLController {
     }
 }
 
-// MARK: - Data Providers
-
-extension GraphQLController: UserDataProvider {}
-extension GraphQLController: ImpactDataProvider {}
-extension GraphQLController: PickupDataProvider {}
