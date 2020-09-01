@@ -19,10 +19,10 @@ class PaymentCoordinator: FlowCoordinator {
     let rootVC: PaymentHistoryViewController
 
     func start() {
-        let globe = UIImage(
-            systemName: "dolarsign.circle.fill",
+        let payment = UIImage(
+            systemName: "dollarsign.circle",
             withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular)
         )
-        rootVC.tabBarItem = UITabBarItem(title: "Payments", image: globe, tag: 0)
+        rootVC.tabBarItem = UITabBarItem(title: "Payments", image: payment, tag: 0)
     }
 }
