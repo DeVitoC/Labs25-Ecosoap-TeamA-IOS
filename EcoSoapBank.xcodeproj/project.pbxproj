@@ -147,6 +147,7 @@
 		99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */; };
 		99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177024EC3D000099664B /* Publisher+HandleError.swift */; };
 		99B6177324EC743F0099664B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177224EC743F0099664B /* LoginCoordinator.swift */; };
+		99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */; };
 		E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220C32624E35E59003FF32D /* GraphQLQueries.swift */; };
 		E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */; };
 		E2AEB12624E7460600C42ACD /* mockImpactStatsFailure.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */; };
@@ -298,6 +299,7 @@
 		99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingViewController.swift; sourceTree = "<group>"; };
 		99B6177024EC3D000099664B /* Publisher+HandleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+HandleError.swift"; sourceTree = "<group>"; };
 		99B6177224EC743F0099664B /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		E220C32624E35E59003FF32D /* GraphQLQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueries.swift; sourceTree = "<group>"; };
 		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
 		E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsFailure.json; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 				994E4B6D24DDAEA800C12921 /* Impact */,
 				994E4B6E24DDAEB100C12921 /* Pickups */,
 				994E4B6F24DDAEB700C12921 /* Payment */,
+				99C0467424FD8AA500E2B005 /* Profile */,
 				46BEB4EF24C98ED900FE0CD1 /* Login */,
 				46BEB4EB24C98EB400FE0CD1 /* Model */,
 				46BEB4EC24C98EBB00FE0CD1 /* Model Controller */,
@@ -641,6 +644,14 @@
 				999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		99C0467424FD8AA500E2B005 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		E27B4B1924E1ECE800148E4E /* Network Controller */ = {
@@ -963,6 +974,7 @@
 				04BE6D0524F045C800DFC47D /* MockImpactProvider.swift in Sources */,
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
+				99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */,
 				992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */,
 				E2D302F524E5CA32008A6FAF /* User.swift in Sources */,
 				99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */,
