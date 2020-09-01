@@ -10,22 +10,48 @@ import SwiftUI
 
 
 struct ESBForm: View {
-    let formTitle: String
-    let navItem: Button<Text>
+    let formTitle: String?
+    let navItem: Button<Text>?
     let sections: [SectionInfo]
 
     @State var labelWidth: CGFloat?
 
-    init(title: String, navItem: Button<Text>, sections: [SectionInfo]) {
+    init(title: String?, navItem: Button<Text>?, sections: [SectionInfo]) {
         self.formTitle = title
         self.sections = sections
         self.navItem = navItem
     }
 
+    // MARK: - Body
+
+    @ViewBuilder var body: some View {
+        // terrible nested ifs necessary due to function builder syntax's lack of normal control flow
+        if formTitle != nil {
+            if navItem != nil {
+                mainContent()
+                    .navigationBarTitle(Text(formTitle!), displayMode: .inline)
+                    .navigationBarItems(trailing: navItem!)
+            } else {
+                mainContent()
+                    .navigationBarTitle(Text(formTitle!), displayMode: .inline)
+            }
+        } else {
+            if navItem != nil {
+                mainContent()
+                    .navigationBarItems(trailing: navItem!)
+            } else {
+                mainContent()
+            }
+        }
+    }
+
+    // MARK: - Subviews
+
     func sectionTextField(_ title: String, text: Binding<String>) -> some View {
         HStack(alignment: .center) {
             Text(title + ":")
                 .font(.muli(style: .caption1, typeface: .bold))
+                // Set width of all titles based on width of longest title
                 .background(GeometryReader { proxy in
                     Color.clear.preference(key: WidthKey.self,
                                            value: proxy.size.width)
@@ -43,18 +69,26 @@ struct ESBForm: View {
         }
     }
 
-    var body: some View {
+    func sectionContent(_ sectionInfo: SectionInfo) -> some View {
+        ForEach(sectionInfo.fields) {
+            self.sectionTextField($0.title, text: $0.text)
+        }
+    }
+
+    func mainContent() -> some View {
         Form {
             ForEach(sections) { sectionInfo in
-                Section(header: Text(sectionInfo.title.uppercased())) {
-                    ForEach(sectionInfo.fields) {
-                        self.sectionTextField($0.title, text: $0.text)
+                if sectionInfo.title != nil {
+                    Section(header: Text(sectionInfo.title!.uppercased())) {
+                        self.sectionContent(sectionInfo)
+                    }
+                } else {
+                    Section {
+                        self.sectionContent(sectionInfo)
                     }
                 }
             }
         }
-        .navigationBarTitle(Text(formTitle), displayMode: .inline)
-        .navigationBarItems(trailing: navItem)
     }
 }
 
@@ -62,10 +96,15 @@ struct ESBForm: View {
 
 extension ESBForm {
     struct SectionInfo: Identifiable, Hashable {
-        let title: String
+        let title: String?
         let fields: [EditableText]
 
         var id: SectionInfo { self }
+
+        init(title: String? = nil, fields: [EditableText]) {
+            self.title = title
+            self.fields = fields
+        }
     }
 
     struct EditableText: Identifiable, Hashable {
