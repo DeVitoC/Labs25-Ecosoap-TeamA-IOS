@@ -13,16 +13,7 @@ struct EditPropertyView: View {
     @ObservedObject var viewModel: EditPropertyViewModel
 
     var body: some View {
-        ESBForm(
-            title: "Edit Property",
-            navItem: Button(
-                action: viewModel.commitChanges,
-                label: { Text("Save") }),
-            sections: [
-                .init(title: "test", fields: [
-                    .init(title: "testtesttest", text: Binding.constant("bleh"))
-                ])
-        ])
+        EmptyView()
     }
 }
 

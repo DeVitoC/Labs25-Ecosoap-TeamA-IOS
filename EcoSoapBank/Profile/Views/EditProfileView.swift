@@ -11,24 +11,36 @@ import SwiftUI
 struct EditProfileView: View {
     @ObservedObject var viewModel: EditProfileViewModel
 
+    @State var labelWidth: CGFloat?
+
     var body: some View {
-        ESBForm(
-            title: "Edit Profile",
-            navItem: Button(
-                action: viewModel.commitProfileUpdates,
-                label: { Text("Save") }),
-            sections: [
-                .init(title: "Name", fields: [
-                    .init(title: "First", text: $viewModel.editableInfo.firstName),
-                    .init(title: "Middle", text: $viewModel.editableInfo.middleName),
-                    .init(title: "Last", text: $viewModel.editableInfo.lastName),
-                ]),
-                .init(title: "Contact Info", fields: [
-                    .init(title: "Email", text: $viewModel.editableInfo.email),
-                    .init(title: "Skype", text: $viewModel.editableInfo.skype),
-                    .init(title: "Phone", text: $viewModel.editableInfo.phone),
-                ])
-        ])
+        With($viewModel.editableInfo) { prof in
+            Form {
+                Section(header: Text("Name")) {
+                    LabelAlignedTextField(title: "First",
+                                          labelWidth: self.$labelWidth,
+                                          text: prof.firstName)
+                    LabelAlignedTextField(title: "Middle",
+                                          labelWidth: self.$labelWidth,
+                                          text: prof.middleName)
+                    LabelAlignedTextField(title: "Last",
+                                          labelWidth: self.$labelWidth,
+                                          text: prof.lastName)
+                }
+
+                Section(header: Text("Contact Info")) {
+                    LabelAlignedTextField(title: "Email",
+                                          labelWidth: self.$labelWidth,
+                                          text: prof.email)
+                    LabelAlignedTextField(title: "Skype",
+                                          labelWidth: self.$labelWidth,
+                                          text: prof.skype)
+                    LabelAlignedTextField(title: "Phone",
+                                          labelWidth: self.$labelWidth,
+                                          text: prof.phone)
+                }
+            }
+        }
     }
 }
 
