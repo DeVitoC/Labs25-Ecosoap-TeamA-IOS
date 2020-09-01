@@ -209,3 +209,13 @@ extension GraphQLController: PickupDataProvider {
                      completion: completion)
     }
 }
+
+extension GraphQLController: PaymentDataProvider {
+    func fetchPayments(forPropertyId propertyId: String, _ completion: @escaping ResultHandler<[Payment]>) {
+        completion(.failure(GraphQLError.unimplemented))
+    }
+
+    func makePayment(_ paymentInput: Payment, completion: @escaping ResultHandler<Payment>) {
+        completion(.failure(GraphQLError.unimplemented))
+    }
+}
