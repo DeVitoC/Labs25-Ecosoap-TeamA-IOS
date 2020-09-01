@@ -83,6 +83,9 @@
 		04BE6D0524F045C800DFC47D /* MockImpactProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0424F045C800DFC47D /* MockImpactProvider.swift */; };
 		04BE6D0924F05A3100DFC47D /* ImpactCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0824F05A3100DFC47D /* ImpactCellTests.swift */; };
 		04BE6D0B24F05A6300DFC47D /* ImpactViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0A24F05A6300DFC47D /* ImpactViewControllerTests.swift */; };
+		04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90224FD60AA00263376 /* GraphQLOperation.swift */; };
+		04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90424FD85CF00263376 /* HTTPMethod.swift */; };
+		04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90624FD860B00263376 /* GraphQLError.swift */; };
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
@@ -230,6 +233,9 @@
 		04BE6D0424F045C800DFC47D /* MockImpactProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImpactProvider.swift; sourceTree = "<group>"; };
 		04BE6D0824F05A3100DFC47D /* ImpactCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellTests.swift; sourceTree = "<group>"; };
 		04BE6D0A24F05A6300DFC47D /* ImpactViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewControllerTests.swift; sourceTree = "<group>"; };
+		04CCD90224FD60AA00263376 /* GraphQLOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLOperation.swift; sourceTree = "<group>"; };
+		04CCD90424FD85CF00263376 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		04CCD90624FD860B00263376 /* GraphQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLError.swift; sourceTree = "<group>"; };
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -656,9 +662,12 @@
 			isa = PBXGroup;
 			children = (
 				E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */,
+				04CCD90224FD60AA00263376 /* GraphQLOperation.swift */,
 				E220C32624E35E59003FF32D /* GraphQLQueries.swift */,
 				E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */,
 				E2B961B324E45BF800C5DF8B /* QueryObjects.swift */,
+				04CCD90424FD85CF00263376 /* HTTPMethod.swift */,
+				04CCD90624FD860B00263376 /* GraphQLError.swift */,
 				992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */,
 				04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */,
 			);
@@ -926,6 +935,7 @@
 			files = (
 				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
+				04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */,
 				992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */,
 				992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */,
 				E2E2F0EC24F844A10050BFCF /* PaymentController.swift in Sources */,
@@ -983,12 +993,14 @@
 				E2D04F9324F0D50600515831 /* Address.swift in Sources */,
 				9998716424E1E8C4000A993E /* PickupsView.swift in Sources */,
 				998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */,
+				04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */,
 				9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
 				E2D3030124E5F9B8008A6FAF /* MockDataLoader.swift in Sources */,
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
 				E2E2F0EA24F838170050BFCF /* Payment.swift in Sources */,
 				99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */,
+				04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */,
 				04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */,
 				04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
