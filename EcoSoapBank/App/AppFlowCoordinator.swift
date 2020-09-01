@@ -21,7 +21,7 @@ class AppFlowCoordinator: FlowCoordinator {
     private(set) lazy var loginCoord = LoginCoordinator(
         root: tabBarController,
         userController: userController,
-        onLoginComplete: { [weak self] in self?.onLoginComplete() })
+        onLoginComplete: { [weak self] user in self?.onLoginComplete(withUser: user) })
     private(set) lazy var userController = UserController(dataLoader: userProvider)
 
     // MARK: - Data Providers
@@ -69,8 +69,8 @@ class AppFlowCoordinator: FlowCoordinator {
                     switch result {
                     case .failure(let error):
                         self?.presentLoginFailAlert(error: error)
-                    case .success:
-                        self?.onLoginComplete()
+                    case .success(let user):
+                        self?.onLoginComplete(withUser: user)
                     }
                 }
             }
@@ -82,28 +82,15 @@ class AppFlowCoordinator: FlowCoordinator {
     // MARK: - Methods
 
     func presentLoginFailAlert(error: Error? = nil) {
-        if let error = error {
-            NSLog("Error occurred: \(error)")
-        }
-        let userError = error as? UserFacingError
         if tabBarController.presentedViewController != nil {
             tabBarController.dismiss(animated: true) { [weak self] in
                 self?.presentLoginFailAlert(error: error)
             }
         }
-        let message = userError?.userFacingDescription
-            ?? "An unknown error occurred while logging in. Please try again."
-        tabBarController.presentSimpleAlert(
-            with: "Login failed",
-            message: message,
-            preferredStyle: .alert,
-            dismissText: "OK"
-        ) { [weak self] _ in
-            self?.loginCoord.start()
-        }
+        tabBarController.presentAlert(for: error)
     }
 
-    private func onLoginComplete() {
+    private func onLoginComplete(withUser user: User) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {
                 var topLevelVC = UIApplication.shared.windows

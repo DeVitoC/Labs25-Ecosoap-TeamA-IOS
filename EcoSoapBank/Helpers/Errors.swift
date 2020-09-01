@@ -9,10 +9,45 @@
 import Foundation
 
 
-/// An error that may be presented to the user.
-protocol UserFacingError: Error {
-    /// A short description of the error to be displayed to the user. Should be short and layperson-friendly.
-    var userFacingDescription: String? { get }
+struct CustomError: LocalizedError {
+    let errorDescription: String
+    let recoverySuggestion: String
+}
+
+
+struct ErrorMessage {
+    let title: String
+    let message: String
+    let error: Error?
+
+    private static let fallbackTitle = "An unknown error occurred."
+    private static let fallbackMessage = "Please contact the developer for more information."
+
+    init(title: String, message: String, error: Error? = nil) {
+        self.title = title
+        self.message = message
+        if let error = error {
+            self.error = error
+        } else {
+            self.error = CustomError(errorDescription: title,
+                                     recoverySuggestion: message)
+        }
+    }
+
+    init(error: Error? = nil) {
+        if let error = error as? LocalizedError {
+            self.init(
+                title: error.errorDescription ?? Self.fallbackTitle,
+                message: error.recoverySuggestion
+                    ?? error.failureReason
+                    ?? Self.fallbackMessage
+            )
+        } else {
+            self.init(title: Self.fallbackTitle,
+                      message: Self.fallbackMessage,
+                      error: error)
+        }
+    }
 }
 
 
