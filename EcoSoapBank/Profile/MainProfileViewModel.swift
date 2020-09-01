@@ -16,6 +16,8 @@ class MainProfileViewModel: ObservableObject {
     @Published var selectedPropertyIndex: Int
     let userController: UserController
 
+    var selectedProperty: Property { properties[selectedPropertyIndex] }
+
     private var cancellables = Set<AnyCancellable>()
     
     init(user: User, currentProperty: Property, userController: UserController) {
@@ -23,9 +25,5 @@ class MainProfileViewModel: ObservableObject {
         self.properties = user.properties ?? []
         self.selectedPropertyIndex = 0
         self.userController = userController
-        $selectedPropertyIndex
-            .print()
-            .sink { print($0) }
-            .store(in: &cancellables)
     }
 }

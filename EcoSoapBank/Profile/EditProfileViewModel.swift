@@ -18,7 +18,7 @@ class EditProfileViewModel: ObservableObject {
         self.user = user
     }
 
-    func commitProfileUpdates() {
+    func commitChanges() {
         
     }
 }
