@@ -18,6 +18,8 @@ extension Image {
     static func plus() -> Image { Image(systemName: "plus") }
     static func cubeBox() -> Image { Image(systemName: "cube.box") }
     static func notes() -> Image { Image(systemName: "doc.plaintext") }
+    static func personSquareFill() -> Image { Image(systemName: "person.crop.square.fill") }
+    static func property() -> Image { Image(systemName: "bed.double.fill") }
 }
 
 // MARK: - Text
