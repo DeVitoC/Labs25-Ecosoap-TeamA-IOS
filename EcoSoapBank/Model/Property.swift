@@ -37,11 +37,21 @@ struct Property: Codable, Equatable, Identifiable, Hashable {
     let shippingNote: String?
     let notes: String?
 
-    enum PropertyType: String, Codable, CaseIterable {
+    enum PropertyType: String, Codable, CaseIterable, Identifiable {
         case bedAndBreakfast = "BED_AND_BREAKFAST"
         case guesthouse = "GUESTHOUSE"
         case hotel = "HOTEL"
         case other = "OTHER"
+
+        var id: String { rawValue }
+
+        var display: String {
+            if case .bedAndBreakfast = self {
+                return "Bed & Breakfast"
+            } else {
+                return rawValue.capitalized
+            }
+        }
     }
 
     enum BillingMethod: String, Codable, CaseIterable {
