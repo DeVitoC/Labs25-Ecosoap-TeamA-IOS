@@ -76,6 +76,18 @@ struct MainProfileView: View {
                         }
                     }
                 }
+
+                Section {
+                    Button(action: viewModel.logOut) {
+                        HStack {
+                            Spacer()
+                            Text("Log out")
+                                .foregroundColor(.red)
+                            Spacer()
+                        }
+                    }
+                }
+
             }.navigationBarTitle("Profile Settings", displayMode: .inline)
         }.font(.muli())
     }

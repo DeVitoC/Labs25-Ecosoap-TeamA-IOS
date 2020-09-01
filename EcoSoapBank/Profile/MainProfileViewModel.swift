@@ -29,4 +29,8 @@ class MainProfileViewModel: ObservableObject {
         self.selectedPropertyIndex = 0
         self.userController = userController
     }
+
+    func logOut() {
+        
+    }
 }
