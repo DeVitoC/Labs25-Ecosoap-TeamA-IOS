@@ -12,17 +12,20 @@ import Combine
 
 class MainProfileViewModel: ObservableObject {
     @Published var user: User
-    @Published var properties: [Property]
+    let propertyOptions: [PropertySelection]
     @Published var selectedPropertyIndex: Int
     let userController: UserController
 
-    var selectedProperty: Property { properties[selectedPropertyIndex] }
+    var selectedProperty: PropertySelection { propertyOptions[selectedPropertyIndex] }
+    var properties: [Property] {
+        propertyOptions.compactMap { $0.property }
+    }
 
     private var cancellables = Set<AnyCancellable>()
     
     init(user: User, currentProperty: Property, userController: UserController) {
         self.user = user
-        self.properties = user.properties ?? []
+        self.propertyOptions = [.all] + (user.properties ?? []).map { .select($0) }
         self.selectedPropertyIndex = 0
         self.userController = userController
     }
