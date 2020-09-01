@@ -20,7 +20,7 @@ struct PickupHistoryView: View {
             ForEach(pickupController.pickups) {
                 PickupHistoryCell(pickup: $0)
             }
-        }.listBackgroundColor(color: .esbGreen)
+        }//.listBackgroundColor(color: .esbGreen)
     }
 }
 
