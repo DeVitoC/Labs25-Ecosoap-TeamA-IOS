@@ -11,9 +11,9 @@ import Combine
 
 protocol PaymentDataProvider {
     func fetchPayments(forPropertyId propertyId: String,
-                       _ completion: @escaping ResultHandler<[Payment]>)
+                       _ completion: @escaping (Result<[Payment], Error>) -> Void)
     func makePayment(_ paymentInput: Payment,
-                     completion: @escaping ResultHandler<Payment>)
+                     completion: @escaping (Result<Payment, Error>) -> Void)
 }
 
 class PaymentController {
@@ -29,35 +29,19 @@ class PaymentController {
         self.dataProvider = dataProvider
     }
 
-    func fetchPayments(forPropertyId propertyId: String) -> Future<[Payment], Error> {
+    func fetchPayments(forPropertyId propertyId: String) -> [Payment]? {
+        var payments: [Payment]?
 
-        Future { promise in
-            self.dataProvider.fetchPayments(forPropertyId: propertyId) { [weak self] result in
-                if case .success(let payments) = result {
-                    DispatchQueue.main.async {
-                        self?.payments = payments
-                    }
-                    promise(result)
-                }
+        dataProvider.fetchPayments(forPropertyId: propertyId) { result in
+            switch result {
+            case .success(let payments):
+                self.payments = payments
+            case .failure(let error):
+                print(error.localizedDescription)
+                payments = nil
             }
         }
-    }
-
-    func fetchPaymentsForAllProperties() -> AnyPublisher<[Payment], Error> {
-        guard let properties = properties, !properties.isEmpty else {
-            return Future {
-                $0(.failure(UserError.noProperties))
-            }
-            .eraseToAnyPublisher()
-        }
-        var futures = properties.map { fetchPayments(forPropertyId: $0.id)
-        }
-        var combined = futures.popLast()!.eraseToAnyPublisher()
-        while let future = futures.popLast() {
-            combined = combined.append(future).eraseToAnyPublisher()
-        }
-
-        return combined
+        return payments
     }
     
 }
