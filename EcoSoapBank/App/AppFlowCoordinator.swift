@@ -9,6 +9,7 @@
 import KeychainAccess
 import UIKit
 import OktaAuth
+import Combine
 
 
 class AppFlowCoordinator: FlowCoordinator {
@@ -21,8 +22,7 @@ class AppFlowCoordinator: FlowCoordinator {
     private(set) var profileCoord: ProfileCoordinator?
     private(set) lazy var loginCoord = LoginCoordinator(
         root: tabBarController,
-        userController: userController,
-        onLoginComplete: { [weak self] user in self?.onLoginComplete(withUser: user) })
+        userController: userController)
     private(set) lazy var userController = UserController(dataLoader: userProvider)
 
     // MARK: - Data Providers
@@ -35,8 +35,15 @@ class AppFlowCoordinator: FlowCoordinator {
 
     // MARK: - Init / Start
 
+    private var cancellables = Set<AnyCancellable>()
+
     init(window: UIWindow) {
         self.window = window
+
+        userController.$user
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in self?.onLoginComplete(withUser: $0) }
+            .store(in: &cancellables)
     }
 
     func start() {
@@ -83,51 +90,40 @@ class AppFlowCoordinator: FlowCoordinator {
     // MARK: - Methods
 
     func presentLoginFailAlert(error: Error? = nil) {
-        if tabBarController.presentedViewController != nil {
-            tabBarController.dismiss(animated: true) { [weak self] in
-                self?.presentLoginFailAlert(error: error)
-            }
-        }
-        tabBarController.presentAlert(for: error)
+        tabBarController.presentAlert(for: error, actions: [
+            .okay({ _ in
+                if self.tabBarController.presentedViewController != nil {
+                    self.tabBarController.dismiss(animated: true) {
+                        self.loginCoord.start()
+                    }
+                } else {
+                    self.loginCoord.start()
+                }
+            })
+        ])
     }
 
-    private func onLoginComplete(withUser user: User) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else {
-                var topLevelVC = UIApplication.shared.windows
-                    .first(where: { !$0.isHidden && $0.isKeyWindow })?
-                    .rootViewController
-                if let presentedVC = topLevelVC?.presentedViewController {
-                    topLevelVC = presentedVC
-                }
-                topLevelVC?.presentSimpleAlert(
-                    with: "Sorry! An unknown error occurred!",
-                    message: "Please contact the app developers with information about how you got here. Thanks!",
-                    preferredStyle: .alert,
-                    dismissText: "OK")
-                return assertionFailure("AppFlowCoordinator unexpectedly deinitialized before login completion")
-            }
-            guard let user = self.userController.user else {
-                return self.presentLoginFailAlert()
-            }
+    private func onLoginComplete(withUser user: User?) {
+        guard let user = user else {
+            return self.presentLoginFailAlert()
+        }
 
-            self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
-            self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.impactProvider)
-            self.profileCoord = ProfileCoordinator(userController: self.userController)
+        self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
+        self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.impactProvider)
+        self.profileCoord = ProfileCoordinator(userController: self.userController)
 
-            self.tabBarController.setViewControllers([
-                self.impactCoord!.rootVC,
-                self.pickupCoord!.rootVC,
-                self.profileCoord!.rootVC
-            ], animated: false)
+        self.tabBarController.setViewControllers([
+            self.impactCoord!.rootVC,
+            self.pickupCoord!.rootVC,
+            self.profileCoord!.rootVC
+        ], animated: false)
 
-            self.impactCoord!.start()
-            self.pickupCoord!.start()
-            self.profileCoord!.start()
+        self.impactCoord!.start()
+        self.pickupCoord!.start()
+        self.profileCoord!.start()
 
-            if self.tabBarController.presentedViewController != nil {
-                self.tabBarController.dismiss(animated: true, completion: nil)
-            }
+        if self.tabBarController.presentedViewController != nil {
+            self.tabBarController.dismiss(animated: true, completion: nil)
         }
     }
 }
@@ -135,4 +131,4 @@ class AppFlowCoordinator: FlowCoordinator {
 
 // MARK: - Use Mock
 
-let useMock: Bool = true
+let useMock: Bool = false
