@@ -23,6 +23,7 @@ enum GraphQLOperation {
     case schedulePickup(input: Pickup.ScheduleInput)
     case cancelPickup(id: String)
     case updateUserProfile(info: EditableProfileInfo)
+    case updateProperty(info: EditablePropertyInfo)
     
     // MARK: - Public
     
@@ -69,6 +70,8 @@ enum GraphQLOperation {
             return GraphQLMutations.cancelPickup
         case .updateUserProfile:
             return GraphQLMutations.updateUserProfile
+        case .updateProperty:
+            return GraphQLMutations.updateProperty
         }
     }
 }
@@ -99,6 +102,8 @@ extension GraphQLOperation: Encodable {
         case .schedulePickup(let input):
             try variablesContainer.encode(input, forKey: .input)
         case .updateUserProfile(let info):
+            try variablesContainer.encode(info, forKey: .input)
+        case .updateProperty(let info):
             try variablesContainer.encode(info, forKey: .input)
         }
     }

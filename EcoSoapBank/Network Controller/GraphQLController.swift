@@ -46,6 +46,7 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     
     func updateUserProfile(with info: EditableProfileInfo,
                            completion: @escaping ResultHandler<User>) {
+        // TODO: may need to add token later
         performOperation(.updateUserProfile(info: info), completion: completion)
     }
     
@@ -93,6 +94,12 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
         // TODO: may need to add token later
         performOperation(.propertiesByUserID(id: userID), completion: completion)
     }
+    
+    func updateProperty(with info: EditablePropertyInfo,
+                        completion: @escaping ResultHandler<Property>) {
+        // TODO: may need to add token later
+        performOperation(.updateProperty(info: info), completion: completion)
+    }
 
     // MARK: - Private Methods
     
@@ -122,10 +129,6 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
             guard let data = data else {
                 return completion(.failure(GraphQLError.noData))
             }
-            
-            // swiftlint:disable force_try
-            let json = try! JSONSerialization.jsonObject(with: data)
-            print(json)
             
             completion(self.decodeJSON(T.self, data: data))
         }

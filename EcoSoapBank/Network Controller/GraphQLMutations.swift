@@ -38,6 +38,16 @@ enum GraphQLMutations {
         }
     }
     """
+    
+    static let updateProperty = """
+    mutation UpdateProperty($input: UpdatePropertyInput) {
+        updateProperty(input: $input) {
+            property {
+                \(QueryObjects.property)
+            }
+        }
+    }
+    """
 
     /* works with variables as:
      {
