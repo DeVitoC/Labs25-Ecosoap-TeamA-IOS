@@ -41,6 +41,8 @@ class AppFlowCoordinator: FlowCoordinator {
         self.window = window
 
         userController.$user
+            .dropFirst(1)
+            .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in self?.onLoginComplete(withUser: $0) }
             .store(in: &cancellables)
@@ -105,7 +107,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private func onLoginComplete(withUser user: User?) {
         guard let user = user else {
-            return self.presentLoginFailAlert()
+            return self.presentLoginFailAlert(error: LoginError.loginFailed)
         }
 
         self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
