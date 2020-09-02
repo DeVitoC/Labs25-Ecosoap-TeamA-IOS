@@ -78,11 +78,15 @@
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
 		049379AB24EB29160084051B /* ImpactHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379AA24EB29160084051B /* ImpactHeaderView.swift */; };
+		04B6FEAF24FEDCDF000CC58A /* DateCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */; };
 		04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */; };
 		04BE6D0324F041E700DFC47D /* ImpactControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */; };
 		04BE6D0524F045C800DFC47D /* MockImpactProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0424F045C800DFC47D /* MockImpactProvider.swift */; };
 		04BE6D0924F05A3100DFC47D /* ImpactCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0824F05A3100DFC47D /* ImpactCellTests.swift */; };
 		04BE6D0B24F05A6300DFC47D /* ImpactViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0A24F05A6300DFC47D /* ImpactViewControllerTests.swift */; };
+		04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90224FD60AA00263376 /* GraphQLOperation.swift */; };
+		04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90424FD85CF00263376 /* HTTPMethod.swift */; };
+		04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90624FD860B00263376 /* GraphQLError.swift */; };
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
@@ -112,6 +116,12 @@
 		992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64924F0319D00638AA4 /* EditCartonViewController.swift */; };
 		992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */; };
 		992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C929024F70B0C004FCBBB /* Randomizable.swift */; };
+		992FBC8524FDAB8F0099C32D /* PropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8424FDAB8F0099C32D /* PropertyList.swift */; };
+		992FBC8724FDABE10099C32D /* LabelAlignedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */; };
+		992FBC8924FDB2D50099C32D /* PropertyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8824FDB2D50099C32D /* PropertyListViewModel.swift */; };
+		992FBC8B24FDB67D0099C32D /* EditPropertyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8A24FDB67D0099C32D /* EditPropertyViewModel.swift */; };
+		992FBC8D24FDB6970099C32D /* EditPropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8C24FDB6970099C32D /* EditPropertyView.swift */; };
+		992FBC9024FDC01F0099C32D /* MainProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8F24FDC01F0099C32D /* MainProfileViewModel.swift */; };
 		993B15CC24F42D8C00529517 /* InputPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B15CB24F42D8C00529517 /* InputPickerView.swift */; };
 		993B15CE24F4575500529517 /* CursorlessTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B15CD24F4575500529517 /* CursorlessTextField.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
@@ -132,6 +142,9 @@
 		998913D724DE0C34009ADBC1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D624DE0C33009ADBC1 /* Property.swift */; };
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
+		9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E024F9B78C00DD16B5 /* StripeController.swift */; };
+		9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
+		9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */; };
 		9998716424E1E8C4000A993E /* PickupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9998716324E1E8C4000A993E /* PickupsView.swift */; };
 		999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */; };
 		999CBA3D24F9AFF100CDF0F3 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */; };
@@ -143,6 +156,11 @@
 		99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */; };
 		99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177024EC3D000099664B /* Publisher+HandleError.swift */; };
 		99B6177324EC743F0099664B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177224EC743F0099664B /* LoginCoordinator.swift */; };
+		99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */; };
+		99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467724FD8AF200E2B005 /* MainProfileView.swift */; };
+		99C0467A24FD8B9200E2B005 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467924FD8B9200E2B005 /* EditProfileView.swift */; };
+		99C0467C24FD8BB700E2B005 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467B24FD8BB700E2B005 /* EditProfileViewModel.swift */; };
+		99D0166024FEA6D9001A7555 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D0165F24FEA6D8001A7555 /* With.swift */; };
 		E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220C32624E35E59003FF32D /* GraphQLQueries.swift */; };
 		E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */; };
 		E28E911024FD541F0014DF82 /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */; };
@@ -225,11 +243,15 @@
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		049379AA24EB29160084051B /* ImpactHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactHeaderView.swift; sourceTree = "<group>"; };
+		04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCoding.swift; sourceTree = "<group>"; };
 		04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellViewModelTests.swift; sourceTree = "<group>"; };
 		04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactControllerTests.swift; sourceTree = "<group>"; };
 		04BE6D0424F045C800DFC47D /* MockImpactProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImpactProvider.swift; sourceTree = "<group>"; };
 		04BE6D0824F05A3100DFC47D /* ImpactCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellTests.swift; sourceTree = "<group>"; };
 		04BE6D0A24F05A6300DFC47D /* ImpactViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewControllerTests.swift; sourceTree = "<group>"; };
+		04CCD90224FD60AA00263376 /* GraphQLOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLOperation.swift; sourceTree = "<group>"; };
+		04CCD90424FD85CF00263376 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		04CCD90624FD860B00263376 /* GraphQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLError.swift; sourceTree = "<group>"; };
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -262,6 +284,12 @@
 		992BB64924F0319D00638AA4 /* EditCartonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCartonViewController.swift; sourceTree = "<group>"; };
 		992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISwipeActionsConfiguration+Constants.swift"; sourceTree = "<group>"; };
 		992C929024F70B0C004FCBBB /* Randomizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomizable.swift; sourceTree = "<group>"; };
+		992FBC8424FDAB8F0099C32D /* PropertyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyList.swift; sourceTree = "<group>"; };
+		992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAlignedTextField.swift; sourceTree = "<group>"; };
+		992FBC8824FDB2D50099C32D /* PropertyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListViewModel.swift; sourceTree = "<group>"; };
+		992FBC8A24FDB67D0099C32D /* EditPropertyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPropertyViewModel.swift; sourceTree = "<group>"; };
+		992FBC8C24FDB6970099C32D /* EditPropertyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPropertyView.swift; sourceTree = "<group>"; };
+		992FBC8F24FDC01F0099C32D /* MainProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileViewModel.swift; sourceTree = "<group>"; };
 		993B15CB24F42D8C00529517 /* InputPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputPickerView.swift; sourceTree = "<group>"; };
 		993B15CD24F4575500529517 /* CursorlessTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorlessTextField.swift; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
@@ -284,6 +312,9 @@
 		998913D624DE0C33009ADBC1 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
+		9990F6E024F9B78C00DD16B5 /* StripeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeController.swift; sourceTree = "<group>"; };
+		9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlert.swift"; sourceTree = "<group>"; };
 		9998716324E1E8C4000A993E /* PickupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupsView.swift; sourceTree = "<group>"; };
 		999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = Carthage/Build/iOS/Stripe.framework; sourceTree = "<group>"; };
@@ -297,6 +328,11 @@
 		99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingViewController.swift; sourceTree = "<group>"; };
 		99B6177024EC3D000099664B /* Publisher+HandleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+HandleError.swift"; sourceTree = "<group>"; };
 		99B6177224EC743F0099664B /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		99C0467724FD8AF200E2B005 /* MainProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileView.swift; sourceTree = "<group>"; };
+		99C0467924FD8B9200E2B005 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		99C0467B24FD8BB700E2B005 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		99D0165F24FEA6D8001A7555 /* With.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
 		E220C32624E35E59003FF32D /* GraphQLQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueries.swift; sourceTree = "<group>"; };
 		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
 		E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryViewController.swift; path = EcoSoapBankTests/PaymentHistoryViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -465,6 +501,7 @@
 				994E4B6D24DDAEA800C12921 /* Impact */,
 				994E4B6E24DDAEB100C12921 /* Pickups */,
 				994E4B6F24DDAEB700C12921 /* Payment */,
+				99C0467424FD8AA500E2B005 /* Profile */,
 				46BEB4EF24C98ED900FE0CD1 /* Login */,
 				46BEB4EB24C98EB400FE0CD1 /* Model */,
 				46BEB4EC24C98EBB00FE0CD1 /* Model Controller */,
@@ -485,6 +522,7 @@
 				46BEB4E624C98D8900FE0CD1 /* Notifications.swift */,
 				992BB63324ED930600638AA4 /* SortDescriptor.swift */,
 				994E4B7824DDB58300C12921 /* UtilityFunctions.swift */,
+				04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */,
 				0445F04924EC648E00A0A665 /* UserDefaults.swift */,
 				0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */,
 				E2D302FE24E5F464008A6FAF /* DataLoader.swift */,
@@ -519,6 +557,7 @@
 				04FEE1B524E48AB000F51D69 /* ImpactController.swift */,
 				998913D024DDFF96009ADBC1 /* PickupController.swift */,
 				992BB63D24EEE21300638AA4 /* UserController.swift */,
+				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
 				992BB64624EF08E400638AA4 /* Mock Providers */,
 				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
 			);
@@ -545,6 +584,7 @@
 				991874D324E4B28900F636FB /* UIView+Subviews.swift */,
 				049379A624EAE9FF0084051B /* UIView+Layout.swift */,
 				992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */,
+				9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -568,6 +608,17 @@
 				041E1EA824E22DF50052831D /* ColorTests.swift */,
 			);
 			path = "Helper Tests";
+			sourceTree = "<group>";
+		};
+		992FBC8E24FDBA890099C32D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				99C0467724FD8AF200E2B005 /* MainProfileView.swift */,
+				99C0467924FD8B9200E2B005 /* EditProfileView.swift */,
+				992FBC8424FDAB8F0099C32D /* PropertyList.swift */,
+				992FBC8C24FDB6970099C32D /* EditPropertyView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		994E4B6D24DDAEA800C12921 /* Impact */ = {
@@ -599,6 +650,7 @@
 				E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */,
 				E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */,
 				E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */,
+				9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -625,6 +677,8 @@
 				9983874D24E4658600450244 /* KeyboardDismissing.swift */,
 				997BF11124E20AAE00A643D8 /* TextView.swift */,
 				99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */,
+				992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */,
+				99D0165F24FEA6D8001A7555 /* With.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -652,13 +706,29 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		99C0467424FD8AA500E2B005 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */,
+				992FBC8F24FDC01F0099C32D /* MainProfileViewModel.swift */,
+				992FBC8824FDB2D50099C32D /* PropertyListViewModel.swift */,
+				99C0467B24FD8BB700E2B005 /* EditProfileViewModel.swift */,
+				992FBC8A24FDB67D0099C32D /* EditPropertyViewModel.swift */,
+				992FBC8E24FDBA890099C32D /* Views */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		E27B4B1924E1ECE800148E4E /* Network Controller */ = {
 			isa = PBXGroup;
 			children = (
 				E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */,
+				04CCD90224FD60AA00263376 /* GraphQLOperation.swift */,
 				E220C32624E35E59003FF32D /* GraphQLQueries.swift */,
 				E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */,
 				E2B961B324E45BF800C5DF8B /* QueryObjects.swift */,
+				04CCD90424FD85CF00263376 /* HTTPMethod.swift */,
+				04CCD90624FD860B00263376 /* GraphQLError.swift */,
 				992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */,
 				04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */,
 			);
@@ -925,7 +995,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
+				992FBC8524FDAB8F0099C32D /* PropertyList.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
+				04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */,
 				992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */,
 				992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */,
 				E2E2F0EC24F844A10050BFCF /* PaymentController.swift in Sources */,
@@ -936,18 +1008,24 @@
 				049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */,
 				E28E911224FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift in Sources */,
 				992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */,
+				99D0166024FEA6D9001A7555 /* With.swift in Sources */,
 				04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
+				992FBC8B24FDB67D0099C32D /* EditPropertyViewModel.swift in Sources */,
+				9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */,
 				049379AB24EB29160084051B /* ImpactHeaderView.swift in Sources */,
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
 				992BB63424ED930600638AA4 /* SortDescriptor.swift in Sources */,
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
+				992FBC9024FDC01F0099C32D /* MainProfileViewModel.swift in Sources */,
 				04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */,
 				999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */,
+				99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
 				99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
+				99C0467A24FD8B9200E2B005 /* EditProfileView.swift in Sources */,
 				99B6175D24EAF0C70099664B /* SchedulePickupViewModel.swift in Sources */,
 				998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
@@ -963,6 +1041,8 @@
 				992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
 				E28E911024FD541F0014DF82 /* PaymentHistoryViewController.swift in Sources */,
+				992FBC8924FDB2D50099C32D /* PropertyListViewModel.swift in Sources */,
+				9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */,
 				99B6175B24EAF0A20099664B /* SchedulePickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
 				998913D524DE0907009ADBC1 /* PickupHistoryCell.swift in Sources */,
@@ -975,25 +1055,33 @@
 				04BE6D0524F045C800DFC47D /* MockImpactProvider.swift in Sources */,
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
+				99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */,
 				992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */,
 				E2D302F524E5CA32008A6FAF /* User.swift in Sources */,
 				99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */,
 				9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */,
+				04B6FEAF24FEDCDF000CC58A /* DateCoding.swift in Sources */,
 				997BF11224E20AAE00A643D8 /* TextView.swift in Sources */,
 				0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */,
 				E2D04F9324F0D50600515831 /* Address.swift in Sources */,
 				9998716424E1E8C4000A993E /* PickupsView.swift in Sources */,
 				998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */,
+				04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */,
+				9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
 				E2D3030124E5F9B8008A6FAF /* MockDataLoader.swift in Sources */,
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
 				E2E2F0EA24F838170050BFCF /* Payment.swift in Sources */,
 				99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */,
+				992FBC8724FDABE10099C32D /* LabelAlignedTextField.swift in Sources */,
+				04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */,
 				04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */,
 				04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
+				992FBC8D24FDB6970099C32D /* EditPropertyView.swift in Sources */,
 				0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */,
 				992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */,
+				99C0467C24FD8BB700E2B005 /* EditProfileViewModel.swift in Sources */,
 				E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */,
 				998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */,
 				E2E2F0E824F815780050BFCF /* PaymentCoordinator.swift in Sources */,

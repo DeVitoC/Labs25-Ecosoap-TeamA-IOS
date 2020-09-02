@@ -20,8 +20,8 @@ enum GraphQLQueries {
      }
      */
     static let impactStatsByPropertyId = """
-    query ImpactStatsByPropertyIdInput($input:ImpactStatsByPropertyIdInput) {
-        impactStatsByPropertyId(input:$input) {
+    query ImpactStatsByPropertyId($input: ImpactStatsByPropertyIdInput) {
+        impactStatsByPropertyId(input: $input) {
             impactStats {
                 \(QueryObjects.impactStats)
             }
@@ -37,8 +37,8 @@ enum GraphQLQueries {
      }
      */
     static let userById = """
-    query UserByIdInput($input:UserByIdInput) {
-        userById(input:$input) {
+    query UserById($input: UserByIdInput) {
+        userById(input: $input) {
             user {
                 \(QueryObjects.user)
             }
@@ -54,8 +54,8 @@ enum GraphQLQueries {
      }
      */
     static let hubByPropertyId = """
-    query HubByPropertyIdInput($input:HubByPropertyIdInput) {
-        hubByPropertyId(input:$input) {
+    query HubByPropertyId($input: HubByPropertyIdInput) {
+        hubByPropertyId(input: $input) {
             hub {
                 id
                 name
@@ -84,8 +84,8 @@ enum GraphQLQueries {
      }
      */
     static let propertiesByUserId = """
-    query PropertiesByUserIdInput($input: PropertiesByUserIdInput) {
-        propertiesByUserId(input:$input) {
+    query PropertiesByUserId($input: PropertiesByUserIdInput) {
+        propertiesByUserId(input: $input) {
             properties {
                 \(QueryObjects.property)
             }
@@ -101,10 +101,20 @@ enum GraphQLQueries {
     }
     */
     static let pickupsByPropertyId = """
-    query PickupsByPropertyIdInput($input: PickupsByPropertyIdInput) {
-        pickupsByPropertyId(input:$input) {
+    query PickupsByPropertyId($input: PickupsByPropertyIdInput) {
+        pickupsByPropertyId(input: $input) {
             pickups {
                 \(QueryObjects.pickup)
+            }
+        }
+    }
+    """
+    
+    static let paymentsByPropertyId = """
+    query PaymentsByProperty($input: PaymentsByPropertyIdInput) {
+        paymentsByPropertyId(input: $input) {
+            payments {
+                \(QueryObjects.payment)
             }
         }
     }

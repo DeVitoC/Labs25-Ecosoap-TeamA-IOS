@@ -101,22 +101,13 @@ extension Pickup {
         let propertyID: String
         let cartons: [CartonContents]
 
-        var formatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-mm-dd"
-            return formatter
-        }()
-
         func encode(to encoder: Encoder) throws {
             // Encode top level values to JSON
             var container = encoder.container(keyedBy: PickupKeys.self)
             try container.encode(collectionType, forKey: .collectionType)
             try container.encode(status, forKey: .status)
-            // Encode and convert dates to Date
-            try container.encode(formatter.string(from: self.readyDate), forKey: .readyDate)
-            if let pickupDate = self.pickupDate {
-                try container.encode(formatter.string(from: pickupDate), forKey: .pickupDate)
-            }
+            try container.encode(readyDate, forKey: .readyDate)
+            try container.encodeIfPresent(pickupDate, forKey: .pickupDate)
             try container.encode(propertyID, forKey: .propertyId)
             try container.encodeIfPresent(notes, forKey: .notes)
 
@@ -225,24 +216,18 @@ extension Pickup: Decodable {
         let status = try container.decode(Status.self, forKey: .status)
 
         // Decode and convert Date string to Date.
-        let readyDateString = try container.decode(String.self, forKey: .readyDate)
-        var readyDate: Date = Date()
-        if let readyDate1 = formatter.date(from: readyDateString) {
-            readyDate = readyDate1
-        } else {
-            let year = readyDateString.dropLast(4)
-            let month = readyDateString.dropFirst(4).dropLast(2)
-            let day = readyDateString.dropFirst(6)
-            if let readyDate2 = formatter.date(from: "\(year)-\(month)-\(day)") {
-                readyDate = readyDate2
-            }
-        }
-
+        let readyDate = try container.decode(Date.self, forKey: .readyDate)
+        
         let pickupDateString = try container.decodeIfPresent(String.self, forKey: .pickupDate)
-        var pickupDate: Date?
-        if let pickupDateStringUnwrapped = pickupDateString {
-            pickupDate = formatter.date(from: pickupDateStringUnwrapped)
+    
+        let pickupDate: Date?
+        
+        if pickupDateString == nil || pickupDateString == "undefined" {
+            pickupDate = nil
+        } else {
+            pickupDate = try container.decodeIfPresent(Date.self, forKey: .pickupDate)
         }
+        
         let property = try container.decode(Property.self, forKey: .property)
         let notes = try container.decodeIfPresent(String.self, forKey: .notes)
 

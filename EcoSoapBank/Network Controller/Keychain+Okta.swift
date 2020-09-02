@@ -8,6 +8,7 @@
 
 import Foundation
 import KeychainAccess
+import OktaAuth
 
 extension Keychain {
     enum Okta {
@@ -22,7 +23,7 @@ extension Keychain {
                date > Date() {
                 return token
             } else {
-                NotificationCenter.default.post(name: .oktaAuthenticationExpired, object: nil)
+                OktaAuth.error.send(LoginError.notLoggedIn)
                 return nil
             }
         }

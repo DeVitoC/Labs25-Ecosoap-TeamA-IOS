@@ -9,6 +9,7 @@
 import KeychainAccess
 import UIKit
 import OktaAuth
+import Combine
 
 
 class AppFlowCoordinator: FlowCoordinator {
@@ -19,10 +20,10 @@ class AppFlowCoordinator: FlowCoordinator {
     private(set) var impactCoord: ImpactCoordinator?
     private(set) var pickupCoord: PickupCoordinator?
     private(set) var paymentCoord: PaymentCoordinator?
+    private(set) var profileCoord: ProfileCoordinator?
     private(set) lazy var loginCoord = LoginCoordinator(
         root: tabBarController,
-        userController: userController,
-        onLoginComplete: { [weak self] in self?.onLoginComplete() })
+        userController: userController)
     private(set) lazy var userController = UserController(dataLoader: userProvider)
 
     // MARK: - Data Providers
@@ -36,8 +37,17 @@ class AppFlowCoordinator: FlowCoordinator {
 
     // MARK: - Init / Start
 
+    private var cancellables = Set<AnyCancellable>()
+
     init(window: UIWindow) {
         self.window = window
+
+        userController.$user
+            .dropFirst(1)
+            .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in self?.onLoginComplete(withUser: $0) }
+            .store(in: &cancellables)
     }
 
     func start() {
@@ -71,8 +81,8 @@ class AppFlowCoordinator: FlowCoordinator {
                     switch result {
                     case .failure(let error):
                         self?.presentLoginFailAlert(error: error)
-                    case .success:
-                        self?.onLoginComplete()
+                    case .success(let user):
+                        self?.onLoginComplete(withUser: user)
                     }
                 }
             }
@@ -84,65 +94,44 @@ class AppFlowCoordinator: FlowCoordinator {
     // MARK: - Methods
 
     func presentLoginFailAlert(error: Error? = nil) {
-        if let error = error {
-            NSLog("Error occurred: \(error)")
-        }
-        let userError = error as? UserFacingError
-        if tabBarController.presentedViewController != nil {
-            tabBarController.dismiss(animated: true) { [weak self] in
-                self?.presentLoginFailAlert(error: error)
-            }
-        }
-        let message = userError?.userFacingDescription
-            ?? "An unknown error occurred while logging in. Please try again."
-        tabBarController.presentSimpleAlert(
-            with: "Login failed",
-            message: message,
-            preferredStyle: .alert,
-            dismissText: "OK"
-        ) { [weak self] _ in
-            self?.loginCoord.start()
-        }
+        tabBarController.presentAlert(for: error, actions: [
+            .okay({ _ in
+                if self.tabBarController.presentedViewController != nil {
+                    self.tabBarController.dismiss(animated: true) {
+                        self.loginCoord.start()
+                    }
+                } else {
+                    self.loginCoord.start()
+                }
+            })
+        ])
     }
 
-    private func onLoginComplete() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else {
-                var topLevelVC = UIApplication.shared.windows
-                    .first(where: { !$0.isHidden && $0.isKeyWindow })?
-                    .rootViewController
-                if let presentedVC = topLevelVC?.presentedViewController {
-                    topLevelVC = presentedVC
-                }
-                topLevelVC?.presentSimpleAlert(
-                    with: "Sorry! An unknown error occurred!",
-                    message: "Please contact the app developers with information about how you got here. Thanks!",
-                    preferredStyle: .alert,
-                    dismissText: "OK")
-                return assertionFailure("AppFlowCoordinator unexpectedly deinitialized before login completion")
-            }
-            guard let user = self.userController.user else {
-                return self.presentLoginFailAlert()
-            }
+    private func onLoginComplete(withUser user: User?) {
+        guard let user = user else {
+            return self.presentLoginFailAlert(error: LoginError.loginFailed)
+        }
 
-            // when backend ready, use graphQL controller as data provider
-            self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
-            self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.impactProvider)
-            self.paymentCoord = PaymentCoordinator(user: user, dataProvider: self.paymentProvider)
+        // when backend ready, use graphQL controller as data provider
+        self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
+        self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.impactProvider)
+        self.paymentCoord = PaymentCoordinator(user: user, dataProvider: self.paymentProvider)
+        self.profileCoord = ProfileCoordinator(userController: self.userController)
 
-            self.tabBarController.setViewControllers([
-                self.impactCoord!.rootVC,
-                self.pickupCoord!.rootVC,
-                self.paymentCoord!.rootVC
-            ], animated: false)
+        self.tabBarController.setViewControllers([
+            self.impactCoord!.rootVC,
+            self.pickupCoord!.rootVC,
+            self.paymentCoord!.rootVC,
+            self.profileCoord!.rootVC
+        ], animated: false)
 
-            self.impactCoord!.start()
-            self.pickupCoord!.start()
-            self.paymentCoord!.start()
+        self.impactCoord!.start()
+        self.pickupCoord!.start()
+        self.paymentCoord!.start()
+        self.profileCoord!.start()
 
-            if self.tabBarController.presentedViewController != nil {
-                self.tabBarController.dismiss(animated: true, completion: nil)
-            }
+        if self.tabBarController.presentedViewController != nil {
+            self.tabBarController.dismiss(animated: true, completion: nil)
         }
     }
 }

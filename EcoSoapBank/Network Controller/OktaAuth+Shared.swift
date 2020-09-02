@@ -8,6 +8,7 @@
 
 import Foundation
 import OktaAuth
+import Combine
 
 
 extension OktaAuth {
@@ -22,4 +23,7 @@ extension OktaAuth {
         baseURL: URL(string: "https://dev-668428.okta.com")!,
         clientID: "0oapaqacafrGUTfKx4x6",
         redirectURI: "labs://scaffolding/implicit/callback")
+
+    static let error = PassthroughSubject<Error, Never>()
+    static let success = PassthroughSubject<Void, Never>()
 }

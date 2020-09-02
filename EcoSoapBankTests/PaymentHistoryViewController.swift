@@ -24,7 +24,7 @@ class PaymentHistoryViewController: UIViewController {
         guard let user = user, let properties = user.properties else { return }
         paymentCollectionView?.register(PaymentHistoryCollectionViewCell.self, forCellWithReuseIdentifier: "PaymentCell")
         paymentCollectionView?.backgroundColor = .clear
-        paymentController?.fetchPayments(forPropertyId: properties[0].id)
+        paymentController?.fetchPayments(forPropertyID: properties[0].id)
 
         // Do any additional setup after loading the view.
     }
@@ -52,10 +52,12 @@ extension PaymentHistoryViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PaymentCell", for: indexPath) as? PaymentHistoryCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "PaymentCell",
+            for: indexPath) as? PaymentHistoryCollectionViewCell
+            else { return UICollectionViewCell() }
 
         return cell
     }
-
 
 }

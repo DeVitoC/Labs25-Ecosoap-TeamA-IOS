@@ -12,7 +12,7 @@ enum UserError: Error {
     case noProperties
 }
 
-struct User: Decodable {
+struct User: Codable {
     let id: String
     let firstName: String
     let middleName: String?

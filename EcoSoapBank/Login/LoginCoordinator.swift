@@ -8,9 +8,10 @@
 
 import UIKit
 import Combine
+import OktaAuth
 
 
-enum LoginError: UserFacingError {
+enum LoginError: LocalizedError {
     case notLoggedIn
     case loginFailed
     case expiredCredentials
@@ -18,7 +19,7 @@ enum LoginError: UserFacingError {
     case other(Error)
     case unknown
 
-    var userFacingDescription: String? {
+    var errorDescription: String? {
         switch self {
         case .notLoggedIn:
             return "You're currently logged out."
@@ -29,7 +30,24 @@ enum LoginError: UserFacingError {
         case .oktaFailure:
             return "There's a problem with Okta's service."
         case .other(let otherError):
-            return (otherError as? UserFacingError)?.userFacingDescription
+            return (otherError as? LocalizedError)?.errorDescription
+        case .unknown:
+            return nil
+        }
+    }
+
+    var recoverySuggestion: String? {
+        switch self {
+        case .notLoggedIn:
+            return "Please log in to proceed."
+        case .loginFailed:
+            return "Please try again; did you enter the correct username/password?"
+        case .expiredCredentials:
+            return "Please log in again to renew your credentials."
+        case .oktaFailure:
+            return "Please try again later; sorry for the inconvenience."
+        case .other(let otherError):
+            return (otherError as? LocalizedError)?.recoverySuggestion
         case .unknown:
             return nil
         }
@@ -45,35 +63,19 @@ class LoginCoordinator: FlowCoordinator {
 
     private var cancellables = Set<AnyCancellable>()
 
-    private var onLoginComplete: () -> Void
-
     // MARK: - Init/Start
 
     init(
         root: UIViewController,
-        userController: UserController,
-        onLoginComplete: @escaping () -> Void
+        userController: UserController
     ) {
         self.rootVC = root
         self.userController = userController
-        self.onLoginComplete = onLoginComplete
         
         loginVC.modalPresentationStyle = .fullScreen
 
-        NotificationCenter.default
-            .publisher(for: .oktaAuthenticationExpired)
-            .map { _ in LoginError.expiredCredentials }
-            .sink(receiveValue: alertUserOfLoginError(_:))
-            .store(in: &cancellables)
-        NotificationCenter.default
-            .publisher(for: .oktaAuthenticationFailed)
-            .map { _ in LoginError.loginFailed }
-            .sink(receiveValue: alertUserOfLoginError(_:))
-            .store(in: &cancellables)
-        userController.$user
-            .compactMap { $0 }
-            .map { _ in () }
-            .sink(receiveValue: onLoginComplete)
+        OktaAuth.error
+            .sink { [weak self] in self?.alertUserOfLoginError($0) }
             .store(in: &cancellables)
     }
 
@@ -90,16 +92,7 @@ extension LoginCoordinator {
     }
 
     private func alertUserOfLoginError(_ error: Error) {
-        let message = "Please log in."
-        let title = (error as? UserFacingError)?.userFacingDescription
-                        ?? "Login failed"
-        (self.rootVC.presentedViewController ?? self.rootVC)?
-            .presentSimpleAlert(
-                with: title,
-                message: message,
-                preferredStyle: .alert,
-                dismissText: "OK",
-                completionUponDismissal: { [weak self] _ in self?.start() })
+        (self.rootVC.presentedViewController ?? self.rootVC)?.presentAlert(for: error)
     }
 }
 

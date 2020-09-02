@@ -23,7 +23,7 @@ class MockPaymentProvider {
 extension MockPaymentProvider: PaymentDataProvider {
     /// Simply returns mock Pickups through closure
     /// (or `MockPickupProvider.Error.shouldFail` if `shouldFail` instance property is set to `true`).
-    func fetchPayments(forPropertyId propertyId: String, _ completion: @escaping ResultHandler<[Payment]>) {
+    func fetchPayments(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<[Payment]>) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             guard !self.shouldFail else {
                 completion(.mockFailure())

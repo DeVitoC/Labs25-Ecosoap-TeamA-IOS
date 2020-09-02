@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 protocol PaymentDataProvider {
-    func fetchPayments(forPropertyId propertyId: String,
+    func fetchPayments(forPropertyID propertyID: String,
                        _ completion: @escaping (Result<[Payment], Error>) -> Void)
     func makePayment(_ paymentInput: Payment,
                      completion: @escaping (Result<Payment, Error>) -> Void)
@@ -29,10 +29,10 @@ class PaymentController {
         self.dataProvider = dataProvider
     }
 
-    func fetchPayments(forPropertyId propertyId: String) -> [Payment]? {
+    func fetchPayments(forPropertyID propertyID: String) -> [Payment]? {
         var payments: [Payment]?
 
-        dataProvider.fetchPayments(forPropertyId: propertyId) { result in
+        dataProvider.fetchPayments(forPropertyID: propertyID) { result in
             switch result {
             case .success(let payments):
                 self.payments = payments
