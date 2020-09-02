@@ -558,8 +558,8 @@
 				998913D024DDFF96009ADBC1 /* PickupController.swift */,
 				992BB63D24EEE21300638AA4 /* UserController.swift */,
 				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
-				992BB64624EF08E400638AA4 /* Mock Providers */,
 				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
+				992BB64624EF08E400638AA4 /* Mock Providers */,
 			);
 			path = "Model Controller";
 			sourceTree = "<group>";
