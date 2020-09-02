@@ -15,4 +15,5 @@ enum GraphQLError: Error {
     case unimplemented
     case backendMessages([String])
     case encodingError(Error)
+    case decodingError(Error)
 }
