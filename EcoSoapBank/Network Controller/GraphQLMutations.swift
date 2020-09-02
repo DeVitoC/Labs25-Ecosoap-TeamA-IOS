@@ -23,11 +23,7 @@ enum GraphQLMutations {
     mutation LogIn($input: LogInInput) {
         logIn(input: $input) {
             user {
-                id
-                firstName
-                lastName
-                email
-                password
+                \(QueryObjects.user)
             }
         }
     }
