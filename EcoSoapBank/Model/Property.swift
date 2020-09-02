@@ -23,7 +23,7 @@
 
 import Foundation
 
-struct Property: Codable, Equatable {
+struct Property: Codable, Equatable, Identifiable, Hashable {
     let id: String
     let name: String
     let propertyType: PropertyType
@@ -37,11 +37,21 @@ struct Property: Codable, Equatable {
     let shippingNote: String?
     let notes: String?
 
-    enum PropertyType: String, Codable, CaseIterable {
+    enum PropertyType: String, Codable, CaseIterable, Identifiable {
         case bedAndBreakfast = "BED_AND_BREAKFAST"
         case guesthouse = "GUESTHOUSE"
         case hotel = "HOTEL"
         case other = "OTHER"
+
+        var id: String { rawValue }
+
+        var display: String {
+            if case .bedAndBreakfast = self {
+                return "Bed & Breakfast"
+            } else {
+                return rawValue.capitalized
+            }
+        }
     }
 
     enum BillingMethod: String, Codable, CaseIterable {
@@ -50,4 +60,17 @@ struct Property: Codable, Equatable {
         case debit = "DEBIT"
         case invoice = "INVOICE"
     }
+}
+
+enum PropertySelection {
+    case select(Property)
+    case all
+
+    var property: Property? {
+        if case .select(let property) = self {
+            return property
+        }
+        return nil
+    }
+    var display: String { property?.name ?? "All" }
 }

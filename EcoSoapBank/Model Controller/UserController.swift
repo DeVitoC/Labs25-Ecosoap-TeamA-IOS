@@ -16,12 +16,9 @@ protocol UserDataProvider {
 }
 
 
-class UserController {
+class UserController: ObservableObject {
     @Published private(set) var user: User?
-
-    var viewingProperty: Property? {
-        user?.properties?.first
-    }
+    @Published var viewingProperty: Property?
 
     private var dataLoader: UserDataProvider
     
@@ -34,6 +31,9 @@ class UserController {
             .publisher(for: .oktaAuthenticationSuccessful)
             .sink(receiveValue: loginDidComplete(_:))
             .store(in: &cancellables)
+        $user.sink(receiveValue: { [weak self] user in
+            self?.viewingProperty = user?.properties?.first
+        }).store(in: &cancellables)
     }
 }
 

@@ -18,6 +18,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private(set) var impactCoord: ImpactCoordinator?
     private(set) var pickupCoord: PickupCoordinator?
+    private(set) var profileCoord: ProfileCoordinator?
     private(set) lazy var loginCoord = LoginCoordinator(
         root: tabBarController,
         userController: userController,
@@ -110,17 +111,19 @@ class AppFlowCoordinator: FlowCoordinator {
                 return self.presentLoginFailAlert()
             }
 
-            // when backend ready, use graphQL controller as data provider
             self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
             self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.impactProvider)
+            self.profileCoord = ProfileCoordinator(userController: self.userController)
 
             self.tabBarController.setViewControllers([
                 self.impactCoord!.rootVC,
-                self.pickupCoord!.rootVC
+                self.pickupCoord!.rootVC,
+                self.profileCoord!.rootVC
             ], animated: false)
 
             self.impactCoord!.start()
             self.pickupCoord!.start()
+            self.profileCoord!.start()
 
             if self.tabBarController.presentedViewController != nil {
                 self.tabBarController.dismiss(animated: true, completion: nil)
