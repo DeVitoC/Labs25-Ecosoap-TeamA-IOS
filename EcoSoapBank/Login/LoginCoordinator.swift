@@ -8,6 +8,7 @@
 
 import UIKit
 import Combine
+import OktaAuth
 
 
 enum LoginError: LocalizedError {
@@ -62,34 +63,19 @@ class LoginCoordinator: FlowCoordinator {
 
     private var cancellables = Set<AnyCancellable>()
 
-    private var onLoginComplete: (User) -> Void
-
     // MARK: - Init/Start
 
     init(
         root: UIViewController,
-        userController: UserController,
-        onLoginComplete: @escaping (User) -> Void
+        userController: UserController
     ) {
         self.rootVC = root
         self.userController = userController
-        self.onLoginComplete = onLoginComplete
         
         loginVC.modalPresentationStyle = .fullScreen
 
-        NotificationCenter.default
-            .publisher(for: .oktaAuthenticationExpired)
-            .map { _ in LoginError.expiredCredentials }
-            .sink(receiveValue: alertUserOfLoginError(_:))
-            .store(in: &cancellables)
-        NotificationCenter.default
-            .publisher(for: .oktaAuthenticationFailed)
-            .map { _ in LoginError.loginFailed }
-            .sink(receiveValue: alertUserOfLoginError(_:))
-            .store(in: &cancellables)
-        userController.$user
-            .compactMap { $0 }
-            .sink(receiveValue: onLoginComplete)
+        OktaAuth.error
+            .sink { [weak self] in self?.alertUserOfLoginError($0) }
             .store(in: &cancellables)
     }
 
