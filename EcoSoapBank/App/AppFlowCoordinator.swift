@@ -15,7 +15,7 @@ import Combine
 class AppFlowCoordinator: FlowCoordinator {
     let window: UIWindow
 
-    private(set) lazy var tabBarController = UITabBarController()
+    private(set) lazy var tabBarController = AppTabBarController()
 
     private(set) var impactCoord: ImpactCoordinator?
     private(set) var pickupCoord: PickupCoordinator?

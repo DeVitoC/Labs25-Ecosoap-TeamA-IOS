@@ -156,6 +156,7 @@
 		99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */; };
 		99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177024EC3D000099664B /* Publisher+HandleError.swift */; };
 		99B6177324EC743F0099664B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177224EC743F0099664B /* LoginCoordinator.swift */; };
+		99BA964425001FE400821694 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA964325001FE400821694 /* AppTabBarController.swift */; };
 		99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */; };
 		99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467724FD8AF200E2B005 /* MainProfileView.swift */; };
 		99C0467A24FD8B9200E2B005 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467924FD8B9200E2B005 /* EditProfileView.swift */; };
@@ -325,6 +326,7 @@
 		99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingViewController.swift; sourceTree = "<group>"; };
 		99B6177024EC3D000099664B /* Publisher+HandleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+HandleError.swift"; sourceTree = "<group>"; };
 		99B6177224EC743F0099664B /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		99BA964325001FE400821694 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
 		99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		99C0467724FD8AF200E2B005 /* MainProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileView.swift; sourceTree = "<group>"; };
 		99C0467924FD8B9200E2B005 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				466C427C249A8749007D033E /* Colors.xcassets */,
 				049379A824EB25600084051B /* Images.xcassets */,
 				990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */,
+				99BA964325001FE400821694 /* AppTabBarController.swift */,
 				466C4273249A8748007D033E /* AppDelegate.swift */,
 				466C4275249A8748007D033E /* SceneDelegate.swift */,
 				466C427E249A8749007D033E /* LaunchScreen.storyboard */,
@@ -998,6 +1001,7 @@
 				04D1758D24E4195C00F8929C /* GradientView.swift in Sources */,
 				049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */,
 				992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */,
+				99BA964425001FE400821694 /* AppTabBarController.swift in Sources */,
 				99D0166024FEA6D9001A7555 /* With.swift in Sources */,
 				04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
