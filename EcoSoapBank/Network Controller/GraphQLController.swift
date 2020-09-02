@@ -44,9 +44,9 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
         performOperation(.userByID(id: userID), completion: completion)
     }
     
-    func updateUserProfile(with user: User,
+    func updateUserProfile(with info: EditableProfileInfo,
                            completion: @escaping ResultHandler<User>) {
-        completion(.failure(GraphQLError.unimplemented))
+        performOperation(.updateUserProfile(info: info), completion: completion)
     }
     
     // Impact
@@ -122,6 +122,10 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
             guard let data = data else {
                 return completion(.failure(GraphQLError.noData))
             }
+            
+            // swiftlint:disable force_try
+            let json = try! JSONSerialization.jsonObject(with: data)
+            print(json)
             
             completion(self.decodeJSON(T.self, data: data))
         }

@@ -22,7 +22,7 @@ enum GraphQLOperation {
     case login(token: String)
     case schedulePickup(input: Pickup.ScheduleInput)
     case cancelPickup(id: String)
-    case updateUserProfile(user: User)
+    case updateUserProfile(info: EditableProfileInfo)
     
     // MARK: - Public
     
@@ -98,8 +98,8 @@ extension GraphQLOperation: Encodable {
             try variablesContainer.encode(["token": token], forKey: .input)
         case .schedulePickup(let input):
             try variablesContainer.encode(input, forKey: .input)
-        case .updateUserProfile(let user):
-            try variablesContainer.encode(user, forKey: .input)
+        case .updateUserProfile(let info):
+            try variablesContainer.encode(info, forKey: .input)
         }
     }
 }

@@ -201,4 +201,41 @@ class GraphQLControllerTests: XCTestCase {
         
         wait(for: [expectation], timeout: 5.0)
     }
+    
+    func testUpdateProfile() {
+        let inputUser = User(id: "00uvb3lz10Bekzr854x6",
+                             firstName: "Llama",
+                             middleName: nil,
+                             lastName: "Dude",
+                             title: nil,
+                             company: nil,
+                             email: "llama1@maildrop.cc",
+                             phone: nil,
+                             skype: nil,
+                             properties: nil)
+        var info = EditableProfileInfo(user: inputUser)
+        
+        let newMiddleName = UUID().uuidString
+        info.middleName = newMiddleName
+        let newPhoneNumber = UUID().uuidString
+        info.phone = newPhoneNumber
+        let newSkype = UUID().uuidString
+        info.skype = newSkype
+        
+        graphQLController.updateUserProfile(with: info) { result in
+            guard let updatedUser = try? result.get() else {
+                XCTFail("Unable to get valid User from returned data")
+                return
+            }
+            
+            XCTAssertEqual(updatedUser.firstName, inputUser.firstName)
+            XCTAssertEqual(updatedUser.lastName, inputUser.lastName)
+            XCTAssertEqual(updatedUser.middleName, newMiddleName)
+            XCTAssertEqual(updatedUser.skype, newSkype)
+            
+            self.expectation.fulfill()
+        }
+        
+        wait(for: expectation, timeout: 5.0)
+    }
 }
