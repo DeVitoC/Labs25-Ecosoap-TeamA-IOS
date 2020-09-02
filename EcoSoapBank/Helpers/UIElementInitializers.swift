@@ -38,7 +38,10 @@ class UIElementInitializers: NSObject {
      - Parameter spacing: **CGFloat** that describes the UIStackView's spacing property
      - Returns: A **UIStackView** set up to the the passed in specifications.
      */
-    func createElementStackView(axis: NSLayoutConstraint.Axis = .horizontal, alignment: UIStackView.Alignment = .center, distribution: UIStackView.Distribution = .fillEqually, spacing: CGFloat = 5) -> UIStackView {
+    func createElementStackView(axis: NSLayoutConstraint.Axis = .horizontal,
+                                alignment: UIStackView.Alignment = .center,
+                                distribution: UIStackView.Distribution = .fillEqually,
+                                spacing: CGFloat = 5) -> UIStackView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = axis

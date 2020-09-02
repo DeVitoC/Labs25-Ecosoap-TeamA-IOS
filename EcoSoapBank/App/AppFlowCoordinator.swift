@@ -139,4 +139,4 @@ class AppFlowCoordinator: FlowCoordinator {
 
 // MARK: - Use Mock
 
-let useMock: Bool = false
+let useMock: Bool = true
