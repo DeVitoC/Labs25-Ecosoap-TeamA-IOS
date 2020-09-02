@@ -95,12 +95,11 @@ extension GraphQLOperation: Encodable {
         case .cancelPickup(let id):
             try variablesContainer.encode(["pickupId": id], forKey: .input)
         case .login(let token):
-            try variablesContainer.encode(token, forKey: .input)
+            try variablesContainer.encode(["token": token], forKey: .input)
         case .schedulePickup(let input):
             try variablesContainer.encode(input, forKey: .input)
         case .updateUserProfile(let user):
             try variablesContainer.encode(user, forKey: .input)
-            break
         }
     }
 }
