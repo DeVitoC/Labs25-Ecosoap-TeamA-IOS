@@ -217,7 +217,17 @@ extension Pickup: Decodable {
 
         // Decode and convert Date string to Date.
         let readyDate = try container.decode(Date.self, forKey: .readyDate)
-        let pickupDate = try container.decodeIfPresent(Date.self, forKey: .pickupDate)
+        
+        let pickupDateString = try container.decodeIfPresent(String.self, forKey: .pickupDate)
+    
+        let pickupDate: Date?
+        
+        if pickupDateString == nil || pickupDateString == "undefined" {
+            pickupDate = nil
+        } else {
+            pickupDate = try container.decodeIfPresent(Date.self, forKey: .pickupDate)
+        }
+        
         let property = try container.decode(Property.self, forKey: .property)
         let notes = try container.decodeIfPresent(String.self, forKey: .notes)
 
