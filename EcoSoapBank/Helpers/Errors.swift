@@ -15,7 +15,7 @@ struct CustomError: LocalizedError {
 }
 
 
-struct ErrorMessage {
+struct ErrorMessage: CustomStringConvertible {
     let title: String
     let message: String
     let error: Error?
@@ -47,6 +47,15 @@ struct ErrorMessage {
                       message: Self.fallbackMessage,
                       error: error)
         }
+    }
+
+    var description: String {
+        var desc = ""
+        if let error = error {
+            desc += "\(error)\n"
+        }
+        desc += "\(title)\n\(message)"
+        return desc
     }
 }
 

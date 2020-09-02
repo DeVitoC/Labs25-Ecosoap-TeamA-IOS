@@ -27,9 +27,8 @@ class UserController: ObservableObject {
     init(dataLoader: UserDataProvider) {
         self.dataLoader = dataLoader
 
-        NotificationCenter.default
-            .publisher(for: .oktaAuthenticationSuccessful)
-            .sink(receiveValue: loginDidComplete(_:))
+        OktaAuth.success
+            .sink { [weak self] in self?.loginDidComplete() }
             .store(in: &cancellables)
         $user.sink(receiveValue: { [weak self] user in
             self?.viewingProperty = user?.properties?.first
@@ -55,7 +54,7 @@ extension UserController {
 // MARK: - Private
 
 extension UserController {
-    private func loginDidComplete(_ notification: Notification) {
+    private func loginDidComplete() {
         dataLoader.logIn { [weak self] result in
             switch result {
             case .success(let user):

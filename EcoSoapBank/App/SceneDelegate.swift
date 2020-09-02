@@ -31,19 +31,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let url = URLContexts.first?.url else { return }
 
         OktaAuth.shared.receiveCredentials(fromCallbackURL: url) { result in
-            let notificationName: Notification.Name
             do {
                 try result.get()
                 let credentials = try OktaAuth.shared.credentialsIfAvailable()
                 Keychain.Okta.setToken(credentials.accessToken, expiresIn: credentials.expiresIn)
-                
-                notificationName = .oktaAuthenticationSuccessful
+                OktaAuth.success.send()
             } catch {
-                notificationName = .oktaAuthenticationFailed
-            }
-            
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: notificationName, object: nil)
+                OktaAuth.error.send(error)
             }
         }
     }
