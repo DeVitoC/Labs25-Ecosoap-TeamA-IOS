@@ -29,7 +29,7 @@ class PaymentController {
         self.dataProvider = dataProvider
     }
 
-    func fetchAllPayments(forPropertyId propertyId: String) -> Future<[Payment], Error> {
+    func fetchPayments(forPropertyId propertyId: String) -> Future<[Payment], Error> {
 
         Future { promise in
             self.dataProvider.fetchPayments(forPropertyId: propertyId) { [weak self] result in
@@ -50,7 +50,7 @@ class PaymentController {
             }
             .eraseToAnyPublisher()
         }
-        var futures = properties.map { fetchAllPayments(forPropertyId: $0.id)
+        var futures = properties.map { fetchPayments(forPropertyId: $0.id)
         }
         var combined = futures.popLast()!.eraseToAnyPublisher()
         while let future = futures.popLast() {

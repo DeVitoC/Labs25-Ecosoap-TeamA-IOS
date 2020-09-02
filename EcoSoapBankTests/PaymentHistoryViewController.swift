@@ -12,6 +12,8 @@ class PaymentHistoryViewController: UIViewController {
 
     var paymentController: PaymentController?
     private var paymentCollectionView: UICollectionView?
+    private var payments: [Payment] = []
+    var user: User?
 
     override func loadView() {
         view = BackgroundView()
@@ -19,8 +21,15 @@ class PaymentHistoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let user = user, let properties = user.properties else { return }
         paymentCollectionView?.register(PaymentHistoryCollectionViewCell.self, forCellWithReuseIdentifier: "PaymentCell")
         paymentCollectionView?.backgroundColor = .clear
+        if let paymentFuture = paymentController?.fetchPayments(forPropertyId: properties[0].id) as? [Payment] {
+            payments = paymentFuture
+        } else {
+            NSLog("Did not get Payment array from fetchPayments")
+        }
+
 
         // Do any additional setup after loading the view.
     }
