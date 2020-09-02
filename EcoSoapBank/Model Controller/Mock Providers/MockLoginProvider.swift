@@ -44,7 +44,6 @@ extension User {
             title: nil,
             company: "Bobbly Inc.",
             email: "Bibbly@Bobbly.zone",
-            password: "I@m5uper$m@R7",
             phone: "555-123-4444",
             skype: nil,
             properties: .placeholders())

@@ -20,7 +20,6 @@ struct User: Codable {
     let title: String?
     let company: String?
     let email: String
-    let password: String
     let phone: String?
     let skype: String?
     let properties: [Property]?

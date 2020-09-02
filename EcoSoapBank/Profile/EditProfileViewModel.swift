@@ -23,7 +23,8 @@ class EditProfileViewModel: ObservableObject {
     }
 }
 
-struct EditableProfileInfo {
+struct EditableProfileInfo: Encodable {
+    let id: String
     var firstName: String
     var middleName: String
     var lastName: String
@@ -32,6 +33,7 @@ struct EditableProfileInfo {
     var phone: String
 
     init(user: User) {
+        self.id = user.id
         self.firstName = user.firstName
         self.middleName = user.middleName ?? ""
         self.lastName = user.lastName
