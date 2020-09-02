@@ -50,30 +50,31 @@ class AppFlowCoordinator: FlowCoordinator {
 
     func start() {
         // set default tabBar/navBar appearance
-        UITabBar.appearance().tintColor = .esbGreen
-        UITabBar.appearance().backgroundColor = .downyBlue
-        
-        configure(UINavigationBar.appearance(), with: {
-            $0.titleTextAttributes = [
-                .font: UIFont.navBarInlineTitle,
-                .foregroundColor: UIColor.white
-            ]
-            $0.largeTitleTextAttributes = [
-                .font: UIFont.navBarLargeTitle,
-                .foregroundColor: UIColor.white
-            ]
-            $0.backgroundColor = .esbGreen
-            $0.setBackgroundImage(.navBar, for: .default)
-            $0.tintColor = .white
-            // We can use `$0.barTintColor = .esbGreen` if we want the `inline` version of the title bar to be that color
-        })
+        configure(UITabBar.appearance()) {
+            $0.tintColor = .esbGreen
+            $0.backgroundColor = .downyBlue
+        }
+        configure(UITableView.appearance()) {
+//            let bg = BackgroundView()
+            $0.backgroundColor = .clear
+            $0.backgroundView = BackgroundView()
+//            $0.constrainNewSubviewToSides(bg)
+//            $0.bringSubviewToFront(bg)
+        }
+
+        configure(UITableViewCell.appearance()) {
+            $0.backgroundColor = .clear
+        }
 
         // set up window and make visible
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
 
         if Keychain.Okta.isLoggedIn {
-            tabBarController.present(LoadingViewController(loadingText: "Logging in..."), animated: false, completion: nil)
+            tabBarController.present(
+                LoadingViewController(loadingText: "Logging in..."),
+                animated: false,
+                completion: nil)
             userController.logInWithBearer { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
