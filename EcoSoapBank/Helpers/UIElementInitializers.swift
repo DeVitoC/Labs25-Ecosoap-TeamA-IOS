@@ -29,4 +29,24 @@ class UIElementInitializers: NSObject {
         return label
     }
 
+    /**
+     Create a UIStackView with title, frame, alignment and textColor passed in.
+
+     - Parameter axis: **NSLayoutConstraint.Axis** that describes the UIStackView's axis property
+     - Parameter alignment: **UIStackView.Alignment** that describes the UIStackView's alignment property
+     - Parameter distribution: **UIStackView.Distribution** that describes the UIStackView's distribution property
+     - Parameter spacing: **CGFloat** that describes the UIStackView's spacing property
+     - Returns: A **UIStackView** set up to the the passed in specifications.
+     */
+    func createElementStackView(axis: NSLayoutConstraint.Axis = .horizontal, alignment: UIStackView.Alignment = .center, distribution: UIStackView.Distribution = .fillEqually, spacing: CGFloat = 5) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = axis
+        stackView.alignment = alignment
+        stackView.distribution = distribution
+        stackView.spacing = spacing
+
+        return stackView
+    }
+
 }
