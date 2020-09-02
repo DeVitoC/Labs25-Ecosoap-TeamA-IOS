@@ -27,7 +27,6 @@ enum QueryObjects {
     title
     company
     email
-    password
     phone
     skype
     address {
