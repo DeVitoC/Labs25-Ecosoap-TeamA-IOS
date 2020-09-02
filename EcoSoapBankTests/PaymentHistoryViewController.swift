@@ -13,7 +13,6 @@ class PaymentHistoryViewController: UIViewController {
     var paymentController: PaymentController?
     private var paymentCollectionView: UICollectionView?
     private var payments: [Payment] = []
-    var user: User?
 
     override func loadView() {
         view = BackgroundView()
@@ -21,24 +20,12 @@ class PaymentHistoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let user = user, let properties = user.properties else { return }
+        guard let user = paymentController?.user, let properties = user.properties else { return }
         paymentCollectionView?.register(PaymentHistoryCollectionViewCell.self, forCellWithReuseIdentifier: "PaymentCell")
         paymentCollectionView?.backgroundColor = .clear
-        paymentController?.fetchPayments(forPropertyID: properties[0].id)
-
-        // Do any additional setup after loading the view.
+        self.payments = paymentController?.fetchPayments(forPropertyID: properties[0].id) ?? []
+        print(self.payments)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension PaymentHistoryViewController: UICollectionViewDelegate { }
