@@ -44,6 +44,11 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
         performOperation(.userByID(id: userID), completion: completion)
     }
     
+    func updateUserProfile(with user: User,
+                           completion: @escaping ResultHandler<User>) {
+        completion(.failure(GraphQLError.unimplemented))
+    }
+    
     // Impact
     
     func fetchImpactStats(forPropertyID propertyID: String,
@@ -73,8 +78,8 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     
     // Payments
     
-    func fetchPayments(forPropertyId propertyId: String, _ completion: @escaping ResultHandler<[Payment]>) {
-        completion(.failure(GraphQLError.unimplemented))
+    func fetchPayments(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<[Payment]>) {
+        performOperation(.paymentsByPropertyID(id: propertyID), completion: completion)
     }
 
     func makePayment(_ paymentInput: Payment, completion: @escaping ResultHandler<Payment>) {
@@ -157,8 +162,11 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
             } else {
                 objectData = try JSONSerialization.data(withJSONObject: returnData, options: [])
             }
-
-            let dict = try JSONDecoder().decode(T.self, from: objectData)
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .graphQL
+            
+            let dict = try decoder.decode(T.self, from: objectData)
             
             return .success(dict)
         } catch {

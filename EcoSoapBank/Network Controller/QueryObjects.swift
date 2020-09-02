@@ -30,6 +30,9 @@ enum QueryObjects {
     password
     phone
     skype
+    address {
+        \(address)
+    }
     properties {
         \(property)
     }
@@ -59,6 +62,12 @@ enum QueryObjects {
     collectionType
     logo
     phone
+    billingAddress {
+        \(address)
+    }
+    shippingAddress {
+        \(address)
+    }
     shippingNote
     notes
     """
@@ -119,5 +128,18 @@ enum QueryObjects {
     static let successPayload = """
     success
     error
+    """
+    
+    static let payment = """
+    id
+    invoiceCode
+    invoice
+    amountPaid
+    amountDue
+    date
+    invoicePeriodStartDate
+    invoicePeriodEndDate
+    dueDate
+    paymentMethod
     """
 }

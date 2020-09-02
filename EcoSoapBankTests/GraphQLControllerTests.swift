@@ -120,13 +120,11 @@ class GraphQLControllerTests: XCTestCase {
     }
 
     func testSchedulePickup() {
+        let readyDate = Date(year: 2020, month: 09, day: 25, hour: 1, minute: 1)!
+        
         let scheuleInput = Pickup.ScheduleInput(base: Pickup.Base(collectionType: .generatedLabel,
                                                                   status: .submitted,
-                                                                  readyDate: Date(year: 2020,
-                                                                                  month: 08,
-                                                                                  day: 25,
-                                                                                  hour: 1,
-                                                                                  minute: 1)!,
+                                                                  readyDate: readyDate,
                                                                   pickupDate: nil,
                                                                   notes: nil),
                                                 propertyID: "PropertyId1",
@@ -151,6 +149,7 @@ class GraphQLControllerTests: XCTestCase {
             XCTAssertEqual(cartonPercentFull, 100)
             XCTAssertEqual(collectionType, .generatedLabel)
             XCTAssertEqual(label?.absoluteString, "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf")
+            XCTAssertEqual(scheduleResult.pickup?.readyDate, readyDate)
             
             self.expectation.fulfill()
         }
@@ -176,6 +175,30 @@ class GraphQLControllerTests: XCTestCase {
             self.expectation.fulfill()
         }
 
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testFetchPayments() {
+        graphQLController.fetchPayments(forPropertyID: "PropertyId1") { result in
+            guard let firstPayment = try? result.get().first else {
+                XCTFail("Unable to get valid Payment from returned data")
+                return
+            }
+            
+            XCTAssertEqual(firstPayment.id, "PaymentId1")
+            XCTAssertEqual(firstPayment.invoiceCode, "Invoice1")
+            XCTAssertEqual(firstPayment.invoice, "https://test.com/invoice1")
+            XCTAssertEqual(firstPayment.amountPaid, 1111)
+            XCTAssertEqual(firstPayment.amountDue, 1111)
+            XCTAssertEqual(firstPayment.date.iso8601String, "2020-01-01T02:01:01Z")
+            XCTAssertEqual(firstPayment.invoicePeriodStartDate?.iso8601String, "2020-01-01T02:01:01Z")
+            XCTAssertEqual(firstPayment.invoicePeriodEndDate?.iso8601String, "2020-03-01T02:01:01Z")
+            XCTAssertEqual(firstPayment.dueDate?.iso8601String, "2020-01-01T02:01:01Z")
+            XCTAssertEqual(firstPayment.paymentMethod, .ach)
+            
+            self.expectation.fulfill()
+        }
+        
         wait(for: [expectation], timeout: 5.0)
     }
 }
