@@ -12,7 +12,7 @@ extension JSONDecoder.DateDecodingStrategy {
     static let graphQL = JSONDecoder.DateDecodingStrategy.custom { decoder -> Date in
         let container = try decoder.singleValueContainer()
         let dateString = try container.decode(String.self).replacingOccurrences(of: "−", with: "-")
-        print("Decoding date: \(dateString)")
+    
         guard let date = ISO8601DateFormatter.full.date(from: dateString) ??
             ISO8601DateFormatter.short.date(from: dateString) else {
                 throw NSError(domain: "Unable to parse date", code: 0)
