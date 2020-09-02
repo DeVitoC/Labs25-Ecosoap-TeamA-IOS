@@ -110,7 +110,6 @@ class GraphQLControllerTests: XCTestCase {
             XCTAssertEqual(firstProperty.propertyType, .hotel)
             XCTAssertEqual(firstProperty.rooms, 111)
             XCTAssertEqual(firstProperty.services, [.soap, .linens])
-            XCTAssertEqual(firstProperty.phone, "111-111-1111")
             XCTAssertEqual(firstProperty.shippingNote, "Shipping note 1.")
 
             self.expectation.fulfill()
@@ -201,4 +200,97 @@ class GraphQLControllerTests: XCTestCase {
         
         wait(for: [expectation], timeout: 5.0)
     }
+    
+    func testUpdateProfile() {
+        let inputUser = User(id: "00uvb3lz10Bekzr854x6",
+                             firstName: "Llama",
+                             middleName: nil,
+                             lastName: "Dude",
+                             title: nil,
+                             company: nil,
+                             email: "llama1@maildrop.cc",
+                             phone: nil,
+                             skype: nil,
+                             properties: nil)
+        
+        var info = EditableProfileInfo(user: inputUser)
+        
+        let newMiddleName = UUID().uuidString
+        info.middleName = newMiddleName
+        let newPhoneNumber = UUID().uuidString
+        info.phone = newPhoneNumber
+        let newSkype = UUID().uuidString
+        info.skype = newSkype
+        
+        graphQLController.updateUserProfile(with: info) { result in
+            guard let updatedUser = try? result.get() else {
+                XCTFail("Unable to get valid User from returned data")
+                return
+            }
+            
+            XCTAssertEqual(updatedUser.id, inputUser.id)
+            XCTAssertEqual(updatedUser.firstName, inputUser.firstName)
+            XCTAssertEqual(updatedUser.lastName, inputUser.lastName)
+            XCTAssertEqual(updatedUser.email, inputUser.email)
+            XCTAssertEqual(updatedUser.middleName, newMiddleName)
+            XCTAssertEqual(updatedUser.skype, newSkype)
+            
+            self.expectation.fulfill()
+        }
+        
+        wait(for: expectation, timeout: 5.0)
+    }
+    
+    func testUpdateProperty() {
+        let inputAddress = Address(address1: "Address 5 Line 1",
+                                   address2: "Address 5 Line 2",
+                                   address3: "Address 5 Line 3",
+                                   city: "City 5",
+                                   state: "State 5",
+                                   postalCode: "55555",
+                                   country: "US",
+                                   formattedAddress: nil)
+        
+        let inputProperty = Property(id: "PropertyId1",
+                                     name: "Property 1",
+                                     propertyType: .hotel,
+                                     rooms: 111,
+                                     services: [.soap, .linens],
+                                     collectionType: .generatedLabel,
+                                     logo: "https://test.com/logo1.png",
+                                     phone: "111-111-1111",
+                                     billingAddress: inputAddress,
+                                     shippingAddress: inputAddress,
+                                     shippingNote: "Shipping note 1.",
+                                     notes: "Notes 1.")
+        
+        var info = EditablePropertyInfo(inputProperty)
+        
+        let newPhoneNumber = UUID().uuidString; info.phone = newPhoneNumber
+        
+        graphQLController.updateProperty(with: info) { result in
+            guard let updatedProperty = try? result.get() else {
+                XCTFail("Unable to get valid User from returned data")
+                return
+            }
+            
+            XCTAssertEqual(updatedProperty.id, inputProperty.id)
+            XCTAssertEqual(updatedProperty.name, inputProperty.name)
+            XCTAssertEqual(updatedProperty.propertyType, inputProperty.propertyType)
+            XCTAssertEqual(updatedProperty.rooms, inputProperty.rooms)
+            XCTAssertEqual(updatedProperty.services, inputProperty.services)
+            XCTAssertEqual(updatedProperty.collectionType, inputProperty.collectionType)
+            XCTAssertEqual(updatedProperty.logo, inputProperty.logo)
+            XCTAssertEqual(updatedProperty.billingAddress, inputProperty.billingAddress)
+            XCTAssertEqual(updatedProperty.shippingAddress, inputProperty.shippingAddress)
+            XCTAssertEqual(updatedProperty.shippingNote, inputProperty.shippingNote)
+            XCTAssertEqual(updatedProperty.notes, inputProperty.notes)
+            XCTAssertEqual(updatedProperty.phone, newPhoneNumber)
+            
+            self.expectation.fulfill()
+        }
+        
+        wait(for: expectation, timeout: 5.0)
+    }
 }
+

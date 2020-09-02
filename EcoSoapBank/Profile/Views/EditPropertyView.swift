@@ -16,9 +16,9 @@ struct EditPropertyView: View {
     var propertyType: Binding<Int> {
         Binding(get: {
             Property.PropertyType.allCases
-                .firstIndex(of: self.viewModel.propertyInfo.type)!
+                .firstIndex(of: self.viewModel.propertyInfo.propertyType)!
         }, set: { idx in
-            self.viewModel.propertyInfo.type
+            self.viewModel.propertyInfo.propertyType
                 = Property.PropertyType.allCases[idx]
         })
     }

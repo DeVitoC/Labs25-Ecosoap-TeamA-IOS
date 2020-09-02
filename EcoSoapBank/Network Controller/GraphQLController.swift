@@ -44,9 +44,10 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
         performOperation(.userByID(id: userID), completion: completion)
     }
     
-    func updateUserProfile(with user: User,
+    func updateUserProfile(with info: EditableProfileInfo,
                            completion: @escaping ResultHandler<User>) {
-        completion(.failure(GraphQLError.unimplemented))
+        // TODO: may need to add token later
+        performOperation(.updateUserProfile(info: info), completion: completion)
     }
     
     // Impact
@@ -92,6 +93,12 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
                          completion: @escaping ResultHandler<[Property]>) {
         // TODO: may need to add token later
         performOperation(.propertiesByUserID(id: userID), completion: completion)
+    }
+    
+    func updateProperty(with info: EditablePropertyInfo,
+                        completion: @escaping ResultHandler<Property>) {
+        // TODO: may need to add token later
+        performOperation(.updateProperty(info: info), completion: completion)
     }
 
     // MARK: - Private Methods

@@ -15,7 +15,7 @@ extension JSONDecoder.DateDecodingStrategy {
     
         guard let date = ISO8601DateFormatter.full.date(from: dateString) ??
             ISO8601DateFormatter.short.date(from: dateString) else {
-                throw NSError(domain: "Unable to parse date", code: 0)
+                throw NSError(domain: "Unable to parse date", code: 0, userInfo: ["Input string": dateString])
         }
         return date
     }

@@ -23,11 +23,7 @@ enum GraphQLMutations {
     mutation LogIn($input: LogInInput) {
         logIn(input: $input) {
             user {
-                id
-                firstName
-                lastName
-                email
-                password
+                \(QueryObjects.user)
             }
         }
     }
@@ -38,6 +34,16 @@ enum GraphQLMutations {
         updateUserProfile(input: $input) {
             user {
                 \(QueryObjects.user)
+            }
+        }
+    }
+    """
+    
+    static let updateProperty = """
+    mutation UpdateProperty($input: UpdatePropertyInput) {
+        updateProperty(input: $input) {
+            property {
+                \(QueryObjects.property)
             }
         }
     }
