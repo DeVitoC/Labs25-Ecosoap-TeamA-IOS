@@ -18,8 +18,9 @@ extension Image {
     static func plus() -> Image { Image(systemName: "plus") }
     static func cubeBox() -> Image { Image(systemName: "cube.box") }
     static func notes() -> Image { Image(systemName: "doc.plaintext") }
+    static func personSquareFill() -> Image { Image(systemName: "person.crop.square.fill") }
+    static func property() -> Image { Image(systemName: "bed.double.fill") }
 }
-
 
 // MARK: - Text
 
@@ -33,11 +34,9 @@ extension Text {
     }
 }
 
-
 extension String {
     func uiText() -> Text { Text(self) }
 }
-
 
 extension Array where Element == String {
     func uiText(separatedBy separator: String = "") -> Text {
@@ -51,13 +50,11 @@ extension Array where Element == String {
     }
 }
 
-
 extension View {
     func font(_ uiFont: UIFont) -> some View {
         font(Font(uiFont))
     }
 }
-
 
 // MARK: - Binding
 
