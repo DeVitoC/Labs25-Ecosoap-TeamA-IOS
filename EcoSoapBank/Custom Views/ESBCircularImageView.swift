@@ -54,20 +54,31 @@ class ESBCircularImageView: GradientView {
         layer.cornerRadius = frame.size.width / 2
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
     }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
+            updateColors()
+        }
+    }
     
     // MARK: - Private methods
     
     func setUp(withInset inset: CGFloat) {
         startPoint = CGPoint(x: 0, y: 1)
         endPoint = CGPoint(x: 1, y: 0)
-        colors = [.esbGreen, .downyBlue]
-        layer.borderColor = UIColor.white.cgColor
+        updateColors()
         layer.borderWidth = borderWidth
         isUserInteractionEnabled = false
-        
+
         addSubview(imageView)
         imageView.constrain(with: imageView.constraints(from: self, toSides: .all, constant: inset))
-    
+
         widthAnchor.constraint(equalTo: heightAnchor).isActive = true
+    }
+
+    func updateColors() {
+        colors = [.esbGreen, .downyBlue]
+        layer.borderColor = UIColor.systemBackground.cgColor
     }
 }

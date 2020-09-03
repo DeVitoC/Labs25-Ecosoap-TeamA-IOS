@@ -22,7 +22,8 @@ class BackgroundView: UIView {
     
     private func setUp() {
         let gradient = configure(GradientView()) {
-            $0.colors = [.esbGreen, .downyBlue]
+            $0.colors = [UIColor.esbGreen.orInverse(),
+                         UIColor.downyBlue.orInverse()]
             $0.startPoint = CGPoint(x: 0.2, y: 0.8)
             $0.endPoint = CGPoint(x: 0.4, y: -0.3)
         }
@@ -32,6 +33,10 @@ class BackgroundView: UIView {
         let circles = BackgroundCirclesView()
         addSubviewsUsingAutolayout(circles)
         circles.fillSuperview()
+
+        constrainNewSubviewToSides(configure(UIView(), with: {
+            $0.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.2)
+        }))
     }
 }
 
@@ -46,9 +51,6 @@ private struct Circle {
 }
 
 private class BackgroundCirclesView: UIView {
-    private let greenColor = UIColor(red: 45 / 255, green: 155 / 255, blue: 115 / 255, alpha: 40 / 100).cgColor
-    private let blueColor = UIColor(red: 46 / 255, green: 210 / 255, blue: 247 / 255, alpha: 55 / 100).cgColor
-    
     private var circles: [Circle] = [
         Circle(style: .dark,
                relativeCenter: CGPoint(x: -0.02, y: 0.25),
@@ -64,22 +66,32 @@ private class BackgroundCirclesView: UIView {
                relativeWidth: 0.4),
         
     ]
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
+            setNeedsDisplay()
+        }
+    }
     
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
+        let greenColor = UIColor(red: 45 / 255, green: 155 / 255, blue: 115 / 255, alpha: 40 / 100).orInverse().cgColor
+        let blueColor = UIColor(red: 46 / 255, green: 210 / 255, blue: 247 / 255, alpha: 55 / 100).orInverse().cgColor
         
-        func drawCircle(_ circle: Circle) {
-            let diameter = circle.relativeWidth * frame.width
+        circles.forEach {
+            let diameter = $0.relativeWidth * frame.width
             let radius = diameter / 2
-            let circleFrame = CGRect(x: (circle.relativeCenter.x * frame.width) - radius,
-                                     y: (circle.relativeCenter.y * frame.height) - radius,
+            let circleFrame = CGRect(x: ($0.relativeCenter.x * frame.width) - radius,
+                                     y: ($0.relativeCenter.y * frame.height) - radius,
                                      width: diameter,
                                      height: diameter)
 
             let circlePath = CGPath(ellipseIn: circleFrame, transform: nil)
             context.addPath(circlePath)
-            
-            switch circle.style {
+
+            switch $0.style {
             case .light:
                 context.setFillColor(blueColor)
                 context.setBlendMode(.softLight)
@@ -87,11 +99,9 @@ private class BackgroundCirclesView: UIView {
                 context.setFillColor(greenColor)
                 context.setBlendMode(.multiply)
             }
-            
+
             context.fillPath()
         }
-        
-        circles.forEach { drawCircle($0) }
     }
     
     override init(frame: CGRect) {
@@ -106,6 +116,16 @@ private class BackgroundCirclesView: UIView {
     
     private func setUp() {
         backgroundColor = .clear
+    }
+}
+
+// MARK: - Shade
+
+extension UIView {
+    static var shade: UIView {
+        configure(UIView()) {
+            $0.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.2)
+        }
     }
 }
 
