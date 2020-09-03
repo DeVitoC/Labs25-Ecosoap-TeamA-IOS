@@ -35,41 +35,37 @@ struct MainProfileView: View {
                         }
                     }
 
-                    Section {
-                        if !viewModel.propertyOptions.isEmpty {
-                            Picker(
-                                selection: $viewModel.selectedProperty,
-                                label: HStack {
-                                    Image.property()
-                                        .resizable()
-                                        .padding(EdgeInsets(
-                                            top: (iconWidth ?? 10) * 0.3,
-                                            leading: 2,
-                                            bottom: 2,
-                                            trailing: 2))
-                                        .background(
-                                            Color.green.clipShape(
-                                                RoundedRectangle(
-                                                    cornerRadius: 2,
-                                                    style: .circular)
-                                            ).aspectRatio(CGSize(width: 1, height: 1),
-                                                          contentMode: .fit))
-                                        .foregroundColor(Color(.systemBackground))
-                                        .frame(width: iconWidth, height: iconWidth)
-                                    Text("Current Property")
-                                }
-                            ) {
-                                Section {
-                                    ForEach(viewModel.propertyOptions, id: \.display) {
-                                        Text($0.display).tag($0)
-                                    }
-                                }
+                    if !viewModel.propertyOptions.isEmpty {
+                        Picker(
+                            selection: $viewModel.selectedProperty,
+                            label: HStack {
+                                Image.property()
+                                    .resizable()
+                                    .padding(EdgeInsets(
+                                        top: (iconWidth ?? 10) * 0.3,
+                                        leading: 2,
+                                        bottom: 2,
+                                        trailing: 2))
+                                    .background(
+                                        Color.green.clipShape(
+                                            RoundedRectangle(
+                                                cornerRadius: 2,
+                                                style: .circular)
+                                        ).aspectRatio(CGSize(width: 1, height: 1),
+                                                      contentMode: .fit))
+                                    .foregroundColor(Color(.systemBackground))
+                                    .frame(width: iconWidth, height: iconWidth)
+                                Text("Current Property")
                             }
-                        } else {
-                            Text("User account has no associated properties. Please contact Eco-Soap Bank for more info.")
+                        ) {
+                            ForEach(viewModel.propertyOptions, id: \.display) {
+                                Text($0.display).tag($0)
+                            }
                         }
+                    } else {
+                        Text("User account has no associated properties. Please contact Eco-Soap Bank for more info.")
                     }
-                }
+                }.esbListRowBackground()
 
                 Section(header: Text("Edit Property Info".uppercased())) {
                     ForEach(viewModel.properties) { property in
@@ -80,7 +76,7 @@ struct MainProfileView: View {
                             Text(property.name)
                         }
                     }
-                }
+                }.esbListRowBackground()
 
                 Section {
                     Button(action: viewModel.logOut) {
@@ -88,10 +84,11 @@ struct MainProfileView: View {
                             Spacer()
                             Text("Log out")
                                 .foregroundColor(.red)
+                                .fontWeight(.bold)
                             Spacer()
                         }
                     }
-                }
+                }.esbListRowBackground()
             }.navigationBarTitle("Profile Settings", displayMode: .automatic)
         }
         .font(.muli())
