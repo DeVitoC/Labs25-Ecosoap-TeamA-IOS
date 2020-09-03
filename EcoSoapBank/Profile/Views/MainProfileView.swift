@@ -35,35 +35,39 @@ struct MainProfileView: View {
                         }
                     }
 
-                    if !viewModel.propertyOptions.isEmpty {
-                        Picker(
-                            selection: $viewModel.selectedPropertyIndex,
-                            label: HStack {
-                                Image.property()
-                                    .resizable()
-                                    .padding(EdgeInsets(
-                                        top: (iconWidth ?? 10) * 0.3,
-                                        leading: 2,
-                                        bottom: 2,
-                                        trailing: 2))
-                                    .background(
-                                        Color.green.clipShape(
-                                            RoundedRectangle(
-                                                cornerRadius: 2,
-                                                style: .circular)
-                                        ).aspectRatio(CGSize(width: 1, height: 1),
-                                                      contentMode: .fit))
-                                    .foregroundColor(.white)
-                                    .frame(width: iconWidth, height: iconWidth)
-                                Text("Current Property")
+                    Section {
+                        if !viewModel.propertyOptions.isEmpty {
+                            Picker(
+                                selection: $viewModel.selectedProperty,
+                                label: HStack {
+                                    Image.property()
+                                        .resizable()
+                                        .padding(EdgeInsets(
+                                            top: (iconWidth ?? 10) * 0.3,
+                                            leading: 2,
+                                            bottom: 2,
+                                            trailing: 2))
+                                        .background(
+                                            Color.green.clipShape(
+                                                RoundedRectangle(
+                                                    cornerRadius: 2,
+                                                    style: .circular)
+                                            ).aspectRatio(CGSize(width: 1, height: 1),
+                                                          contentMode: .fit))
+                                        .foregroundColor(Color(.systemBackground))
+                                        .frame(width: iconWidth, height: iconWidth)
+                                    Text("Current Property")
+                                }
+                            ) {
+                                Section {
+                                    ForEach(viewModel.propertyOptions, id: \.display) {
+                                        Text($0.display).tag($0)
+                                    }
+                                }
                             }
-                        ) {
-                            ForEach(viewModel.propertyOptions, id: \.display) {
-                                Text($0.display)
-                            }
+                        } else {
+                            Text("User account has no associated properties. Please contact Eco-Soap Bank for more info.")
                         }
-                    } else {
-                        Text("User has no associated properties!")
                     }
                 }
 
@@ -91,6 +95,7 @@ struct MainProfileView: View {
             }.navigationBarTitle("Profile Settings", displayMode: .automatic)
         }
         .font(.muli())
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
