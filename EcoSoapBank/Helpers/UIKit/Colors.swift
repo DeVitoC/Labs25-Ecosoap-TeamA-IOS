@@ -36,21 +36,22 @@ extension UIColor {
         }
     }
 
-    /// Returns color with the same hue/saturation/alpha, but with 1 minus the original brightness.
-    var inverseBrightness: UIColor {
-        let hsba = self.hsba
-        return UIColor(hue: hsba.hue,
-                       saturation: hsba.saturation,
-                       brightness: 1 - hsba.brightness,
-                       alpha: hsba.alpha)
+    /// Returns `self` if in a non-`.dark` user interface style, or else the provided color.
+    /// This is inverted if `defaultLight` is set to `false`; `self` will be used in dark mode and
+    /// the provided color otherwise.
+    func or(_ otherColor: @escaping @autoclosure () -> UIColor,
+            defaultLight: Bool = true
+    ) -> UIColor {
+        if defaultLight {
+            return UIColor(light: self, dark: otherColor())
+        } else {
+            return UIColor(light: otherColor(), dark: self)
+        }
     }
 
-    /// Returns `self` if in any user interface mode other than `.dark`,
-    /// or the provided color if in dark mode.
-    func or(_ colorForDarkMode: @escaping @autoclosure () -> UIColor) -> UIColor {
-        UIColor(light: self, dark: colorForDarkMode())
-    }
-
+    /// Returns self if in a non-`.dark` user interface style, otherwise returns `self.inverseBrightness`.
+    /// This is inverted if `defaultLight` is set to `false`; `self` will be used in dark mode and
+    /// the provided color otherwise.
     func orInverse(defaultLight: Bool = true) -> UIColor {
         if defaultLight {
             return self.or(self.inverseBrightness)
@@ -77,10 +78,23 @@ extension UIColor {
         return hsba
     }
 
+    /// Returns color with the same hue/saturation/alpha, but with 1 minus the original brightness.
+    var inverseBrightness: UIColor {
+        let hsba = self.hsba
+        return UIColor(hue: hsba.hue,
+                       saturation: hsba.saturation,
+                       brightness: 1 - hsba.brightness,
+                       alpha: hsba.alpha)
+    }
+
+    /// Basic `CGFloat` values representative of red/green/blue/alpha color components.
+    /// Component values are scaled 0-1.0.
     struct RGBA {
         var red, green, blue, alpha: CGFloat
     }
 
+    /// Basic `CGFloat` values representative of hue/saturation/brightness/alpha color components.
+    /// Component values are scaled 0-1.0.
     struct HSBA {
         var hue, saturation, brightness, alpha: CGFloat
     }
