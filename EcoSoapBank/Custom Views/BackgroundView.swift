@@ -77,8 +77,12 @@ private class BackgroundCirclesView: UIView {
     
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
-        let greenColor = UIColor(red: 45 / 255, green: 155 / 255, blue: 115 / 255, alpha: 40 / 100).orInverse().cgColor
-        let blueColor = UIColor(red: 46 / 255, green: 210 / 255, blue: 247 / 255, alpha: 55 / 100).orInverse().cgColor
+        let greenColor = UIColor(red: 45 / 255, green: 155 / 255, blue: 115 / 255, alpha: 40 / 100)
+            .orInverse()
+            .cgColor
+        let blueColor = UIColor(red: 46 / 255, green: 210 / 255, blue: 247 / 255, alpha: 55 / 100)
+            .orWithBrightness(0.3)
+            .cgColor
         
         circles.forEach {
             let diameter = $0.relativeWidth * frame.width

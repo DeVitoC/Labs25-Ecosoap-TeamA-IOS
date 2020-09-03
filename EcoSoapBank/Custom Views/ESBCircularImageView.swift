@@ -78,7 +78,8 @@ class ESBCircularImageView: GradientView {
     }
 
     func updateColors() {
-        colors = [.esbGreen, .downyBlue]
+        colors = [UIColor.esbGreen.orAdjustingBrightness(by: -0.25),
+                  UIColor.downyBlue.orAdjustingBrightness(by: -0.25)]
         layer.borderColor = UIColor.systemBackground.cgColor
     }
 }
