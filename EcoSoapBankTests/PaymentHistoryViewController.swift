@@ -24,12 +24,8 @@ class PaymentHistoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        paymentCollectionView.collectionViewLayout = configureLayout()
-        paymentCollectionView.dataSource = self
-        paymentCollectionView.delegate = self
         setupCollectionView()
         guard let user = paymentController?.user, let properties = user.properties else { return }
-        paymentCollectionView.backgroundColor = .clear
         paymentController?.fetchPayments(forPropertyID: properties[0].id, completion: { result in
             switch result {
             case .success(let payments):
@@ -55,6 +51,9 @@ class PaymentHistoryViewController: UIViewController {
 
     func setupCollectionView() {
         view.addSubview(paymentCollectionView)
+        paymentCollectionView.collectionViewLayout = configureLayout()
+        paymentCollectionView.dataSource = self
+        paymentCollectionView.delegate = self
         paymentCollectionView.translatesAutoresizingMaskIntoConstraints = false
         paymentCollectionView.register(PaymentHistoryCollectionViewCell.self, forCellWithReuseIdentifier: "PaymentCell")
         paymentCollectionView.backgroundColor = .clear
