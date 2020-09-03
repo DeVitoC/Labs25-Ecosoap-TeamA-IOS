@@ -9,7 +9,11 @@
 import UIKit
 
 class PaymentHistoryCollectionViewCell: UICollectionViewCell {
-    private var payment: Payment?
+    private var payment: Payment? {
+        didSet {
+            setupUI()
+        }
+    }
     private lazy var uiInitializers = UIElementInitializers()
 
     func setupUI() {
@@ -33,5 +37,7 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
         addSubview(paymentMethodLabel)
         addSubview(invoiceNumberLabel)
         addSubview(paymentDateLabel)
+
+        
     }
 }
