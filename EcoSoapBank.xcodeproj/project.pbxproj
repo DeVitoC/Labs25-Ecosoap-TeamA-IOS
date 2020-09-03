@@ -116,7 +116,6 @@
 		992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64924F0319D00638AA4 /* EditCartonViewController.swift */; };
 		992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */; };
 		992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C929024F70B0C004FCBBB /* Randomizable.swift */; };
-		992FBC8524FDAB8F0099C32D /* PropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8424FDAB8F0099C32D /* PropertyList.swift */; };
 		992FBC8724FDABE10099C32D /* LabelAlignedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */; };
 		992FBC8924FDB2D50099C32D /* PropertyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8824FDB2D50099C32D /* PropertyListViewModel.swift */; };
 		992FBC8B24FDB67D0099C32D /* EditPropertyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8A24FDB67D0099C32D /* EditPropertyViewModel.swift */; };
@@ -283,7 +282,6 @@
 		992BB64924F0319D00638AA4 /* EditCartonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCartonViewController.swift; sourceTree = "<group>"; };
 		992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISwipeActionsConfiguration+Constants.swift"; sourceTree = "<group>"; };
 		992C929024F70B0C004FCBBB /* Randomizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomizable.swift; sourceTree = "<group>"; };
-		992FBC8424FDAB8F0099C32D /* PropertyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyList.swift; sourceTree = "<group>"; };
 		992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAlignedTextField.swift; sourceTree = "<group>"; };
 		992FBC8824FDB2D50099C32D /* PropertyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListViewModel.swift; sourceTree = "<group>"; };
 		992FBC8A24FDB67D0099C32D /* EditPropertyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPropertyViewModel.swift; sourceTree = "<group>"; };
@@ -612,7 +610,6 @@
 			children = (
 				99C0467724FD8AF200E2B005 /* MainProfileView.swift */,
 				99C0467924FD8B9200E2B005 /* EditProfileView.swift */,
-				992FBC8424FDAB8F0099C32D /* PropertyList.swift */,
 				992FBC8C24FDB6970099C32D /* EditPropertyView.swift */,
 			);
 			path = Views;
@@ -992,7 +989,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
-				992FBC8524FDAB8F0099C32D /* PropertyList.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
 				04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */,
 				992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */,
