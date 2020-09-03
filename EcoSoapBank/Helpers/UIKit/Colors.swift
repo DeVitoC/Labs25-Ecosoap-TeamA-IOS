@@ -16,3 +16,72 @@ extension UIColor {
     static let shuttleGrey = UIColor(named: "ShuttleGrey")!
     static let silver = UIColor(named: "Silver")!
 }
+
+// MARK: - Interface Style
+
+extension UIColor {
+    /// Initializes a dynamic color that evaluates to either the `light` or `dark` colors provided
+    /// depending on the current user interface style.
+    convenience init(
+        light: @escaping @autoclosure () -> UIColor,
+        dark: @escaping @autoclosure () -> UIColor
+    ) {
+        self.init { traits in
+            switch traits.userInterfaceStyle {
+            case .dark:
+                return dark()
+            default:
+                return light()
+            }
+        }
+    }
+
+    /// Returns color with the same hue/saturation/alpha, but with 1 minus the original brightness.
+    var inverseBrightness: UIColor {
+        let hsba = self.hsba
+        return UIColor(hue: hsba.hue,
+                       saturation: hsba.saturation,
+                       brightness: 1 - hsba.brightness,
+                       alpha: hsba.alpha)
+    }
+
+    /// Returns `self` if in any user interface mode other than `.dark`,
+    /// or the provided color if in dark mode.
+    func or(_ colorForDarkMode: @escaping @autoclosure () -> UIColor) -> UIColor {
+        UIColor(light: self, dark: colorForDarkMode())
+    }
+
+    func orInverse(defaultLight: Bool = true) -> UIColor {
+        if defaultLight {
+            return self.or(self.inverseBrightness)
+        } else {
+            return inverseBrightness.or(self)
+        }
+    }
+}
+
+// MARK: - RGBA / HSBA
+
+extension UIColor {
+    /// The red, green, blue, and alpha values of the color, scaled between 0 and 1.0.
+    var rgba: RGBA {
+        var rgba = RGBA(red: 0, green: 0, blue: 0, alpha: 0)
+        getRed(&rgba.red, green: &rgba.green, blue: &rgba.blue, alpha: &rgba.alpha)
+        return rgba
+    }
+
+    /// The hue, saturation, brightness, and alpha values of the color, scaled between 0 and 1.0.
+    var hsba: HSBA {
+        var hsba = HSBA(hue: 0, saturation: 0, brightness: 0, alpha: 0)
+        getHue(&hsba.hue, saturation: &hsba.saturation, brightness: &hsba.brightness, alpha: &hsba.alpha)
+        return hsba
+    }
+
+    struct RGBA {
+        var red, green, blue, alpha: CGFloat
+    }
+
+    struct HSBA {
+        var hue, saturation, brightness, alpha: CGFloat
+    }
+}
