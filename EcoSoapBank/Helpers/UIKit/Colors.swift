@@ -53,11 +53,16 @@ extension UIColor {
     /// This is inverted if `defaultLight` is set to `false`; `self` will be used in dark mode and
     /// the provided color otherwise.
     func orInverse(defaultLight: Bool = true) -> UIColor {
-        if defaultLight {
-            return self.or(self.inverseBrightness)
-        } else {
-            return inverseBrightness.or(self)
-        }
+        self.or(self.inverseBrightness, defaultLight: defaultLight)
+    }
+
+    /// 
+    func orAdjustingBrightness(
+        by brightnessChange: CGFloat,
+        defaultLight: Bool = true
+    ) -> UIColor {
+        self.or(self.adjustingBrightness(by: brightnessChange),
+                defaultLight: defaultLight)
     }
 }
 
@@ -85,6 +90,26 @@ extension UIColor {
                        saturation: hsba.saturation,
                        brightness: 1 - hsba.brightness,
                        alpha: hsba.alpha)
+    }
+
+    /// Returns a color with the new brightness and all other components values identical to the original.
+    func withBrightness(_ newBrightness: CGFloat) -> UIColor {
+        let oldHSBA = self.hsba
+        return UIColor(
+            hue: oldHSBA.hue,
+            saturation: oldHSBA.saturation,
+            brightness: newBrightness,
+            alpha: oldHSBA.alpha)
+    }
+
+    /// Returns a color with the old brightness adjusted by the provided amount and all other components values identical to the original.
+    func adjustingBrightness(by brightnessChange: CGFloat) -> UIColor {
+        let oldHSBA = self.hsba
+        return UIColor(
+            hue: oldHSBA.hue,
+            saturation: oldHSBA.saturation,
+            brightness: oldHSBA.brightness + brightnessChange,
+            alpha: oldHSBA.alpha)
     }
 
     /// Basic `CGFloat` values representative of red/green/blue/alpha color components.
