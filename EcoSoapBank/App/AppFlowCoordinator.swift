@@ -49,23 +49,6 @@ class AppFlowCoordinator: FlowCoordinator {
     }
 
     func start() {
-        // set default tabBar/navBar appearance
-        configure(UITabBar.appearance()) {
-            $0.tintColor = .esbGreen
-            $0.backgroundColor = .downyBlue
-        }
-        configure(UITableView.appearance()) {
-//            let bg = BackgroundView()
-            $0.backgroundColor = .clear
-            $0.backgroundView = BackgroundView()
-//            $0.constrainNewSubviewToSides(bg)
-//            $0.bringSubviewToFront(bg)
-        }
-
-        configure(UITableViewCell.appearance()) {
-            $0.backgroundColor = .clear
-        }
-
         // set up window and make visible
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
@@ -108,12 +91,15 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private func onLoginComplete(withUser user: User?) {
         guard let user = user else {
-            return self.presentLoginFailAlert(error: LoginError.loginFailed)
+            guard userController.user != nil else {
+                return self.presentLoginFailAlert(error: LoginError.loginFailed)
+            }
+            return loginCoord.start()
         }
 
         self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
         self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.impactProvider)
-        self.profileCoord = ProfileCoordinator(userController: self.userController)
+        self.profileCoord = ProfileCoordinator(user: user, userController: self.userController)
 
         self.tabBarController.setViewControllers([
             self.impactCoord!.rootVC,
@@ -134,4 +120,4 @@ class AppFlowCoordinator: FlowCoordinator {
 
 // MARK: - Use Mock
 
-let useMock: Bool = false
+let useMock: Bool = true
