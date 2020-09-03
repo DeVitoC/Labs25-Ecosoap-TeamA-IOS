@@ -33,22 +33,20 @@ struct EditPropertyView: View {
                     }
                 }
                 TextField("Phone", text: $viewModel.propertyInfo.phone)
-            }
+            }.esbListRowBackground()
 
             Section(header: Text("Shipping Address".uppercased())) {
                 addressSectionContent($viewModel.propertyInfo.shippingAddress)
-            }
+            }.esbListRowBackground()
 
-            Section(header: Text("Billing Address".uppercased())) {
-                Toggle(isOn: $viewModel.useShippingAddressForBilling) {
-                    Text("Use shipping address for billing")
-                }
+            Toggle(isOn: $viewModel.useShippingAddressForBilling) {
+                Text("Use shipping address for billing")
             }
 
             if !viewModel.useShippingAddressForBilling {
-                Section {
+                Section(header: Text("Billing Address".uppercased())) {
                     addressSectionContent($viewModel.propertyInfo.billingAddress)
-                }
+                }.esbListRowBackground()
             }
         }
         .keyboardAvoiding()
