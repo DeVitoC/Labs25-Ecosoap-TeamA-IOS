@@ -12,6 +12,7 @@ struct PickupHistoryView: View {
     @ObservedObject var pickupController: PickupController
 
     @State private var makingNewPickup = false
+    @State private var statusWidth: CGFloat?
 
     private var schedulePickup: () -> Void
 
@@ -24,7 +25,7 @@ struct PickupHistoryView: View {
         NavigationView {
             List {
                 ForEach(pickupController.pickups) {
-                    PickupHistoryCell(pickup: $0)
+                    PickupHistoryCell(pickup: $0, statusWidth: self.$statusWidth)
                 }
             }
             .listStyle(GroupedListStyle())
@@ -39,7 +40,6 @@ struct PickupHistoryView: View {
         Image(uiImage: .addBoxSymbol)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .foregroundColor(Color(.white))
             .frame(height: 28)
             .accessibility(label: Text("Schedule New Pickup"))
     }
@@ -54,18 +54,6 @@ struct PickupHistoryView: View {
                 height: UIScreen.main.bounds.height + 160)
     }
 }
-
-//            .onAppear {
-//            let shade = UIView.shade
-//            let bg = BackgroundView()
-//            configure(UITableView.appearance()) {
-//                $0.constrainNewSubviewToSides(bg)
-//                $0.constrainNewSubviewToSides(shade)
-//                $0.bringSubviewToFront(bg)
-//                $0.bringSubviewToFront(shade)
-//            }
-//            UITableViewCell.appearance().backgroundColor = .clear
-//        }
 
 // MARK: - Previews
 
