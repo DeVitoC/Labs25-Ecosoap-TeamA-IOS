@@ -28,11 +28,7 @@ struct MainProfileView: View {
                         HStack {
                             Image.personSquareFill()
                                 .foregroundColor(Color(red: 0.8, green: 0.5, blue: 0.1))
-                                .background(GeometryReader { proxy in
-                                    Color.clear
-                                        .preference(key: IconWidth.self,
-                                                    value: proxy.size.width)
-                                }).onPreferenceChange(IconWidth.self) {
+                                .readingGeometry(key: IconWidth.self, valuePath: \.size.width) {
                                     self.iconWidth = $0
                             }
                             Text("Edit Profile")

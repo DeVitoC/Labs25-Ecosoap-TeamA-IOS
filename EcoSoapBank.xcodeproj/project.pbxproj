@@ -145,6 +145,7 @@
 		9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E024F9B78C00DD16B5 /* StripeController.swift */; };
 		9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
 		9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */; };
+		999B2D0E25014DEB002D3591 /* View+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999B2D0D25014DEB002D3591 /* View+Alignment.swift */; };
 		999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */; };
 		999CBA3D24F9AFF100CDF0F3 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */; };
 		99B5790324E30F140097957D /* PickupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5790224E30F140097957D /* PickupTests.swift */; };
@@ -312,6 +313,7 @@
 		9990F6E024F9B78C00DD16B5 /* StripeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeController.swift; sourceTree = "<group>"; };
 		9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlert.swift"; sourceTree = "<group>"; };
+		999B2D0D25014DEB002D3591 /* View+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alignment.swift"; sourceTree = "<group>"; };
 		999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = Carthage/Build/iOS/Stripe.framework; sourceTree = "<group>"; };
 		999CBA4124F9B08600CDF0F3 /* input.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = input.xcfilelist; sourceTree = "<group>"; };
@@ -671,6 +673,7 @@
 				99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */,
 				992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */,
 				99D0165F24FEA6D8001A7555 /* With.swift */,
+				999B2D0D25014DEB002D3591 /* View+Alignment.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -1058,6 +1061,7 @@
 				9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
 				E2D3030124E5F9B8008A6FAF /* MockDataLoader.swift in Sources */,
+				999B2D0E25014DEB002D3591 /* View+Alignment.swift in Sources */,
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
 				E2E2F0EA24F838170050BFCF /* Payment.swift in Sources */,
 				99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */,
