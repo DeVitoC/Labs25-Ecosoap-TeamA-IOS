@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         configure(UITableView.appearance()) {
-            $0.backgroundColor = .clear
+            $0.backgroundColor = UIColor.esbGreen.orInverse().withAlphaComponent(0.3)
         }
 
         configure(UITableViewCell.appearance()) {
