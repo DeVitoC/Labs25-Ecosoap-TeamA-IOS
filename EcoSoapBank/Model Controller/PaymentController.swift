@@ -17,7 +17,6 @@ protocol PaymentDataProvider {
 }
 
 class PaymentController {
-    private(set) var payments: [Payment] = []
     private let dataProvider: PaymentDataProvider
     private(set) var user: User
     private var properties: [Property]? {
@@ -29,19 +28,8 @@ class PaymentController {
         self.dataProvider = dataProvider
     }
 
-    func fetchPayments(forPropertyID propertyID: String) -> [Payment]? {
-        var payments: [Payment]?
-
-        dataProvider.fetchPayments(forPropertyID: propertyID) { result in
-            switch result {
-            case .success(let payments):
-                self.payments = payments
-            case .failure(let error):
-                print(error.localizedDescription)
-                payments = nil
-            }
-        }
-        return payments
+    func fetchPayments(forPropertyID propertyID: String, completion: @escaping (Result<[Payment], Error>) -> Void) {
+        dataProvider.fetchPayments(forPropertyID: propertyID, completion)
     }
     
 }
