@@ -90,3 +90,12 @@ extension Binding where Value == Bool {
         })
     }
 }
+
+// MARK: - Misc
+
+extension View {
+    func esbListRowBackground() -> some View {
+        self.listRowBackground(Color(
+            UIColor.systemGroupedBackground.withAlphaComponent(0.75)))
+    }
+}
