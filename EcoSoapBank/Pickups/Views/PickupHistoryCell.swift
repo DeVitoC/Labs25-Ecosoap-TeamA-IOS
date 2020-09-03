@@ -21,16 +21,18 @@ struct PickupHistoryCell: View {
     }
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
+        NavigationLink(
+            destination: PickupDetailViewController.Representable(pickup: pickup)
+        ) {
             VStack(alignment: .leading, spacing: 22) {
                 HStack(alignment: .center) {
-                    
+
                     // Confirmation Code
                     Text(pickup.confirmationCode)
                         .font(UIFont.muli(style: .title2, typeface: .bold))
                         .foregroundColor(Color(.montanaGrey))
                     Spacer()
-                    
+
                     HStack {
                         // Date
                         VStack(alignment: .trailing) {
@@ -40,15 +42,15 @@ struct PickupHistoryCell: View {
                             Text(pickup.readyDate.string())
                                 .font(UIFont.muli(style: .body, typeface: .regular))
                         }
-                        
+
                         // Disclosure
-                        Image(systemName: "chevron.right")
-                            .font(.systemFont(ofSize: 20, weight: .semibold))
-                            .foregroundColor(Color(.silver))
-                            .padding(.leading, 10)
+//                        Image(systemName: "chevron.right")
+//                            .font(.systemFont(ofSize: 20, weight: .semibold))
+//                            .foregroundColor(Color(.silver))
+//                            .padding(.leading, 10)
                     }
                 }
-                
+
                 HStack {
                     // Pickup Status
                     HStack {
@@ -57,26 +59,21 @@ struct PickupHistoryCell: View {
                         Text(pickup.status.display)
                             .font(UIFont.muli(style: UIFont.TextStyle.body, typeface: .semiBold))
                     }.frame(width: 140, alignment: .leading)
-                    
+
                     // Cartons
                     Image(systemName: "square.stack.3d.up.fill")
                         .modifier(Icon())
                         .foregroundColor(Color(.downyBlue))
                     Text("\(pickup.cartons.count) Cartons")
                         .font(UIFont.muli(style: UIFont.TextStyle.body, typeface: .semiBold))
-                    
+
                     Spacer()
                 }
-            }.padding(.bottom, 8)
-            
-            NavigationLink(destination:
-                PickupDetailViewController.Representable(pickup: pickup)
-                    .navigationBarTitle("Pickup Details")) {
-                        EmptyView()
             }
         }
         .font(Font(UIFont.muli(style: .body)))
         .foregroundColor(Color(.shuttleGrey))
+        .listRowBackground(Color(UIColor.systemGroupedBackground.withAlphaComponent(0.5)))
     }
 }
 
@@ -112,27 +109,7 @@ extension PickupHistoryCell {
         
         var body: some View {
             Image(systemName: imageName)
-            .foregroundColor(color)
-        }
-    }
-    
-    private struct TitledView<Content: View>: View {
-        let title: String
-        let content: Content
-
-        init(_ title: String, @ViewBuilder _ content: () -> Content) {
-            self.title = title
-            self.content = content()
-        }
-
-        var body: some View {
-            HStack {
-                Text(title + ":")
-                    .bold()
-                    .frame(alignment: .trailing)
-                content
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
+                .foregroundColor(color)
         }
     }
 }
