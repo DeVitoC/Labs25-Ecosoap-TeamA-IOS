@@ -90,6 +90,7 @@
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
+		04D3253E250148E5005ABDEB /* GraphQLControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */; };
 		04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6D72B24E8444C0003A585 /* BackgroundView.swift */; };
 		04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */; };
 		04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEE1B524E48AB000F51D69 /* ImpactController.swift */; };
@@ -172,7 +173,6 @@
 		E2D04F9124F0B7C300515831 /* mockPropertiesByUserIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */; };
 		E2D04F9324F0D50600515831 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9224F0D50600515831 /* Address.swift */; };
 		E2D04F9424F0DAC900515831 /* mockPropertiesByUserIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */; };
-		E2D04F9624F1653000515831 /* GraphQLControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */; };
 		E2D04F9824F16C1E00515831 /* mockSchedulePickupSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9724F16C1D00515831 /* mockSchedulePickupSuccess.json */; };
 		E2D04F9924F16C1E00515831 /* mockSchedulePickupSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9724F16C1D00515831 /* mockSchedulePickupSuccess.json */; };
 		E2D04F9B24F1726A00515831 /* mockCancelPickupSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9A24F1726A00515831 /* mockCancelPickupSuccess.json */; };
@@ -189,6 +189,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		04D325392501489A005ABDEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 466C4268249A8748007D033E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 466C426F249A8748007D033E;
+			remoteInfo = EcoSoapBank;
+		};
 		994E4B8324DDB67000C12921 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 466C4268249A8748007D033E /* Project object */;
@@ -252,6 +259,8 @@
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		04D325342501489A005ABDEB /* AsynchronousTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsynchronousTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04D325382501489A005ABDEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04D6D72B24E8444C0003A585 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+Okta.swift"; sourceTree = "<group>"; };
 		04FEE1B524E48AB000F51D69 /* ImpactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactController.swift; sourceTree = "<group>"; };
@@ -354,6 +363,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		04D325312501489A005ABDEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		466C426D249A8748007D033E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -453,6 +469,15 @@
 			path = "Custom Views";
 			sourceTree = "<group>";
 		};
+		04D325352501489A005ABDEB /* AsynchronousTests */ = {
+			isa = PBXGroup;
+			children = (
+				E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */,
+				04D325382501489A005ABDEB /* Info.plist */,
+			);
+			path = AsynchronousTests;
+			sourceTree = "<group>";
+		};
 		465DAA2724BD0BC100D94C24 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,6 +497,7 @@
 			children = (
 				466C4272249A8748007D033E /* EcoSoapBank */,
 				994E4B7F24DDB67000C12921 /* EcoSoapBankTests */,
+				04D325352501489A005ABDEB /* AsynchronousTests */,
 				466C4271249A8748007D033E /* Products */,
 				999CBA3B24F9AFF100CDF0F3 /* Frameworks */,
 				999CBA4124F9B08600CDF0F3 /* input.xcfilelist */,
@@ -484,6 +510,7 @@
 			children = (
 				466C4270249A8748007D033E /* EcoSoapBank.app */,
 				994E4B7E24DDB67000C12921 /* EcoSoapBankTests.xctest */,
+				04D325342501489A005ABDEB /* AsynchronousTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -655,7 +682,6 @@
 				04BE6D0C24F05ABB00DFC47D /* Impact Tests */,
 				99B5790224E30F140097957D /* PickupTests.swift */,
 				E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */,
-				E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */,
 			);
 			path = EcoSoapBankTests;
 			sourceTree = "<group>";
@@ -743,6 +769,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		04D325332501489A005ABDEB /* AsynchronousTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04D3253D2501489A005ABDEB /* Build configuration list for PBXNativeTarget "AsynchronousTests" */;
+			buildPhases = (
+				04D325302501489A005ABDEB /* Sources */,
+				04D325312501489A005ABDEB /* Frameworks */,
+				04D325322501489A005ABDEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04D3253A2501489A005ABDEB /* PBXTargetDependency */,
+			);
+			name = AsynchronousTests;
+			productName = AsynchronousTests;
+			productReference = 04D325342501489A005ABDEB /* AsynchronousTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		466C426F249A8748007D033E /* EcoSoapBank */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 466C4284249A8749007D033E /* Build configuration list for PBXNativeTarget "EcoSoapBank" */;
@@ -794,6 +838,10 @@
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Spencer Curtis";
 				TargetAttributes = {
+					04D325332501489A005ABDEB = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = 466C426F249A8748007D033E;
+					};
 					466C426F249A8748007D033E = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -846,11 +894,19 @@
 			targets = (
 				466C426F249A8748007D033E /* EcoSoapBank */,
 				994E4B7D24DDB67000C12921 /* EcoSoapBankTests */,
+				04D325332501489A005ABDEB /* AsynchronousTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		04D325322501489A005ABDEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		466C426E249A8748007D033E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -981,6 +1037,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		04D325302501489A005ABDEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04D3253E250148E5005ABDEB /* GraphQLControllerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		466C426C249A8748007D033E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1090,7 +1154,6 @@
 				994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */,
 				04BE6D0324F041E700DFC47D /* ImpactControllerTests.swift in Sources */,
 				04BE6D0924F05A3100DFC47D /* ImpactCellTests.swift in Sources */,
-				E2D04F9624F1653000515831 /* GraphQLControllerTests.swift in Sources */,
 				E2D302FD24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift in Sources */,
 				041E1EA924E22DF50052831D /* ColorTests.swift in Sources */,
 				04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */,
@@ -1102,6 +1165,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		04D3253A2501489A005ABDEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 466C426F249A8748007D033E /* EcoSoapBank */;
+			targetProxy = 04D325392501489A005ABDEB /* PBXContainerItemProxy */;
+		};
 		994E4B8424DDB67000C12921 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 466C426F249A8748007D033E /* EcoSoapBank */;
@@ -1121,6 +1189,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		04D3253B2501489A005ABDEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = AsynchronousTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiftstudent.AsynchronousTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EcoSoapBank.app/EcoSoapBank";
+			};
+			name = Debug;
+		};
+		04D3253C2501489A005ABDEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = AsynchronousTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiftstudent.AsynchronousTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EcoSoapBank.app/EcoSoapBank";
+			};
+			name = Release;
+		};
 		466C4282249A8749007D033E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1322,6 +1432,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		04D3253D2501489A005ABDEB /* Build configuration list for PBXNativeTarget "AsynchronousTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04D3253B2501489A005ABDEB /* Debug */,
+				04D3253C2501489A005ABDEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		466C426B249A8748007D033E /* Build configuration list for PBXProject "EcoSoapBank" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

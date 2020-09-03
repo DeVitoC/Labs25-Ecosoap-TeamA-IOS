@@ -238,7 +238,7 @@ class GraphQLControllerTests: XCTestCase {
             self.expectation.fulfill()
         }
         
-        wait(for: expectation, timeout: 5.0)
+        wait(for: [expectation], timeout: 5.0)
     }
     
     func testUpdateProperty() {
@@ -290,7 +290,7 @@ class GraphQLControllerTests: XCTestCase {
             self.expectation.fulfill()
         }
         
-        wait(for: expectation, timeout: 5.0)
+        wait(for: [expectation], timeout: 5.0)
     }
 }
 

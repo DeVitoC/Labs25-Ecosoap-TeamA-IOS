@@ -39,6 +39,16 @@
                ReferencedContainer = "container:EcoSoapBank.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "04D325332501489A005ABDEB"
+               BuildableName = "AsynchronousTests.xctest"
+               BlueprintName = "AsynchronousTests"
+               ReferencedContainer = "container:EcoSoapBank.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
