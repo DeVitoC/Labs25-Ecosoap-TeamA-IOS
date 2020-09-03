@@ -32,13 +32,18 @@ class ImpactCell: UICollectionViewCell {
     // Views
     private let titleLabel = configure(UILabel()) {
         $0.font = .montserrat(ofSize: 24, typeface: .semiBold)
-        $0.textColor = .white
+        $0.textColor = .label
         $0.text = "34.9 lbs"
     }
     
     private let subtitleLabel = configure(UILabel()) {
         $0.font = .montserrat(ofSize: 18)
-        $0.textColor = .codGrey
+        $0.textColor = UIColor(dynamicProvider: { traits -> UIColor in
+            if case .dark = traits.userInterfaceStyle {
+                return UIColor.codGrey.inverseBrightness
+            }
+            return .codGrey
+        })
         $0.numberOfLines = 0
         $0.text = "bottle amenities\nrecycled"
     }
@@ -46,7 +51,7 @@ class ImpactCell: UICollectionViewCell {
     private let circleView = ESBCircularImageView()
     
     private let lineView = configure(UIView()) {
-        $0.backgroundColor = .white
+        $0.backgroundColor = .systemBackground
     }
     
     // Constraints

@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
             """
             $0.textAlignment = .center
             $0.numberOfLines = 0
-            $0.textColor = .white
+            $0.textColor = .label
             $0.font = .montserrat(style: .body, typeface: .semiBold)
         }
         view.addSubview(missionStatementLabel)
@@ -67,7 +67,7 @@ class LoginViewController: UIViewController {
         missionStatementLabel.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 40).isActive = true
         
         let signInButton = configure(ESBButton()) {
-            $0.colorScheme = .greenOnWhite
+            $0.colorScheme = .greenOnPrimary
             $0.setTitle("SIGN IN WITH OKTA", for: .normal)
             $0.addTarget(self, action: #selector(signIn(_:)), for: .touchUpInside)
         }
