@@ -16,7 +16,7 @@ class PickupCoordinator: FlowCoordinator {
     private(set) var user: User
 
     private(set) lazy var rootVC: UIViewController = UIHostingController(
-        rootView: PickupsView(
+        rootView: PickupHistoryView(
             pickupController: pickupController,
             schedulePickup: { [weak self] in self?.scheduleNewPickup() }))
 
