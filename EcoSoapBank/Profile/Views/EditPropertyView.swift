@@ -25,11 +25,11 @@ struct EditPropertyView: View {
                     }
                 }
                 TextField("Phone", text: $viewModel.propertyInfo.phone)
-            }.esbListRowBackground()
+            }
 
             Section(header: Text("Shipping Address".uppercased())) {
                 addressSectionContent($viewModel.propertyInfo.shippingAddress)
-            }.esbListRowBackground()
+            }
 
             Toggle(isOn: $viewModel.useShippingAddressForBilling) {
                 Text("Use shipping address for billing")
@@ -38,7 +38,7 @@ struct EditPropertyView: View {
             if !viewModel.useShippingAddressForBilling {
                 Section(header: Text("Billing Address".uppercased())) {
                     addressSectionContent($viewModel.propertyInfo.billingAddress)
-                }.esbListRowBackground()
+                }
             }
         }
         .keyboardAvoiding()

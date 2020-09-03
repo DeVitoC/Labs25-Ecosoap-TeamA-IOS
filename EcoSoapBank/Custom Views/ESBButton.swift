@@ -50,11 +50,11 @@ class ESBButton: UIButton {
         switch colorScheme {
         case .greenOnPrimary:
             setTitleColor(UIColor.esbGreen.orInverse(defaultLight: false), for: .normal)
-            backgroundColor = UIColor.white.orInverse().withAlphaComponent(0.8)
+            backgroundColor = UIColor.systemBackground.withAlphaComponent(0.8)
             backgroundGradient?.removeFromSuperview()
             backgroundGradient = nil
         case .primaryOnGradient:
-            setTitleColor(UIColor.white.orInverse(), for: .normal)
+            setTitleColor(UIColor.label, for: .normal)
             backgroundGradient = configure(GradientView()) {
                 $0.colors = [UIColor.esbGreen.orInverse(),
                              UIColor.downyBlue.orInverse()]

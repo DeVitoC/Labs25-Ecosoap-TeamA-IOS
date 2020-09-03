@@ -66,7 +66,6 @@ struct PickupHistoryCell: View {
             }
         }
         .font(Font(UIFont.muli(style: .body)))
-        .esbListRowBackground()
     }
 }
 

@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         configure(UITableViewCell.appearance()) {
-            $0.backgroundColor = .clear
+            $0.backgroundColor = UIColor.systemGroupedBackground.withAlphaComponent(0.75)
         }
 
         configure(UINavigationBar.appearance()) { nav in

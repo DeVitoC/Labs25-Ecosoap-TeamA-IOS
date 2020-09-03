@@ -24,13 +24,13 @@ struct EditProfileView: View {
                     self.textField("First", text: profile.firstName)
                     self.textField("Middle", text: profile.middleName)
                     self.textField("Last", text: profile.lastName)
-                }.esbListRowBackground()
+                }
 
                 Section(header: Text("Contact Info".uppercased())) {
                     self.textField("Email", text: profile.email)
                     self.textField("Skype", text: profile.skype)
                     self.textField("Phone", text: profile.phone)
-                }.esbListRowBackground()
+                }
             }
         }
         .keyboardAvoiding()

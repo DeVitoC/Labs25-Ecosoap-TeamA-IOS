@@ -60,7 +60,7 @@ struct MainProfileView: View {
                     } else {
                         Text("User account has no associated properties. Please contact Eco-Soap Bank for more info.")
                     }
-                }.esbListRowBackground()
+                }
 
                 Section(header: Text("Edit Property Info".uppercased())) {
                     ForEach(viewModel.properties) { property in
@@ -71,7 +71,7 @@ struct MainProfileView: View {
                             Text(property.name)
                         }
                     }
-                }.esbListRowBackground()
+                }
 
                 Section {
                     Button(action: viewModel.logOut) {
@@ -83,7 +83,7 @@ struct MainProfileView: View {
                             Spacer()
                         }
                     }
-                }.esbListRowBackground()
+                }
             }.navigationBarTitle("Profile Settings", displayMode: .automatic)
         }
         .font(.muli())

@@ -48,7 +48,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     }
     private lazy var propertyField = configure(CursorlessTextField()) {
         $0.inputView = propertyPicker
-        $0.backgroundColor = .white
+        $0.backgroundColor = .systemBackground
         $0.borderStyle = .roundedRect
         $0.text = viewModel.selectedProperty.name
     }
@@ -61,7 +61,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     }
     private lazy var readyDateField = configure(CursorlessTextField()) {
         $0.inputView = datePicker
-        $0.backgroundColor = .white
+        $0.backgroundColor = .systemBackground
         $0.borderStyle = .roundedRect
         $0.text = viewModel.readyDate.string()
     }
@@ -78,6 +78,15 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.addTarget(self,
                      action: #selector(schedulePickup),
                      for: .touchUpInside)
+        $0.colorScheme = .greenOnPrimary
+    }
+    private lazy var cancelButton = configure(UIBarButtonItem(
+        barButtonSystemItem: .cancel,
+        target: self,
+        action: #selector(cancelPickup(_:)))) {
+            $0.setTitleTextAttributes([
+                .font: UIFont.muli(typeface: .semiBold)
+            ], for: .normal)
     }
 
     // MARK: - Init / Lifecycle
@@ -92,6 +101,10 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    override func loadView() {
+        view = BackgroundView()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
@@ -104,6 +117,9 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
 extension SchedulePickupViewController {
     private func setUpViews() {
         view.backgroundColor = .secondarySystemBackground
+        title = "Schedule New Pickup"
+
+        navigationItem.setLeftBarButton(cancelButton, animated: false)
 
         // add subviews, basic constraints, `tamic`
         contentView.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading], constant: 20)
@@ -143,9 +159,9 @@ extension SchedulePickupViewController {
 
             ]
         } else {
-            remainingConstraints += [
-                readyDateLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
-            ]
+            remainingConstraints.append(
+                readyDateLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20)
+            )
         }
 
         // remaining constraints
@@ -217,6 +233,10 @@ extension SchedulePickupViewController {
 extension SchedulePickupViewController {
     @objc private func addCarton(_ sender: Any) {
         viewModel.addCarton()
+    }
+
+    @objc private func cancelPickup(_ sender: Any) {
+        viewModel.cancelPickup()
     }
 
     @objc private func schedulePickup(_ sender: Any) {
