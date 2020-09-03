@@ -22,8 +22,8 @@ struct MainProfileView: View {
         NavigationView {
             Form {
                 Section(header: Text("User".uppercased())) {
-                    NavigationLink(destination: EditProfileView(
-                        viewModel: EditProfileViewModel(user: viewModel.user))
+                    NavigationLink(
+                        destination: EditProfileView(viewModel: viewModel)
                     ) {
                         HStack {
                             Image.personSquareFill()
@@ -35,7 +35,6 @@ struct MainProfileView: View {
                                 }).onPreferenceChange(IconWidth.self) {
                                     self.iconWidth = $0
                             }
-
                             Text("Edit Profile")
                         }
                     }
@@ -63,10 +62,12 @@ struct MainProfileView: View {
                                 Text("Current Property")
                             }
                         ) {
-                            ForEach(0 ..< viewModel.propertyOptions.count) { idx in
-                                Text(self.viewModel.propertyOptions[idx].display)
+                            ForEach(viewModel.propertyOptions, id: \.display) {
+                                Text($0.display)
                             }
                         }
+                    } else {
+                        Text("User has no associated properties!")
                     }
                 }
 
@@ -91,9 +92,9 @@ struct MainProfileView: View {
                         }
                     }
                 }
-
-            }.navigationBarTitle("Profile Settings", displayMode: .inline)
-        }.font(.muli())
+            }.navigationBarTitle("Profile Settings", displayMode: .automatic)
+        }
+        .font(.muli())
     }
 }
 
@@ -118,7 +119,6 @@ struct MainProfileView_Previews: PreviewProvider {
         MainProfileView(
             viewModel: MainProfileViewModel(
                 user: .placeholder(),
-                currentProperty: .random(),
                 userController: UserController(dataLoader: MockLoginProvider()))
         )
     }

@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import OktaAuth
+import KeychainAccess
 
 
 protocol UserDataProvider {
@@ -48,6 +49,11 @@ extension UserController {
             }
             completion(result)
         }
+    }
+
+    func logOut() {
+        Keychain.Okta.removeToken()
+        user = nil
     }
 }
 

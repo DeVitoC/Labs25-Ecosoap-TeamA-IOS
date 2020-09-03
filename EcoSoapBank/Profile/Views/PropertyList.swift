@@ -23,7 +23,7 @@ struct PropertyList: View {
                     }
                 }
             }
-        }.navigationBarTitle(Text("Properties"), displayMode: .inline)
+        }.navigationBarTitle(Text("Properties"), displayMode: .automatic)
     }
 }
 

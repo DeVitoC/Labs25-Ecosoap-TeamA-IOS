@@ -52,7 +52,7 @@ struct EditPropertyView: View {
             }
         }
         .keyboardAvoiding()
-        .navigationBarTitle("Update Property", displayMode: .inline)
+        .navigationBarTitle("Update Property", displayMode: .automatic)
         .navigationBarItems(trailing: Button(
             action: viewModel.commitChanges,
             label: { Text("Save") })
