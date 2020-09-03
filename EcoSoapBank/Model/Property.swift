@@ -37,7 +37,7 @@ struct Property: Codable, Equatable, Identifiable, Hashable {
     let shippingNote: String?
     let notes: String?
 
-    enum PropertyType: String, Codable, CaseIterable, Identifiable {
+    enum PropertyType: String, Codable, CaseIterable, Identifiable, Hashable {
         case bedAndBreakfast = "BED_AND_BREAKFAST"
         case guesthouse = "GUESTHOUSE"
         case hotel = "HOTEL"

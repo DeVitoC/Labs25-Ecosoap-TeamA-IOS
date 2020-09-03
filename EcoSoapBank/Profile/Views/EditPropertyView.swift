@@ -13,23 +13,15 @@ struct EditPropertyView: View {
     @ObservedObject var viewModel: EditPropertyViewModel
 
     @State var labelWidth: CGFloat?
-    var propertyType: Binding<Int> {
-        Binding(get: {
-            Property.PropertyType.allCases
-                .firstIndex(of: self.viewModel.propertyInfo.type)!
-        }, set: { idx in
-            self.viewModel.propertyInfo.type
-                = Property.PropertyType.allCases[idx]
-        })
-    }
 
     var body: some View {
         Form {
             Section {
                 TextField("Name", text: $viewModel.propertyInfo.name)
-                Picker("Property Type", selection: propertyType) {
-                    ForEach(0..<viewModel.propertyTypes.count) {
-                        Text(self.viewModel.propertyTypes[$0].display)
+                Picker("Property Type", selection: $viewModel.propertyInfo.type) {
+                    ForEach(viewModel.propertyTypes) {
+                        Text($0.display)
+                            .tag($0)
                     }
                 }
                 TextField("Phone", text: $viewModel.propertyInfo.phone)
