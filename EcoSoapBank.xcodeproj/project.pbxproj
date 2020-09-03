@@ -146,6 +146,7 @@
 		9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
 		9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */; };
 		999B2D0E25014DEB002D3591 /* View+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999B2D0D25014DEB002D3591 /* View+Alignment.swift */; };
+		999B2D1025019045002D3591 /* InverseMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999B2D0F25019045002D3591 /* InverseMask.swift */; };
 		999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */; };
 		999CBA3D24F9AFF100CDF0F3 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */; };
 		99B5790324E30F140097957D /* PickupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5790224E30F140097957D /* PickupTests.swift */; };
@@ -314,6 +315,7 @@
 		9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlert.swift"; sourceTree = "<group>"; };
 		999B2D0D25014DEB002D3591 /* View+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alignment.swift"; sourceTree = "<group>"; };
+		999B2D0F25019045002D3591 /* InverseMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverseMask.swift; sourceTree = "<group>"; };
 		999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = Carthage/Build/iOS/Stripe.framework; sourceTree = "<group>"; };
 		999CBA4124F9B08600CDF0F3 /* input.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = input.xcfilelist; sourceTree = "<group>"; };
@@ -674,6 +676,7 @@
 				992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */,
 				99D0165F24FEA6D8001A7555 /* With.swift */,
 				999B2D0D25014DEB002D3591 /* View+Alignment.swift */,
+				999B2D0F25019045002D3591 /* InverseMask.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -1072,6 +1075,7 @@
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
 				992FBC8D24FDB6970099C32D /* EditPropertyView.swift in Sources */,
 				0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */,
+				999B2D1025019045002D3591 /* InverseMask.swift in Sources */,
 				992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */,
 				99C0467C24FD8BB700E2B005 /* EditProfileViewModel.swift in Sources */,
 				E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */,
