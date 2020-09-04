@@ -12,7 +12,7 @@ import KeychainAccess
 
 protocol DataLoader {
     func loadData(with request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void)
-    func getToken() -> String?
+    func getToken() throws -> String
     func removeToken()
 }
 
@@ -21,8 +21,8 @@ extension URLSession: DataLoader {
         self.dataTask(with: request, completionHandler: completion).resume()
     }
 
-    func getToken() -> String? {
-        Keychain.Okta.getToken()
+    func getToken() throws -> String {
+        try Keychain.Okta.getToken()
     }
 
     func removeToken() {

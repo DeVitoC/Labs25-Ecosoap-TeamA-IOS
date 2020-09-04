@@ -21,8 +21,12 @@ class MockDataLoader: DataLoader {
         completion(data, nil, error)
     }
 
-    func getToken() -> String? {
-        error == nil ? "fake token" : nil
+    func getToken() throws -> String {
+        if let error = error {
+            throw error
+        } else {
+            return "fake token"
+        }
     }
 
     func removeToken() {

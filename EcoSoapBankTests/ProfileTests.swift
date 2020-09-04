@@ -16,7 +16,7 @@ import KeychainAccess
 class ProfileTests: XCTestCase {
     var strongDelegate: MockProfileDelegate!
     var user: User!
-    var dataProvider: UserDataProvider!
+    var dataProvider: MockUserDataProvider!
     var userController: UserController!
     var coordinator: ProfileCoordinator!
 
@@ -26,6 +26,7 @@ class ProfileTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+
         self.strongDelegate = MockProfileDelegate()
         self.user = .placeholder()
         self.dataProvider = MockUserDataProvider()
@@ -33,7 +34,6 @@ class ProfileTests: XCTestCase {
         self.coordinator = ProfileCoordinator(user: user,
                                               userController: userController,
                                               delegate: strongDelegate)
-
         self.badUser = User(
             id: "",
             firstName: "",

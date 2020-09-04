@@ -222,7 +222,7 @@ class GraphQLControllerTests: XCTestCase {
         let newSkype = UUID().uuidString
         info.skype = newSkype
         
-        graphQLController.updateUserProfile(with: info) { result in
+        graphQLController.updateUserProfile(info) { result in
             guard let updatedUser = try? result.get() else {
                 XCTFail("Unable to get valid User from returned data")
                 return

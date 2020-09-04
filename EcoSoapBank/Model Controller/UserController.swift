@@ -53,7 +53,7 @@ extension UserController {
         }
     }
 
-    func updateUserProfile(_ input: EditableProfileInfo, completion: @escaping ResultHandler<User>){
+    func updateUserProfile(_ input: EditableProfileInfo, completion: @escaping ResultHandler<User>) {
         dataLoader.updateUserProfile(input) { [weak self] result in
             if let newUser = try? result.get() {
                 self?.user = newUser

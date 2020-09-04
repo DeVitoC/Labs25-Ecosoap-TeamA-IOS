@@ -22,24 +22,32 @@ class MockUserDataProvider: UserDataProvider {
     var user = User.placeholder()
     var status = Status.loggedOut
 
+    var dataLoader: DataLoader = MockDataLoader(data: nil, error: nil)
+
     init(shouldFail: Bool = false, waitTime: Double = 0.2) {
         self.shouldFail = shouldFail
         self.waitTime = waitTime
     }
 
     func logIn(_ completion: @escaping ResultHandler<User>) {
-        guard let token = Keychain.Okta.getToken() else {
+        guard !shouldFail else {
             return completion(.mockFailure())
         }
-        print(token)
 
-        dispatch {
-            if self.shouldFail {
-                completion(.mockFailure())
-            } else {
-                self.status = .loggedIn
-                completion(.success(.placeholder()))
+        do {
+            let token = try dataLoader.getToken()
+            print(token) // TODO: remove from production
+
+            dispatch {
+                if self.shouldFail {
+                    completion(.mockFailure())
+                } else {
+                    self.status = .loggedIn
+                    completion(.success(.placeholder()))
+                }
             }
+        } catch {
+            completion(.failure(error))
         }
     }
 

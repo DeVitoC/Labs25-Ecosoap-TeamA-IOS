@@ -18,7 +18,6 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     // MARK: - Properties
 
     private let session: DataLoader
-    private var token: String? { session.getToken() }
 
     // MARK: - Init
     
@@ -32,10 +31,12 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     // User
     
     func logIn(_ completion: @escaping ResultHandler<User>) {
-        guard let token = self.token else {
-            return completion(.failure(GraphQLError.noToken))
+        do {
+            let token = try session.getToken()
+            performOperation(.login(token: token), completion: completion)
+        } catch {
+            completion(.failure(error))
         }
-        performOperation(.login(token: token), completion: completion)
     }
 
     func logOut() {
