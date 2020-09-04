@@ -56,9 +56,17 @@ class ProfileTests: XCTestCase {
     }
 
     func testLogOut() throws {
+        let exp = expectation(description: "logging in")
+        userController.logInWithBearer { _ in
+            exp.fulfill()
+        }
+        wait(for: exp)
+
+        XCTAssertEqual(dataProvider.status, .loggedIn)
         mainVM.logOut()
         XCTAssertNil(userController.user)
         XCTAssertEqual(strongDelegate.status, .loggedOut)
+        XCTAssertEqual(dataProvider.status, .loggedOut)
         XCTAssertNil(userController.user)
     }
 }
