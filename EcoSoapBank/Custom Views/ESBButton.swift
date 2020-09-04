@@ -10,7 +10,7 @@ import UIKit
 
 class ESBButton: UIButton {
     enum ColorScheme {
-        case greenOnPrimary
+        case greenOnWhite
         case primaryOnGradient
     }
     
@@ -48,9 +48,12 @@ class ESBButton: UIButton {
     
     private func updateColors() {
         switch colorScheme {
-        case .greenOnPrimary:
-            setTitleColor(UIColor.esbGreen.orInverse(defaultLight: false), for: .normal)
-            backgroundColor = UIColor.systemBackground.withAlphaComponent(0.8)
+        case .greenOnWhite:
+            setTitleColor(
+                UIColor(light: UIColor.esbGreen.adjustingBrightness(by: -0.1),
+                        dark: UIColor.esbGreen.adjustingBrightness(by: -0.3)),
+                for: .normal)
+            backgroundColor = UIColor.white
             backgroundGradient?.removeFromSuperview()
             backgroundGradient = nil
         case .primaryOnGradient:
@@ -62,6 +65,7 @@ class ESBButton: UIButton {
                 $0.endPoint = CGPoint(x: 1, y: 0)
             }
             addSubview(backgroundGradient!)
+            sendSubviewToBack(backgroundGradient!)
             backgroundGradient?.fillSuperview()
         }
     }
