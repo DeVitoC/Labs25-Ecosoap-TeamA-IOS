@@ -22,8 +22,13 @@ class MainProfileViewModel: ObservableObject {
     private var editingPropertyVM: EditPropertyViewModel?
 
     private var cancellables = Set<AnyCancellable>()
+
+    weak var delegate: ProfileDelegate?
     
-    init(user: User, userController: UserController) {
+    init(user: User,
+         userController: UserController,
+         delegate: ProfileDelegate?
+    ) {
         self.user = user
         self.editableInfo = EditableProfileInfo(user: user)
 
@@ -37,6 +42,7 @@ class MainProfileViewModel: ObservableObject {
         self.selectedProperty = propertyOptions.first ?? .none
         self.properties = user.properties ?? []
         self.userController = userController
+        self.delegate = delegate
     }
 
     func editPropertyVM(_ property: Property) -> EditPropertyViewModel {
@@ -49,6 +55,7 @@ class MainProfileViewModel: ObservableObject {
     }
 
     func logOut() {
-        
+        userController.logOut()
+        delegate?.logOut()
     }
 }

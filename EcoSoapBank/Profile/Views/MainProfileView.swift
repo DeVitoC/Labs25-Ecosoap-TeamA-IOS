@@ -112,7 +112,8 @@ struct MainProfileView_Previews: PreviewProvider {
         MainProfileView(
             viewModel: MainProfileViewModel(
                 user: .placeholder(),
-                userController: UserController(dataLoader: MockLoginProvider()))
+                userController: UserController(dataLoader: MockLoginProvider()),
+                delegate: nil)
         )
     }
 }

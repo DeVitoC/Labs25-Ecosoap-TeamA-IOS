@@ -56,7 +56,8 @@ struct EditProfileView_Previews: PreviewProvider {
             EditProfileView(
                 viewModel: MainProfileViewModel(
                     user: user,
-                    userController: UserController(dataLoader: MockLoginProvider())))
+                    userController: UserController(dataLoader: MockLoginProvider()),
+                    delegate: nil))
         }
     }
 }
