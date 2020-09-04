@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Combine
 
 
 class MainProfileViewModel: ObservableObject {
@@ -53,15 +52,17 @@ class MainProfileViewModel: ObservableObject {
     func commitProfileChanges() {
         loading = true
 
-        userController.updateUserProfile(editableInfo) { [weak self] result in
-            self?.loading = false
+        userController.updateUserProfile(editableInfo) { result in
+            DispatchQueue.main.async { [weak self] in
+                self?.loading = false
 
-            switch result {
-            case .success(let newUser):
-                self?.editableInfo = EditableProfileInfo(user: newUser)
-                self?.user = newUser
-            case .failure(let updateError):
-                self?.error = updateError
+                switch result {
+                case .success(let newUser):
+                    self?.editableInfo = EditableProfileInfo(user: newUser)
+                    self?.user = newUser
+                case .failure(let updateError):
+                    self?.error = updateError
+                }
             }
         }
     }
