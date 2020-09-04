@@ -55,19 +55,20 @@ class MockUserDataProvider: UserDataProvider {
         _ input: EditableProfileInfo,
         completion: @escaping ResultHandler<User>
     ) {
-        let newUser = User(
-            id: input.id,
-            firstName: input.firstName,
-            middleName: input.middleName,
-            lastName: input.lastName,
-            title: user.title,
-            company: user.company,
-            email: input.email,
-            phone: input.phone,
-            skype: input.skype,
-            properties: user.properties)
+        dispatch { [weak self] in
+            guard let self = self else { return completion(.mockFailure()) }
+            let newUser = User(
+                id: input.id,
+                firstName: input.firstName,
+                middleName: input.middleName,
+                lastName: input.lastName,
+                title: self.user.title,
+                company: self.user.company,
+                email: input.email,
+                phone: input.phone,
+                skype: input.skype,
+                properties: self.user.properties)
 
-        dispatch {
             if self.shouldFail == true {
                 completion(.mockFailure())
             } else {

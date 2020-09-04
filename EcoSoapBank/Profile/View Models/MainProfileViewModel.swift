@@ -15,6 +15,7 @@ class MainProfileViewModel: ObservableObject {
     @Published var editableInfo: EditableProfileInfo
     @Published var selectedProperty: PropertySelection
     @Published var error: Error?
+    @Published private(set) var loading = false
 
     let propertyOptions: [PropertySelection]
     let properties: [Property]
@@ -50,9 +51,14 @@ class MainProfileViewModel: ObservableObject {
     }
 
     func commitProfileChanges() {
+        loading = true
+
         userController.updateUserProfile(editableInfo) { [weak self] result in
+            self?.loading = false
+            
             switch result {
             case .success(let newUser):
+                self?.editableInfo = EditableProfileInfo(user: newUser)
                 self?.user = newUser
             case .failure(let updateError):
                 self?.error = updateError
