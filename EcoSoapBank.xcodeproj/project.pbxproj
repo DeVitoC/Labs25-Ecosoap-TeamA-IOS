@@ -90,6 +90,7 @@
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
+		04D3252F25004D57005ABDEB /* GraphQLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3252E25004D57005ABDEB /* GraphQLResult.swift */; };
 		04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6D72B24E8444C0003A585 /* BackgroundView.swift */; };
 		04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */; };
 		04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEE1B524E48AB000F51D69 /* ImpactController.swift */; };
@@ -254,6 +255,7 @@
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		04D3252E25004D57005ABDEB /* GraphQLResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLResult.swift; sourceTree = "<group>"; };
 		04D6D72B24E8444C0003A585 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+Okta.swift"; sourceTree = "<group>"; };
 		04FEE1B524E48AB000F51D69 /* ImpactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactController.swift; sourceTree = "<group>"; };
@@ -729,6 +731,7 @@
 			children = (
 				E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */,
 				04CCD90224FD60AA00263376 /* GraphQLOperation.swift */,
+				04D3252E25004D57005ABDEB /* GraphQLResult.swift */,
 				E220C32624E35E59003FF32D /* GraphQLQueries.swift */,
 				E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */,
 				E2B961B324E45BF800C5DF8B /* QueryObjects.swift */,
@@ -1063,6 +1066,7 @@
 				99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */,
 				9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */,
 				04B6FEAF24FEDCDF000CC58A /* DateCoding.swift in Sources */,
+				04D3252F25004D57005ABDEB /* GraphQLResult.swift in Sources */,
 				997BF11224E20AAE00A643D8 /* TextView.swift in Sources */,
 				0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */,
 				E2D04F9324F0D50600515831 /* Address.swift in Sources */,
