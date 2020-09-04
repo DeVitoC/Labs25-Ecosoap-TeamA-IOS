@@ -140,7 +140,7 @@ extension PickupCoordinator: SchedulePickupViewModelDelegate {
         let popover = editCartonVC(for: cartonVM)
         popover.popoverPresentationController?.sourceView =
             scheduleVC?.sourceViewForCartonEditingPopover()
-        
+
         scheduleVC?.present(popover, animated: true, completion: nil)
     }
 
