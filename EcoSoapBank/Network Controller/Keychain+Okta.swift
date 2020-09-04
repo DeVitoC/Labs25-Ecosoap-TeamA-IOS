@@ -18,9 +18,9 @@ extension Keychain {
         
         static func getToken() -> String? {
             if let token = keychain[tokenKey],
-               let expiry = keychain[expiryKey],
-               let date = dateFormatter.date(from: expiry),
-               date > Date() {
+                let expiry = keychain[expiryKey],
+                let date = dateFormatter.date(from: expiry),
+                date > Date() {
                 return token
             } else {
                 OktaAuth.error.send(LoginError.notLoggedIn)

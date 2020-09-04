@@ -52,8 +52,8 @@ extension UserController {
     }
 
     func logOut() {
-        Keychain.Okta.removeToken()
         user = nil
+        dataLoader.logOut()
     }
 }
 

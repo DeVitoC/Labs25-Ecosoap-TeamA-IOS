@@ -18,7 +18,7 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     // MARK: - Properties
 
     private let session: DataLoader
-    private var token: String? { Keychain.Okta.getToken() }
+    private var token: String? { session.getToken() }
 
     // MARK: - Init
     
@@ -36,6 +36,10 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
             return completion(.failure(GraphQLError.noToken))
         }
         performOperation(.login(token: token), completion: completion)
+    }
+
+    func logOut() {
+        session.removeToken()
     }
     
     func fetchUser(byID userID: String,

@@ -33,6 +33,10 @@ class MockLoginProvider: UserDataProvider {
             }
         }
     }
+
+    func logOut() {
+        NSLog("Removing token (but not really)")
+    }
 }
 
 
