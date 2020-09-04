@@ -39,4 +39,12 @@ class ProfileTests: XCTestCase {
             skype: nil,
             properties: nil)
     }
+
+    func testMainProfileVMSetup() throws {
+        XCTAssertEqual(mainVM.properties, user.properties)
+        XCTAssert(mainVM.propertyOptions.contains(.all))
+        let userProperties = try XCTUnwrap(user.properties)
+        let userSelections = userProperties.map { PropertySelection.select($0) }
+        XCTAssertEqual(mainVM.propertyOptions.dropFirst(), userSelections[...])
+    }
 }
