@@ -28,23 +28,25 @@ class EditPropertyViewModel: ObservableObject, Identifiable {
 }
 
 
-struct EditablePropertyInfo {
+struct EditablePropertyInfo: Encodable {
+    let id: String?
     var name: String
-    var type: Property.PropertyType
+    var propertyType: Property.PropertyType
     var billingAddress: EditableAddressInfo
     var shippingAddress: EditableAddressInfo
     var phone: String
 
     init(_ property: Property?) {
+        self.id = property?.id
         self.name = property?.name ?? ""
-        self.type = property?.propertyType ?? .hotel
+        self.propertyType = property?.propertyType ?? .hotel
         self.billingAddress = EditableAddressInfo(property?.billingAddress)
         self.shippingAddress = EditableAddressInfo(property?.shippingAddress)
         self.phone = property?.phone ?? ""
     }
 }
 
-struct EditableAddressInfo {
+struct EditableAddressInfo: Encodable {
     var address1: String
     var address2: String
     var address3: String
