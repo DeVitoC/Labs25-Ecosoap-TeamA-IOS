@@ -146,3 +146,13 @@ extension Optional {
         lhs.orSettingIfNil(rhs)
     }
 }
+
+extension Result {
+    var error: Failure? {
+        if case .failure(let error) = self {
+            return error
+        } else {
+            return nil
+        }
+    }
+}
