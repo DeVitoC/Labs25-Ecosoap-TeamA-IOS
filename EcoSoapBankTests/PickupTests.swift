@@ -111,7 +111,7 @@ class PickupTests: XCTestCase {
         let firstVM = pickupCoordinator.scheduleVM
 
         pickupCoordinator.scheduleNewPickup()
-        pickupCoordinator.cancelNewPickup()
+        pickupCoordinator.cancelPickup()
 
         XCTAssert(firstVM === pickupCoordinator.scheduleVM
             || (firstVM == nil && pickupCoordinator.scheduleVM != nil))
@@ -150,6 +150,14 @@ class PickupTests: XCTestCase {
             }
             let pickupResult = try! result.get()
             let pickup = pickupResult.pickup
+
+            XCTAssert({
+                if case .pickupScheduled = delegate.status {
+                    return true
+                } else {
+                    return false
+                }
+            }())
 
             XCTAssertNotNil(pickup)
             XCTAssertEqual(pickup?.cartons.count, 2)
@@ -227,20 +235,50 @@ extension KeyPathListable {
 
 extension Property: KeyPathListable {}
 
-class MockScheduleVMDelegate: SchedulePickupViewModelDelegate {
-    var shouldFail: Bool = false
+// MARK: - Mock Delegate
 
-    func schedulePickup(for input: Pickup.ScheduleInput, completion: @escaping ResultHandler<Pickup.ScheduleResult>) {
-        DispatchQueue.global().async {
-            if self.shouldFail {
-                completion(.failure(MockError.shouldFail))
-            } else {
-                completion(.success(.mock(from: input)))
-            }
-        }
+class MockScheduleVMDelegate: SchedulePickupViewModelDelegate {
+    enum Status {
+        case started
+        case editingCarton(NewCartonViewModel)
+        case schedulingPickup(Pickup.ScheduleInput)
+        case pickupScheduled(Result<Pickup.ScheduleResult, Error>)
+        case pickupCancelled
+    }
+
+    var shouldFail: Bool = false
+    var waitTime: Double = 0.1
+    private(set) var status: Status = .started
+
+    func reinitialize() {
+        self.status = .started
     }
 
     func editCarton(for viewModel: NewCartonViewModel) {
         NSLog("Editing carton...")
+        self.status = .editingCarton(viewModel)
+    }
+
+    func cancelPickup() {
+        NSLog("Pickup cancelled")
+        self.status = .pickupCancelled
+    }
+
+    func schedulePickup(
+        for input: Pickup.ScheduleInput,
+        completion: @escaping ResultHandler<Pickup.ScheduleResult>
+    ) {
+        self.status = .schedulingPickup(input)
+        DispatchQueue.global().asyncAfter(deadline: .now() + waitTime) {
+            let result: Result<Pickup.ScheduleResult, Error> = {
+                if self.shouldFail {
+                    return .failure(MockError.shouldFail)
+                } else {
+                    return .success(.mock(from: input))
+                }
+            }()
+            self.status = .pickupScheduled(result)
+            completion(result)
+        }
     }
 }
