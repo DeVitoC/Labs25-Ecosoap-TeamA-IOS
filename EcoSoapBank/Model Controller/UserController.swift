@@ -14,6 +14,8 @@ import KeychainAccess
 
 protocol UserDataProvider {
     func logIn(_ completion: @escaping ResultHandler<User>)
+    func updateUserProfile(_ input: EditableProfileInfo, completion: @escaping ResultHandler<User>)
+    func logOut()
 }
 
 
@@ -44,8 +46,17 @@ extension UserController {
 
     func logInWithBearer(completion: @escaping ResultHandler<User>) {
         self.dataLoader.logIn { [weak self] result in
-            if case .success(let user) = result {
+            if let user = try? result.get() {
                 self?.user = user
+            }
+            completion(result)
+        }
+    }
+
+    func updateUserProfile(_ input: EditableProfileInfo, completion: @escaping ResultHandler<User>){
+        dataLoader.updateUserProfile(input) { [weak self] result in
+            if let newUser = try? result.get() {
+                self?.user = newUser
             }
             completion(result)
         }

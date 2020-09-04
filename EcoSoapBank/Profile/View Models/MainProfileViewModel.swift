@@ -14,14 +14,13 @@ class MainProfileViewModel: ObservableObject {
     @Published var user: User
     @Published var editableInfo: EditableProfileInfo
     @Published var selectedProperty: PropertySelection
+    @Published var error: Error?
 
     let propertyOptions: [PropertySelection]
     let properties: [Property]
     let userController: UserController
 
     private var editingPropertyVM: EditPropertyViewModel?
-
-    private var cancellables = Set<AnyCancellable>()
 
     weak var delegate: ProfileDelegate?
     
@@ -51,7 +50,14 @@ class MainProfileViewModel: ObservableObject {
     }
 
     func commitProfileChanges() {
-
+        userController.updateUserProfile(editableInfo) { [weak self] result in
+            switch result {
+            case .success(let newUser):
+                self?.user = newUser
+            case .failure(let updateError):
+                self?.error = updateError
+            }
+        }
     }
 
     func logOut() {

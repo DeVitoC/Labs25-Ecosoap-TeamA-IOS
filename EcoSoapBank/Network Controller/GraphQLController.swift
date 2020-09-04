@@ -48,7 +48,7 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
         performOperation(.userByID(id: userID), completion: completion)
     }
     
-    func updateUserProfile(with info: EditableProfileInfo,
+    func updateUserProfile(_ info: EditableProfileInfo,
                            completion: @escaping ResultHandler<User>) {
         // TODO: may need to add token later
         performOperation(.updateUserProfile(info: info), completion: completion)

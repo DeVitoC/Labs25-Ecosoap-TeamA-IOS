@@ -10,9 +10,11 @@
 
 import XCTest
 @testable import EcoSoapBank
+import KeychainAccess
+
 
 class ProfileTests: XCTestCase {
-    var strongDelegate: ProfileDelegate!
+    var strongDelegate: MockProfileDelegate!
     var user: User!
     var dataProvider: UserDataProvider!
     var userController: UserController!
@@ -52,18 +54,28 @@ class ProfileTests: XCTestCase {
         let userSelections = userProperties.map { PropertySelection.select($0) }
         XCTAssertEqual(mainVM.propertyOptions.dropFirst(), userSelections[...])
     }
+
+    func testLogOut() throws {
+        mainVM.logOut()
+        XCTAssertNil(userController.user)
+        XCTAssertEqual(strongDelegate.status, .loggedOut)
+        XCTAssertNil(userController.user)
+    }
 }
 
+// MARK: - Delegate
 
-class MockProfileDelegate: ProfileDelegate {
-    enum Status {
+class MockProfileDelegate {
+    enum Status: Equatable {
         case started
         case loggedOut
     }
 
     var status: Status = .started
+}
 
+extension MockProfileDelegate: ProfileDelegate {
     func logOut() {
-
+        status = .loggedOut
     }
 }
