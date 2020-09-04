@@ -55,7 +55,7 @@ class MainProfileViewModel: ObservableObject {
 
         userController.updateUserProfile(editableInfo) { [weak self] result in
             self?.loading = false
-            
+
             switch result {
             case .success(let newUser):
                 self?.editableInfo = EditableProfileInfo(user: newUser)

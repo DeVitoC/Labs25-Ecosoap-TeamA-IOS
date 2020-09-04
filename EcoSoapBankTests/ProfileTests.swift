@@ -24,6 +24,13 @@ class ProfileTests: XCTestCase {
     var badUser: User!
 
     var mainVM: MainProfileViewModel { coordinator.profileVM }
+    var newProfileInfo: EditableProfileInfo {
+        configure(mainVM.editableInfo) {
+            $0.email = "new@email.net"
+            $0.middleName = "Lasagna"
+            $0.skype = "new-skype-handle"
+        }
+    }
 
     var bag = Set<AnyCancellable>()
 
@@ -59,36 +66,53 @@ class ProfileTests: XCTestCase {
         XCTAssertEqual(mainVM.propertyOptions.dropFirst(), userSelections[...])
     }
 
-    func testProfileChanges() {
+    func testUserControllerUpdateProfile() {
         logIn()
 
         let exp = expectation(description: "profile changed")
         let oldUser = mainVM.user
 
-        XCTAssertFalse(mainVM.loading)
-        let oldInfo = mainVM.editableInfo
-
-        mainVM.editableInfo = configure(mainVM.editableInfo) {
-            $0.email = "new@email.net"
-            $0.middleName = "Lasagna"
-            $0.skype = "new-skype-handle"
+        let info = newProfileInfo
+        var newUser: User?
+        userController.updateUserProfile(info) { result in
+            guard let user = try? result.get() else {
+                return XCTFail("Update user failed with error: \(result.error!)")
+            }
+            newUser = user
+            exp.fulfill()
         }
-        XCTAssertNotEqual(oldInfo, mainVM.editableInfo)
-        mainVM.commitProfileChanges()
 
+        wait(for: exp)
+        XCTAssertNotEqual(newUser, oldUser)
+    }
+
+    func testProfileChanges() {
+        logIn()
+
+        let exp = expectation(description: "profile changed")
+        let oldUser = mainVM.user
+        let oldInfo = mainVM.editableInfo
         var newUser: User?
 
+        XCTAssertFalse(mainVM.loading)
+
+        mainVM.editableInfo = newProfileInfo
         mainVM.$user
+            .dropFirst()
             .sink { user in
                 newUser = user
 
                 exp.fulfill()
         }.store(in: &bag)
+        mainVM.commitProfileChanges()
+        XCTAssertTrue(mainVM.loading)
 
         wait(for: exp)
 
-        XCTAssertNotNil(newUser)
         XCTAssertNotEqual(oldUser, newUser)
+        XCTAssertEqual(mainVM.editableInfo, newProfileInfo)
+        XCTAssertNotEqual(mainVM.editableInfo, oldInfo)
+        XCTAssertNil(mainVM.error)
     }
 
     func testProfileChangesFail() {
@@ -107,6 +131,8 @@ class ProfileTests: XCTestCase {
     }
 }
 
+// MARK: - Helpers
+
 extension ProfileTests {
     func logIn() {
         let exp = expectation(description: "logging in")
@@ -117,7 +143,6 @@ extension ProfileTests {
     }
 }
 
-// MARK: - Delegate
 
 class MockProfileDelegate {
     enum Status: Equatable {
