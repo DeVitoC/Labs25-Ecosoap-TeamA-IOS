@@ -12,9 +12,11 @@ import KeychainAccess
 
 class MockLoginProvider: UserDataProvider {
     var shouldFail: Bool
+    var waitTime: Double
 
-    init(shouldFail: Bool = false) {
+    init(shouldFail: Bool = false, waitTime: Double = 0.2) {
         self.shouldFail = shouldFail
+        self.waitTime = waitTime
     }
 
     func logIn(_ completion: @escaping ResultHandler<User>) {
@@ -23,7 +25,7 @@ class MockLoginProvider: UserDataProvider {
         }
         print(token)
 
-        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + waitTime) {
             if self.shouldFail {
                 completion(.mockFailure())
             } else {
