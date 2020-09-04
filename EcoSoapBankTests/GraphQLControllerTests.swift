@@ -293,4 +293,3 @@ class GraphQLControllerTests: XCTestCase {
         wait(for: expectation, timeout: 5.0)
     }
 }
-
