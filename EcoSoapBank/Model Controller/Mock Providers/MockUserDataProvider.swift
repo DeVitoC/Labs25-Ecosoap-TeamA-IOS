@@ -1,5 +1,5 @@
 //
-//  MockLoginProvider.swift
+//  MockUserDataProvider.swift
 //  EcoSoapBank
 //
 //  Created by Jon Bash on 2020-08-20.
@@ -10,9 +10,17 @@ import Foundation
 import KeychainAccess
 
 
-class MockLoginProvider: UserDataProvider {
+class MockUserDataProvider: UserDataProvider {
+    enum Status {
+        case loggedIn
+        case loggedOut
+    }
+
     var shouldFail: Bool
     var waitTime: Double
+
+    var user = User.placeholder()
+    var status = Status.loggedOut
 
     init(shouldFail: Bool = false, waitTime: Double = 0.2) {
         self.shouldFail = shouldFail
@@ -25,20 +33,53 @@ class MockLoginProvider: UserDataProvider {
         }
         print(token)
 
-        DispatchQueue.global().asyncAfter(deadline: .now() + waitTime) {
+        dispatch {
             if self.shouldFail {
                 completion(.mockFailure())
             } else {
+                self.status = .loggedIn
                 completion(.success(.placeholder()))
+            }
+        }
+    }
+
+    func updateUserProfile(
+        _ input: EditableProfileInfo,
+        completion: @escaping ResultHandler<User>
+    ) {
+        let newUser = User(
+            id: input.id,
+            firstName: input.firstName,
+            middleName: input.middleName,
+            lastName: input.lastName,
+            title: user.title,
+            company: user.company,
+            email: input.email,
+            phone: input.phone,
+            skype: input.skype,
+            properties: user.properties)
+
+        dispatch {
+            if self.shouldFail == true {
+                completion(.mockFailure())
+            } else {
+                self.user = newUser
+                completion(.success(newUser))
             }
         }
     }
 
     func logOut() {
         NSLog("Removing token (but not really)")
+        self.status = .loggedOut
+    }
+
+    private func dispatch(_ work: @escaping () -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + waitTime, execute: work)
     }
 }
 
+// MARK: - Mock Models
 
 extension User {
     static func placeholder() -> User {

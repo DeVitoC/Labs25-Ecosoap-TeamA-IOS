@@ -26,7 +26,7 @@ class ProfileTests: XCTestCase {
         super.setUp()
         self.strongDelegate = MockProfileDelegate()
         self.user = .placeholder()
-        self.dataProvider = MockLoginProvider()
+        self.dataProvider = MockUserDataProvider()
         self.userController = UserController(dataLoader: dataProvider)
         self.coordinator = ProfileCoordinator(user: user,
                                               userController: userController,

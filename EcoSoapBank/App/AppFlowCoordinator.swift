@@ -29,7 +29,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private var graphQLController = GraphQLController()
 
-    private lazy var userProvider: UserDataProvider = useMock ? MockLoginProvider() : graphQLController
+    private lazy var userProvider: UserDataProvider = useMock ? MockUserDataProvider() : graphQLController
     private lazy var pickupProvider: PickupDataProvider = useMock ? MockPickupProvider() : graphQLController
     private lazy var impactProvider: ImpactDataProvider = useMock ? MockImpactProvider() : graphQLController
 

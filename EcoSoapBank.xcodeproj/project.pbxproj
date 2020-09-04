@@ -111,7 +111,7 @@
 		992BB63C24EDD01F00638AA4 /* PickupDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */; };
 		992BB63E24EEE21300638AA4 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB63D24EEE21300638AA4 /* UserController.swift */; };
 		992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64224EEFBAD00638AA4 /* Errors.swift */; };
-		992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64424EF021600638AA4 /* MockLoginProvider.swift */; };
+		992BB64524EF021600638AA4 /* MockUserDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64424EF021600638AA4 /* MockUserDataProvider.swift */; };
 		992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */; };
 		992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64924F0319D00638AA4 /* EditCartonViewController.swift */; };
 		992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */; };
@@ -278,7 +278,7 @@
 		992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PickupDetailViewController.storyboard; sourceTree = "<group>"; };
 		992BB63D24EEE21300638AA4 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		992BB64224EEFBAD00638AA4 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		992BB64424EF021600638AA4 /* MockLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoginProvider.swift; sourceTree = "<group>"; };
+		992BB64424EF021600638AA4 /* MockUserDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDataProvider.swift; sourceTree = "<group>"; };
 		992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OktaAuth+Shared.swift"; sourceTree = "<group>"; };
 		992BB64924F0319D00638AA4 /* EditCartonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCartonViewController.swift; sourceTree = "<group>"; };
 		992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISwipeActionsConfiguration+Constants.swift"; sourceTree = "<group>"; };
@@ -592,7 +592,7 @@
 			children = (
 				9983874724E33A0600450244 /* MockPickupProvider.swift */,
 				04BE6D0424F045C800DFC47D /* MockImpactProvider.swift */,
-				992BB64424EF021600638AA4 /* MockLoginProvider.swift */,
+				992BB64424EF021600638AA4 /* MockUserDataProvider.swift */,
 			);
 			path = "Mock Providers";
 			sourceTree = "<group>";
@@ -1041,7 +1041,7 @@
 				04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */,
 				993B15CC24F42D8C00529517 /* InputPickerView.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
-				992BB64524EF021600638AA4 /* MockLoginProvider.swift in Sources */,
+				992BB64524EF021600638AA4 /* MockUserDataProvider.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
 				E28E911024FD541F0014DF82 /* PaymentHistoryViewController.swift in Sources */,
 				992FBC8924FDB2D50099C32D /* PropertyListViewModel.swift in Sources */,
