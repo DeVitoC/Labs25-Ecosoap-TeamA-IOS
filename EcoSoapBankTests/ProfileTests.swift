@@ -11,6 +11,7 @@
 import XCTest
 @testable import EcoSoapBank
 import KeychainAccess
+import Combine
 
 
 class ProfileTests: XCTestCase {
@@ -23,6 +24,8 @@ class ProfileTests: XCTestCase {
     var badUser: User!
 
     var mainVM: MainProfileViewModel { coordinator.profileVM }
+
+    var bag = Set<AnyCancellable>()
 
     override func setUp() {
         super.setUp()
@@ -45,6 +48,7 @@ class ProfileTests: XCTestCase {
             phone: nil,
             skype: nil,
             properties: nil)
+        self.bag = []
     }
 
     func testMainProfileVMSetup() throws {
@@ -55,12 +59,44 @@ class ProfileTests: XCTestCase {
         XCTAssertEqual(mainVM.propertyOptions.dropFirst(), userSelections[...])
     }
 
-    func testLogOut() throws {
-        let exp = expectation(description: "logging in")
-        userController.logInWithBearer { _ in
-            exp.fulfill()
+    func testProfileChanges() {
+        logIn()
+
+        let exp = expectation(description: "profile changed")
+        let oldUser = mainVM.user
+
+        XCTAssertFalse(mainVM.loading)
+        let oldInfo = mainVM.editableInfo
+
+        mainVM.editableInfo = configure(mainVM.editableInfo) {
+            $0.email = "new@email.net"
+            $0.middleName = "Lasagna"
+            $0.skype = "new-skype-handle"
         }
+        XCTAssertNotEqual(oldInfo, mainVM.editableInfo)
+        mainVM.commitProfileChanges()
+
+        var newUser: User?
+
+        mainVM.$user
+            .sink { user in
+                newUser = user
+
+                exp.fulfill()
+        }.store(in: &bag)
+
         wait(for: exp)
+
+        XCTAssertNotNil(newUser)
+        XCTAssertNotEqual(oldUser, newUser)
+    }
+
+    func testProfileChangesFail() {
+
+    }
+
+    func testLogOut() throws {
+        logIn()
 
         XCTAssertEqual(dataProvider.status, .loggedIn)
         mainVM.logOut()
@@ -68,6 +104,16 @@ class ProfileTests: XCTestCase {
         XCTAssertEqual(strongDelegate.status, .loggedOut)
         XCTAssertEqual(dataProvider.status, .loggedOut)
         XCTAssertNil(userController.user)
+    }
+}
+
+extension ProfileTests {
+    func logIn() {
+        let exp = expectation(description: "logging in")
+        userController.logInWithBearer { _ in
+            exp.fulfill()
+        }
+        wait(for: exp)
     }
 }
 
