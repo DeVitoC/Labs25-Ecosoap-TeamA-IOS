@@ -129,6 +129,7 @@
 		994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* UtilityFunctions.swift */; };
 		994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8824DDB68700C12921 /* UtilityTests.swift */; };
 		99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */; };
+		99789CC52502C832000428AC /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99789CC42502C832000428AC /* ProfileTests.swift */; };
 		997BF11224E20AAE00A643D8 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BF11124E20AAE00A643D8 /* TextView.swift */; };
 		9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874724E33A0600450244 /* MockPickupProvider.swift */; };
 		9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874B24E4657C00450244 /* KeyboardAvoiding.swift */; };
@@ -297,6 +298,7 @@
 		994E4B8224DDB67000C12921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		994E4B8824DDB68700C12921 /* UtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityTests.swift; sourceTree = "<group>"; };
 		99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBackgroundColor.swift; sourceTree = "<group>"; };
+		99789CC42502C832000428AC /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		997BF11124E20AAE00A643D8 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		9983874724E33A0600450244 /* MockPickupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPickupProvider.swift; sourceTree = "<group>"; };
 		9983874B24E4657C00450244 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
@@ -656,10 +658,22 @@
 				992C928F24F6EFF6004FCBBB /* Helper Tests */,
 				04BE6D0C24F05ABB00DFC47D /* Impact Tests */,
 				99B5790224E30F140097957D /* PickupTests.swift */,
+				99789CC42502C832000428AC /* ProfileTests.swift */,
 				E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */,
 				E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */,
 			);
 			path = EcoSoapBankTests;
+			sourceTree = "<group>";
+		};
+		99789CC62502C891000428AC /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				992FBC8F24FDC01F0099C32D /* MainProfileViewModel.swift */,
+				992FBC8824FDB2D50099C32D /* PropertyListViewModel.swift */,
+				99C0467B24FD8BB700E2B005 /* EditProfileViewModel.swift */,
+				992FBC8A24FDB67D0099C32D /* EditPropertyViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 		9983874F24E4694400450244 /* SwiftUI */ = {
@@ -704,10 +718,7 @@
 			isa = PBXGroup;
 			children = (
 				99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */,
-				992FBC8F24FDC01F0099C32D /* MainProfileViewModel.swift */,
-				992FBC8824FDB2D50099C32D /* PropertyListViewModel.swift */,
-				99C0467B24FD8BB700E2B005 /* EditProfileViewModel.swift */,
-				992FBC8A24FDB67D0099C32D /* EditPropertyViewModel.swift */,
+				99789CC62502C891000428AC /* View Models */,
 				992FBC8E24FDBA890099C32D /* Views */,
 			);
 			path = Profile;
@@ -1096,6 +1107,7 @@
 				04BE6D0924F05A3100DFC47D /* ImpactCellTests.swift in Sources */,
 				E2D04F9624F1653000515831 /* GraphQLControllerTests.swift in Sources */,
 				E2D302FD24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift in Sources */,
+				99789CC52502C832000428AC /* ProfileTests.swift in Sources */,
 				041E1EA924E22DF50052831D /* ColorTests.swift in Sources */,
 				04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */,
 				04BE6D0B24F05A6300DFC47D /* ImpactViewControllerTests.swift in Sources */,
