@@ -101,7 +101,6 @@ class ProfileTests: XCTestCase {
             .dropFirst()
             .sink { user in
                 newUser = user
-
                 exp.fulfill()
         }.store(in: &bag)
         mainVM.commitProfileChanges()
@@ -116,7 +115,31 @@ class ProfileTests: XCTestCase {
     }
 
     func testProfileChangesFail() {
+        dataProvider.shouldFail = true
 
+        let exp = expectation(description: "profile changed")
+        let oldUser = mainVM.user
+        let oldInfo = mainVM.editableInfo
+        var caughtError: Error?
+
+        XCTAssertFalse(mainVM.loading)
+
+        mainVM.editableInfo = newProfileInfo
+        mainVM.$error
+            .compactMap { $0 }
+            .sink { error in
+                caughtError = error
+                exp.fulfill()
+        }.store(in: &bag)
+        mainVM.commitProfileChanges()
+        XCTAssertTrue(mainVM.loading)
+
+        wait(for: exp)
+
+        XCTAssertNotNil(caughtError)
+        XCTAssertEqual(mainVM.editableInfo, newProfileInfo)
+        XCTAssertNotEqual(mainVM.editableInfo, oldInfo)
+        XCTAssertEqual(mainVM.user, oldUser)
     }
 
     func testLogOut() throws {
