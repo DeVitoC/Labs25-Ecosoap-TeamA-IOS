@@ -11,15 +11,13 @@ import UIKit
 class ESBButton: UIButton {
     enum ColorScheme {
         case greenOnWhite
-        case whiteOnGradient
+        case primaryOnGradient
     }
     
     // MARK: - Public Properties
     
-    var colorScheme: ColorScheme = .whiteOnGradient {
-        didSet {
-            updateColors()
-        }
+    var colorScheme: ColorScheme = .primaryOnGradient {
+        didSet { updateColors() }
     }
     
     // MARK: - Private Properties
@@ -51,18 +49,23 @@ class ESBButton: UIButton {
     private func updateColors() {
         switch colorScheme {
         case .greenOnWhite:
-            setTitleColor(.esbGreen, for: .normal)
-            backgroundColor = .white
+            setTitleColor(
+                UIColor(light: UIColor.esbGreen.adjustingBrightness(by: -0.1),
+                        dark: UIColor.esbGreen.adjustingBrightness(by: -0.3)),
+                for: .normal)
+            backgroundColor = UIColor.white
             backgroundGradient?.removeFromSuperview()
             backgroundGradient = nil
-        case .whiteOnGradient:
-            setTitleColor(.white, for: .normal)
+        case .primaryOnGradient:
+            setTitleColor(UIColor.label, for: .normal)
             backgroundGradient = configure(GradientView()) {
-                $0.colors = [.esbGreen, .downyBlue]
+                $0.colors = [UIColor.esbGreen.orInverse(),
+                             UIColor.downyBlue.orInverse()]
                 $0.startPoint = CGPoint(x: 0, y: 0)
                 $0.endPoint = CGPoint(x: 1, y: 0)
             }
             addSubview(backgroundGradient!)
+            sendSubviewToBack(backgroundGradient!)
             backgroundGradient?.fillSuperview()
         }
     }

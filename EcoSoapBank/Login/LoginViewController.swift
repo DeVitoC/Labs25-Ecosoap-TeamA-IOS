@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
             """
             $0.textAlignment = .center
             $0.numberOfLines = 0
-            $0.textColor = .white
+            $0.textColor = .label
             $0.font = .montserrat(style: .body, typeface: .semiBold)
         }
         view.addSubview(missionStatementLabel)

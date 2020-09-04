@@ -12,22 +12,40 @@ import Combine
 
 class MainProfileViewModel: ObservableObject {
     @Published var user: User
+    @Published var editableInfo: EditableProfileInfo
+    @Published var selectedProperty: PropertySelection
+
     let propertyOptions: [PropertySelection]
-    @Published var selectedPropertyIndex: Int
+    let properties: [Property]
     let userController: UserController
 
-    var selectedProperty: PropertySelection { propertyOptions[selectedPropertyIndex] }
-    var properties: [Property] {
-        propertyOptions.compactMap { $0.property }
-    }
+    private var editingPropertyVM: EditPropertyViewModel?
 
     private var cancellables = Set<AnyCancellable>()
     
-    init(user: User, currentProperty: Property, userController: UserController) {
+    init(user: User, userController: UserController) {
         self.user = user
-        self.propertyOptions = [.all] + (user.properties ?? []).map { .select($0) }
-        self.selectedPropertyIndex = 0
+        self.editableInfo = EditableProfileInfo(user: user)
+
+        if user.properties?.count ?? 0 > 0 {
+            var options: [PropertySelection] = [.all]
+            options.append(contentsOf: (user.properties ?? []).map { .select($0) })
+            self.propertyOptions = options
+        } else {
+            self.propertyOptions = []
+        }
+        self.selectedProperty = propertyOptions.first ?? .none
+        self.properties = user.properties ?? []
         self.userController = userController
+    }
+
+    func editPropertyVM(_ property: Property) -> EditPropertyViewModel {
+        editingPropertyVM = EditPropertyViewModel(property)
+        return editingPropertyVM!
+    }
+
+    func commitProfileChanges() {
+
     }
 
     func logOut() {

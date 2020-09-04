@@ -22,51 +22,43 @@ struct MainProfileView: View {
         NavigationView {
             Form {
                 Section(header: Text("User".uppercased())) {
-                    NavigationLink(destination: EditProfileView(
-                        viewModel: EditProfileViewModel(user: viewModel.user))
+                    NavigationLink(
+                        destination: EditProfileView(viewModel: viewModel)
                     ) {
                         HStack {
                             Image.personSquareFill()
                                 .foregroundColor(Color(red: 0.8, green: 0.5, blue: 0.1))
-                                .background(GeometryReader { proxy in
-                                    Color.clear
-                                        .preference(key: IconWidth.self,
-                                                    value: proxy.size.width)
-                                }).onPreferenceChange(IconWidth.self) {
+                                .readingGeometry(key: IconWidth.self, valuePath: \.size.width) {
                                     self.iconWidth = $0
                             }
-
                             Text("Edit Profile")
                         }
                     }
 
                     if !viewModel.propertyOptions.isEmpty {
                         Picker(
-                            selection: $viewModel.selectedPropertyIndex,
+                            selection: $viewModel.selectedProperty,
                             label: HStack {
-                                Image.property()
-                                    .resizable()
-                                    .padding(EdgeInsets(
-                                        top: (iconWidth ?? 10) * 0.3,
-                                        leading: 2,
-                                        bottom: 2,
-                                        trailing: 2))
-                                    .background(
-                                        Color.green.clipShape(
-                                            RoundedRectangle(
-                                                cornerRadius: 2,
-                                                style: .circular)
-                                        ).aspectRatio(CGSize(width: 1, height: 1),
-                                                      contentMode: .fit))
-                                    .foregroundColor(.white)
-                                    .frame(width: iconWidth, height: iconWidth)
+                                Color.green.clipShape(
+                                    RoundedRectangle(
+                                        cornerRadius: 2,
+                                        style: .circular))
+                                    .inverseMask(ZStack(alignment: .center) {
+                                        Image.property()
+                                            .resizable()
+                                            .aspectRatio(CGSize(width: 1, height: 1),
+                                                         contentMode: .fit)
+                                            .padding(EdgeInsets(top: 3.5, leading: 2, bottom: 1, trailing: 2))
+                                    }).frame(width: iconWidth, height: iconWidth)
                                 Text("Current Property")
                             }
                         ) {
-                            ForEach(0 ..< viewModel.propertyOptions.count) { idx in
-                                Text(self.viewModel.propertyOptions[idx].display)
+                            ForEach(viewModel.propertyOptions, id: \.display) {
+                                Text($0.display).tag($0)
                             }
                         }
+                    } else {
+                        Text("User account has no associated properties. Please contact Eco-Soap Bank for more info.")
                     }
                 }
 
@@ -86,14 +78,16 @@ struct MainProfileView: View {
                         HStack {
                             Spacer()
                             Text("Log out")
-                                .foregroundColor(.red)
+                                .foregroundColor(Color(UIColor(red: 0.8, green: 0, blue: 0, alpha: 1)))
+                                .fontWeight(.bold)
                             Spacer()
                         }
                     }
                 }
-
-            }.navigationBarTitle("Profile Settings", displayMode: .inline)
-        }.font(.muli())
+            }.navigationBarTitle("Profile Settings", displayMode: .automatic)
+        }
+        .font(.muli())
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -118,7 +112,6 @@ struct MainProfileView_Previews: PreviewProvider {
         MainProfileView(
             viewModel: MainProfileViewModel(
                 user: .placeholder(),
-                currentProperty: .random(),
                 userController: UserController(dataLoader: MockLoginProvider()))
         )
     }

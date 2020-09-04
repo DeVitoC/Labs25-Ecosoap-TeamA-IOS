@@ -107,7 +107,7 @@ extension PickupDetailViewController {
 }
 
 extension PickupDetailViewController {
-    struct Representable: UIViewControllerRepresentable {
+    private struct _Representable: UIViewControllerRepresentable {
         let pickup: Pickup
 
         func makeUIViewController(context: Context) -> PickupDetailViewController {
@@ -121,6 +121,15 @@ extension PickupDetailViewController {
             context: Context
         ) {
             uiViewController.pickup = pickup
+        }
+    }
+
+    struct Representable: View {
+        let pickup: Pickup
+
+        var body: some View {
+            _Representable(pickup: pickup)
+                .navigationBarTitle("Pickup Details")
         }
     }
 }

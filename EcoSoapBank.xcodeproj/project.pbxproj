@@ -116,7 +116,6 @@
 		992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64924F0319D00638AA4 /* EditCartonViewController.swift */; };
 		992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */; };
 		992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C929024F70B0C004FCBBB /* Randomizable.swift */; };
-		992FBC8524FDAB8F0099C32D /* PropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8424FDAB8F0099C32D /* PropertyList.swift */; };
 		992FBC8724FDABE10099C32D /* LabelAlignedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */; };
 		992FBC8924FDB2D50099C32D /* PropertyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8824FDB2D50099C32D /* PropertyListViewModel.swift */; };
 		992FBC8B24FDB67D0099C32D /* EditPropertyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8A24FDB67D0099C32D /* EditPropertyViewModel.swift */; };
@@ -145,7 +144,8 @@
 		9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E024F9B78C00DD16B5 /* StripeController.swift */; };
 		9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
 		9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */; };
-		9998716424E1E8C4000A993E /* PickupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9998716324E1E8C4000A993E /* PickupsView.swift */; };
+		999B2D0E25014DEB002D3591 /* View+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999B2D0D25014DEB002D3591 /* View+Alignment.swift */; };
+		999B2D1025019045002D3591 /* InverseMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999B2D0F25019045002D3591 /* InverseMask.swift */; };
 		999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */; };
 		999CBA3D24F9AFF100CDF0F3 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */; };
 		99B5790324E30F140097957D /* PickupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5790224E30F140097957D /* PickupTests.swift */; };
@@ -156,6 +156,7 @@
 		99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */; };
 		99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177024EC3D000099664B /* Publisher+HandleError.swift */; };
 		99B6177324EC743F0099664B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177224EC743F0099664B /* LoginCoordinator.swift */; };
+		99BA964425001FE400821694 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA964325001FE400821694 /* AppTabBarController.swift */; };
 		99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */; };
 		99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467724FD8AF200E2B005 /* MainProfileView.swift */; };
 		99C0467A24FD8B9200E2B005 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467924FD8B9200E2B005 /* EditProfileView.swift */; };
@@ -281,7 +282,6 @@
 		992BB64924F0319D00638AA4 /* EditCartonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCartonViewController.swift; sourceTree = "<group>"; };
 		992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISwipeActionsConfiguration+Constants.swift"; sourceTree = "<group>"; };
 		992C929024F70B0C004FCBBB /* Randomizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomizable.swift; sourceTree = "<group>"; };
-		992FBC8424FDAB8F0099C32D /* PropertyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyList.swift; sourceTree = "<group>"; };
 		992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAlignedTextField.swift; sourceTree = "<group>"; };
 		992FBC8824FDB2D50099C32D /* PropertyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListViewModel.swift; sourceTree = "<group>"; };
 		992FBC8A24FDB67D0099C32D /* EditPropertyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPropertyViewModel.swift; sourceTree = "<group>"; };
@@ -312,7 +312,8 @@
 		9990F6E024F9B78C00DD16B5 /* StripeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeController.swift; sourceTree = "<group>"; };
 		9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlert.swift"; sourceTree = "<group>"; };
-		9998716324E1E8C4000A993E /* PickupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupsView.swift; sourceTree = "<group>"; };
+		999B2D0D25014DEB002D3591 /* View+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alignment.swift"; sourceTree = "<group>"; };
+		999B2D0F25019045002D3591 /* InverseMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverseMask.swift; sourceTree = "<group>"; };
 		999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		999CBA3C24F9AFF100CDF0F3 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = Carthage/Build/iOS/Stripe.framework; sourceTree = "<group>"; };
 		999CBA4124F9B08600CDF0F3 /* input.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = input.xcfilelist; sourceTree = "<group>"; };
@@ -325,6 +326,7 @@
 		99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingViewController.swift; sourceTree = "<group>"; };
 		99B6177024EC3D000099664B /* Publisher+HandleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+HandleError.swift"; sourceTree = "<group>"; };
 		99B6177224EC743F0099664B /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		99BA964325001FE400821694 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
 		99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		99C0467724FD8AF200E2B005 /* MainProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileView.swift; sourceTree = "<group>"; };
 		99C0467924FD8B9200E2B005 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				466C427C249A8749007D033E /* Colors.xcassets */,
 				049379A824EB25600084051B /* Images.xcassets */,
 				990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */,
+				99BA964325001FE400821694 /* AppTabBarController.swift */,
 				466C4273249A8748007D033E /* AppDelegate.swift */,
 				466C4275249A8748007D033E /* SceneDelegate.swift */,
 				466C427E249A8749007D033E /* LaunchScreen.storyboard */,
@@ -607,7 +610,6 @@
 			children = (
 				99C0467724FD8AF200E2B005 /* MainProfileView.swift */,
 				99C0467924FD8B9200E2B005 /* EditProfileView.swift */,
-				992FBC8424FDAB8F0099C32D /* PropertyList.swift */,
 				992FBC8C24FDB6970099C32D /* EditPropertyView.swift */,
 			);
 			path = Views;
@@ -670,6 +672,8 @@
 				99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */,
 				992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */,
 				99D0165F24FEA6D8001A7555 /* With.swift */,
+				999B2D0D25014DEB002D3591 /* View+Alignment.swift */,
+				999B2D0F25019045002D3591 /* InverseMask.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -677,7 +681,6 @@
 		9985ED1324F08BC5009F108F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9998716324E1E8C4000A993E /* PickupsView.swift */,
 				998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */,
 				998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */,
 				992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */,
@@ -986,7 +989,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
-				992FBC8524FDAB8F0099C32D /* PropertyList.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
 				04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */,
 				992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */,
@@ -998,6 +1000,7 @@
 				04D1758D24E4195C00F8929C /* GradientView.swift in Sources */,
 				049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */,
 				992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */,
+				99BA964425001FE400821694 /* AppTabBarController.swift in Sources */,
 				99D0166024FEA6D9001A7555 /* With.swift in Sources */,
 				04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
@@ -1052,12 +1055,12 @@
 				997BF11224E20AAE00A643D8 /* TextView.swift in Sources */,
 				0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */,
 				E2D04F9324F0D50600515831 /* Address.swift in Sources */,
-				9998716424E1E8C4000A993E /* PickupsView.swift in Sources */,
 				998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */,
 				04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */,
 				9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
 				E2D3030124E5F9B8008A6FAF /* MockDataLoader.swift in Sources */,
+				999B2D0E25014DEB002D3591 /* View+Alignment.swift in Sources */,
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
 				E2E2F0EA24F838170050BFCF /* Payment.swift in Sources */,
 				99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */,
@@ -1068,6 +1071,7 @@
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
 				992FBC8D24FDB6970099C32D /* EditPropertyView.swift in Sources */,
 				0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */,
+				999B2D1025019045002D3591 /* InverseMask.swift in Sources */,
 				992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */,
 				99C0467C24FD8BB700E2B005 /* EditProfileViewModel.swift in Sources */,
 				E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */,

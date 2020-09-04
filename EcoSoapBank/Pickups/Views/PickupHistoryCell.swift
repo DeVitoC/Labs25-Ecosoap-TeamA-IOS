@@ -14,69 +14,58 @@ import UIKit
 struct PickupHistoryCell: View {
     let pickup: Pickup
 
-    @State var titleColumnWidth: CGFloat?
+    @Binding var statusWidth: CGFloat?
 
-    init(pickup: Pickup) {
+    init(pickup: Pickup, statusWidth: Binding<CGFloat?>) {
         self.pickup = pickup
+        self._statusWidth = statusWidth
     }
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
+        NavigationLink(
+            destination: PickupDetailViewController.Representable(pickup: pickup)
+        ) {
             VStack(alignment: .leading, spacing: 22) {
-                HStack(alignment: .center) {
-                    
-                    // Confirmation Code
-                    Text(pickup.confirmationCode)
-                        .font(UIFont.muli(style: .title2, typeface: .bold))
-                        .foregroundColor(Color(.montanaGrey))
-                    Spacer()
-                    
-                    HStack {
-                        // Date
-                        VStack(alignment: .trailing) {
-                            Text("READY DATE")
-                                .font(UIFont.muli(style: UIFont.TextStyle.caption2, typeface: .regular))
-                                .foregroundColor(Color(.systemGray))
-                            Text(pickup.readyDate.string())
-                                .font(UIFont.muli(style: .body, typeface: .regular))
-                        }
-                        
-                        // Disclosure
-                        Image(systemName: "chevron.right")
-                            .font(.systemFont(ofSize: 20, weight: .semibold))
-                            .foregroundColor(Color(.silver))
-                            .padding(.leading, 10)
-                    }
+                // Date
+                VStack(alignment: .leading) {
+                    Text("READY DATE")
+                        .font(UIFont.muli(style: .caption2, typeface: .regular))
+                        .foregroundColor(Color(.secondaryLabel))
+                    Text(pickup.readyDate.string())
+                        .font(UIFont.muli(style: .body, typeface: .regular))
                 }
-                
-                HStack {
+
+                HStack(spacing: 12) {
                     // Pickup Status
-                    HStack {
+                    HStack(spacing: 4) {
                         StatusIcon(status: pickup.status)
-                            .modifier(Icon())
                         Text(pickup.status.display)
                             .font(UIFont.muli(style: UIFont.TextStyle.body, typeface: .semiBold))
-                    }.frame(width: 140, alignment: .leading)
-                    
+                            .foregroundColor(Color(.label))
+                        Spacer()
+                    }.readingGeometry(
+                        key: StatusWidthKey.self,
+                        valuePath: \.size.width,
+                        onChange: {
+                            if let old = self.statusWidth, let new = $0 {
+                                self.statusWidth = max(old, new)
+                            } else {
+                                self.statusWidth = $0
+                            }
+                    }).frame(width: statusWidth)
+
                     // Cartons
-                    Image(systemName: "square.stack.3d.up.fill")
-                        .modifier(Icon())
-                        .foregroundColor(Color(.downyBlue))
-                    Text("\(pickup.cartons.count) Cartons")
-                        .font(UIFont.muli(style: UIFont.TextStyle.body, typeface: .semiBold))
-                    
-                    Spacer()
+                    HStack(spacing: 4) {
+                        Image(systemName: "square.stack.3d.up.fill")
+                            .modifier(Icon())
+                            .foregroundColor(Color(.downyBlue))
+                        Text("\(pickup.cartons.count) Cartons")
+                            .font(UIFont.muli(style: UIFont.TextStyle.body, typeface: .semiBold))
+                    }.padding(.trailing, 16)
                 }
-            }.padding(.bottom, 8)
-            
-            NavigationLink(destination:
-                PickupDetailViewController.Representable(pickup: pickup)
-                    .navigationBarTitle("Pickup Details")) {
-                        EmptyView()
             }
         }
         .font(Font(UIFont.muli(style: .body)))
-        .foregroundColor(Color(.shuttleGrey))
     }
 }
 
@@ -84,7 +73,7 @@ extension PickupHistoryCell {
     private struct Icon: ViewModifier {
         func body(content: Content) -> some View {
             content
-                .font(.systemFont(ofSize: 26, weight: .medium))
+                .font(UIFont.systemFont(ofSize: 26, weight: .medium).scaled())
                 .frame(width: 30, alignment: .leading)
         }
     }
@@ -112,26 +101,17 @@ extension PickupHistoryCell {
         
         var body: some View {
             Image(systemName: imageName)
-            .foregroundColor(color)
+                .foregroundColor(color)
+                .modifier(Icon())
         }
     }
-    
-    private struct TitledView<Content: View>: View {
-        let title: String
-        let content: Content
 
-        init(_ title: String, @ViewBuilder _ content: () -> Content) {
-            self.title = title
-            self.content = content()
-        }
-
-        var body: some View {
-            HStack {
-                Text(title + ":")
-                    .bold()
-                    .frame(alignment: .trailing)
-                content
-                    .frame(maxWidth: .infinity, alignment: .leading)
+    struct StatusWidthKey: PreferenceKey {
+        static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
+            if let old = value, let new = nextValue() {
+                value = max(old, new)
+            } else {
+                value = nextValue()
             }
         }
     }
@@ -141,7 +121,7 @@ extension PickupHistoryCell {
 
 struct PickupListItem_Previews: PreviewProvider {
     static var previews: some View {
-        PickupHistoryCell(pickup: .random())
+        PickupHistoryCell(pickup: .random(), statusWidth: .constant(nil))
             .previewLayout(.sizeThatFits)
             .padding()
     }

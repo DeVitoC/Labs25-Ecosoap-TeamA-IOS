@@ -12,29 +12,20 @@ import Combine
 
 
 class ProfileCoordinator: FlowCoordinator {
-    lazy var rootVC: UIViewController = mainProfileView() ?? noPropertiesView()
+    lazy var rootVC = UIHostingController(
+        rootView: MainProfileView(viewModel: profileVM))
 
-    private(set) var profileVM: MainProfileViewModel?
+    private(set) var profileVM: MainProfileViewModel
 
     private var userController: UserController
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(userController: UserController) {
+    init(user: User, userController: UserController) {
         self.userController = userController
-
-        userController.$user
-            .combineLatest(userController.$viewingProperty)
-            .sink { [unowned self] info in
-                guard let user = info.0, let property = info.1 else {
-                    self.profileVM = nil
-                    return
-                }
-                self.profileVM = MainProfileViewModel(
-                        user: user,
-                        currentProperty: property,
-                        userController: userController)
-        }.store(in: &cancellables)
+        self.profileVM = MainProfileViewModel(
+            user: user,
+            userController: userController)
     }
 
     func start() {
@@ -46,14 +37,5 @@ class ProfileCoordinator: FlowCoordinator {
                     pointSize: 22,
                     weight: .regular)),
             tag: 4)
-    }
-
-    func mainProfileView() -> UIViewController? {
-        guard let vm = profileVM else { return nil }
-        return UIHostingController(rootView: MainProfileView(viewModel: vm))
-    }
-
-    func noPropertiesView() -> UIViewController {
-        UIHostingController(rootView: EmptyView())
     }
 }

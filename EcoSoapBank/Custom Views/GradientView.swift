@@ -33,6 +33,13 @@ class GradientView: UIView {
     override class var layerClass: AnyClass {
         CAGradientLayer.self
     }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
+            updateColors()
+        }
+    }
     
     // MARK: - Private Methods
     
