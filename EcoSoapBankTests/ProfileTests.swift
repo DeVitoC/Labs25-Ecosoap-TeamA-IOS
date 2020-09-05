@@ -58,6 +58,8 @@ class ProfileTests: XCTestCase {
         self.bag = []
     }
 
+    // MARK: - Tests
+
     func testMainProfileVMSetup() throws {
         XCTAssertEqual(mainVM.properties, user.properties)
         XCTAssert(mainVM.propertyOptions.contains(.all))
