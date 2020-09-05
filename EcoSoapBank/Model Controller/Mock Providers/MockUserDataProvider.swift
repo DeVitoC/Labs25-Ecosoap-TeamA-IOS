@@ -36,8 +36,6 @@ class MockUserDataProvider: UserDataProvider {
 
         do {
             let token = try dataLoader.getToken()
-            print(token) // TODO: remove from production
-
             dispatch {
                 if self.shouldFail {
                     completion(.mockFailure())

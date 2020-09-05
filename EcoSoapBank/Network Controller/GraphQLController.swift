@@ -33,6 +33,9 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     func logIn(_ completion: @escaping ResultHandler<User>) {
         do {
             let token = try session.getToken()
+            #if DEBUG
+            print("token: " + token)
+            #endif
             performOperation(.login(token: token), completion: completion)
         } catch {
             completion(.failure(error))
@@ -148,7 +151,7 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
                 if let object = result.object {
                     completion(.success(object))
                 } else {
-                    print(result.errorMessages)
+                    NSLog(result.errorMessages.joined(separator: "\n"))
                     completion(.failure(GraphQLError.backendMessages(result.errorMessages)))
                 }
             } catch {
