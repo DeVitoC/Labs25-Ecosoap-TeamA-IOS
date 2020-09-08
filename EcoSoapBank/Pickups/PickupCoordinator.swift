@@ -33,7 +33,7 @@ class PickupCoordinator: FlowCoordinator {
         // subscribe to and respond to model controller messages
         pickupController.fetchPickupsForAllProperties()
             .receive(on: DispatchQueue.main)
-            .handleError(handleError(_:))
+            .handleError { [weak rootVC] error in rootVC?.presentAlert(for: error) }
             .sink { _ in }
             .store(in: &cancellables)
     }
@@ -55,7 +55,7 @@ class PickupCoordinator: FlowCoordinator {
 extension PickupCoordinator {
     func scheduleNewPickup() {
         guard user.properties?.first != nil else {
-            return handleError(UserError.noProperties)
+            rootVC.presentAlert(for: UserError.noProperties)
         }
         // see `UtilityFunctions.swift` `Optional` extension and infix operator
         let viewController = scheduleVC ??= newScheduleVC()
@@ -65,34 +65,13 @@ extension PickupCoordinator {
         rootVC.present(nav, animated: true, completion: nil)
     }
 
-    private func handleError(_ error: Error) {
-        let title: String
-        let message: String
-
-        switch error {
-        case .noProperties as UserError:
-            title = "No properties to schedule pickups for!"
-            message = "Please contact us to set up your properties for container pickups."
-        default:
-            // TODO: handle more errors
-            title = "An unknown error occurred"
-            message = ""
-        }
-
-        rootVC.presentSimpleAlert(
-            with: title,
-            message: message,
-            preferredStyle: .alert,
-            dismissText: "OK")
-    }
-
     private func handlePickupScheduleResult(_ pickupResult: Pickup.ScheduleResult) {
         let alert = successAlert(for: pickupResult)
         rootVC.dismiss(animated: true) { [unowned rootVC] in
             rootVC.present(alert, animated: true)
+            self.scheduleVC = nil
+            self.scheduleVM = nil
         }
-        self.scheduleVC = nil
-        self.scheduleVM = nil
     }
 
     private func successAlert(for pickupResult: Pickup.ScheduleResult) -> UIAlertController {
@@ -162,7 +141,7 @@ extension PickupCoordinator: SchedulePickupViewModelDelegate {
         self.pickupController.schedulePickup(for: input)
             .receive(on: DispatchQueue.main)
             .handleError({ [weak self] error in
-                self?.handleError(error)
+                self?.rootVC.presentAlert(for: error)
                 completion(.failure(error))
             }).sink(receiveValue: { [weak self] result in
                 self?.handlePickupScheduleResult(result)
