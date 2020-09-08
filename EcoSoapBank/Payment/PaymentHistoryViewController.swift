@@ -18,6 +18,13 @@ class PaymentHistoryViewController: UIViewController {
         }
     }
 
+    var cellWidth: CGFloat {
+        paymentCollectionView.frame.size.width
+    }
+    var expandedHeight: CGFloat = 200
+    var notExpandedHeight: CGFloat = 50
+    var isExpanded = [Bool]()
+
     override func loadView() {
         view = BackgroundView()
     }
@@ -39,22 +46,12 @@ class PaymentHistoryViewController: UIViewController {
             case .success(let payments):
                 DispatchQueue.main.async {
                     self.payments = payments
+                    self.isExpanded = Array(repeating: false, count: payments.count)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
             }
         })
-    }
-
-    func configureLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(80))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
-        let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
     }
 
     func setupNavBar() {
@@ -63,7 +60,6 @@ class PaymentHistoryViewController: UIViewController {
 
     func setupCollectionView() {
         view.addSubview(paymentCollectionView)
-        paymentCollectionView.collectionViewLayout = configureLayout()
         paymentCollectionView.dataSource = self
         paymentCollectionView.delegate = self
         paymentCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +74,29 @@ class PaymentHistoryViewController: UIViewController {
     }
 }
 
-extension PaymentHistoryViewController: UICollectionViewDelegate { }
+extension PaymentHistoryViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        toggleExpandCell(indexPath: indexPath)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        toggleExpandCell(indexPath: indexPath)
+    }
+
+    func toggleExpandCell(indexPath: IndexPath) {
+        isExpanded[indexPath.row].toggle()
+        UIView.animate(withDuration: 0.8,
+                       delay: 0.0,
+                       usingSpringWithDamping: 0.9,
+                       initialSpringVelocity: 0.9,
+                       options: UIView.AnimationOptions.curveEaseInOut,
+                       animations: {
+            self.paymentCollectionView.reloadItems(at: [indexPath])
+        }, completion: { success in
+            print(success)
+        })
+    }
+}
 
 extension PaymentHistoryViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -94,9 +112,19 @@ extension PaymentHistoryViewController: UICollectionViewDataSource {
             for: indexPath) as? PaymentHistoryCollectionViewCell
             else { return UICollectionViewCell() }
         cell.payment = payments[indexPath.row]
+        cell.isExpanded = isExpanded[indexPath.row]
 
-        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderColor = UIColor.gray.cgColor
         cell.layer.borderWidth = 0.5
         return cell
+    }
+}
+
+extension PaymentHistoryViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        isExpanded[indexPath.row] ? CGSize(width: cellWidth, height: expandedHeight) :
+            CGSize(width: cellWidth, height: notExpandedHeight)
     }
 }
