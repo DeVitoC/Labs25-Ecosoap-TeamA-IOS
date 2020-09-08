@@ -50,12 +50,18 @@ class LoginViewController: UIViewController {
         logo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.45).isActive = true
         
         let missionStatementLabel = configure(UILabel()) {
-            $0.text =
-            """
+            let missionStatement = """
             Saving, sanitizing, and supplying
             RECYCLED SOAP
             for the developing world
             """
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 6
+            
+            $0.attributedText = NSAttributedString(
+                string: missionStatement,
+                attributes: [.paragraphStyle: paragraphStyle]
+            )
             $0.textAlignment = .center
             $0.numberOfLines = 0
             $0.textColor = .label
