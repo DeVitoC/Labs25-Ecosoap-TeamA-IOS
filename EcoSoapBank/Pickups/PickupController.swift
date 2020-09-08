@@ -96,9 +96,12 @@ class PickupController: ObservableObject {
             .mapError { _ in PickupError.unknown }                  // makes compiler happy?
             .flatMap { $0 }                                         // [Publisher[Pickup]>] -> Publisher<[Pickup]...>
             .collect()                                              // [Pickup]... -> [[Pickup]]
-            .map { arrays in arrays.flatMap { $0 }}                 // [[Pickup]] -> [Pickup]
+            .map { arrays in arrays.flatMap { $0 } }                // [[Pickup]] -> [Pickup]
             .map { Array(Set($0)).sorted(by: Self.pickupSorter) }   // unique, sort
-            .eraseToAnyPublisher()
+            .receive(on: DispatchQueue.main)                        // run following on main thread
+            .handleEvents(receiveOutput: { [weak self] pickups in   // set sorted pickups
+                self?.pickups = pickups
+            }).eraseToAnyPublisher()
     }
 
     func schedulePickup(
@@ -116,6 +119,10 @@ class PickupController: ObservableObject {
                 promise(result)
             }
         }
+    }
+
+    func fetchPickupsForSelectedProperty() -> AnyPublisher<[Pickup], Error> {
+        pickupsPublisher(forPropertyID: selectedProperty?.id)
     }
 
     private func pickupsPublisher(forPropertyID propertyID: String?) -> AnyPublisher<[Pickup], Error> {

@@ -31,7 +31,7 @@ class PickupCoordinator: FlowCoordinator {
             dataProvider: dataProvider)
 
         // subscribe to and respond to model controller messages
-        pickupController.fetchPickupsForAllProperties()
+        pickupController.fetchPickupsForSelectedProperty()
             .receive(on: DispatchQueue.main)
             .handleError { [weak rootVC] error in rootVC?.presentAlert(for: error) }
             .sink { _ in }
