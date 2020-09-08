@@ -30,8 +30,13 @@ enum PickupError: Error {
 
 class PickupController: ObservableObject {
     @Published private(set) var pickups: [Pickup] = []
+    @Published private(set) var error: Error?
+
     var properties: [Property]? {
         user.properties
+    }
+    var selectedProperty: Property? {
+        UserDefaults.standard.selectedProperty(forUser: user)
     }
 
     private(set) var user: User
@@ -43,11 +48,24 @@ class PickupController: ObservableObject {
     init(user: User, dataProvider: PickupDataProvider) {
         self.dataProvider = dataProvider
         self.user = user
+
+        // Observe changes to property ID in user defaults; fetch new pickups on change
+        UserDefaults.standard.selectedPropertyPublisher(forUser: user)
+            .mapError({ _ in PickupError.unknown })
+            .compactMap({ [weak self] selection in
+                self?.pickupsPublisher(forPropertyID: selection.property?.id)
+            }).flatMap { $0 }
+            .sink(
+                receiveCompletion: { [weak self] complete in
+                    if case .failure(let err) = complete { self?.error = err }
+                }, receiveValue: { _ in })
+            .store(in: &cancellables)
     }
 
     @discardableResult
     func fetchPickups(forPropertyID propertyID: String) -> Future<[Pickup], Error> {
-        Future { promise in
+        Future { [weak self] promise in
+            guard let self = self else { return promise(.failure(PickupError.unknown)) }
             self.dataProvider.fetchPickups(forPropertyID: propertyID) { [weak self] result in
                 guard let self = self else { return promise(result) }
                 if case .success(let newPickups) = result {
@@ -92,6 +110,14 @@ class PickupController: ObservableObject {
                 }
                 promise(result)
             }
+        }
+    }
+
+    private func pickupsPublisher(forPropertyID propertyID: String?) -> AnyPublisher<[Pickup], Error> {
+        if let id = propertyID, (properties ?? []).contains(where: { $0.id == id }) {
+            return fetchPickups(forPropertyID: id).eraseToAnyPublisher()
+        } else {
+            return fetchPickupsForAllProperties()
         }
     }
 }
