@@ -183,6 +183,7 @@ extension SchedulePickupViewController {
         let label = UILabel()
         label.text = title.uppercased()
         label.font = .muli(style: .caption1)
+        label.textColor = .secondaryLabel
         return label
     }
 

@@ -49,6 +49,7 @@ class AppFlowCoordinator: FlowCoordinator {
     }
 
     func start() {
+        Keychain.Okta.removeToken()
         // set up window and make visible
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
