@@ -29,9 +29,10 @@ class UIElementInitializers: NSObject {
         return label
     }
 
-    func createImageView(_ image: UIImage) -> UIImageView {
-        let imageView = UIImageView()
-        
+    func createImageView(_ imageNamed: String) -> UIImageView {
+        let imageView = UIImageView(image: UIImage(systemName: imageNamed, withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold)))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.tintColor = .lightGray
 
         return imageView
     }
