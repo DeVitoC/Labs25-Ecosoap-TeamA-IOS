@@ -48,9 +48,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configure(UITableViewCell.appearance()) {
             $0.backgroundColor = UIColor.systemGray6
         }
-
+        
         configure(UIBarButtonItem.appearance()) {
             $0.tintColor = .white
+            $0.setTitleTextAttributes(
+                [.font: UIFont.muli(typeface: .semiBold)],
+                for: .normal)
         }
         
         configure(UINavigationBar.appearance()) { nav in
