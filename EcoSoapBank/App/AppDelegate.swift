@@ -38,31 +38,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setUpAppAppearance() {
         configure(UITabBar.appearance()) {
             $0.tintColor = .esbGreen
-            $0.backgroundColor = .downyBlue
+            $0.backgroundColor = .systemGray2
         }
 
         configure(UITableView.appearance()) {
-            $0.backgroundColor = UIColor.esbGreen.orInverse().withAlphaComponent(0.3)
+            $0.backgroundColor = UIColor.systemGray5
         }
 
         configure(UITableViewCell.appearance()) {
-            $0.backgroundColor = UIColor.systemGroupedBackground.withAlphaComponent(0.75)
+            $0.backgroundColor = UIColor.systemGray6
         }
 
+        configure(UIBarButtonItem.appearance()) {
+            $0.tintColor = .white
+        }
+        
         configure(UINavigationBar.appearance()) { nav in
             nav.standardAppearance = configure(UINavigationBarAppearance()) {
-                $0.backgroundImage = UIImage.navBar.withAlpha(0.4)
-                $0.backgroundColor = .systemBackground
-                $0.backgroundEffect = UIBlurEffect(style: .systemMaterial)
+                $0.backgroundImage = UIImage.navBar
                 $0.titleTextAttributes = [
                     .font: UIFont.navBarInlineTitle,
                     .foregroundColor: UIColor.label
                 ]
             }
             nav.compactAppearance = configure(UINavigationBarAppearance()) {
-                $0.backgroundImage = UIImage.navBar.withAlpha(0.4)
-                $0.backgroundColor = .systemBackground
-                $0.backgroundEffect = UIBlurEffect(style: .systemThickMaterial)
+                $0.backgroundImage = UIImage.navBar
                 $0.titleTextAttributes = [
                     .font: UIFont.navBarInlineTitle,
                     .foregroundColor: UIColor.label
