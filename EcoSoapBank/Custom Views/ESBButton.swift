@@ -11,12 +11,12 @@ import UIKit
 class ESBButton: UIButton {
     enum ColorScheme {
         case greenOnWhite
-        case primaryOnBlue
+        case whiteOnGreen
     }
     
     // MARK: - Public Properties
     
-    var colorScheme: ColorScheme = .primaryOnBlue {
+    var colorScheme: ColorScheme = .whiteOnGreen {
         didSet { updateColors() }
     }
     
@@ -50,13 +50,12 @@ class ESBButton: UIButton {
         switch colorScheme {
         case .greenOnWhite:
             setTitleColor(
-                UIColor(light: UIColor.esbGreen.adjustingBrightness(by: -0.1),
-                        dark: UIColor.esbGreen.adjustingBrightness(by: -0.3)),
+                .esbGreen,
                 for: .normal)
             backgroundColor = .white
-        case .primaryOnBlue:
-            setTitleColor(UIColor.label, for: .normal)
-            backgroundColor = UIColor.downyBlue.orAdjustingBrightness(by: -0.3)
+        case .whiteOnGreen:
+            setTitleColor(UIColor.white, for: .normal)
+            backgroundColor = .esbGreen
         }
     }
     
