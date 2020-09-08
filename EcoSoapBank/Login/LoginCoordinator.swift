@@ -75,7 +75,7 @@ class LoginCoordinator: FlowCoordinator {
         loginVC.modalPresentationStyle = .fullScreen
 
         OktaAuth.error
-            .sink { [weak self] in self?.alertUserOfLoginError($0) }
+            .sink { [weak rootVC] in rootVC?.presentAlert(for: $0) }
             .store(in: &cancellables)
     }
 
@@ -90,10 +90,6 @@ extension LoginCoordinator {
     private func showLoginScreen() {
         rootVC.present(loginVC, animated: true, completion: nil)
     }
-
-    private func alertUserOfLoginError(_ error: Error) {
-        (self.rootVC.presentedViewController ?? self.rootVC)?.presentAlert(for: error)
-    }
 }
 
 // MARK: - LoginVC Delegate
@@ -101,7 +97,7 @@ extension LoginCoordinator {
 extension LoginCoordinator: LoginViewControllerDelegate {
     func login() {
         guard let loginURL = userController.oktaLoginURL else {
-            return alertUserOfLoginError(LoginError.oktaFailure)
+            return rootVC.presentAlert(for: LoginError.oktaFailure)
         }
         loginVC.present(LoadingViewController(loadingText: "Logging in..."), animated: true) {
             UIApplication.shared.open(loginURL)
