@@ -18,16 +18,9 @@ protocol UserDataProvider {
     func logOut()
 }
 
-extension String {
-    static func viewingPropertyKey(for user: User) -> String {
-        "EcoSoapBank.\(user.id).viewingProperty"
-    }
-}
-
 
 class UserController: ObservableObject {
     @Published private(set) var user: User?
-    @Published var viewingProperty: Property?
 
     private var dataLoader: UserDataProvider
     
@@ -39,9 +32,6 @@ class UserController: ObservableObject {
         OktaAuth.success
             .sink { [weak self] in self?.logInWithBearer() }
             .store(in: &cancellables)
-        $user.sink(receiveValue: { [weak self] user in
-            self?.viewingProperty = user?.properties?.first
-        }).store(in: &cancellables)
     }
 }
 
@@ -54,11 +44,6 @@ extension UserController {
         self.dataLoader.logIn { [weak self] result in
             if let user = try? result.get() {
                 self?.user = user
-                // If viewing property is set in UserDefaults for user, set it on controller
-                if let storedPropertyID = UserDefaults.standard.string(forKey: .viewingPropertyKey(for: user)),
-                    let property = user.properties?.first(where: { $0.id == storedPropertyID }) {
-                    self?.viewingProperty = property
-                }
             }
             completion(result)
         }

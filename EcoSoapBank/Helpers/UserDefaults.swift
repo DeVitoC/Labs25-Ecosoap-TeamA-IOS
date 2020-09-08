@@ -13,10 +13,6 @@ import Foundation
 /// You can also observe changes on user defaults using a UserDefaultsObservation.
 extension UserDefaults {
     @UserDefault(Key("massUnit")) static var massUnit: String?
-    
-    static func propertyIDWrapper(forUser user: User) -> UserDefault<String> {
-        UserDefault(Key(rawValue: .selectedPropertyKey(for: user)))
-    }
 }
 
 // MARK: - Property Wrapper
