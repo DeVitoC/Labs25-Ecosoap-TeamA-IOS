@@ -19,7 +19,7 @@ class UIElementInitializers: NSObject {
      - Parameter textColor: **UIColor** that describes the UILabel's textColor property
      - Returns: A **UILabel** set up to the specifications passed in.
      */
-    func createLabel(_ title: String, frame: CGRect, alignment: NSTextAlignment, textColor: UIColor = .white) -> UILabel {
+    func createLabel(_ title: String, frame: CGRect, alignment: NSTextAlignment, textColor: UIColor = .label) -> UILabel {
         let label = UILabel(frame: frame)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = title
