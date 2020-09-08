@@ -34,8 +34,7 @@ class ImpactViewController: UIViewController {
 
         impactController?.getImpactStats { [weak self] error in
             if let error = error {
-                // TODO: Proper error handling
-                print(error)
+                self?.presentAlert(for: error)
                 return
             }
             

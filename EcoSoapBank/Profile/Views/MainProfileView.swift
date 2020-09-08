@@ -12,7 +12,7 @@ import SwiftUI
 struct MainProfileView: View {
     @ObservedObject var viewModel: MainProfileViewModel
 
-    @State var iconWidth: CGFloat?
+    @State var iconWidth: CGFloat = 15
 
     init(viewModel: MainProfileViewModel) {
         self.viewModel = viewModel
@@ -92,16 +92,10 @@ struct MainProfileView: View {
 }
 
 struct IconWidth: PreferenceKey {
-    static var defaultValue: CGFloat?
+    static var defaultValue: CGFloat = 0
 
-    static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
-        if let new = nextValue() {
-            if let old = value {
-                value = max(old, new)
-            } else {
-                value = new
-            }
-        }
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }
 
@@ -112,7 +106,8 @@ struct MainProfileView_Previews: PreviewProvider {
         MainProfileView(
             viewModel: MainProfileViewModel(
                 user: .placeholder(),
-                userController: UserController(dataLoader: MockLoginProvider()))
+                userController: UserController(dataLoader: MockUserDataProvider()),
+                delegate: nil)
         )
     }
 }

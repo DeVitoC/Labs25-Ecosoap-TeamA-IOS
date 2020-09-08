@@ -14,14 +14,14 @@ extension View {
     /// and applies it to the provided preference key, performing the provided closure when the preference changes.
     /// Useful for reading size values, writing them to a size binding, and aligning several views according to this value.
     func readingGeometry<K: PreferenceKey>(
-        forKey key: K.Type,
-        keyPath: KeyPath<GeometryProxy, K.Value>,
+        key: K.Type,
+        valuePath: KeyPath<GeometryProxy, K.Value>,
         onChange: @escaping (K.Value) -> Void
     ) -> some View where K.Value: Equatable {
         self.background(GeometryReader { proxy in
             Color.clear
                 .preference(key: K.self,
-                            value: proxy[keyPath: keyPath])
+                            value: proxy[keyPath: valuePath])
         }).onPreferenceChange(K.self, perform: { onChange($0) })
     }
 

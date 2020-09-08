@@ -18,4 +18,14 @@ class AppTabBarController: UITabBarController {
             view.sendSubviewToBack($0)
         }
     }
+
+    /// Recursively dismisses any view controllers currently being presented
+    func dismissAllPresentedViewControllers(onComplete: (() -> Void)?) {
+        if presentedViewController != nil {
+            dismiss(animated: true) {
+                self.dismissAllPresentedViewControllers(onComplete: onComplete)
+            }
+        }
+        onComplete?()
+    }
 }
