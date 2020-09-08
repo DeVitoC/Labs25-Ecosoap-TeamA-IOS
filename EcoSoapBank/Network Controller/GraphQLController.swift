@@ -18,7 +18,6 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     // MARK: - Properties
 
     private let session: DataLoader
-    private var token: String? { Keychain.Okta.getToken() }
 
     // MARK: - Init
     
@@ -32,10 +31,19 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     // User
     
     func logIn(_ completion: @escaping ResultHandler<User>) {
-        guard let token = self.token else {
-            return completion(.failure(GraphQLError.noToken))
+        do {
+            let token = try session.getToken()
+            #if DEBUG
+            print("token: " + token)
+            #endif
+            performOperation(.login(token: token), completion: completion)
+        } catch {
+            completion(.failure(error))
         }
-        performOperation(.login(token: token), completion: completion)
+    }
+
+    func logOut() {
+        session.removeToken()
     }
     
     func fetchUser(byID userID: String,
@@ -44,7 +52,7 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
         performOperation(.userByID(id: userID), completion: completion)
     }
     
-    func updateUserProfile(with info: EditableProfileInfo,
+    func updateUserProfile(_ info: EditableProfileInfo,
                            completion: @escaping ResultHandler<User>) {
         // TODO: may need to add token later
         performOperation(.updateUserProfile(info: info), completion: completion)
@@ -143,7 +151,7 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
                 if let object = result.object {
                     completion(.success(object))
                 } else {
-                    print(result.errorMessages)
+                    NSLog(result.errorMessages.joined(separator: "\n"))
                     completion(.failure(GraphQLError.backendMessages(result.errorMessages)))
                 }
             } catch {

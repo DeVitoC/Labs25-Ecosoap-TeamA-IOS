@@ -11,21 +11,34 @@ import SwiftUI
 import Combine
 
 
+protocol ProfileDelegate: AnyObject {
+    func logOut()
+}
+
+
 class ProfileCoordinator: FlowCoordinator {
     lazy var rootVC = UIHostingController(
         rootView: MainProfileView(viewModel: profileVM))
 
-    private(set) var profileVM: MainProfileViewModel
+    private(set) lazy var profileVM: MainProfileViewModel = MainProfileViewModel(
+        user: user,
+        userController: userController,
+        delegate: delegate)
 
+    private var user: User
     private var userController: UserController
+
+    weak var delegate: ProfileDelegate?
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(user: User, userController: UserController) {
+    init(user: User,
+         userController: UserController,
+         delegate: ProfileDelegate?
+    ) {
+        self.user = user
         self.userController = userController
-        self.profileVM = MainProfileViewModel(
-            user: user,
-            userController: userController)
+        self.delegate = delegate
     }
 
     func start() {

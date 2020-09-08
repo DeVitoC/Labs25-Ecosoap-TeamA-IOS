@@ -29,7 +29,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private var graphQLController = GraphQLController()
 
-    private lazy var userProvider: UserDataProvider = useMock ? MockLoginProvider() : graphQLController
+    private lazy var userProvider: UserDataProvider = useMock ? MockUserDataProvider() : graphQLController
     private lazy var pickupProvider: PickupDataProvider = useMock ? MockPickupProvider() : graphQLController
     private lazy var impactProvider: ImpactDataProvider = useMock ? MockImpactProvider() : graphQLController
 
@@ -99,7 +99,10 @@ class AppFlowCoordinator: FlowCoordinator {
 
         self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
         self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.impactProvider)
-        self.profileCoord = ProfileCoordinator(user: user, userController: self.userController)
+        self.profileCoord = ProfileCoordinator(
+            user: user,
+            userController: self.userController,
+            delegate: self)
 
         self.tabBarController.setViewControllers([
             self.impactCoord!.rootVC,
@@ -111,9 +114,15 @@ class AppFlowCoordinator: FlowCoordinator {
         self.pickupCoord!.start()
         self.profileCoord!.start()
 
-        if self.tabBarController.presentedViewController != nil {
-            self.tabBarController.dismiss(animated: true, completion: nil)
-        }
+        tabBarController.dismissAllPresentedViewControllers(onComplete: nil)
+    }
+}
+
+// MARK: - Profile Delegate
+
+extension AppFlowCoordinator: ProfileDelegate {
+    func logOut() {
+        loginCoord.start()
     }
 }
 

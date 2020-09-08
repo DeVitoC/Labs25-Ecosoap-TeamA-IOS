@@ -23,7 +23,8 @@ class EditProfileViewModel: ObservableObject {
     }
 }
 
-struct EditableProfileInfo: Encodable {
+
+struct EditableProfileInfo: Encodable, Equatable {
     let id: String
     var firstName: String
     var middleName: String
