@@ -22,6 +22,14 @@ extension Image {
     static func property() -> Image { Image(systemName: "bed.double.fill") }
 }
 
+// MARK: - Color
+
+extension Color {
+    static var barButtonTintColor: Color {
+        Color(UIBarButtonItem.appearance().tintColor ?? UIButton.appearance().tintColor)
+    }
+}
+
 // MARK: - Text
 
 extension Text {
