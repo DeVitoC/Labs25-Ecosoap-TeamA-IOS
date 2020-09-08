@@ -501,9 +501,7 @@
 				994E4B6E24DDAEB100C12921 /* Pickups */,
 				994E4B6F24DDAEB700C12921 /* Payment */,
 				99C0467424FD8AA500E2B005 /* Profile */,
-				46BEB4EF24C98ED900FE0CD1 /* Login */,
 				46BEB4EB24C98EB400FE0CD1 /* Model */,
-				46BEB4EC24C98EBB00FE0CD1 /* Model Controller */,
 				46BEB4EA24C98EA300FE0CD1 /* Helpers */,
 				465DAA2724BD0BC100D94C24 /* App */,
 				04D1758E24E41DF500F8929C /* Custom Views */,
@@ -544,30 +542,9 @@
 				E2D302F424E5CA32008A6FAF /* User.swift */,
 				E2D04F9224F0D50600515831 /* Address.swift */,
 				E2E2F0E924F838170050BFCF /* Payment.swift */,
+				992BB64624EF08E400638AA4 /* Mock Providers */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		46BEB4EC24C98EBB00FE0CD1 /* Model Controller */ = {
-			isa = PBXGroup;
-			children = (
-				04FEE1B524E48AB000F51D69 /* ImpactController.swift */,
-				998913D024DDFF96009ADBC1 /* PickupController.swift */,
-				992BB63D24EEE21300638AA4 /* UserController.swift */,
-				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
-				992BB64624EF08E400638AA4 /* Mock Providers */,
-				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
-			);
-			path = "Model Controller";
-			sourceTree = "<group>";
-		};
-		46BEB4EF24C98ED900FE0CD1 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				99B6177224EC743F0099664B /* LoginCoordinator.swift */,
-				46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		9921943324E49AC300E16C16 /* UIKit */ = {
@@ -609,6 +586,7 @@
 		992FBC8E24FDBA890099C32D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */,
 				99C0467724FD8AF200E2B005 /* MainProfileView.swift */,
 				99C0467924FD8B9200E2B005 /* EditProfileView.swift */,
 				992FBC8C24FDB6970099C32D /* EditPropertyView.swift */,
@@ -620,6 +598,7 @@
 			isa = PBXGroup;
 			children = (
 				994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */,
+				04FEE1B524E48AB000F51D69 /* ImpactController.swift */,
 				994E4B7624DDB55E00C12921 /* ImpactViewController.swift */,
 				049379AA24EB29160084051B /* ImpactHeaderView.swift */,
 				04D1758824E3453B00F8929C /* ImpactCell.swift */,
@@ -632,6 +611,7 @@
 			isa = PBXGroup;
 			children = (
 				994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */,
+				998913D024DDFF96009ADBC1 /* PickupController.swift */,
 				99B6175C24EAF0C70099664B /* SchedulePickupViewModel.swift */,
 				99B6176424EB256D0099664B /* NewCartonViewModel.swift */,
 				9985ED1324F08BC5009F108F /* Views */,
@@ -643,6 +623,8 @@
 			isa = PBXGroup;
 			children = (
 				E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */,
+				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
+				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
 				E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */,
 				9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */,
 			);
@@ -716,7 +698,9 @@
 		99C0467424FD8AA500E2B005 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				99B6177224EC743F0099664B /* LoginCoordinator.swift */,
 				99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */,
+				992BB63D24EEE21300638AA4 /* UserController.swift */,
 				99789CC62502C891000428AC /* View Models */,
 				992FBC8E24FDBA890099C32D /* Views */,
 			);
