@@ -20,9 +20,6 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     private lazy var tableViewHeight: NSLayoutConstraint =
         tableView.heightAnchor.constraint(equalToConstant: 0)
 
-    private let cancelColor = UIColor(red: 0.2, green: 0.4, blue: 1, alpha: 1)
-        .orAdjustingBrightness(by: 0.3)
-
     // MARK: - Views
 
     private lazy var cartonsLabel = configureSectionLabel(titled: "Cartons")
@@ -94,19 +91,13 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.addTarget(self,
                      action: #selector(schedulePickup),
                      for: .touchUpInside)
-        $0.colorScheme = .primaryOnGradient
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.5).cgColor
+        $0.colorScheme = .primaryOnBlue
     }
-    private lazy var cancelButton = configure(UIBarButtonItem(
+    private lazy var cancelButton = UIBarButtonItem(
         barButtonSystemItem: .cancel,
         target: self,
-        action: #selector(cancelPickup(_:)))) {
-            $0.setTitleTextAttributes([
-                .font: UIFont.muli(typeface: .semiBold)
-            ], for: .normal)
-            $0.tintColor = cancelColor
-    }
+        action: #selector(cancelPickup(_:))
+    )
 
     // MARK: - Init / Lifecycle
 
@@ -118,15 +109,6 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     init(viewModel: SchedulePickupViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-    }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        cancelButton.tintColor = cancelColor
-    }
-
-    override func loadView() {
-        view = BackgroundView()
     }
 
     override func viewDidLoad() {
@@ -141,7 +123,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
 extension SchedulePickupViewController {
     private func setUpViews() {
         view.backgroundColor = .secondarySystemBackground
-        title = "Schedule New Pickup"
+        title = "New Pickup"
 
         navigationItem.setLeftBarButton(cancelButton, animated: false)
 
@@ -149,12 +131,12 @@ extension SchedulePickupViewController {
         contentView.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading], constant: 20)
 //        contentView.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top], constant: 20)
         contentView.constrainNewSubview(tableView, to: [.leading, .trailing])
-        contentView.constrainNewSubview(addCartonButton, to: [.leading, .trailing])
+        contentView.constrainNewSubview(addCartonButton, to: [.leading, .trailing], constant: -20)
         contentView.constrainNewSubviewToSafeArea(readyDateLabel, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(readyDateField, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
-        contentView.constrainNewSubview(scheduleButton, to: [.leading, .trailing])
+        contentView.constrainNewSubview(scheduleButton, to: [.leading, .trailing], constant: -20)
 
         var remainingConstraints = [
 //            addCartonButton.leadingAnchor.constraint(greaterThanOrEqualTo: cartonsLabel.trailingAnchor, constant: 8),
