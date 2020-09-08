@@ -38,6 +38,7 @@ struct EditProfileView: View {
         .navigationBarItems(trailing: Button(
             action: viewModel.commitProfileChanges,
             label: { Text("Save") })
+            .foregroundColor(.barButtonTintColor)
         )
     }
 

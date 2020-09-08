@@ -18,7 +18,7 @@ struct EditPropertyView: View {
         Form {
             Section {
                 TextField("Name", text: $viewModel.propertyInfo.name)
-                Picker("Property Type", selection: $viewModel.propertyInfo.type) {
+                Picker("Property Type", selection: $viewModel.propertyInfo.propertyType) {
                     ForEach(viewModel.propertyTypes) {
                         Text($0.display)
                             .tag($0)
@@ -46,6 +46,7 @@ struct EditPropertyView: View {
         .navigationBarItems(trailing: Button(
             action: viewModel.commitChanges,
             label: { Text("Save") })
+            .foregroundColor(.barButtonTintColor)
         )
     }
 
