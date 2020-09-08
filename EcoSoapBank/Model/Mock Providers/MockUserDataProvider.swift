@@ -91,7 +91,7 @@ class MockUserDataProvider: UserDataProvider {
 extension User {
     static func placeholder() -> User {
         User(
-            id: String(Int.random(in: Int.min ... Int.max)),
+            id: "0010",
             firstName: "Bibbly",
             middleName: "Chrumbus",
             lastName: "Bobbly",
@@ -114,7 +114,7 @@ extension Array where Element == Property {
                 propertyType: .hotel,
                 rooms: 20,
                 services: HospitalityService.allCases,
-                collectionType: .random(),
+                collectionType: .generatedLabel,
                 logo: nil,
                 phone: "555-124-3333",
                 billingAddress: nil,
@@ -127,7 +127,7 @@ extension Array where Element == Property {
                 propertyType: .bedAndBreakfast,
                 rooms: 5,
                 services: [.bottles, .soap],
-                collectionType: .random(),
+                collectionType: .local,
                 logo: nil,
                 phone: "555-124-3333",
                 billingAddress: nil,
