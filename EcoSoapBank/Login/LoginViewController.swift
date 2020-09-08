@@ -74,7 +74,7 @@ class LoginViewController: UIViewController {
         
         let signInButton = configure(ESBButton()) {
             $0.colorScheme = .greenOnWhite
-            $0.setTitle("SIGN IN WITH OKTA", for: .normal)
+            $0.setTitle("SIGN IN", for: .normal)
             $0.addTarget(self, action: #selector(signIn(_:)), for: .touchUpInside)
         }
         
