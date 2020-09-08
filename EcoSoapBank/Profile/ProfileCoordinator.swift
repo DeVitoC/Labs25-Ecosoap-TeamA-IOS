@@ -12,7 +12,7 @@ import Combine
 
 
 class ProfileCoordinator: FlowCoordinator {
-    lazy var rootVC = UIHostingController(
+    lazy var rootVC = DarkStatusBarHostingController(
         rootView: MainProfileView(viewModel: profileVM))
 
     private(set) var profileVM: MainProfileViewModel
