@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setUpAppAppearance() {
+        
         configure(UITabBar.appearance()) {
             $0.tintColor = .esbGreen
             $0.backgroundColor = .systemGray2
@@ -47,6 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         configure(UITableViewCell.appearance()) {
             $0.backgroundColor = UIColor.systemGray6
+        }
+        
+        configure(UIButton.appearance()) {
+            $0.tintColor = .esbGreen
         }
         
         configure(UIBarButtonItem.appearance()) {
@@ -61,14 +66,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 $0.backgroundImage = UIImage.navBar
                 $0.titleTextAttributes = [
                     .font: UIFont.navBarInlineTitle,
-                    .foregroundColor: UIColor.label
+                    .foregroundColor: UIColor.black
                 ]
             }
             nav.compactAppearance = configure(UINavigationBarAppearance()) {
                 $0.backgroundImage = UIImage.navBar
                 $0.titleTextAttributes = [
                     .font: UIFont.navBarInlineTitle,
-                    .foregroundColor: UIColor.label
+                    .foregroundColor: UIColor.black
                 ]
             }
             nav.scrollEdgeAppearance = configure(UINavigationBarAppearance()) {
