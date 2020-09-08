@@ -31,14 +31,14 @@ class ImpactCell: UICollectionViewCell {
     
     // Views
     private let titleLabel = configure(UILabel()) {
-        $0.font = .montserrat(ofSize: 24, typeface: .semiBold)
+        $0.font = .montserrat(style: .title2, typeface: .semiBold)
         $0.textColor = .label
         $0.text = "34.9 lbs"
     }
     
     private let subtitleLabel = configure(UILabel()) {
-        $0.font = .montserrat(ofSize: 18)
-        $0.textColor = .label
+        $0.font = .montserrat(style: .body)
+        $0.textColor = UIColor.codGrey.orInverse()
         $0.numberOfLines = 0
         $0.text = "bottle amenities\nrecycled"
     }
