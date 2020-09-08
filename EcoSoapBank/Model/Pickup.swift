@@ -82,6 +82,8 @@ struct Pickup: Identifiable, PickupBaseContainer, Equatable, Hashable {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+        hasher.combine(confirmationCode)
+        hasher.combine(property.id)
     }
 }
 

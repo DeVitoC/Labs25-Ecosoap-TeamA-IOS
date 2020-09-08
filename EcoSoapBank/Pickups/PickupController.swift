@@ -45,6 +45,10 @@ class PickupController: ObservableObject {
     private var schedulePickupCancellables: Set<AnyCancellable> = []
     private var cancellables: Set<AnyCancellable> = []
 
+    private static let pickupSorter: (Pickup, Pickup) -> Bool = {
+        $0.readyDate > $1.readyDate
+    }
+
     init(user: User, dataProvider: PickupDataProvider) {
         self.dataProvider = dataProvider
         self.user = user
@@ -66,16 +70,14 @@ class PickupController: ObservableObject {
     func fetchPickups(forPropertyID propertyID: String) -> Future<[Pickup], Error> {
         Future { [weak self] promise in
             guard let self = self else { return promise(.failure(PickupError.unknown)) }
+
             self.dataProvider.fetchPickups(forPropertyID: propertyID) { [weak self] result in
                 guard let self = self else { return promise(result) }
+                
                 if case .success(let newPickups) = result {
-                    var pickupSet = Set(self.pickups)
-                    newPickups.forEach { pickupSet.insert($0) }
-                    let finalPickups = Array(newPickups).sorted {
-                        $0.readyDate > $1.readyDate
-                    }
+                    let sortedPickups = newPickups.sorted(by: Self.pickupSorter)
                     DispatchQueue.main.async {
-                        self.pickups = finalPickups
+                        self.pickups = sortedPickups
                     }
                 }
                 promise(result)
@@ -88,12 +90,15 @@ class PickupController: ObservableObject {
             return Future { $0(.failure(UserError.noProperties)) }
                 .eraseToAnyPublisher()
         }
-        var futures = properties.map { fetchPickups(forPropertyID: $0.id) }
-        var combined = futures.popLast()!.eraseToAnyPublisher()
-        while let future = futures.popLast() {
-            combined = combined.append(future).eraseToAnyPublisher()
-        }
-        return combined
+        return properties
+            .map { fetchPickups(forPropertyID: $0.id) }             // [Publisher<[Pickup]>]
+            .publisher                                              // Publisher<[Publisher[Pickup]>]>
+            .mapError { _ in PickupError.unknown }                  // makes compiler happy?
+            .flatMap { $0 }                                         // [Publisher[Pickup]>] -> Publisher<[Pickup]...>
+            .collect()                                              // [Pickup]... -> [[Pickup]]
+            .map { arrays in arrays.flatMap { $0 }}                 // [[Pickup]] -> [Pickup]
+            .map { Array(Set($0)).sorted(by: Self.pickupSorter) }   // unique, sort
+            .eraseToAnyPublisher()
     }
 
     func schedulePickup(
