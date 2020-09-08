@@ -40,8 +40,6 @@ class PickupController: ObservableObject {
     private var schedulePickupCancellables: Set<AnyCancellable> = []
     private var cancellables: Set<AnyCancellable> = []
 
-    private static let pickupSorter = sortDescriptor(keypath: \Pickup.readyDate, by: >)
-
     init(user: User, dataProvider: PickupDataProvider) {
         self.dataProvider = dataProvider
         self.user = user
@@ -49,11 +47,18 @@ class PickupController: ObservableObject {
 
     @discardableResult
     func fetchPickups(forPropertyID propertyID: String) -> Future<[Pickup], Error> {
-
         Future { promise in
             self.dataProvider.fetchPickups(forPropertyID: propertyID) { [weak self] result in
-                if case .success(let pickups) = result {
-                    DispatchQueue.main.async { self?.pickups = pickups }
+                guard let self = self else { return promise(result) }
+                if case .success(let newPickups) = result {
+                    var pickupSet = Set(self.pickups)
+                    newPickups.forEach { pickupSet.insert($0) }
+                    let finalPickups = Array(newPickups).sorted {
+                        $0.readyDate > $1.readyDate
+                    }
+                    DispatchQueue.main.async {
+                        self.pickups = finalPickups
+                    }
                 }
                 promise(result)
             }
@@ -83,7 +88,7 @@ class PickupController: ObservableObject {
                     guard let pickup = pickupResult.pickup else {
                         return promise(.failure(PickupError.noResult))
                     }
-                    DispatchQueue.main.async { self.pickups.append(pickup) }
+                    DispatchQueue.main.async { self.pickups.insert(pickup, at: 0) }
                 }
                 promise(result)
             }

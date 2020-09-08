@@ -55,7 +55,7 @@ class PickupCoordinator: FlowCoordinator {
 extension PickupCoordinator {
     func scheduleNewPickup() {
         guard user.properties?.first != nil else {
-            rootVC.presentAlert(for: UserError.noProperties)
+            return rootVC.presentAlert(for: UserError.noProperties)
         }
         // see `UtilityFunctions.swift` `Optional` extension and infix operator
         let viewController = scheduleVC ??= newScheduleVC()
