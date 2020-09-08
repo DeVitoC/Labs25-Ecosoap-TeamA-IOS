@@ -35,7 +35,7 @@ class MockUserDataProvider: UserDataProvider {
         }
 
         do {
-            let token = try dataLoader.getToken()
+            _ = try dataLoader.getToken()
             dispatch {
                 if self.shouldFail {
                     completion(.mockFailure())
