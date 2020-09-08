@@ -31,7 +31,7 @@ class UserController: ObservableObject {
         self.dataLoader = dataLoader
 
         OktaAuth.success
-            .sink { [weak self] in self?.loginDidComplete() }
+            .sink { [weak self] in self?.logInWithBearer() }
             .store(in: &cancellables)
         $user.sink(receiveValue: { [weak self] user in
             self?.viewingProperty = user?.properties?.first
@@ -44,7 +44,7 @@ class UserController: ObservableObject {
 extension UserController {
     var oktaLoginURL: URL? { OktaAuth.shared.identityAuthURL() }
 
-    func logInWithBearer(completion: @escaping ResultHandler<User>) {
+    func logInWithBearer(completion: @escaping ResultHandler<User> = { _ in }) {
         self.dataLoader.logIn { [weak self] result in
             if let user = try? result.get() {
                 self?.user = user
@@ -65,20 +65,5 @@ extension UserController {
     func logOut() {
         user = nil
         dataLoader.logOut()
-    }
-}
-
-// MARK: - Private
-
-extension UserController {
-    private func loginDidComplete() {
-        dataLoader.logIn { [weak self] result in
-            switch result {
-            case .success(let user):
-                self?.user = user
-            case .failure:
-                self?.user = nil
-            }
-        }
     }
 }
