@@ -558,7 +558,6 @@
 				998913D024DDFF96009ADBC1 /* PickupController.swift */,
 				992BB63D24EEE21300638AA4 /* UserController.swift */,
 				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
-				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
 				992BB64624EF08E400638AA4 /* Mock Providers */,
 			);
 			path = "Model Controller";
@@ -595,7 +594,6 @@
 				9983874724E33A0600450244 /* MockPickupProvider.swift */,
 				04BE6D0424F045C800DFC47D /* MockImpactProvider.swift */,
 				992BB64424EF021600638AA4 /* MockLoginProvider.swift */,
-				E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */,
 			);
 			path = "Mock Providers";
 			sourceTree = "<group>";
@@ -651,6 +649,8 @@
 				E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */,
 				E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */,
 				9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */,
+				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
+				E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
