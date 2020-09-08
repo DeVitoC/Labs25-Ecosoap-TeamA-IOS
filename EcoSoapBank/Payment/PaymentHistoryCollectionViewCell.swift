@@ -31,10 +31,12 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
         let invoicePeriodLabel = uiInitializers.createLabel(invoiceString, frame: .zero, alignment: .left)
         let amountDueLabel = uiInitializers.createLabel("Amt Due:  \(payment.amountDue)", frame: .zero, alignment: .left)
         let amountPaidLabel = uiInitializers.createLabel("Amt Paid: \(payment.amountPaid)", frame: .zero, alignment: .left)
+        let detailsImageView = uiInitializers.createImageView("chevron.right")
 
         addSubview(invoicePeriodLabel)
         addSubview(amountDueLabel)
         addSubview(amountPaidLabel)
+        addSubview(detailsImageView)
 
         NSLayoutConstraint.activate([
             invoicePeriodLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
@@ -42,7 +44,11 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
             amountDueLabel.topAnchor.constraint(equalTo: invoicePeriodLabel.bottomAnchor, constant: 10),
             amountDueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             amountPaidLabel.topAnchor.constraint(equalTo: amountDueLabel.topAnchor),
-            amountPaidLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: (frame.width / 2))
+            amountPaidLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: (frame.width / 2)),
+            detailsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            detailsImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            detailsImageView.heightAnchor.constraint(equalToConstant: 20),
+            detailsImageView.widthAnchor.constraint(equalToConstant: 20)
         ])
 
         if isExpanded {
