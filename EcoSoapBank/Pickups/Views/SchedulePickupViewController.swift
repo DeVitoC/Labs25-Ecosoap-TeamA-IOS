@@ -74,7 +74,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.datePickerMode = .date
         $0.minimumDate = Date()
     }
-    private lazy var notesView = configure(UITextView()) {
+    private lazy var notesView = configure(ESBTextView()) {
         $0.delegate = self
         $0.font = .muli(style: .body)
     }
