@@ -11,12 +11,11 @@ import UIKit
 class ImpactCoordinator: FlowCoordinator {
     
     init(user: User, dataProvider: ImpactDataProvider) {
-        rootVC = configure(ImpactViewController()) {
-            $0.impactController = ImpactController(user: user, dataProvider: dataProvider)
-        }
+        impactVC.impactController = ImpactController(user: user, dataProvider: dataProvider)
     }
     
-    let rootVC: ImpactViewController
+    let rootVC = UINavigationController()
+    let impactVC = ImpactViewController()
     
     func start() {
         let globe = UIImage(
@@ -24,5 +23,6 @@ class ImpactCoordinator: FlowCoordinator {
             withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular)
         )
         rootVC.tabBarItem = UITabBarItem(title: "Impact", image: globe, tag: 0)
+        rootVC.pushViewController(impactVC, animated: false)
     }
 }
