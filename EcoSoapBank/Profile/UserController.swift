@@ -30,8 +30,17 @@ class UserController: ObservableObject {
         self.dataLoader = dataLoader
 
         OktaAuth.success
-            .sink { [weak self] in self?.logInWithBearer() }
+            .mapError { _ in LoginError.loginFailed }
+            .flatMap({
+                Future { [weak self] promise in
+                    self?.logInWithBearer { result in
+                        promise(result)
+                    }
+                }
+            }).handleError { OktaAuth.error.send($0) }
+            .sink { _ in }
             .store(in: &cancellables)
+
     }
 }
 
