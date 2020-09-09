@@ -30,16 +30,9 @@ class PaymentHistoryViewController: UIViewController {
         view = BackgroundView()
     }
 
-    override func viewWillLayoutSubviews() {
-        let width = self.view.frame.width
-        let navigationBar: UINavigationBar = UINavigationBar(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: width, height: 44)))
-        view.addSubview(navigationBar)
-        let navBarTitle = UINavigationItem(title: "Payment History")
-        navigationBar.setItems([navBarTitle], animated: false)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Payment History"
         setupCollectionView()
         guard let user = paymentController?.user, let properties = user.properties else { return }
         paymentController?.fetchPayments(forPropertyID: properties[0].id, completion: { result in
@@ -67,7 +60,7 @@ class PaymentHistoryViewController: UIViewController {
         paymentCollectionView.register(PaymentHistoryCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
         paymentCollectionView.backgroundColor = .systemBackground
         NSLayoutConstraint.activate([
-            paymentCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 44),
+            paymentCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             paymentCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             paymentCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             paymentCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
