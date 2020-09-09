@@ -39,7 +39,7 @@ class ProfileTests: XCTestCase {
 
         self.strongDelegate = MockProfileDelegate()
         self.user = .placeholder()
-        self.dataProvider = MockUserDataProvider()
+        self.dataProvider = MockUserDataProvider(testing: true, waitTime: 0.1)
         self.userController = UserController(dataLoader: dataProvider)
         self.coordinator = ProfileCoordinator(user: user,
                                               userController: userController,

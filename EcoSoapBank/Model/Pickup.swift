@@ -52,7 +52,7 @@ import SwiftUI
 import UIKit
 
 
-struct Pickup: Identifiable, PickupBaseContainer, Equatable {
+struct Pickup: Identifiable, PickupBaseContainer, Equatable, Hashable {
     let base: Base
 
     let id: String
@@ -79,6 +79,12 @@ struct Pickup: Identifiable, PickupBaseContainer, Equatable {
         formatter.dateFormat = "yyyy-mm-dd"
         return formatter
     }()
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(confirmationCode)
+        hasher.combine(property.id)
+    }
 }
 
 // MARK: - SubTypes

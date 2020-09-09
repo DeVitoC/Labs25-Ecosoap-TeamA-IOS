@@ -12,7 +12,11 @@ import Foundation
 class MainProfileViewModel: ObservableObject {
     @Published var user: User
     @Published var editableInfo: EditableProfileInfo
-    @Published var selectedProperty: PropertySelection
+    @Published var selectedProperty: PropertySelection {
+        didSet {
+            UserDefaults.standard.setSelectedProperty(selectedProperty.property, forUser: user)
+        }
+    }
     @Published var error: Error?
     @Published private(set) var loading = false
 
@@ -38,7 +42,7 @@ class MainProfileViewModel: ObservableObject {
         } else {
             self.propertyOptions = []
         }
-        self.selectedProperty = propertyOptions.first ?? .none
+        self.selectedProperty = UserDefaults.standard.propertySelection(forUser: user)
         self.properties = user.properties ?? []
         self.userController = userController
         self.delegate = delegate
