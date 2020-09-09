@@ -16,8 +16,5 @@ class ColorTests: XCTestCase {
         XCTAssertNotNil(UIColor.esbGreen)
         XCTAssertNotNil(UIColor.downyBlue)
         XCTAssertNotNil(UIColor.codGrey)
-        XCTAssertNotNil(UIColor.montanaGrey)
-        XCTAssertNotNil(UIColor.shuttleGrey)
-        XCTAssertNotNil(UIColor.silver)
     }
 }
