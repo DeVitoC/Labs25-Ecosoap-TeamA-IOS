@@ -1,0 +1,41 @@
+{
+  "data" : {
+    "updateProperty" : {
+      "property" : {
+        "id" : "PropertyId1",
+        "phone" : "88D7BB70-275C-41AA-9AD4-86123CF55B27",
+        "shippingAddress" : {
+          "city" : "City 5",
+          "address1" : "Address 5 Line 1",
+          "postalCode" : "55555",
+          "country" : "US",
+          "formattedAddress" : null,
+          "address3" : "Address 5 Line 3",
+          "state" : "State 5",
+          "address2" : "Address 5 Line 2"
+        },
+        "propertyType" : "HOTEL",
+        "collectionType" : "GENERATED_LABEL",
+        "billingAddress" : {
+          "city" : "City 5",
+          "address1" : "Address 5 Line 1",
+          "postalCode" : "55555",
+          "country" : "US",
+          "formattedAddress" : null,
+          "address3" : "Address 5 Line 3",
+          "state" : "State 5",
+          "address2" : "Address 5 Line 2"
+        },
+        "shippingNote" : "Shipping note 1.",
+        "logo" : "https:\/\/test.com\/logo1.png",
+        "notes" : "Notes 1.",
+        "services" : [
+          "SOAP",
+          "LINENS"
+        ],
+        "rooms" : 111,
+        "name" : "Property 1"
+      }
+    }
+  }
+}

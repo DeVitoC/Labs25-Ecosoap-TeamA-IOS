@@ -1,16 +1,16 @@
 //
-//  GraphQLControllerMockDataTests.swift
+//  GraphQLControllerTests.swift
 //  EcoSoapBankTests
 //
-//  Created by Christopher Devito on 8/13/20.
+//  Created by Christopher Devito on 8/22/20.
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
-
+//
 
 import XCTest
 @testable import EcoSoapBank
 
 class GraphQLControllerTests: XCTestCase {
-    let useMocks = true
+    let useMocks = false
     
     var graphQLController: GraphQLController!
     var expectation: XCTestExpectation!

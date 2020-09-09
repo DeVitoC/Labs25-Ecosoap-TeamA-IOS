@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Combine
+
 
 protocol PaymentDataProvider {
     func fetchPayments(forPropertyID propertyID: String,
@@ -31,5 +31,5 @@ class PaymentController {
     func fetchPayments(forPropertyID propertyID: String, completion: @escaping (Result<[Payment], Error>) -> Void) {
         dataProvider.fetchPayments(forPropertyID: propertyID, completion)
     }
-    
+
 }

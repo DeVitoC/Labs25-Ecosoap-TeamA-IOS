@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 // swiftlint:disable block_based_kvo
 
 /// A convenient object with which to observe a change to a default by way of
@@ -40,6 +41,16 @@ class UserDefaultsObservation: NSObject {
     
     /// Clean up the observer when this observation is de-initialized
     deinit {
+        cancel()
+    }
+}
+
+extension UserDefaultsObservation: Cancellable {
+    func cancel() {
         UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue, context: nil)
+    }
+
+    func erasedToAnyCancellable() -> AnyCancellable {
+        AnyCancellable(self)
     }
 }
