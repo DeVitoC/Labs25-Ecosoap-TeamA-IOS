@@ -57,6 +57,8 @@ class GraphQLControllerTests: XCTestCase {
     
     // MARK: - Users
     
+    // TODO: Test Login
+    
     func testFetchUserById() {
         graphQLController.fetchUser(byID: "UserId1") { result in
             
@@ -110,7 +112,7 @@ class GraphQLControllerTests: XCTestCase {
         let newSkype = UUID().uuidString
         info.skype = newSkype
         
-        graphQLController.updateUserProfile(with: info) { result in
+        graphQLController.updateUserProfile(info) { result in
             guard let updatedUser = try? result.get() else {
                 XCTFail("Unable to get valid User from returned data")
                 return
@@ -134,12 +136,10 @@ class GraphQLControllerTests: XCTestCase {
     func testFetchPickupsForPropertyId() {
         graphQLController.fetchPickups(forPropertyID: "PropertyId1") { result in
             
-            guard let pickups = try? result.get() else {
+            guard let firstPickpup = try? result.get().first else {
                 XCTFail("Unable to get Pickup from returned data")
                 return
             }
-            
-            let firstPickpup = pickups[0]
             
             XCTAssertEqual(firstPickpup.id, "PickupId1")
             XCTAssertEqual(firstPickpup.confirmationCode, "PickupConfirmationCode1")
@@ -264,18 +264,35 @@ class GraphQLControllerTests: XCTestCase {
     func testFetchPropertiesForUserId() {
         graphQLController.fetchProperties(forUserID: "UserId1") { result in
             
-            guard let result = try? result.get() else {
+            guard let firstProperty = try? result.get().first else {
                 XCTFail("Unable to get Properties from returned data")
                 return
             }
-            
-            let firstProperty = result[0]
             
             XCTAssertEqual(firstProperty.id, "PropertyId1")
             XCTAssertEqual(firstProperty.propertyType, .hotel)
             XCTAssertEqual(firstProperty.rooms, 111)
             XCTAssertEqual(firstProperty.services, [.soap, .linens])
             XCTAssertEqual(firstProperty.shippingNote, "Shipping note 1.")
+            
+            self.expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testFetchPropertiesForInvalidUserId() {
+        graphQLController.fetchProperties(forUserID: "InvalidUserID") { result in
+            
+            guard let properties = try? result.get() else {
+                return
+            }
+            
+            XCTAssertEqual(
+                properties.count,
+                0,
+                "There should be no properties for an invalid user ID"
+            )
             
             self.expectation.fulfill()
         }
