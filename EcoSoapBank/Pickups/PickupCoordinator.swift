@@ -15,8 +15,8 @@ class PickupCoordinator: FlowCoordinator {
     private let pickupController: PickupController
     private(set) var user: User
 
-    private(set) lazy var rootVC: UIViewController = UIHostingController(
-        rootView: PickupsView(
+    private(set) lazy var rootVC: UIViewController = DarkStatusBarHostingController(
+        rootView: PickupHistoryView(
             pickupController: pickupController,
             schedulePickup: { [weak self] in self?.scheduleNewPickup() }))
 
@@ -53,20 +53,13 @@ class PickupCoordinator: FlowCoordinator {
 // MARK: - Event handlers
 
 extension PickupCoordinator {
-    @objc func cancelNewPickup(_ sender: Any? = nil) {
-        guard let nav = rootVC.presentedViewController as? UINavigationController,
-            nav.viewControllers.first as? SchedulePickupViewController != nil
-            else { return }
-        rootVC.dismiss(animated: true, completion: sender as? () -> Void)
-    }
-
     func scheduleNewPickup() {
         guard user.properties?.first != nil else {
             return handleError(UserError.noProperties)
         }
         // see `UtilityFunctions.swift` `Optional` extension and infix operator
         let viewController = scheduleVC ??= newScheduleVC()
-        let nav = configure(UINavigationController(rootViewController: viewController)) {
+        let nav = configure(ESBNavigationController(rootViewController: viewController)) {
             $0.modalPresentationStyle = .fullScreen
         }
         rootVC.present(nav, animated: true, completion: nil)
@@ -134,21 +127,30 @@ extension PickupCoordinator {
     private func newScheduleVC() -> SchedulePickupViewController {
         // see `UtilityFunctions.swift` `Optional` extension and infix operator
         let viewModel = scheduleVM ??= SchedulePickupViewModel(user: user, delegate: self)
-        return configure(SchedulePickupViewController(viewModel: viewModel)) {
-            let cancel = UIBarButtonItem(
-                barButtonSystemItem: .cancel,
-                target: self,
-                action: #selector(cancelNewPickup(_:)))
-            cancel.tintColor = UIColor.codGrey
-            $0.navigationItem.setLeftBarButton(cancel, animated: false)
-            $0.title = "Schedule New Pickup"
-        }
+        return SchedulePickupViewController(viewModel: viewModel)
     }
 }
 
 // MARK: - Delegate conformance
 
 extension PickupCoordinator: SchedulePickupViewModelDelegate {
+    func editCarton(for cartonVM: NewCartonViewModel) {
+        guard scheduleVC?.isViewLoaded == true else { return }
+
+        let popover = editCartonVC(for: cartonVM)
+        popover.popoverPresentationController?.sourceView =
+            scheduleVC?.sourceViewForCartonEditingPopover()
+
+        scheduleVC?.present(popover, animated: true, completion: nil)
+    }
+
+    func cancelPickup() {
+        guard let nav = rootVC.presentedViewController as? ESBNavigationController,
+            nav.viewControllers.first as? SchedulePickupViewController != nil
+            else { return }
+        rootVC.dismiss(animated: true, completion: nil)
+    }
+
     func schedulePickup(
         for input: Pickup.ScheduleInput,
         completion: @escaping ResultHandler<Pickup.ScheduleResult>
@@ -166,13 +168,5 @@ extension PickupCoordinator: SchedulePickupViewModelDelegate {
                 self?.handlePickupScheduleResult(result)
                 completion(.success(result))
             }).store(in: &self.cancellables)
-    }
-
-    func editCarton(for cartonVM: NewCartonViewModel) {
-        guard scheduleVC?.isViewLoaded == true else { return }
-        let popover = editCartonVC(for: cartonVM)
-        popover.popoverPresentationController?.sourceView =
-            scheduleVC?.sourceViewForCartonEditingPopover()
-        scheduleVC?.present(popover, animated: true, completion: nil)
     }
 }

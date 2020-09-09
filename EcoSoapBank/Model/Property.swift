@@ -37,7 +37,7 @@ struct Property: Codable, Equatable, Identifiable, Hashable {
     let shippingNote: String?
     let notes: String?
 
-    enum PropertyType: String, Codable, CaseIterable, Identifiable {
+    enum PropertyType: String, Codable, CaseIterable, Identifiable, Hashable {
         case bedAndBreakfast = "BED_AND_BREAKFAST"
         case guesthouse = "GUESTHOUSE"
         case hotel = "HOTEL"
@@ -62,9 +62,10 @@ struct Property: Codable, Equatable, Identifiable, Hashable {
     }
 }
 
-enum PropertySelection {
+enum PropertySelection: Hashable {
     case select(Property)
     case all
+    case none
 
     var property: Property? {
         if case .select(let property) = self {

@@ -54,18 +54,13 @@ struct LabelAlignedTextField: View {
     private var label: some View {
         _basicLabel
             // Set width of all labels based on width of longest label
-            .background(GeometryReader { proxy in
-                Color.clear.preference(key: WidthKey.self,
-                                       value: proxy.size.width)
-            })
-            .onPreferenceChange(WidthKey.self, perform: {
+            .readingGeometry(key: WidthKey.self, valuePath: \.size.width, onChange: {
                 if let new = $0, let old = self.labelWidth {
                     self.labelWidth = max(new, old)
                 } else {
                     self.labelWidth = $0
                 }
-            })
-            .frame(width: labelWidth, alignment: .leading)
+            }).frame(width: labelWidth, alignment: .leading)
     }
 
     private var textField: some View {

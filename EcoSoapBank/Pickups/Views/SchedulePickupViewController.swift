@@ -35,12 +35,19 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     private lazy var dataSource = DataSource(
         tableView: tableView,
         cellProvider: cell(for:at:with:))
-    private lazy var addCartonButton = configure(UIButton()) {
+    private lazy var addCartonButton = configure(UIButton(type: .system)) {
         $0.setPreferredSymbolConfiguration(
             UIImage.SymbolConfiguration(pointSize: 30),
             forImageIn: .normal)
-        $0.setImage(UIImage.plusSquareFill.withTintColor(.esbGreen), for: .normal)
-        $0.tintColor = .esbGreen
+
+        $0.setImage(UIImage.plusSquareFill.withTintColor(.white), for: .normal)
+        let title = NSAttributedString(
+            string: "Add Carton",
+            attributes: [
+                NSAttributedString.Key.font: UIFont.muli(),
+        ])
+        $0.setAttributedTitle(title, for: .normal)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 6)
         $0.imageView?.contentMode = .scaleAspectFit
         $0.imageEdgeInsets = .zero
         $0.layer.cornerRadius = 5
@@ -48,7 +55,6 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     }
     private lazy var propertyField = configure(CursorlessTextField()) {
         $0.inputView = propertyPicker
-        $0.backgroundColor = .white
         $0.borderStyle = .roundedRect
         $0.text = viewModel.selectedProperty.name
     }
@@ -61,7 +67,6 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     }
     private lazy var readyDateField = configure(CursorlessTextField()) {
         $0.inputView = datePicker
-        $0.backgroundColor = .white
         $0.borderStyle = .roundedRect
         $0.text = viewModel.readyDate.string()
     }
@@ -69,7 +74,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.datePickerMode = .date
         $0.minimumDate = Date()
     }
-    private lazy var notesView = configure(UITextView()) {
+    private lazy var notesView = configure(ESBTextView()) {
         $0.delegate = self
         $0.font = .muli(style: .body)
     }
@@ -78,7 +83,13 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.addTarget(self,
                      action: #selector(schedulePickup),
                      for: .touchUpInside)
+        $0.colorScheme = .whiteOnGreen
     }
+    private lazy var cancelButton = UIBarButtonItem(
+        barButtonSystemItem: .cancel,
+        target: self,
+        action: #selector(cancelPickup(_:))
+    )
 
     // MARK: - Init / Lifecycle
 
@@ -104,32 +115,32 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
 extension SchedulePickupViewController {
     private func setUpViews() {
         view.backgroundColor = .secondarySystemBackground
+        title = "New Pickup"
+
+        navigationItem.setLeftBarButton(cancelButton, animated: false)
 
         // add subviews, basic constraints, `tamic`
         contentView.constrainNewSubviewToSafeArea(cartonsLabel, sides: [.top, .leading], constant: 20)
-        contentView.constrainNewSubviewToSafeArea(addCartonButton, sides: [.top], constant: 20)
         contentView.constrainNewSubview(tableView, to: [.leading, .trailing])
+        contentView.constrainNewSubview(addCartonButton, to: [.leading], constant: -14)
         contentView.constrainNewSubviewToSafeArea(readyDateLabel, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(readyDateField, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(notesLabel, sides: [.leading, .trailing], constant: 20)
         contentView.constrainNewSubviewToSafeArea(notesView, sides: [.leading, .trailing], constant: 20)
-        contentView.addSubviewsUsingAutolayout(scheduleButton)
+        contentView.constrainNewSubview(scheduleButton, to: [.leading, .trailing], constant: -20)
 
         var remainingConstraints = [
-            addCartonButton.leadingAnchor.constraint(greaterThanOrEqualTo: cartonsLabel.trailingAnchor, constant: 8),
-            addCartonButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            addCartonButton.widthAnchor.constraint(equalToConstant: 30),
             addCartonButton.heightAnchor.constraint(equalToConstant: 30),
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
             tableView.topAnchor.constraint(equalTo: addCartonButton.bottomAnchor, constant: 8),
             tableViewHeight,
+            addCartonButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 2),
 
             readyDateField.topAnchor.constraint(equalTo: readyDateLabel.bottomAnchor, constant: 8),
             notesLabel.topAnchor.constraint(equalTo: readyDateField.bottomAnchor, constant: 20),
             notesView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 8),
             notesView.heightAnchor.constraint(equalToConstant: 150),
             scheduleButton.topAnchor.constraint(equalTo: notesView.bottomAnchor, constant: 20),
-            scheduleButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             scheduleButton.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: 20)
         ]
 
@@ -137,15 +148,15 @@ extension SchedulePickupViewController {
             contentView.constrainNewSubviewToSafeArea(propertyLabel, sides: [.leading, .trailing], constant: 20)
             contentView.constrainNewSubviewToSafeArea(propertyField, sides: [.leading, .trailing], constant: 20)
             remainingConstraints += [
-                propertyLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
+                propertyLabel.topAnchor.constraint(equalTo: addCartonButton.bottomAnchor, constant: 20),
                 propertyField.topAnchor.constraint(equalTo: propertyLabel.bottomAnchor, constant: 8),
                 readyDateLabel.topAnchor.constraint(equalTo: propertyField.bottomAnchor, constant: 20)
 
             ]
         } else {
-            remainingConstraints += [
-                readyDateLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
-            ]
+            remainingConstraints.append(
+                readyDateLabel.topAnchor.constraint(equalTo: addCartonButton.bottomAnchor, constant: 20)
+            )
         }
 
         // remaining constraints
@@ -172,6 +183,7 @@ extension SchedulePickupViewController {
         let label = UILabel()
         label.text = title.uppercased()
         label.font = .muli(style: .caption1)
+        label.textColor = .secondaryLabel
         return label
     }
 
@@ -217,6 +229,10 @@ extension SchedulePickupViewController {
 extension SchedulePickupViewController {
     @objc private func addCarton(_ sender: Any) {
         viewModel.addCarton()
+    }
+
+    @objc private func cancelPickup(_ sender: Any) {
+        viewModel.cancelPickup()
     }
 
     @objc private func schedulePickup(_ sender: Any) {
@@ -327,8 +343,16 @@ extension SchedulePickupViewController {
 
 struct NewPickupViewController_Previews: PreviewProvider {
     static var previews: some View {
-        SchedulePickupViewController.Representable(
-            viewModel: SchedulePickupViewModel(user: .placeholder(),
-                                               delegate: nil))
+        Group {
+            SchedulePickupViewController.Representable(
+                viewModel: SchedulePickupViewModel(user: .placeholder(),
+                                                   delegate: nil))
+
+            SchedulePickupViewController.Representable(
+                viewModel: SchedulePickupViewModel(user: .placeholder(),
+                                                   delegate: nil))
+                .environment(\.colorScheme, .dark)
+        }
+
     }
 }

@@ -1,5 +1,5 @@
 //
-//  MockLoginProvider.swift
+//  MockUserDataProvider.swift
 //  EcoSoapBank
 //
 //  Created by Jon Bash on 2020-08-20.
@@ -10,29 +10,83 @@ import Foundation
 import KeychainAccess
 
 
-class MockLoginProvider: UserDataProvider {
-    var shouldFail: Bool
+class MockUserDataProvider: UserDataProvider {
+    enum Status {
+        case loggedIn
+        case loggedOut
+    }
 
-    init(shouldFail: Bool = false) {
+    var shouldFail: Bool
+    var waitTime: Double
+
+    var user = User.placeholder()
+    var status = Status.loggedOut
+
+    var dataLoader: DataLoader = MockDataLoader(data: nil, error: nil)
+
+    init(shouldFail: Bool = false, waitTime: Double = 0.2) {
         self.shouldFail = shouldFail
+        self.waitTime = waitTime
     }
 
     func logIn(_ completion: @escaping ResultHandler<User>) {
-        guard let token = Keychain.Okta.getToken() else {
+        guard !shouldFail else {
             return completion(.mockFailure())
         }
-        print(token)
 
-        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-            if self.shouldFail {
+        do {
+            _ = try dataLoader.getToken()
+            dispatch {
+                if self.shouldFail {
+                    completion(.mockFailure())
+                } else {
+                    self.status = .loggedIn
+                    completion(.success(.placeholder()))
+                }
+            }
+        } catch {
+            completion(.failure(error))
+        }
+    }
+
+    func updateUserProfile(
+        _ input: EditableProfileInfo,
+        completion: @escaping ResultHandler<User>
+    ) {
+        dispatch { [weak self] in
+            guard let self = self else { return completion(.mockFailure()) }
+            let newUser = User(
+                id: input.id,
+                firstName: input.firstName,
+                middleName: input.middleName,
+                lastName: input.lastName,
+                title: self.user.title,
+                company: self.user.company,
+                email: input.email,
+                phone: input.phone,
+                skype: input.skype,
+                properties: self.user.properties)
+
+            if self.shouldFail == true {
                 completion(.mockFailure())
             } else {
-                completion(.success(.placeholder()))
+                self.user = newUser
+                completion(.success(newUser))
             }
         }
     }
+
+    func logOut() {
+        NSLog("Removing token (but not really)")
+        self.status = .loggedOut
+    }
+
+    private func dispatch(_ work: @escaping () -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + waitTime, execute: work)
+    }
 }
 
+// MARK: - Mock Models
 
 extension User {
     static func placeholder() -> User {

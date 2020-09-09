@@ -9,35 +9,40 @@
 import SwiftUI
 
 struct EditProfileView: View {
-    @ObservedObject var viewModel: EditProfileViewModel
+    @ObservedObject var viewModel: MainProfileViewModel
 
     @State var labelWidth: CGFloat?
+
+    init(viewModel: MainProfileViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         With($viewModel.editableInfo) { profile in
             Form {
                 Section(header: Text("Name".uppercased())) {
-                    self.textField(title: "First", text: profile.firstName)
-                    self.textField(title: "Middle", text: profile.middleName)
-                    self.textField(title: "Last", text: profile.lastName)
+                    self.textField("First", text: profile.firstName)
+                    self.textField("Middle", text: profile.middleName)
+                    self.textField("Last", text: profile.lastName)
                 }
 
                 Section(header: Text("Contact Info".uppercased())) {
-                    self.textField(title: "Email", text: profile.email)
-                    self.textField(title: "Skype", text: profile.skype)
-                    self.textField(title: "Phone", text: profile.phone)
+                    self.textField("Email", text: profile.email)
+                    self.textField("Skype", text: profile.skype)
+                    self.textField("Phone", text: profile.phone)
                 }
             }
         }
         .keyboardAvoiding()
         .navigationBarTitle("Edit Profile")
         .navigationBarItems(trailing: Button(
-            action: viewModel.commitChanges,
+            action: viewModel.commitProfileChanges,
             label: { Text("Save") })
+            .foregroundColor(.barButtonTintColor)
         )
     }
 
-    func textField(title: String, text: Binding<String>) -> some View {
+    func textField(_ title: String, text: Binding<String>) -> some View {
         LabelAlignedTextField(title: title, labelWidth: $labelWidth, text: text)
             .fonts(label: Font(UIFont.muli(style: .caption1, typeface: .bold)),
                    textField: Font(UIFont.muli(typeface: .light)))
@@ -46,9 +51,14 @@ struct EditProfileView: View {
 
 
 struct EditProfileView_Previews: PreviewProvider {
+    static let user = User.placeholder()
     static var previews: some View {
         NavigationView {
-            EditProfileView(viewModel: EditProfileViewModel(user: .placeholder()))
+            EditProfileView(
+                viewModel: MainProfileViewModel(
+                    user: user,
+                    userController: UserController(dataLoader: MockUserDataProvider()),
+                    delegate: nil))
         }
     }
 }

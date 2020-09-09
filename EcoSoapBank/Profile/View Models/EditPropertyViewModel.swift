@@ -12,7 +12,7 @@ import Foundation
 class EditPropertyViewModel: ObservableObject, Identifiable {
     @Published var propertyInfo: EditablePropertyInfo
     @Published var useShippingAddressForBilling: Bool = false
-    let property: Property
+    var property: Property
 
     var id: String { property.id }
     let propertyTypes: [Property.PropertyType] = Property.PropertyType.allCases

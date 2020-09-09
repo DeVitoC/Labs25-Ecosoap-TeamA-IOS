@@ -13,9 +13,11 @@ import Foundation
 class MockPickupProvider {
     /// Set to `true` for testing networking failures
     var shouldFail: Bool
+    var waitTime: Double
 
-    init(shouldFail: Bool = false) {
+    init(shouldFail: Bool = false, waitTime: Double = 0.2) {
         self.shouldFail = shouldFail
+        self.waitTime = waitTime
     }
 }
 
@@ -24,7 +26,7 @@ extension MockPickupProvider: PickupDataProvider {
     /// Simply returns mock Pickups through closure
     /// (or `MockPickupProvider.Error.shouldFail` if `shouldFail` instance property is set to `true`).
     func fetchPickups(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<[Pickup]>) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + waitTime) {
             guard !self.shouldFail else {
                 completion(.mockFailure())
                 return
@@ -37,7 +39,7 @@ extension MockPickupProvider: PickupDataProvider {
         _ pickupInput: Pickup.ScheduleInput,
         completion: @escaping (Result<Pickup.ScheduleResult, Swift.Error>) -> Void
     ) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + waitTime) {
             guard !self.shouldFail else {
                 completion(.mockFailure())
                 return

@@ -14,17 +14,16 @@ extension Keychain {
     enum Okta {
         // MARK: - Public
         
-        static var isLoggedIn: Bool { getToken() != nil }
+        static var isLoggedIn: Bool { (try? getToken()) != nil }
         
-        static func getToken() -> String? {
+        static func getToken() throws -> String {
             if let token = keychain[tokenKey],
-               let expiry = keychain[expiryKey],
-               let date = dateFormatter.date(from: expiry),
-               date > Date() {
+                let expiry = keychain[expiryKey],
+                let date = dateFormatter.date(from: expiry),
+                date > Date() {
                 return token
             } else {
-                OktaAuth.error.send(LoginError.notLoggedIn)
-                return nil
+                throw LoginError.notLoggedIn
             }
         }
         

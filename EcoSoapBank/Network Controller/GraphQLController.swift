@@ -18,7 +18,6 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     // MARK: - Properties
 
     private let session: DataLoader
-    private var token: String? { Keychain.Okta.getToken() }
 
     // MARK: - Init
     
@@ -32,10 +31,19 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     // User
     
     func logIn(_ completion: @escaping ResultHandler<User>) {
-        guard let token = self.token else {
-            return completion(.failure(GraphQLError.noToken))
+        do {
+            let token = try session.getToken()
+            #if DEBUG
+            print("token: " + token)
+            #endif
+            performOperation(.login(token: token), completion: completion)
+        } catch {
+            completion(.failure(error))
         }
-        performOperation(.login(token: token), completion: completion)
+    }
+
+    func logOut() {
+        session.removeToken()
     }
     
     func fetchUser(byID userID: String,
@@ -44,7 +52,7 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
         performOperation(.userByID(id: userID), completion: completion)
     }
     
-    func updateUserProfile(with info: EditableProfileInfo,
+    func updateUserProfile(_ info: EditableProfileInfo,
                            completion: @escaping ResultHandler<User>) {
         // TODO: may need to add token later
         performOperation(.updateUserProfile(info: info), completion: completion)
@@ -69,7 +77,9 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     func schedulePickup(_ pickupInput: Pickup.ScheduleInput,
                         completion: @escaping ResultHandler<Pickup.ScheduleResult>) {
         // TODO: may need to add token later
-        performOperation(.schedulePickup(input: pickupInput), completion: completion)
+        performOperation(.schedulePickup(input: pickupInput),
+                         completion: completion,
+                         decodingOptions: [.isNotNested: true])
     }
     
     func cancelPickup(_ pickupID: String, completion: @escaping ResultHandler<Pickup>) {
@@ -109,7 +119,8 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     ///   - completion: A completion handler that will be called on a background thread
     ///                 with a Result containing either a decoded object of type T, or an Error
     private func performOperation<T: Decodable>(_ operation: GraphQLOperation,
-                                                completion: @escaping ResultHandler<T>) {
+                                                completion: @escaping ResultHandler<T>,
+                                                decodingOptions: [CodingUserInfoKey: Any] = [:]) {
         let request: URLRequest
         
         do {
@@ -130,55 +141,22 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
                 return completion(.failure(GraphQLError.noData))
             }
             
-            completion(self.decodeJSON(T.self, data: data))
-        }
-    }
-
-    /// Method to decode JSON Data to usable Type
-    /// - Parameter data: The JSON Data returned from the request
-    /// - Parameter type: The Model Type for the JSON Decoder to decode
-    /// - Returns: Either an Error or the Decoded object
-    private func decodeJSON<T: Decodable>(_ type: T.Type, data: Data) -> Result<T, Error> {
-        do {
-            // Decode data as ProfileQuery and pass the stored object of type Profile through completion
-            let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-
-            guard let dataDict = jsonDict?["data"] as? [String: Any],
-                let returnType = Array(dataDict.keys).first,
-                let returnData = dataDict[returnType] as? [String: Any]
-            else {
-                if let errors = jsonDict?["errors"] as? [[String: Any]] {
-                    let errorMessages = errors.compactMap {
-                        $0["message"] as? String
-                    }
-                    errorMessages.forEach { NSLog($0) }
-                    return .failure(GraphQLError.backendMessages(errorMessages))
-                }
-                return .failure(GraphQLError.invalidData)
-            }
-
-            var objectData: Data
-            if returnType != "schedulePickup" {
-                guard let methodType = Array(returnData.keys).first,
-                    let object: Any = returnData[methodType] as? [String: Any] ?? returnData[methodType] as? [Any],
-                    let objectDataUnwrapped = try? JSONSerialization.data(withJSONObject: object, options: [])
-                    else {
-                        return .failure(GraphQLError.invalidData)
-                }
-                objectData = objectDataUnwrapped
-            } else {
-                objectData = try JSONSerialization.data(withJSONObject: returnData, options: [])
-            }
-            
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .graphQL
+            decoder.userInfo = decodingOptions
             
-            let dict = try decoder.decode(T.self, from: objectData)
-            
-            return .success(dict)
-        } catch {
-            NSLog("\(error)")
-            return .failure(error)
+            do {
+                let result = try decoder.decode(GraphQLResult<T>.self, from: data)
+                
+                if let object = result.object {
+                    completion(.success(object))
+                } else {
+                    NSLog(result.errorMessages.joined(separator: "\n"))
+                    completion(.failure(GraphQLError.backendMessages(result.errorMessages)))
+                }
+            } catch {
+                completion(.failure(GraphQLError.decodingError(error)))
+            }
         }
     }
 //

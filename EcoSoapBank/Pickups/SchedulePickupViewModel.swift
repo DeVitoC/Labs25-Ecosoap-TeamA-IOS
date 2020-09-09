@@ -11,10 +11,11 @@ import Combine
 
 
 protocol SchedulePickupViewModelDelegate: AnyObject {
+    func editCarton(for viewModel: NewCartonViewModel)
+    func cancelPickup()
     func schedulePickup(
         for input: Pickup.ScheduleInput,
         completion: @escaping ResultHandler<Pickup.ScheduleResult>)
-    func editCarton(for viewModel: NewCartonViewModel)
 }
 
 
@@ -72,5 +73,9 @@ extension SchedulePickupViewModel {
                 propertyID: selectedProperty.id,
                 cartons: cartons.map { $0.carton }),
             completion: completion ?? { _ in })
+    }
+
+    func cancelPickup() {
+        delegate?.cancelPickup()
     }
 }
