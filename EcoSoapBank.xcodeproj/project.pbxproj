@@ -86,6 +86,9 @@
 		04C91DDB250817B2005ED433 /* ESBTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDA250817B2005ED433 /* ESBTextView.swift */; };
 		04C91DDD25082979005ED433 /* ESBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDC25082979005ED433 /* ESBNavigationController.swift */; };
 		04C91DDF25082E71005ED433 /* DarkStatusBarHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */; };
+		04C91DDB250817B2005ED433 /* ESBTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDA250817B2005ED433 /* ESBTextView.swift */; };
+		04C91DDD25082979005ED433 /* ESBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDC25082979005ED433 /* ESBNavigationController.swift */; };
+		04C91DDF25082E71005ED433 /* DarkStatusBarHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */; };
 		04C91DF425090633005ED433 /* UserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DF325090633005ED433 /* UserDefaultsTests.swift */; };
 		04C91E13250928B2005ED433 /* mockImpactStatsByPropertyId.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */; };
 		04C91E14250928B7005ED433 /* mockUserByIdInput.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */; };
@@ -108,6 +111,7 @@
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
+		04D3252F25004D57005ABDEB /* GraphQLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3252E25004D57005ABDEB /* GraphQLResult.swift */; };
 		04D3252F25004D57005ABDEB /* GraphQLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3252E25004D57005ABDEB /* GraphQLResult.swift */; };
 		04D3253E250148E5005ABDEB /* GraphQLControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */; };
 		04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6D72B24E8444C0003A585 /* BackgroundView.swift */; };
@@ -265,6 +269,9 @@
 		04C91DDA250817B2005ED433 /* ESBTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBTextView.swift; sourceTree = "<group>"; };
 		04C91DDC25082979005ED433 /* ESBNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBNavigationController.swift; sourceTree = "<group>"; };
 		04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkStatusBarHostingController.swift; sourceTree = "<group>"; };
+		04C91DDA250817B2005ED433 /* ESBTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBTextView.swift; sourceTree = "<group>"; };
+		04C91DDC25082979005ED433 /* ESBNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBNavigationController.swift; sourceTree = "<group>"; };
+		04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkStatusBarHostingController.swift; sourceTree = "<group>"; };
 		04C91DF325090633005ED433 /* UserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
 		04C91DF52509152C005ED433 /* mockPaymentsByPropertyIdSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockPaymentsByPropertyIdSuccess.json; sourceTree = "<group>"; };
 		04C91DF92509207A005ED433 /* mockUserByIdFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockUserByIdFailure.json; sourceTree = "<group>"; };
@@ -280,6 +287,7 @@
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		04D3252E25004D57005ABDEB /* GraphQLResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLResult.swift; sourceTree = "<group>"; };
 		04D3252E25004D57005ABDEB /* GraphQLResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLResult.swift; sourceTree = "<group>"; };
 		04D325342501489A005ABDEB /* AsynchronousTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsynchronousTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D325382501489A005ABDEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
