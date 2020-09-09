@@ -23,19 +23,19 @@ class GraphQLControllerMockDataTests: XCTestCase {
                                         error: nil)
         return GraphQLController(session: mockLoader)
     }
-
-    // MARK: - Impact
     
-    func testImpactStatsQueryRequestWithMockDataSuccess() {
+    // MARK: - Impact Stats
+    
+    func testFetchImpactStats() {
         let graphQLController = dataLoader(withFile: "mockImpactStatsByPropertyId")
-
+        
         graphQLController.fetchImpactStats(forPropertyID: "PropertyId1") { result in
-
+            
             guard let impactStats = try? result.get() else {
-                    XCTFail("Unable to get valid impact stats from returned data")
-                    return
+                XCTFail("Unable to get valid impact stats from returned data")
+                return
             }
-
+            
             XCTAssertEqual(impactStats.soapRecycled, 1)
             XCTAssertEqual(impactStats.linensRecycled, 2)
             XCTAssertEqual(impactStats.bottlesRecycled, 3)
@@ -44,16 +44,38 @@ class GraphQLControllerMockDataTests: XCTestCase {
             XCTAssertEqual(impactStats.womenEmployed, 6)
         }
     }
-
-    func testImpactStatsQueryRequestWithMockDataFailure() {
+    
+    func testFetchImpactStatsFailure() {
         let graphQLController = dataLoader(withFile: "mockImpactStatsFailure")
-
+        
         graphQLController.fetchImpactStats(forPropertyID: "PropertyId1") { result in
             XCTAssertNil(try? result.get())
         }
     }
     
-    func testUserByIdQueryRequestWithMockDataSuccess() {
+    // MARK: - User
+    
+    func testLogIn() {
+        let graphQLController = dataLoader(withFile: "mockUserByIdInput")
+        
+        graphQLController.logIn { result in
+            
+            guard let user = try? result.get(),
+                let property = user.properties?.first else {
+                    XCTFail("Unable to get user from returned data")
+                    return
+            }
+            
+            XCTAssertEqual(user.id, "4")
+            XCTAssertEqual(user.firstName, "Christopher")
+            XCTAssertEqual(user.lastName, "DeVito")
+            XCTAssertEqual(property.id, "5")
+            XCTAssertEqual(property.services, [.bottles, .linens, .paper, .soap])
+            XCTAssertEqual(property.collectionType, .courierConsolidated)
+        }
+    }
+    
+    func testFetchUserByID() {
         let graphQLController = dataLoader(withFile: "mockUserByIdInput")
         
         graphQLController.fetchUser(byID: "UserId1") { result in
@@ -71,10 +93,12 @@ class GraphQLControllerMockDataTests: XCTestCase {
             XCTAssertEqual(user.email, "email@email.com")
         }
     }
-
-    func testPickupsByPropertyIdWithMockDataSuccess() {
+    
+    // MARK: - Pickups
+    
+    func testFetchPickupsForPropertyId() {
         let graphQLController = dataLoader(withFile: "mockPickupsByPropertyIdSuccess")
-
+        
         graphQLController.fetchPickups(forPropertyID: "PropertyId1") { result in
             
             guard let pickups = try? result.get() else {
@@ -100,49 +124,8 @@ class GraphQLControllerMockDataTests: XCTestCase {
             XCTAssertEqual(secondPickup.notes, "Pickup2 notes here")
         }
     }
-
-    func testPropertiesByUserIdWithMockDataSuccess() {
-        let graphQLController = dataLoader(withFile: "mockPropertiesByUserIdSuccess")
-
-        graphQLController.fetchProperties(forUserID: "UserId1") { result in
-            
-            guard let firstProperty = try? result.get().first else {
-                XCTFail("Unable to get Properties from returned data")
-                return
-            }
-            
-            XCTAssertEqual(firstProperty.id, "PropertyId1")
-            XCTAssertEqual(firstProperty.propertyType, .hotel)
-            XCTAssertEqual(firstProperty.rooms, 111)
-            XCTAssertEqual(firstProperty.services, [.soap, .linens])
-            XCTAssertEqual(firstProperty.phone, "111-111-1111")
-            XCTAssertEqual(firstProperty.billingAddress?.city, "City 5")
-            XCTAssertEqual(firstProperty.shippingAddress?.city, "City 5")
-            XCTAssertEqual(firstProperty.shippingNote, "Shipping note 1.")
-        }
-    }
-
-    func testLoginWithMockData() {
-        let graphQLController = dataLoader(withFile: "mockUserByIdInput")
-
-        graphQLController.logIn { result in
-
-            guard let user = try? result.get(),
-                let property = user.properties?.first else {
-                    XCTFail("Unable to get user from returned data")
-                    return
-            }
-            
-            XCTAssertEqual(user.id, "4")
-            XCTAssertEqual(user.firstName, "Christopher")
-            XCTAssertEqual(user.lastName, "DeVito")
-            XCTAssertEqual(property.id, "5")
-            XCTAssertEqual(property.services, [.bottles, .linens, .paper, .soap])
-            XCTAssertEqual(property.collectionType, .courierConsolidated)
-        }
-    }
-
-    func testSchedulePickupWithMockData() {
+    
+    func testSchedulePickup() {
         let graphQLController = dataLoader(withFile: "mockSchedulePickupSuccess")
         
         let readyDate = Date(year: 2020, month: 09, day: 25, hour: 1, minute: 1)!
@@ -174,10 +157,10 @@ class GraphQLControllerMockDataTests: XCTestCase {
             XCTAssertEqual(labelURL.absoluteString, "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf")
         }
     }
-
-    func testCancelPickupRequestWithMockData() {
+    
+    func testCancelPickupRequest() {
         let graphQLController = dataLoader(withFile: "mockCancelPickupSuccess")
-
+        
         graphQLController.cancelPickup("PickupId1") { result in
             
             guard let pickup = try? result.get(),
@@ -192,6 +175,29 @@ class GraphQLControllerMockDataTests: XCTestCase {
             XCTAssertEqual(pickup.property.id, "PropertyId1")
             XCTAssertEqual(firstCarton.id, "CartonId1")
             XCTAssertEqual(firstCarton.contents?.percentFull, 100)
+        }
+    }
+    
+    // MARK: - Properties
+    
+    func testFetchPropertiesForUserId() {
+        let graphQLController = dataLoader(withFile: "mockPropertiesByUserIdSuccess")
+        
+        graphQLController.fetchProperties(forUserID: "UserId1") { result in
+            
+            guard let firstProperty = try? result.get().first else {
+                XCTFail("Unable to get Properties from returned data")
+                return
+            }
+            
+            XCTAssertEqual(firstProperty.id, "PropertyId1")
+            XCTAssertEqual(firstProperty.propertyType, .hotel)
+            XCTAssertEqual(firstProperty.rooms, 111)
+            XCTAssertEqual(firstProperty.services, [.soap, .linens])
+            XCTAssertEqual(firstProperty.phone, "111-111-1111")
+            XCTAssertEqual(firstProperty.billingAddress?.city, "City 5")
+            XCTAssertEqual(firstProperty.shippingAddress?.city, "City 5")
+            XCTAssertEqual(firstProperty.shippingNote, "Shipping note 1.")
         }
     }
 }
