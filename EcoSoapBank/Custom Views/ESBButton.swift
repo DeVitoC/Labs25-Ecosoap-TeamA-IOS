@@ -11,12 +11,12 @@ import UIKit
 class ESBButton: UIButton {
     enum ColorScheme {
         case greenOnWhite
-        case primaryOnGradient
+        case whiteOnGreen
     }
     
     // MARK: - Public Properties
     
-    var colorScheme: ColorScheme = .primaryOnGradient {
+    var colorScheme: ColorScheme = .whiteOnGreen {
         didSet { updateColors() }
     }
     
@@ -50,23 +50,12 @@ class ESBButton: UIButton {
         switch colorScheme {
         case .greenOnWhite:
             setTitleColor(
-                UIColor(light: UIColor.esbGreen.adjustingBrightness(by: -0.1),
-                        dark: UIColor.esbGreen.adjustingBrightness(by: -0.3)),
+                .esbGreen,
                 for: .normal)
-            backgroundColor = UIColor.white
-            backgroundGradient?.removeFromSuperview()
-            backgroundGradient = nil
-        case .primaryOnGradient:
-            setTitleColor(UIColor.label, for: .normal)
-            backgroundGradient = configure(GradientView()) {
-                $0.colors = [UIColor.esbGreen.orInverse(),
-                             UIColor.downyBlue.orInverse()]
-                $0.startPoint = CGPoint(x: 0, y: 0)
-                $0.endPoint = CGPoint(x: 1, y: 0)
-            }
-            addSubview(backgroundGradient!)
-            sendSubviewToBack(backgroundGradient!)
-            backgroundGradient?.fillSuperview()
+            backgroundColor = .white
+        case .whiteOnGreen:
+            setTitleColor(UIColor.white, for: .normal)
+            backgroundColor = .esbGreen
         }
     }
     
@@ -74,7 +63,7 @@ class ESBButton: UIButton {
         updateColors()
         clipsToBounds = true
         layer.cornerRadius = 8.0
-        titleLabel?.font = .muli( style: .body, typeface: .semiBold)
+        titleLabel?.font = .muli( style: .title3, typeface: .semiBold)
         contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
 }
