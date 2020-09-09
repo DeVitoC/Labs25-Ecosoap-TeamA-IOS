@@ -7,17 +7,16 @@
 //
 
 import Foundation
-import Combine
+
 
 protocol PaymentDataProvider {
-    func fetchPayments(forPropertyID propertyId: String,
-                       _ completion: @escaping ResultHandler<[Payment]>)
+    func fetchPayments(forPropertyID propertyID: String,
+                       _ completion: @escaping (Result<[Payment], Error>) -> Void)
     func makePayment(_ paymentInput: Payment,
-                     completion: @escaping ResultHandler<Payment>)
+                     completion: @escaping (Result<Payment, Error>) -> Void)
 }
 
 class PaymentController {
-    private(set) var payments: [Payment] = []
     private let dataProvider: PaymentDataProvider
     private(set) var user: User
     private var properties: [Property]? {
@@ -29,35 +28,8 @@ class PaymentController {
         self.dataProvider = dataProvider
     }
 
-    func fetchAllPayments(forPropertyId propertyId: String) -> Future<[Payment], Error> {
-
-        Future { promise in
-            self.dataProvider.fetchPayments(forPropertyID: propertyId) { [weak self] result in
-                if case .success(let payments) = result {
-                    DispatchQueue.main.async {
-                        self?.payments = payments
-                    }
-                    promise(result)
-                }
-            }
-        }
+    func fetchPayments(forPropertyID propertyID: String, completion: @escaping (Result<[Payment], Error>) -> Void) {
+        dataProvider.fetchPayments(forPropertyID: propertyID, completion)
     }
 
-    func fetchPaymentsForAllProperties() -> AnyPublisher<[Payment], Error> {
-        guard let properties = properties, !properties.isEmpty else {
-            return Future {
-                $0(.failure(UserError.noProperties))
-            }
-            .eraseToAnyPublisher()
-        }
-        var futures = properties.map { fetchAllPayments(forPropertyId: $0.id)
-        }
-        var combined = futures.popLast()!.eraseToAnyPublisher()
-        while let future = futures.popLast() {
-            combined = combined.append(future).eraseToAnyPublisher()
-        }
-
-        return combined
-    }
-    
 }
