@@ -86,14 +86,15 @@
 		04C91DDB250817B2005ED433 /* ESBTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDA250817B2005ED433 /* ESBTextView.swift */; };
 		04C91DDD25082979005ED433 /* ESBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDC25082979005ED433 /* ESBNavigationController.swift */; };
 		04C91DDF25082E71005ED433 /* DarkStatusBarHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */; };
+		04C91DF425090633005ED433 /* UserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DF325090633005ED433 /* UserDefaultsTests.swift */; };
 		04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90224FD60AA00263376 /* GraphQLOperation.swift */; };
 		04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90424FD85CF00263376 /* HTTPMethod.swift */; };
 		04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90624FD860B00263376 /* GraphQLError.swift */; };
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
-		04D3253E250148E5005ABDEB /* GraphQLControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */; };
 		04D3252F25004D57005ABDEB /* GraphQLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3252E25004D57005ABDEB /* GraphQLResult.swift */; };
+		04D3253E250148E5005ABDEB /* GraphQLControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */; };
 		04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6D72B24E8444C0003A585 /* BackgroundView.swift */; };
 		04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */; };
 		04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEE1B524E48AB000F51D69 /* ImpactController.swift */; };
@@ -260,15 +261,16 @@
 		04C91DDA250817B2005ED433 /* ESBTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBTextView.swift; sourceTree = "<group>"; };
 		04C91DDC25082979005ED433 /* ESBNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBNavigationController.swift; sourceTree = "<group>"; };
 		04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkStatusBarHostingController.swift; sourceTree = "<group>"; };
+		04C91DF325090633005ED433 /* UserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
 		04CCD90224FD60AA00263376 /* GraphQLOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLOperation.swift; sourceTree = "<group>"; };
 		04CCD90424FD85CF00263376 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		04CCD90624FD860B00263376 /* GraphQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLError.swift; sourceTree = "<group>"; };
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		04D3252E25004D57005ABDEB /* GraphQLResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLResult.swift; sourceTree = "<group>"; };
 		04D325342501489A005ABDEB /* AsynchronousTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsynchronousTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D325382501489A005ABDEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04D3252E25004D57005ABDEB /* GraphQLResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLResult.swift; sourceTree = "<group>"; };
 		04D6D72B24E8444C0003A585 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+Okta.swift"; sourceTree = "<group>"; };
 		04FEE1B524E48AB000F51D69 /* ImpactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactController.swift; sourceTree = "<group>"; };
@@ -639,6 +641,7 @@
 				994E4B8824DDB68700C12921 /* UtilityTests.swift */,
 				041E1E8724E1F3890052831D /* FontTests.swift */,
 				041E1EA824E22DF50052831D /* ColorTests.swift */,
+				04C91DF325090633005ED433 /* UserDefaultsTests.swift */,
 			);
 			path = "Helper Tests";
 			sourceTree = "<group>";
@@ -1184,6 +1187,7 @@
 				E2D302FD24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift in Sources */,
 				99789CC52502C832000428AC /* ProfileTests.swift in Sources */,
 				041E1EA924E22DF50052831D /* ColorTests.swift in Sources */,
+				04C91DF425090633005ED433 /* UserDefaultsTests.swift in Sources */,
 				04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */,
 				04BE6D0B24F05A6300DFC47D /* ImpactViewControllerTests.swift in Sources */,
 				99B5790324E30F140097957D /* PickupTests.swift in Sources */,
