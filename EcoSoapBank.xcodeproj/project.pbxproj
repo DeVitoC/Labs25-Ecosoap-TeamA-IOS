@@ -101,6 +101,7 @@
 		04C91E22250928EE005ED433 /* mockCancelPickupFailure.json in Resources */ = {isa = PBXBuildFile; fileRef = 04C91E032509241D005ED433 /* mockCancelPickupFailure.json */; };
 		04C91E23250928F2005ED433 /* mockUpdatePropertySuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 04C91E1025092597005ED433 /* mockUpdatePropertySuccess.json */; };
 		04C91E24250928F5005ED433 /* mockPaymentsByPropertyIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 04C91DF52509152C005ED433 /* mockPaymentsByPropertyIdSuccess.json */; };
+		04C91E26250929C1005ED433 /* PrintJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91E25250929C1005ED433 /* PrintJson.swift */; };
 		04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90224FD60AA00263376 /* GraphQLOperation.swift */; };
 		04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90424FD85CF00263376 /* HTTPMethod.swift */; };
 		04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90624FD860B00263376 /* GraphQLError.swift */; };
@@ -272,6 +273,7 @@
 		04C91E032509241D005ED433 /* mockCancelPickupFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockCancelPickupFailure.json; sourceTree = "<group>"; };
 		04C91E07250924B5005ED433 /* mockPropertiesByUserIdFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockPropertiesByUserIdFailure.json; sourceTree = "<group>"; };
 		04C91E1025092597005ED433 /* mockUpdatePropertySuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockUpdatePropertySuccess.json; sourceTree = "<group>"; };
+		04C91E25250929C1005ED433 /* PrintJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintJson.swift; sourceTree = "<group>"; };
 		04CCD90224FD60AA00263376 /* GraphQLOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLOperation.swift; sourceTree = "<group>"; };
 		04CCD90424FD85CF00263376 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		04CCD90624FD860B00263376 /* GraphQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLError.swift; sourceTree = "<group>"; };
@@ -578,6 +580,7 @@
 				992BB64224EEFBAD00638AA4 /* Errors.swift */,
 				992C929024F70B0C004FCBBB /* Randomizable.swift */,
 				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
+				04C91E25250929C1005ED433 /* PrintJson.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1193,6 +1196,7 @@
 				9985ED1224F06E39009F108F /* SteppedSlider.swift in Sources */,
 				04C91DDF25082E71005ED433 /* DarkStatusBarHostingController.swift in Sources */,
 				991874D424E4B28900F636FB /* UIView+Subviews.swift in Sources */,
+				04C91E26250929C1005ED433 /* PrintJson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
