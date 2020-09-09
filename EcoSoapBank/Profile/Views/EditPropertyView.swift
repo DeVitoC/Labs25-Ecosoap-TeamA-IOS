@@ -13,23 +13,15 @@ struct EditPropertyView: View {
     @ObservedObject var viewModel: EditPropertyViewModel
 
     @State var labelWidth: CGFloat?
-    var propertyType: Binding<Int> {
-        Binding(get: {
-            Property.PropertyType.allCases
-                .firstIndex(of: self.viewModel.propertyInfo.propertyType)!
-        }, set: { idx in
-            self.viewModel.propertyInfo.propertyType
-                = Property.PropertyType.allCases[idx]
-        })
-    }
 
     var body: some View {
         Form {
             Section {
                 TextField("Name", text: $viewModel.propertyInfo.name)
-                Picker("Property Type", selection: propertyType) {
-                    ForEach(0..<viewModel.propertyTypes.count) {
-                        Text(self.viewModel.propertyTypes[$0].display)
+                Picker("Property Type", selection: $viewModel.propertyInfo.propertyType) {
+                    ForEach(viewModel.propertyTypes) {
+                        Text($0.display)
+                            .tag($0)
                     }
                 }
                 TextField("Phone", text: $viewModel.propertyInfo.phone)
@@ -39,23 +31,22 @@ struct EditPropertyView: View {
                 addressSectionContent($viewModel.propertyInfo.shippingAddress)
             }
 
-            Section(header: Text("Billing Address".uppercased())) {
-                Toggle(isOn: $viewModel.useShippingAddressForBilling) {
-                    Text("Use shipping address for billing")
-                }
+            Toggle(isOn: $viewModel.useShippingAddressForBilling) {
+                Text("Use shipping address for billing")
             }
 
             if !viewModel.useShippingAddressForBilling {
-                Section {
+                Section(header: Text("Billing Address".uppercased())) {
                     addressSectionContent($viewModel.propertyInfo.billingAddress)
                 }
             }
         }
         .keyboardAvoiding()
-        .navigationBarTitle("Update Property", displayMode: .inline)
+        .navigationBarTitle("Update Property", displayMode: .automatic)
         .navigationBarItems(trailing: Button(
             action: viewModel.commitChanges,
             label: { Text("Save") })
+            .foregroundColor(.barButtonTintColor)
         )
     }
 

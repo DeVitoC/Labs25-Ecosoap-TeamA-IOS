@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 import Stripe
 
 
@@ -17,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         Stripe.setDefaultPublishableKey("pk_test_51HLF1UKa1YnGlDrRQFihKS3jQGrbOCryI29gKBdXLJUt3lWKaKTRTjhBXxsIFV4xQiCh15gYM4PiJwQaaiN6BiHk00blUGhoiG")
+        setUpAppAppearance()
         return true
     }
 
@@ -31,5 +33,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to select a configuration to create the new scene with.
         UISceneConfiguration(name: "Default Configuration",
                              sessionRole: connectingSceneSession.role)
+    }
+
+    private func setUpAppAppearance() {
+        
+        configure(UITabBar.appearance()) {
+            $0.tintColor = .esbGreen
+            $0.backgroundColor = .systemGray2
+        }
+
+        configure(UITableView.appearance()) {
+            $0.backgroundColor = UIColor.systemGray5
+        }
+
+        configure(UITableViewCell.appearance()) {
+            $0.backgroundColor = UIColor.systemGray6
+        }
+        
+        configure(UIButton.appearance()) {
+            $0.tintColor = .esbGreen
+        }
+        
+        configure(UIBarButtonItem.appearance()) {
+            $0.tintColor = .white
+            $0.setTitleTextAttributes(
+                [.font: UIFont.muli(typeface: .semiBold)],
+                for: .normal)
+        }
+        
+        configure(UINavigationBar.appearance()) { nav in
+            nav.standardAppearance = configure(UINavigationBarAppearance()) {
+                $0.backgroundImage = UIImage.navBar
+                $0.titleTextAttributes = [
+                    .font: UIFont.navBarInlineTitle,
+                    .foregroundColor: UIColor.black
+                ]
+            }
+            nav.compactAppearance = configure(UINavigationBarAppearance()) {
+                $0.backgroundImage = UIImage.navBar
+                $0.titleTextAttributes = [
+                    .font: UIFont.navBarInlineTitle,
+                    .foregroundColor: UIColor.black
+                ]
+            }
+            nav.scrollEdgeAppearance = configure(UINavigationBarAppearance()) {
+                $0.configureWithTransparentBackground()
+                $0.largeTitleTextAttributes = [
+                    .font: UIFont.navBarLargeTitle,
+                ]
+            }
+        }
     }
 }

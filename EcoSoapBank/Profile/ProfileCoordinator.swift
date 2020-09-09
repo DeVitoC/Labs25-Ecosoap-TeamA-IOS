@@ -11,30 +11,34 @@ import SwiftUI
 import Combine
 
 
+protocol ProfileDelegate: AnyObject {
+    func logOut()
+}
+
+
 class ProfileCoordinator: FlowCoordinator {
-    lazy var rootVC: UIViewController = mainProfileView() ?? noPropertiesView()
+    lazy var rootVC = DarkStatusBarHostingController(
+        rootView: MainProfileView(viewModel: profileVM))
 
-    private(set) var profileVM: MainProfileViewModel?
+    private(set) lazy var profileVM: MainProfileViewModel = MainProfileViewModel(
+        user: user,
+        userController: userController,
+        delegate: delegate)
 
+    private var user: User
     private var userController: UserController
+
+    weak var delegate: ProfileDelegate?
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(userController: UserController) {
+    init(user: User,
+         userController: UserController,
+         delegate: ProfileDelegate?
+    ) {
+        self.user = user
         self.userController = userController
-
-        userController.$user
-            .combineLatest(userController.$viewingProperty)
-            .sink { [unowned self] info in
-                guard let user = info.0, let property = info.1 else {
-                    self.profileVM = nil
-                    return
-                }
-                self.profileVM = MainProfileViewModel(
-                        user: user,
-                        currentProperty: property,
-                        userController: userController)
-        }.store(in: &cancellables)
+        self.delegate = delegate
     }
 
     func start() {
@@ -46,14 +50,5 @@ class ProfileCoordinator: FlowCoordinator {
                     pointSize: 22,
                     weight: .regular)),
             tag: 4)
-    }
-
-    func mainProfileView() -> UIViewController? {
-        guard let vm = profileVM else { return nil }
-        return UIHostingController(rootView: MainProfileView(viewModel: vm))
-    }
-
-    func noPropertiesView() -> UIViewController {
-        UIHostingController(rootView: EmptyView())
     }
 }

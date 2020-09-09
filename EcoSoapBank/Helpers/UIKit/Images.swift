@@ -13,7 +13,7 @@ extension UIImage {
     static let esbLogoWhite = UIImage(named: "esbLogoWhite")!
     
     static let addBoxSymbol = UIImage(named: "cube.box.plus")!
-    static let navBar = UIImage(named: "navBar")!
+    static let navBar = UIImage(named: "newNavBar")!
     
     static let soap = UIImage(named: "soap")!
     static let bottles = UIImage(named: "bottles")!
@@ -25,4 +25,12 @@ extension UIImage {
     static let plusSquareFill = UIImage(systemName: "plus.square.fill")!
     static let cubeBox = UIImage(systemName: "cube.box")!
     static let cubeBoxFill = UIImage(systemName: "cube.box.fill")!
+
+    func withAlpha(_ alpha: CGFloat) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: .zero, blendMode: .normal, alpha: alpha)
+        let newImg = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImg
+    }
 }

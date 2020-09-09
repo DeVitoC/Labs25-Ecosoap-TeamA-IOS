@@ -20,12 +20,11 @@ class ImpactViewController: UIViewController {
     
     private var massUnitObserver: UserDefaultsObservation?
     
-    override func loadView() {
-        view = BackgroundView()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .systemGray6
+        title = "Impact Summary"
         
         massUnitObserver = UserDefaults.$massUnit.observe { [weak self] _, _ in
             self?.collectionView.reloadData()
@@ -35,8 +34,7 @@ class ImpactViewController: UIViewController {
 
         impactController?.getImpactStats { [weak self] error in
             if let error = error {
-                // TODO: Proper error handling
-                print(error)
+                self?.presentAlert(for: error)
                 return
             }
             
@@ -46,9 +44,6 @@ class ImpactViewController: UIViewController {
     
     private func setUpCollectionView() {
         collectionView.register(ImpactCell.self, forCellWithReuseIdentifier: ImpactCell.reuseIdentifier)
-        collectionView.register(ImpactHeaderView.self,
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: ImpactHeaderView.reuseIdentifier)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -63,19 +58,6 @@ class ImpactViewController: UIViewController {
 // MARK: - Collection View Data Source
 
 extension ImpactViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView
-            .dequeueReusableSupplementaryView(ofKind: kind,
-                                              withReuseIdentifier: ImpactHeaderView.reuseIdentifier,
-                                              for: indexPath) as? ImpactHeaderView else {
-            fatalError("Unable to cast view as \(ImpactHeaderView.self)")
-        }
-        header.title = "Impact Summary"
-        return header
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         impactController?.viewModels.count ?? 0
@@ -103,12 +85,7 @@ private enum ImpactLayout {
 }
 
 extension ImpactViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForHeaderInSection section: Int) -> CGSize {
-        CGSize(width: collectionView.frame.width, height: ImpactLayout.headerHeight)
-    }
-    
+
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {

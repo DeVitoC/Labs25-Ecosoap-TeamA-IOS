@@ -15,7 +15,7 @@ import Combine
 class AppFlowCoordinator: FlowCoordinator {
     let window: UIWindow
 
-    private(set) lazy var tabBarController = UITabBarController()
+    private(set) lazy var tabBarController = AppTabBarController()
 
     private(set) var impactCoord: ImpactCoordinator?
     private(set) var pickupCoord: PickupCoordinator?
@@ -29,7 +29,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private var graphQLController = GraphQLController()
 
-    private lazy var userProvider: UserDataProvider = useMock ? MockLoginProvider() : graphQLController
+    private lazy var userProvider: UserDataProvider = useMock ? MockUserDataProvider() : graphQLController
     private lazy var pickupProvider: PickupDataProvider = useMock ? MockPickupProvider() : graphQLController
     private lazy var impactProvider: ImpactDataProvider = useMock ? MockImpactProvider() : graphQLController
 
@@ -49,31 +49,15 @@ class AppFlowCoordinator: FlowCoordinator {
     }
 
     func start() {
-        // set default tabBar/navBar appearance
-        UITabBar.appearance().tintColor = .esbGreen
-        UITabBar.appearance().backgroundColor = .downyBlue
-        
-        configure(UINavigationBar.appearance(), with: {
-            $0.titleTextAttributes = [
-                .font: UIFont.navBarInlineTitle,
-                .foregroundColor: UIColor.white
-            ]
-            $0.largeTitleTextAttributes = [
-                .font: UIFont.navBarLargeTitle,
-                .foregroundColor: UIColor.white
-            ]
-            $0.backgroundColor = .esbGreen
-            $0.setBackgroundImage(.navBar, for: .default)
-            $0.tintColor = .white
-            // We can use `$0.barTintColor = .esbGreen` if we want the `inline` version of the title bar to be that color
-        })
-
         // set up window and make visible
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
 
         if Keychain.Okta.isLoggedIn {
-            tabBarController.present(LoadingViewController(loadingText: "Logging in..."), animated: false, completion: nil)
+            tabBarController.present(
+                LoadingViewController(loadingText: "Logging in..."),
+                animated: false,
+                completion: nil)
             userController.logInWithBearer { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
@@ -107,12 +91,18 @@ class AppFlowCoordinator: FlowCoordinator {
 
     private func onLoginComplete(withUser user: User?) {
         guard let user = user else {
-            return self.presentLoginFailAlert(error: LoginError.loginFailed)
+            guard userController.user != nil else {
+                return self.presentLoginFailAlert(error: LoginError.loginFailed)
+            }
+            return loginCoord.start()
         }
 
         self.pickupCoord = PickupCoordinator(user: user, dataProvider: self.pickupProvider)
         self.impactCoord = ImpactCoordinator(user: user, dataProvider: self.impactProvider)
-        self.profileCoord = ProfileCoordinator(userController: self.userController)
+        self.profileCoord = ProfileCoordinator(
+            user: user,
+            userController: self.userController,
+            delegate: self)
 
         self.tabBarController.setViewControllers([
             self.impactCoord!.rootVC,
@@ -124,13 +114,19 @@ class AppFlowCoordinator: FlowCoordinator {
         self.pickupCoord!.start()
         self.profileCoord!.start()
 
-        if self.tabBarController.presentedViewController != nil {
-            self.tabBarController.dismiss(animated: true, completion: nil)
-        }
+        tabBarController.dismissAllPresentedViewControllers(onComplete: nil)
+    }
+}
+
+// MARK: - Profile Delegate
+
+extension AppFlowCoordinator: ProfileDelegate {
+    func logOut() {
+        loginCoord.start()
     }
 }
 
 
 // MARK: - Use Mock
 
-let useMock: Bool = false
+let useMock: Bool = true

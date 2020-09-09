@@ -20,4 +20,16 @@ class MockDataLoader: DataLoader {
     func loadData(with request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         completion(data, nil, error)
     }
+
+    func getToken() throws -> String {
+        if let error = error {
+            throw error
+        } else {
+            return "fake token"
+        }
+    }
+
+    func removeToken() {
+        NSLog("(fake) token \"removed\" (ie no-op)")
+    }
 }
