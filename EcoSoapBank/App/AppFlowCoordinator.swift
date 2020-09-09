@@ -35,20 +35,15 @@ class AppFlowCoordinator: FlowCoordinator {
 
     // MARK: - Init / Start
 
-    private var cancellables = Set<AnyCancellable>()
+    private var userSubscription: AnyCancellable?
 
     init(window: UIWindow) {
         self.window = window
-
-        userController.$user
-            .dropFirst(1)
-            .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in self?.onLoginComplete(withUser: $0) }
-            .store(in: &cancellables)
     }
 
     func start() {
+        userSubscription = makeUserChangesSubscription()
+
         // set up window and make visible
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
@@ -115,6 +110,17 @@ class AppFlowCoordinator: FlowCoordinator {
         self.profileCoord!.start()
 
         tabBarController.dismissAllPresentedViewControllers(onComplete: nil)
+        userSubscription = nil
+    }
+
+    private func makeUserChangesSubscription() -> AnyCancellable {
+        userController.$user
+            .dropFirst(1)
+            .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] newUser in
+                self?.onLoginComplete(withUser: newUser)
+            })
     }
 }
 
@@ -122,6 +128,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
 extension AppFlowCoordinator: ProfileDelegate {
     func logOut() {
+        userSubscription = makeUserChangesSubscription()
         loginCoord.start()
     }
 }
