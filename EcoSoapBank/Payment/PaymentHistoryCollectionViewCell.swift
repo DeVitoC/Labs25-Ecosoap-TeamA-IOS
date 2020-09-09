@@ -19,6 +19,7 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
     var labelHeight = 25
 
     func setupUI() {
+        removeSubviews()
         guard let payment = payment,
             let invoicePeriodStartDate = payment.invoicePeriodStartDate,
             let invoicePeriodEndDate = payment.invoicePeriodEndDate,
@@ -61,6 +62,17 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
             addSubview(paymentMethodLabel)
             addSubview(invoiceNumberLabel)
             addSubview(invoiceLabel)
+
+            NSLayoutConstraint.activate([
+                paymentDateLabel.topAnchor.constraint(equalTo: amountDueLabel.bottomAnchor, constant: 10),
+                paymentDateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+                paymentMethodLabel.topAnchor.constraint(equalTo: paymentDateLabel.bottomAnchor, constant: 10),
+                paymentMethodLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+                invoiceNumberLabel.topAnchor.constraint(equalTo: paymentMethodLabel.bottomAnchor, constant: 10),
+                invoiceNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+                invoiceLabel.topAnchor.constraint(equalTo: invoiceNumberLabel.bottomAnchor, constant: 10),
+                invoiceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5)
+            ])
         }
     }
 }

@@ -22,8 +22,9 @@ class PaymentHistoryViewController: UIViewController {
         paymentCollectionView.frame.size.width
     }
     var expandedHeight: CGFloat = 200
-    var notExpandedHeight: CGFloat = 50
+    var notExpandedHeight: CGFloat = 80
     var isExpanded = [Bool]()
+    let cellIdentifier = "PaymentCell"
 
     override func loadView() {
         view = BackgroundView()
@@ -63,7 +64,7 @@ class PaymentHistoryViewController: UIViewController {
         paymentCollectionView.dataSource = self
         paymentCollectionView.delegate = self
         paymentCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        paymentCollectionView.register(PaymentHistoryCollectionViewCell.self, forCellWithReuseIdentifier: "PaymentCell")
+        paymentCollectionView.register(PaymentHistoryCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
         paymentCollectionView.backgroundColor = .systemBackground
         NSLayoutConstraint.activate([
             paymentCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 44),
@@ -108,11 +109,11 @@ extension PaymentHistoryViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "PaymentCell",
+            withReuseIdentifier: cellIdentifier,
             for: indexPath) as? PaymentHistoryCollectionViewCell
             else { return UICollectionViewCell() }
-        cell.payment = payments[indexPath.row]
         cell.isExpanded = isExpanded[indexPath.row]
+        cell.payment = payments[indexPath.row]
 
         cell.layer.borderColor = UIColor.gray.cgColor
         cell.layer.borderWidth = 0.5
