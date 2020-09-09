@@ -56,6 +56,9 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
             let paymentMethodLabel = UILabel("Method: \(payment.paymentMethod)", frame: .zero, alignment: .left)
             let invoiceNumberLabel = UILabel("Invoice Code: \(invoiceCode)", frame: .zero, alignment: .left)
             let invoiceLabel = UILabel("Invoice: pdf", frame: .zero, alignment: .left)
+            UIView.animate(withDuration: 2.0) {
+                detailsImageView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+            }
 
             addSubview(paymentDateLabel)
             addSubview(paymentMethodLabel)
