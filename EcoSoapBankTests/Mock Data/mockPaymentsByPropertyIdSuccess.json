@@ -1,0 +1,20 @@
+{
+  "data" : {
+    "paymentsByPropertyId" : {
+      "payments" : [
+        {
+          "invoicePeriodStartDate" : "2020-01-01T01:01:01−01:00",
+          "id" : "PaymentId1",
+          "amountDue" : 1111,
+          "date" : "2020-01-01T01:01:01−01:00",
+          "invoice" : "https:\/\/test.com\/invoice1",
+          "invoiceCode" : "Invoice1",
+          "paymentMethod" : "ACH",
+          "amountPaid" : 1111,
+          "invoicePeriodEndDate" : "2020-03-01T01:01:01−01:00",
+          "dueDate" : "2020-01-01T01:01:01−01:00"
+        }
+      ]
+    }
+  }
+}

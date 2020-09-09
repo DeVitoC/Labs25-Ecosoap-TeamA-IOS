@@ -1,38 +1,58 @@
 {
-    "data": {
-        "schedulePickup": {
-            "pickup": {
-                "id": "PickupId1",
-                "confirmationCode": "Success",
-                "collectionType": "LOCAL",
-                "status": "COMPLETE",
-                "readyDate": "2020-08-20",
-                "pickupDate": "2020-08-20",
-                "property": {
-                    "id": "PropertyId1",
-                    "name": "Hilton",
-                    "propertyType": "HOTEL",
-                    "rooms": 200,
-                    "services": [
+    "data" : {
+        "schedulePickup" : {
+            "label" : "https:\/\/www.w3.org\/WAI\/ER\/tests\/xhtml\/testfiles\/resources\/pdf\/dummy.pdf",
+            "pickup" : {
+                "status" : "SUBMITTED",
+                "id" : "7f231ada-e02d-4c38-9ede-09f6945ea006-1599663021401",
+                "collectionType" : "GENERATED_LABEL",
+                "pickupDate" : null,
+                "notes" : null,
+                "property" : {
+                    "id" : "PropertyId1",
+                    "phone" : "DACECA64-5E77-4AC6-99E1-1CC6ED93AAA8",
+                    "shippingAddress" : {
+                        "city" : "City 5",
+                        "address1" : "Address 5 Line 1",
+                        "postalCode" : "55555",
+                        "country" : "US",
+                        "formattedAddress" : null,
+                        "address3" : "Address 5 Line 3",
+                        "state" : "State 5",
+                        "address2" : "Address 5 Line 2"
+                    },
+                    "propertyType" : "HOTEL",
+                    "collectionType" : "GENERATED_LABEL",
+                    "billingAddress" : {
+                        "city" : "City 5",
+                        "address1" : "Address 5 Line 1",
+                        "postalCode" : "55555",
+                        "country" : "US",
+                        "formattedAddress" : null,
+                        "address3" : "Address 5 Line 3",
+                        "state" : "State 5",
+                        "address2" : "Address 5 Line 2"
+                    },
+                    "shippingNote" : "Shipping note 1.",
+                    "logo" : "https:\/\/test.com\/logo1.png",
+                    "notes" : "Notes 1.",
+                    "services" : [
                         "SOAP",
-                        "PAPER"
+                        "LINENS"
                     ],
-                    "collectionType": "LOCAL",
-                    "logo": "http://www.logo1.com",
-                    "phone": "123-456-7890",
-                    "shippingNote": "Shipping note1 here",
-                    "notes": "Note1 here"
+                    "rooms" : 111,
+                    "name" : "Property 1"
                 },
-                "cartons": [
+                "cartons" : [
                     {
-                        "id": "CartonId1",
-                        "product": "SOAP",
-                        "percentFull": 100
+                        "id" : "3a57172a-026e-4195-ac2f-546df9c9b58a-1599663021401",
+                        "product" : "SOAP",
+                        "percentFull" : 100
                     }
                 ],
-                "notes": "Pickup notes here"
-            },
-            "label": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+                "confirmationCode" : "0F50-F512",
+                "readyDate" : "2020-09-25T05:01:00Z"
+            }
         }
     }
 }
