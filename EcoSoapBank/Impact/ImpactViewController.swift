@@ -33,14 +33,12 @@ class ImpactViewController: UIViewController {
         setUpCollectionView()
 
         impactController?.getImpactStats { [weak self] error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self?.presentAlert(for: error)
-                    return
-                }
-                
-                self?.collectionView.reloadData()
+            if let error = error {
+                self?.presentAlert(for: error)
+                return
             }
+            
+            self?.collectionView.reloadData()
         }
     }
     
