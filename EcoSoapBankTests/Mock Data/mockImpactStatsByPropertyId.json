@@ -1,15 +1,15 @@
-
 {
-    "data": {
-        "impactStatsByPropertyId": {
-            "impactStats": {
-                "soapRecycled": 1,
-                "linensRecycled": 2,
-                "bottlesRecycled": 3,
-                "paperRecycled": 4,
-                "peopleServed": 5,
-                "womenEmployed": 6
-            }
-        }
+  "data" : {
+    "impactStatsByPropertyId" : {
+      "impactStats" : {
+        "womenEmployed" : 11,
+        "paperRecycled" : 11,
+        "linensRecycled" : 11,
+        "soapRecycled" : 11,
+        "bottlesRecycled" : 11,
+        "peopleServed" : 11
+      }
     }
+  }
 }
+

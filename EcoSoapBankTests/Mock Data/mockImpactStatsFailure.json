@@ -1,5 +1,7 @@
 {
-    "data": {
-        "impactStatsByPropertyId": null
+  "data" : {
+    "impactStatsByPropertyId" : {
+      "impactStats" : null
     }
+  }
 }

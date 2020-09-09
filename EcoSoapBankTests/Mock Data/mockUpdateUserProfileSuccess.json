@@ -1,0 +1,21 @@
+{
+  "data" : {
+    "updateUserProfile" : {
+      "user" : {
+        "phone" : "595D860C-66E8-48E8-8D9B-4AEE505185E4",
+        "address" : null,
+        "firstName" : "Llama",
+        "id" : "00uvb3lz10Bekzr854x6",
+        "middleName" : "A7902E78-7484-4F54-969D-139D4F33B69C",
+        "title" : null,
+        "company" : null,
+        "email" : "llama1@maildrop.cc",
+        "skype" : "BB0B41CC-68CC-42C3-ADEB-2A4FFA0D36E1",
+        "properties" : [
+
+        ],
+        "lastName" : "Dude"
+      }
+    }
+  }
+}

@@ -37,7 +37,6 @@ class ImpactViewControllerTest: XCTestCase {
     
     func testConformsToCollectionViewDataSource() {
         XCTAssert(ImpactViewController.conforms(to: UICollectionViewDataSource.self))
-        XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:viewForSupplementaryElementOfKind:at:))))
         XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:numberOfItemsInSection:))))
         XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:cellForItemAt:))))
     }
@@ -48,7 +47,6 @@ class ImpactViewControllerTest: XCTestCase {
     
     func testConformsToCollectionViewDelegateFlowLayout () {
         XCTAssertTrue(impactVC.conforms(to: UICollectionViewDelegateFlowLayout.self))
-        XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:layout:referenceSizeForHeaderInSection:))))
         XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:layout:sizeForItemAt:))))
         XCTAssertTrue(impactVC.responds(to: #selector(impactVC.collectionView(_:layout:insetForSectionAt:))))
     }
