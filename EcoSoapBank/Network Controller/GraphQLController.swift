@@ -159,37 +159,7 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
             }
         }
     }
-//
-//    // MARK: - Enums
-//
-//    /// Enum describing the possible errors we can get back from
-//    private struct QueryInput<V: VariableType>: Encodable {
-//        let query: String
-//        let variables: V
-//
-//        func encode(to encoder: Encoder) throws {
-//            var container = encoder.container(keyedBy: CodingKeys.self)
-//            try container.encode(query, forKey: .query)
-//            var variablesContainer = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .variables)
-//            try variablesContainer.encode(variables, forKey: .input)
-//        }
-//
-//    }
-//
-//    private enum CodingKeys: String, CodingKey {
-//        case query
-//        case variables
-//        case input
-//    }
 }
-    
-//enum GraphQLError: Error {
-//    case noData
-//    case invalidData
-//    case noToken
-//    case unimplemented
-//    case backendMessages([String])
-//}
 
 /// Protocol to set conformance to possible input types for GraphQL query and mutation variables
 protocol VariableType: Encodable {}
