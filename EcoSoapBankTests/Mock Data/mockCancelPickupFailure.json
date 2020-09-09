@@ -1,0 +1,37 @@
+{
+  "errors" : [
+    {
+      "path" : [
+        "cancelPickup"
+      ],
+      "message" : "No result found",
+      "extensions" : {
+        "exception" : {
+          "stacktrace" : [
+            "Error: No result found",
+            "    at Object.<anonymous> (\/home\/frank\/ios-api\/1\/resolvers.js:28:14)",
+            "    at Module._compile (internal\/modules\/cjs\/loader.js:1256:30)",
+            "    at Object.Module._extensions..js (internal\/modules\/cjs\/loader.js:1277:10)",
+            "    at Module.load (internal\/modules\/cjs\/loader.js:1105:32)",
+            "    at Function.Module._load (internal\/modules\/cjs\/loader.js:967:14)",
+            "    at Module.require (internal\/modules\/cjs\/loader.js:1145:19)",
+            "    at require (internal\/modules\/cjs\/helpers.js:75:18)",
+            "    at Object.<anonymous> (\/home\/frank\/ios-api\/1\/start.js:2:23)",
+            "    at Module._compile (internal\/modules\/cjs\/loader.js:1256:30)",
+            "    at Object.Module._extensions..js (internal\/modules\/cjs\/loader.js:1277:10)"
+          ]
+        },
+        "code" : "NO_RESULT"
+      },
+      "locations" : [
+        {
+          "line" : 2,
+          "column" : 5
+        }
+      ]
+    }
+  ],
+  "data" : {
+    "cancelPickup" : null
+  }
+}
