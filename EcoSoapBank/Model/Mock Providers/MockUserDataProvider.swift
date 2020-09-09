@@ -18,34 +18,28 @@ class MockUserDataProvider: UserDataProvider {
 
     var shouldFail: Bool
     var waitTime: Double
+    var testing: Bool
 
     var user = User.placeholder()
     var status = Status.loggedOut
 
-    var dataLoader: DataLoader = MockDataLoader(data: nil, error: nil)
-
-    init(shouldFail: Bool = false, waitTime: Double = 0.2) {
+    init(shouldFail: Bool = false, testing: Bool = false, waitTime: Double = 0.2) {
         self.shouldFail = shouldFail
         self.waitTime = waitTime
+        self.testing = testing
     }
 
     func logIn(_ completion: @escaping ResultHandler<User>) {
         guard !shouldFail else {
             return completion(.mockFailure())
         }
-
-        do {
-            _ = try dataLoader.getToken()
-            dispatch {
-                if self.shouldFail {
-                    completion(.mockFailure())
-                } else {
-                    self.status = .loggedIn
-                    completion(.success(.placeholder()))
-                }
+        dispatch {
+            if self.shouldFail {
+                completion(.mockFailure())
+            } else {
+                self.status = .loggedIn
+                completion(.success(.placeholder()))
             }
-        } catch {
-            completion(.failure(error))
         }
     }
 
@@ -77,7 +71,11 @@ class MockUserDataProvider: UserDataProvider {
     }
 
     func logOut() {
-        NSLog("Removing token (but not really)")
+        if testing {
+            NSLog("Removing token (but not really)")
+        } else {
+            Keychain.Okta.removeToken()
+        }
         self.status = .loggedOut
     }
 
