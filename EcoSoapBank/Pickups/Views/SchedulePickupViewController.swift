@@ -35,6 +35,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     private lazy var dataSource = DataSource(
         tableView: tableView,
         cellProvider: cell(for:at:with:))
+
     private lazy var addCartonButton = configure(UIButton(type: .system)) {
         $0.setPreferredSymbolConfiguration(
             UIImage.SymbolConfiguration(pointSize: 30),
@@ -47,6 +48,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
                 NSAttributedString.Key.font: UIFont.muli(),
         ])
         $0.setAttributedTitle(title, for: .normal)
+        $0.tintColor = .esbGreen
         $0.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 6)
         $0.imageView?.contentMode = .scaleAspectFit
         $0.imageEdgeInsets = .zero

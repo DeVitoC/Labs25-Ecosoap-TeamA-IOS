@@ -51,14 +51,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         configure(UIButton.appearance()) {
-            $0.tintColor = .esbGreen
+            $0.tintColor = .white
         }
         
         configure(UIBarButtonItem.appearance()) {
             $0.tintColor = .white
-            $0.setTitleTextAttributes(
-                [.font: UIFont.muli(typeface: .semiBold)],
-                for: .normal)
+
+            $0.setTitleTextAttributes([
+                .font: UIFont.muli(typeface: .semiBold),
+                .foregroundColor: UIColor.white
+            ], for: .normal)
         }
         
         configure(UINavigationBar.appearance()) { nav in
