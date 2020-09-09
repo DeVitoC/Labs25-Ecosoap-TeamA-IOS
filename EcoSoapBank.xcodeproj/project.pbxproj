@@ -120,7 +120,6 @@
 		992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */; };
 		992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C929024F70B0C004FCBBB /* Randomizable.swift */; };
 		992FBC8724FDABE10099C32D /* LabelAlignedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */; };
-		992FBC8924FDB2D50099C32D /* PropertyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8824FDB2D50099C32D /* PropertyListViewModel.swift */; };
 		992FBC8B24FDB67D0099C32D /* EditPropertyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8A24FDB67D0099C32D /* EditPropertyViewModel.swift */; };
 		992FBC8D24FDB6970099C32D /* EditPropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8C24FDB6970099C32D /* EditPropertyView.swift */; };
 		992FBC9024FDC01F0099C32D /* MainProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8F24FDC01F0099C32D /* MainProfileViewModel.swift */; };
@@ -168,10 +167,16 @@
 		99D0166024FEA6D9001A7555 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D0165F24FEA6D8001A7555 /* With.swift */; };
 		E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220C32624E35E59003FF32D /* GraphQLQueries.swift */; };
 		E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */; };
-		E28E911024FD541F0014DF82 /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */; };
+		E28E911424FEBC320014DF82 /* UIElementInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E911324FEBC320014DF82 /* UIElementInitializers.swift */; };
 		E2AEB12624E7460600C42ACD /* mockImpactStatsFailure.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */; };
 		E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */; };
 		E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B324E45BF800C5DF8B /* QueryObjects.swift */; };
+		E2C37DE32508207C00B9F20F /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2F0EB24F844A10050BFCF /* PaymentController.swift */; };
+		E2C37DE42508208100B9F20F /* MockPaymentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */; };
+		E2C37DE52508209A00B9F20F /* PropertyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8824FDB2D50099C32D /* PropertyListViewModel.swift */; };
+		E2C37DE92508221E00B9F20F /* PaymentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */; };
+		E2C37DEA2508222200B9F20F /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */; };
+		E2C37DEB2508222600B9F20F /* PaymentHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */; };
 		E2D04F8E24EEE94D00515831 /* mockPickupsByPropertyIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F8C24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json */; };
 		E2D04F8F24EEE95100515831 /* mockPickupsByPropertyIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F8C24EEDDDF00515831 /* mockPickupsByPropertyIdSuccess.json */; };
 		E2D04F9124F0B7C300515831 /* mockPropertiesByUserIdSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D04F9024F0B7C300515831 /* mockPropertiesByUserIdSuccess.json */; };
@@ -188,9 +193,7 @@
 		E2D302FD24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */; };
 		E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D302FE24E5F464008A6FAF /* DataLoader.swift */; };
 		E2D3030124E5F9B8008A6FAF /* MockDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */; };
-		E2E2F0E824F815780050BFCF /* PaymentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */; };
 		E2E2F0EA24F838170050BFCF /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2F0E924F838170050BFCF /* Payment.swift */; };
-		E2E2F0EC24F844A10050BFCF /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2F0EB24F844A10050BFCF /* PaymentController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -342,7 +345,10 @@
 		99D0165F24FEA6D8001A7555 /* With.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
 		E220C32624E35E59003FF32D /* GraphQLQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueries.swift; sourceTree = "<group>"; };
 		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
-		E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryViewController.swift; path = EcoSoapBankTests/PaymentHistoryViewController.swift; sourceTree = SOURCE_ROOT; };
+		E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryViewController.swift; path = EcoSoapBank/Payment/PaymentHistoryViewController.swift; sourceTree = SOURCE_ROOT; };
+		E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryCollectionViewCell.swift; path = EcoSoapBank/Payment/PaymentHistoryCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		E28E911324FEBC320014DF82 /* UIElementInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElementInitializers.swift; sourceTree = "<group>"; };
+		E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPaymentProvider.swift; sourceTree = "<group>"; };
 		E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsFailure.json; sourceTree = "<group>"; };
 		E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLMutations.swift; sourceTree = "<group>"; };
 		E2B961B324E45BF800C5DF8B /* QueryObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryObjects.swift; sourceTree = "<group>"; };
@@ -358,7 +364,7 @@
 		E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLControllerMockDataTests.swift; sourceTree = "<group>"; };
 		E2D302FE24E5F464008A6FAF /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataLoader.swift; sourceTree = "<group>"; };
-		E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentCoordinator.swift; path = EcoSoapBankTests/PaymentCoordinator.swift; sourceTree = SOURCE_ROOT; };
+		E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentCoordinator.swift; path = EcoSoapBank/Payment/PaymentCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		E2E2F0E924F838170050BFCF /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		E2E2F0EB24F844A10050BFCF /* PaymentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -539,6 +545,7 @@
 				992BB64224EEFBAD00638AA4 /* Errors.swift */,
 				992C929024F70B0C004FCBBB /* Randomizable.swift */,
 				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
+				E28E911324FEBC320014DF82 /* UIElementInitializers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -566,7 +573,6 @@
 				992BB63D24EEE21300638AA4 /* UserController.swift */,
 				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
 				992BB64624EF08E400638AA4 /* Mock Providers */,
-				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
 			);
 			path = "Model Controller";
 			sourceTree = "<group>";
@@ -653,7 +659,10 @@
 			children = (
 				E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */,
 				E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */,
+				E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */,
 				9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */,
+				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
+				E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -1008,12 +1017,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2C37DE52508209A00B9F20F /* PropertyListViewModel.swift in Sources */,
+				E2C37DE42508208100B9F20F /* MockPaymentProvider.swift in Sources */,
+				E2C37DE32508207C00B9F20F /* PaymentController.swift in Sources */,
 				992BB63E24EEE21300638AA4 /* UserController.swift in Sources */,
 				E2D302FF24E5F464008A6FAF /* DataLoader.swift in Sources */,
 				04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */,
 				992BB64C24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift in Sources */,
 				992BB64824EF0F4900638AA4 /* OktaAuth+Shared.swift in Sources */,
-				E2E2F0EC24F844A10050BFCF /* PaymentController.swift in Sources */,
 				99B6176124EB0C4E0099664B /* NewCartonCell.swift in Sources */,
 				9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */,
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
@@ -1041,6 +1052,7 @@
 				99B6175D24EAF0C70099664B /* SchedulePickupViewModel.swift in Sources */,
 				998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
+				E28E911424FEBC320014DF82 /* UIElementInitializers.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
 				993B15CE24F4575500529517 /* CursorlessTextField.swift in Sources */,
 				99B6177324EC743F0099664B /* LoginCoordinator.swift in Sources */,
@@ -1049,11 +1061,10 @@
 				04C91DDD25082979005ED433 /* ESBNavigationController.swift in Sources */,
 				04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */,
 				993B15CC24F42D8C00529517 /* InputPickerView.swift in Sources */,
+				E2C37DEB2508222600B9F20F /* PaymentHistoryCollectionViewCell.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				992BB64524EF021600638AA4 /* MockUserDataProvider.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
-				E28E911024FD541F0014DF82 /* PaymentHistoryViewController.swift in Sources */,
-				992FBC8924FDB2D50099C32D /* PropertyListViewModel.swift in Sources */,
 				9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */,
 				99B6175B24EAF0A20099664B /* SchedulePickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
@@ -1067,6 +1078,7 @@
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
 				99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */,
+				E2C37DEA2508222200B9F20F /* PaymentHistoryViewController.swift in Sources */,
 				992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */,
 				04C91DDB250817B2005ED433 /* ESBTextView.swift in Sources */,
 				E2D302F524E5CA32008A6FAF /* User.swift in Sources */,
@@ -1087,6 +1099,7 @@
 				E2E2F0EA24F838170050BFCF /* Payment.swift in Sources */,
 				99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */,
 				992FBC8724FDABE10099C32D /* LabelAlignedTextField.swift in Sources */,
+				E2C37DE92508221E00B9F20F /* PaymentCoordinator.swift in Sources */,
 				04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */,
 				04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */,
 				04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */,
@@ -1098,7 +1111,6 @@
 				99C0467C24FD8BB700E2B005 /* EditProfileViewModel.swift in Sources */,
 				E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */,
 				998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */,
-				E2E2F0E824F815780050BFCF /* PaymentCoordinator.swift in Sources */,
 				E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */,
 				998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */,
 				049379A524EAE7140084051B /* Images.swift in Sources */,

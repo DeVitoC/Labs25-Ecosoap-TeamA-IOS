@@ -89,7 +89,7 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     
     // Payments
     
-    func fetchPayments(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<[Payment]>) {
+    func fetchPayments(forPropertyID propertyID: String, _ completion: @escaping (Result<[Payment], Error>) -> Void) {
         performOperation(.paymentsByPropertyID(id: propertyID), completion: completion)
     }
 
@@ -160,3 +160,10 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
         }
     }
 }
+
+/// Protocol to set conformance to possible input types for GraphQL query and mutation variables
+protocol VariableType: Encodable {}
+
+//extension Dictionary: VariableType where Key == GraphQLController.InputTypes, Value == String {}
+extension Dictionary: VariableType where Key == String, Value == String {}
+extension Pickup.ScheduleInput: VariableType {}
