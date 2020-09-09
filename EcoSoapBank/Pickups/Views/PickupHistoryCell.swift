@@ -25,14 +25,14 @@ struct PickupHistoryCell: View {
         NavigationLink(
             destination: PickupDetailViewController.Representable(pickup: pickup)
         ) {
-            VStack(alignment: .leading, spacing: 22) {
+            VStack(alignment: .leading, spacing: 16) {
                 // Date
                 VStack(alignment: .leading) {
                     Text("READY DATE")
                         .font(UIFont.muli(style: .caption2, typeface: .regular))
                         .foregroundColor(Color(.secondaryLabel))
                     Text(pickup.readyDate.string())
-                        .font(UIFont.muli(style: .body, typeface: .regular))
+                        .font(UIFont.muli(style: .body, typeface: .bold))
                 }
 
                 HStack(spacing: 12) {
@@ -40,8 +40,8 @@ struct PickupHistoryCell: View {
                     HStack(spacing: 4) {
                         StatusIcon(status: pickup.status)
                         Text(pickup.status.display)
-                            .font(UIFont.muli(style: UIFont.TextStyle.body, typeface: .semiBold))
-                            .foregroundColor(Color(.label))
+                            .font(UIFont.muli(style: .callout, typeface: .regular))
+                            .foregroundColor(Color(UIColor.codGrey.orInverse()))
                         Spacer()
                     }.readingGeometry(
                         key: StatusWidthKey.self,
@@ -60,10 +60,12 @@ struct PickupHistoryCell: View {
                             .modifier(Icon())
                             .foregroundColor(Color(.downyBlue))
                         Text("\(pickup.cartons.count) Cartons")
-                            .font(UIFont.muli(style: UIFont.TextStyle.body, typeface: .semiBold))
+                            .font(UIFont.muli(style: .callout, typeface: .regular))
+                            .foregroundColor(Color(UIColor.codGrey.orInverse()))
                     }.padding(.trailing, 16)
                 }
-            }
+            }.padding(.top, 6)
+                .padding(.bottom, 10)
         }
         .font(Font(UIFont.muli(style: .body)))
     }
@@ -73,7 +75,7 @@ extension PickupHistoryCell {
     private struct Icon: ViewModifier {
         func body(content: Content) -> some View {
             content
-                .font(UIFont.systemFont(ofSize: 26, weight: .medium).scaled())
+                .font(UIFont.systemFont(ofSize: 24, weight: .medium).scaled())
                 .frame(width: 30, alignment: .leading)
         }
     }

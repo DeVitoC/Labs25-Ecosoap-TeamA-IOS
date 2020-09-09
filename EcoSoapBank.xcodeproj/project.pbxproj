@@ -77,13 +77,15 @@
 		049379A524EAE7140084051B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A424EAE7140084051B /* Images.swift */; };
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
-		049379AB24EB29160084051B /* ImpactHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379AA24EB29160084051B /* ImpactHeaderView.swift */; };
 		04B6FEAF24FEDCDF000CC58A /* DateCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */; };
 		04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */; };
 		04BE6D0324F041E700DFC47D /* ImpactControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */; };
 		04BE6D0524F045C800DFC47D /* MockImpactProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0424F045C800DFC47D /* MockImpactProvider.swift */; };
 		04BE6D0924F05A3100DFC47D /* ImpactCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0824F05A3100DFC47D /* ImpactCellTests.swift */; };
 		04BE6D0B24F05A6300DFC47D /* ImpactViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0A24F05A6300DFC47D /* ImpactViewControllerTests.swift */; };
+		04C91DDB250817B2005ED433 /* ESBTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDA250817B2005ED433 /* ESBTextView.swift */; };
+		04C91DDD25082979005ED433 /* ESBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDC25082979005ED433 /* ESBNavigationController.swift */; };
+		04C91DDF25082E71005ED433 /* DarkStatusBarHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */; };
 		04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90224FD60AA00263376 /* GraphQLOperation.swift */; };
 		04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90424FD85CF00263376 /* HTTPMethod.swift */; };
 		04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90624FD860B00263376 /* GraphQLError.swift */; };
@@ -242,13 +244,15 @@
 		049379A424EAE7140084051B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		049379AA24EB29160084051B /* ImpactHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactHeaderView.swift; sourceTree = "<group>"; };
 		04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCoding.swift; sourceTree = "<group>"; };
 		04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellViewModelTests.swift; sourceTree = "<group>"; };
 		04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactControllerTests.swift; sourceTree = "<group>"; };
 		04BE6D0424F045C800DFC47D /* MockImpactProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImpactProvider.swift; sourceTree = "<group>"; };
 		04BE6D0824F05A3100DFC47D /* ImpactCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellTests.swift; sourceTree = "<group>"; };
 		04BE6D0A24F05A6300DFC47D /* ImpactViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewControllerTests.swift; sourceTree = "<group>"; };
+		04C91DDA250817B2005ED433 /* ESBTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBTextView.swift; sourceTree = "<group>"; };
+		04C91DDC25082979005ED433 /* ESBNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBNavigationController.swift; sourceTree = "<group>"; };
+		04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkStatusBarHostingController.swift; sourceTree = "<group>"; };
 		04CCD90224FD60AA00263376 /* GraphQLOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLOperation.swift; sourceTree = "<group>"; };
 		04CCD90424FD85CF00263376 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		04CCD90624FD860B00263376 /* GraphQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLError.swift; sourceTree = "<group>"; };
@@ -449,6 +453,7 @@
 				04D6D72B24E8444C0003A585 /* BackgroundView.swift */,
 				0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */,
 				04D1758C24E4195C00F8929C /* GradientView.swift */,
+				04C91DDA250817B2005ED433 /* ESBTextView.swift */,
 				99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */,
 				0445F04D24EDD9C700A0A665 /* ESBButton.swift */,
 				993B15CB24F42D8C00529517 /* InputPickerView.swift */,
@@ -466,6 +471,8 @@
 				466C427C249A8749007D033E /* Colors.xcassets */,
 				049379A824EB25600084051B /* Images.xcassets */,
 				990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */,
+				04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */,
+				04C91DDC25082979005ED433 /* ESBNavigationController.swift */,
 				99BA964325001FE400821694 /* AppTabBarController.swift */,
 				466C4273249A8748007D033E /* AppDelegate.swift */,
 				466C4275249A8748007D033E /* SceneDelegate.swift */,
@@ -624,7 +631,6 @@
 			children = (
 				994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */,
 				994E4B7624DDB55E00C12921 /* ImpactViewController.swift */,
-				049379AA24EB29160084051B /* ImpactHeaderView.swift */,
 				04D1758824E3453B00F8929C /* ImpactCell.swift */,
 				04FEE1DB24E5E16600F51D69 /* ImpactCellViewModel.swift */,
 			);
@@ -1020,7 +1026,6 @@
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
 				992FBC8B24FDB67D0099C32D /* EditPropertyViewModel.swift in Sources */,
 				9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */,
-				049379AB24EB29160084051B /* ImpactHeaderView.swift in Sources */,
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
 				992BB63424ED930600638AA4 /* SortDescriptor.swift in Sources */,
@@ -1041,6 +1046,7 @@
 				99B6177324EC743F0099664B /* LoginCoordinator.swift in Sources */,
 				990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */,
 				04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */,
+				04C91DDD25082979005ED433 /* ESBNavigationController.swift in Sources */,
 				04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */,
 				993B15CC24F42D8C00529517 /* InputPickerView.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
@@ -1062,6 +1068,7 @@
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
 				99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */,
 				992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */,
+				04C91DDB250817B2005ED433 /* ESBTextView.swift in Sources */,
 				E2D302F524E5CA32008A6FAF /* User.swift in Sources */,
 				99B6176524EB256D0099664B /* NewCartonViewModel.swift in Sources */,
 				9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */,
@@ -1097,6 +1104,7 @@
 				049379A524EAE7140084051B /* Images.swift in Sources */,
 				466C4276249A8748007D033E /* SceneDelegate.swift in Sources */,
 				9985ED1224F06E39009F108F /* SteppedSlider.swift in Sources */,
+				04C91DDF25082E71005ED433 /* DarkStatusBarHostingController.swift in Sources */,
 				991874D424E4B28900F636FB /* UIView+Subviews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

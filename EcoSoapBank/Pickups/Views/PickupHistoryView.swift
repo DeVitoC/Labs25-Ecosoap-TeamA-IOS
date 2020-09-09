@@ -28,8 +28,7 @@ struct PickupHistoryView: View {
                     PickupHistoryCell(pickup: $0, statusWidth: self.$statusWidth)
                 }
             }
-            .listStyle(GroupedListStyle())
-            .navigationBarTitle("Pickup History", displayMode: .automatic)
+            .navigationBarTitle("Pickup History", displayMode: .inline)
             .navigationBarItems(trailing: Button(
                 action: schedulePickup,
                 label: newPickupButton))
@@ -41,7 +40,9 @@ struct PickupHistoryView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(height: 28)
-            .accessibility(label: Text("Schedule New Pickup"))
+            .foregroundColor(.barButtonTintColor)
+            .accessibility(label: Text("Schedule New Pickup")
+        )
     }
 
     private func gradientBackground() -> some View {

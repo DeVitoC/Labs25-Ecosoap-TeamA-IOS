@@ -22,8 +22,8 @@ class BackgroundView: UIView {
     
     private func setUp() {
         let gradient = configure(GradientView()) {
-            $0.colors = [UIColor.esbGreen.orInverse(),
-                         UIColor.downyBlue.orInverse()]
+            $0.colors = [UIColor.esbGreen.orAdjustingBrightness(by: -0.4),
+                         UIColor.downyBlue.orAdjustingBrightness(by: -0.4)]
             $0.startPoint = CGPoint(x: 0.2, y: 0.8)
             $0.endPoint = CGPoint(x: 0.4, y: -0.3)
         }
@@ -33,10 +33,6 @@ class BackgroundView: UIView {
         let circles = BackgroundCirclesView()
         addSubviewsUsingAutolayout(circles)
         circles.fillSuperview()
-
-        constrainNewSubviewToSides(configure(UIView(), with: {
-            $0.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.2)
-        }))
     }
 }
 
@@ -78,10 +74,10 @@ private class BackgroundCirclesView: UIView {
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         let greenColor = UIColor(red: 45 / 255, green: 155 / 255, blue: 115 / 255, alpha: 40 / 100)
-            .orInverse()
+            .orAdjustingBrightness(by: -0.3)
             .cgColor
         let blueColor = UIColor(red: 46 / 255, green: 210 / 255, blue: 247 / 255, alpha: 55 / 100)
-            .orWithBrightness(0.3)
+            .orAdjustingBrightness(by: -0.3)
             .cgColor
         
         circles.forEach {

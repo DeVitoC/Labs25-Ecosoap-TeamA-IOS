@@ -27,6 +27,12 @@ class ESBCircularImageView: GradientView {
         }
     }
     
+    var borderColor: UIColor = UIColor.codGrey.orInverse() {
+        didSet {
+            layer.borderColor = borderColor.cgColor
+        }
+    }
+    
     // MARK: - Private Properties
     
     private let imageView = configure(UIImageView()) {
@@ -67,7 +73,9 @@ class ESBCircularImageView: GradientView {
     func setUp(withInset inset: CGFloat) {
         startPoint = CGPoint(x: 0, y: 1)
         endPoint = CGPoint(x: 1, y: 0)
-        updateColors()
+//        updateColors()
+        colors = [.esbGreen, .downyBlue]
+        layer.borderColor = borderColor.cgColor
         layer.borderWidth = borderWidth
         isUserInteractionEnabled = false
 
@@ -78,8 +86,6 @@ class ESBCircularImageView: GradientView {
     }
 
     func updateColors() {
-        colors = [UIColor.esbGreen.orAdjustingBrightness(by: -0.25),
-                  UIColor.downyBlue.orAdjustingBrightness(by: -0.25)]
-        layer.borderColor = UIColor.systemBackground.cgColor
+        layer.borderColor = borderColor.cgColor
     }
 }
