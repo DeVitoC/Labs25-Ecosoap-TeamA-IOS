@@ -14,7 +14,6 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
             setupUI()
         }
     }
-    private lazy var uiInitializers = UIElementInitializers()
     var isExpanded = false
     var labelHeight = 25
 
@@ -29,10 +28,10 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         let invoiceString = "Period: \(dateFormatter.string(from: invoicePeriodStartDate)) - \(dateFormatter.string(from: invoicePeriodEndDate))"
-        let invoicePeriodLabel = uiInitializers.createLabel(invoiceString, frame: .zero, alignment: .left)
-        let amountDueLabel = uiInitializers.createLabel("Amt Due:  \(payment.amountDue)", frame: .zero, alignment: .left)
-        let amountPaidLabel = uiInitializers.createLabel("Amt Paid: \(payment.amountPaid)", frame: .zero, alignment: .left)
-        let detailsImageView = uiInitializers.createImageView("chevron.right")
+        let invoicePeriodLabel = UILabel(invoiceString, frame: .zero, alignment: .left)
+        let amountDueLabel = UILabel("Amt Due:  \(payment.amountDue)", frame: .zero, alignment: .left)
+        let amountPaidLabel = UILabel("Amt Paid: \(payment.amountPaid)", frame: .zero, alignment: .left)
+        let detailsImageView = UIImageView("chevron.right")
 
         addSubview(invoicePeriodLabel)
         addSubview(amountDueLabel)
@@ -53,10 +52,10 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
         ])
 
         if isExpanded {
-            let paymentDateLabel = uiInitializers.createLabel("Payment Date: \(dateFormatter.string(from: payment.date))", frame: .zero, alignment: .left)
-            let paymentMethodLabel = uiInitializers.createLabel("Method: \(payment.paymentMethod)", frame: .zero, alignment: .left)
-            let invoiceNumberLabel = uiInitializers.createLabel("Invoice Code: \(invoiceCode)", frame: .zero, alignment: .left)
-            let invoiceLabel = uiInitializers.createLabel("Invoice: pdf", frame: .zero, alignment: .left)
+            let paymentDateLabel = UILabel("Payment Date: \(dateFormatter.string(from: payment.date))", frame: .zero, alignment: .left)
+            let paymentMethodLabel = UILabel("Method: \(payment.paymentMethod)", frame: .zero, alignment: .left)
+            let invoiceNumberLabel = UILabel("Invoice Code: \(invoiceCode)", frame: .zero, alignment: .left)
+            let invoiceLabel = UILabel("Invoice: pdf", frame: .zero, alignment: .left)
 
             addSubview(paymentDateLabel)
             addSubview(paymentMethodLabel)
