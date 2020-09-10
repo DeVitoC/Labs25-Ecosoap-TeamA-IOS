@@ -32,7 +32,7 @@ class PaymentHistoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Payment History"
+        self.navigationItem.title = "Payment History"
         setupCollectionView()
         guard let user = paymentController?.user, let properties = user.properties else { return }
         paymentController?.fetchPayments(forPropertyID: properties[0].id, completion: { result in
@@ -46,10 +46,6 @@ class PaymentHistoryViewController: UIViewController {
                 print(error.localizedDescription)
             }
         })
-    }
-
-    func setupNavBar() {
-//        view.add
     }
 
     func setupCollectionView() {
