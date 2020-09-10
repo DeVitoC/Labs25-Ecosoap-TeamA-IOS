@@ -86,9 +86,6 @@
 		04C91DDB250817B2005ED433 /* ESBTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDA250817B2005ED433 /* ESBTextView.swift */; };
 		04C91DDD25082979005ED433 /* ESBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDC25082979005ED433 /* ESBNavigationController.swift */; };
 		04C91DDF25082E71005ED433 /* DarkStatusBarHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */; };
-		04C91DDB250817B2005ED433 /* ESBTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDA250817B2005ED433 /* ESBTextView.swift */; };
-		04C91DDD25082979005ED433 /* ESBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDC25082979005ED433 /* ESBNavigationController.swift */; };
-		04C91DDF25082E71005ED433 /* DarkStatusBarHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */; };
 		04C91DF425090633005ED433 /* UserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91DF325090633005ED433 /* UserDefaultsTests.swift */; };
 		04C91E13250928B2005ED433 /* mockImpactStatsByPropertyId.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EC24E5B260008A6FAF /* mockImpactStatsByPropertyId.json */; };
 		04C91E14250928B7005ED433 /* mockUserByIdInput.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D302EE24E5B489008A6FAF /* mockUserByIdInput.json */; };
@@ -111,7 +108,6 @@
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
-		04D3252F25004D57005ABDEB /* GraphQLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3252E25004D57005ABDEB /* GraphQLResult.swift */; };
 		04D3252F25004D57005ABDEB /* GraphQLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3252E25004D57005ABDEB /* GraphQLResult.swift */; };
 		04D3253E250148E5005ABDEB /* GraphQLControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9524F1653000515831 /* GraphQLControllerTests.swift */; };
 		04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6D72B24E8444C0003A585 /* BackgroundView.swift */; };
@@ -187,9 +183,7 @@
 		99D0166024FEA6D9001A7555 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D0165F24FEA6D8001A7555 /* With.swift */; };
 		E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220C32624E35E59003FF32D /* GraphQLQueries.swift */; };
 		E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */; };
-		E28E911024FD541F0014DF82 /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */; };
 		E28E911424FEBC320014DF82 /* UIElementInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E911324FEBC320014DF82 /* UIElementInitializers.swift */; };
-		E2AEB12624E7460600C42ACD /* mockImpactStatsFailure.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */; };
 		E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */; };
 		E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B324E45BF800C5DF8B /* QueryObjects.swift */; };
 		E2C37DE32508207C00B9F20F /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2F0EB24F844A10050BFCF /* PaymentController.swift */; };
@@ -273,9 +267,6 @@
 		04C91DDA250817B2005ED433 /* ESBTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBTextView.swift; sourceTree = "<group>"; };
 		04C91DDC25082979005ED433 /* ESBNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBNavigationController.swift; sourceTree = "<group>"; };
 		04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkStatusBarHostingController.swift; sourceTree = "<group>"; };
-		04C91DDA250817B2005ED433 /* ESBTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBTextView.swift; sourceTree = "<group>"; };
-		04C91DDC25082979005ED433 /* ESBNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBNavigationController.swift; sourceTree = "<group>"; };
-		04C91DDE25082E71005ED433 /* DarkStatusBarHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkStatusBarHostingController.swift; sourceTree = "<group>"; };
 		04C91DF325090633005ED433 /* UserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
 		04C91DF52509152C005ED433 /* mockPaymentsByPropertyIdSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockPaymentsByPropertyIdSuccess.json; sourceTree = "<group>"; };
 		04C91DF92509207A005ED433 /* mockUserByIdFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockUserByIdFailure.json; sourceTree = "<group>"; };
@@ -291,7 +282,6 @@
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		04D3252E25004D57005ABDEB /* GraphQLResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLResult.swift; sourceTree = "<group>"; };
 		04D3252E25004D57005ABDEB /* GraphQLResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLResult.swift; sourceTree = "<group>"; };
 		04D325342501489A005ABDEB /* AsynchronousTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsynchronousTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D325382501489A005ABDEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -591,7 +581,6 @@
 				992BB64224EEFBAD00638AA4 /* Errors.swift */,
 				992C929024F70B0C004FCBBB /* Randomizable.swift */,
 				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
-				E28E911324FEBC320014DF82 /* UIElementInitializers.swift */,
 				04C91E25250929C1005ED433 /* PrintJson.swift */,
 			);
 			path = Helpers;
@@ -625,6 +614,7 @@
 				049379A624EAE9FF0084051B /* UIView+Layout.swift */,
 				992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */,
 				9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */,
+				E28E911324FEBC320014DF82 /* UIElementInitializers.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -689,7 +679,6 @@
 			isa = PBXGroup;
 			children = (
 				E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */,
-				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
 				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
 				E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */,
 				E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */,
