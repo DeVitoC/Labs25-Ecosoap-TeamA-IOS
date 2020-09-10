@@ -24,7 +24,7 @@ class ImpactViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemGray6
-        title = "Impact Summary"
+        navigationItem.title = "Impact Summary"
         
         massUnitObserver = UserDefaults.$massUnit.observe { [weak self] _, _ in
             self?.collectionView.reloadData()
