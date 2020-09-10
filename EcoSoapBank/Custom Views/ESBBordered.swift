@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// A shared interface for setting up a bordered view, and updating the border
+/// when switching between light and dark modes. Has defaults in an extension to
+/// allow for changing settings among multiple views in one place.
 protocol ESBBordered {
     var lightModeBorderColor: UIColor { get }
     var darkModeBorderColor: UIColor { get }
@@ -37,10 +40,17 @@ extension ESBBordered where Self: UIView {
     }
     
     func configureBorder() {
-        backgroundColor = .systemBackground
         clipsToBounds = true
         layer.cornerRadius = cornerRadius
         layer.borderWidth = borderWidth
         updateBorderColor()
     }
 }
+
+// Use this to call the updateBorderColor method from a view conforming to ESBBordered:
+
+//override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//    if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
+//        updateBorderColor()
+//    }
+//}
