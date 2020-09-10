@@ -21,21 +21,21 @@ struct MainProfileView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("User".uppercased())) {
-                    NavigationLink(
-                        destination: EditProfileView(viewModel: viewModel)
-                    ) {
-                        HStack {
-                            Image.personSquareFill()
-                                .foregroundColor(Color(red: 0.8, green: 0.5, blue: 0.1))
-                                .readingGeometry(key: IconWidth.self, valuePath: \.size.width) {
-                                    self.iconWidth = $0
+                if !viewModel.propertyOptions.isEmpty {
+                    Section(header: Text("User".uppercased())) {
+                        NavigationLink(
+                            destination: EditProfileView(viewModel: viewModel)
+                        ) {
+                            HStack {
+                                Image.personSquareFill()
+                                    .foregroundColor(Color(red: 0.8, green: 0.5, blue: 0.1))
+                                    .readingGeometry(key: IconWidth.self, valuePath: \.size.width) {
+                                        self.iconWidth = $0
+                                }
+                                Text("Edit Profile")
                             }
-                            Text("Edit Profile")
                         }
-                    }
 
-                    if !viewModel.propertyOptions.isEmpty {
                         Picker(
                             selection: $viewModel.selectedProperty,
                             label: HStack {
@@ -57,20 +57,20 @@ struct MainProfileView: View {
                                 Text($0.display).tag($0)
                             }
                         }
-                    } else {
-                        Text("User account has no associated properties. Please contact Eco-Soap Bank for more info.")
                     }
-                }
 
-                Section(header: Text("Edit Property Info".uppercased())) {
-                    ForEach(viewModel.properties) { property in
-                        NavigationLink(
-                            destination: EditPropertyView(
-                                viewModel: EditPropertyViewModel(property))
-                        ) {
-                            Text(property.name)
+                    Section(header: Text("Edit Property Info".uppercased())) {
+                        ForEach(viewModel.properties) { property in
+                            NavigationLink(
+                                destination: EditPropertyView(
+                                    viewModel: EditPropertyViewModel(property))
+                            ) {
+                                Text(property.name)
+                            }
                         }
                     }
+                } else {
+                    Text("User account has no associated properties. Please contact Eco-Soap Bank for more info.")
                 }
 
                 Section {
