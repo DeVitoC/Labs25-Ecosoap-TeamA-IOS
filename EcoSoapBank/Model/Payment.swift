@@ -28,10 +28,17 @@ struct PaymentInput: Encodable {
     let hospitalityContractId: String
 }
 
-enum PaymentMethod: String, Codable, CaseIterable {
+enum PaymentMethod: String, Codable, CaseIterable, CustomStringConvertible {
     case ach = "ACH"
     case credit = "CREDIT"
     case debit = "DEBIT"
     case wire = "WIRE"
     case other = "OTHER"
+
+    var description: String {
+        switch self {
+        case .ach: return rawValue
+        default: return rawValue.capitalized
+        }
+    }
 }
