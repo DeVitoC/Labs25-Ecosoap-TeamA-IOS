@@ -18,6 +18,7 @@ class PaymentHistoryViewController: UIViewController {
         }
     }
 
+
     var cellWidth: CGFloat {
         paymentCollectionView.frame.size.width
     }
@@ -39,7 +40,12 @@ class PaymentHistoryViewController: UIViewController {
             switch result {
             case .success(let payments):
                 DispatchQueue.main.async {
-                    self.payments = payments
+                    var sortedPayments: [Payment] = payments
+                    sortedPayments.sort {
+                        guard let date0 = $0.invoicePeriodEndDate, let date1 = $1.invoicePeriodEndDate else { return false }
+                        return date0 > date1
+                    }
+                    self.payments = sortedPayments
                     self.isExpanded = Array(repeating: false, count: payments.count)
                 }
             case .failure(let error):
