@@ -12,17 +12,17 @@ import SwiftUI
 
 class PickupDetailViewController: UIViewController {
     
-//    @IBOutlet private var tableView: UITableView!
-//    @IBOutlet private var headingLabels: [UILabel]!
+    // MARK: -  Public Properties
     
-//    @IBOutlet private weak var confirmationCodeLabel: UILabel!
-//    @IBOutlet private weak var statusLabel: UILabel!
-//    @IBOutlet private weak var readyDateLabel: UILabel!
-//    @IBOutlet private weak var pickupDateLabel: UILabel!
-//    @IBOutlet private weak var cartonStack: UIStackView!
-//    @IBOutlet private weak var notesView: UITextView!
-
-    private var cartonViewCache: [UIStackView] = []
+    var pickup: Pickup { didSet { updateViews() } }
+    
+    // MARK: - Private Properties
+    
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var collectionView: UICollectionView!
+    @IBOutlet private var headingLabels: [UILabel]!
+    @IBOutlet var notesHeadingLabel: UILabel!
+    @IBOutlet private var notesView: UILabel!
     
     private var cells: [(text: String, detail: String)] {
         [
@@ -32,14 +32,7 @@ class PickupDetailViewController: UIViewController {
             ("Pickup Date", pickup.pickupDate?.string() ?? "N/A"),
         ]
     }
-    
-    var pickup: Pickup {
-        didSet {
-            guard isViewLoaded else { return }
-            setUpViews()
-        }
-    }
-    
+
     // MARK: - Init / Lifecycle
     
     init?(coder: NSCoder, pickup: Pickup) {
@@ -55,74 +48,29 @@ class PickupDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpViews()
+        title = "Pickup Details"
         
-//        tableView.dataSource = self
-        // set fonts
-        //        [confirmationCodeLabel, statusLabel, readyDateLabel, pickupDateLabel]
-        //            .forEach { $0.font = .muli(style: .body) }
-//        headingLabels.forEach { $0.font = .muli(style: .body, typeface: .bold) }
-//        notesView.font = UIFont.muli(ofSize: 13)
-        // swiftlint:disable line_length
-//        notesView.text = """
-//        Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.
-//        """
-//        title = "Pickup Details"
-//        notesView.textColor = UIColor.codGrey.orInverse()
+        tableView.dataSource = self
+        collectionView.dataSource = self
+        
+        headingLabels.forEach { $0.font = .muli(style: .body, typeface: .bold) }
+        notesView.font = UIFont.muli(ofSize: 14)
+        notesView.textColor = UIColor.codGrey.orInverse()
+        
+        updateViews()
     }
     
-}
-
-// MARK: - Private Helpers
-
-extension PickupDetailViewController {
-    private func setUpViews() {
-        // set content from pickup
-//        confirmationCodeLabel.text = pickup.confirmationCode
-//        statusLabel.text = pickup.status.display
-//        statusLabel.textColor = pickup.status.color
-//        readyDateLabel.text = pickup.readyDate.string()
-//        pickupDateLabel.text = pickup.pickupDate?.string() ?? ""
-//        notesView.text = pickup.notes
-
-//        // replace carton views
-//        cartonStack.arrangedSubviews.forEach {
-//            guard let cartonView = $0 as? UIStackView else { return }
-//            cartonViewCache.append(cartonView)
-//            cartonStack.removeArrangedSubview(cartonView)
-//        }
-//        pickup.cartons
-//            .map(configuredViewForCarton(_:))
-//            .forEach(cartonStack.addArrangedSubview(_:))
+    // MARK: - Private Functions
+    
+    private func updateViews() {
+        guard isViewLoaded else { return }
+        
+        notesView.text = pickup.notes
+        notesHeadingLabel.isHidden = pickup.notes.isEmpty
     }
-
-//    private func configuredViewForCarton(_ carton: Pickup.Carton) -> UIView {
-//        let cartonView = cartonViewCache.popLast() ?? newEmptyCartonView()
-//
-//        (cartonView.arrangedSubviews[0] as? UILabel)?.text =
-//            carton.contents?.product.rawValue.capitalized ?? "<empty>"
-//
-//        (cartonView.arrangedSubviews[1] as? UILabel)?.text =
-//            carton.contents?.percentFull.percentString ?? ""
-//
-//        return cartonView
-//    }
-
-//    private func newEmptyCartonView() -> UIStackView {
-//        let labels = configure([UILabel(), UILabel()]) { labels in
-//            labels.forEach { $0.font = .muli(style: .caption1) }
-//            labels[0].textAlignment = .right
-//        }
-//        return configure(UIStackView(arrangedSubviews: labels)) {
-//            $0.axis = .horizontal
-//            $0.alignment = .fill
-//            $0.distribution = .fillEqually
-//            $0.spacing = 8
-//        }
-//    }
-    
-    
 }
+
+// MARK: - Table View Data Source
 
 extension PickupDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -140,6 +88,26 @@ extension PickupDetailViewController: UITableViewDataSource {
         return cell
     }
 }
+
+// MARK: - Carton Collection View Data Source
+
+extension PickupDetailViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        pickup.cartons.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: NSStringFromClass(PickupDetailCartonCell.self),
+            for: indexPath) as? PickupDetailCartonCell else {
+                fatalError("Could not cast cell as \(PickupDetailCartonCell.self)")
+        }
+        cell.carton = pickup.cartons[indexPath.item]
+        return cell
+    }
+}
+
+// MARK: - SwiftUI Wrapper
 
 extension PickupDetailViewController {
     private struct _Representable: UIViewControllerRepresentable {
