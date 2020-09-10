@@ -49,7 +49,7 @@ class PaymentHistoryViewController: UIViewController {
                     self.isExpanded = Array(repeating: false, count: payments.count)
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                self.presentAlert(for: error)
             }
         })
     }
