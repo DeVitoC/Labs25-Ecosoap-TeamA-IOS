@@ -105,6 +105,7 @@
 		04C91E282509D04A005ED433 /* ESBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91E272509D04A005ED433 /* ESBTextField.swift */; };
 		04C91E2A2509D069005ED433 /* ESBBordered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91E292509D069005ED433 /* ESBBordered.swift */; };
 		04C91E2C250A920F005ED433 /* CartonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91E2B250A920F005ED433 /* CartonView.swift */; };
+		04C91E2E250A9C6A005ED433 /* PickupDetailCartonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C91E2D250A9C6A005ED433 /* PickupDetailCartonCell.swift */; };
 		04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90224FD60AA00263376 /* GraphQLOperation.swift */; };
 		04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90424FD85CF00263376 /* HTTPMethod.swift */; };
 		04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90624FD860B00263376 /* GraphQLError.swift */; };
@@ -283,6 +284,7 @@
 		04C91E272509D04A005ED433 /* ESBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBTextField.swift; sourceTree = "<group>"; };
 		04C91E292509D069005ED433 /* ESBBordered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBBordered.swift; sourceTree = "<group>"; };
 		04C91E2B250A920F005ED433 /* CartonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartonView.swift; sourceTree = "<group>"; };
+		04C91E2D250A9C6A005ED433 /* PickupDetailCartonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupDetailCartonCell.swift; sourceTree = "<group>"; };
 		04CCD90224FD60AA00263376 /* GraphQLOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLOperation.swift; sourceTree = "<group>"; };
 		04CCD90424FD85CF00263376 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		04CCD90624FD860B00263376 /* GraphQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLError.swift; sourceTree = "<group>"; };
@@ -766,6 +768,7 @@
 				998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */,
 				992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */,
 				992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */,
+				04C91E2D250A9C6A005ED433 /* PickupDetailCartonCell.swift */,
 				04C91E2B250A920F005ED433 /* CartonView.swift */,
 				99B6175A24EAF0A20099664B /* SchedulePickupViewController.swift */,
 				99B6176024EB0C4E0099664B /* NewCartonCell.swift */,
@@ -1213,6 +1216,7 @@
 				99C0467C24FD8BB700E2B005 /* EditProfileViewModel.swift in Sources */,
 				E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */,
 				998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */,
+				04C91E2E250A9C6A005ED433 /* PickupDetailCartonCell.swift in Sources */,
 				E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */,
 				998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */,
 				049379A524EAE7140084051B /* Images.swift in Sources */,
