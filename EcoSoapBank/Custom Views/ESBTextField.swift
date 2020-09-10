@@ -1,16 +1,16 @@
 //
-//  ESBTextView.swift
+//  ESBTextField.swift
 //  EcoSoapBank
 //
-//  Created by Shawn Gee on 9/8/20.
+//  Created by Shawn Gee on 9/9/20.
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
 import UIKit
 
-class ESBTextView: UITextView, ESBBordered {
-    override init(frame: CGRect, textContainer: NSTextContainer?) {
-        super.init(frame: frame, textContainer: textContainer)
+class ESBTextField: UITextField, ESBBordered {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setUp()
     }
     
@@ -26,6 +26,7 @@ class ESBTextView: UITextView, ESBBordered {
     }
     
     private func setUp() {
+        borderStyle = .none
         configureBorder()
     }
 }
