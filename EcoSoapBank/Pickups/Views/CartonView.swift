@@ -8,14 +8,63 @@
 
 import UIKit
 
-class CartonView: UIView {
+class CartonView: UIView, ESBBordered {
+    let borderWidth: CGFloat = 1.0
+    let lightModeBorderColor = UIColor.codGrey
+    let darkModeBorderColor = UIColor.codGrey.inverseBrightness
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    var percentFull: Int? {
+        didSet {
+            setNeedsDisplay()
+        }
     }
-    */
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setUp()
+    }
+    
+    private let fillRect = UIView(frame: .zero)
+    
+    private func setUp() {
+        configureBorder()
+        fillRect.backgroundColor = .downyBlue
+        addSubview(fillRect)
+    }
+    
+    override func layoutSubviews() {
+        if let percentFull = percentFull {
+            fillRect.frame = frame.offsetBy(
+                dx: 0,
+                dy: (CGFloat(100 - percentFull) / 100 * frame.height)
+            )
+        }
+    }
+    
+}
+
+import SwiftUI
+
+struct CartonViewWrapper: UIViewRepresentable {
+    func makeUIView(context: UIViewRepresentableContext<CartonViewWrapper>) -> UIView {
+        configure(CartonView(frame: .zero)) {
+            $0.percentFull = 50
+        }
+    }
+    
+    func updateUIView(_ uiView: CartonViewWrapper.UIViewType, context: UIViewRepresentableContext<CartonViewWrapper>) {
+    }
+}
+
+struct CartonViewWrapper_Previews: PreviewProvider {
+    static var previews: some View {
+        HStack {
+            CartonViewWrapper().frame(width: 36, height: 36, alignment: .center)
+        }
+    }
 }
