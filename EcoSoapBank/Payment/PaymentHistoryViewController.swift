@@ -78,17 +78,11 @@ extension PaymentHistoryViewController: UICollectionViewDelegate {
     }
 
     func toggleExpandCell(indexPath: IndexPath) {
+        if !isExpanded[indexPath.row] {
+            isExpanded = Array(repeating: false, count: payments.count)
+        }
         isExpanded[indexPath.row].toggle()
-        UIView.animate(withDuration: 0.8,
-                       delay: 0.0,
-                       usingSpringWithDamping: 0.9,
-                       initialSpringVelocity: 0.9,
-                       options: UIView.AnimationOptions.curveEaseInOut,
-                       animations: {
-            self.paymentCollectionView.reloadItems(at: [indexPath])
-        }, completion: { success in
-            print(success)
-        })
+        self.paymentCollectionView.reloadData()
     }
 }
 
