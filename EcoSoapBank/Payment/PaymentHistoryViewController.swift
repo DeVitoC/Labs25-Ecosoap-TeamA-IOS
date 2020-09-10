@@ -53,11 +53,7 @@ class PaymentHistoryViewController: UIViewController {
             }
         })
     }
-
-    func setupNavBar() {
-//        view.add
-    }
-
+    
     func setupCollectionView() {
         view.addSubview(paymentCollectionView)
         paymentCollectionView.dataSource = self
