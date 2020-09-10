@@ -26,6 +26,7 @@ class ESBTextField: UITextField, ESBBordered {
     }
     
     private func setUp() {
+        backgroundColor = .systemBackground
         borderStyle = .none
         configureBorder()
     }
