@@ -6,19 +6,28 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
+import SwiftUI
 import UIKit
 
 class CartonView: UIView, ESBBordered {
-    let borderWidth: CGFloat = 1.0
-    let lightModeBorderColor = UIColor.codGrey
-    let darkModeBorderColor = UIColor.codGrey.inverseBrightness
-
+    
+    // MARK: - Public Properties
+    
     var percentFull: Int? {
         didSet {
-            setNeedsDisplay()
+            setNeedsLayout()
         }
     }
+    
+    // ESB Bordered Settings
+    let borderWidth: CGFloat = 1.0
+    let lightModeBorderColor = UIColor.codGrey
+    let darkModeBorderColor = UIColor.white
 
+    private let fillRect = UIView(frame: .zero)
+    
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
@@ -29,26 +38,36 @@ class CartonView: UIView, ESBBordered {
         setUp()
     }
     
-    private let fillRect = UIView(frame: .zero)
-    
-    private func setUp() {
-        configureBorder()
-        fillRect.backgroundColor = .downyBlue
-        addSubview(fillRect)
-    }
+    // MARK: - Overrides
     
     override func layoutSubviews() {
         if let percentFull = percentFull {
-            fillRect.frame = frame.offsetBy(
+            print(percentFull)
+            fillRect.frame = bounds.offsetBy(
                 dx: 0,
                 dy: (CGFloat(100 - percentFull) / 100 * frame.height)
             )
         }
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
+            updateBorderColor()
+        }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setUp() {
+        backgroundColor = .systemBackground
+        configureBorder()
+        
+        fillRect.backgroundColor = UIColor.downyBlue
+        addSubview(fillRect)
+    }
 }
 
-import SwiftUI
+// MARK: - SwiftUI Previews
 
 struct CartonViewWrapper: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<CartonViewWrapper>) -> UIView {
