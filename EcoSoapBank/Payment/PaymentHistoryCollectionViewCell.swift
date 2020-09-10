@@ -8,71 +8,160 @@
 
 import UIKit
 
+
+/*
+ struct Payment: Decodable {
+     let id: String
+     let invoiceCode: String?
+     let invoice: String?
+     let amountPaid: Int
+     let amountDue: Int
+     let date: Date
+     let invoicePeriodStartDate: Date?
+     let invoicePeriodEndDate: Date?
+     let dueDate: Date?
+     let paymentMethod: PaymentMethod
+ }
+ */
+
 class PaymentHistoryCollectionViewCell: UICollectionViewCell {
+    private enum Padding {
+        static let small: CGFloat = 8
+        static let medium: CGFloat = 12
+        static let large: CGFloat = 20
+    }
+
     var payment: Payment? {
         didSet {
-            setupUI()
+            updateContent()
         }
     }
-    private lazy var uiInitializers = UIElementInitializers()
-    var isExpanded = false
-    var labelHeight = 25
 
-    func setupUI() {
-        removeSubviews()
+    var isExpanded = false {
+        didSet {
+            updateViews()
+        }
+    }
+
+    private let dateFormatter = configure(DateFormatter()) {
+        $0.dateStyle = .medium
+    }
+
+    private lazy var rootStack = UIStackView(axis: .horizontal, alignment: .firstBaseline, distribution: .fill, spacing: Padding.small)
+    private lazy var mainStack = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill, spacing: Padding.small)
+    private lazy var duePaidStack = UIStackView(axis: .horizontal, alignment: .firstBaseline, distribution: .fillEqually, spacing: Padding.small)
+    private lazy var detailStack = UIStackView(axis: .horizontal, alignment: .firstBaseline, distribution: .fillEqually, spacing: Padding.small)
+    private lazy var invoiceStack = UIStackView(axis: .horizontal, alignment: .lastBaseline, distribution: .fillEqually, spacing: Padding.small)
+    private lazy var invoicePeriod = contentLabel()
+    private lazy var amountDue = contentLabel()
+    private lazy var amountPaid = contentLabel()
+    private lazy var paymentDate = contentLabel()
+    private lazy var paymentMethod = contentLabel()
+    private lazy var invoiceCode = contentLabel()
+    private lazy var invoiceButton = configure(UIButton()) {
+        $0.setTitle("Open invoice", for: .normal)
+        $0.tintColor = .esbGreen
+        $0.setTitleColor(.esbGreen, for: .normal)
+        $0.addTarget(self, action: #selector(openInvoice(_:)), for: .touchUpInside)
+        $0.titleLabel?.lineBreakMode = .byWordWrapping
+        $0.titleLabel?.numberOfLines = 0
+        $0.titleLabel?.textAlignment = .left
+        $0.contentHorizontalAlignment = .leading
+    }
+    private lazy var disclosureIndicator = configure(UIImageView(systemName: "chevron.right")) {
+        $0.preferredSymbolConfiguration = .init(textStyle: .body, scale: .small)
+        $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        $0.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        $0.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+
+    private func captionLabel(_ text: String) -> UILabel {
+        configure(UILabel()) {
+            $0.text = text.uppercased()
+            $0.font = .muli(style: .caption1)
+            $0.textColor = .secondaryLabel
+        }
+    }
+
+    private func labeledStack(_ newSubViews: [UIView]) -> UIStackView {
+        let stack = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill, spacing: 4)
+        newSubViews.forEach { stack.addArrangedSubview($0) }
+        return stack
+    }
+
+    private func contentLabel() -> UILabel {
+        configure(UILabel()) {
+            $0.font = .muli(typeface: .semiBold)
+        }
+    }
+
+    private func commonInit() {
+        backgroundColor = .secondarySystemBackground
+
+        constrainNewSubviewToSafeArea(rootStack, constant: 12)
+        [mainStack, disclosureIndicator]
+            .forEach(rootStack.addArrangedSubview(_:))
+
+        mainStack.addArrangedSubview(invoicePeriod)
+
+        [labeledStack([captionLabel("Amount Due"), amountDue]), labeledStack([captionLabel("Amount Paid"), amountPaid])]
+            .forEach(duePaidStack.addArrangedSubview(_:))
+        mainStack.addArrangedSubview(duePaidStack)
+
+        [labeledStack([captionLabel("Paid"), paymentDate]), labeledStack([captionLabel("Method"), paymentMethod])]
+            .forEach(detailStack.addArrangedSubview(_:))
+        [labeledStack([captionLabel("Invoice"), invoiceCode]), invoiceButton]
+            .forEach(invoiceStack.addArrangedSubview(_:))
+        mainStack.addArrangedSubview(detailStack)
+        mainStack.addArrangedSubview(invoiceStack)
+        configure(UIView()) {
+            $0.backgroundColor = .tertiaryLabel
+            constrainNewSubview($0, to: [.bottom, .trailing])
+            NSLayoutConstraint.activate([
+                $0.heightAnchor.constraint(equalToConstant: 0.5),
+                $0.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 12)
+            ])
+        }
+
+        updateViews()
+    }
+
+    private func updateContent() {
         guard let payment = payment,
             let invoicePeriodStartDate = payment.invoicePeriodStartDate,
-            let invoicePeriodEndDate = payment.invoicePeriodEndDate,
-            let invoiceCode = payment.invoiceCode else {
-                return
-        }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        let invoiceString = "Period: \(dateFormatter.string(from: invoicePeriodStartDate)) - \(dateFormatter.string(from: invoicePeriodEndDate))"
-        let invoicePeriodLabel = uiInitializers.createLabel(invoiceString, frame: .zero, alignment: .left)
-        let amountDueLabel = uiInitializers.createLabel("Amt Due:  \(payment.amountDue)", frame: .zero, alignment: .left)
-        let amountPaidLabel = uiInitializers.createLabel("Amt Paid: \(payment.amountPaid)", frame: .zero, alignment: .left)
-        let detailsImageView = uiInitializers.createImageView("chevron.right")
+            let invoicePeriodEndDate = payment.invoicePeriodEndDate
+            else { return }
 
-        addSubview(invoicePeriodLabel)
-        addSubview(amountDueLabel)
-        addSubview(amountPaidLabel)
-        addSubview(detailsImageView)
+        amountDue.text = NumberFormatter.forDollars.string(from: payment.amountDue as NSNumber)
+        amountPaid.text = NumberFormatter.forDollars.string(from: payment.amountPaid as NSNumber)
+        invoicePeriod.text = "\(dateFormatter.string(from: invoicePeriodStartDate)) — \(dateFormatter.string(from: invoicePeriodEndDate))"
+        paymentDate.text = dateFormatter.string(from: payment.date)
+        paymentMethod.text = "\(payment.paymentMethod)"
+        invoiceCode.text = payment.invoiceCode
+    }
 
-        NSLayoutConstraint.activate([
-            invoicePeriodLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            invoicePeriodLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            amountDueLabel.topAnchor.constraint(equalTo: invoicePeriodLabel.bottomAnchor, constant: 10),
-            amountDueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            amountPaidLabel.topAnchor.constraint(equalTo: amountDueLabel.topAnchor),
-            amountPaidLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: (frame.width / 2)),
-            detailsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-            detailsImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            detailsImageView.heightAnchor.constraint(equalToConstant: 20),
-            detailsImageView.widthAnchor.constraint(equalToConstant: 20)
-        ])
+    private func updateViews() {
+        self.disclosureIndicator.transform = self.isExpanded ?
+            CGAffineTransform(rotationAngle: .pi / 2)
+            : .identity
+        self.detailStack.isHidden = !self.isExpanded
+        self.invoiceStack.isHidden = !self.isExpanded
+    }
 
-        if isExpanded {
-            let paymentDateLabel = uiInitializers.createLabel("Payment Date: \(dateFormatter.string(from: payment.date))", frame: .zero, alignment: .left)
-            let paymentMethodLabel = uiInitializers.createLabel("Method: \(payment.paymentMethod)", frame: .zero, alignment: .left)
-            let invoiceNumberLabel = uiInitializers.createLabel("Invoice Code: \(invoiceCode)", frame: .zero, alignment: .left)
-            let invoiceLabel = uiInitializers.createLabel("Invoice: pdf", frame: .zero, alignment: .left)
-
-            addSubview(paymentDateLabel)
-            addSubview(paymentMethodLabel)
-            addSubview(invoiceNumberLabel)
-            addSubview(invoiceLabel)
-
-            NSLayoutConstraint.activate([
-                paymentDateLabel.topAnchor.constraint(equalTo: amountDueLabel.bottomAnchor, constant: 10),
-                paymentDateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-                paymentMethodLabel.topAnchor.constraint(equalTo: paymentDateLabel.bottomAnchor, constant: 10),
-                paymentMethodLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-                invoiceNumberLabel.topAnchor.constraint(equalTo: paymentMethodLabel.bottomAnchor, constant: 10),
-                invoiceNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-                invoiceLabel.topAnchor.constraint(equalTo: invoiceNumberLabel.bottomAnchor, constant: 10),
-                invoiceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5)
-            ])
+    @objc private func openInvoice(_ sender: Any?) {
+        if let urlString = payment?.invoice, let url = URL(string: urlString) {
+            UIApplication.shared.open(url)
         }
     }
 }
