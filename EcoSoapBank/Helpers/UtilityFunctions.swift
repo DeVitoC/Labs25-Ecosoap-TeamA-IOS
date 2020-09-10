@@ -96,9 +96,14 @@ extension NumberFormatter {
         MeasurementFormatter.providedUnits.numberFormatter
     }
 
-    static var forPercentage: NumberFormatter = configure(NumberFormatter()) {
+    static let forPercentage: NumberFormatter = configure(NumberFormatter()) {
         $0.numberStyle = .percent
         $0.allowsFloats = false
+    }
+
+    static let forDollars: NumberFormatter = configure(NumberFormatter()) {
+        $0.numberStyle = .currency
+        $0.currencyCode = "USD"
     }
 }
 
