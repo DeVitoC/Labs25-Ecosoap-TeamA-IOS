@@ -9,21 +9,6 @@
 import UIKit
 
 
-/*
- struct Payment: Decodable {
-     let id: String
-     let invoiceCode: String?
-     let invoice: String?
-     let amountPaid: Int
-     let amountDue: Int
-     let date: Date
-     let invoicePeriodStartDate: Date?
-     let invoicePeriodEndDate: Date?
-     let dueDate: Date?
-     let paymentMethod: PaymentMethod
- }
- */
-
 class PaymentHistoryCollectionViewCell: UICollectionViewCell {
     private enum Padding {
         static let small: CGFloat = 8
@@ -39,13 +24,15 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
 
     var isExpanded = false {
         didSet {
-            updateViews()
+            updateLayout()
         }
     }
 
     private let dateFormatter = configure(DateFormatter()) {
         $0.dateStyle = .medium
     }
+
+    // MARK: - Subviews
 
     private lazy var rootStack = UIStackView(axis: .horizontal, alignment: .firstBaseline, distribution: .fill, spacing: Padding.small)
     private lazy var mainStack = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill, spacing: Padding.small)
@@ -76,6 +63,8 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
         $0.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
     }
 
+    // MARK: - Init
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -84,26 +73,6 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
-    }
-
-    private func captionLabel(_ text: String) -> UILabel {
-        configure(UILabel()) {
-            $0.text = text.uppercased()
-            $0.font = .muli(style: .caption1)
-            $0.textColor = .secondaryLabel
-        }
-    }
-
-    private func labeledStack(_ newSubViews: [UIView]) -> UIStackView {
-        let stack = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill, spacing: 4)
-        newSubViews.forEach { stack.addArrangedSubview($0) }
-        return stack
-    }
-
-    private func contentLabel() -> UILabel {
-        configure(UILabel()) {
-            $0.font = .muli(typeface: .semiBold)
-        }
     }
 
     private func commonInit() {
@@ -134,8 +103,10 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
             ])
         }
 
-        updateViews()
+        updateLayout()
     }
+
+    // MARK: - Update
 
     private func updateContent() {
         guard let payment = payment,
@@ -151,7 +122,7 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
         invoiceCode.text = payment.invoiceCode
     }
 
-    private func updateViews() {
+    private func updateLayout() {
         self.disclosureIndicator.transform = self.isExpanded ?
             CGAffineTransform(rotationAngle: .pi / 2)
             : .identity
@@ -163,5 +134,29 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
         if let urlString = payment?.invoice, let url = URL(string: urlString) {
             UIApplication.shared.open(url)
         }
+    }
+}
+
+// MARK: - Subview factory
+
+extension PaymentHistoryCollectionViewCell {
+    private func contentLabel() -> UILabel {
+        configure(UILabel()) {
+            $0.font = .muli(typeface: .semiBold)
+        }
+    }
+
+    private func captionLabel(_ text: String) -> UILabel {
+        configure(UILabel()) {
+            $0.text = text.uppercased()
+            $0.font = .muli(style: .caption1)
+            $0.textColor = .secondaryLabel
+        }
+    }
+
+    private func labeledStack(_ newSubViews: [UIView]) -> UIStackView {
+        let stack = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill, spacing: 4)
+        newSubViews.forEach { stack.addArrangedSubview($0) }
+        return stack
     }
 }
