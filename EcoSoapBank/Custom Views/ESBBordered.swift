@@ -9,17 +9,28 @@
 import UIKit
 
 protocol ESBBordered {
-    func updateBorderColor()
-    func configureBorder()
+    var lightModeBorderColor: UIColor { get }
+    var darkModeBorderColor: UIColor { get }
+    var borderWidth: CGFloat { get }
+    var cornerRadius: CGFloat { get }
 }
 
 extension ESBBordered where Self: UIView {
+    var lightModeBorderColor: UIColor {
+        UIColor.downyBlue.adjustingBrightness(by: -0.3).withAlphaComponent(0.8)
+    }
+    var darkModeBorderColor: UIColor {
+        UIColor.downyBlue.withAlphaComponent(0.8)
+    }
+    var borderWidth: CGFloat { 0.5 }
+    var cornerRadius: CGFloat { 5.0 }
+    
     func updateBorderColor() {
         switch traitCollection.userInterfaceStyle {
         case .light:
-            layer.borderColor = UIColor.downyBlue.adjustingBrightness(by: -0.3).withAlphaComponent(0.8).cgColor
+            layer.borderColor = lightModeBorderColor.cgColor
         case .dark:
-            layer.borderColor = UIColor.downyBlue.withAlphaComponent(0.8).cgColor
+            layer.borderColor = darkModeBorderColor.cgColor
         default:
             break
         }
@@ -28,8 +39,8 @@ extension ESBBordered where Self: UIView {
     func configureBorder() {
         backgroundColor = .systemBackground
         clipsToBounds = true
-        layer.cornerRadius = 5.0
-        layer.borderWidth = 0.5
+        layer.cornerRadius = cornerRadius
+        layer.borderWidth = borderWidth
         updateBorderColor()
     }
 }
