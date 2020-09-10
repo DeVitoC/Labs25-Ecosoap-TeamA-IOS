@@ -89,7 +89,7 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     
     // Payments
     
-    func fetchPayments(forPropertyID propertyID: String, _ completion: @escaping (Result<[Payment], Error>) -> Void) {
+    func fetchPayments(forPropertyID propertyID: String, _ completion: @escaping (ResultHandler<[Payment]>)) {
         performOperation(.paymentsByPropertyID(id: propertyID), completion: completion)
     }
 
