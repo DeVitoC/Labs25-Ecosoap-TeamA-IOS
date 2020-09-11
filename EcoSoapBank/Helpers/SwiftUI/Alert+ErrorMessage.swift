@@ -46,7 +46,7 @@ extension View {
         self.alert(
             isPresented: Binding(
                 get: { error.wrappedValue != nil },
-                set: { hasError in if !hasError { error.wrappedValue = nil }}),
+                set: { hasError in if !hasError { error.wrappedValue = nil } }),
             content: { Alert(error.wrappedValue) })
     }
 }
