@@ -9,6 +9,6 @@
 import UIKit
 
 
-class CursorlessTextField: UITextField {
+class CursorlessTextField: ESBTextField {
     override func caretRect(for position: UITextPosition) -> CGRect { .zero }
 }

@@ -24,7 +24,7 @@ class ImpactViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemGray6
-        title = "Impact Summary"
+        navigationItem.title = "Impact Summary"
         
         massUnitObserver = UserDefaults.$massUnit.observe { [weak self] _, _ in
             self?.collectionView.reloadData()
@@ -33,12 +33,14 @@ class ImpactViewController: UIViewController {
         setUpCollectionView()
 
         impactController?.getImpactStats { [weak self] error in
-            if let error = error {
-                self?.presentAlert(for: error)
-                return
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.presentAlert(for: error)
+                    return
+                }
+                
+                self?.collectionView.reloadData()
             }
-            
-            self?.collectionView.reloadData()
         }
     }
     

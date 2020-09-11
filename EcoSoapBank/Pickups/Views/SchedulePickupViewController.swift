@@ -60,13 +60,11 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.borderStyle = .roundedRect
         $0.text = viewModel.selectedProperty.name
     }
-    private lazy var propertyPicker = configure(InputPickerView(
+    private lazy var propertyPicker = InputPickerView(
         data: viewModel.properties,
         rowLabel: \.name,
-        onSelect: { [weak self] in self?.setProperty($0) })
-    ) {
-        $0.backgroundColor = .tertiarySystemBackground
-    }
+        onSelect: { [weak self] in self?.setProperty($0) }
+    )
     private lazy var readyDateField = configure(CursorlessTextField()) {
         $0.inputView = datePicker
         $0.borderStyle = .roundedRect

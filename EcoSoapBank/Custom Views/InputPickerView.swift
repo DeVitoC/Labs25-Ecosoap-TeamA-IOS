@@ -32,7 +32,6 @@ UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
         dataSource = self
         reloadAllComponents()
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        backgroundColor = .white
     }
 
     @available(*, unavailable, message: "Use `init(data:)`")

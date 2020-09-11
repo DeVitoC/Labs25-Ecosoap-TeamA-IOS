@@ -37,23 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setUpAppAppearance() {
         
-        configure(UITabBar.appearance()) {
-            $0.tintColor = .esbGreen
-            $0.backgroundColor = .systemGray2
-        }
-
-        configure(UITableView.appearance()) {
-            $0.backgroundColor = UIColor.systemGray5
-        }
-
-        configure(UITableViewCell.appearance()) {
-            $0.backgroundColor = UIColor.systemGray6
-        }
-        
-        configure(UIButton.appearance()) {
-            $0.tintColor = .white
-        }
-        
         configure(UIBarButtonItem.appearance()) {
             $0.tintColor = .white
 
@@ -61,6 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 .font: UIFont.muli(typeface: .semiBold),
                 .foregroundColor: UIColor.white
             ], for: .normal)
+        }
+        
+        configure(UIButton.appearance()) {
+            $0.tintColor = .esbGreen
         }
         
         configure(UINavigationBar.appearance()) { nav in
@@ -84,6 +71,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     .font: UIFont.navBarLargeTitle,
                 ]
             }
+        }
+        
+        configure(UIPickerView.appearance()) {
+            $0.backgroundColor = .systemGray4
+        }
+        
+        configure(UISlider.appearance()) {
+            $0.tintColor = .downyBlue
+            $0.minimumTrackTintColor = .downyBlue
+        }
+        
+        configure(UITabBar.appearance()) {
+            $0.tintColor = .esbGreen
+            $0.backgroundColor = .systemGray2
+        }
+
+        configure(UITableView.appearance()) {
+            $0.backgroundColor = UIColor.systemGray5
+            $0.separatorColor = UIColor.downyBlue.adjustingBrightness(by: -0.3).or(.downyBlue)
+        }
+
+        configure(UITableViewCell.appearance()) {
+            $0.backgroundColor = UIColor.systemGray6
         }
     }
 }

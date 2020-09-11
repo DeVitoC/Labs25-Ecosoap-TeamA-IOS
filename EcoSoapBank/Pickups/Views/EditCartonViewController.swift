@@ -28,7 +28,7 @@ class EditCartonViewController: UIViewController {
         $0.maximumValue = 100
         $0.minimumValueImage = .cubeBox
         $0.maximumValueImage = .cubeBoxFill
-        $0.stepSize = 5
+        $0.stepSize = 10
         $0.value = Float(viewModel.carton.percentFull)
         $0.onValueChange = { [unowned self] newValue in
             self.sliderValueDidChange(newValue)
