@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Coordinator that manages the initialization of the PaymentHistoryViewController
 class PaymentCoordinator: FlowCoordinator {
     
     init(user: User, dataProvider: PaymentDataProvider) {
@@ -18,6 +19,7 @@ class PaymentCoordinator: FlowCoordinator {
     let rootVC = ESBNavigationController()
     let paymentVC = PaymentHistoryViewController()
 
+    /// Starts the PaymentHistoryViewController
     func start() {
         let payment = UIImage(
             systemName: "dollarsign.circle",
