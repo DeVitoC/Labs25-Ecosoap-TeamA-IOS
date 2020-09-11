@@ -144,7 +144,7 @@ class ProfileTests: XCTestCase {
         XCTAssertEqual(mainVM.user, oldUser)
     }
 
-    func testLogOut() throws {
+    func testLogOut() {
         logIn()
 
         XCTAssertEqual(dataProvider.status, .loggedIn)
@@ -153,6 +153,20 @@ class ProfileTests: XCTestCase {
         XCTAssertEqual(strongDelegate.status, .loggedOut)
         XCTAssertEqual(dataProvider.status, .loggedOut)
         XCTAssertNil(userController.user)
+    }
+
+    func testEditProfileUseShippingAddressForBilling() {
+        let firstEditPropVM = mainVM.editPropertyVM(user.properties!.first!)
+        XCTAssertEqual(
+            firstEditPropVM.propertyInfo.shippingAddress,
+            EditableAddressInfo(user.properties?.first?.shippingAddress))
+        XCTAssertNotEqual(firstEditPropVM.propertyInfo.shippingAddress,
+                          firstEditPropVM.propertyInfo.billingAddress)
+        firstEditPropVM.propertyInfo.billingAddress = EditableAddressInfo()
+        firstEditPropVM.useShippingAddressForBilling = true
+        firstEditPropVM.useShippingAddressForBilling = false
+        XCTAssertNotEqual(firstEditPropVM.propertyInfo.billingAddress,
+                          firstEditPropVM.propertyInfo.shippingAddress)
     }
 }
 
