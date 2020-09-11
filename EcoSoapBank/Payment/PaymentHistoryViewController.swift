@@ -27,10 +27,6 @@ class PaymentHistoryViewController: UIViewController {
     var isExpanded: IndexPath?
     let cellIdentifier = "PaymentCell"
 
-    override func loadView() {
-        view = BackgroundView()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Payment History"
