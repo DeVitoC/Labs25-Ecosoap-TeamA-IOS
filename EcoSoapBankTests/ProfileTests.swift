@@ -56,6 +56,8 @@ class ProfileTests: XCTestCase {
             skype: nil,
             properties: nil)
         self.bag = []
+
+        XCTAssertGreaterThanOrEqual(user.properties?.count ?? 0, 2)
     }
 
     // MARK: - Tests
@@ -155,18 +157,58 @@ class ProfileTests: XCTestCase {
         XCTAssertNil(userController.user)
     }
 
-    func testEditProfileUseShippingAddressForBilling() {
-        let firstEditPropVM = mainVM.editPropertyVM(user.properties!.first!)
-        XCTAssertEqual(
-            firstEditPropVM.propertyInfo.shippingAddress,
-            EditableAddressInfo(user.properties?.first?.shippingAddress))
-        XCTAssertNotEqual(firstEditPropVM.propertyInfo.shippingAddress,
-                          firstEditPropVM.propertyInfo.billingAddress)
-        firstEditPropVM.propertyInfo.billingAddress = EditableAddressInfo()
-        firstEditPropVM.useShippingAddressForBilling = true
-        firstEditPropVM.useShippingAddressForBilling = false
-        XCTAssertNotEqual(firstEditPropVM.propertyInfo.billingAddress,
-                          firstEditPropVM.propertyInfo.shippingAddress)
+    /// Ensure setting `useShippingAddressForBilling` does not change the address until commiting.
+    func testEditPropertyUseShippingAddressForBilling() {
+        let editPropVM = editPropertyVM(0)
+        XCTAssertEqual(editPropVM.propertyInfo.shippingAddress,
+                       EditableAddressInfo(user.properties?.first?.shippingAddress))
+        XCTAssertNotEqual(editPropVM.propertyInfo.shippingAddress,
+                          editPropVM.propertyInfo.billingAddress)
+        editPropVM.propertyInfo.billingAddress = EditableAddressInfo()
+        editPropVM.useShippingAddressForBilling = true
+        editPropVM.useShippingAddressForBilling = false
+        XCTAssertNotEqual(editPropVM.propertyInfo.billingAddress,
+                          editPropVM.propertyInfo.shippingAddress)
+    }
+
+    func testCommitProfileChangesSuccess() {
+        logIn()
+        let editPropVM = editPropertyVM(0)
+
+        editPropVM.propertyInfo.phone = "999-555-8765"
+        XCTAssertNotEqual(editPropVM.propertyInfo,
+                          EditablePropertyInfo(user.properties!.first!))
+        let oldProperty = user.properties?.first
+        var newProperty: Property?
+        var isEditingProperty = true
+
+        let callsDidComplete = expectation(description: "calls completed")
+        callsDidComplete.expectedFulfillmentCount = 2
+
+        editPropVM.$error
+            .compactMap { $0 }
+            .sink(receiveValue: { XCTFail("Failed with error: \($0)") })
+            .store(in: &bag)
+        mainVM.$user
+            .dropFirst()
+            .sink(receiveValue: { newUser in
+                XCTAssertNotEqual(newProperty, newUser.properties?.first)
+                newProperty = newUser.properties?.first
+                callsDidComplete.fulfill()
+            }).store(in: &bag)
+        mainVM.$isEditingProperty
+            .dropFirst()
+            .sink(receiveValue: { isNowEditing in
+                isEditingProperty = isNowEditing
+                callsDidComplete.fulfill()
+            }).store(in: &bag)
+
+        editPropVM.commitChanges()
+
+        wait(for: callsDidComplete)
+
+        XCTAssertNotEqual(oldProperty, newProperty)
+        XCTAssertFalse(isEditingProperty)
     }
 }
 
@@ -179,6 +221,10 @@ extension ProfileTests {
             exp.fulfill()
         }
         wait(for: exp)
+    }
+
+    private func editPropertyVM(_ idx: Int) -> EditPropertyViewModel {
+        mainVM.editPropertyVM(user.properties![idx])
     }
 }
 
