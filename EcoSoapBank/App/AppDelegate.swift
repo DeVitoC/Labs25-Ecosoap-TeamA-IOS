@@ -62,6 +62,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 for: .normal)
         }
         
+        configure(UISlider.appearance()) {
+            $0.tintColor = .downyBlue
+            $0.minimumTrackTintColor = .downyBlue
+        }
+        
+        configure(UIPickerView.appearance()) {
+            $0.backgroundColor = .systemGray4
+        }
+        
         configure(UINavigationBar.appearance()) { nav in
             nav.standardAppearance = configure(UINavigationBarAppearance()) {
                 $0.backgroundImage = UIImage.navBar
