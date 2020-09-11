@@ -11,23 +11,25 @@ import Combine
 
 
 class MainProfileViewModel: ObservableObject {
+    // For strange SwiftUI bug
+    static let propertyTypes: [Property.PropertyType] = Property.PropertyType.allCases
+
     @Published var user: User
-    @Published var editableInfo: EditableProfileInfo
-    @Published var selectedProperty: PropertySelection {
+    @Published var profileInfo: EditableProfileInfo
+    @Published var managingProperty: PropertySelection {
         didSet {
-            UserDefaults.standard.setSelectedProperty(selectedProperty.property, forUser: user)
+            UserDefaults.standard.setSelectedProperty(managingProperty.property, forUser: user)
         }
     }
     @Published var error: Error?
 
-    @Published var isEditingProperty = false
+    @Published var isEditingProfile = false
     @Published private(set) var loading = false
+    @Published var useShippingAddressForBilling = false
 
     let propertyOptions: [PropertySelection]
-    let properties: [Property]
+    var properties: [Property] { user.properties ?? [] }
     let userController: UserController
-
-    private var editingPropertyVM: EditPropertyViewModel?
 
     weak var delegate: ProfileDelegate?
 
@@ -38,7 +40,7 @@ class MainProfileViewModel: ObservableObject {
          delegate: ProfileDelegate?
     ) {
         self.user = user
-        self.editableInfo = EditableProfileInfo(user: user)
+        self.profileInfo = EditableProfileInfo(user: user)
 
         if user.properties?.count ?? 0 > 0 {
             var options: [PropertySelection] = [.all]
@@ -47,41 +49,45 @@ class MainProfileViewModel: ObservableObject {
         } else {
             self.propertyOptions = []
         }
-        self.selectedProperty = UserDefaults.standard.propertySelection(forUser: user)
-        self.properties = user.properties ?? []
+        self.managingProperty = UserDefaults.standard.propertySelection(forUser: user)
         self.userController = userController
         self.delegate = delegate
-
-        $isEditingProperty
-            .sink(receiveValue: { [weak self] nowEditingProperty in
-                if !nowEditingProperty, let newUser = userController.user, newUser != self?.user {
-                    self?.user = newUser
-                }
-            }).store(in: &cancellables)
-    }
-
-    func editPropertyVM(_ property: Property) -> EditPropertyViewModel {
-        editingPropertyVM ??= EditPropertyViewModel(
-            property,
-            isActive: Binding(
-                get: { [weak self] in self?.isEditingProperty == true },
-                set: { [weak self] isNowEditing in self?.isEditingProperty = isNowEditing }),
-            userController: userController)
+        userController.$user
+            .dropFirst()
+            .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.user, on: self)
+            .store(in: &cancellables)
     }
 
     func commitProfileChanges() {
         loading = true
 
-        userController.updateUserProfile(editableInfo) { result in
+        userController.updateUserProfile(profileInfo) { result in
             DispatchQueue.main.async { [weak self] in
                 self?.loading = false
 
                 switch result {
                 case .success(let newUser):
-                    self?.editableInfo = EditableProfileInfo(user: newUser)
-                    self?.user = newUser
+                    self?.profileInfo = EditableProfileInfo(user: newUser)
                 case .failure(let updateError):
                     self?.error = updateError
+                }
+            }
+        }
+    }
+
+    func savePropertyChanges(_ info: EditablePropertyInfo, completion: @escaping () -> Void) {
+        var submission = info
+        if useShippingAddressForBilling {
+            submission.billingAddress = submission.shippingAddress
+        }
+        self.userController.updateProperty(with: submission) { [weak self] result in
+            DispatchQueue.main.async {
+                if case .failure(let error) = result {
+                    self?.error = error
+                } else {
+                    completion()
                 }
             }
         }
