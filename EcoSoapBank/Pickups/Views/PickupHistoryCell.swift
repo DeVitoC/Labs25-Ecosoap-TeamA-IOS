@@ -62,7 +62,8 @@ struct PickupHistoryCell: View {
                         Text("\(pickup.cartons.count) Cartons")
                             .font(UIFont.muli(style: .callout, typeface: .regular))
                             .foregroundColor(Color(UIColor.codGrey.orInverse()))
-                    }.padding(.trailing, 16)
+                        Spacer()
+                    }.padding(.leading, 20)
                 }
             }.padding(.top, 6)
                 .padding(.bottom, 10)
@@ -75,34 +76,35 @@ extension PickupHistoryCell {
     private struct Icon: ViewModifier {
         func body(content: Content) -> some View {
             content
+                .aspectRatio(contentMode: .fit)
                 .font(UIFont.systemFont(ofSize: 24, weight: .medium).scaled())
-                .frame(width: 30, alignment: .leading)
+                .frame(width: 28, alignment: .leading)
         }
     }
     
     private struct StatusIcon: View {
-        private let imageName: String
+        private let image: Image
         private let color: Color
         
         init(status: Pickup.Status) {
             switch status {
             case .cancelled:
-                imageName = "clear.fill"
+                image = Image(systemName: "clear.fill")
                 color = Color(.systemRed)
             case .complete:
-                imageName = "checkmark.circle.fill"
+                image = Image(systemName: "checkmark.circle.fill")
                 color = Color(.esbGreen)
             case .outForPickup:
-                imageName = "tray.and.arrow.up.fill"
+                image = Image(uiImage: UIImage(named: "truck")!.withTintColor(.systemOrange, renderingMode: .alwaysTemplate)).resizable()
                 color = Color(.systemOrange)
             case .submitted:
-                imageName = "paperplane.fill"
+                image = Image(systemName: "paperplane.fill")
                 color = Color(.systemBlue)
             }
         }
         
         var body: some View {
-            Image(systemName: imageName)
+            image
                 .foregroundColor(color)
                 .modifier(Icon())
         }
