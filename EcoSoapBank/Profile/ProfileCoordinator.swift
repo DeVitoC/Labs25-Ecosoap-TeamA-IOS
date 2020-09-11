@@ -20,7 +20,7 @@ class ProfileCoordinator: FlowCoordinator {
     lazy var rootVC: UIViewController = DarkStatusBarHostingController(
         rootView: MainProfileView().environmentObject(profileVM))
 
-    private(set) lazy var profileVM: MainProfileViewModel = MainProfileViewModel(
+    private(set) lazy var profileVM: ProfileViewModel = ProfileViewModel(
         user: user,
         userController: userController,
         delegate: delegate)

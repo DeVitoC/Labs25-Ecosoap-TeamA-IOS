@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct EditProfileView: View {
-    @EnvironmentObject var viewModel: MainProfileViewModel
+    @EnvironmentObject var viewModel: ProfileViewModel
 
     @State var labelWidth: CGFloat?
 
@@ -50,7 +50,7 @@ struct EditProfileView_Previews: PreviewProvider {
     static let user = User.placeholder()
     static var previews: some View {
         NavigationView {
-            EditProfileView().environmentObject(MainProfileViewModel(
+            EditProfileView().environmentObject(ProfileViewModel(
                 user: user,
                 userController: UserController(dataLoader: MockUserDataProvider()),
                 delegate: nil))

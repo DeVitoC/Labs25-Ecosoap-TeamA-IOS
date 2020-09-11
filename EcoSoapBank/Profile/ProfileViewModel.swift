@@ -1,5 +1,5 @@
 //
-//  MainProfileViewModel.swift
+//  ProfileViewModel.swift
 //  EcoSoapBank
 //
 //  Created by Jon Bash on 2020-08-31.
@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 
-class MainProfileViewModel: ObservableObject {
+class ProfileViewModel: ObservableObject {
     // For strange SwiftUI bug
     static let propertyTypes: [Property.PropertyType] = Property.PropertyType.allCases
 

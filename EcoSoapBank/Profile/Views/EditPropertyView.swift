@@ -16,7 +16,7 @@ struct EditPropertyState {
 
 
 struct EditPropertyView: View {
-    @EnvironmentObject var viewModel: MainProfileViewModel
+    @EnvironmentObject var viewModel: ProfileViewModel
 
     @State var propertyInfo: EditablePropertyInfo
 
@@ -32,7 +32,7 @@ struct EditPropertyView: View {
             Section {
                 TextField("Name", text: $propertyInfo.name)
                 Picker("Property Type", selection: $propertyInfo.propertyType) {
-                    ForEach(MainProfileViewModel.propertyTypes) {
+                    ForEach(ProfileViewModel.propertyTypes) {
                         Text($0.display)
                             .tag($0)
                     }
@@ -97,7 +97,7 @@ struct EditPropertyView_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            EditPropertyView(property).environmentObject(MainProfileViewModel(
+            EditPropertyView(property).environmentObject(ProfileViewModel(
                 user: user,
                 userController: UserController(dataLoader: MockUserDataProvider()),
                 delegate: nil))

@@ -23,9 +23,9 @@ class ProfileTests: XCTestCase {
 
     var badUser: User!
 
-    var mainVM: MainProfileViewModel { coordinator.profileVM }
+    var viewModel: ProfileViewModel { coordinator.profileVM }
     var newProfileInfo: EditableProfileInfo {
-        configure(mainVM.profileInfo) {
+        configure(viewModel.profileInfo) {
             $0.email = "new@email.net"
             $0.middleName = "Lasagna"
             $0.skype = "new-skype-handle"
@@ -63,18 +63,18 @@ class ProfileTests: XCTestCase {
     // MARK: - Tests
 
     func testMainProfileVMSetup() throws {
-        XCTAssertEqual(mainVM.properties, user.properties)
-        XCTAssert(mainVM.propertyOptions.contains(.all))
+        XCTAssertEqual(viewModel.properties, user.properties)
+        XCTAssert(viewModel.propertyOptions.contains(.all))
         let userProperties = try XCTUnwrap(user.properties)
         let userSelections = userProperties.map { PropertySelection.select($0) }
-        XCTAssertEqual(mainVM.propertyOptions.dropFirst(), userSelections[...])
+        XCTAssertEqual(viewModel.propertyOptions.dropFirst(), userSelections[...])
     }
 
     func testUserControllerUpdateProfile() {
         logIn()
 
         let exp = expectation(description: "profile changed")
-        let oldUser = mainVM.user
+        let oldUser = viewModel.user
 
         let info = newProfileInfo
         var newUser: User?
@@ -94,63 +94,63 @@ class ProfileTests: XCTestCase {
         logIn()
 
         let exp = expectation(description: "profile changed")
-        let oldUser = mainVM.user
-        let oldInfo = mainVM.profileInfo
+        let oldUser = viewModel.user
+        let oldInfo = viewModel.profileInfo
         var newUser: User?
 
-        XCTAssertFalse(mainVM.loading)
+        XCTAssertFalse(viewModel.loading)
 
-        mainVM.profileInfo = newProfileInfo
-        mainVM.$user
+        viewModel.profileInfo = newProfileInfo
+        viewModel.$user
             .dropFirst()
             .sink { user in
                 newUser = user
                 exp.fulfill()
         }.store(in: &bag)
-        mainVM.commitProfileChanges()
-        XCTAssertTrue(mainVM.loading)
+        viewModel.commitProfileChanges()
+        XCTAssertTrue(viewModel.loading)
 
         wait(for: exp)
 
         XCTAssertNotEqual(oldUser, newUser)
-        XCTAssertEqual(mainVM.profileInfo, newProfileInfo)
-        XCTAssertNotEqual(mainVM.profileInfo, oldInfo)
-        XCTAssertNil(mainVM.error)
+        XCTAssertEqual(viewModel.profileInfo, newProfileInfo)
+        XCTAssertNotEqual(viewModel.profileInfo, oldInfo)
+        XCTAssertNil(viewModel.error)
     }
 
     func testProfileChangesFail() {
         dataProvider.shouldFail = true
 
         let exp = expectation(description: "profile changed")
-        let oldUser = mainVM.user
-        let oldInfo = mainVM.profileInfo
+        let oldUser = viewModel.user
+        let oldInfo = viewModel.profileInfo
         var caughtError: Error?
 
-        XCTAssertFalse(mainVM.loading)
+        XCTAssertFalse(viewModel.loading)
 
-        mainVM.profileInfo = newProfileInfo
-        mainVM.$error
+        viewModel.profileInfo = newProfileInfo
+        viewModel.$error
             .compactMap { $0 }
             .sink { error in
                 caughtError = error
                 exp.fulfill()
         }.store(in: &bag)
-        mainVM.commitProfileChanges()
-        XCTAssertTrue(mainVM.loading)
+        viewModel.commitProfileChanges()
+        XCTAssertTrue(viewModel.loading)
 
         wait(for: exp)
 
         XCTAssertNotNil(caughtError)
-        XCTAssertEqual(mainVM.profileInfo, newProfileInfo)
-        XCTAssertNotEqual(mainVM.profileInfo, oldInfo)
-        XCTAssertEqual(mainVM.user, oldUser)
+        XCTAssertEqual(viewModel.profileInfo, newProfileInfo)
+        XCTAssertNotEqual(viewModel.profileInfo, oldInfo)
+        XCTAssertEqual(viewModel.user, oldUser)
     }
 
     func testLogOut() {
         logIn()
 
         XCTAssertEqual(dataProvider.status, .loggedIn)
-        mainVM.logOut()
+        viewModel.logOut()
         XCTAssertNil(userController.user)
         XCTAssertEqual(strongDelegate.status, .loggedOut)
         XCTAssertEqual(dataProvider.status, .loggedOut)
@@ -163,8 +163,8 @@ class ProfileTests: XCTestCase {
         XCTAssertEqual(info.shippingAddress, EditableAddressInfo(user.properties?.first?.shippingAddress))
         XCTAssertNotEqual(info.shippingAddress, info.billingAddress)
         info.billingAddress = EditableAddressInfo()
-        mainVM.useShippingAddressForBilling = true
-        mainVM.useShippingAddressForBilling = false
+        viewModel.useShippingAddressForBilling = true
+        viewModel.useShippingAddressForBilling = false
         XCTAssertNotEqual(info.billingAddress, info.shippingAddress)
     }
 
@@ -179,11 +179,11 @@ class ProfileTests: XCTestCase {
         let callsDidComplete = expectation(description: "calls completed")
         callsDidComplete.expectedFulfillmentCount = 2
 
-        mainVM.$error
+        viewModel.$error
             .compactMap { $0 }
             .sink(receiveValue: { XCTFail("Failed with error: \($0)") })
             .store(in: &bag)
-        mainVM.$user
+        viewModel.$user
             .dropFirst()
             .sink(receiveValue: { newUser in
                 XCTAssertNotEqual(newProperty, newUser.properties?.first)
@@ -191,7 +191,7 @@ class ProfileTests: XCTestCase {
                 callsDidComplete.fulfill()
             }).store(in: &bag)
 
-        mainVM.savePropertyChanges(info) {
+        viewModel.savePropertyChanges(info) {
             callsDidComplete.fulfill()
         }
 

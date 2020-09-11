@@ -137,7 +137,7 @@
 		992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C929024F70B0C004FCBBB /* Randomizable.swift */; };
 		992FBC8724FDABE10099C32D /* LabelAlignedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */; };
 		992FBC8D24FDB6970099C32D /* EditPropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8C24FDB6970099C32D /* EditPropertyView.swift */; };
-		992FBC9024FDC01F0099C32D /* MainProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8F24FDC01F0099C32D /* MainProfileViewModel.swift */; };
+		992FBC9024FDC01F0099C32D /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FBC8F24FDC01F0099C32D /* ProfileViewModel.swift */; };
 		993B15CC24F42D8C00529517 /* InputPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B15CB24F42D8C00529517 /* InputPickerView.swift */; };
 		993B15CE24F4575500529517 /* CursorlessTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B15CD24F4575500529517 /* CursorlessTextField.swift */; };
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
@@ -313,7 +313,7 @@
 		992C929024F70B0C004FCBBB /* Randomizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomizable.swift; sourceTree = "<group>"; };
 		992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAlignedTextField.swift; sourceTree = "<group>"; };
 		992FBC8C24FDB6970099C32D /* EditPropertyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPropertyView.swift; sourceTree = "<group>"; };
-		992FBC8F24FDC01F0099C32D /* MainProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileViewModel.swift; sourceTree = "<group>"; };
+		992FBC8F24FDC01F0099C32D /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		993B15CB24F42D8C00529517 /* InputPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputPickerView.swift; sourceTree = "<group>"; };
 		993B15CD24F4575500529517 /* CursorlessTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorlessTextField.swift; sourceTree = "<group>"; };
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
@@ -699,14 +699,6 @@
 			path = EcoSoapBankTests;
 			sourceTree = "<group>";
 		};
-		99789CC62502C891000428AC /* View Models */ = {
-			isa = PBXGroup;
-			children = (
-				992FBC8F24FDC01F0099C32D /* MainProfileViewModel.swift */,
-			);
-			path = "View Models";
-			sourceTree = "<group>";
-		};
 		9983874F24E4694400450244 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,7 +744,7 @@
 				99B6177224EC743F0099664B /* LoginCoordinator.swift */,
 				99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */,
 				992BB63D24EEE21300638AA4 /* UserController.swift */,
-				99789CC62502C891000428AC /* View Models */,
+				992FBC8F24FDC01F0099C32D /* ProfileViewModel.swift */,
 				992FBC8E24FDBA890099C32D /* Views */,
 			);
 			path = Profile;
@@ -1103,7 +1095,7 @@
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
-				992FBC9024FDC01F0099C32D /* MainProfileViewModel.swift in Sources */,
+				992FBC9024FDC01F0099C32D /* ProfileViewModel.swift in Sources */,
 				04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */,
 				999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */,
 				99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */,

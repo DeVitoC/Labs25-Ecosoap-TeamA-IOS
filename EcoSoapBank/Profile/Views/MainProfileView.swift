@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct MainProfileView: View {
-    @EnvironmentObject var viewModel: MainProfileViewModel
+    @EnvironmentObject var viewModel: ProfileViewModel
 
     @State var iconWidth: CGFloat = 15
 
@@ -100,7 +100,7 @@ struct MainProfileView_Previews: PreviewProvider {
 
     static var previews: some View {
         MainProfileView()
-            .environmentObject(MainProfileViewModel(
+            .environmentObject(ProfileViewModel(
                 user: user,
                 userController: UserController(dataLoader: MockUserDataProvider()),
                 delegate: nil))
