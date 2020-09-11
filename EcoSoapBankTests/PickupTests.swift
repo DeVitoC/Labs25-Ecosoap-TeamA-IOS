@@ -26,7 +26,7 @@ class PickupTests: XCTestCase {
         super.setUp()
         bag = []
         let user = User.placeholder()
-        pickupProvider = MockPickupProvider()
+        pickupProvider = MockPickupProvider(waitTime: 0.05)
         pickupController = PickupController(user: user, dataProvider: pickupProvider)
         pickupCoordinator = PickupCoordinator(user: user, dataProvider: pickupProvider)
     }
@@ -143,15 +143,14 @@ class PickupTests: XCTestCase {
         vm.removeCarton(atIndex: 1)
         vm.selectedProperty = try XCTUnwrap(property)
 
+        var pickup: Pickup?
         let exp = newMockExpectation()
-        vm.schedulePickup { result in
-            if case .failure = result {
-                XCTFail("request should not fail")
-            }
-            let pickupResult = try! result.get()
-            let pickup = pickupResult.pickup
 
-            XCTAssert({
+        vm.schedulePickup { result in
+            if case .failure = result { XCTFail("request should not fail") }
+            pickup = try! result.get().pickup
+
+            XCTAssertTrue({
                 if case .pickupScheduled = delegate.status {
                     return true
                 } else {
@@ -159,21 +158,19 @@ class PickupTests: XCTestCase {
                 }
             }())
 
-            XCTAssertNotNil(pickup)
-            XCTAssertEqual(pickup?.cartons.count, 2)
-            XCTAssertEqual(pickup?.cartons[0].contents?.percentFull, 100)
-            XCTAssertEqual(pickup?.cartons[0].contents?.product, .soap)
-            XCTAssertEqual(pickup?.cartons[1].contents?.percentFull, 50)
-            XCTAssertEqual(pickup?.cartons[1].contents?.product, .paper)
-            XCTAssertEqual(pickup?.notes, notes)
-            XCTAssertEqual(pickup?.property.id, property!.id)
-            XCTAssert(Calendar.current.isDate(pickup!.readyDate,
-                                              equalTo: in4Days,
-                                              toGranularity: .day))
             exp.fulfill()
         }
 
         wait(for: exp)
+
+        XCTAssertEqual(pickup?.cartons.count, 2)
+        XCTAssertEqual(pickup?.cartons[0].contents?.percentFull, 100)
+        XCTAssertEqual(pickup?.cartons[0].contents?.product, .soap)
+        XCTAssertEqual(pickup?.cartons[1].contents?.percentFull, 50)
+        XCTAssertEqual(pickup?.cartons[1].contents?.product, .paper)
+        XCTAssertEqual(pickup?.notes, notes)
+        XCTAssertEqual(pickup?.property.id, property!.id)
+        XCTAssert(Calendar.current.isDate(pickup!.readyDate, equalTo: in4Days, toGranularity: .day))
     }
 
     func testStoryboardInit() throws {

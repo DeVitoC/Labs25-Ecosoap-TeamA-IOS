@@ -25,7 +25,7 @@ class ProfileTests: XCTestCase {
 
     var mainVM: MainProfileViewModel { coordinator.profileVM }
     var newProfileInfo: EditableProfileInfo {
-        configure(mainVM.editableInfo) {
+        configure(mainVM.profileInfo) {
             $0.email = "new@email.net"
             $0.middleName = "Lasagna"
             $0.skype = "new-skype-handle"
@@ -95,12 +95,12 @@ class ProfileTests: XCTestCase {
 
         let exp = expectation(description: "profile changed")
         let oldUser = mainVM.user
-        let oldInfo = mainVM.editableInfo
+        let oldInfo = mainVM.profileInfo
         var newUser: User?
 
         XCTAssertFalse(mainVM.loading)
 
-        mainVM.editableInfo = newProfileInfo
+        mainVM.profileInfo = newProfileInfo
         mainVM.$user
             .dropFirst()
             .sink { user in
@@ -113,8 +113,8 @@ class ProfileTests: XCTestCase {
         wait(for: exp)
 
         XCTAssertNotEqual(oldUser, newUser)
-        XCTAssertEqual(mainVM.editableInfo, newProfileInfo)
-        XCTAssertNotEqual(mainVM.editableInfo, oldInfo)
+        XCTAssertEqual(mainVM.profileInfo, newProfileInfo)
+        XCTAssertNotEqual(mainVM.profileInfo, oldInfo)
         XCTAssertNil(mainVM.error)
     }
 
@@ -123,12 +123,12 @@ class ProfileTests: XCTestCase {
 
         let exp = expectation(description: "profile changed")
         let oldUser = mainVM.user
-        let oldInfo = mainVM.editableInfo
+        let oldInfo = mainVM.profileInfo
         var caughtError: Error?
 
         XCTAssertFalse(mainVM.loading)
 
-        mainVM.editableInfo = newProfileInfo
+        mainVM.profileInfo = newProfileInfo
         mainVM.$error
             .compactMap { $0 }
             .sink { error in
@@ -141,8 +141,8 @@ class ProfileTests: XCTestCase {
         wait(for: exp)
 
         XCTAssertNotNil(caughtError)
-        XCTAssertEqual(mainVM.editableInfo, newProfileInfo)
-        XCTAssertNotEqual(mainVM.editableInfo, oldInfo)
+        XCTAssertEqual(mainVM.profileInfo, newProfileInfo)
+        XCTAssertNotEqual(mainVM.profileInfo, oldInfo)
         XCTAssertEqual(mainVM.user, oldUser)
     }
 
@@ -159,33 +159,27 @@ class ProfileTests: XCTestCase {
 
     /// Ensure setting `useShippingAddressForBilling` does not change the address until commiting.
     func testEditPropertyUseShippingAddressForBilling() {
-        let editPropVM = editPropertyVM(0)
-        XCTAssertEqual(editPropVM.propertyInfo.shippingAddress,
-                       EditableAddressInfo(user.properties?.first?.shippingAddress))
-        XCTAssertNotEqual(editPropVM.propertyInfo.shippingAddress,
-                          editPropVM.propertyInfo.billingAddress)
-        editPropVM.propertyInfo.billingAddress = EditableAddressInfo()
-        editPropVM.useShippingAddressForBilling = true
-        editPropVM.useShippingAddressForBilling = false
-        XCTAssertNotEqual(editPropVM.propertyInfo.billingAddress,
-                          editPropVM.propertyInfo.shippingAddress)
+        var info = EditablePropertyInfo(user.properties?.first!)
+        XCTAssertEqual(info.shippingAddress, EditableAddressInfo(user.properties?.first?.shippingAddress))
+        XCTAssertNotEqual(info.shippingAddress, info.billingAddress)
+        info.billingAddress = EditableAddressInfo()
+        mainVM.useShippingAddressForBilling = true
+        mainVM.useShippingAddressForBilling = false
+        XCTAssertNotEqual(info.billingAddress, info.shippingAddress)
     }
 
     func testCommitProfileChangesSuccess() {
         logIn()
-        let editPropVM = editPropertyVM(0)
+        var info = EditablePropertyInfo(user.properties?.first)
 
-        editPropVM.propertyInfo.phone = "999-555-8765"
-        XCTAssertNotEqual(editPropVM.propertyInfo,
-                          EditablePropertyInfo(user.properties!.first!))
+        info.phone = "999-555-8765"
         let oldProperty = user.properties?.first
         var newProperty: Property?
-        var isEditingProperty = true
 
         let callsDidComplete = expectation(description: "calls completed")
         callsDidComplete.expectedFulfillmentCount = 2
 
-        editPropVM.$error
+        mainVM.$error
             .compactMap { $0 }
             .sink(receiveValue: { XCTFail("Failed with error: \($0)") })
             .store(in: &bag)
@@ -196,19 +190,15 @@ class ProfileTests: XCTestCase {
                 newProperty = newUser.properties?.first
                 callsDidComplete.fulfill()
             }).store(in: &bag)
-        mainVM.$isEditingProperty
-            .dropFirst()
-            .sink(receiveValue: { isNowEditing in
-                isEditingProperty = isNowEditing
-                callsDidComplete.fulfill()
-            }).store(in: &bag)
 
-        editPropVM.commitChanges()
+        mainVM.savePropertyChanges(info) {
+            callsDidComplete.fulfill()
+        }
 
         wait(for: callsDidComplete)
 
         XCTAssertNotEqual(oldProperty, newProperty)
-        XCTAssertFalse(isEditingProperty)
+        XCTAssertEqual(EditablePropertyInfo(newProperty), info)
     }
 }
 
@@ -221,10 +211,6 @@ extension ProfileTests {
             exp.fulfill()
         }
         wait(for: exp)
-    }
-
-    private func editPropertyVM(_ idx: Int) -> EditPropertyViewModel {
-        mainVM.editPropertyVM(user.properties![idx])
     }
 }
 
