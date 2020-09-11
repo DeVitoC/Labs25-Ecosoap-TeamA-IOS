@@ -15,7 +15,6 @@ class ProfileViewModel: ObservableObject {
     static let propertyTypes: [Property.PropertyType] = Property.PropertyType.allCases
 
     @Published var user: User
-    @Published var profileInfo: EditableProfileInfo
     @Published var managingProperty: PropertySelection {
         didSet {
             UserDefaults.standard.setSelectedProperty(managingProperty.property, forUser: user)
@@ -23,7 +22,6 @@ class ProfileViewModel: ObservableObject {
     }
     @Published var error: Error?
 
-    @Published var isEditingProfile = false
     @Published private(set) var loading = false
     @Published var useShippingAddressForBilling = false
 
@@ -40,7 +38,6 @@ class ProfileViewModel: ObservableObject {
          delegate: ProfileDelegate?
     ) {
         self.user = user
-        self.profileInfo = EditableProfileInfo(user: user)
 
         if user.properties?.count ?? 0 > 0 {
             var options: [PropertySelection] = [.all]
@@ -60,7 +57,8 @@ class ProfileViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func commitProfileChanges() {
+
+    func commitProfileChanges(_ profileInfo: EditableProfileInfo, completion: @escaping () -> Void) {
         loading = true
 
         userController.updateUserProfile(profileInfo) { result in
@@ -68,8 +66,8 @@ class ProfileViewModel: ObservableObject {
                 self?.loading = false
 
                 switch result {
-                case .success(let newUser):
-                    self?.profileInfo = EditableProfileInfo(user: newUser)
+                case .success:
+                    completion()
                 case .failure(let updateError):
                     self?.error = updateError
                 }
@@ -78,12 +76,16 @@ class ProfileViewModel: ObservableObject {
     }
 
     func savePropertyChanges(_ info: EditablePropertyInfo, completion: @escaping () -> Void) {
+        loading = true
+
         var submission = info
         if useShippingAddressForBilling {
             submission.billingAddress = submission.shippingAddress
         }
         self.userController.updateProperty(with: submission) { [weak self] result in
             DispatchQueue.main.async {
+                self?.loading = false
+                
                 if case .failure(let error) = result {
                     self?.error = error
                 } else {

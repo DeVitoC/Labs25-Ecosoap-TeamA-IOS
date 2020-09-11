@@ -19,10 +19,7 @@ struct MainProfileView: View {
             Form {
                 if !viewModel.propertyOptions.isEmpty {
                     Section(header: Text("User".uppercased())) {
-                        NavigationLink(
-                            destination: EditProfileView(),
-                            isActive: $viewModel.isEditingProfile
-                        ) {
+                        NavigationLink(destination: EditProfileView(viewModel.user)) {
                             HStack {
                                 Image.personSquareFill()
                                     .foregroundColor(Color(red: 0.8, green: 0.5, blue: 0.1))

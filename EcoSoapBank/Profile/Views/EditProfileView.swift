@@ -11,10 +11,17 @@ import SwiftUI
 struct EditProfileView: View {
     @EnvironmentObject var viewModel: ProfileViewModel
 
+    @State var profileInfo: EditableProfileInfo
+
+    @Environment(\.presentationMode) var presentationMode
     @State var labelWidth: CGFloat?
 
+    init(_ user: User) {
+        self._profileInfo = State(initialValue: EditableProfileInfo(user: user))
+    }
+
     var body: some View {
-        With($viewModel.profileInfo) { profile in
+        With($profileInfo) { profile in
             Form {
                 Section(header: Text("Name".uppercased())) {
                     self.textField("First", text: profile.firstName)
@@ -32,7 +39,7 @@ struct EditProfileView: View {
         .keyboardAvoiding()
         .navigationBarTitle("Edit Profile")
         .navigationBarItems(trailing: Button(
-            action: viewModel.commitProfileChanges,
+            action: commitChanges,
             label: { Text("Save") })
             .foregroundColor(.barButtonTintColor)
         )
@@ -43,6 +50,12 @@ struct EditProfileView: View {
             .fonts(label: Font(UIFont.muli(style: .caption1, typeface: .bold)),
                    textField: Font(UIFont.muli(typeface: .light)))
     }
+
+    func commitChanges() {
+        viewModel.commitProfileChanges(profileInfo) {
+            self.presentationMode.wrappedValue.dismiss()
+        }
+    }
 }
 
 
@@ -50,7 +63,7 @@ struct EditProfileView_Previews: PreviewProvider {
     static let user = User.placeholder()
     static var previews: some View {
         NavigationView {
-            EditProfileView().environmentObject(ProfileViewModel(
+            EditProfileView(user).environmentObject(ProfileViewModel(
                 user: user,
                 userController: UserController(dataLoader: MockUserDataProvider()),
                 delegate: nil))

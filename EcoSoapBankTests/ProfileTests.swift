@@ -24,8 +24,11 @@ class ProfileTests: XCTestCase {
     var badUser: User!
 
     var viewModel: ProfileViewModel { coordinator.profileVM }
+    var currentProfileInfo: EditableProfileInfo {
+        EditableProfileInfo(user: viewModel.user)
+    }
     var newProfileInfo: EditableProfileInfo {
-        configure(viewModel.profileInfo) {
+        configure(EditableProfileInfo(user: user)) {
             $0.email = "new@email.net"
             $0.middleName = "Lasagna"
             $0.skype = "new-skype-handle"
@@ -94,27 +97,29 @@ class ProfileTests: XCTestCase {
         logIn()
 
         let exp = expectation(description: "profile changed")
+        exp.expectedFulfillmentCount = 2
         let oldUser = viewModel.user
-        let oldInfo = viewModel.profileInfo
+        let oldInfo = currentProfileInfo
         var newUser: User?
 
         XCTAssertFalse(viewModel.loading)
 
-        viewModel.profileInfo = newProfileInfo
         viewModel.$user
             .dropFirst()
             .sink { user in
                 newUser = user
                 exp.fulfill()
         }.store(in: &bag)
-        viewModel.commitProfileChanges()
+        viewModel.commitProfileChanges(newProfileInfo) {
+            exp.fulfill()
+        }
         XCTAssertTrue(viewModel.loading)
 
         wait(for: exp)
 
         XCTAssertNotEqual(oldUser, newUser)
-        XCTAssertEqual(viewModel.profileInfo, newProfileInfo)
-        XCTAssertNotEqual(viewModel.profileInfo, oldInfo)
+        XCTAssertEqual(currentProfileInfo, newProfileInfo)
+        XCTAssertNotEqual(currentProfileInfo, oldInfo)
         XCTAssertNil(viewModel.error)
     }
 
@@ -123,26 +128,28 @@ class ProfileTests: XCTestCase {
 
         let exp = expectation(description: "profile changed")
         let oldUser = viewModel.user
-        let oldInfo = viewModel.profileInfo
+        let oldInfo = currentProfileInfo
         var caughtError: Error?
 
         XCTAssertFalse(viewModel.loading)
 
-        viewModel.profileInfo = newProfileInfo
         viewModel.$error
             .compactMap { $0 }
             .sink { error in
                 caughtError = error
                 exp.fulfill()
         }.store(in: &bag)
-        viewModel.commitProfileChanges()
+        viewModel.commitProfileChanges(newProfileInfo) {
+            // only runs with success
+            XCTFail("Completion should not run")
+        }
         XCTAssertTrue(viewModel.loading)
 
         wait(for: exp)
 
         XCTAssertNotNil(caughtError)
-        XCTAssertEqual(viewModel.profileInfo, newProfileInfo)
-        XCTAssertNotEqual(viewModel.profileInfo, oldInfo)
+        XCTAssertNotEqual(currentProfileInfo, newProfileInfo)
+        XCTAssertEqual(currentProfileInfo, oldInfo)
         XCTAssertEqual(viewModel.user, oldUser)
     }
 
