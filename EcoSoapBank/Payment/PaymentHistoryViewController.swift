@@ -18,12 +18,13 @@ class PaymentHistoryViewController: UIViewController {
         }
     }
 
+
     var cellWidth: CGFloat {
         paymentCollectionView.frame.size.width
     }
     var expandedHeight: CGFloat = 200
     var notExpandedHeight: CGFloat = 80
-    var isExpanded = [Bool]()
+    var isExpanded: IndexPath?
     let cellIdentifier = "PaymentCell"
 
     override func loadView() {
@@ -32,24 +33,24 @@ class PaymentHistoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Payment History"
+        navigationItem.title = "Payment History"
         setupCollectionView()
         guard let user = paymentController?.user, let properties = user.properties else { return }
         paymentController?.fetchPayments(forPropertyID: properties[0].id, completion: { result in
             switch result {
             case .success(let payments):
                 DispatchQueue.main.async {
-                    self.payments = payments
-                    self.isExpanded = Array(repeating: false, count: payments.count)
+                    var sortedPayments: [Payment] = payments
+                    sortedPayments.sort {
+                        guard let date0 = $0.invoicePeriodEndDate, let date1 = $1.invoicePeriodEndDate else { return false }
+                        return date0 > date1
+                    }
+                    self.payments = sortedPayments
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                self.presentAlert(for: error)
             }
         })
-    }
-
-    func setupNavBar() {
-//        view.add
     }
 
     func setupCollectionView() {
@@ -78,10 +79,11 @@ extension PaymentHistoryViewController: UICollectionViewDelegate {
     }
 
     func toggleExpandCell(indexPath: IndexPath) {
-        if !isExpanded[indexPath.row] {
-            isExpanded = Array(repeating: false, count: payments.count)
+        if let index = isExpanded, index == indexPath {
+            isExpanded = nil
+        } else {
+        isExpanded = indexPath
         }
-        isExpanded[indexPath.row].toggle()
         self.paymentCollectionView.reloadData()
     }
 }
@@ -99,7 +101,7 @@ extension PaymentHistoryViewController: UICollectionViewDataSource {
             withReuseIdentifier: cellIdentifier,
             for: indexPath) as? PaymentHistoryCollectionViewCell
             else { return UICollectionViewCell() }
-        cell.isExpanded = isExpanded[indexPath.row]
+        cell.isExpanded = isExpanded == indexPath ? true : false
         cell.payment = payments[indexPath.row]
 
         cell.layer.borderColor = UIColor.gray.cgColor
@@ -112,7 +114,7 @@ extension PaymentHistoryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        isExpanded[indexPath.row] ? CGSize(width: cellWidth, height: expandedHeight) :
+        isExpanded == indexPath ? CGSize(width: cellWidth, height: expandedHeight) :
             CGSize(width: cellWidth, height: notExpandedHeight)
     }
 }
