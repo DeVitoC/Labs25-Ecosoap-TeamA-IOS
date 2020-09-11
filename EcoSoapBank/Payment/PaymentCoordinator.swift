@@ -15,7 +15,7 @@ class PaymentCoordinator: FlowCoordinator {
                                                         dataProvider: dataProvider)
     }
 
-    let rootVC = ESBNavigationController()
+    let rootVC = UINavigationController()
     let paymentVC = PaymentHistoryViewController()
 
     func start() {

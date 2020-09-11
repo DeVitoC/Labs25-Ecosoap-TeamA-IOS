@@ -39,6 +39,7 @@ struct EditProfileView: View {
             action: viewModel.commitProfileChanges,
             label: { Text("Save") })
             .foregroundColor(.barButtonTintColor)
+            .font(.barButtonItem)
         )
     }
 
