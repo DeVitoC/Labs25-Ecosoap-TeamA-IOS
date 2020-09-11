@@ -491,6 +491,17 @@
 			path = "Impact Tests";
 			sourceTree = "<group>";
 		};
+		04C91E2F250B105F005ED433 /* PickupDetail */ = {
+			isa = PBXGroup;
+			children = (
+				992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */,
+				992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */,
+				04C91E2D250A9C6A005ED433 /* PickupDetailCartonCell.swift */,
+				04C91E2B250A920F005ED433 /* CartonView.swift */,
+			);
+			path = PickupDetail;
+			sourceTree = "<group>";
+		};
 		04D1758E24E41DF500F8929C /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -766,10 +777,7 @@
 			children = (
 				998913CE24DDFE54009ADBC1 /* PickupHistoryView.swift */,
 				998913D424DE0907009ADBC1 /* PickupHistoryCell.swift */,
-				992BB63924EDCF1400638AA4 /* PickupDetailViewController.swift */,
-				992BB63B24EDD01F00638AA4 /* PickupDetailViewController.storyboard */,
-				04C91E2D250A9C6A005ED433 /* PickupDetailCartonCell.swift */,
-				04C91E2B250A920F005ED433 /* CartonView.swift */,
+				04C91E2F250B105F005ED433 /* PickupDetail */,
 				99B6175A24EAF0A20099664B /* SchedulePickupViewController.swift */,
 				99B6176024EB0C4E0099664B /* NewCartonCell.swift */,
 				992BB64924F0319D00638AA4 /* EditCartonViewController.swift */,
