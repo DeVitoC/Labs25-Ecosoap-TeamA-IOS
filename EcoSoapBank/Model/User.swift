@@ -24,15 +24,15 @@ struct User: Codable, Equatable {
     let skype: String?
     private(set) var properties: [Property]?
 
-    mutating func updateProperty(_ newProperty: Property) {
-        guard let indexToReplace = properties?.firstIndex(where: {
-            $0.id == newProperty.id
-        }), properties != nil else {
-            properties = properties ?? []
-            properties?.append(newProperty)
-            return
+    func updatingProperty(_ newProperty: Property) -> User {
+        var newUser = self
+        if let indexToReplace = properties?.firstIndex(where: { $0.id == newProperty.id }), properties != nil {
+            newUser.properties?.remove(at: indexToReplace)
+            newUser.properties?.insert(newProperty, at: indexToReplace)
+        } else {
+            newUser.properties = properties ?? []
+            newUser.properties?.append(newProperty)
         }
-        properties?.remove(at: indexToReplace)
-        properties?.insert(newProperty, at: indexToReplace)
+        return newUser
     }
 }
