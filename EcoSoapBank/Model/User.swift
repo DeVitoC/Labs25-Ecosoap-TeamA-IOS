@@ -22,5 +22,17 @@ struct User: Codable, Equatable {
     let email: String
     let phone: String?
     let skype: String?
-    let properties: [Property]?
+    private(set) var properties: [Property]?
+
+    mutating func updateProperty(_ newProperty: Property) {
+        guard let indexToReplace = properties?.firstIndex(where: {
+            $0.id == newProperty.id
+        }), properties != nil else {
+            properties = properties ?? []
+            properties?.append(newProperty)
+            return
+        }
+        properties?.remove(at: indexToReplace)
+        properties?.insert(newProperty, at: indexToReplace)
+    }
 }
