@@ -62,11 +62,10 @@ struct MainProfileView: View {
                     Section(header: Text("Edit Property Info".uppercased())) {
                         ForEach(viewModel.properties) { property in
                             NavigationLink(
+                                property.name,
                                 destination: EditPropertyView(
-                                    viewModel: EditPropertyViewModel(property))
-                            ) {
-                                Text(property.name)
-                            }
+                                    viewModel: self.viewModel.editPropertyVM(property)),
+                                isActive: self.$viewModel.isEditingProperty)
                         }
                     }
                 } else {

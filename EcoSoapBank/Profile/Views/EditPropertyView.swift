@@ -47,17 +47,19 @@ struct EditPropertyView: View {
             action: viewModel.commitChanges,
             label: { Text("Save") })
             .foregroundColor(.barButtonTintColor)
-        )
+        ).alert(isPresented: viewModel.didFail) {
+            Alert(viewModel.error)
+        }
     }
 
     // MARK: - Subviews
 
-    func textField(title: String, text: Binding<String>) -> some View {
+    private func textField(title: String, text: Binding<String>) -> some View {
         LabelAlignedTextField(title: title, labelWidth: $labelWidth, text: text)
     }
 
     @ViewBuilder
-    func addressSectionContent(_ address: Binding<EditableAddressInfo>) -> some View {
+    private func addressSectionContent(_ address: Binding<EditableAddressInfo>) -> some View {
         TextField("Address (line 1)", text: address.address1)
         TextField("Address (line 2)", text: address.address2)
         TextField("Address (line 3)", text: address.address3)
@@ -78,7 +80,10 @@ struct EditPropertyView_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            EditPropertyView(viewModel: EditPropertyViewModel(property))
+            EditPropertyView(viewModel: EditPropertyViewModel(
+                property,
+                isActive: .constant(true),
+                userController: UserController(dataLoader: MockUserDataProvider())))
         }
     }
 }

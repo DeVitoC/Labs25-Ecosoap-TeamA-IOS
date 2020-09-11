@@ -33,5 +33,14 @@ class EditPropertyViewModel: ObservableObject, Identifiable {
     }
 
     func commitChanges() {
+        var submission = propertyInfo
+        if useShippingAddressForBilling {
+            submission.billingAddress = submission.shippingAddress
+        }
+        self.userController.updateProperty(with: submission) { result in
+            if case .failure(let error) = result {
+                self.error = error
+            }
+        }
     }
 }

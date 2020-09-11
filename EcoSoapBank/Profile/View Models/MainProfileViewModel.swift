@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 class MainProfileViewModel: ObservableObject {
@@ -18,6 +19,8 @@ class MainProfileViewModel: ObservableObject {
         }
     }
     @Published var error: Error?
+
+    @Published var isEditingProperty = false
     @Published private(set) var loading = false
 
     let propertyOptions: [PropertySelection]
@@ -49,8 +52,12 @@ class MainProfileViewModel: ObservableObject {
     }
 
     func editPropertyVM(_ property: Property) -> EditPropertyViewModel {
-        editingPropertyVM = EditPropertyViewModel(property)
-        return editingPropertyVM!
+        editingPropertyVM ??= EditPropertyViewModel(
+            property,
+            isActive: Binding(
+                get: { [weak self] in self?.isEditingProperty == true },
+                set: { [weak self] isNowEditing in self?.isEditingProperty = isNowEditing }),
+            userController: userController)
     }
 
     func commitProfileChanges() {
