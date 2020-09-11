@@ -6,8 +6,8 @@
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
+import Combine
 
 
 class MainProfileViewModel: ObservableObject {
@@ -30,6 +30,8 @@ class MainProfileViewModel: ObservableObject {
     private var editingPropertyVM: EditPropertyViewModel?
 
     weak var delegate: ProfileDelegate?
+
+    private var cancellables = Set<AnyCancellable>()
     
     init(user: User,
          userController: UserController,
@@ -49,6 +51,13 @@ class MainProfileViewModel: ObservableObject {
         self.properties = user.properties ?? []
         self.userController = userController
         self.delegate = delegate
+
+        $isEditingProperty
+            .sink(receiveValue: { [weak self] nowEditingProperty in
+                if !nowEditingProperty, let newUser = userController.user, newUser != self?.user {
+                    self?.user = newUser
+                }
+            }).store(in: &cancellables)
     }
 
     func editPropertyVM(_ property: Property) -> EditPropertyViewModel {

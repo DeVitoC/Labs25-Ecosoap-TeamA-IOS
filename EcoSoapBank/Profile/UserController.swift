@@ -74,7 +74,7 @@ extension UserController {
         dataLoader.updateProperty(with: info) { [weak self] result in
             defer { completion(result) }
             guard let newProperty = try? result.get() else { return }
-            self?.user?.updateProperty(newProperty)
+            self?.user = self?.user?.updatingProperty(newProperty)
         }
     }
 

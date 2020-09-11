@@ -19,7 +19,7 @@ struct EditPropertyView: View {
             Section {
                 TextField("Name", text: $viewModel.propertyInfo.name)
                 Picker("Property Type", selection: $viewModel.propertyInfo.propertyType) {
-                    ForEach(viewModel.propertyTypes) {
+                    ForEach(EditPropertyViewModel.propertyTypes) {
                         Text($0.display)
                             .tag($0)
                     }
