@@ -12,7 +12,7 @@ import SwiftUI
 
 class PickupDetailViewController: UIViewController {
     
-    // MARK: -  Public Properties
+    // MARK: - Public Properties
     
     var pickup: Pickup { didSet { updateViews() } }
     
@@ -21,7 +21,7 @@ class PickupDetailViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var collectionView: UICollectionView!
     @IBOutlet private var headingLabels: [UILabel]!
-    @IBOutlet var notesHeadingLabel: UILabel!
+    @IBOutlet private var notesHeadingLabel: UILabel!
     @IBOutlet private var notesView: UILabel!
     
     private var cells: [(text: String, detail: String)] {
@@ -53,14 +53,17 @@ class PickupDetailViewController: UIViewController {
         tableView.dataSource = self
         collectionView.dataSource = self
         
-        headingLabels.forEach { $0.font = .muli(style: .body, typeface: .bold) }
-        notesView.font = UIFont.muli(ofSize: 14)
-        notesView.textColor = UIColor.codGrey.orInverse()
-        
+        setUpViews()
         updateViews()
     }
     
     // MARK: - Private Functions
+    
+    private func setUpViews() {
+        headingLabels.forEach { $0.font = .muli(style: .body, typeface: .bold) }
+        notesView.font = UIFont.muli(ofSize: 14)
+        notesView.textColor = UIColor.codGrey.orInverse()
+    }
     
     private func updateViews() {
         guard isViewLoaded else { return }
