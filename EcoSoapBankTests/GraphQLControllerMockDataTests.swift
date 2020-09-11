@@ -223,7 +223,8 @@ class GraphQLControllerTests: XCTestCase {
             graphQLController = .init(session: mockLoader(withFile: "mockSchedulePickupSuccess"))
         }
         
-        let readyDate = Date(year: 2020, month: 09, day: 25, hour: 1, minute: 1)!
+        let timeZone = TimeZone(identifier: "America/New_York")!
+        let readyDate = Date(year: 2020, month: 09, day: 25, hour: 1, minute: 1, timeZone: timeZone)!
         
         let scheduleInput = Pickup.ScheduleInput(
             base: Pickup.Base(collectionType: .generatedLabel,

@@ -59,7 +59,7 @@ extension Array where Element == Pickup {
 
 extension Array where Element == Pickup.CartonContents {
     static func random() -> [Pickup.CartonContents] {
-        (0 ... .random(in: 1...4)).map { _ in
+        (0 ... .random(in: 1...10)).map { _ in
             Pickup.CartonContents.random()
         }
     }
