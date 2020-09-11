@@ -40,3 +40,13 @@ extension Alert {
                   secondaryButton: secondaryButton)
     }
 }
+
+extension View {
+    func errorAlert(_ error: Binding<Error?>) -> some View {
+        self.alert(
+            isPresented: Binding(
+                get: { error.wrappedValue != nil },
+                set: { hasError in if !hasError { error.wrappedValue = nil }}),
+            content: { Alert(error.wrappedValue) })
+    }
+}
