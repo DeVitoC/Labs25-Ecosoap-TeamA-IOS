@@ -70,10 +70,6 @@ extension PaymentHistoryViewController: UICollectionViewDelegate {
         toggleExpandCell(indexPath: indexPath)
     }
 
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        toggleExpandCell(indexPath: indexPath)
-    }
-
     func toggleExpandCell(indexPath: IndexPath) {
         if let index = isExpanded, index == indexPath {
             isExpanded = nil
