@@ -9,16 +9,12 @@
 import SwiftUI
 
 struct EditProfileView: View {
-    @ObservedObject var viewModel: MainProfileViewModel
+    @EnvironmentObject var viewModel: MainProfileViewModel
 
     @State var labelWidth: CGFloat?
 
-    init(viewModel: MainProfileViewModel) {
-        self.viewModel = viewModel
-    }
-
     var body: some View {
-        With($viewModel.editableInfo) { profile in
+        With($viewModel.profileInfo) { profile in
             Form {
                 Section(header: Text("Name".uppercased())) {
                     self.textField("First", text: profile.firstName)
@@ -54,11 +50,10 @@ struct EditProfileView_Previews: PreviewProvider {
     static let user = User.placeholder()
     static var previews: some View {
         NavigationView {
-            EditProfileView(
-                viewModel: MainProfileViewModel(
-                    user: user,
-                    userController: UserController(dataLoader: MockUserDataProvider()),
-                    delegate: nil))
+            EditProfileView().environmentObject(MainProfileViewModel(
+                user: user,
+                userController: UserController(dataLoader: MockUserDataProvider()),
+                delegate: nil))
         }
     }
 }

@@ -10,13 +10,9 @@ import SwiftUI
 
 
 struct MainProfileView: View {
-    @ObservedObject var viewModel: MainProfileViewModel
+    @EnvironmentObject var viewModel: MainProfileViewModel
 
     @State var iconWidth: CGFloat = 15
-
-    init(viewModel: MainProfileViewModel) {
-        self.viewModel = viewModel
-    }
 
     var body: some View {
         NavigationView {
@@ -24,7 +20,8 @@ struct MainProfileView: View {
                 if !viewModel.propertyOptions.isEmpty {
                     Section(header: Text("User".uppercased())) {
                         NavigationLink(
-                            destination: EditProfileView(viewModel: viewModel)
+                            destination: EditProfileView(),
+                            isActive: $viewModel.isEditingProfile
                         ) {
                             HStack {
                                 Image.personSquareFill()
@@ -34,10 +31,10 @@ struct MainProfileView: View {
                                 }
                                 Text("Edit Profile")
                             }
-                        }
+                        }.isDetailLink(false)
 
                         Picker(
-                            selection: $viewModel.selectedProperty,
+                            selection: $viewModel.managingProperty,
                             label: HStack {
                                 Color.green.clipShape(
                                     RoundedRectangle(
@@ -56,16 +53,15 @@ struct MainProfileView: View {
                             ForEach(viewModel.propertyOptions, id: \.display) {
                                 Text($0.display).tag($0)
                             }
-                        }
+                        }.onAppear(perform: { UIImageView.appearance().tintColor = UIColor.esbGreen })
                     }
 
                     Section(header: Text("Edit Property Info".uppercased())) {
                         ForEach(viewModel.properties) { property in
                             NavigationLink(
                                 property.name,
-                                destination: EditPropertyView(
-                                    viewModel: self.viewModel.editPropertyVM(property)),
-                                isActive: self.$viewModel.isEditingProperty)
+                                destination: EditPropertyView(property)
+                            ).isDetailLink(false)
                         }
                     }
                 } else {
@@ -87,6 +83,7 @@ struct MainProfileView: View {
         }
         .font(.muli())
         .navigationViewStyle(StackNavigationViewStyle())
+        .errorAlert($viewModel.error)
     }
 }
 
@@ -102,11 +99,10 @@ struct MainProfileView_Previews: PreviewProvider {
     static let user: User = .placeholder()
 
     static var previews: some View {
-        MainProfileView(
-            viewModel: MainProfileViewModel(
-                user: .placeholder(),
+        MainProfileView()
+            .environmentObject(MainProfileViewModel(
+                user: user,
                 userController: UserController(dataLoader: MockUserDataProvider()),
-                delegate: nil)
-        )
+                delegate: nil))
     }
 }
