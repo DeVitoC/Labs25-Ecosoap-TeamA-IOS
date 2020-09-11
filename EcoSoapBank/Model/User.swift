@@ -36,3 +36,24 @@ struct User: Codable, Equatable {
         return newUser
     }
 }
+
+
+struct EditableProfileInfo: Encodable, Equatable {
+    let id: String
+    var firstName: String
+    var middleName: String
+    var lastName: String
+    var email: String
+    var skype: String
+    var phone: String
+
+    init(user: User) {
+        self.id = user.id
+        self.firstName = user.firstName
+        self.middleName = user.middleName ?? ""
+        self.lastName = user.lastName
+        self.email = user.email
+        self.skype = user.skype ?? ""
+        self.phone = user.phone ?? ""
+    }
+}
