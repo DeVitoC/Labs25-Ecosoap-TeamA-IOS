@@ -14,7 +14,7 @@ class ImpactCoordinator: FlowCoordinator {
         impactVC.impactController = ImpactController(user: user, dataProvider: dataProvider)
     }
     
-    let rootVC = ESBNavigationController()
+    let rootVC = UINavigationController()
     let impactVC = ImpactViewController()
     
     func start() {
