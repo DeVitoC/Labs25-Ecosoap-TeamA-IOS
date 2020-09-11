@@ -700,7 +700,6 @@
 			isa = PBXGroup;
 			children = (
 				E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */,
-				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
 				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
 				E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */,
 				E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */,
