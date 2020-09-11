@@ -18,15 +18,11 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
     }
 
     var payment: Payment? {
-        didSet {
-            updateContent()
-        }
+        didSet { updateContent() }
     }
 
     var isExpanded = false {
-        didSet {
-            updateLayout()
-        }
+        didSet { updateLayout() }
     }
 
     private let dateFormatter = configure(DateFormatter()) {
@@ -41,14 +37,14 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
     private lazy var detailStack = UIStackView(axis: .horizontal, alignment: .firstBaseline, distribution: .fillEqually, spacing: Padding.small)
     private lazy var invoiceStack = UIStackView(axis: .horizontal, alignment: .lastBaseline, distribution: .fillEqually, spacing: Padding.small)
 
-    private lazy var invoicePeriod = configure(UILabel()) {
+    private lazy var invoicePeriodLabel = configure(UILabel()) {
         $0.font = .muli(typeface: .bold)
     }
-    private lazy var amountDue = contentLabel()
-    private lazy var amountPaid = contentLabel()
-    private lazy var paymentDate = contentLabel()
-    private lazy var paymentMethod = contentLabel()
-    private lazy var invoiceCode = contentLabel()
+    private lazy var amountDueLabel = contentLabel()
+    private lazy var amountPaidLabel = contentLabel()
+    private lazy var paymentDateLabel = contentLabel()
+    private lazy var paymentMethodLabel = contentLabel()
+    private lazy var invoiceCodeLabel = contentLabel()
     private lazy var invoiceButton = configure(UIButton()) {
         $0.setAttributedTitle(
             NSAttributedString(string: "Open invoice", attributes: [
@@ -85,37 +81,47 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
     private func commonInit() {
         backgroundColor = .secondarySystemBackground
 
-        constrainNewSubviewToSafeArea(rootStack, constant: Padding.medium)
+        constrainNewSubviewToSafeArea(rootStack,
+                                      sides: [.top, .leading, .trailing],
+                                      constant: Padding.medium)
+        bottomAnchor.constraint(equalTo: rootStack.bottomAnchor, constant: Padding.large)
+            .isActive = true
         [mainStack, disclosureIndicator]
             .forEach(rootStack.addArrangedSubview(_:))
 
-        mainStack.addArrangedSubview(invoicePeriod)
+        mainStack.addArrangedSubview(invoicePeriodLabel)
 
+        // Due/Paid
         [labeledStack(
             caption: "Amount Due",
-            content: iconStack(image: dollarSign(.systemOrange), label: amountDue)),
+            content: iconStack(image: dollarSign(.systemOrange), label: amountDueLabel)),
          labeledStack(
             caption: "Amount Paid",
-            content: iconStack(image: dollarSign(.esbGreen), label: amountPaid))
+            content: iconStack(image: dollarSign(.esbGreen), label: amountPaidLabel))
         ].forEach(duePaidStack.addArrangedSubview(_:))
-
         mainStack.addArrangedSubview(duePaidStack)
 
-        [labeledStack(caption: "Paid", content: paymentDate), labeledStack(caption: "Method", content: paymentMethod)]
-            .forEach(detailStack.addArrangedSubview(_:))
-        [labeledStack(caption: "Invoice", content: invoiceCode), invoiceButton]
-            .forEach(invoiceStack.addArrangedSubview(_:))
+        // Details row 1
+        [labeledStack(caption: "Paid", content: paymentDateLabel),
+         labeledStack(caption: "Method", content: paymentMethodLabel)
+        ].forEach(detailStack.addArrangedSubview(_:))
         mainStack.addArrangedSubview(detailStack)
+
+        // Details row 2
+        [labeledStack(caption: "Invoice", content: invoiceCodeLabel), invoiceButton]
+            .forEach(invoiceStack.addArrangedSubview(_:))
         mainStack.addArrangedSubview(invoiceStack)
+
+        // Divider
         configure(UIView()) {
             $0.backgroundColor = .tertiaryLabel
             constrainNewSubview($0, to: [.bottom, .trailing])
             NSLayoutConstraint.activate([
                 $0.heightAnchor.constraint(equalToConstant: 0.5),
-                $0.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: Padding.medium)
+                $0.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
+                                            constant: Padding.medium)
             ])
         }
-
 
         updateLayout()
     }
@@ -128,12 +134,12 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
             let invoicePeriodEndDate = payment.invoicePeriodEndDate
             else { return }
 
-        amountDue.text = dollarString(payment.amountDue as NSNumber)
-        amountPaid.text = dollarString(payment.amountPaid as NSNumber)
-        invoicePeriod.text = "\(dateFormatter.string(from: invoicePeriodStartDate)) — \(dateFormatter.string(from: invoicePeriodEndDate))"
-        paymentDate.text = dateFormatter.string(from: payment.date)
-        paymentMethod.text = "\(payment.paymentMethod)"
-        invoiceCode.text = payment.invoiceCode
+        amountDueLabel.text = dollarString(payment.amountDue as NSNumber)
+        amountPaidLabel.text = dollarString(payment.amountPaid as NSNumber)
+        invoicePeriodLabel.text = "\(dateFormatter.string(from: invoicePeriodStartDate)) — \(dateFormatter.string(from: invoicePeriodEndDate))"
+        paymentDateLabel.text = dateFormatter.string(from: payment.date)
+        paymentMethodLabel.text = "\(payment.paymentMethod)"
+        invoiceCodeLabel.text = payment.invoiceCode
     }
 
     private func updateLayout() {
@@ -160,7 +166,7 @@ extension PaymentHistoryCollectionViewCell {
     
     private func contentLabel() -> UILabel {
         configure(UILabel()) {
-            $0.font = .muli(typeface: .semiBold)
+            $0.font = .muli(typeface: .regular)
         }
     }
 
