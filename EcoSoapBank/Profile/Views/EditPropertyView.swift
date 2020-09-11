@@ -47,6 +47,7 @@ struct EditPropertyView: View {
             action: viewModel.commitChanges,
             label: { Text("Save") })
             .foregroundColor(.barButtonTintColor)
+            .font(.barButtonItem)
         )
     }
 

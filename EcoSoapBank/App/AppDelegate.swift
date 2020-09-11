@@ -40,12 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configure(UIBarButtonItem.appearance()) {
             $0.tintColor = .white
             $0.setTitleTextAttributes(
-                [.font: UIFont.muli(typeface: .semiBold)],
+                [.font: UIFont.barButtonItem],
                 for: .normal)
         }
         
         configure(UIButton.appearance()) {
-            $0.tintColor = .esbGreen
+            $0.tintColor = .white
         }
         
         configure(UINavigationBar.appearance()) { nav in
@@ -55,6 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     .font: UIFont.navBarInlineTitle,
                     .foregroundColor: UIColor.black
                 ]
+                
+                let textAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.muli(typeface: .semiBold)]
+                $0.backButtonAppearance.normal.titleTextAttributes = textAttributes
+                $0.doneButtonAppearance.normal.titleTextAttributes = textAttributes
             }
             nav.compactAppearance = configure(UINavigationBarAppearance()) {
                 $0.backgroundImage = UIImage.navBar
