@@ -63,7 +63,7 @@ extension UIFont {
         case semiBold = "-SemiBold"
     }
 
-    /// Returns a Montserrat font with the provided style, typeface,  and size (or the default size of the provided style if `nil`).
+    /// Returns a Montserrat font with the provided style, typeface, and size (or the default size of the provided style if `nil`).
     static func montserrat(
         ofSize size: CGFloat? = nil,
         style: TextStyle? = nil,
@@ -97,7 +97,7 @@ extension UIFont {
     }
     
     static var barButtonItem: UIFont {
-        .muli(typeface: .semiBold)
+        .muli(ofFixedSize: 17, typeface: .semiBold)
     }
 }
 
