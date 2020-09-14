@@ -46,11 +46,11 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
             attributes: [
                 NSAttributedString.Key.font: UIFont.muli(),
         ])
+        $0.tintColor = .esbGreen
         $0.setAttributedTitle(title, for: .normal)
         $0.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 6)
         $0.imageView?.contentMode = .scaleAspectFit
         $0.imageEdgeInsets = .zero
-        $0.layer.cornerRadius = 5
         $0.addTarget(self, action: #selector(addCarton), for: .touchUpInside)
     }
     private lazy var propertyField = configure(CursorlessTextField()) {
@@ -58,13 +58,11 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.borderStyle = .roundedRect
         $0.text = viewModel.selectedProperty.name
     }
-    private lazy var propertyPicker = configure(InputPickerView(
+    private lazy var propertyPicker = InputPickerView(
         data: viewModel.properties,
         rowLabel: \.name,
-        onSelect: { [weak self] in self?.setProperty($0) })
-    ) {
-        $0.backgroundColor = .tertiarySystemBackground
-    }
+        onSelect: { [weak self] in self?.setProperty($0) }
+    )
     private lazy var readyDateField = configure(CursorlessTextField()) {
         $0.inputView = datePicker
         $0.borderStyle = .roundedRect

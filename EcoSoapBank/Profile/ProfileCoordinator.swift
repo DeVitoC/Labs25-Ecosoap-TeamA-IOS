@@ -17,7 +17,7 @@ protocol ProfileDelegate: AnyObject {
 
 
 class ProfileCoordinator: FlowCoordinator {
-    lazy var rootVC = DarkStatusBarHostingController(
+    lazy var rootVC = UIHostingController(
         rootView: MainProfileView(viewModel: profileVM))
 
     private(set) lazy var profileVM: MainProfileViewModel = MainProfileViewModel(

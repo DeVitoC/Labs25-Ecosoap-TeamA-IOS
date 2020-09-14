@@ -27,10 +27,10 @@ public func configure<T>(
 
 
 extension Date {
-    init?(year: Int, month: Int, day: Int, hour: Int, minute: Int) {
+    init?(year: Int, month: Int, day: Int, hour: Int, minute: Int, timeZone: TimeZone = .current) {
         guard let date = DateComponents(
             calendar: .current,
-            timeZone: .current,
+            timeZone: timeZone,
             year: year,
             month: month,
             day: day,
@@ -96,9 +96,14 @@ extension NumberFormatter {
         MeasurementFormatter.providedUnits.numberFormatter
     }
 
-    static var forPercentage: NumberFormatter = configure(NumberFormatter()) {
+    static let forPercentage: NumberFormatter = configure(NumberFormatter()) {
         $0.numberStyle = .percent
         $0.allowsFloats = false
+    }
+
+    static let forDollars: NumberFormatter = configure(NumberFormatter()) {
+        $0.numberStyle = .currency
+        $0.currencyCode = "USD"
     }
 }
 

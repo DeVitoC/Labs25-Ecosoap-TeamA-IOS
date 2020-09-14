@@ -15,7 +15,7 @@ class PickupCoordinator: FlowCoordinator {
     private let pickupController: PickupController
     private(set) var user: User
 
-    private(set) lazy var rootVC: UIViewController = DarkStatusBarHostingController(
+    private(set) lazy var rootVC: UIViewController = UIHostingController(
         rootView: PickupHistoryView(
             pickupController: pickupController,
             schedulePickup: { [weak self] in self?.scheduleNewPickup() }))
@@ -59,7 +59,7 @@ extension PickupCoordinator {
         }
         // see `UtilityFunctions.swift` `Optional` extension and infix operator
         let viewController = scheduleVC ??= newScheduleVC()
-        let nav = configure(ESBNavigationController(rootViewController: viewController)) {
+        let nav = configure(UINavigationController(rootViewController: viewController)) {
             $0.modalPresentationStyle = .fullScreen
         }
         rootVC.present(nav, animated: true, completion: nil)
@@ -124,7 +124,7 @@ extension PickupCoordinator: SchedulePickupViewModelDelegate {
     }
 
     func cancelPickup() {
-        guard let nav = rootVC.presentedViewController as? ESBNavigationController,
+        guard let nav = rootVC.presentedViewController as? UINavigationController,
             nav.viewControllers.first as? SchedulePickupViewController != nil
             else { return }
         rootVC.dismiss(animated: true, completion: nil)

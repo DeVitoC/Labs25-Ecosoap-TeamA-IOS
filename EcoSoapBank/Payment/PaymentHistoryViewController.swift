@@ -12,7 +12,7 @@ class PaymentHistoryViewController: UIViewController {
 
     // MARK: - Properties
     var paymentController: PaymentController?
-    private var paymentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private lazy var paymentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout())
     private var payments: [Payment] = [] {
         didSet {
             self.paymentCollectionView.reloadData()
@@ -65,6 +65,17 @@ class PaymentHistoryViewController: UIViewController {
             paymentCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+
+    private func compositionalLayout() -> UICollectionViewLayout {
+        let size = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(100))
+        return UICollectionViewCompositionalLayout(
+            section: NSCollectionLayoutSection(
+                group: .vertical(
+                    layoutSize: size,
+                    subitems: [NSCollectionLayoutItem(layoutSize: size)])))
+    }
 }
 
 extension PaymentHistoryViewController: UICollectionViewDelegate {
@@ -99,17 +110,6 @@ extension PaymentHistoryViewController: UICollectionViewDataSource {
         cell.isExpanded = isExpanded == indexPath ? true : false
         cell.payment = payments[indexPath.row]
 
-        cell.layer.borderColor = UIColor.gray.cgColor
-        cell.layer.borderWidth = 0.5
         return cell
-    }
-}
-
-extension PaymentHistoryViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        isExpanded == indexPath ? CGSize(width: cellWidth, height: expandedHeight) :
-            CGSize(width: cellWidth, height: notExpandedHeight)
     }
 }
