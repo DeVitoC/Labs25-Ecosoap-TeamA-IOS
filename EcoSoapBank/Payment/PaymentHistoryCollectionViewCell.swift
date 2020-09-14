@@ -31,11 +31,51 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Subviews
 
-    private lazy var rootStack = UIStackView(axis: .horizontal, alignment: .firstBaseline, distribution: .fill, spacing: Padding.tiny)
-    private lazy var mainStack = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill, spacing: Padding.small)
-    private lazy var duePaidStack = UIStackView(axis: .horizontal, alignment: .firstBaseline, distribution: .fillEqually, spacing: Padding.small)
-    private lazy var detailStack = UIStackView(axis: .horizontal, alignment: .firstBaseline, distribution: .fillEqually, spacing: Padding.small)
-    private lazy var invoiceStack = UIStackView(axis: .horizontal, alignment: .lastBaseline, distribution: .fillEqually, spacing: Padding.small)
+    private lazy var rootStack = UIStackView(
+        axis: .horizontal,
+        alignment: .firstBaseline,
+        distribution: .fill,
+        spacing: Padding.tiny,
+        arrangedSubviews: [mainStack, disclosureIndicator])
+    private lazy var mainStack = UIStackView(
+        axis: .vertical,
+        alignment: .fill,
+        distribution: .fill,
+        spacing: Padding.small,
+        arrangedSubviews: [invoicePeriodLabel, duePaidStack, detailStack, invoiceStack])
+
+    private lazy var duePaidStack = UIStackView(
+        axis: .horizontal,
+        alignment: .firstBaseline,
+        distribution: .fillEqually,
+        spacing: Padding.small,
+        arrangedSubviews: [
+            labeledStack(
+                caption: "Amount Due",
+                content: iconStack(
+                    image: dollarSign(.systemOrange),
+                    label: amountDueLabel)),
+            labeledStack(
+                caption: "Amount Paid",
+                content: iconStack(
+                    image: dollarSign(.esbGreen),
+                    label: amountPaidLabel))])
+    private lazy var detailStack = UIStackView(
+        axis: .horizontal,
+        alignment: .firstBaseline,
+        distribution: .fillEqually,
+        spacing: Padding.small,
+        arrangedSubviews: [
+            labeledStack(caption: "Paid", content: paymentDateLabel),
+            labeledStack(caption: "Method", content: paymentMethodLabel)])
+    private lazy var invoiceStack = UIStackView(
+        axis: .horizontal,
+        alignment: .lastBaseline,
+        distribution: .fillEqually,
+        spacing: Padding.small,
+        arrangedSubviews: [
+            labeledStack(caption: "Invoice", content: invoiceCodeLabel),
+            invoiceButton])
 
     private lazy var invoicePeriodLabel = configure(UILabel()) {
         $0.font = .muli(typeface: .bold)
@@ -58,7 +98,7 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
         $0.titleLabel?.numberOfLines = 0
         $0.contentHorizontalAlignment = .leading
     }
-    private lazy var disclosureIndicator = configure(UIImageView(systemName: "chevron.right")) {
+    private lazy var disclosureIndicator = configure(UIImageView("chevron.down")) {
         $0.preferredSymbolConfiguration = .init(textStyle: .body, scale: .small)
         $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         $0.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -86,31 +126,6 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
                                       constant: Padding.medium)
         bottomAnchor.constraint(equalTo: rootStack.bottomAnchor, constant: Padding.large)
             .isActive = true
-        [mainStack, disclosureIndicator]
-            .forEach(rootStack.addArrangedSubview(_:))
-
-        mainStack.addArrangedSubview(invoicePeriodLabel)
-
-        // Due/Paid
-        [labeledStack(
-            caption: "Amount Due",
-            content: iconStack(image: dollarSign(.systemOrange), label: amountDueLabel)),
-         labeledStack(
-            caption: "Amount Paid",
-            content: iconStack(image: dollarSign(.esbGreen), label: amountPaidLabel))
-        ].forEach(duePaidStack.addArrangedSubview(_:))
-        mainStack.addArrangedSubview(duePaidStack)
-
-        // Details row 1
-        [labeledStack(caption: "Paid", content: paymentDateLabel),
-         labeledStack(caption: "Method", content: paymentMethodLabel)
-        ].forEach(detailStack.addArrangedSubview(_:))
-        mainStack.addArrangedSubview(detailStack)
-
-        // Details row 2
-        [labeledStack(caption: "Invoice", content: invoiceCodeLabel), invoiceButton]
-            .forEach(invoiceStack.addArrangedSubview(_:))
-        mainStack.addArrangedSubview(invoiceStack)
 
         // Divider
         configure(UIView()) {
@@ -144,7 +159,7 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
 
     private func updateLayout() {
         self.disclosureIndicator.transform = self.isExpanded ?
-            CGAffineTransform(rotationAngle: .pi / 2)
+            CGAffineTransform(rotationAngle: .pi)
             : .identity
         self.detailStack.isHidden = !self.isExpanded
         self.invoiceStack.isHidden = !self.isExpanded
@@ -179,19 +194,23 @@ extension PaymentHistoryCollectionViewCell {
     }
 
     private func labeledStack(caption: String, content: UIView) -> UIStackView {
-        configure(UIStackView(axis: .vertical, alignment: .fill, distribution: .fill, spacing: 0)) {
-            [captionLabel(caption), content].forEach($0.addArrangedSubview(_:))
-        }
+        UIStackView(axis: .vertical,
+                    alignment: .fill,
+                    distribution: .fill,
+                    spacing: 0,
+                    arrangedSubviews: [captionLabel(caption), content])
     }
 
     private func iconStack(image: UIImageView, label: UILabel) -> UIStackView {
-        configure(UIStackView(axis: .horizontal, alignment: .firstBaseline, distribution: .fill, spacing: 0)) {
-            [image, label].forEach($0.addArrangedSubview(_:))
-        }
+        UIStackView(axis: .horizontal,
+                    alignment: .lastBaseline,
+                    distribution: .fill,
+                    spacing: 0,
+                    arrangedSubviews: [image, label])
     }
 
     private func dollarSign(_ color: UIColor) -> UIImageView {
-        configure(UIImageView(systemName: "dollarsign.circle.fill")) {
+        configure(UIImageView("dollarsign.circle.fill")) {
             $0.preferredSymbolConfiguration = .init(weight: .light)
             $0.tintColor = color
             $0.widthAnchor.constraint(equalTo: $0.heightAnchor).isActive = true
