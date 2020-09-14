@@ -569,6 +569,7 @@
 				994E4B6E24DDAEB100C12921 /* Pickups */,
 				994E4B6F24DDAEB700C12921 /* Payment */,
 				99C0467424FD8AA500E2B005 /* Profile */,
+				997ECB5725101BB0003B9430 /* Login */,
 				46BEB4EB24C98EB400FE0CD1 /* Model */,
 				46BEB4EA24C98EA300FE0CD1 /* Helpers */,
 				465DAA2724BD0BC100D94C24 /* App */,
@@ -657,7 +658,6 @@
 		992FBC8E24FDBA890099C32D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */,
 				99C0467724FD8AF200E2B005 /* MainProfileView.swift */,
 				99C0467924FD8B9200E2B005 /* EditProfileView.swift */,
 				992FBC8C24FDB6970099C32D /* EditPropertyView.swift */,
@@ -718,6 +718,15 @@
 			path = EcoSoapBankTests;
 			sourceTree = "<group>";
 		};
+		997ECB5725101BB0003B9430 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				99B6177224EC743F0099664B /* LoginCoordinator.swift */,
+				46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		9983874F24E4694400450244 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -759,7 +768,6 @@
 		99C0467424FD8AA500E2B005 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				99B6177224EC743F0099664B /* LoginCoordinator.swift */,
 				99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */,
 				992BB63D24EEE21300638AA4 /* UserController.swift */,
 				992FBC8F24FDC01F0099C32D /* ProfileViewModel.swift */,
