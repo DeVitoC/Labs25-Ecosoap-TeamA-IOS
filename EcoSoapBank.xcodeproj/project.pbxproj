@@ -564,13 +564,13 @@
 		466C4272249A8748007D033E /* EcoSoapBank */ = {
 			isa = PBXGroup;
 			children = (
-				E27B4B1924E1ECE800148E4E /* Network Controller */,
 				994E4B6D24DDAEA800C12921 /* Impact */,
 				994E4B6E24DDAEB100C12921 /* Pickups */,
 				994E4B6F24DDAEB700C12921 /* Payment */,
 				99C0467424FD8AA500E2B005 /* Profile */,
 				997ECB5725101BB0003B9430 /* Login */,
 				46BEB4EB24C98EB400FE0CD1 /* Model */,
+				E27B4B1924E1ECE800148E4E /* Networking */,
 				46BEB4EA24C98EA300FE0CD1 /* Helpers */,
 				465DAA2724BD0BC100D94C24 /* App */,
 				04D1758E24E41DF500F8929C /* Custom Views */,
@@ -776,7 +776,7 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		E27B4B1924E1ECE800148E4E /* Network Controller */ = {
+		E27B4B1924E1ECE800148E4E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */,
@@ -790,7 +790,7 @@
 				992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */,
 				04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */,
 			);
-			path = "Network Controller";
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		E2AEB12324E736E300C42ACD /* Mock Data */ = {
