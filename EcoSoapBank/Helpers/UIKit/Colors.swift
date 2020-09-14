@@ -12,6 +12,8 @@ extension UIColor {
     static let esbGreen = UIColor(named: "ESBGreen")!
     static let downyBlue = UIColor(named: "DownyBlue")!
     static let codGrey = UIColor(named: "CodGrey")!
+
+    static let esbSeparator = UIColor.downyBlue.orAdjustingBrightness(by: -0.3, defaultLight: false)
 }
 
 // MARK: - RGBA / HSBA

@@ -55,7 +55,8 @@ class PaymentHistoryViewController: UIViewController {
         paymentCollectionView.delegate = self
         paymentCollectionView.translatesAutoresizingMaskIntoConstraints = false
         paymentCollectionView.register(PaymentHistoryCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
-        paymentCollectionView.backgroundColor = .systemBackground
+        paymentCollectionView.backgroundColor = .systemGray5
+        
         NSLayoutConstraint.activate([
             paymentCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             paymentCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
