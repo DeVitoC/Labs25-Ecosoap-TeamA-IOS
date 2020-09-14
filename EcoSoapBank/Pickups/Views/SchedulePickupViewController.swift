@@ -47,12 +47,12 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
             attributes: [
                 NSAttributedString.Key.font: UIFont.muli(),
         ])
+        $0.tintColor = .esbGreen
         $0.setAttributedTitle(title, for: .normal)
         $0.tintColor = .esbGreen
         $0.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 6)
         $0.imageView?.contentMode = .scaleAspectFit
         $0.imageEdgeInsets = .zero
-        $0.layer.cornerRadius = 5
         $0.addTarget(self, action: #selector(addCarton), for: .touchUpInside)
     }
     private lazy var propertyField = configure(CursorlessTextField()) {

@@ -89,6 +89,9 @@ extension UIFont {
         .montserrat(ofSize: 22, typeface: .semiBold)
     }
     
+    static var barButtonItem: UIFont {
+        .muli(typeface: .semiBold)
+    }
 }
 
 

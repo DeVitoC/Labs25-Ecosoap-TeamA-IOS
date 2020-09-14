@@ -56,9 +56,11 @@ struct EditPropertyView: View {
         }
         .keyboardAvoiding()
         .navigationBarTitle("Update Property", displayMode: .automatic)
-        .navigationBarItems(trailing:
-            Button(action: saveChanges, label: { Text("Save") })
-                .foregroundColor(.barButtonTintColor)
+        .navigationBarItems(trailing: Button(
+            action: viewModel.commitChanges,
+            label: { Text("Save") })
+            .foregroundColor(.barButtonTintColor)
+            .font(.barButtonItem)
         )
     }
 

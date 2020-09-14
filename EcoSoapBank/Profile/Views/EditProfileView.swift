@@ -42,6 +42,7 @@ struct EditProfileView: View {
             action: commitChanges,
             label: { Text("Save") })
             .foregroundColor(.barButtonTintColor)
+            .font(.barButtonItem)
         )
     }
 
