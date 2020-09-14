@@ -163,6 +163,7 @@
 		998913D724DE0C34009ADBC1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D624DE0C33009ADBC1 /* Property.swift */; };
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
+		998EF05925102DA800EDD19E /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 998EF05825102DA800EDD19E /* SwiftUIRefresh */; };
 		9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E024F9B78C00DD16B5 /* StripeController.swift */; };
 		9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
 		9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */; };
@@ -405,6 +406,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				998EF05925102DA800EDD19E /* SwiftUIRefresh in Frameworks */,
 				042CD96024F585AA00ADFCB5 /* KeychainAccess in Frameworks */,
 				041E1E2124E1E1510052831D /* OktaAuth in Frameworks */,
 				999CBA3D24F9AFF100CDF0F3 /* Stripe.framework in Frameworks */,
@@ -845,6 +847,7 @@
 			packageProductDependencies = (
 				041E1E2024E1E1510052831D /* OktaAuth */,
 				042CD95F24F585AA00ADFCB5 /* KeychainAccess */,
+				998EF05825102DA800EDD19E /* SwiftUIRefresh */,
 			);
 			productName = LabsScaffolding;
 			productReference = 466C4270249A8748007D033E /* EcoSoapBank.app */;
@@ -927,6 +930,7 @@
 			packageReferences = (
 				041E1E1F24E1E1510052831D /* XCRemoteSwiftPackageReference "OktaAuth" */,
 				042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				998EF05725102DA800EDD19E /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
 			);
 			productRefGroup = 466C4271249A8748007D033E /* Products */;
 			projectDirPath = "";
@@ -1543,6 +1547,14 @@
 				minimumVersion = 4.2.0;
 			};
 		};
+		998EF05725102DA800EDD19E /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUIRefresh";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1555,6 +1567,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		998EF05825102DA800EDD19E /* SwiftUIRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 998EF05725102DA800EDD19E /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
+			productName = SwiftUIRefresh;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
