@@ -82,14 +82,14 @@ class LoginViewController: UIViewController {
         let missionStatment = NSMutableAttributedString(
             string: line1,
             attributes: [.paragraphStyle: paragraphStyle,
-                         .font: UIFont.montserrat(style: .title3)]
+                         .font: UIFont.montserratScaled(style: .title3)]
         )
         
         missionStatment.append(
             NSAttributedString(
                 string: line2,
                 attributes: [.paragraphStyle: paragraphStyle,
-                             .font: UIFont.montserrat(style: .title3, typeface: .semiBold)]
+                             .font: UIFont.montserratScaled(style: .title3, typeface: .semiBold)]
             )
         )
         
@@ -97,7 +97,7 @@ class LoginViewController: UIViewController {
             NSAttributedString(
                 string: line3,
                 attributes: [.paragraphStyle: paragraphStyle,
-                             .font: UIFont.montserrat(style: .title3)]
+                             .font: UIFont.montserratScaled(style: .title3)]
             )
         )
         

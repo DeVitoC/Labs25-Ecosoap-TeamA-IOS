@@ -23,7 +23,7 @@ extension UIFont {
     }
 
     /// Returns a Muli font with the provided style, typeface,  and size (or the default size of the provided style if `nil`).
-    static func muli(
+    static func muliScaled(
         ofSize size: CGFloat? = nil,
         style: TextStyle? = nil,
         typeface: MuliTypeface = .regular
@@ -35,11 +35,15 @@ extension UIFont {
         )!.scaled(forStyle: style)
     }
     
-    static func muli(
-        ofFixedSize size: CGFloat,
-        typeface: MuliTypeface = .regular
-    ) -> UIFont {
+    static func muli(ofSize size: CGFloat, typeface: MuliTypeface = .regular) -> UIFont {
         UIFont(name: .muli + typeface.rawValue, size: size)!
+    }
+    
+    static func muli(ofStyle style: TextStyle, typeface: MuliTypeface = .regular) -> UIFont {
+        UIFont(
+            name: .muli + typeface.rawValue,
+            size: UIFontDescriptor.preferredFontDescriptor(withTextStyle: style).pointSize
+        )!
     }
     
     enum MontserratTypeface: String, CaseIterable {
@@ -64,7 +68,7 @@ extension UIFont {
     }
 
     /// Returns a Montserrat font with the provided style, typeface, and size (or the default size of the provided style if `nil`).
-    static func montserrat(
+    static func montserratScaled(
         ofSize size: CGFloat? = nil,
         style: TextStyle? = nil,
         typeface: MontserratTypeface = .regular
@@ -74,6 +78,17 @@ extension UIFont {
             size: size ?? UIFontDescriptor
                 .preferredFontDescriptor(withTextStyle: style ?? .body).pointSize
             )!.scaled(forStyle: style)
+    }
+    
+    static func montserrat(ofSize size: CGFloat, typeface: MontserratTypeface = .regular) -> UIFont {
+        UIFont(name: .montserrat + typeface.rawValue, size: size)!
+    }
+    
+    static func montserrat(ofStyle style: TextStyle, typeface: MuliTypeface = .regular) -> UIFont {
+        UIFont(
+            name: .montserrat + typeface.rawValue,
+            size: UIFontDescriptor.preferredFontDescriptor(withTextStyle: style).pointSize
+        )!
     }
 
     /// Returns a Dynamic Type-adaptive version of the font.
@@ -89,15 +104,15 @@ extension UIFont {
     }
     
     static var navBarLargeTitle: UIFont {
-        .montserrat(ofSize: 30, typeface: .semiBold)
+        .montserratScaled(ofSize: 30, typeface: .semiBold)
     }
     
     static var navBarInlineTitle: UIFont {
-        .montserrat(ofSize: 22, typeface: .semiBold)
+        .montserratScaled(ofSize: 22, typeface: .semiBold)
     }
     
     static var barButtonItem: UIFont {
-        .muli(ofFixedSize: 17, typeface: .semiBold)
+        .muli(ofSize: 17, typeface: .semiBold)
     }
 }
 

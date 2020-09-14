@@ -13,14 +13,14 @@ class PickupDetailCartonCell: UICollectionViewCell {
     
     @IBOutlet private var productLabel: UILabel! {
         didSet {
-            productLabel.font = UIFont.muli(style: .callout, typeface: .regular)
+            productLabel.font = UIFont.muliScaled(style: .callout, typeface: .regular)
             productLabel.textColor = UIColor.label
         }
     }
     @IBOutlet private var cartonView: CartonView!
     @IBOutlet private var percentFullLabel: UILabel! {
         didSet {
-            percentFullLabel.font = UIFont.muli(style: .caption1, typeface: .semiBold)
+            percentFullLabel.font = UIFont.muliScaled(style: .caption1, typeface: .semiBold)
             percentFullLabel.textColor = UIColor.codGrey.orInverse()
         }
     }

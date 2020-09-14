@@ -45,8 +45,8 @@ struct EditProfileView: View {
 
     func textField(_ title: String, text: Binding<String>) -> some View {
         LabelAlignedTextField(title: title, labelWidth: $labelWidth, text: text)
-            .fonts(label: Font(UIFont.muli(style: .caption1, typeface: .bold)),
-                   textField: Font(UIFont.muli(typeface: .light)))
+            .fonts(label: Font(UIFont.muliScaled(style: .caption1, typeface: .bold)),
+                   textField: Font(UIFont.muliScaled(typeface: .light)))
     }
 }
 

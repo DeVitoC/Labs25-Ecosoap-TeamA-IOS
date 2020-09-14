@@ -51,7 +51,7 @@ class FontTests: XCTestCase {
         let desiredFontName = "Montserrat-BoldItalic"
         
         // when
-        let font: UIFont = .montserrat(ofSize: 20, typeface: .boldItalic)
+        let font: UIFont = .montserratScaled(ofSize: 20, typeface: .boldItalic)
         
         // then
         XCTAssertEqual(font.fontName, desiredFontName)

@@ -63,7 +63,7 @@ class ESBButton: UIButton {
         updateColors()
         clipsToBounds = true
         layer.cornerRadius = 8.0
-        titleLabel?.font = .muli( style: .title3, typeface: .semiBold)
+        titleLabel?.font = .muliScaled( style: .title3, typeface: .semiBold)
         contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
 }

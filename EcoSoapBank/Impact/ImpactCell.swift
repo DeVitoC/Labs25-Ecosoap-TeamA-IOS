@@ -31,13 +31,18 @@ class ImpactCell: UICollectionViewCell {
     
     // Views
     private let titleLabel = configure(UILabel()) {
-        $0.font = .montserrat(style: .title2, typeface: .semiBold)
+        $0.font = .montserratScaled(style: .title2, typeface: .semiBold)
+        $0.adjustsFontForContentSizeCategory = true
         $0.textColor = .label
         $0.text = "34.9 lbs"
     }
     
     private let subtitleLabel = configure(UILabel()) {
-        $0.font = .montserrat(style: .body)
+//        $0.font = .montserrat(style: .subheadline)
+        
+        $0.font = UIFontMetrics.default.scaledFont(for: .montserrat(ofSize: 18), maximumPointSize: 30)
+        
+        $0.adjustsFontForContentSizeCategory = true
         $0.textColor = UIColor.codGrey.orInverse()
         $0.numberOfLines = 0
         $0.text = "bottle amenities\nrecycled"
@@ -113,7 +118,8 @@ class ImpactCell: UICollectionViewCell {
             
             titleLabel.leadingAnchor.constraint(equalTo: circleView.trailingAnchor,
                                                 constant: horizontalLabelPadding),
-            subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor)
+            subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            subtitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
         ]
     }
     
@@ -127,7 +133,8 @@ class ImpactCell: UICollectionViewCell {
             
             titleLabel.trailingAnchor.constraint(equalTo: circleView.leadingAnchor,
                                                  constant: -horizontalLabelPadding),
-            subtitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+            subtitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            subtitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
         ]
     }
     

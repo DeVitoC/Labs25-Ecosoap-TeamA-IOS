@@ -86,7 +86,7 @@ struct MainProfileView: View {
                 }
             }.navigationBarTitle("Profile Settings", displayMode: .inline)
         }
-        .font(.muli())
+        .font(.muliScaled())
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
