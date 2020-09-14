@@ -185,7 +185,7 @@
 		99D0166024FEA6D9001A7555 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D0165F24FEA6D8001A7555 /* With.swift */; };
 		E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220C32624E35E59003FF32D /* GraphQLQueries.swift */; };
 		E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */; };
-		E28E911424FEBC320014DF82 /* UIElementInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E911324FEBC320014DF82 /* UIElementInitializers.swift */; };
+		E28E911424FEBC320014DF82 /* UIViews+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E911324FEBC320014DF82 /* UIViews+Convenience.swift */; };
 		E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */; };
 		E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B324E45BF800C5DF8B /* QueryObjects.swift */; };
 		E2C37DE32508207C00B9F20F /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2F0EB24F844A10050BFCF /* PaymentController.swift */; };
@@ -372,7 +372,7 @@
 		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
 		E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryViewController.swift; path = EcoSoapBank/Payment/PaymentHistoryViewController.swift; sourceTree = SOURCE_ROOT; };
 		E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryCollectionViewCell.swift; path = EcoSoapBank/Payment/PaymentHistoryCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
-		E28E911324FEBC320014DF82 /* UIElementInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElementInitializers.swift; sourceTree = "<group>"; };
+		E28E911324FEBC320014DF82 /* UIViews+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViews+Convenience.swift"; sourceTree = "<group>"; };
 		E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPaymentProvider.swift; sourceTree = "<group>"; };
 		E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsFailure.json; sourceTree = "<group>"; };
 		E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLMutations.swift; sourceTree = "<group>"; };
@@ -596,7 +596,6 @@
 				992BB64224EEFBAD00638AA4 /* Errors.swift */,
 				992C929024F70B0C004FCBBB /* Randomizable.swift */,
 				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
-				E28E911324FEBC320014DF82 /* UIElementInitializers.swift */,
 				04C91E25250929C1005ED433 /* PrintJson.swift */,
 			);
 			path = Helpers;
@@ -630,6 +629,7 @@
 				049379A624EAE9FF0084051B /* UIView+Layout.swift */,
 				992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */,
 				9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */,
+				E28E911324FEBC320014DF82 /* UIViews+Convenience.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1138,7 +1138,7 @@
 				99B6175D24EAF0C70099664B /* SchedulePickupViewModel.swift in Sources */,
 				998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
-				E28E911424FEBC320014DF82 /* UIElementInitializers.swift in Sources */,
+				E28E911424FEBC320014DF82 /* UIViews+Convenience.swift in Sources */,
 				04C91E2A2509D069005ED433 /* ESBBordered.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
 				993B15CE24F4575500529517 /* CursorlessTextField.swift in Sources */,
