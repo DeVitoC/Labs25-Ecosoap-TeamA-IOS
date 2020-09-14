@@ -31,24 +31,7 @@ class PaymentHistoryViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "Payment History"
         setupCollectionView()
-        guard let user = paymentController?.user, let properties = user.properties else { return }
-        paymentController?.fetchPayments(forPropertyID: properties[0].id, completion: { [weak self] result in
-            switch result {
-            case .success(let payments):
-                var sortedPayments: [Payment] = payments
-                sortedPayments.sort {
-                    guard let date0 = $0.invoicePeriodEndDate, let date1 = $1.invoicePeriodEndDate else { return false }
-                    return date0 > date1
-                }
-                DispatchQueue.main.async {
-                    self?.payments = sortedPayments
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self?.presentAlert(for: error)
-                }
-            }
-        })
+        refreshPayments()
     }
 
     func setupCollectionView() {
@@ -65,6 +48,10 @@ class PaymentHistoryViewController: UIViewController {
             paymentCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             paymentCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        paymentCollectionView.refreshControl = UIRefreshControl()
+        paymentCollectionView.refreshControl?.addTarget(self,
+                                                        action: #selector(refreshControlDidTrigger(_:)),
+                                                        for: .valueChanged)
     }
 
     private func compositionalLayout() -> UICollectionViewLayout {
@@ -76,6 +63,35 @@ class PaymentHistoryViewController: UIViewController {
                 group: .vertical(
                     layoutSize: size,
                     subitems: [NSCollectionLayoutItem(layoutSize: size)])))
+    }
+
+    private func refreshPayments() {
+        guard let user = paymentController?.user, let properties = user.properties else { return }
+        paymentCollectionView.refreshControl?.beginRefreshing()
+        paymentController?.fetchPayments(forPropertyID: properties[0].id, completion: { [weak self] result in
+            switch result {
+            case .success(let payments):
+                var sortedPayments: [Payment] = payments
+                sortedPayments.sort {
+                    guard let date0 = $0.invoicePeriodEndDate, let date1 = $1.invoicePeriodEndDate else { return false }
+                    return date0 > date1
+                }
+                DispatchQueue.main.async {
+                    self?.payments = sortedPayments
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.presentAlert(for: error)
+                }
+            }
+            DispatchQueue.main.async {
+                self?.paymentCollectionView.refreshControl?.endRefreshing()
+            }
+        })
+    }
+
+    @objc private func refreshControlDidTrigger(_ sender: UIRefreshControl) {
+        refreshPayments()
     }
 }
 
