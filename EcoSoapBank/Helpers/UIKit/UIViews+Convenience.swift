@@ -14,28 +14,46 @@ extension UILabel {
      - Parameter title: **String** that describes the UILabel's text property
      - Parameter frame: **CGRect** that describes the initial dimensions of the UILabel
      - Parameter alignment: **NSTextAlignment** that describes the UILabel's  textAlignment property
-     - Parameter textColor: **UIColor** that describes the UILabel's textColor property
+     - Parameter textColor: **UIColor** that describes the UILabel's textColor property (defaults to `.label`)
+
+     Sets `translatesAutoresizingMaskIntoConstraints` to `false`.
      */
     convenience init(_ title: String, frame: CGRect, alignment: NSTextAlignment, textColor: UIColor = .label) {
         self.init(frame: frame)
-        translatesAutoresizingMaskIntoConstraints = false
-        text = title
-        textAlignment = alignment
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.text = title
+        self.textAlignment = alignment
         self.textColor = textColor
     }
 }
 
 extension UIImageView {
-    /// Initializes a UIImageView with image name
+    /// Initializes a UIImageView with image name, configuration
     /// - Parameter systemName: **String** with the system name for the image
-    convenience init(_ systemName: String) {
-        self.init(image: UIImage(systemName: systemName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold)))
-        translatesAutoresizingMaskIntoConstraints = false
-        tintColor = .lightGray
+    /// - Parameter configuration: Defaults to `.init(pointSize: 16, weight: .semibold)`
+    /// - Parameter tintColor: Defaults to `.tertiaryLabel`
+    ///
+    /// Sets `translatesAutoresizingMaskIntoConstraints` to `false`.
+    convenience init(
+        _ systemName: String,
+        configuration: UIImage.SymbolConfiguration = .init(pointSize: 16, weight: .semibold),
+        tintColor: UIColor = .tertiaryLabel
+    ) {
+        self.init(image: UIImage(systemName: systemName, withConfiguration: configuration))
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.tintColor = tintColor
     }
 }
 
 extension UIStackView {
+    /// Initializes a stack view with the given parameters and arranged subviews.
+    ///
+    /// - Parameters:
+    ///   - axis: Default `.vertical`
+    ///   - alignment: Default `.fill`
+    ///   - distribution: Default `.fill`
+    ///   - spacing: Default `8`
+    ///   - arrangedSubviews: Default `[]`
     convenience init(
         axis: NSLayoutConstraint.Axis = .vertical,
         alignment: UIStackView.Alignment = .fill,

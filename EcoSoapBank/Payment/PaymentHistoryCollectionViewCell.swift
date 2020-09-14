@@ -210,9 +210,10 @@ extension PaymentHistoryCollectionViewCell {
     }
 
     private func dollarSign(_ color: UIColor) -> UIImageView {
-        configure(UIImageView("dollarsign.circle.fill")) {
-            $0.preferredSymbolConfiguration = .init(weight: .light)
-            $0.tintColor = color
+        configure(UIImageView("dollarsign.circle.fill",
+                              configuration: .init(weight: .light),
+                              tintColor: color)
+        ) {
             $0.widthAnchor.constraint(equalTo: $0.heightAnchor).isActive = true
         }
     }
