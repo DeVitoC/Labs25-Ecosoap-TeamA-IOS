@@ -7,12 +7,20 @@
 //
 
 import SwiftUI
+import Combine
+import SwiftUIRefresh
+
 
 struct PickupHistoryView: View {
     @ObservedObject var pickupController: PickupController
 
     @State private var makingNewPickup = false
     @State private var statusWidth: CGFloat?
+    @State private var refreshing = false
+
+    @State private var error: Error?
+
+    @State private var fetchSubscription: AnyCancellable?
 
     private var schedulePickup: () -> Void
 
@@ -28,6 +36,16 @@ struct PickupHistoryView: View {
                     PickupHistoryCell(pickup: $0, statusWidth: self.$statusWidth)
                 }
             }
+            .pullToRefresh(isShowing: $refreshing, onRefresh: {
+                self.fetchSubscription = self.pickupController.fetchPickupsForSelectedProperty()
+                    .sink(receiveCompletion: { completion in
+                        if case .failure(let error) = completion {
+                            self.error = error
+                        }
+                        self.refreshing = false
+                    }, receiveValue: { _ in })
+            })
+            .errorAlert($error)
             .navigationBarTitle("Pickup History", displayMode: .inline)
             .navigationBarItems(trailing: Button(
                 action: schedulePickup,
@@ -41,18 +59,7 @@ struct PickupHistoryView: View {
             .aspectRatio(contentMode: .fit)
             .frame(height: 28)
             .foregroundColor(.barButtonTintColor)
-            .accessibility(label: Text("Schedule New Pickup")
-        )
-    }
-
-    private func gradientBackground() -> some View {
-        LinearGradient(
-            gradient: Gradient(colors: [Color(.esbGreen), Color(.downyBlue)]),
-            startPoint: .top,
-            endPoint: .bottom)
-            .frame(
-                width: UIScreen.main.bounds.width,
-                height: UIScreen.main.bounds.height + 160)
+            .accessibility(label: Text("Schedule New Pickup"))
     }
 }
 
