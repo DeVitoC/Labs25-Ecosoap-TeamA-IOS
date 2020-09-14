@@ -49,24 +49,7 @@ class LoginViewController: UIViewController {
         logo.centerVerticallyInSuperview(multiplier: 0.7)
         logo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.45).isActive = true
         
-        let missionStatementLabel = configure(UILabel()) {
-            let missionStatement = """
-            Saving, sanitizing, and supplying
-            RECYCLED SOAP
-            for the developing world
-            """
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = 6
-            
-            $0.attributedText = NSAttributedString(
-                string: missionStatement,
-                attributes: [.paragraphStyle: paragraphStyle]
-            )
-            $0.textAlignment = .center
-            $0.numberOfLines = 0
-            $0.textColor = .label
-            $0.font = .montserrat(style: .body, typeface: .semiBold)
-        }
+        let missionStatementLabel = setUpMissionStatementLabel()
         view.addSubview(missionStatementLabel)
         
         missionStatementLabel.centerHorizontallyInSuperview()
@@ -84,6 +67,46 @@ class LoginViewController: UIViewController {
         signInButton.constrain(with: signInButton.constraints(from: view,
                                                               toSides: [LayoutSide.leading, LayoutSide.trailing],
                                                               constant: 40))
+    }
+    
+    func setUpMissionStatementLabel() -> UILabel {
+        let missionStatementLabel = UILabel()
+        
+        let line1 = "Saving, sanitizing, and supplying\n"
+        let line2 = "RECYCLED SOAP\n"
+        let line3 = "for the developing world"
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 10
+        
+        let missionStatment = NSMutableAttributedString(
+            string: line1,
+            attributes: [.paragraphStyle: paragraphStyle,
+                         .font: UIFont.montserrat(style: .title3)]
+        )
+        
+        missionStatment.append(
+            NSAttributedString(
+                string: line2,
+                attributes: [.paragraphStyle: paragraphStyle,
+                             .font: UIFont.montserrat(style: .title3, typeface: .semiBold)]
+            )
+        )
+        
+        missionStatment.append(
+            NSAttributedString(
+                string: line3,
+                attributes: [.paragraphStyle: paragraphStyle,
+                             .font: UIFont.montserrat(style: .title3)]
+            )
+        )
+        
+        missionStatementLabel.attributedText = missionStatment
+        missionStatementLabel.textAlignment = .center
+        missionStatementLabel.numberOfLines = 0
+        missionStatementLabel.textColor = .label
+        
+        return missionStatementLabel
     }
     
     // MARK: - Actions
