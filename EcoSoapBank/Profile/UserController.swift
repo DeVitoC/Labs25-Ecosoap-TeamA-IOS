@@ -14,7 +14,10 @@ import KeychainAccess
 
 protocol UserDataProvider {
     func logIn(_ completion: @escaping ResultHandler<User>)
-    func updateUserProfile(_ input: EditableProfileInfo, completion: @escaping ResultHandler<User>)
+    func updateUserProfile(_ input: EditableProfileInfo,
+                           completion: @escaping ResultHandler<User>)
+    func updateProperty(with info: EditablePropertyInfo,
+                        completion: @escaping ResultHandler<Property>)
     func logOut()
 }
 
@@ -30,8 +33,17 @@ class UserController: ObservableObject {
         self.dataLoader = dataLoader
 
         OktaAuth.success
-            .sink { [weak self] in self?.logInWithBearer() }
+            .mapError { _ in LoginError.loginFailed }
+            .flatMap({
+                Future { [weak self] promise in
+                    self?.logInWithBearer { result in
+                        promise(result)
+                    }
+                }
+            }).handleError { OktaAuth.error.send($0) }
+            .sink { _ in }
             .store(in: &cancellables)
+
     }
 }
 
@@ -55,6 +67,14 @@ extension UserController {
                 self?.user = newUser
             }
             completion(result)
+        }
+    }
+
+    func updateProperty(with info: EditablePropertyInfo, completion: @escaping ResultHandler<Property>) {
+        dataLoader.updateProperty(with: info) { [weak self] result in
+            defer { completion(result) }
+            guard let newProperty = try? result.get() else { return }
+            self?.user = self?.user?.updatingProperty(newProperty)
         }
     }
 

@@ -23,9 +23,12 @@ class ProfileTests: XCTestCase {
 
     var badUser: User!
 
-    var mainVM: MainProfileViewModel { coordinator.profileVM }
+    var viewModel: ProfileViewModel { coordinator.profileVM }
+    var currentProfileInfo: EditableProfileInfo {
+        EditableProfileInfo(user: viewModel.user)
+    }
     var newProfileInfo: EditableProfileInfo {
-        configure(mainVM.editableInfo) {
+        configure(EditableProfileInfo(user: user)) {
             $0.email = "new@email.net"
             $0.middleName = "Lasagna"
             $0.skype = "new-skype-handle"
@@ -56,23 +59,25 @@ class ProfileTests: XCTestCase {
             skype: nil,
             properties: nil)
         self.bag = []
+
+        XCTAssertGreaterThanOrEqual(user.properties?.count ?? 0, 2)
     }
 
     // MARK: - Tests
 
     func testMainProfileVMSetup() throws {
-        XCTAssertEqual(mainVM.properties, user.properties)
-        XCTAssert(mainVM.propertyOptions.contains(.all))
+        XCTAssertEqual(viewModel.properties, user.properties)
+        XCTAssert(viewModel.propertyOptions.contains(.all))
         let userProperties = try XCTUnwrap(user.properties)
         let userSelections = userProperties.map { PropertySelection.select($0) }
-        XCTAssertEqual(mainVM.propertyOptions.dropFirst(), userSelections[...])
+        XCTAssertEqual(viewModel.propertyOptions.dropFirst(), userSelections[...])
     }
 
     func testUserControllerUpdateProfile() {
         logIn()
 
         let exp = expectation(description: "profile changed")
-        let oldUser = mainVM.user
+        let oldUser = viewModel.user
 
         let info = newProfileInfo
         var newUser: User?
@@ -92,67 +97,115 @@ class ProfileTests: XCTestCase {
         logIn()
 
         let exp = expectation(description: "profile changed")
-        let oldUser = mainVM.user
-        let oldInfo = mainVM.editableInfo
+        exp.expectedFulfillmentCount = 2
+        let oldUser = viewModel.user
+        let oldInfo = currentProfileInfo
         var newUser: User?
 
-        XCTAssertFalse(mainVM.loading)
+        XCTAssertFalse(viewModel.loading)
 
-        mainVM.editableInfo = newProfileInfo
-        mainVM.$user
+        viewModel.$user
             .dropFirst()
             .sink { user in
                 newUser = user
                 exp.fulfill()
         }.store(in: &bag)
-        mainVM.commitProfileChanges()
-        XCTAssertTrue(mainVM.loading)
+        viewModel.commitProfileChanges(newProfileInfo) {
+            exp.fulfill()
+        }
+        XCTAssertTrue(viewModel.loading)
 
         wait(for: exp)
 
         XCTAssertNotEqual(oldUser, newUser)
-        XCTAssertEqual(mainVM.editableInfo, newProfileInfo)
-        XCTAssertNotEqual(mainVM.editableInfo, oldInfo)
-        XCTAssertNil(mainVM.error)
+        XCTAssertEqual(currentProfileInfo, newProfileInfo)
+        XCTAssertNotEqual(currentProfileInfo, oldInfo)
+        XCTAssertNil(viewModel.error)
     }
 
     func testProfileChangesFail() {
         dataProvider.shouldFail = true
 
         let exp = expectation(description: "profile changed")
-        let oldUser = mainVM.user
-        let oldInfo = mainVM.editableInfo
+        let oldUser = viewModel.user
+        let oldInfo = currentProfileInfo
         var caughtError: Error?
 
-        XCTAssertFalse(mainVM.loading)
+        XCTAssertFalse(viewModel.loading)
 
-        mainVM.editableInfo = newProfileInfo
-        mainVM.$error
+        viewModel.$error
             .compactMap { $0 }
             .sink { error in
                 caughtError = error
                 exp.fulfill()
         }.store(in: &bag)
-        mainVM.commitProfileChanges()
-        XCTAssertTrue(mainVM.loading)
+        viewModel.commitProfileChanges(newProfileInfo) {
+            // only runs with success
+            XCTFail("Completion should not run")
+        }
+        XCTAssertTrue(viewModel.loading)
 
         wait(for: exp)
 
         XCTAssertNotNil(caughtError)
-        XCTAssertEqual(mainVM.editableInfo, newProfileInfo)
-        XCTAssertNotEqual(mainVM.editableInfo, oldInfo)
-        XCTAssertEqual(mainVM.user, oldUser)
+        XCTAssertNotEqual(currentProfileInfo, newProfileInfo)
+        XCTAssertEqual(currentProfileInfo, oldInfo)
+        XCTAssertEqual(viewModel.user, oldUser)
     }
 
-    func testLogOut() throws {
+    func testLogOut() {
         logIn()
 
         XCTAssertEqual(dataProvider.status, .loggedIn)
-        mainVM.logOut()
+        viewModel.logOut()
         XCTAssertNil(userController.user)
         XCTAssertEqual(strongDelegate.status, .loggedOut)
         XCTAssertEqual(dataProvider.status, .loggedOut)
         XCTAssertNil(userController.user)
+    }
+
+    /// Ensure setting `useShippingAddressForBilling` does not change the address until commiting.
+    func testEditPropertyUseShippingAddressForBilling() {
+        var info = EditablePropertyInfo(user.properties?.first!)
+        XCTAssertEqual(info.shippingAddress, EditableAddressInfo(user.properties?.first?.shippingAddress))
+        XCTAssertNotEqual(info.shippingAddress, info.billingAddress)
+        info.billingAddress = EditableAddressInfo()
+        viewModel.useShippingAddressForBilling = true
+        viewModel.useShippingAddressForBilling = false
+        XCTAssertNotEqual(info.billingAddress, info.shippingAddress)
+    }
+
+    func testCommitProfileChangesSuccess() {
+        logIn()
+        var info = EditablePropertyInfo(user.properties?.first)
+
+        info.phone = "999-555-8765"
+        let oldProperty = user.properties?.first
+        var newProperty: Property?
+
+        let callsDidComplete = expectation(description: "calls completed")
+        callsDidComplete.expectedFulfillmentCount = 2
+
+        viewModel.$error
+            .compactMap { $0 }
+            .sink(receiveValue: { XCTFail("Failed with error: \($0)") })
+            .store(in: &bag)
+        viewModel.$user
+            .dropFirst()
+            .sink(receiveValue: { newUser in
+                XCTAssertNotEqual(newProperty, newUser.properties?.first)
+                newProperty = newUser.properties?.first
+                callsDidComplete.fulfill()
+            }).store(in: &bag)
+
+        viewModel.savePropertyChanges(info) {
+            callsDidComplete.fulfill()
+        }
+
+        wait(for: callsDidComplete)
+
+        XCTAssertNotEqual(oldProperty, newProperty)
+        XCTAssertEqual(EditablePropertyInfo(newProperty), info)
     }
 }
 

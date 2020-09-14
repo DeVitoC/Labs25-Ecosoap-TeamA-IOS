@@ -75,8 +75,13 @@ class LoginCoordinator: FlowCoordinator {
         loginVC.modalPresentationStyle = .fullScreen
 
         OktaAuth.error
-            .sink { [weak rootVC] in rootVC?.presentAlert(for: $0) }
-            .store(in: &cancellables)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                self?.rootVC.presentAlert(
+                    for: $0,
+                    actions: [.okay({ _ in self?.start() })]
+                )
+            }).store(in: &cancellables)
     }
 
     func start() {
@@ -88,6 +93,12 @@ class LoginCoordinator: FlowCoordinator {
 
 extension LoginCoordinator {
     private func showLoginScreen() {
+        guard loginVC.presentedViewController == nil else {
+            return loginVC.dismiss(animated: true, completion: showLoginScreen)
+        }
+        guard !loginVC.isBeingPresented, rootVC.presentedViewController == nil
+            else { return }
+        
         rootVC.present(loginVC, animated: true, completion: nil)
     }
 }

@@ -132,3 +132,23 @@ extension UserDefaults {
 extension String {
     static let selectedPropertyIDsByUserKey = "selectedPropertyIDsByUser"
 }
+
+// MARK: - Editable Property Info
+
+struct EditablePropertyInfo: Encodable, Equatable {
+    let id: String?
+    var name: String
+    var propertyType: Property.PropertyType
+    var billingAddress: EditableAddressInfo
+    var shippingAddress: EditableAddressInfo
+    var phone: String
+
+    init(_ property: Property?) {
+        self.id = property?.id
+        self.name = property?.name ?? ""
+        self.propertyType = property?.propertyType ?? .hotel
+        self.billingAddress = EditableAddressInfo(property?.billingAddress)
+        self.shippingAddress = EditableAddressInfo(property?.shippingAddress)
+        self.phone = property?.phone ?? ""
+    }
+}
