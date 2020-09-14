@@ -79,8 +79,10 @@ class PickupController: ObservableObject {
                     DispatchQueue.main.async {
                         self.pickups = sortedPickups
                     }
+                    promise(.success(sortedPickups))
+                } else {
+                    promise(result)
                 }
-                promise(result)
             }
         }
     }
@@ -100,7 +102,9 @@ class PickupController: ObservableObject {
             .map { Array(Set($0)).sorted(by: Self.pickupSorter) }   // unique, sort
             .receive(on: DispatchQueue.main)                        // run following on main thread
             .handleEvents(receiveOutput: { [weak self] pickups in   // set sorted pickups
-                self?.pickups = pickups
+                DispatchQueue.main.async {
+                    self?.pickups = pickups
+                }
             }).eraseToAnyPublisher()
     }
 
@@ -114,7 +118,12 @@ class PickupController: ObservableObject {
                     guard let pickup = pickupResult.pickup else {
                         return promise(.failure(PickupError.noResult))
                     }
-                    DispatchQueue.main.async { self.pickups.insert(pickup, at: 0) }
+                    var sortingPickups = self.pickups
+                    sortingPickups.append(pickup)
+                    sortingPickups.sort(by: Self.pickupSorter)
+                    DispatchQueue.main.async {
+                        self.pickups = sortingPickups
+                    }
                 }
                 promise(result)
             }
