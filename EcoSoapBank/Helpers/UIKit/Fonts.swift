@@ -35,6 +35,13 @@ extension UIFont {
         )!.scaled(forStyle: style)
     }
     
+    static func muli(
+        ofFixedSize size: CGFloat,
+        typeface: MuliTypeface = .regular
+    ) -> UIFont {
+        UIFont(name: .muli + typeface.rawValue, size: size)!
+    }
+    
     enum MontserratTypeface: String, CaseIterable {
         case mediumItalic = "-MediumItalic"
         case bold = "-Bold"
