@@ -129,7 +129,7 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
 
         // Divider
         configure(UIView()) {
-            $0.backgroundColor = .tertiaryLabel
+            $0.backgroundColor = .esbSeparator
             constrainNewSubview($0, to: [.bottom, .trailing])
             NSLayoutConstraint.activate([
                 $0.heightAnchor.constraint(equalToConstant: 0.5),

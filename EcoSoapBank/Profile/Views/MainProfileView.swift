@@ -30,27 +30,16 @@ struct MainProfileView: View {
                             }
                         }.isDetailLink(false)
 
-                        Picker(
-                            selection: $viewModel.managingProperty,
-                            label: HStack {
-                                Color.green.clipShape(
-                                    RoundedRectangle(
-                                        cornerRadius: 2,
-                                        style: .circular))
-                                    .inverseMask(ZStack(alignment: .center) {
-                                        Image.property()
-                                            .resizable()
-                                            .aspectRatio(CGSize(width: 1, height: 1),
-                                                         contentMode: .fit)
-                                            .padding(EdgeInsets(top: 3.5, leading: 2, bottom: 1, trailing: 2))
-                                    }).frame(width: iconWidth, height: iconWidth)
-                                Text("Current Property")
-                            }
-                        ) {
-                            ForEach(viewModel.propertyOptions, id: \.display) {
-                                Text($0.display).tag($0)
-                            }
-                        }.onAppear(perform: { UIImageView.appearance().tintColor = UIColor.esbGreen })
+                        if viewModel.properties.count > 1 {
+                            Picker(
+                                selection: $viewModel.managingProperty,
+                                label: propertyPickerLabel
+                            ) {
+                                ForEach(viewModel.propertyOptions, id: \.display) {
+                                    Text($0.display).tag($0)
+                                }
+                            }.onAppear(perform: { UIImageView.appearance().tintColor = UIColor.esbGreen })
+                        }
                     }
 
                     Section(header: Text("Edit Property Info".uppercased())) {
@@ -81,6 +70,23 @@ struct MainProfileView: View {
         .font(.muli())
         .navigationViewStyle(StackNavigationViewStyle())
         .errorAlert($viewModel.error)
+    }
+
+    private var propertyPickerLabel: some View {
+        HStack {
+            Color.green.clipShape(
+                RoundedRectangle(
+                    cornerRadius: 2,
+                    style: .circular))
+                .inverseMask(ZStack(alignment: .center) {
+                    Image.property()
+                        .resizable()
+                        .aspectRatio(CGSize(width: 1, height: 1),
+                                     contentMode: .fit)
+                        .padding(EdgeInsets(top: 3.5, leading: 2, bottom: 1, trailing: 2))
+                }).frame(width: iconWidth, height: iconWidth)
+            Text("Current Property")
+        }
     }
 }
 

@@ -32,19 +32,21 @@ class PaymentHistoryViewController: UIViewController {
         navigationItem.title = "Payment History"
         setupCollectionView()
         guard let user = paymentController?.user, let properties = user.properties else { return }
-        paymentController?.fetchPayments(forPropertyID: properties[0].id, completion: { result in
+        paymentController?.fetchPayments(forPropertyID: properties[0].id, completion: { [weak self] result in
             switch result {
             case .success(let payments):
+                var sortedPayments: [Payment] = payments
+                sortedPayments.sort {
+                    guard let date0 = $0.invoicePeriodEndDate, let date1 = $1.invoicePeriodEndDate else { return false }
+                    return date0 > date1
+                }
                 DispatchQueue.main.async {
-                    var sortedPayments: [Payment] = payments
-                    sortedPayments.sort {
-                        guard let date0 = $0.invoicePeriodEndDate, let date1 = $1.invoicePeriodEndDate else { return false }
-                        return date0 > date1
-                    }
-                    self.payments = sortedPayments
+                    self?.payments = sortedPayments
                 }
             case .failure(let error):
-                self.presentAlert(for: error)
+                DispatchQueue.main.async {
+                    self?.presentAlert(for: error)
+                }
             }
         })
     }
@@ -55,7 +57,8 @@ class PaymentHistoryViewController: UIViewController {
         paymentCollectionView.delegate = self
         paymentCollectionView.translatesAutoresizingMaskIntoConstraints = false
         paymentCollectionView.register(PaymentHistoryCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
-        paymentCollectionView.backgroundColor = .systemBackground
+        paymentCollectionView.backgroundColor = .systemGray5
+        
         NSLayoutConstraint.activate([
             paymentCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             paymentCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

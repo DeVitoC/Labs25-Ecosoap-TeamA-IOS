@@ -31,10 +31,8 @@ struct PickupHistoryView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(pickupController.pickups) {
-                    PickupHistoryCell(pickup: $0, statusWidth: self.$statusWidth)
-                }
+            List(pickupController.pickups) { pickup in
+                PickupHistoryCell(pickup: pickup, statusWidth: self.$statusWidth)
             }
             .pullToRefresh(isShowing: $refreshing, onRefresh: {
                 self.fetchSubscription = self.pickupController.fetchPickupsForSelectedProperty()
