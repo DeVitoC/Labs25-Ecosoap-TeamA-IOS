@@ -24,8 +24,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchWithLogo" translatesAutoresizingMaskIntoConstraints="NO" id="c2V-fg-yC8">
-                                <rect key="frame" x="0.0" y="-31" width="414" height="862"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchWithLogo" translatesAutoresizingMaskIntoConstraints="NO" id="c2V-fg-yC8">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ra3-RQ-dTt">
                                 <rect key="frame" x="43.5" y="447" width="327" height="92"/>
@@ -54,11 +54,11 @@
                         <color key="backgroundColor" name="ESBGreen"/>
                         <constraints>
                             <constraint firstItem="Ra3-RQ-dTt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="1.1" id="GjQ-p5-ZH7"/>
-                            <constraint firstItem="c2V-fg-yC8" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="-31" id="SgR-Py-NoY"/>
+                            <constraint firstItem="c2V-fg-yC8" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="SgR-Py-NoY"/>
                             <constraint firstItem="Ra3-RQ-dTt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="oT0-El-mCe"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="c2V-fg-yC8" secondAttribute="trailing" id="rev-iL-x6E"/>
-                            <constraint firstItem="c2V-fg-yC8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sz4-g7-lSH"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="c2V-fg-yC8" secondAttribute="bottom" constant="31" id="ubd-rf-Hy8"/>
+                            <constraint firstAttribute="trailing" secondItem="c2V-fg-yC8" secondAttribute="trailing" id="rev-iL-x6E"/>
+                            <constraint firstItem="c2V-fg-yC8" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="sz4-g7-lSH"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="c2V-fg-yC8" secondAttribute="bottom" id="ubd-rf-Hy8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
