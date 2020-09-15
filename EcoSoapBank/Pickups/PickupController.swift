@@ -88,7 +88,7 @@ class PickupController: ObservableObject {
         return properties
             .map { fetchPickups(forPropertyID: $0.id) }             // [Publisher<[Pickup]>]
             .publisher                                              // Publisher<[Publisher[Pickup]>]>
-            .mapError { _ in ESBError.unknown }                  // makes compiler happy?
+            .mapError { _ in ESBError.unknown }                     // makes compiler happy?
             .flatMap { $0 }                                         // [Publisher[Pickup]>] -> Publisher<[Pickup]...>
             .collect()                                              // [Pickup]... -> [[Pickup]]
             .map { arrays in arrays.flatMap { $0 } }                // [[Pickup]] -> [Pickup]
