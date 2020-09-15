@@ -16,15 +16,20 @@ class PickupDetailViewController: UIViewController {
     
     var pickup: Pickup { didSet { updateViews() } }
     
-    // MARK: - Private Properties
+    // MARK: - IBOutlets
     
+    // views
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var collectionView: UICollectionView!
     @IBOutlet private var headingLabels: [UILabel]!
     @IBOutlet private var notesHeadingLabel: UILabel!
     @IBOutlet private var notesView: UILabel!
     
+    // constraints
     @IBOutlet private var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet private var collectionViewHeight: NSLayoutConstraint!
+    
+    // MARK: - Private Properties
     
     private var cells: [(text: String, detail: String)] {
         [
@@ -34,6 +39,25 @@ class PickupDetailViewController: UIViewController {
             ("Pickup Date", pickup.pickupDate?.string() ?? "N/A"),
         ]
     }
+    
+    // swiftlint:disable force_cast
+    private lazy var cartonSizingCell = Bundle.main.loadNibNamed(
+        "CartonCollectionViewCell",
+        owner: self,
+        options: nil
+    )?.first as! CartonCollectionViewCell
+    // swiftlint:enable force_cast
+    
+    private lazy var largestCarton: Pickup.Carton? = {
+        pickup.cartons.sorted { carton1, carton2 -> Bool in
+            guard let contents1 = carton1.contents,
+                let contents2 = carton2.contents else { return true }
+            
+            return contents1.product.rawValue.count > contents2.product.rawValue.count
+        }.first
+    }()
+    
+    private let verticalCartonCellPadding: CGFloat = 10
 
     // MARK: - Init / Lifecycle
     
@@ -54,16 +78,30 @@ class PickupDetailViewController: UIViewController {
         
         tableView.dataSource = self
         collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        collectionView.register(
+            UINib(nibName: "CartonCollectionViewCell", bundle: .main),
+            forCellWithReuseIdentifier: NSStringFromClass(CartonCollectionViewCell.self)
+        )
         
         setUpViews()
         updateViews()
-        
-        collectionView.register(UINib(nibName: "CartonCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: NSStringFromClass(CartonCollectionViewCell.self))
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         tableViewHeight.constant = tableView.contentSize.height
+        
+        let cellHeight = cartonSizingCell
+                            .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+                            .height
+        collectionViewHeight.constant = cellHeight + verticalCartonCellPadding
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.flashScrollIndicators()
     }
     
     // MARK: - Private Functions
@@ -115,7 +153,20 @@ extension PickupDetailViewController: UICollectionViewDataSource {
                 fatalError("Could not cast cell as \(CartonCollectionViewCell.self)")
         }
         cell.carton = pickup.cartons[indexPath.item]
+
         return cell
+    }
+}
+
+// MARK: - Carton Collection View Flow Layout Delegate
+
+extension PickupDetailViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        cartonSizingCell.carton = largestCarton
+        cartonSizingCell.setNeedsLayout()
+        cartonSizingCell.layoutIfNeeded()
+        return cartonSizingCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
 }
 

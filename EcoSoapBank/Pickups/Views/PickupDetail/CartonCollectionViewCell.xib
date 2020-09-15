@@ -16,15 +16,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="276" height="303"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hn7-bU-EAz">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hn7-bU-EAz" userLabel="ContentView">
                         <rect key="frame" x="0.0" y="0.0" width="276" height="303"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3Go-J2-4P1">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="3Go-J2-4P1">
                         <rect key="frame" x="0.0" y="0.0" width="276" height="303"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Soap" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2C-Pv-T0i">
-                                <rect key="frame" x="8" y="0.0" width="260" height="20.5"/>
+                                <rect key="frame" x="118.5" y="0.0" width="39.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -44,8 +44,7 @@
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Nek-s7-0Vn" firstAttribute="width" secondItem="3Go-J2-4P1" secondAttribute="width" multiplier="0.5" id="T3j-zV-EZH"/>
-                            <constraint firstItem="E2C-Pv-T0i" firstAttribute="leading" secondItem="3Go-J2-4P1" secondAttribute="leading" constant="8" id="amZ-OF-iwU"/>
+                            <constraint firstItem="E2C-Pv-T0i" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3Go-J2-4P1" secondAttribute="leading" constant="8" id="amZ-OF-iwU"/>
                         </constraints>
                     </stackView>
                 </subviews>
@@ -58,6 +57,7 @@
                 <constraint firstItem="3Go-J2-4P1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Fte-48-CyB"/>
                 <constraint firstItem="hn7-bU-EAz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="JOe-tk-qXD"/>
                 <constraint firstItem="hn7-bU-EAz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="XA9-7V-PhR"/>
+                <constraint firstItem="Nek-s7-0Vn" firstAttribute="width" secondItem="hn7-bU-EAz" secondAttribute="width" multiplier="0.5" id="aoU-Yi-fIN"/>
                 <constraint firstItem="3Go-J2-4P1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="eG7-vh-9cf"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>

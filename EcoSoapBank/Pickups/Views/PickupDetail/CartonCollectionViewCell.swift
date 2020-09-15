@@ -14,7 +14,7 @@ class CartonCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private var productLabel: UILabel! {
         didSet {
-            productLabel.font = .preferredMuli(forTextStyle: .callout)
+            productLabel.font = .preferredMuli(forTextStyle: .subheadline)
             productLabel.textColor = UIColor.label
         }
     }
