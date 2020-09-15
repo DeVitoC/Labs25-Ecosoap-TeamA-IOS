@@ -24,6 +24,8 @@ class PickupDetailViewController: UIViewController {
     @IBOutlet private var notesHeadingLabel: UILabel!
     @IBOutlet private var notesView: UILabel!
     
+    @IBOutlet private var tableViewHeight: NSLayoutConstraint!
+    
     private var cells: [(text: String, detail: String)] {
         [
             ("Confirmation Code", pickup.confirmationCode),
@@ -55,6 +57,12 @@ class PickupDetailViewController: UIViewController {
         
         setUpViews()
         updateViews()
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        tableViewHeight.constant = tableView.contentSize.height
     }
     
     // MARK: - Private Functions

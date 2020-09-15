@@ -183,6 +183,7 @@
                         <outlet property="notesHeadingLabel" destination="LVh-Gh-Auc" id="DbO-B1-9Bl"/>
                         <outlet property="notesView" destination="B4b-Y1-XPy" id="wAl-if-5H0"/>
                         <outlet property="tableView" destination="yl7-C2-Y6d" id="r2X-4Y-0ut"/>
+                        <outlet property="tableViewHeight" destination="yDV-tP-eeT" id="eMZ-Bx-7ga"/>
                         <outletCollection property="headingLabels" destination="dAD-MM-iOG" collectionClass="NSMutableArray" id="Jnn-a5-yvY"/>
                         <outletCollection property="headingLabels" destination="LVh-Gh-Auc" collectionClass="NSMutableArray" id="6rc-BY-w7t"/>
                     </connections>
