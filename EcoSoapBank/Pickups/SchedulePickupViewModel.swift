@@ -58,7 +58,7 @@ extension SchedulePickupViewModel {
     func schedulePickup(_ completion: ResultHandler<Pickup.ScheduleResult>? = nil) {
         guard let delegate = delegate else {
             if let comp = completion {
-                comp(.failure(PickupError.noDelegate))
+                comp(.failure(ESBError.noDelegate))
             }
             return
         }

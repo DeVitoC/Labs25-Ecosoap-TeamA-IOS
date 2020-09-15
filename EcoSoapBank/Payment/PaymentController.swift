@@ -49,7 +49,7 @@ class PaymentController {
                     self?.fetchPayments(forPropertyID: propertyID, completion: promise)
                 }
             }).publisher
-            .mapError { _ in PickupError.unknown }
+            .mapError { _ in ESBError.unknown }
             .flatMap { $0 }
             .collect()
             .map { arrays in arrays.flatMap { $0 } }
