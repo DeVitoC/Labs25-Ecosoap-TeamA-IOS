@@ -10,67 +10,48 @@ import SwiftUI
 
 
 struct MainProfileView: View {
-    @ObservedObject var viewModel: MainProfileViewModel
+    @EnvironmentObject var viewModel: ProfileViewModel
 
     @State var iconWidth: CGFloat = 15
-
-    init(viewModel: MainProfileViewModel) {
-        self.viewModel = viewModel
-    }
 
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("User".uppercased())) {
-                    NavigationLink(
-                        destination: EditProfileView(viewModel: viewModel)
-                    ) {
-                        HStack {
-                            Image.personSquareFill()
-                                .foregroundColor(Color(red: 0.8, green: 0.5, blue: 0.1))
-                                .readingGeometry(key: IconWidth.self, valuePath: \.size.width) {
-                                    self.iconWidth = $0
+                if !viewModel.propertyOptions.isEmpty {
+                    Section(header: Text("User".uppercased())) {
+                        NavigationLink(destination: EditProfileView(viewModel.user)) {
+                            HStack {
+                                Image.personSquareFill()
+                                    .foregroundColor(Color(red: 0.8, green: 0.5, blue: 0.1))
+                                    .readingGeometry(key: IconWidth.self, valuePath: \.size.width) {
+                                        self.iconWidth = $0
+                                }
+                                Text("Edit Profile")
                             }
-                            Text("Edit Profile")
+                        }.isDetailLink(false)
+
+                        if viewModel.properties.count > 1 {
+                            Picker(
+                                selection: $viewModel.managingProperty,
+                                label: propertyPickerLabel
+                            ) {
+                                ForEach(viewModel.propertyOptions, id: \.display) {
+                                    Text($0.display).tag($0)
+                                }
+                            }.onAppear(perform: { UIImageView.appearance().tintColor = UIColor.esbGreen })
                         }
                     }
 
-                    if !viewModel.propertyOptions.isEmpty {
-                        Picker(
-                            selection: $viewModel.selectedProperty,
-                            label: HStack {
-                                Color.green.clipShape(
-                                    RoundedRectangle(
-                                        cornerRadius: 2,
-                                        style: .circular))
-                                    .inverseMask(ZStack(alignment: .center) {
-                                        Image.property()
-                                            .resizable()
-                                            .aspectRatio(CGSize(width: 1, height: 1),
-                                                         contentMode: .fit)
-                                            .padding(EdgeInsets(top: 3.5, leading: 2, bottom: 1, trailing: 2))
-                                    }).frame(width: iconWidth, height: iconWidth)
-                                Text("Current Property")
-                            }
-                        ) {
-                            ForEach(viewModel.propertyOptions, id: \.display) {
-                                Text($0.display).tag($0)
-                            }
-                        }
-                    } else {
-                        Text("User account has no associated properties. Please contact Eco-Soap Bank for more info.")
-                    }
-                }
-
-                Section(header: Text("Edit Property Info".uppercased())) {
-                    ForEach(viewModel.properties) { property in
-                        NavigationLink(
-                            destination: EditPropertyView(
-                                viewModel: EditPropertyViewModel(property))
-                        ) {
-                            Text(property.name)
+                    Section(header: Text("Edit Property Info".uppercased())) {
+                        ForEach(viewModel.properties) { property in
+                            NavigationLink(
+                                property.name,
+                                destination: EditPropertyView(property)
+                            ).isDetailLink(false)
                         }
                     }
+                } else {
+                    Text("User account has no associated properties. Please contact Eco-Soap Bank for more info.")
                 }
 
                 Section {
@@ -88,6 +69,24 @@ struct MainProfileView: View {
         }
         .font(.muli())
         .navigationViewStyle(StackNavigationViewStyle())
+        .errorAlert($viewModel.error)
+    }
+
+    private var propertyPickerLabel: some View {
+        HStack {
+            Color.green.clipShape(
+                RoundedRectangle(
+                    cornerRadius: 2,
+                    style: .circular))
+                .inverseMask(ZStack(alignment: .center) {
+                    Image.property()
+                        .resizable()
+                        .aspectRatio(CGSize(width: 1, height: 1),
+                                     contentMode: .fit)
+                        .padding(EdgeInsets(top: 3.5, leading: 2, bottom: 1, trailing: 2))
+                }).frame(width: iconWidth, height: iconWidth)
+            Text("Current Property")
+        }
     }
 }
 
@@ -103,11 +102,10 @@ struct MainProfileView_Previews: PreviewProvider {
     static let user: User = .placeholder()
 
     static var previews: some View {
-        MainProfileView(
-            viewModel: MainProfileViewModel(
-                user: .placeholder(),
+        MainProfileView()
+            .environmentObject(ProfileViewModel(
+                user: user,
                 userController: UserController(dataLoader: MockUserDataProvider()),
-                delegate: nil)
-        )
+                delegate: nil))
     }
 }

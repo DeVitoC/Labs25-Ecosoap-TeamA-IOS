@@ -75,7 +75,7 @@ extension UIViewController {
         animated: Bool = true,
         onComplete: (() -> Void)? = nil
     ) {
-        presentAlert(for: ErrorMessage(error: error),
+        presentAlert(for: ErrorMessage(error),
                      actions: actions,
                      animated: animated,
                      onComplete: onComplete)

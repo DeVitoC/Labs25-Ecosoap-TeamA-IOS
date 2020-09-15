@@ -34,7 +34,7 @@ struct ErrorMessage: CustomStringConvertible {
         }
     }
 
-    init(error: Error? = nil) {
+    init(_ error: Error? = nil) {
         if let error = error as? LocalizedError {
             self.init(
                 title: error.errorDescription ?? Self.fallbackTitle,
