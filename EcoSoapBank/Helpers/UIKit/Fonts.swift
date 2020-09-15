@@ -62,7 +62,7 @@ extension UIFont {
     /// To obtain a Dynamic Type version of the returned font, use UIFontMetrics.
     /// - Parameters:
     ///   - size: The desired font size in points.
-    ///   - typeface: The desired Typeface (defaults to .regular)
+    ///   - typeface: The desired Typeface (defaults to .regular).
     /// - Returns: A statically sized font that does not respect the current font metrics.
     static func montserrat(ofSize size: CGFloat, typeface: MontserratTypeface = .regular) -> UIFont {
         UIFont(name: .montserrat + typeface.rawValue, size: size)!
@@ -106,7 +106,7 @@ extension UIFont {
             default:
                 typeface = .regular
             }
-            
+
             return metrics.scaledFont(for: muli(ofSize: textStyle.defaultPointSize, typeface: typeface))
         }
     }
@@ -115,7 +115,7 @@ extension UIFont {
     /// To obtain a Dynamic Type version of the returned font, use UIFontMetrics.
     /// - Parameters:
     ///   - size: The desired font size in points.
-    ///   - typeface: The desired Typeface (defaults to .regular)
+    ///   - typeface: The desired Typeface (defaults to .regular).
     /// - Returns: A statically sized font that does not respect the current font metrics.
     static func muli(ofSize size: CGFloat, typeface: MuliTypeface = .regular) -> UIFont {
         UIFont(name: .muli + typeface.rawValue, size: size)!
