@@ -12,6 +12,8 @@ import UIKit
 // MARK: - Cell
 
 struct PickupHistoryCell: View {
+    @Environment(\.sizeCategory) var sizeCategory
+    
     let pickup: Pickup
 
     @Binding var statusWidth: CGFloat?
@@ -29,17 +31,19 @@ struct PickupHistoryCell: View {
                 // Date
                 VStack(alignment: .leading) {
                     Text("READY DATE")
-                        .font(.preferredMuli(forTextStyle: .caption2))
+                        .font(.preferredMuli(forTextStyle: .caption1))
                         .foregroundColor(Color(.secondaryLabel))
                     Text(pickup.readyDate.string())
                         .font(.preferredMuli(forTextStyle: .headline))
                 }
 
-                HStack(spacing: 12) {
+                HStack {
                     // Pickup Status
                     HStack(spacing: 4) {
                         StatusIcon(status: pickup.status)
                         Text(pickup.status.display)
+                            .lineLimit(2)
+                            .fixedSize(horizontal: false, vertical: true)
                             .font(UIFont.preferredMuli(forTextStyle: .callout))
                             .foregroundColor(Color(UIColor.codGrey.orInverse()))
                         Spacer()
@@ -60,13 +64,16 @@ struct PickupHistoryCell: View {
                             .modifier(Icon())
                             .foregroundColor(Color(.downyBlue))
                         Text("\(pickup.cartons.count) Cartons")
+                            .lineLimit(2)
+                            .fixedSize(horizontal: false, vertical: true)
                             .font(UIFont.preferredMuli(forTextStyle: .callout))
                             .foregroundColor(Color(UIColor.codGrey.orInverse()))
                         Spacer()
-                    }.padding(.leading, 20)
+                    }
                 }
             }.padding(.top, 6)
                 .padding(.bottom, 10)
+                .padding(.trailing, 0)
         }
         .font(Font(UIFont.preferredMuli(forTextStyle: .body)))
     }
@@ -77,7 +84,7 @@ extension PickupHistoryCell {
         func body(content: Content) -> some View {
             content
                 .aspectRatio(contentMode: .fit)
-                .font(UIFont.systemFont(ofSize: 24, weight: .medium).scaled())
+                .font(UIFont.systemFont(ofSize: 24, weight: .medium))
                 .frame(width: 28, alignment: .leading)
         }
     }
