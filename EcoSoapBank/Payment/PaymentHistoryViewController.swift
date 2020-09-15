@@ -102,12 +102,12 @@ extension PaymentHistoryViewController: UICollectionViewDelegate {
         toggleExpandCell(indexPath: indexPath)
     }
 
-    /// Method to control toggle isExpanded and reload paymentCollectionView based on the results. 
+    /// Method to control toggle isExpanded and reload paymentCollectionView based on the results.
     func toggleExpandCell(indexPath: IndexPath) {
         if let index = isExpanded, index == indexPath {
             isExpanded = nil
         } else {
-        isExpanded = indexPath
+            isExpanded = indexPath
         }
         self.paymentCollectionView.reloadData()
     }
