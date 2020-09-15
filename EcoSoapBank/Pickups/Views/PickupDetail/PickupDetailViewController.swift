@@ -58,6 +58,7 @@ class PickupDetailViewController: UIViewController {
         setUpViews()
         updateViews()
         
+        collectionView.register(UINib(nibName: "CartonCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: NSStringFromClass(CartonCollectionViewCell.self))
     }
     
     override func viewWillLayoutSubviews() {
@@ -109,9 +110,9 @@ extension PickupDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: NSStringFromClass(PickupDetailCartonCell.self),
-            for: indexPath) as? PickupDetailCartonCell else {
-                fatalError("Could not cast cell as \(PickupDetailCartonCell.self)")
+            withReuseIdentifier: NSStringFromClass(CartonCollectionViewCell.self),
+            for: indexPath) as? CartonCollectionViewCell else {
+                fatalError("Could not cast cell as \(CartonCollectionViewCell.self)")
         }
         cell.carton = pickup.cartons[indexPath.item]
         return cell

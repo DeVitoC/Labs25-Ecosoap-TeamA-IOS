@@ -1,14 +1,15 @@
 //
-//  PickupDetailCartonCell.swift
+//  CartonCollectionViewCell.swift
 //  EcoSoapBank
 //
-//  Created by Shawn Gee on 9/10/20.
+//  Created by Shawn Gee on 9/15/20.
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
 import UIKit
 
-class PickupDetailCartonCell: UICollectionViewCell {
+class CartonCollectionViewCell: UICollectionViewCell {
+
     var carton: Pickup.Carton? { didSet { updateViews() } }
     
     @IBOutlet private var productLabel: UILabel! {
