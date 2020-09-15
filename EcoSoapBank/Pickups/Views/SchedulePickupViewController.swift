@@ -44,7 +44,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         let title = NSAttributedString(
             string: "Add Carton",
             attributes: [
-                NSAttributedString.Key.font: UIFont.muliScaled(),
+                NSAttributedString.Key.font: UIFont.preferredMuli(forTextStyle: .body),
         ])
         $0.tintColor = .esbGreen
         $0.setAttributedTitle(title, for: .normal)
@@ -74,7 +74,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     }
     private lazy var notesView = configure(ESBTextView()) {
         $0.delegate = self
-        $0.font = .muliScaled(style: .body)
+        $0.font = .preferredMuli(forTextStyle: .body)
     }
     private lazy var scheduleButton = configure(ESBButton()) {
         $0.setTitle("Schedule Pickup", for: .normal)
@@ -180,7 +180,7 @@ extension SchedulePickupViewController {
     private func configureSectionLabel(titled title: String) -> UILabel {
         let label = UILabel()
         label.text = title.uppercased()
-        label.font = .muliScaled(style: .caption1)
+        label.font = .preferredMuli(forTextStyle: .caption1)
         label.textColor = .secondaryLabel
         return label
     }

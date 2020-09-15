@@ -33,7 +33,7 @@ public class LoadingViewController: UIViewController {
     public let loadingLabel = configure(UILabel()) {
         $0.numberOfLines = 0
         $0.textAlignment = .center
-        $0.font = .montserratScaled(ofSize: 36, style: .title2, typeface: .bold)
+        $0.font = .preferredMontserrat(forTextStyle: .largeTitle)
     }
 
     private var blurEffect: UIBlurEffect = UIBlurEffect(style: .systemUltraThinMaterial)

@@ -44,6 +44,11 @@ class ImpactViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.reloadData()
+    }
+    
     private func setUpCollectionView() {
         collectionView.register(ImpactCell.self, forCellWithReuseIdentifier: ImpactCell.reuseIdentifier)
         
@@ -75,6 +80,12 @@ extension ImpactViewController: UICollectionViewDataSource {
        
         return cell
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
+            collectionView.reloadData()
+        }
+    }
 }
 
 // MARK: - Flow Layout Delegate
@@ -93,6 +104,16 @@ extension ImpactViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width
         return CGSize(width: width, height: width * ImpactLayout.cellAspectRatio)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if traitCollection.preferredContentSizeCategory > .large {
+            return UIFontMetrics.default.scaledValue(for: 20)
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,

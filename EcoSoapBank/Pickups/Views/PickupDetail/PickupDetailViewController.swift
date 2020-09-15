@@ -60,8 +60,8 @@ class PickupDetailViewController: UIViewController {
     // MARK: - Private Functions
     
     private func setUpViews() {
-        headingLabels.forEach { $0.font = .muliScaled(style: .body, typeface: .bold) }
-        notesView.font = UIFont.muliScaled(ofSize: 14)
+        headingLabels.forEach { $0.font = .preferredMuli(forTextStyle: .headline) }
+        notesView.font = .preferredMuli(forTextStyle: .subheadline)
         notesView.textColor = UIColor.codGrey.orInverse()
     }
     
@@ -84,9 +84,9 @@ extension PickupDetailViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PickupDetailCell", for: indexPath)
         
         cell.textLabel?.text = cells[indexPath.row].text
-        cell.textLabel?.font = .muliScaled(style: .body, typeface: .bold)
+        cell.textLabel?.font = .preferredMuli(forTextStyle: .headline)
         cell.detailTextLabel?.text = cells[indexPath.row].detail
-        cell.detailTextLabel?.font = .muliScaled(style: .callout, typeface: .regular)
+        cell.detailTextLabel?.font = .preferredMuli(forTextStyle: .callout)
         cell.detailTextLabel?.textColor = UIColor.codGrey.orInverse()
         return cell
     }

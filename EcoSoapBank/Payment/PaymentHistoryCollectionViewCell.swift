@@ -78,7 +78,7 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
             invoiceButton])
 
     private lazy var invoicePeriodLabel = configure(UILabel()) {
-        $0.font = .muliScaled(typeface: .bold)
+        $0.font = UIFont.preferredMuli(forTextStyle: .headline)
     }
     private lazy var amountDueLabel = contentLabel()
     private lazy var amountPaidLabel = contentLabel()
@@ -88,7 +88,7 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
     private lazy var invoiceButton = configure(UIButton()) {
         $0.setAttributedTitle(
             NSAttributedString(string: "Open invoice", attributes: [
-                .font: UIFont.muliScaled(style: .body, typeface: .semiBold),
+                .font: UIFont.preferredMuli(forTextStyle: .body, typeface: .semiBold),
                 .foregroundColor: UIColor.esbGreen]),
             for: .normal)
         $0.tintColor = .esbGreen
@@ -181,14 +181,14 @@ extension PaymentHistoryCollectionViewCell {
     
     private func contentLabel() -> UILabel {
         configure(UILabel()) {
-            $0.font = .muliScaled(typeface: .regular)
+            $0.font = UIFont.preferredMuli(forTextStyle: .body)
         }
     }
 
     private func captionLabel(_ text: String) -> UILabel {
         configure(UILabel()) {
             $0.text = text.uppercased()
-            $0.font = .muliScaled(style: .caption1)
+            $0.font = UIFont.preferredMuli(forTextStyle: .caption1)
             $0.textColor = .secondaryLabel
         }
     }

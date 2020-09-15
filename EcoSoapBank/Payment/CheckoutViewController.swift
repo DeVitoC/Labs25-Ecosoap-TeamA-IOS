@@ -28,13 +28,13 @@ class CheckoutViewController: UIViewController {
 
     private let paymentOptionsButton = configure(ESBButton()) {
         $0.setTitle("Select Payment Type", for: .normal)
-        $0.titleLabel?.font = .muliScaled(style: .title2)
+        $0.titleLabel?.font = .preferredMuli(forTextStyle: .title2)
         $0.addTarget(self, action: #selector(choosePayment(_:)), for: .touchUpInside)
     }
 
     private let paymentIcon = UIImageView()
     private let paymentLabel = configure(UILabel()) {
-        $0.font = .muliScaled(style: .title1)
+        $0.font = .preferredMuli(forTextStyle: .title1)
         $0.text = "Paying by: "
     }
     private lazy var paymentStack = configure(UIStackView()) {

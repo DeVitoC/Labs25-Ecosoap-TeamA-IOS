@@ -29,10 +29,10 @@ struct PickupHistoryCell: View {
                 // Date
                 VStack(alignment: .leading) {
                     Text("READY DATE")
-                        .font(UIFont.muliScaled(style: .caption2, typeface: .regular))
+                        .font(.preferredMuli(forTextStyle: .caption2))
                         .foregroundColor(Color(.secondaryLabel))
                     Text(pickup.readyDate.string())
-                        .font(UIFont.muliScaled(style: .body, typeface: .bold))
+                        .font(.preferredMuli(forTextStyle: .headline))
                 }
 
                 HStack(spacing: 12) {
@@ -40,7 +40,7 @@ struct PickupHistoryCell: View {
                     HStack(spacing: 4) {
                         StatusIcon(status: pickup.status)
                         Text(pickup.status.display)
-                            .font(UIFont.muliScaled(style: .callout, typeface: .regular))
+                            .font(UIFont.preferredMuli(forTextStyle: .callout))
                             .foregroundColor(Color(UIColor.codGrey.orInverse()))
                         Spacer()
                     }.readingGeometry(
@@ -60,7 +60,7 @@ struct PickupHistoryCell: View {
                             .modifier(Icon())
                             .foregroundColor(Color(.downyBlue))
                         Text("\(pickup.cartons.count) Cartons")
-                            .font(UIFont.muliScaled(style: .callout, typeface: .regular))
+                            .font(UIFont.preferredMuli(forTextStyle: .callout))
                             .foregroundColor(Color(UIColor.codGrey.orInverse()))
                         Spacer()
                     }.padding(.leading, 20)
@@ -68,7 +68,7 @@ struct PickupHistoryCell: View {
             }.padding(.top, 6)
                 .padding(.bottom, 10)
         }
-        .font(Font(UIFont.muliScaled(style: .body)))
+        .font(Font(UIFont.preferredMuli(forTextStyle: .body)))
     }
 }
 
