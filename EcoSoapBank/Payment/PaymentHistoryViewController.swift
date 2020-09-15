@@ -10,6 +10,7 @@ import UIKit
 
 class PaymentHistoryViewController: UIViewController {
 
+    // MARK: - Properties
     var paymentController: PaymentController?
     private lazy var paymentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout())
     private var payments: [Payment] = [] {
@@ -18,7 +19,7 @@ class PaymentHistoryViewController: UIViewController {
         }
     }
 
-
+    // Cell Properties
     var cellWidth: CGFloat {
         paymentCollectionView.frame.size.width
     }
@@ -27,6 +28,7 @@ class PaymentHistoryViewController: UIViewController {
     var isExpanded: IndexPath?
     let cellIdentifier = "PaymentCell"
 
+    // MARK: - Initialization methods
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Payment History"
@@ -84,10 +86,7 @@ extension PaymentHistoryViewController: UICollectionViewDelegate {
         toggleExpandCell(indexPath: indexPath)
     }
 
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        toggleExpandCell(indexPath: indexPath)
-    }
-
+    /// Method to control toggle isExpanded and reload paymentCollectionView based on the results. 
     func toggleExpandCell(indexPath: IndexPath) {
         if let index = isExpanded, index == indexPath {
             isExpanded = nil
