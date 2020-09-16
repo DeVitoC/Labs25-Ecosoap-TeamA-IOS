@@ -41,7 +41,7 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
         axis: .vertical,
         alignment: .fill,
         distribution: .fill,
-        spacing: Padding.small,
+        spacing: Padding.medium,
         arrangedSubviews: [invoicePeriodLabel, duePaidStack, detailStack, invoiceStack])
 
     private lazy var duePaidStack = UIStackView(
@@ -79,6 +79,7 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
 
     private lazy var invoicePeriodLabel = configure(UILabel()) {
         $0.font = UIFont.preferredMuli(forTextStyle: .headline)
+        $0.adjustsFontForContentSizeCategory = true
     }
     private lazy var amountDueLabel = contentLabel()
     private lazy var amountPaidLabel = contentLabel()
@@ -181,14 +182,17 @@ extension PaymentHistoryCollectionViewCell {
     
     private func contentLabel() -> UILabel {
         configure(UILabel()) {
-            $0.font = UIFont.preferredMuli(forTextStyle: .body)
+            $0.font = UIFont.preferredMuli(forTextStyle: .callout)
+            $0.textColor = UIColor.codGrey.orInverse()
+            $0.adjustsFontForContentSizeCategory = true
         }
     }
 
     private func captionLabel(_ text: String) -> UILabel {
         configure(UILabel()) {
             $0.text = text.uppercased()
-            $0.font = UIFont.preferredMuli(forTextStyle: .caption1)
+            $0.font = .smallCaption
+            $0.adjustsFontForContentSizeCategory = true
             $0.textColor = .secondaryLabel
         }
     }
@@ -211,7 +215,7 @@ extension PaymentHistoryCollectionViewCell {
 
     private func dollarSign(_ color: UIColor) -> UIImageView {
         configure(UIImageView("dollarsign.circle.fill",
-                              configuration: .init(weight: .light),
+                              configuration: .init(font: .preferredMuli(forTextStyle: .headline)),
                               tintColor: color)
         ) {
             $0.widthAnchor.constraint(equalTo: $0.heightAnchor).isActive = true
