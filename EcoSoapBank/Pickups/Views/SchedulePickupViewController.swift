@@ -118,7 +118,11 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        tableViewHeight.constant = tableView.contentSize.height
+        UIView.animate(withDuration: 0.3) {
+            self.tableViewHeight.constant =
+                self.tableView.contentSize.height
+            self.view.layoutIfNeeded()
+        }
     }
 }
 
@@ -146,7 +150,6 @@ extension SchedulePickupViewController {
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
             tableViewHeight,
             addCartonButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 2),
-
             readyDateField.topAnchor.constraint(equalTo: readyDateLabel.bottomAnchor, constant: 8),
             notesLabel.topAnchor.constraint(equalTo: readyDateField.bottomAnchor, constant: 20),
             notesView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 8),
@@ -223,15 +226,6 @@ extension SchedulePickupViewController {
             $0.appendItems(cartons, toSection: 0)
         }
         dataSource.apply(snapshot)
-        UIView.animate(withDuration: 0.3) { [unowned self] in
-            defer { self.view.layoutIfNeeded() }
-            guard !cartons.isEmpty else {
-                self.tableViewHeight.constant = 0
-                return
-            }
-            self.tableViewHeight.constant =
-                self.tableView.contentSize.height
-        }
     }
 }
 
