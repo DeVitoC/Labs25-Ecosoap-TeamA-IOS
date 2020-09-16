@@ -9,16 +9,19 @@
 import SwiftUI
 
 struct EditProfileView: View {
-    @ObservedObject var viewModel: MainProfileViewModel
+    @EnvironmentObject var viewModel: ProfileViewModel
 
+    @State var profileInfo: EditableProfileInfo
+
+    @Environment(\.presentationMode) var presentationMode
     @State var labelWidth: CGFloat?
 
-    init(viewModel: MainProfileViewModel) {
-        self.viewModel = viewModel
+    init(_ user: User) {
+        self._profileInfo = State(initialValue: EditableProfileInfo(user: user))
     }
 
     var body: some View {
-        With($viewModel.editableInfo) { profile in
+        With($profileInfo) { profile in
             Form {
                 Section(header: Text("Name".uppercased())) {
                     self.textField("First", text: profile.firstName)
@@ -36,7 +39,7 @@ struct EditProfileView: View {
         .keyboardAvoiding()
         .navigationBarTitle("Edit Profile")
         .navigationBarItems(trailing: Button(
-            action: viewModel.commitProfileChanges,
+            action: commitChanges,
             label: { Text("Save") })
             .foregroundColor(.barButtonTintColor)
             .font(.barButtonItem)
@@ -48,6 +51,12 @@ struct EditProfileView: View {
             .fonts(label: Font(UIFont.preferredMuli(forTextStyle: .caption1, typeface: .bold)),
                    textField: Font(UIFont.preferredMuli(forTextStyle: .body, typeface: .light)))
     }
+
+    func commitChanges() {
+        viewModel.commitProfileChanges(profileInfo) {
+            self.presentationMode.wrappedValue.dismiss()
+        }
+    }
 }
 
 
@@ -55,11 +64,10 @@ struct EditProfileView_Previews: PreviewProvider {
     static let user = User.placeholder()
     static var previews: some View {
         NavigationView {
-            EditProfileView(
-                viewModel: MainProfileViewModel(
-                    user: user,
-                    userController: UserController(dataLoader: MockUserDataProvider()),
-                    delegate: nil))
+            EditProfileView(user).environmentObject(ProfileViewModel(
+                user: user,
+                userController: UserController(dataLoader: MockUserDataProvider()),
+                delegate: nil))
         }
     }
 }

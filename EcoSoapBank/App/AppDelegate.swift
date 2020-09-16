@@ -91,9 +91,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         configure(UITableView.appearance()) {
             $0.backgroundColor = UIColor.systemGray5
-            $0.separatorColor = UIColor.downyBlue.adjustingBrightness(by: -0.3).or(.downyBlue)
+            $0.separatorColor = UIColor.esbSeparator
         }
-
+        
         configure(UITableViewCell.appearance()) {
             $0.backgroundColor = UIColor.systemGray6
         }

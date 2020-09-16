@@ -31,17 +31,7 @@ class ImpactViewController: UIViewController {
         }
                 
         setUpCollectionView()
-
-        impactController?.getImpactStats { [weak self] error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self?.presentAlert(for: error)
-                    return
-                }
-                
-                self?.collectionView.reloadData()
-            }
-        }
+        refreshImpactStats()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,6 +49,28 @@ class ImpactViewController: UIViewController {
         
         view.addSubviewsUsingAutolayout(collectionView)
         collectionView.fillSuperview()
+        collectionView.refreshControl = UIRefreshControl()
+        collectionView.refreshControl?.addTarget(
+            self,
+            action: #selector(refreshImpactStats(_:)),
+            for: .valueChanged)
+    }
+
+    @objc private func refreshImpactStats(_ sender: Any? = nil) {
+        guard let impactController = impactController else { return }
+        collectionView.refreshControl?.beginRefreshing()
+
+        impactController.getImpactStats { [weak self] error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.presentAlert(for: error)
+                    return
+                }
+
+                self?.collectionView.refreshControl?.endRefreshing()
+                self?.collectionView.reloadData()
+            }
+        }
     }
 }
 
