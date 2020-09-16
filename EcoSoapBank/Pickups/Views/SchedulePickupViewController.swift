@@ -152,7 +152,7 @@ extension SchedulePickupViewController {
             notesView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 8),
             notesView.heightAnchor.constraint(equalToConstant: 150),
             scheduleButton.topAnchor.constraint(equalTo: notesView.bottomAnchor, constant: 20),
-            scheduleButton.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: 20)
+            scheduleButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -40)
         ]
 
         if viewModel.properties.count > 1 {
