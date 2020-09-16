@@ -137,7 +137,6 @@ extension SchedulePickupViewController {
         var remainingConstraints = [
             addCartonButton.heightAnchor.constraint(equalToConstant: 30),
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
-            tableView.topAnchor.constraint(equalTo: addCartonButton.bottomAnchor, constant: 8),
             tableViewHeight,
             addCartonButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 2),
 
