@@ -57,6 +57,8 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.inputView = propertyPicker
         $0.borderStyle = .roundedRect
         $0.text = viewModel.selectedProperty.name
+        $0.font = .preferredMuli(forTextStyle: .body)
+        $0.adjustsFontForContentSizeCategory = true
     }
     private lazy var propertyPicker = InputPickerView(
         data: viewModel.properties,
@@ -67,6 +69,8 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.inputView = datePicker
         $0.borderStyle = .roundedRect
         $0.text = viewModel.readyDate.string()
+        $0.font = .preferredMuli(forTextStyle: .body)
+        $0.adjustsFontForContentSizeCategory = true
     }
     private lazy var datePicker = configure(UIDatePicker()) {
         $0.datePickerMode = .date
@@ -74,7 +78,8 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     }
     private lazy var notesView = configure(ESBTextView()) {
         $0.delegate = self
-        $0.font = .preferredMuli(forTextStyle: .body)
+        $0.font = .preferredMuli(forTextStyle: .subheadline)
+        $0.adjustsFontForContentSizeCategory = true
     }
     private lazy var scheduleButton = configure(ESBButton()) {
         $0.setTitle("Schedule Pickup", for: .normal)
@@ -181,6 +186,7 @@ extension SchedulePickupViewController {
         let label = UILabel()
         label.text = title.uppercased()
         label.font = .preferredMuli(forTextStyle: .caption1)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .secondaryLabel
         return label
     }
