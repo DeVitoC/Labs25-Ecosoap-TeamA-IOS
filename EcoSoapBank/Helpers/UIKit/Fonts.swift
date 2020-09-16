@@ -140,6 +140,10 @@ extension UIFont {
     static var barButtonItem: UIFont {
         .muli(ofSize: 17, typeface: .semiBold)
     }
+    
+    static var smallCaption: UIFont {
+        UIFont.muli(ofSize: 11).scaled()
+    }
 }
 
 extension UIFont.TextStyle {
