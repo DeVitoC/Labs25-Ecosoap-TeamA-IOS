@@ -31,7 +31,7 @@ struct PickupHistoryCell: View {
                 // Date
                 VStack(alignment: .leading) {
                     Text("READY DATE")
-                        .font(.preferredMuli(forTextStyle: .caption1))
+                        .font(.smallCaption)
                         .foregroundColor(Color(.secondaryLabel))
                     Text(pickup.readyDate.string())
                         .font(.preferredMuli(forTextStyle: .headline))
