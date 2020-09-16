@@ -15,6 +15,7 @@ class EditCartonViewController: UIViewController {
     // MARK: - Subviews
 
     private lazy var productPickerView = configure(UIPickerView()) {
+        $0.backgroundColor = .systemBackground
         $0.dataSource = self
         $0.delegate = self
         $0.selectRow(
