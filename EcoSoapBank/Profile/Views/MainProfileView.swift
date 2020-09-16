@@ -10,8 +10,9 @@ import SwiftUI
 
 
 struct MainProfileView: View {
+    @Environment(\.sizeCategory) var sizeCategory
     @EnvironmentObject var viewModel: ProfileViewModel
-
+    
     @State var iconWidth: CGFloat = 15
 
     var body: some View {
