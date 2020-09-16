@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Combine
+
 
 protocol ImpactDataProvider {
     func fetchImpactStats(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<ImpactStats>)
@@ -18,7 +20,11 @@ class ImpactController {
     private let dataProvider: ImpactDataProvider
     private let user: User
 
-    var viewingProperty: Property? { user.properties?.first }
+    var viewingProperty: Property? {
+        UserDefaults.standard.selectedProperty(forUser: user)
+    }
+
+    private var cancellables = Set<AnyCancellable>()
     
     /// Gets the latest impact stats from the data provider, which in
     /// turn updates the `viewModels` property accordingly.
@@ -27,7 +33,7 @@ class ImpactController {
     /// stats were properly fetched and the view models updated.
     func getImpactStats(_ completion: @escaping (Error?) -> Void) {
         guard let property = viewingProperty else {
-            return completion(UserError.noProperties)
+            return getImpactStatsForAllProperties(completion)
         }
         dataProvider.fetchImpactStats(forPropertyID: property.id) { [weak self] result in
             switch result {
@@ -38,6 +44,34 @@ class ImpactController {
                 completion(error)
             }
         }
+    }
+
+    func getImpactStatsForAllProperties(_ completion: @escaping (Error?) -> Void) {
+        guard let propertyIDs = user.properties?.compactMap({ $0.id }) else {
+            return completion(UserError.noProperties)
+        }
+        var allPropertiesSubscription: AnyCancellable?
+        allPropertiesSubscription = propertyIDs
+            .map({ [weak self] propertyID in
+                Future { promise in
+                    self?.dataProvider.fetchImpactStats(forPropertyID: propertyID, promise)
+                }
+            }).publisher
+            .mapError { _ in ESBError.unknown }
+            .flatMap { $0 }
+            .reduce(ImpactStats(), +)
+            .sink(receiveCompletion: { [weak self] fetchResult in
+                if case .failure(let error) = fetchResult {
+                    completion(error)
+                }
+                if let sub = allPropertiesSubscription {
+                    self?.cancellables.remove(sub)
+                }
+            }, receiveValue: { [weak self] stats in
+                self?.updateViewModels(with: stats)
+                completion(nil)
+            })
+        cancellables.insert(allPropertiesSubscription!)
     }
     
     // MARK: - Init

@@ -68,9 +68,9 @@ class PaymentHistoryViewController: UIViewController {
     }
 
     private func refreshPayments() {
-        guard let user = paymentController?.user, let properties = user.properties else { return }
+        guard let controller = paymentController else { return }
         paymentCollectionView.refreshControl?.beginRefreshing()
-        paymentController?.fetchPayments(forPropertyID: properties[0].id, completion: { [weak self] result in
+        controller.fetchPaymentsForSelectedProperty(completion: { [weak self] result in
             switch result {
             case .success(let payments):
                 var sortedPayments: [Payment] = payments
@@ -102,12 +102,12 @@ extension PaymentHistoryViewController: UICollectionViewDelegate {
         toggleExpandCell(indexPath: indexPath)
     }
 
-    /// Method to control toggle isExpanded and reload paymentCollectionView based on the results. 
+    /// Method to control toggle isExpanded and reload paymentCollectionView based on the results.
     func toggleExpandCell(indexPath: IndexPath) {
         if let index = isExpanded, index == indexPath {
             isExpanded = nil
         } else {
-        isExpanded = indexPath
+            isExpanded = indexPath
         }
         self.paymentCollectionView.reloadData()
     }

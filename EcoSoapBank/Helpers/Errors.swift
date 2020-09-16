@@ -9,6 +9,13 @@
 import Foundation
 
 
+enum ESBError: Error {
+    case noResult
+    case noDelegate
+    case unknown
+}
+
+
 struct CustomError: LocalizedError {
     let errorDescription: String
     let recoverySuggestion: String
