@@ -31,7 +31,9 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.register(NewCartonCell.self,
                     forCellReuseIdentifier: NewCartonCell.reuseIdentifier)
         $0.delegate = self
+        $0.isScrollEnabled = false
     }
+    
     private lazy var dataSource = DataSource(
         tableView: tableView,
         cellProvider: cell(for:at:with:))
@@ -112,6 +114,11 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         super.viewDidLoad()
         setUpViews()
         bindToViewModel()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        tableViewHeight.constant = tableView.contentSize.height
     }
 }
 
@@ -224,7 +231,6 @@ extension SchedulePickupViewController {
             }
             self.tableViewHeight.constant =
                 self.tableView.contentSize.height
-                - (CGFloat(cartons.count) * 7.5)
         }
     }
 }
