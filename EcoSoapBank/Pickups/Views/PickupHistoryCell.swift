@@ -18,15 +18,19 @@ struct PickupHistoryCell: View {
 
     @Binding var statusWidth: CGFloat?
 
-    init(pickup: Pickup, statusWidth: Binding<CGFloat?>) {
+    private var goToPickupDetail: (Pickup) -> Void
+
+    init(pickup: Pickup,
+         statusWidth: Binding<CGFloat?>,
+         goToPickupDetail: @escaping (Pickup) -> Void
+    ) {
         self.pickup = pickup
         self._statusWidth = statusWidth
+        self.goToPickupDetail = goToPickupDetail
     }
 
     var body: some View {
-        NavigationLink(
-            destination: PickupDetailViewController.Representable(pickup: pickup)
-        ) {
+        Button(action: { goToPickupDetail(pickup) }, label: {
             VStack(alignment: .leading, spacing: 16) {
                 // Date
                 VStack(alignment: .leading) {
@@ -56,7 +60,7 @@ struct PickupHistoryCell: View {
                             } else {
                                 self.statusWidth = $0
                             }
-                    }).frame(width: statusWidth)
+                        }).frame(width: statusWidth)
 
                     // Cartons
                     HStack(spacing: 4) {
@@ -73,7 +77,7 @@ struct PickupHistoryCell: View {
                 }
             }
             .padding(EdgeInsets(top: 6, leading: 0, bottom: 10, trailing: 0))
-        }
+        })
         .font(Font(UIFont.preferredMuli(forTextStyle: .body)))
         .listRowBackground(Color(.historyCellBackground))
     }
@@ -132,8 +136,11 @@ extension PickupHistoryCell {
 
 struct PickupListItem_Previews: PreviewProvider {
     static var previews: some View {
-        PickupHistoryCell(pickup: .random(), statusWidth: .constant(nil))
-            .previewLayout(.sizeThatFits)
-            .padding()
+        PickupHistoryCell(
+            pickup: .random(),
+            statusWidth: .constant(nil),
+            goToPickupDetail: { _ in }
+        ).previewLayout(.sizeThatFits)
+        .padding()
     }
 }
