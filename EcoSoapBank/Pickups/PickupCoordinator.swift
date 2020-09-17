@@ -63,6 +63,7 @@ class PickupCoordinator: FlowCoordinator {
 // MARK: - Event handlers
 
 extension PickupCoordinator {
+    /// Presents the scheduleVC (SchedulePickupViewController) as the curent ViewController
     func scheduleNewPickup() {
         guard user.properties?.first != nil else {
             return rootVC.presentAlert(for: UserError.noProperties)
@@ -75,6 +76,8 @@ extension PickupCoordinator {
         rootVC.present(nav, animated: true, completion: nil)
     }
 
+    /// Dismisses the **SchedulePickupViewController** and passes the pickupResult to the successAlert
+    /// - Parameter pickupResult: The scheduled **Pickup.ScheduleResult** from the **SchedulePickupViewController**
     private func handlePickupScheduleResult(_ pickupResult: Pickup.ScheduleResult) {
         let alert = successAlert(for: pickupResult)
         rootVC.dismiss(animated: true) { [unowned rootVC] in
@@ -84,6 +87,9 @@ extension PickupCoordinator {
         }
     }
 
+    /// An alert on successfully scheduling a new **Pickup**. Allows user to view shipping label now or dismiss alert to view later
+    /// - Parameter pickupResult: The **Pickup.ScheduleResult** passed in from the **SchedulePickupViewController**
+    /// - Returns: Returns the configured alert
     private func successAlert(for pickupResult: Pickup.ScheduleResult) -> UIAlertController {
         let alert = UIAlertController(
             title: "Success!",
@@ -105,6 +111,9 @@ extension PickupCoordinator {
         return alert
     }
 
+    /// Controls the popover view of the **EditCartonViewController**
+    /// - Parameter viewModel: The **ViewModel** of type **NewCartonViewModel** to be displayed
+    /// - Returns: Returns the configured **EditCartonViewController**
     private func editCartonVC(for viewModel: NewCartonViewModel) -> EditCartonViewController {
         configure(EditCartonViewController(viewModel: viewModel)) {
             $0.modalPresentationStyle = .popover
@@ -113,6 +122,8 @@ extension PickupCoordinator {
         }
     }
 
+    /// Method that returns a new **SchedulePickupViewController** when **scheduleVC** is **nil**
+    /// - Returns: Returns the initialized **SchedulePickupViewController**
     private func newScheduleVC() -> SchedulePickupViewController {
         // see `UtilityFunctions.swift` `Optional` extension and infix operator
         let viewModel = scheduleVM ??= SchedulePickupViewModel(user: user, delegate: self)
@@ -123,6 +134,8 @@ extension PickupCoordinator {
 // MARK: - Delegate conformance
 
 extension PickupCoordinator: SchedulePickupViewModelDelegate {
+    /// Presents a **NewCartonViewModel** popover
+    /// - Parameter cartonVM: The **NewCartonViewModel** to be displayed
     func editCarton(for cartonVM: NewCartonViewModel) {
         guard scheduleVC?.isViewLoaded == true else { return }
 
@@ -133,6 +146,7 @@ extension PickupCoordinator: SchedulePickupViewModelDelegate {
         scheduleVC?.present(popover, animated: true, completion: nil)
     }
 
+    /// Dismisses the **SchedulePickupViewController** without scheduling a new **Pickup**
     func cancelPickup() {
         guard let nav = rootVC.presentedViewController as? UINavigationController,
             nav.viewControllers.first as? SchedulePickupViewController != nil
@@ -140,14 +154,20 @@ extension PickupCoordinator: SchedulePickupViewModelDelegate {
         rootVC.dismiss(animated: true, completion: nil)
     }
 
+    /// Takes in a **Pickup.ScheduleInput** and attempts to schedule it with the server
+    /// - Parameters:
+    ///   - input: The **Pickup.ScheduleInput** object to be sent to the server
+    ///   - completion: Returns the passed in **Pickup.ScheduleResult** when successful, otherwise an error
     func schedulePickup(
         for input: Pickup.ScheduleInput,
         completion: @escaping ResultHandler<Pickup.ScheduleResult>
     ) {
+        // Presents a LoadingViewController while attempting to schedule a Pickup
         (rootVC.presentedViewController ?? rootVC).present(
             LoadingViewController(loadingText: "Scheduling pickup..."),
             animated: true)
 
+        // Sends the passed in input to the schedulePickup method to save to the server
         self.pickupController.schedulePickup(for: input)
             .receive(on: DispatchQueue.main)
             .handleError({ [weak self] error in
