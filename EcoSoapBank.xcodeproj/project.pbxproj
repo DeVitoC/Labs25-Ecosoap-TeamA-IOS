@@ -481,6 +481,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		04B1C7752513DC5300F3E7A4 /* PropertySelection */ = {
+			isa = PBXGroup;
+			children = (
+				047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */,
+				047B89832513BC2700AB10D3 /* PropertySelectionCell.swift */,
+			);
+			path = PropertySelection;
+			sourceTree = "<group>";
+		};
 		04BE6D0C24F05ABB00DFC47D /* Impact Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -519,8 +528,6 @@
 				993B15CD24F4575500529517 /* CursorlessTextField.swift */,
 				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
 				999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */,
-				047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */,
-				047B89832513BC2700AB10D3 /* PropertySelectionCell.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -575,6 +582,7 @@
 		466C4272249A8748007D033E /* EcoSoapBank */ = {
 			isa = PBXGroup;
 			children = (
+				04B1C7752513DC5300F3E7A4 /* PropertySelection */,
 				994E4B6D24DDAEA800C12921 /* Impact */,
 				994E4B6E24DDAEB100C12921 /* Pickups */,
 				994E4B6F24DDAEB700C12921 /* Payment */,
