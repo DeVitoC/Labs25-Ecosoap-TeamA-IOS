@@ -23,25 +23,29 @@ struct PickupHistoryView: View {
     @State private var fetchSubscription: AnyCancellable?
 
     private var schedulePickup: () -> Void
+    private var goToPickupDetail: (Pickup) -> Void
 
-    init(pickupController: PickupController, schedulePickup: @escaping () -> Void) {
+    init(pickupController: PickupController,
+         goToPickupDetail: @escaping (Pickup) -> Void,
+         schedulePickup: @escaping () -> Void
+    ) {
         self.pickupController = pickupController
+        self.goToPickupDetail = goToPickupDetail
         self.schedulePickup = schedulePickup
     }
 
     var body: some View {
         List {
             ForEach(pickupController.pickups) { pickup in
-                PickupHistoryCell(pickup: pickup, statusWidth: self.$statusWidth)
+                PickupHistoryCell(
+                    pickup: pickup,
+                    statusWidth: self.$statusWidth,
+                    goToPickupDetail: self.goToPickupDetail)
             }
         }
         .pullToRefresh(isShowing: $refreshing, onRefresh: refreshPickups)
         .errorAlert($error)
         .navigationBarTitle("Pickup History", displayMode: .inline)
-        .navigationBarItems(
-            trailing: Button(
-                action: schedulePickup,
-                label: newPickupButton))
         .listStyle(PlainListStyle())
     }
 
@@ -73,6 +77,7 @@ struct PickupHistoryView_Previews: PreviewProvider {
             pickupController: PickupController(
                 user: .placeholder(),
                 dataProvider: MockPickupProvider()),
+            goToPickupDetail: { _ in },
             schedulePickup: {})
     }
 }
