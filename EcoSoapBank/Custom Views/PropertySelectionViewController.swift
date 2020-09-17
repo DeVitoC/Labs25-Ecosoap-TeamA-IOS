@@ -29,7 +29,7 @@ class PropertySelectionViewController: UIViewController {
                 tableView.layoutIfNeeded()
                 preferredContentSize.height = tableView.contentSize.height - 1
             } else {
-                preferredContentSize.height = cellHeight - 1
+                preferredContentSize.height = cellHeight - 1 // hide bottom separator line
             }
         }
     }
@@ -46,7 +46,6 @@ class PropertySelectionViewController: UIViewController {
         
         selectedProperty = properties.first
         isExpanded = true
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -120,11 +119,6 @@ extension PropertySelectionViewController: UITableViewDataSource {
         }
         
         cell.label.text = properties[indexPath.row]
-        cell.backgroundColor = .clear
-        
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .clear
-        cell.selectedBackgroundView = backgroundView
 
         return cell
     }

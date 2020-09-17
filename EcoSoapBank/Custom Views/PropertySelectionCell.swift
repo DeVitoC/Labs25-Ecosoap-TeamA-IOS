@@ -29,5 +29,11 @@ class PropertySelectionCell: UITableViewCell {
     private func setUp() {
         addSubviewsUsingAutolayout(label)
         label.fillSuperview()
+        
+        backgroundColor = .clear
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .clear
+        selectedBackgroundView = backgroundView
     }
 }
