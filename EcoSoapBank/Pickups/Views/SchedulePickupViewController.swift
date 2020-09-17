@@ -36,7 +36,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     
     private lazy var dataSource = DataSource(
         tableView: tableView,
-        cellProvider: cell(for:at:with:))
+        cellProvider: { [weak self] in self?.cell(for: $0, at: $1, with: $2) })
 
     private lazy var addCartonButton = configure(UIButton(type: .system)) {
         $0.setPreferredSymbolConfiguration(
