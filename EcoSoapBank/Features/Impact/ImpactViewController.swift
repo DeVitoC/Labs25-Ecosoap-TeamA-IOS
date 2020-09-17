@@ -40,26 +40,8 @@ class ImpactViewController: UIViewController {
         }
                 
         setUpCollectionView()
-        
-        addChild(propertySelector)
-        view.addSubviewsUsingAutolayout(propertySelector.view)
-        propertySelector.didMove(toParent: self)
-        
-        propertySelectorHeight =
-            propertySelector.view.heightAnchor
-                .constraint(equalToConstant: propertySelector.preferredContentSize.height)
-        
-        NSLayoutConstraint.activate([
-            propertySelector.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            propertySelector.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            propertySelector.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            propertySelectorHeight!,
-            collectionView.topAnchor.constraint(equalTo: propertySelector.view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-
+        setUpPropertySelector()
+        addConstraints()
         refreshImpactStats()
     }
     
@@ -95,6 +77,29 @@ class ImpactViewController: UIViewController {
             self,
             action: #selector(refreshImpactStats(_:)),
             for: .valueChanged)
+    }
+    
+    private func setUpPropertySelector() {
+        addChild(propertySelector)
+        view.addSubviewsUsingAutolayout(propertySelector.view)
+        propertySelector.didMove(toParent: self)
+    }
+    
+    private func addConstraints() {
+        propertySelectorHeight =
+               propertySelector.view.heightAnchor
+                   .constraint(equalToConstant: propertySelector.preferredContentSize.height)
+        
+        NSLayoutConstraint.activate([
+            propertySelector.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            propertySelector.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            propertySelector.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            propertySelectorHeight!,
+            collectionView.topAnchor.constraint(equalTo: propertySelector.view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
     }
 
     @objc private func refreshImpactStats(_ sender: Any? = nil) {
