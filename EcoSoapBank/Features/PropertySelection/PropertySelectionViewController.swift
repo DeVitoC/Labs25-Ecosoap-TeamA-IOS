@@ -12,6 +12,8 @@ class PropertySelectionViewController: UIViewController {
     
     // MARK: - Public Properties
     
+    var propertySelectionController: PropertySelectionController?
+    
     var properties = ["Blep Bed and Breakfast", "Tranquil Tavern", "Serene Stays"]
     var selectedProperty: String?
     let expansionDuration: TimeInterval = 0.3

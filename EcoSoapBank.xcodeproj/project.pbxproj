@@ -81,6 +81,7 @@
 		049379A524EAE7140084051B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A424EAE7140084051B /* Images.swift */; };
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
+		04B1C7782513DEED00F3E7A4 /* PropertySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C7772513DEED00F3E7A4 /* PropertySelectionController.swift */; };
 		04B6FEAF24FEDCDF000CC58A /* DateCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */; };
 		04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */; };
 		04BE6D0324F041E700DFC47D /* ImpactControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */; };
@@ -268,6 +269,7 @@
 		049379A424EAE7140084051B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		04B1C7772513DEED00F3E7A4 /* PropertySelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PropertySelectionController.swift; path = EcoSoapBank/Features/Impact/PropertySelectionController.swift; sourceTree = SOURCE_ROOT; };
 		04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCoding.swift; sourceTree = "<group>"; };
 		04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellViewModelTests.swift; sourceTree = "<group>"; };
 		04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactControllerTests.swift; sourceTree = "<group>"; };
@@ -376,8 +378,8 @@
 		99D0165F24FEA6D8001A7555 /* With.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
 		E220C32624E35E59003FF32D /* GraphQLQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueries.swift; sourceTree = "<group>"; };
 		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
-		E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryViewController.swift; path = EcoSoapBank/Payment/PaymentHistoryViewController.swift; sourceTree = SOURCE_ROOT; };
-		E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryCollectionViewCell.swift; path = EcoSoapBank/Payment/PaymentHistoryCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryViewController.swift; path = EcoSoapBank/Features/Payment/PaymentHistoryViewController.swift; sourceTree = SOURCE_ROOT; };
+		E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryCollectionViewCell.swift; path = EcoSoapBank/Features/Payment/PaymentHistoryCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		E28E911324FEBC320014DF82 /* UIViews+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViews+Convenience.swift"; sourceTree = "<group>"; };
 		E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPaymentProvider.swift; sourceTree = "<group>"; };
 		E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsFailure.json; sourceTree = "<group>"; };
@@ -395,7 +397,7 @@
 		E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLControllerMockDataTests.swift; sourceTree = "<group>"; };
 		E2D302FE24E5F464008A6FAF /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataLoader.swift; sourceTree = "<group>"; };
-		E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentCoordinator.swift; path = EcoSoapBank/Payment/PaymentCoordinator.swift; sourceTree = SOURCE_ROOT; };
+		E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentCoordinator.swift; path = EcoSoapBank/Features/Payment/PaymentCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		E2E2F0E924F838170050BFCF /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		E2E2F0EB24F844A10050BFCF /* PaymentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -485,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */,
+				04B1C7772513DEED00F3E7A4 /* PropertySelectionController.swift */,
 				047B89832513BC2700AB10D3 /* PropertySelectionCell.swift */,
 			);
 			path = PropertySelection;
@@ -1220,6 +1223,7 @@
 				04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */,
 				04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */,
 				04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */,
+				04B1C7782513DEED00F3E7A4 /* PropertySelectionController.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
 				992FBC8D24FDB6970099C32D /* EditPropertyView.swift in Sources */,
 				0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */,
