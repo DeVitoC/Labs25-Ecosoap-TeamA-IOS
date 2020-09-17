@@ -71,11 +71,11 @@ struct PickupHistoryCell: View {
                         Spacer()
                     }
                 }
-            }.padding(.top, 6)
-                .padding(.bottom, 10)
-                .padding(.trailing, 0)
+            }
+            .padding(EdgeInsets(top: 6, leading: 0, bottom: 10, trailing: 0))
         }
         .font(Font(UIFont.preferredMuli(forTextStyle: .body)))
+        .listRowBackground(Color(.historyCellBackground))
     }
 }
 
