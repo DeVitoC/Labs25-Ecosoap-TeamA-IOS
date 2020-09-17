@@ -8,18 +8,25 @@
 
 import UIKit
 
-/// Coordinator that manages the initialization of the PaymentHistoryViewController
+/// Coordinator that initializes and starts the ImpactViewController
 class PaymentCoordinator: FlowCoordinator {
-    
+
+    /// Initializer that takes in a **User** and **PaymentDataProvider** and initializes the **PaymentCoordinator**
+    /// - Parameters:
+    ///   - user: A **User** object that will provide the information for the **PaymentViewController**
+    ///   - dataProvider: Takes an object that conforms to the protocol **PaymentDataProvider**. Allows for either live or mock data.
     init(user: User, dataProvider: PaymentDataProvider) {
         paymentVC.paymentController = PaymentController(user: user,
                                                         dataProvider: dataProvider)
     }
 
+    // rootVC is the base controller that will be opened.
+    // In this case, the UINavigationController that will provide the navigation bar and stack
     let rootVC = UINavigationController()
+    // paymentVC is the PaymentViewController that will be started via the rootVC
     let paymentVC = PaymentHistoryViewController()
 
-    /// Starts the PaymentHistoryViewController
+    /// Starts the rootVC and pushes the paymentVC to be the current VC. Initialized with a "dollarsign.circle" image for the tab
     func start() {
         let payment = UIImage(
             systemName: "dollarsign.circle",
