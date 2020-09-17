@@ -77,6 +77,7 @@
 		047B897F251121E500AB10D3 /* CartonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B897D251121E500AB10D3 /* CartonCollectionViewCell.swift */; };
 		047B8980251121E500AB10D3 /* CartonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047B897E251121E500AB10D3 /* CartonCollectionViewCell.xib */; };
 		047B89822513BA0900AB10D3 /* PropertySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */; };
+		047B89842513BC2700AB10D3 /* PropertySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B89832513BC2700AB10D3 /* PropertySelectionCell.swift */; };
 		049379A524EAE7140084051B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A424EAE7140084051B /* Images.swift */; };
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
@@ -263,6 +264,7 @@
 		047B897D251121E500AB10D3 /* CartonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartonCollectionViewCell.swift; sourceTree = "<group>"; };
 		047B897E251121E500AB10D3 /* CartonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartonCollectionViewCell.xib; sourceTree = "<group>"; };
 		047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectionViewController.swift; sourceTree = "<group>"; };
+		047B89832513BC2700AB10D3 /* PropertySelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectionCell.swift; sourceTree = "<group>"; };
 		049379A424EAE7140084051B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
 				999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */,
 				047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */,
+				047B89832513BC2700AB10D3 /* PropertySelectionCell.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -1174,6 +1177,7 @@
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
 				99CE3DDF250AEFD60039E3FC /* Alert+ErrorMessage.swift in Sources */,
+				047B89842513BC2700AB10D3 /* PropertySelectionCell.swift in Sources */,
 				99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */,
 				E2C37DEA2508222200B9F20F /* PaymentHistoryViewController.swift in Sources */,
 				992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */,
