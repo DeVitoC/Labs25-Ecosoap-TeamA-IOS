@@ -50,15 +50,7 @@ class AppFlowCoordinator: FlowCoordinator {
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
 
-        let shouldSkipLogin: Bool = {
-            if case .useMock(let skipLogin) = mockStatus {
-                return skipLogin
-            } else {
-                return false
-            }
-        }()
-
-        if Keychain.Okta.isLoggedIn || shouldSkipLogin {
+        if Keychain.Okta.isLoggedIn || skipLogin {
             tabBarController.present(
                 LoadingViewController(loadingText: "Logging in..."),
                 animated: false,
@@ -145,22 +137,4 @@ extension AppFlowCoordinator: ProfileDelegate {
         userSubscription = makeUserChangesSubscription()
         loginCoord.start()
     }
-}
-
-
-// MARK: - Use Mock
-
-let mockStatus: MockStatus = .useMock(skipLogin: true)
-
-var useMock: Bool {
-    if case .useMock = mockStatus {
-        return true
-    } else {
-        return false
-    }
-}
-
-enum MockStatus {
-    case live
-    case useMock(skipLogin: Bool)
 }
