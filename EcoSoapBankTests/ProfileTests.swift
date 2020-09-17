@@ -166,13 +166,29 @@ class ProfileTests: XCTestCase {
 
     /// Ensure setting `useShippingAddressForBilling` does not change the address until commiting.
     func testEditPropertyUseShippingAddressForBilling() {
+        logIn()
+        
         var info = EditablePropertyInfo(user.properties?.first!)
-        XCTAssertEqual(info.shippingAddress, EditableAddressInfo(user.properties?.first?.shippingAddress))
-        XCTAssertNotEqual(info.shippingAddress, info.billingAddress)
         info.billingAddress = EditableAddressInfo()
         viewModel.useShippingAddressForBilling = true
-        viewModel.useShippingAddressForBilling = false
-        XCTAssertNotEqual(info.billingAddress, info.shippingAddress)
+
+        XCTAssertNotEqual(info.shippingAddress, info.billingAddress)
+
+        let didSavePropertyChanges = expectation(description: "Saved property changes")
+        viewModel.savePropertyChanges(info) {
+            didSavePropertyChanges.fulfill()
+        }
+
+        let userWillChange = expectation(description: "User about to change")
+        viewModel.$user
+            .dropFirst()
+            .sink { _ in userWillChange.fulfill() }
+            .store(in: &bag)
+
+        wait(for: [didSavePropertyChanges, userWillChange], timeout: 2)
+
+        XCTAssertEqual(viewModel.user.properties?.first?.shippingAddress,
+                       viewModel.user.properties?.first?.billingAddress)
     }
 
     func testCommitProfileChangesSuccess() {

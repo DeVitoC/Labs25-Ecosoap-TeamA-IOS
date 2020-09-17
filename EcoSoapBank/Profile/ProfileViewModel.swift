@@ -11,7 +11,6 @@ import Combine
 
 
 class ProfileViewModel: ObservableObject {
-
     /// The currently signed-in user.
     @Published private(set) var user: User
     /// The selected property to be managed (or all user properties).
