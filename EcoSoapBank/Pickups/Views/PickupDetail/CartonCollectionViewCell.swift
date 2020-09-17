@@ -1,26 +1,27 @@
 //
-//  PickupDetailCartonCell.swift
+//  CartonCollectionViewCell.swift
 //  EcoSoapBank
 //
-//  Created by Shawn Gee on 9/10/20.
+//  Created by Shawn Gee on 9/15/20.
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
 import UIKit
 
-class PickupDetailCartonCell: UICollectionViewCell {
+class CartonCollectionViewCell: UICollectionViewCell {
+
     var carton: Pickup.Carton? { didSet { updateViews() } }
     
     @IBOutlet private var productLabel: UILabel! {
         didSet {
-            productLabel.font = UIFont.muli(style: .callout, typeface: .regular)
+            productLabel.font = .preferredMuli(forTextStyle: .subheadline)
             productLabel.textColor = UIColor.label
         }
     }
     @IBOutlet private var cartonView: CartonView!
     @IBOutlet private var percentFullLabel: UILabel! {
         didSet {
-            percentFullLabel.font = UIFont.muli(style: .caption1, typeface: .semiBold)
+            percentFullLabel.font = .preferredMuli(forTextStyle: .caption1, typeface: .semiBold)
             percentFullLabel.textColor = UIColor.codGrey.orInverse()
         }
     }

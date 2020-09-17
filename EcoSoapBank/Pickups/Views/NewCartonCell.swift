@@ -17,6 +17,8 @@ class NewCartonCell: UITableViewCell {
     private var cancellables: Set<AnyCancellable> = []
 
     private lazy var cartonLabel = configure(UILabel()) {
+        $0.font = .preferredMuli(forTextStyle: .callout)
+        $0.adjustsFontForContentSizeCategory = true
         self.constrainNewSubviewToSafeArea($0, sides: [.top, .bottom], constant: 8)
         NSLayoutConstraint.activate($0.constraints(from: safeAreaLayoutGuide,
                                                    toSides: [.leading, .trailing],

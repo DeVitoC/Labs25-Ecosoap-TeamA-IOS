@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     .foregroundColor: UIColor.black
                 ]
                 
-                let textAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.muli(typeface: .semiBold)]
+                let textAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.barButtonItem]
                 $0.backButtonAppearance.normal.titleTextAttributes = textAttributes
                 $0.doneButtonAppearance.normal.titleTextAttributes = textAttributes
             }
