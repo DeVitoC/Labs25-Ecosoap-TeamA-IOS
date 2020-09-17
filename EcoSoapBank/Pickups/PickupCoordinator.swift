@@ -15,11 +15,7 @@ class PickupCoordinator: FlowCoordinator {
     private let pickupController: PickupController
     private(set) var user: User
 
-    private(set) lazy var rootVC = UINavigationController(
-        rootViewController: UIHostingController(
-            rootView: PickupHistoryView(
-                pickupController: pickupController,
-                schedulePickup: { [weak self] in self?.scheduleNewPickup() })))
+    private(set) lazy var rootVC = UINavigationController(rootViewController: historyVC())
 
     private var cancellables = Set<AnyCancellable>()
     private var scheduleVC: SchedulePickupViewController?
@@ -54,7 +50,7 @@ class PickupCoordinator: FlowCoordinator {
 // MARK: - Event handlers
 
 extension PickupCoordinator {
-    func scheduleNewPickup() {
+    @objc func scheduleNewPickup() {
         guard user.properties?.first != nil else {
             return rootVC.presentAlert(for: UserError.noProperties)
         }
@@ -64,6 +60,15 @@ extension PickupCoordinator {
             $0.modalPresentationStyle = .fullScreen
         }
         rootVC.present(nav, animated: true, completion: nil)
+    }
+
+    func showPickupDetail(for pickup: Pickup) {
+        guard let vc = PickupDetailViewController.storyboard().instantiateInitialViewController(creator: {
+            PickupDetailViewController(coder: $0, pickup: pickup)
+        }) else {
+            preconditionFailure("Failed to initialize PickupDetailViewController from storyboard.")
+        }
+        rootVC.pushViewController(vc, animated: true)
     }
 
     private func handlePickupScheduleResult(_ pickupResult: Pickup.ScheduleResult) {
@@ -94,6 +99,25 @@ extension PickupCoordinator {
                     completionHandler: nil)
         }))
         return alert
+    }
+
+    private func historyVC() -> UIViewController {
+        configure(UIHostingController(
+            rootView: PickupHistoryView(
+                pickupController: pickupController,
+                goToPickupDetail: { [weak self] pickup in
+                    self?.showPickupDetail(for: pickup)
+                },
+                schedulePickup: { [weak self] in self?.scheduleNewPickup() }))
+        ) {
+            $0.navigationItem.setRightBarButton(
+                UIBarButtonItem(
+                    image: UIImage.addBoxSymbol.scaled(toNewHeight: 28),
+                    style: .plain,
+                    target: self,
+                    action: #selector(scheduleNewPickup)),
+                animated: false)
+        }
     }
 
     private func editCartonVC(for viewModel: NewCartonViewModel) -> EditCartonViewController {
