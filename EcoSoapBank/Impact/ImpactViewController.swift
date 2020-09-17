@@ -11,14 +11,23 @@ import UIKit
 
 class ImpactViewController: UIViewController {
     
-    var collectionView = UICollectionView(
+    // MARK: - Public Properties
+    
+    var impactController: ImpactController?
+    
+    // MARK: - Private Properties
+    
+    private var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
-    var impactController: ImpactController?
+    private var propertySelector = PropertySelectionViewController()
+    private var propertySelectorHeight: NSLayoutConstraint?
     
     private var massUnitObserver: UserDefaultsObservation?
+    
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +40,26 @@ class ImpactViewController: UIViewController {
         }
                 
         setUpCollectionView()
+        
+        addChild(propertySelector)
+        view.addSubviewsUsingAutolayout(propertySelector.view)
+        propertySelector.didMove(toParent: self)
+        
+        propertySelectorHeight =
+            propertySelector.view.heightAnchor
+                .constraint(equalToConstant: propertySelector.preferredContentSize.height)
+        
+        NSLayoutConstraint.activate([
+            propertySelector.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            propertySelector.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            propertySelector.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            propertySelectorHeight!,
+            collectionView.topAnchor.constraint(equalTo: propertySelector.view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+
         refreshImpactStats()
     }
     
@@ -38,6 +67,18 @@ class ImpactViewController: UIViewController {
         super.viewDidAppear(animated)
         collectionView.reloadData()
     }
+    
+    override func preferredContentSizeDidChange(forChildContentContainer container: UIContentContainer) {
+        super.preferredContentSizeDidChange(forChildContentContainer: container)
+        if container === propertySelector {
+            propertySelectorHeight?.constant = container.preferredContentSize.height
+            UIView.animate(withDuration: propertySelector.expansionDuration) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    // MARK: - Private Methods
     
     private func setUpCollectionView() {
         collectionView.register(ImpactCell.self, forCellWithReuseIdentifier: ImpactCell.reuseIdentifier)
@@ -48,7 +89,7 @@ class ImpactViewController: UIViewController {
         collectionView.backgroundColor = .clear
         
         view.addSubviewsUsingAutolayout(collectionView)
-        collectionView.fillSuperview()
+        
         collectionView.refreshControl = UIRefreshControl()
         collectionView.refreshControl?.addTarget(
             self,
