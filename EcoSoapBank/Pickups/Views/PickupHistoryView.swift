@@ -36,22 +36,14 @@ struct PickupHistoryView: View {
                     PickupHistoryCell(pickup: pickup, statusWidth: self.$statusWidth)
                 }
             }
-            .pullToRefresh(isShowing: $refreshing, onRefresh: {
-                self.fetchSubscription = self.pickupController.fetchPickupsForSelectedProperty()
-                    .sink(receiveCompletion: { completion in
-                        if case .failure(let error) = completion {
-                            self.error = error
-                        }
-                        self.refreshing = false
-                    }, receiveValue: { _ in })
-            })
+            .pullToRefresh(isShowing: $refreshing, onRefresh: refreshPickups)
             .errorAlert($error)
             .navigationBarTitle("Pickup History", displayMode: .inline)
             .navigationBarItems(trailing: Button(
                 action: schedulePickup,
                 label: newPickupButton))
+            .listStyle(PlainListStyle())
         }
-        .listStyle(PlainListStyle())
     }
 
     private func newPickupButton() -> some View {
@@ -61,6 +53,16 @@ struct PickupHistoryView: View {
             .frame(height: 28)
             .foregroundColor(.barButtonTintColor)
             .accessibility(label: Text("Schedule New Pickup"))
+    }
+
+    private func refreshPickups() {
+        self.fetchSubscription = self.pickupController.fetchPickupsForSelectedProperty()
+            .sink(receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+                self.refreshing = false
+            }, receiveValue: { _ in })
     }
 }
 
