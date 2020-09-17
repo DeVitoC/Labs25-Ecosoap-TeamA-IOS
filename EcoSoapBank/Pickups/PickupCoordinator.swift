@@ -105,10 +105,7 @@ extension PickupCoordinator {
         configure(UIHostingController(
             rootView: PickupHistoryView(
                 pickupController: pickupController,
-                goToPickupDetail: { [weak self] pickup in
-                    self?.showPickupDetail(for: pickup)
-                },
-                schedulePickup: { [weak self] in self?.scheduleNewPickup() }))
+                onPickupTap: { [weak self] in self?.showPickupDetail(for: $0) }))
         ) {
             $0.navigationItem.setRightBarButton(
                 UIBarButtonItem(

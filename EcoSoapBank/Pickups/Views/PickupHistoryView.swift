@@ -22,16 +22,13 @@ struct PickupHistoryView: View {
 
     @State private var fetchSubscription: AnyCancellable?
 
-    private var schedulePickup: () -> Void
-    private var goToPickupDetail: (Pickup) -> Void
+    private var onPickupTap: (Pickup) -> Void
 
     init(pickupController: PickupController,
-         goToPickupDetail: @escaping (Pickup) -> Void,
-         schedulePickup: @escaping () -> Void
+         onPickupTap: @escaping (Pickup) -> Void
     ) {
         self.pickupController = pickupController
-        self.goToPickupDetail = goToPickupDetail
-        self.schedulePickup = schedulePickup
+        self.onPickupTap = onPickupTap
     }
 
     var body: some View {
@@ -40,7 +37,7 @@ struct PickupHistoryView: View {
                 PickupHistoryCell(
                     pickup: pickup,
                     statusWidth: self.$statusWidth,
-                    goToPickupDetail: self.goToPickupDetail)
+                    onPickupTap: self.onPickupTap)
             }
         }
         .pullToRefresh(isShowing: $refreshing, onRefresh: refreshPickups)
@@ -77,7 +74,6 @@ struct PickupHistoryView_Previews: PreviewProvider {
             pickupController: PickupController(
                 user: .placeholder(),
                 dataProvider: MockPickupProvider()),
-            goToPickupDetail: { _ in },
-            schedulePickup: {})
+            onPickupTap: { _ in })
     }
 }

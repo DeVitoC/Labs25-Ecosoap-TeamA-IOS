@@ -18,19 +18,19 @@ struct PickupHistoryCell: View {
 
     @Binding var statusWidth: CGFloat?
 
-    private var goToPickupDetail: (Pickup) -> Void
+    private var onTap: (Pickup) -> Void
 
     init(pickup: Pickup,
          statusWidth: Binding<CGFloat?>,
-         goToPickupDetail: @escaping (Pickup) -> Void
+         onPickupTap: @escaping (Pickup) -> Void
     ) {
         self.pickup = pickup
         self._statusWidth = statusWidth
-        self.goToPickupDetail = goToPickupDetail
+        self.onTap = onPickupTap
     }
 
     var body: some View {
-        Button(action: { goToPickupDetail(pickup) }, label: {
+        Button(action: { onTap(pickup) }, label: {
             VStack(alignment: .leading, spacing: 16) {
                 // Date
                 VStack(alignment: .leading) {
@@ -139,7 +139,7 @@ struct PickupListItem_Previews: PreviewProvider {
         PickupHistoryCell(
             pickup: .random(),
             statusWidth: .constant(nil),
-            goToPickupDetail: { _ in }
+            onPickupTap: { _ in }
         ).previewLayout(.sizeThatFits)
         .padding()
     }
