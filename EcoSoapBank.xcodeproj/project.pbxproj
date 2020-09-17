@@ -150,7 +150,6 @@
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
 		994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* UtilityFunctions.swift */; };
 		994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8824DDB68700C12921 /* UtilityTests.swift */; };
-		99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */; };
 		99789CC52502C832000428AC /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99789CC42502C832000428AC /* ProfileTests.swift */; };
 		997BF11224E20AAE00A643D8 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BF11124E20AAE00A643D8 /* TextView.swift */; };
 		9983874824E33A0600450244 /* MockPickupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9983874724E33A0600450244 /* MockPickupProvider.swift */; };
@@ -334,7 +333,6 @@
 		994E4B7E24DDB67000C12921 /* EcoSoapBankTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcoSoapBankTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		994E4B8224DDB67000C12921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		994E4B8824DDB68700C12921 /* UtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityTests.swift; sourceTree = "<group>"; };
-		99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBackgroundColor.swift; sourceTree = "<group>"; };
 		99789CC42502C832000428AC /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		997BF11124E20AAE00A643D8 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		9983874724E33A0600450244 /* MockPickupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPickupProvider.swift; sourceTree = "<group>"; };
@@ -742,7 +740,6 @@
 				9983874B24E4657C00450244 /* KeyboardAvoiding.swift */,
 				9983874D24E4658600450244 /* KeyboardDismissing.swift */,
 				997BF11124E20AAE00A643D8 /* TextView.swift */,
-				99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */,
 				992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */,
 				99D0165F24FEA6D8001A7555 /* With.swift */,
 				999B2D0D25014DEB002D3591 /* View+Alignment.swift */,
@@ -1194,7 +1191,6 @@
 				999B2D0E25014DEB002D3591 /* View+Alignment.swift in Sources */,
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
 				E2E2F0EA24F838170050BFCF /* Payment.swift in Sources */,
-				99565A3E24E7032A000841F2 /* ListBackgroundColor.swift in Sources */,
 				992FBC8724FDABE10099C32D /* LabelAlignedTextField.swift in Sources */,
 				E2C37DE92508221E00B9F20F /* PaymentCoordinator.swift in Sources */,
 				04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */,
