@@ -54,6 +54,7 @@ class LoginViewController: UIViewController {
         
         missionStatementLabel.centerHorizontallyInSuperview()
         missionStatementLabel.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 40).isActive = true
+        missionStatementLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         
         let signInButton = configure(ESBButton()) {
             $0.colorScheme = .greenOnWhite
@@ -82,14 +83,14 @@ class LoginViewController: UIViewController {
         let missionStatment = NSMutableAttributedString(
             string: line1,
             attributes: [.paragraphStyle: paragraphStyle,
-                         .font: UIFont.montserrat(style: .title3)]
+                         .font: UIFont.montserrat(ofSize: 20)]
         )
         
         missionStatment.append(
             NSAttributedString(
                 string: line2,
                 attributes: [.paragraphStyle: paragraphStyle,
-                             .font: UIFont.montserrat(style: .title3, typeface: .semiBold)]
+                             .font: UIFont.montserrat(ofSize: 20, typeface: .semiBold)]
             )
         )
         
@@ -97,7 +98,7 @@ class LoginViewController: UIViewController {
             NSAttributedString(
                 string: line3,
                 attributes: [.paragraphStyle: paragraphStyle,
-                             .font: UIFont.montserrat(style: .title3)]
+                             .font: UIFont.montserrat(ofSize: 20)]
             )
         )
         

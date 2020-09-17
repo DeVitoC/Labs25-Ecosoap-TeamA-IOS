@@ -10,8 +10,9 @@ import SwiftUI
 
 
 struct MainProfileView: View {
+    @Environment(\.sizeCategory) var sizeCategory
     @EnvironmentObject var viewModel: ProfileViewModel
-
+    
     @State var iconWidth: CGFloat = 15
 
     var body: some View {
@@ -67,7 +68,7 @@ struct MainProfileView: View {
                 }
             }.navigationBarTitle("Profile Settings", displayMode: .inline)
         }
-        .font(.muli())
+        .font(UIFont.preferredMuli(forTextStyle: .body))
         .navigationViewStyle(StackNavigationViewStyle())
         .errorAlert($viewModel.error)
     }

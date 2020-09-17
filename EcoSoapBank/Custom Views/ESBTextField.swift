@@ -20,6 +20,7 @@ class ESBTextField: UITextField, ESBBordered {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
             updateBorderColor()
         }
