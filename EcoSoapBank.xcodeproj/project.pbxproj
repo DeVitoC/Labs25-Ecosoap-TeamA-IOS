@@ -168,6 +168,7 @@
 		9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E024F9B78C00DD16B5 /* StripeController.swift */; };
 		9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
 		9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */; };
+		999411772513B99F00675831 /* UseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999411762513B99F00675831 /* UseMock.swift */; };
 		999B2D0E25014DEB002D3591 /* View+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999B2D0D25014DEB002D3591 /* View+Alignment.swift */; };
 		999B2D1025019045002D3591 /* InverseMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999B2D0F25019045002D3591 /* InverseMask.swift */; };
 		999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */; };
@@ -350,6 +351,7 @@
 		9990F6E024F9B78C00DD16B5 /* StripeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeController.swift; sourceTree = "<group>"; };
 		9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlert.swift"; sourceTree = "<group>"; };
+		999411762513B99F00675831 /* UseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseMock.swift; sourceTree = "<group>"; };
 		999B2D0D25014DEB002D3591 /* View+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alignment.swift"; sourceTree = "<group>"; };
 		999B2D0F25019045002D3591 /* InverseMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverseMask.swift; sourceTree = "<group>"; };
 		999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 				049379A824EB25600084051B /* Images.xcassets */,
 				990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */,
 				99BA964325001FE400821694 /* AppTabBarController.swift */,
+				999411762513B99F00675831 /* UseMock.swift */,
 				466C4273249A8748007D033E /* AppDelegate.swift */,
 				466C4275249A8748007D033E /* SceneDelegate.swift */,
 				466C427E249A8749007D033E /* LaunchScreen.storyboard */,
@@ -1120,6 +1123,7 @@
 				99B6176124EB0C4E0099664B /* NewCartonCell.swift in Sources */,
 				9983874E24E4658600450244 /* KeyboardDismissing.swift in Sources */,
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
+				999411772513B99F00675831 /* UseMock.swift in Sources */,
 				04D1758D24E4195C00F8929C /* GradientView.swift in Sources */,
 				049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */,
 				992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */,
