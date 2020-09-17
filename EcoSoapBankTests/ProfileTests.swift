@@ -166,13 +166,29 @@ class ProfileTests: XCTestCase {
 
     /// Ensure setting `useShippingAddressForBilling` does not change the address until commiting.
     func testEditPropertyUseShippingAddressForBilling() {
+        logIn()
+        
         var info = EditablePropertyInfo(user.properties?.first!)
-        XCTAssertEqual(info.shippingAddress, EditableAddressInfo(user.properties?.first?.shippingAddress))
-        XCTAssertNotEqual(info.shippingAddress, info.billingAddress)
         info.billingAddress = EditableAddressInfo()
         viewModel.useShippingAddressForBilling = true
-        viewModel.useShippingAddressForBilling = false
-        XCTAssertNotEqual(info.billingAddress, info.shippingAddress)
+
+        XCTAssertNotEqual(info.shippingAddress, info.billingAddress)
+
+        let didSavePropertyChanges = expectation(description: "Saved property changes")
+        viewModel.savePropertyChanges(info) {
+            didSavePropertyChanges.fulfill()
+        }
+
+        let userWillChange = expectation(description: "User about to change")
+        viewModel.$user
+            .dropFirst()
+            .sink { _ in userWillChange.fulfill() }
+            .store(in: &bag)
+
+        wait(for: [didSavePropertyChanges, userWillChange], timeout: 2)
+
+        XCTAssertEqual(viewModel.user.properties?.first?.shippingAddress,
+                       viewModel.user.properties?.first?.billingAddress)
     }
 
     func testCommitProfileChangesSuccess() {
@@ -206,6 +222,46 @@ class ProfileTests: XCTestCase {
 
         XCTAssertNotEqual(oldProperty, newProperty)
         XCTAssertEqual(EditablePropertyInfo(newProperty), info)
+    }
+
+    func testPropertyUpdateFailed() {
+        userController = UserController(
+            dataLoader: MockUserDataProvider(
+                shouldFail: true,
+                testing: true,
+                waitTime: 0.1))
+        let propInfo = configure(EditablePropertyInfo(user.properties?.first)) {
+            $0.name = "BLAHHHHHH"
+        }
+
+        // user controller failure
+        let controllerCompletedPropertyUpdate = expectation(description: "Returned from closure")
+        userController.updateProperty(with: propInfo) { result in
+            if case .success = result {
+                XCTFail("Should not be successful")
+            }
+            controllerCompletedPropertyUpdate.fulfill()
+        }
+
+        // view model failure
+        let vm = ProfileViewModel(user: user,
+                                  userController: userController,
+                                  delegate: nil)
+        let vmHasError = expectation(description: "View model has an error")
+
+        vm.$error
+            .compactMap { $0 }
+            .sink { _ in
+                vmHasError.fulfill()
+            }.store(in: &bag)
+        vm.savePropertyChanges(propInfo) {
+            XCTFail("Call should not succeed")
+        }
+
+        wait(for: [
+            controllerCompletedPropertyUpdate,
+            vmHasError
+        ], timeout: 5)
     }
 }
 

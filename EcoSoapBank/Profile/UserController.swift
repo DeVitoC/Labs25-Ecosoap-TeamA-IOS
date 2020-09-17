@@ -13,22 +13,40 @@ import KeychainAccess
 
 
 protocol UserDataProvider {
+
+    /// Logs the user in using the Bearer token from Okta.
+    /// - Parameter completion: A closure that takes in a `Result<User, Error>`, called when login is completed.
     func logIn(_ completion: @escaping ResultHandler<User>)
+    /// Send a request to update the current user's profile info.
+    /// - Parameters:
+    ///   - input: The updated profile information.
+    ///   - completion: A closure that takes in a `Result<User, Error>`, called when the request is completed. Contains the updated `User` object if successful.
     func updateUserProfile(_ input: EditableProfileInfo,
                            completion: @escaping ResultHandler<User>)
+    /// Send a request to update the property with the provided ID.
+    /// - Parameters:
+    ///   - info: The updated property information.
+    ///   - completion: A closure that takes in a `Result<Property, Error>`, called when the request is completed. Contains the updated `Property` object if successful.
     func updateProperty(with info: EditablePropertyInfo,
                         completion: @escaping ResultHandler<Property>)
+    /// Log the user out, allowing them to log in as a different user.
     func logOut()
 }
 
 
 class UserController: ObservableObject {
+    /// The currently logged in user.
+    ///
+    /// Can be subscribed to with Combine via `$user`.
     @Published private(set) var user: User?
 
     private var dataLoader: UserDataProvider
     
     private var cancellables: Set<AnyCancellable> = []
 
+    /// Create a new UserController using the provided `dataLoader`.
+    ///
+    /// - Parameter dataLoader: The object making network calls (or mock network calls) on behalf of the `UserController`.
     init(dataLoader: UserDataProvider) {
         self.dataLoader = dataLoader
 
@@ -52,6 +70,8 @@ class UserController: ObservableObject {
 extension UserController {
     var oktaLoginURL: URL? { OktaAuth.shared.identityAuthURL() }
 
+    /// Logs the user in using the Bearer token from Okta.
+    /// - Parameter completion: A closure that takes in a `Result<User, Error>`, called when login is completed.
     func logInWithBearer(completion: @escaping ResultHandler<User> = { _ in }) {
         self.dataLoader.logIn { [weak self] result in
             if let user = try? result.get() {
@@ -61,6 +81,10 @@ extension UserController {
         }
     }
 
+    /// Send a request to update the current user's profile info.
+    /// - Parameters:
+    ///   - input: The updated profile information.
+    ///   - completion: A closure that takes in a `Result<User, Error>`, called when the request is completed. Contains the updated `User` object if successful.
     func updateUserProfile(_ input: EditableProfileInfo, completion: @escaping ResultHandler<User>) {
         dataLoader.updateUserProfile(input) { [weak self] result in
             if let newUser = try? result.get() {
@@ -70,6 +94,10 @@ extension UserController {
         }
     }
 
+    /// Send a request to update the property with the provided ID.
+    /// - Parameters:
+    ///   - info: The updated property information.
+    ///   - completion: A closure that takes in a `Result<Property, Error>`, called when the request is completed. Contains the updated `Property` object if successful.
     func updateProperty(with info: EditablePropertyInfo, completion: @escaping ResultHandler<Property>) {
         dataLoader.updateProperty(with: info) { [weak self] result in
             defer { completion(result) }
@@ -78,6 +106,9 @@ extension UserController {
         }
     }
 
+    /// Log the user out, allowing them to log in as a different user.
+    ///
+    /// Sets the controller's `user` to nil and logs out via the controller's `dataLoader`.
     func logOut() {
         user = nil
         dataLoader.logOut()
