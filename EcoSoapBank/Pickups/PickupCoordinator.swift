@@ -10,12 +10,17 @@ import UIKit
 import SwiftUI
 import Combine
 
-
+/// Coordinator that initializes and starts the ImpactViewController
 class PickupCoordinator: FlowCoordinator {
+
+    // MARK: - Properties
     private let pickupController: PickupController
     private(set) var user: User
 
+    // rootVC is the base controller that will be opened.
+    // In this case, the UIHostingController that will allow SwiftUI views to be displayed on the ViewController
     private(set) lazy var rootVC: UIViewController = UIHostingController(
+        // Initializes view with PickupHistoryView with the passed in pickupController
         rootView: PickupHistoryView(
             pickupController: pickupController,
             schedulePickup: { [weak self] in self?.scheduleNewPickup() }))
@@ -24,6 +29,10 @@ class PickupCoordinator: FlowCoordinator {
     private var scheduleVC: SchedulePickupViewController?
     var scheduleVM: SchedulePickupViewModel?
 
+    /// Initializer that takes in a **User** and **PickupDataProvider** and initializes the **PickupCoordinator**
+    /// - Parameters:
+    ///   - user: A **User** object that will provide the information for the **PickupViewController**
+    ///   - dataProvider: Takes an object that conforms to the protocol **PickupDataProvider**. Allows for either live or mock data.
     init(user: User, dataProvider: PickupDataProvider) {
         self.user = user
         self.pickupController = PickupController(
@@ -38,6 +47,7 @@ class PickupCoordinator: FlowCoordinator {
             .store(in: &cancellables)
     }
 
+    /// Starts the rootVC as the current VC. Initialized with a "cube.box" image for the tab
     func start() {
         rootVC.tabBarItem = UITabBarItem(
             title: "Pickups",
