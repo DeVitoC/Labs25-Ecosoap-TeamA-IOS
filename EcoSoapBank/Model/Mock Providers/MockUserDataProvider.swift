@@ -10,19 +10,30 @@ import Foundation
 import KeychainAccess
 
 
+/// Provides mock data to the UserController.
 class MockUserDataProvider: UserDataProvider {
     enum Status {
         case loggedIn
         case loggedOut
     }
 
+    /// If `true`, all `ResultHandler` completions will contain an error. If `false`, valid data will be returned.
     var shouldFail: Bool
+    /// How long asynchronous method calls will wait to call the `completion` handler.
     var waitTime: Double
+    /// If `true`, any bearer token returned from Okta and saved in the keychain will not be removed when logging out. If `false`, logging out will remove any token in the keychain.
     var testing: Bool
 
+    /// The user that will be provided on successful login.
     var user = User.placeholder()
+    /// Whether the mock provider is "logged in" or "out"
     var status = Status.loggedOut
 
+    /// Initialize a new mock provider for user data.
+    /// - Parameters:
+    ///   - shouldFail: If `true`, all `ResultHandler` completions will contain an error. If `false`, valid data will be returned. Defaults to `false`.
+    ///   - testing: If `true`, any bearer token returned from Okta and saved in the keychain will not be removed when logging out. If `false`, logging out will remove any token in the keychain. Defaults to `false`.
+    ///   - waitTime: How long asynchronous method calls will wait to call the `completion` handler. Defaults to `0.2`.
     init(shouldFail: Bool = false, testing: Bool = false, waitTime: Double = 0.2) {
         self.shouldFail = shouldFail
         self.waitTime = waitTime
@@ -48,7 +59,7 @@ class MockUserDataProvider: UserDataProvider {
         completion: @escaping ResultHandler<User>
     ) {
         dispatch { [weak self] in
-            guard let self = self, !self.shouldFail
+            guard let self = self, !self.shouldFail, self.status == .loggedIn
                 else { return completion(.mockFailure()) }
             let newUser = User(
                 id: input.id,
@@ -75,6 +86,7 @@ class MockUserDataProvider: UserDataProvider {
             guard
                 let self = self,
                 !self.shouldFail,
+                self.status == .loggedIn,
                 let oldProperty = self.user.properties?.first(where: { $0.id == info.id })
                 else { return completion(.mockFailure()) }
             completion(.success(oldProperty.modifiedFromEditableInfo(info)))
@@ -98,6 +110,7 @@ class MockUserDataProvider: UserDataProvider {
 // MARK: - Mock Models
 
 extension User {
+    /// Returns a mock user for testing purposes. Not for live use in production.
     static func placeholder() -> User {
         User(
             id: "0010",
@@ -114,6 +127,7 @@ extension User {
 }
 
 extension Address {
+    /// A mock property address for testing purposes. Not for live use in production.
     static let blepAddress = Address(
         address1: "999 Main St",
         address2: "Unit 8",
@@ -126,6 +140,7 @@ extension Address {
 }
 
 extension Property {
+    /// A mock property for testing purposes. Not for live use in production.
     static let bobblyInn = Property(
         id: "3498",
         name: "Bobbly Inn",
@@ -155,6 +170,7 @@ extension Property {
             formattedAddress: nil),
         shippingNote: "Blep",
         notes: "bloop")
+    /// A mock property for testing purposes. Not for live use in production.
     static let blepBnB = Property(
         id: "9377",
         name: "Blep Bed & Breakfast",
@@ -171,6 +187,7 @@ extension Property {
 }
 
 extension Array where Element == Property {
+    /// Returns an array with two mock properties. Not for use in production.
     static func placeholders() -> [Property] { [.bobblyInn, .blepBnB] }
 }
 
