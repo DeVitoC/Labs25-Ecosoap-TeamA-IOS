@@ -76,6 +76,7 @@
 		0445F05024EDEA7F00A0A665 /* ESBCircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */; };
 		047B897F251121E500AB10D3 /* CartonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B897D251121E500AB10D3 /* CartonCollectionViewCell.swift */; };
 		047B8980251121E500AB10D3 /* CartonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047B897E251121E500AB10D3 /* CartonCollectionViewCell.xib */; };
+		047B89822513BA0900AB10D3 /* PropertySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */; };
 		049379A524EAE7140084051B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A424EAE7140084051B /* Images.swift */; };
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
@@ -261,6 +262,7 @@
 		0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBCircularImageView.swift; sourceTree = "<group>"; };
 		047B897D251121E500AB10D3 /* CartonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartonCollectionViewCell.swift; sourceTree = "<group>"; };
 		047B897E251121E500AB10D3 /* CartonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartonCollectionViewCell.xib; sourceTree = "<group>"; };
+		047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectionViewController.swift; sourceTree = "<group>"; };
 		049379A424EAE7140084051B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -515,6 +517,7 @@
 				993B15CD24F4575500529517 /* CursorlessTextField.swift */,
 				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
 				999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */,
+				047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -1137,6 +1140,7 @@
 				999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */,
 				04C91E282509D04A005ED433 /* ESBTextField.swift in Sources */,
 				99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */,
+				047B89822513BA0900AB10D3 /* PropertySelectionViewController.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
 				99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
