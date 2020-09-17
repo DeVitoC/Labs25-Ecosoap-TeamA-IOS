@@ -59,7 +59,7 @@ class MockUserDataProvider: UserDataProvider {
         completion: @escaping ResultHandler<User>
     ) {
         dispatch { [weak self] in
-            guard let self = self, !self.shouldFail, self.status == .loggedIn
+            guard let self = self, !self.shouldFail
                 else { return completion(.mockFailure()) }
             let newUser = User(
                 id: input.id,
@@ -86,7 +86,6 @@ class MockUserDataProvider: UserDataProvider {
             guard
                 let self = self,
                 !self.shouldFail,
-                self.status == .loggedIn,
                 let oldProperty = self.user.properties?.first(where: { $0.id == info.id })
                 else { return completion(.mockFailure()) }
             completion(.success(oldProperty.modifiedFromEditableInfo(info)))
