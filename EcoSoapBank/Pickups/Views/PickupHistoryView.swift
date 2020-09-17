@@ -30,20 +30,19 @@ struct PickupHistoryView: View {
     }
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(pickupController.pickups) { pickup in
-                    PickupHistoryCell(pickup: pickup, statusWidth: self.$statusWidth)
-                }
+        List {
+            ForEach(pickupController.pickups) { pickup in
+                PickupHistoryCell(pickup: pickup, statusWidth: self.$statusWidth)
             }
-            .pullToRefresh(isShowing: $refreshing, onRefresh: refreshPickups)
-            .errorAlert($error)
-            .navigationBarTitle("Pickup History", displayMode: .inline)
-            .navigationBarItems(trailing: Button(
+        }
+        .pullToRefresh(isShowing: $refreshing, onRefresh: refreshPickups)
+        .errorAlert($error)
+        .navigationBarTitle("Pickup History", displayMode: .inline)
+        .navigationBarItems(
+            trailing: Button(
                 action: schedulePickup,
                 label: newPickupButton))
-            .listStyle(PlainListStyle())
-        }
+        .listStyle(PlainListStyle())
     }
 
     private func newPickupButton() -> some View {

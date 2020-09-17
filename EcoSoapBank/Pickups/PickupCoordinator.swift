@@ -15,10 +15,11 @@ class PickupCoordinator: FlowCoordinator {
     private let pickupController: PickupController
     private(set) var user: User
 
-    private(set) lazy var rootVC: UIViewController = UIHostingController(
-        rootView: PickupHistoryView(
-            pickupController: pickupController,
-            schedulePickup: { [weak self] in self?.scheduleNewPickup() }))
+    private(set) lazy var rootVC = UINavigationController(
+        rootViewController: UIHostingController(
+            rootView: PickupHistoryView(
+                pickupController: pickupController,
+                schedulePickup: { [weak self] in self?.scheduleNewPickup() })))
 
     private var cancellables = Set<AnyCancellable>()
     private var scheduleVC: SchedulePickupViewController?
