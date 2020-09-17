@@ -207,6 +207,46 @@ class ProfileTests: XCTestCase {
         XCTAssertNotEqual(oldProperty, newProperty)
         XCTAssertEqual(EditablePropertyInfo(newProperty), info)
     }
+
+    func testPropertyUpdateFailed() {
+        userController = UserController(
+            dataLoader: MockUserDataProvider(
+                shouldFail: true,
+                testing: true,
+                waitTime: 0.1))
+        let propInfo = configure(EditablePropertyInfo(user.properties?.first)) {
+            $0.name = "BLAHHHHHH"
+        }
+
+        // user controller failure
+        let controllerCompletedPropertyUpdate = expectation(description: "Returned from closure")
+        userController.updateProperty(with: propInfo) { result in
+            if case .success = result {
+                XCTFail("Should not be successful")
+            }
+            controllerCompletedPropertyUpdate.fulfill()
+        }
+
+        // view model failure
+        let vm = ProfileViewModel(user: user,
+                                  userController: userController,
+                                  delegate: nil)
+        let vmHasError = expectation(description: "View model has an error")
+
+        vm.$error
+            .compactMap { $0 }
+            .sink { _ in
+                vmHasError.fulfill()
+            }.store(in: &bag)
+        vm.savePropertyChanges(propInfo) {
+            XCTFail("Call should not succeed")
+        }
+
+        wait(for: [
+            controllerCompletedPropertyUpdate,
+            vmHasError
+        ], timeout: 5)
+    }
 }
 
 // MARK: - Helpers
