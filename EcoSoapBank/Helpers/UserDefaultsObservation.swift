@@ -51,7 +51,7 @@ class UserDefaultsObservation: NSObject {
 
 extension UserDefaultsObservation: Cancellable {
     func cancel() {
-        UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue, context: nil)
+        UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue, context: &Self.context)
     }
 
     func erasedToAnyCancellable() -> AnyCancellable {
