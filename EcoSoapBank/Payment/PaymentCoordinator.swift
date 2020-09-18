@@ -10,14 +10,21 @@ import UIKit
 
 /// Coordinator that manages the initialization of the PaymentHistoryViewController
 class PaymentCoordinator: FlowCoordinator {
-    
+    private(set) lazy var rootVC = UINavigationController(rootViewController: paymentVC)
+    private lazy var paymentVC = configure(PaymentHistoryViewController()) {
+        $0.navigationItem.setRightBarButton(
+            UIBarButtonItem(
+                image: .creditCard,
+                style: .plain,
+                target: self,
+                action: #selector(makePaymentTapped(_:))),
+            animated: true)
+    }
+
     init(user: User, dataProvider: PaymentDataProvider) {
         paymentVC.paymentController = PaymentController(user: user,
                                                         dataProvider: dataProvider)
     }
-
-    let rootVC = UINavigationController()
-    let paymentVC = PaymentHistoryViewController()
 
     /// Starts the PaymentHistoryViewController
     func start() {
@@ -27,5 +34,9 @@ class PaymentCoordinator: FlowCoordinator {
         )
         rootVC.tabBarItem = UITabBarItem(title: "Payments", image: payment, tag: 0)
         rootVC.pushViewController(paymentVC, animated: false)
+    }
+
+    @objc private func makePaymentTapped(_ sender: Any?) {
+
     }
 }
