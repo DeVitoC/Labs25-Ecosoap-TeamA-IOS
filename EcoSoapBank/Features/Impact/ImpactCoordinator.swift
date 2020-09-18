@@ -11,11 +11,12 @@ import UIKit
 class ImpactCoordinator: FlowCoordinator {
     
     init(user: User, dataProvider: ImpactDataProvider) {
-        impactVC.impactController = ImpactController(user: user, dataProvider: dataProvider)
+        let impactController = ImpactController(user: user, dataProvider: dataProvider)
+        impactVC = ImpactViewController(impactController: impactController)
     }
     
     let rootVC = UINavigationController()
-    let impactVC = ImpactViewController()
+    let impactVC: ImpactViewController
     
     func start() {
         let globe = UIImage(

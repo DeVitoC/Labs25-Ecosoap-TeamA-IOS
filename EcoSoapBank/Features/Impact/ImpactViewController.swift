@@ -13,7 +13,7 @@ class ImpactViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    var impactController: ImpactController?
+    var impactController: ImpactController
     
     // MARK: - Private Properties
     
@@ -22,10 +22,23 @@ class ImpactViewController: UIViewController {
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
-    private var propertySelector = PropertySelectionViewController()
+    private lazy var propertySelector = PropertySelectionViewController(user: impactController.user)
     private var propertySelectorHeight: NSLayoutConstraint?
     
     private var massUnitObserver: UserDefaultsObservation?
+    
+    // MARK: - Init
+    
+    @available(*, unavailable, message: "Use init(impactController:)")
+    required init?(coder: NSCoder) {
+        fatalError("`init(coder:)` not implemented. Use `init(user:)`.")
+    }
+    
+    init(impactController: ImpactController) {
+        self.impactController = impactController
+        
+        super.init(nibName: nil, bundle: nil)
+    }
     
     // MARK: - View Lifecycle
     
@@ -103,7 +116,6 @@ class ImpactViewController: UIViewController {
     }
 
     @objc private func refreshImpactStats(_ sender: Any? = nil) {
-        guard let impactController = impactController else { return }
         collectionView.refreshControl?.beginRefreshing()
 
         impactController.getImpactStats { [weak self] error in
@@ -125,7 +137,7 @@ class ImpactViewController: UIViewController {
 extension ImpactViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        impactController?.viewModels.count ?? 0
+        impactController.viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -134,7 +146,7 @@ extension ImpactViewController: UICollectionViewDataSource {
         }
         
         cell.alignment = indexPath.row % 2 == 0 ? .leading : .trailing
-        cell.viewModel = impactController?.viewModels[indexPath.row]
+        cell.viewModel = impactController.viewModels[indexPath.row]
        
         return cell
     }

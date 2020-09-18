@@ -8,14 +8,43 @@
 
 import UIKit
 
+
+/// Used to allow displaying/selecting a single `Property` or `AllProperties`
+private protocol PropertyDisplayable { var name: String { get } }
+private struct AllProperties: PropertyDisplayable { let name = "All Properties" }
+
+extension Property: PropertyDisplayable {}
+
 class PropertySelectionViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    var propertySelectionController: PropertySelectionController?
+    var user: User
     
-    var properties = ["Blep Bed and Breakfast", "Tranquil Tavern", "Serene Stays"]
-    var selectedProperty: String?
+    /// Calculates the properties to display, moving the selected property to the top (if there is one)
+    /// and adding AllProperties to allow for selecting all properties (which sets the selectedProperty
+    /// user default to nil).
+    private var properties: [PropertyDisplayable] {
+        var properties = user.properties ?? []
+        
+        if let selectedProperty = selectedProperty,
+            let index = properties.firstIndex(of: selectedProperty) {
+            properties.move(fromOffsets: [index], toOffset: 0)
+            
+            return properties + [AllProperties()]
+        } else {
+            return [AllProperties()] + properties
+        }
+    }
+    
+    var selectedProperty: Property? {
+        get { UserDefaults.standard.selectedProperty(forUser: user) }
+        set { UserDefaults.standard.setSelectedProperty(newValue, forUser: user) }
+    }
+    
+    /// Used by containing view controllers to determine duration of expansion/contraction
+    /// animation of the height constraint for the property selector (child vc). This animation
+    /// should take place in `preferredContentSizeDidChange`.
     let expansionDuration: TimeInterval = 0.3
     
     // MARK: - Private Properties
@@ -23,6 +52,7 @@ class PropertySelectionViewController: UIViewController {
     private let cellHeight: CGFloat = 32
     
     private var tableView = UITableView()
+    private var dataSource: UITableViewDiffableDataSource<Int, String>?
     
     private var isExpanded = false {
         didSet {
@@ -36,41 +66,88 @@ class PropertySelectionViewController: UIViewController {
         }
     }
     
+    // MARK: - Init
+    
+    @available(*, unavailable, message: "Use init(user:)")
+    required init?(coder: NSCoder) {
+        fatalError("`init(coder:)` not implemented. Use `init(user:)`.")
+    }
+    
+    init(user: User) {
+        self.user = user
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .codGrey
         
         addShadows()
         setUpTableView()
         
-        selectedProperty = properties.first
         isExpanded = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.isExpanded = false
         }
     }
     
-    
     // MARK: - Private Methods
     
     private func setUpTableView() {
-         tableView.register(PropertySelectionCell.self, forCellReuseIdentifier: NSStringFromClass(PropertySelectionCell.self))
-         
-         tableView.dataSource = self
-         tableView.delegate = self
-         tableView.backgroundColor = .clear
-         tableView.isScrollEnabled = false
-         
-         view.addSubviewsUsingAutolayout(tableView)
-         tableView.fillSuperview()
+        tableView.register(PropertySelectionCell.self, forCellReuseIdentifier: NSStringFromClass(PropertySelectionCell.self))
+        
+        tableView.delegate = self
+        tableView.backgroundColor = .clear
+        tableView.isScrollEnabled = false
+        
+        view.addSubviewsUsingAutolayout(tableView)
+        tableView.fillSuperview()
+        
+        setUpDataSource()
+    }
+    
+    // swiftlint:disable closure_parameter_position
+    
+    /// Sets up the diffable data source for the table view which essentially takes the place of a
+    /// traditional table view data source and the corresponding `cellForRowAtIndexPath`. Also calls
+    /// `reloadData()` in order to apply an initial snapshot.
+    private func setUpDataSource() {
+        dataSource = UITableViewDiffableDataSource<Int, String>(tableView: tableView) {
+            (tableView: UITableView, indexPath: IndexPath, itemIdentifier: String) -> UITableViewCell? in
+            
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: NSStringFromClass(PropertySelectionCell.self),
+                for: indexPath) as? PropertySelectionCell else {
+                    fatalError("Unable to cast cell as \(PropertySelectionCell.self)")
+            }
+            
+            cell.label.text = itemIdentifier
+            
+            return cell
+        }
+        tableView.dataSource = dataSource
+        
+        reloadData()
+    }
+    // swiftlint:enable closure_parameter_position
+    
+    /// Creates a new snapshot using the `properties` computed var and applies it to the data source
+    private func reloadData() {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
+
+        snapshot.appendSections([0])
+        snapshot.appendItems(properties.map { $0.name })
+        
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     private func addShadows() {
@@ -106,26 +183,6 @@ class PropertySelectionViewController: UIViewController {
     }
 }
 
-// MARK: - Table View Data Source
-
-extension PropertySelectionViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        properties.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: NSStringFromClass(PropertySelectionCell.self),
-            for: indexPath) as? PropertySelectionCell else {
-                fatalError("Unable to cast cell as \(PropertySelectionCell.self)")
-        }
-        
-        cell.label.text = properties[indexPath.row]
-
-        return cell
-    }
-}
-
 extension PropertySelectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         cellHeight
@@ -135,14 +192,17 @@ extension PropertySelectionViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if !isExpanded {
+            // Selection controller is collapsed, so expand it to allow selection
             isExpanded = true
         } else {
-            let property = properties.remove(at: indexPath.row)
-            properties.insert(property, at: 0)
-            tableView.moveRow(at: indexPath, to: IndexPath(row: 0, section: 0))
+            if let property = properties[indexPath.row] as? Property {
+                selectedProperty = property
+            } else {
+                selectedProperty = nil // All Properties selected
+            }
             
-            selectedProperty = property
-    
+            reloadData()
+            
             isExpanded = false
         }
     }
