@@ -116,16 +116,7 @@ extension UserDefaults {
     }
 
     func setSelectedProperty(_ property: Property?, forUser user: User) {
-        var propertyIDsByUserID = Self.selectedPropertyIDsByUser ?? [:]
-
-        if let property = property {
-            propertyIDsByUserID[user.id] = property.id
-            Self.selectedPropertyIDsByUser = propertyIDsByUserID
-        } else {
-            propertyIDsByUserID.removeValue(forKey: user.id)
-            Self.selectedPropertyIDsByUser = propertyIDsByUserID
-        }
-        
+        Self.selectedPropertyIDsByUser?[user.id] = property?.id
         UserDefaults.propertySelectionByUserID.send([user.id: PropertySelection(property)])
     }
 }
