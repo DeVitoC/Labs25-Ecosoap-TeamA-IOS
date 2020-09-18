@@ -32,7 +32,7 @@ class ImpactViewController: UIViewController {
     
     @available(*, unavailable, message: "Use init(impactController:)")
     required init?(coder: NSCoder) {
-        fatalError("`init(coder:)` not implemented. Use `init(user:)`.")
+        fatalError("`init(coder:)` not implemented. Use `init(impactController:)`.")
     }
     
     init(impactController: ImpactController) {
