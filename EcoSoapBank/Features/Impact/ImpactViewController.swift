@@ -26,6 +26,7 @@ class ImpactViewController: UIViewController {
     private var propertySelectorHeight: NSLayoutConstraint?
     
     private var massUnitObserver: UserDefaultsObservation?
+    private var selectedPropertyObserver: UserDefaultsObservation?
     
     // MARK: - Init
     
@@ -50,6 +51,9 @@ class ImpactViewController: UIViewController {
         
         massUnitObserver = UserDefaults.$massUnit.observe { [weak self] _, _ in
             self?.collectionView.reloadData()
+        }
+        selectedPropertyObserver = UserDefaults.$selectedPropertyIDsByUser.observe { [weak self] _, _ in
+            self?.refreshImpactStats()
         }
                 
         setUpCollectionView()
