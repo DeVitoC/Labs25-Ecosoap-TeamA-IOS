@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 struct Payment: Decodable {
     let id: String
     let invoiceCode: String?
@@ -21,12 +22,24 @@ struct Payment: Decodable {
     let paymentMethod: PaymentMethod
 }
 
+
+struct NextPaymentDue: Decodable {
+    let invoiceCode: String?
+    let invoice: URL?
+    let amountDue: Int
+    let invoicePeriodStartDate: Date?
+    let invoicePeriodEndDate: Date?
+    let dueDate: Date?
+}
+
+
 struct PaymentInput: Encodable {
     let amountPaid: Int
     let date: Date
     let paymentMethod: PaymentMethod
     let hospitalityContractId: String
 }
+
 
 enum PaymentMethod: String, Codable, CaseIterable, CustomStringConvertible {
     case ach = "ACH"
