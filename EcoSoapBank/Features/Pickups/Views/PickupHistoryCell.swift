@@ -30,7 +30,7 @@ struct PickupHistoryCell: View {
     }
 
     var body: some View {
-        Button(action: { onTap(pickup) }, label: {
+        Button(action: { self.onTap(self.pickup) }, label: {
             VStack(alignment: .leading, spacing: 16) {
                 // Date
                 VStack(alignment: .leading) {
