@@ -26,7 +26,7 @@ extension Image {
 
 extension Color {
     static var barButtonTintColor: Color {
-        Color(UIBarButtonItem.appearance().tintColor ?? UIButton.appearance().tintColor)
+        Color(.barButtonTint)
     }
 }
 

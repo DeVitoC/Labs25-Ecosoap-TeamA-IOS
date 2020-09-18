@@ -50,7 +50,7 @@ class AppFlowCoordinator: FlowCoordinator {
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
 
-        if Keychain.Okta.isLoggedIn {
+        if Keychain.Okta.isLoggedIn || skipLogin {
             tabBarController.present(
                 LoadingViewController(loadingText: "Logging in..."),
                 animated: false,
@@ -138,8 +138,3 @@ extension AppFlowCoordinator: ProfileDelegate {
         loginCoord.start()
     }
 }
-
-
-// MARK: - Use Mock
-
-let useMock: Bool = true

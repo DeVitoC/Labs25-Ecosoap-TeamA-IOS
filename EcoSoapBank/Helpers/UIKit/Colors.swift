@@ -14,6 +14,9 @@ extension UIColor {
     static let codGrey = UIColor(named: "CodGrey")!
 
     static let esbSeparator = UIColor.downyBlue.orAdjustingBrightness(by: -0.3, defaultLight: false)
+
+    static let historyCellBackground = UIColor.systemGray6
+    static let barButtonTint = UIColor.white
 }
 
 // MARK: - RGBA / HSBA

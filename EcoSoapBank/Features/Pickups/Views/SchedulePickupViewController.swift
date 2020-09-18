@@ -36,7 +36,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     
     private lazy var dataSource = DataSource(
         tableView: tableView,
-        cellProvider: cell(for:at:with:))
+        cellProvider: { [weak self] in self?.cell(for: $0, at: $1, with: $2) })
 
     private lazy var addCartonButton = configure(UIButton(type: .system)) {
         $0.setPreferredSymbolConfiguration(
@@ -63,6 +63,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.text = viewModel.selectedProperty.name
         $0.font = .preferredMuli(forTextStyle: .body)
         $0.adjustsFontForContentSizeCategory = true
+        $0.setContentHuggingPriority(.defaultHigh + 1, for: .vertical)
     }
     private lazy var propertyPicker = InputPickerView(
         data: viewModel.properties,

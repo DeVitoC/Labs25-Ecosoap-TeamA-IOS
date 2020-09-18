@@ -18,15 +18,19 @@ struct PickupHistoryCell: View {
 
     @Binding var statusWidth: CGFloat?
 
-    init(pickup: Pickup, statusWidth: Binding<CGFloat?>) {
+    private var onTap: (Pickup) -> Void
+
+    init(pickup: Pickup,
+         statusWidth: Binding<CGFloat?>,
+         onPickupTap: @escaping (Pickup) -> Void
+    ) {
         self.pickup = pickup
         self._statusWidth = statusWidth
+        self.onTap = onPickupTap
     }
 
     var body: some View {
-        NavigationLink(
-            destination: PickupDetailViewController.Representable(pickup: pickup)
-        ) {
+        Button(action: { onTap(pickup) }, label: {
             VStack(alignment: .leading, spacing: 16) {
                 // Date
                 VStack(alignment: .leading) {
@@ -56,7 +60,7 @@ struct PickupHistoryCell: View {
                             } else {
                                 self.statusWidth = $0
                             }
-                    }).frame(width: statusWidth)
+                        }).frame(width: statusWidth)
 
                     // Cartons
                     HStack(spacing: 4) {
@@ -71,11 +75,11 @@ struct PickupHistoryCell: View {
                         Spacer()
                     }
                 }
-            }.padding(.top, 6)
-                .padding(.bottom, 10)
-                .padding(.trailing, 0)
-        }
+            }
+            .padding(EdgeInsets(top: 6, leading: 0, bottom: 10, trailing: 0))
+        })
         .font(Font(UIFont.preferredMuli(forTextStyle: .body)))
+        .listRowBackground(Color(.historyCellBackground))
     }
 }
 
@@ -132,8 +136,11 @@ extension PickupHistoryCell {
 
 struct PickupListItem_Previews: PreviewProvider {
     static var previews: some View {
-        PickupHistoryCell(pickup: .random(), statusWidth: .constant(nil))
-            .previewLayout(.sizeThatFits)
-            .padding()
+        PickupHistoryCell(
+            pickup: .random(),
+            statusWidth: .constant(nil),
+            onPickupTap: { _ in }
+        ).previewLayout(.sizeThatFits)
+        .padding()
     }
 }

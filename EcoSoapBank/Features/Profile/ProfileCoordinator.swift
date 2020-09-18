@@ -11,7 +11,9 @@ import SwiftUI
 import Combine
 
 
+/// The object to handle logging out on behalf of the `Profile` module.
 protocol ProfileDelegate: AnyObject {
+    /// Log the user out and enable logging in as a different user.
     func logOut()
 }
 
