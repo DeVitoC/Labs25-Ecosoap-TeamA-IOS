@@ -93,6 +93,12 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
         performOperation(.paymentsByPropertyID(id: propertyID), completion: completion)
     }
 
+    func fetchNextPayment(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<NextPaymentDue>) {
+        performOperation(.nextPaymentByPropertyID(id: propertyID),
+                         completion: completion,
+                         decodingOptions: [.isNotNested: true])
+    }
+
     func makePayment(_ paymentInput: Payment, completion: @escaping ResultHandler<Payment>) {
         completion(.failure(GraphQLError.unimplemented))
     }
