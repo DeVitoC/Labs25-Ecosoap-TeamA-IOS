@@ -42,7 +42,6 @@ class CartonView: UIView, ESBBordered {
     
     override func layoutSubviews() {
         if let percentFull = percentFull {
-            print(percentFull)
             fillRect.frame = bounds.offsetBy(
                 dx: 0,
                 dy: (CGFloat(100 - percentFull) / 100 * frame.height)

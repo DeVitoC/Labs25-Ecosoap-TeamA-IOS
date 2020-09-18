@@ -13,7 +13,6 @@ import KeychainAccess
 
 
 protocol UserDataProvider {
-
     /// Logs the user in using the Bearer token from Okta.
     /// - Parameter completion: A closure that takes in a `Result<User, Error>`, called when login is completed.
     func logIn(_ completion: @escaping ResultHandler<User>)
