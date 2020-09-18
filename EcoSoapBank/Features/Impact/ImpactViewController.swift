@@ -15,12 +15,12 @@ class ImpactViewController: UIViewController {
     
     var impactController: ImpactController
     
-    // MARK: - Private Properties
-    
-    private var collectionView = UICollectionView(
+    var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
+    
+    // MARK: - Private Properties
     
     private lazy var propertySelector = PropertySelectionViewController(user: impactController.user)
     private var propertySelectorHeight: NSLayoutConstraint?

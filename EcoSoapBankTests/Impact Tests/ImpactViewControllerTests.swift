@@ -17,8 +17,8 @@ class ImpactViewControllerTest: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        impactVC = ImpactViewController()
-        impactVC.impactController = ImpactController(user: .placeholder(), dataProvider: MockImpactProvider())
+        let impactController = ImpactController(user: .placeholder(), dataProvider: MockImpactProvider())
+        impactVC = ImpactViewController(impactController: impactController)
         // load view hierarchy
         _ = impactVC.view
     }
