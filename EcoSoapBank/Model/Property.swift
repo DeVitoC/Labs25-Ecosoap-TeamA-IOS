@@ -87,7 +87,11 @@ enum PropertySelection: Hashable {
     }
 }
 
+
 extension UserDefaults {
+    
+    @UserDefault(Key("selectedPropertyIDsByUser")) static var selectedPropertyIDsByUser: [String: String]?
+    
     private static let propertySelectionByUserID = PassthroughSubject<[String: PropertySelection], Never>()
 
     func selectedPropertyPublisher(forUser user: User) -> AnyPublisher<PropertySelection, Never> {
@@ -98,16 +102,11 @@ extension UserDefaults {
                 } else { return nil }
             }).eraseToAnyPublisher()
     }
-
-    var selectedPropertyIDsByUser: [String: String]? {
-        get { UserDefaults.standard.value(forKey: .selectedPropertyIDsByUserKey) as? [String: String] }
-        set { UserDefaults.standard.set(newValue, forKey: .selectedPropertyIDsByUserKey) }
-    }
     
     func selectedProperty(forUser user: User) -> Property? {
         guard
-            let propertyIDsByUserID = dictionary(forKey: .selectedPropertyIDsByUserKey),
-            let propertyID = propertyIDsByUserID[user.id] as? String
+            let propertyIDsByUserID = Self.selectedPropertyIDsByUser,
+            let propertyID = propertyIDsByUserID[user.id]
             else { return nil }
         return user.properties?.first(where: { $0.id == propertyID })
     }
@@ -117,20 +116,18 @@ extension UserDefaults {
     }
 
     func setSelectedProperty(_ property: Property?, forUser user: User) {
-        var propertyIDsByUserID = dictionary(forKey: .selectedPropertyIDsByUserKey) ?? [:]
+        var propertyIDsByUserID = Self.selectedPropertyIDsByUser ?? [:]
 
         if let property = property {
             propertyIDsByUserID[user.id] = property.id
-            set(propertyIDsByUserID, forKey: .selectedPropertyIDsByUserKey)
+            Self.selectedPropertyIDsByUser = propertyIDsByUserID
         } else {
-            removeObject(forKey: .selectedPropertyIDsByUserKey)
+            propertyIDsByUserID.removeValue(forKey: user.id)
+            Self.selectedPropertyIDsByUser = propertyIDsByUserID
         }
+        
         UserDefaults.propertySelectionByUserID.send([user.id: PropertySelection(property)])
     }
-}
-
-extension String {
-    static let selectedPropertyIDsByUserKey = "selectedPropertyIDsByUser"
 }
 
 // MARK: - Editable Property Info
