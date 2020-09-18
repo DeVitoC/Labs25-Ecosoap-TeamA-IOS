@@ -30,7 +30,7 @@ class PropertySelectionViewController: UIViewController {
         if let selectedProperty = selectedProperty,
             let index = properties.firstIndex(of: selectedProperty) {
             properties.move(fromOffsets: [index], toOffset: 0)
-            
+  
             return properties + [AllProperties()]
         } else {
             return [AllProperties()] + properties
@@ -194,6 +194,7 @@ extension PropertySelectionViewController: UITableViewDelegate {
         if !isExpanded {
             // Selection controller is collapsed, so expand it to allow selection
             isExpanded = true
+            tableView.isScrollEnabled = true
         } else {
             if let property = properties[indexPath.row] as? Property {
                 selectedProperty = property
@@ -203,6 +204,8 @@ extension PropertySelectionViewController: UITableViewDelegate {
             
             reloadData()
             
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            tableView.isScrollEnabled = false
             isExpanded = false
         }
     }
