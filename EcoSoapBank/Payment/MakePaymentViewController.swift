@@ -1,5 +1,5 @@
 //
-//  CheckoutViewController.swift
+//  MakePaymentViewController.swift
 //  EcoSoapBank
 //
 //  Created by Jon Bash on 2020-08-28.
@@ -10,7 +10,7 @@ import UIKit
 import Stripe
 
 
-class CheckoutViewController: UIViewController {
+class MakePaymentViewController: UIViewController {
 
     private let stripeController: StripeController
     private let paymentContext: STPPaymentContext
@@ -89,7 +89,7 @@ class CheckoutViewController: UIViewController {
 
 // MARK: - Actions
 
-extension CheckoutViewController {
+extension MakePaymentViewController {
     @objc func choosePayment(_ sender: Any?) {
         paymentContext.presentPaymentOptionsViewController()
     }
@@ -102,7 +102,7 @@ extension CheckoutViewController {
 
 // MARK: - Payment Context Delegate
 
-extension CheckoutViewController: STPPaymentContextDelegate {
+extension MakePaymentViewController: STPPaymentContextDelegate {
     func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
         if paymentContext.loading {
             present(LoadingViewController(), animated: true, completion: nil)

@@ -20,10 +20,12 @@ class PaymentCoordinator: FlowCoordinator {
                 action: #selector(makePaymentTapped(_:))),
             animated: true)
     }
+    let paymentController: PaymentController
 
     init(user: User, dataProvider: PaymentDataProvider) {
-        paymentVC.paymentController = PaymentController(user: user,
-                                                        dataProvider: dataProvider)
+        self.paymentController = PaymentController(user: user,
+                                                   dataProvider: dataProvider)
+        paymentVC.paymentController = paymentController
     }
 
     /// Starts the PaymentHistoryViewController
@@ -33,10 +35,33 @@ class PaymentCoordinator: FlowCoordinator {
             withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular)
         )
         rootVC.tabBarItem = UITabBarItem(title: "Payments", image: payment, tag: 0)
-        rootVC.pushViewController(paymentVC, animated: false)
     }
 
     @objc private func makePaymentTapped(_ sender: Any?) {
-
+        guard let property = UserDefaults.standard.selectedProperty(forUser: paymentController.user) else {
+            return rootVC.presentAlert(
+                for: ErrorMessage(
+                    title: "Cannot get next payment for all properties.",
+                    message: "Please select a single property and try again."))
+        }
+        rootVC.present(LoadingViewController(), animated: true) { [weak self] in
+            self?.paymentController.fetchNextPayment(forPropertyID: property.id) { result in
+                self?.rootVC.dismiss(animated: true, completion: {
+                    guard let self = self else { return }
+                    switch result {
+                    case .success(let payment):
+                        self.rootVC.present(
+                            MakePaymentViewController(
+                                payment: payment,
+                                paymentController: self.paymentController,
+                                stripeController: nil),
+                            animated: true,
+                            completion: nil)
+                    case .failure(let error):
+                        self.rootVC.presentAlert(for: error)
+                    }
+                })
+            }
+        }
     }
 }
