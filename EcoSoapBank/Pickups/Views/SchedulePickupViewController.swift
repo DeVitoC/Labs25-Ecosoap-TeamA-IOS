@@ -63,6 +63,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.text = viewModel.selectedProperty.name
         $0.font = .preferredMuli(forTextStyle: .body)
         $0.adjustsFontForContentSizeCategory = true
+        $0.setContentHuggingPriority(.defaultHigh + 1, for: .vertical)
     }
     private lazy var propertyPicker = InputPickerView(
         data: viewModel.properties,
