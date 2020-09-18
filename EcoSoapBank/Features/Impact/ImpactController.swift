@@ -15,15 +15,18 @@ protocol ImpactDataProvider {
 }
 
 class ImpactController {
-    private(set) var viewModels: [ImpactCellViewModel] = []
     
-    private let dataProvider: ImpactDataProvider
-    private let user: User
-
-    var viewingProperty: Property? {
+    // MARK: - Public Properties
+    
+    let user: User
+    let dataProvider: ImpactDataProvider
+    private(set) var viewModels: [ImpactCellViewModel] = []
+    var selectedProperty: Property? {
         UserDefaults.standard.selectedProperty(forUser: user)
     }
-
+    
+    // MARK: - Private Properties
+    
     private var cancellables = Set<AnyCancellable>()
     
     /// Gets the latest impact stats from the data provider, which in
@@ -32,7 +35,7 @@ class ImpactController {
     /// either an error if something went wrong, or nil if the impact
     /// stats were properly fetched and the view models updated.
     func getImpactStats(_ completion: @escaping (Error?) -> Void) {
-        guard let property = viewingProperty else {
+        guard let property = selectedProperty else {
             return getImpactStatsForAllProperties(completion)
         }
         dataProvider.fetchImpactStats(forPropertyID: property.id) { [weak self] result in
