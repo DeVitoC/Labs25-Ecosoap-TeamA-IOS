@@ -10,8 +10,8 @@ import UIKit
 
 /// Coordinator that manages the initialization of the PaymentHistoryViewController
 class PaymentCoordinator: FlowCoordinator {
-    private(set) lazy var rootVC = UINavigationController(rootViewController: paymentVC)
-    private lazy var paymentVC = configure(PaymentHistoryViewController()) {
+    private(set) lazy var rootVC = UINavigationController(rootViewController: paymentHistoryVC)
+    private lazy var paymentHistoryVC = configure(PaymentHistoryViewController()) {
         $0.navigationItem.setRightBarButton(
             UIBarButtonItem(
                 image: .creditCard,
@@ -20,12 +20,14 @@ class PaymentCoordinator: FlowCoordinator {
                 action: #selector(makePaymentTapped(_:))),
             animated: true)
     }
+    private var makePaymentNav: UINavigationController?
+
     let paymentController: PaymentController
 
     init(user: User, dataProvider: PaymentDataProvider) {
         self.paymentController = PaymentController(user: user,
                                                    dataProvider: dataProvider)
-        paymentVC.paymentController = paymentController
+        paymentHistoryVC.paymentController = paymentController
     }
 
     /// Starts the PaymentHistoryViewController
@@ -44,24 +46,38 @@ class PaymentCoordinator: FlowCoordinator {
                     title: "Cannot get next payment for all properties.",
                     message: "Please select a single property and try again."))
         }
-        rootVC.present(LoadingViewController(), animated: true) { [weak self] in
+        rootVC.present(LoadingViewController(loadingText: "Loading payment"), animated: true) { [weak self] in
             self?.paymentController.fetchNextPayment(forPropertyID: property.id) { result in
-                self?.rootVC.dismiss(animated: true, completion: {
-                    guard let self = self else { return }
-                    switch result {
-                    case .success(let payment):
-                        self.rootVC.present(
-                            MakePaymentViewController(
+                DispatchQueue.main.async {
+                    self?.rootVC.dismiss(animated: true, completion: {
+                        guard let self = self else { return }
+                        switch result {
+                        case .success(let payment):
+                            let makePaymentVC = MakePaymentViewController(
                                 payment: payment,
                                 paymentController: self.paymentController,
-                                stripeController: nil),
-                            animated: true,
-                            completion: nil)
-                    case .failure(let error):
-                        self.rootVC.presentAlert(for: error)
-                    }
-                })
+                                stripeController: nil)
+                            makePaymentVC.delegate = self
+                            self.makePaymentNav = UINavigationController(
+                                rootViewController: makePaymentVC)
+                            self.makePaymentNav!.modalPresentationStyle = .fullScreen
+                            self.rootVC.present(
+                                self.makePaymentNav!,
+                                animated: true,
+                                completion: nil)
+                        case .failure(let error):
+                            self.rootVC.presentAlert(for: error)
+                        }
+                    })
+                }
             }
         }
+    }
+}
+
+extension PaymentCoordinator: MakePaymentDelegate {
+    func cancelPayment() {
+        guard makePaymentNav != nil else { return }
+        rootVC.dismiss(animated: true, completion: nil)
     }
 }
