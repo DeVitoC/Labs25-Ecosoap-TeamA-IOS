@@ -10,141 +10,171 @@ import UIKit
 import Stripe
 
 
+protocol MakePaymentDelegate: AnyObject {
+    func cancelPayment()
+}
+
+
 class MakePaymentViewController: UIViewController {
 
-    private let stripeController: StripeController
-    private let paymentContext: STPPaymentContext
+    private let paymentController: PaymentController
+    private let payment: NextPaymentDue
+
+    private let stripeController: StripeController?
+    private let paymentContext: STPPaymentContext?
 
     private let currencyFormatter = configure(NumberFormatter()) {
         $0.numberStyle = .currency
     }
 
+    weak var delegate: MakePaymentDelegate?
+
     // MARK: - Subviews
 
-    private let priceLabel = configure(UILabel()) {
-        //        $0.font = .muli(style: .title1)
-        $0.text = ""
+    private lazy var priceLabel = configure(UILabel()) {
+        $0.font = .preferredMuli(forTextStyle: .largeTitle)
+        $0.text = stringFromIntegerAmount(payment.amountDue)
+    }
+    private lazy var dueLabel = configure(UILabel()) {
+        $0.font = .preferredMuli(forTextStyle: .headline)
+        $0.text = "due"
+    }
+    private lazy var dueDateLabel = configure(UILabel()) {
+        $0.font = .preferredMuli(forTextStyle: .title2)
+        guard let dueDate = payment.dueDate else {
+            $0.isHidden = true
+            return
+        }
+        $0.text = DateFormatter.default.string(from: dueDate)
+    }
+    private lazy var dueStack = UIStackView(
+        axis: .horizontal,
+        alignment: .lastBaseline,
+        distribution: .fill,
+        spacing: 8,
+        arrangedSubviews: [dueLabel, dueDateLabel])
+
+    private lazy var periodLabel = configure(UILabel()) {
+        $0.font = .preferredMuli(forTextStyle: .subheadline)
+        guard let startDate = payment.invoicePeriodStartDate,
+              let endDate = payment.invoicePeriodEndDate
+        else {
+            $0.isHidden = true
+            return
+        }
+
+        let startText = DateFormatter.default.string(from: startDate)
+        let endText = DateFormatter.default.string(from: endDate)
+        $0.text = "for \(startText) — \(endText)"
+    }
+    private lazy var invoiceButton = configure(UIButton()) {
+        guard let invoiceCode = payment.invoiceCode, let url = payment.invoice else {
+            $0.isHidden = true
+            return
+        }
+        $0.tintColor = .esbGreen
+        $0.setAttributedTitle(
+            NSAttributedString(
+                string: "Invoice: " + invoiceCode,
+                attributes: [
+                    .font: UIFont.preferredMuli(forTextStyle: .body, typeface: .semiBold),
+                    .foregroundColor: UIColor.esbGreen]),
+            for: .normal)
+        $0.addTarget(self, action: #selector(openInvoice(_:)), for: .touchUpInside)
+    }
+    private lazy var makePaymentButton = configure(ESBButton()) {
+        $0.setTitle("Make payment", for: .normal)
+        $0.addTarget(self, action: #selector(makePayment(_:)), for: .touchUpInside)
     }
 
-    private let paymentOptionsButton = configure(ESBButton()) {
-        $0.setTitle("Select Payment Type", for: .normal)
-        $0.titleLabel?.font = .preferredMuli(forTextStyle: .title2)
-        $0.addTarget(self, action: #selector(choosePayment(_:)), for: .touchUpInside)
-    }
-
-    private let paymentIcon = UIImageView()
-    private let paymentLabel = configure(UILabel()) {
-        $0.font = .preferredMuli(forTextStyle: .title1)
-        $0.text = "Paying by: "
-    }
-    private lazy var paymentStack = configure(UIStackView()) {
-        $0.axis = .horizontal
-        $0.alignment = .leading
-        $0.distribution = .fill
-        $0.spacing = 8
-        $0.isHidden = true
-
-        [paymentIcon, paymentLabel].forEach($0.addArrangedSubview(_:))
-    }
-
-    private var mainStack = configure(UIStackView()) {
-        $0.axis = .vertical
-        $0.alignment = .center
-        $0.distribution = .equalSpacing
-        $0.spacing = 8
-    }
+    private lazy var mainStack = UIStackView(
+        axis: .vertical,
+        alignment: .leading,
+        distribution: .fill,
+        spacing: 8,
+        arrangedSubviews: [priceLabel, dueStack, periodLabel, invoiceButton])
 
     // MARK: - Init / Lifecycle
 
-    init(stripeController: StripeController) {
+    init(payment: NextPaymentDue,
+         paymentController: PaymentController,
+         stripeController: StripeController?
+    ) {
+        self.payment = payment
+        self.paymentController = paymentController
         self.stripeController = stripeController
-        self.paymentContext = stripeController.newPaymentContext()
+        self.paymentContext = stripeController?.newPaymentContext()
         super.init(nibName: nil, bundle: nil)
 
-        paymentContext.delegate = self
-        paymentContext.hostViewController = self
-
-
-        priceLabel.text = stringFromContextAmount()
+        //paymentContext?.delegate = self
+        paymentContext?.hostViewController = self
     }
 
-    @available(*, unavailable, message: "Use init(stripeController:)")
+    /// **Warning**: This initializer is not implemented.
+    /// Please use `init(payment:paymentController:stripeController:)`.
+    @available(*, unavailable, message: "Use init(payment:paymentController:stripeController:)")
     required init?(coder: NSCoder) {
-        fatalError("`init(coder:)` not implemented. Use `init(stripeController:)`.")
+        fatalError("`init(coder:)` not implemented. Use `init(payment:paymentController:stripeController:)`.")
     }
 
     override func loadView() {
         view = UIView()
         view.backgroundColor = .systemBackground
-    }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        navigationItem.title = "Make payment"
+        navigationItem.setLeftBarButton(
+            UIBarButtonItem(
+                barButtonSystemItem: .cancel,
+                target: self,
+                action: #selector(cancelTapped(_:))),
+            animated: false)
 
-        view.constrainNewSubviewToCenter(mainStack)
-        [priceLabel, paymentOptionsButton, paymentLabel]
-            .forEach(mainStack.addArrangedSubview(_:))
+        view.constrainNewSubviewToSafeArea(
+            mainStack,
+            sides: [.top, .leading, .trailing],
+            constant: 12)
+        view.constrainNewSubviewToCenter(makePaymentButton, axes: .horizontal)
+        NSLayoutConstraint.activate([
+            makePaymentButton.topAnchor.constraint(
+                equalTo: mainStack.bottomAnchor,
+                constant: 20),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(
+                greaterThanOrEqualTo: makePaymentButton.bottomAnchor,
+                constant: 8)
+        ])
+
     }
 }
 
 // MARK: - Actions
 
 extension MakePaymentViewController {
-    @objc func choosePayment(_ sender: Any?) {
-        paymentContext.presentPaymentOptionsViewController()
+    @objc func makePayment(_ sender: Any?) {
+        guard let context = paymentContext else {
+            return presentAlert(
+                for: ErrorMessage(
+                    title: "Coming soon!",
+                    message: "In-app payments will be coming in a future release. Thanks for your patience!"))
+        }
+        context.presentPaymentOptionsViewController()
     }
 
-    func stringFromContextAmount() -> String {
-        let decimal = Decimal(paymentContext.paymentAmount) * 0.01
+    @objc func cancelTapped(_ sender: Any?) {
+        delegate?.cancelPayment()
+    }
+
+    @objc func openInvoice(_ sender: Any? = nil) {
+        guard let url = payment.invoice else {
+            return presentAlert(
+                for: ErrorMessage(
+                    title: "No invoice found",
+                    message: "We couldn't find the invoice for this payment. Please try again later."))
+        }
+        UIApplication.shared.open(url)
+    }
+
+    func stringFromIntegerAmount(_ amount: Int) -> String {
+        let decimal = Decimal(amount) * 0.01
         return currencyFormatter.string(from: decimal as NSDecimalNumber)!
-    }
-}
-
-// MARK: - Payment Context Delegate
-
-extension MakePaymentViewController: STPPaymentContextDelegate {
-    func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
-        if paymentContext.loading {
-            present(LoadingViewController(), animated: true, completion: nil)
-        } else if presentedViewController as? LoadingViewController != nil {
-            dismiss(animated: true, completion: nil)
-        }
-
-        paymentLabel.text = paymentContext.selectedPaymentOption?.label
-        paymentIcon.image = paymentContext.selectedPaymentOption?.image
-        paymentStack.isHidden = (paymentContext.selectedPaymentOption != nil)
-
-    }
-
-    func paymentContext(
-        _ paymentContext: STPPaymentContext,
-        didFailToLoadWithError error: Error
-    ) {
-        self.presentAlert(for: error)
-    }
-
-    func paymentContext(
-        _ paymentContext: STPPaymentContext,
-        didCreatePaymentResult paymentResult: STPPaymentResult,
-        completion: @escaping STPPaymentStatusBlock
-    ) {
-
-    }
-
-    func paymentContext(
-        _ paymentContext: STPPaymentContext,
-        didFinishWith status: STPPaymentStatus,
-        error: Error?
-    ) {
-        switch status {
-        case .success:
-            ()
-        case .error:
-            presentAlert(for: error ?? StripeError.unknown)
-        case .userCancellation:
-            ()
-        @unknown default:
-            presentAlert(for: StripeError.unknown)
-        }
     }
 }
