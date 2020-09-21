@@ -10,7 +10,13 @@ import UIKit
 import Combine
 
 
+/// Protocol that allows either the live GraphQLController or a mock DataProvider to be passed in to handle data requests
 protocol ImpactDataProvider {
+    /// The method in a class that conforms to ImpactDataProvider that either provides
+    /// mock data or configures and makes calls the Fetch method to get data from the server
+    /// - Parameters:
+    ///   - propertyID: A **String** that contains the property ID to fetch Impact Stats for
+    ///   - completion: Competion that returns either **ImpactStats** or an **Error**
     func fetchImpactStats(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<ImpactStats>)
 }
 
@@ -46,6 +52,11 @@ class ImpactController {
         }
     }
 
+    /// Gets the latest impact stats for all properties from the data provider,
+    /// which in turn updates the `viewModels` property accordingly.
+    /// - Parameter completion: A completion closure that passes back
+    /// either an error if something went wrong, or nil if the impact
+    /// stats were properly fetched and the view models updated
     func getImpactStatsForAllProperties(_ completion: @escaping (Error?) -> Void) {
         guard let propertyIDs = user.properties?.compactMap({ $0.id }) else {
             return completion(UserError.noProperties)
@@ -75,7 +86,11 @@ class ImpactController {
     }
     
     // MARK: - Init
-    
+
+    /// Initializes the **ImpactController** with the current **User** and **ImpactDataProvider**
+    /// - Parameters:
+    ///   - user: <#user description#>
+    ///   - dataProvider: <#dataProvider description#>
     init(user: User, dataProvider: ImpactDataProvider) {
         self.user = user
         self.dataProvider = dataProvider
