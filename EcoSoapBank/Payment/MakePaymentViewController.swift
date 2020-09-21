@@ -31,43 +31,31 @@ class MakePaymentViewController: UIViewController {
 
     // MARK: - Subviews
 
-    private lazy var priceLabel = configure(UILabel()) {
-        $0.font = .preferredMuli(forTextStyle: .largeTitle)
-        $0.text = stringFromIntegerAmount(payment.amountDue)
-    }
     private lazy var dueLabel = configure(UILabel()) {
         $0.font = .preferredMuli(forTextStyle: .headline)
-        $0.text = "due"
+        $0.text = "Amount due:"
+        $0.setContentHuggingPriority(.defaultLow, for: .horizontal)
     }
-    private lazy var dueDateLabel = configure(UILabel()) {
-        $0.font = .preferredMuli(forTextStyle: .title2)
-        guard let dueDate = payment.dueDate else {
-            $0.isHidden = true
-            return
-        }
-        $0.text = DateFormatter.default.string(from: dueDate)
+    private lazy var amountLabel = configure(UILabel()) {
+        $0.font = .preferredMuli(forTextStyle: .largeTitle, typeface: .bold)
+        $0.text = stringFromIntegerAmount(payment.amountDue)
     }
-    private lazy var dueStack = UIStackView(
+    private lazy var amountDueStack = UIStackView(
         axis: .horizontal,
         alignment: .lastBaseline,
         distribution: .fill,
-        spacing: 8,
-        arrangedSubviews: [dueLabel, dueDateLabel])
+        spacing: 12,
+        arrangedSubviews: [dueLabel, amountLabel])
 
-    private lazy var periodLabel = configure(UILabel()) {
-        $0.font = .preferredMuli(forTextStyle: .subheadline)
-        guard let startDate = payment.invoicePeriodStartDate,
-              let endDate = payment.invoicePeriodEndDate
-        else {
-            $0.isHidden = true
-            return
-        }
+    private lazy var dueDateStack: UIStackView = keyValueView(
+        caption: "Due on:",
+        content: textForDate(payment.dueDate))
 
-        let startText = DateFormatter.default.string(from: startDate)
-        let endText = DateFormatter.default.string(from: endDate)
-        $0.text = "for \(startText) — \(endText)"
-    }
-    private lazy var invoiceButton = configure(UIButton()) {
+    private lazy var periodStack: UIStackView = keyValueView(
+        caption: "For period:",
+        content: "\(textForDate(payment.invoicePeriodStartDate)) — \(textForDate(payment.invoicePeriodEndDate))")
+
+    private lazy var invoiceButton = configure(LabelHuggingButton()) {
         guard let invoiceCode = payment.invoiceCode, let url = payment.invoice else {
             $0.isHidden = true
             return
@@ -75,13 +63,25 @@ class MakePaymentViewController: UIViewController {
         $0.tintColor = .esbGreen
         $0.setAttributedTitle(
             NSAttributedString(
-                string: "Invoice: " + invoiceCode,
+                string: invoiceCode,
                 attributes: [
                     .font: UIFont.preferredMuli(forTextStyle: .body, typeface: .semiBold),
-                    .foregroundColor: UIColor.esbGreen]),
+                    .foregroundColor: UIColor.esbGreen
+                ]),
             for: .normal)
+        $0.contentHorizontalAlignment = .right
+//        $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+//        $0.setContentHuggingPriority(.defaultHigh, for: .vertical)
+//        $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+//        $0.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+//        $0.titleEdgeInsets = .zero
+//        $0.contentEdgeInsets = .zero
         $0.addTarget(self, action: #selector(openInvoice(_:)), for: .touchUpInside)
     }
+    private lazy var invoiceStack = keyValueView(
+        caption: "Invoice (open in browser):",
+        content: invoiceButton)
+
     private lazy var makePaymentButton = configure(ESBButton()) {
         $0.setTitle("Make payment", for: .normal)
         $0.addTarget(self, action: #selector(makePayment(_:)), for: .touchUpInside)
@@ -89,10 +89,19 @@ class MakePaymentViewController: UIViewController {
 
     private lazy var mainStack = UIStackView(
         axis: .vertical,
-        alignment: .leading,
+        alignment: .fill,
         distribution: .fill,
         spacing: 8,
-        arrangedSubviews: [priceLabel, dueStack, periodLabel, invoiceButton])
+        arrangedSubviews: [
+            amountDueStack,
+            horizontalDivider(),
+            dueDateStack,
+            horizontalDivider(),
+            periodStack,
+            horizontalDivider(),
+            invoiceStack,
+            horizontalDivider(),
+        ])
 
     // MARK: - Init / Lifecycle
 
@@ -119,9 +128,9 @@ class MakePaymentViewController: UIViewController {
 
     override func loadView() {
         view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGray6
 
-        navigationItem.title = "Make payment"
+        navigationItem.title = "Next Payment"
         navigationItem.setLeftBarButton(
             UIBarButtonItem(
                 barButtonSystemItem: .cancel,
@@ -142,7 +151,48 @@ class MakePaymentViewController: UIViewController {
                 greaterThanOrEqualTo: makePaymentButton.bottomAnchor,
                 constant: 8)
         ])
+    }
 
+    // MARK: - Subview Factory
+
+    private func keyValueView(caption: String, content: String) -> UIStackView {
+        let contentView = configure(UILabel()) {
+            $0.text = content
+            $0.font = .preferredMuli(forTextStyle: .callout)
+            $0.textColor = UIColor.codGrey.orInverse()
+            $0.textAlignment = .right
+        }
+        return keyValueView(caption: caption, content: contentView)
+    }
+
+    private func keyValueView(caption: String, content: UIView) -> UIStackView {
+        let captionLabel = configure(UILabel()) {
+            $0.text = caption
+            $0.font = .preferredMuli(forTextStyle: .headline)
+        }
+        captionLabel.setContentHuggingPriority(.defaultHigh + 2, for: .horizontal)
+        return UIStackView(
+            axis: .horizontal,
+            alignment: .lastBaseline,
+            distribution: .fill,
+            spacing: 4,
+            arrangedSubviews: [captionLabel, content])
+    }
+
+    private func textForDate(_ date: Date?) -> String {
+        if let actualDate = date {
+            return DateFormatter.default.string(from: actualDate)
+        } else {
+            return "???"
+        }
+    }
+
+    private func horizontalDivider() -> UIView {
+        configure(UIView()) {
+            $0.backgroundColor = .systemGray4
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        }
     }
 }
 
