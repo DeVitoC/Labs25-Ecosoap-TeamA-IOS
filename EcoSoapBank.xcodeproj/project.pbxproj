@@ -148,7 +148,7 @@
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
-		994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* UtilityFunctions.swift */; };
+		994E4B7924DDB58300C12921 /* Utilities+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */; };
 		994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8824DDB68700C12921 /* UtilityTests.swift */; };
 		99789CC52502C832000428AC /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99789CC42502C832000428AC /* ProfileTests.swift */; };
 		997BF11224E20AAE00A643D8 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BF11124E20AAE00A643D8 /* TextView.swift */; };
@@ -329,7 +329,7 @@
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
-		994E4B7824DDB58300C12921 /* UtilityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
+		994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Convenience.swift"; sourceTree = "<group>"; };
 		994E4B7E24DDB67000C12921 /* EcoSoapBankTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcoSoapBankTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		994E4B8224DDB67000C12921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		994E4B8824DDB68700C12921 /* UtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityTests.swift; sourceTree = "<group>"; };
@@ -591,7 +591,7 @@
 			children = (
 				9921943324E49AC300E16C16 /* UIKit */,
 				9983874F24E4694400450244 /* SwiftUI */,
-				994E4B7824DDB58300C12921 /* UtilityFunctions.swift */,
+				994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */,
 				04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */,
 				0445F04924EC648E00A0A665 /* UserDefaults.swift */,
 				0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */,
@@ -1156,7 +1156,7 @@
 				E2C37DEB2508222600B9F20F /* PaymentHistoryCollectionViewCell.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				992BB64524EF021600638AA4 /* MockUserDataProvider.swift in Sources */,
-				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
+				994E4B7924DDB58300C12921 /* Utilities+Convenience.swift in Sources */,
 				9990F6E324F9BFFE00DD16B5 /* MakePaymentViewController.swift in Sources */,
 				99B6175B24EAF0A20099664B /* SchedulePickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,

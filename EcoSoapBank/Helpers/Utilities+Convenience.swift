@@ -27,6 +27,7 @@ public func configure<T>(
 
 
 extension Date {
+    /// Initialize a date using the provided date components and the current calendar.
     init?(year: Int, month: Int, day: Int, hour: Int = 0, minute: Int = 0, timeZone: TimeZone = .current) {
         guard let date = DateComponents(
             calendar: .current,
@@ -49,6 +50,7 @@ extension Date {
 
 
 extension TimeInterval {
+    /// Converts the provided day `count` to a `TimeInterval` (i.e., a `Double` indicating the number of seconds).
     static func days(_ count: Int) -> TimeInterval {
         Double(count) * 86_400
     }
@@ -57,7 +59,6 @@ extension TimeInterval {
 
 extension Measurement where UnitType == UnitMass {
     var string: String {
-        
         guard let unitString = UserDefaults.massUnit else {
             return MeasurementFormatter.localUnits.string(from: self)
         }
@@ -153,6 +154,7 @@ extension Optional {
 }
 
 extension Result {
+    /// If `self == .failure`, returns the wrapped `Failure` value.
     var error: Failure? {
         if case .failure(let error) = self {
             return error
