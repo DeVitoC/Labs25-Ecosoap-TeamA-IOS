@@ -110,6 +110,7 @@
 		04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90224FD60AA00263376 /* GraphQLOperation.swift */; };
 		04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90424FD85CF00263376 /* HTTPMethod.swift */; };
 		04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90624FD860B00263376 /* GraphQLError.swift */; };
+		04CE18DA2518FE9A00D9CA4E /* PropertySelectionHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CE18D92518FE9A00D9CA4E /* PropertySelectionHostingController.swift */; };
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
@@ -290,6 +291,7 @@
 		04CCD90224FD60AA00263376 /* GraphQLOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLOperation.swift; sourceTree = "<group>"; };
 		04CCD90424FD85CF00263376 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		04CCD90624FD860B00263376 /* GraphQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLError.swift; sourceTree = "<group>"; };
+		04CE18D92518FE9A00D9CA4E /* PropertySelectionHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectionHostingController.swift; sourceTree = "<group>"; };
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 			children = (
 				047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */,
 				047B89832513BC2700AB10D3 /* PropertySelectionCell.swift */,
+				04CE18D92518FE9A00D9CA4E /* PropertySelectionHostingController.swift */,
 			);
 			path = PropertySelection;
 			sourceTree = "<group>";
@@ -763,7 +766,6 @@
 				9983874B24E4657C00450244 /* KeyboardAvoiding.swift */,
 				9983874D24E4658600450244 /* KeyboardDismissing.swift */,
 				992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */,
-				99565A3D24E7032A000841F2 /* ListBackgroundColor.swift */,
 				998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */,
 				997BF11124E20AAE00A643D8 /* TextView.swift */,
 				999B2D0D25014DEB002D3591 /* View+Alignment.swift */,
@@ -1151,6 +1153,7 @@
 				99BA964425001FE400821694 /* AppTabBarController.swift in Sources */,
 				99D0166024FEA6D9001A7555 /* With.swift in Sources */,
 				04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */,
+				04CE18DA2518FE9A00D9CA4E /* PropertySelectionHostingController.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
 				9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */,
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,

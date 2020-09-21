@@ -102,10 +102,12 @@ extension PickupCoordinator {
     }
 
     private func historyVC() -> UIViewController {
-        configure(UIHostingController(
+        configure(PropertySelectionHostingController(
             rootView: PickupHistoryView(
                 pickupController: pickupController,
-                onPickupTap: { [weak self] in self?.showPickupDetail(for: $0) }))
+                onPickupTap: { [weak self] in self?.showPickupDetail(for: $0) }),
+            user: user
+            )
         ) {
             $0.navigationItem.setRightBarButton(
                 UIBarButtonItem(

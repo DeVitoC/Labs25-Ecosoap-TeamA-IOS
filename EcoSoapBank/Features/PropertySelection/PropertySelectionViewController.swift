@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 /// Used to allow displaying/selecting a single `Property` or `AllProperties`
 private protocol PropertyDisplayable { var name: String { get } }
 private struct AllProperties: PropertyDisplayable { let name = "All Properties" }
@@ -21,6 +20,16 @@ class PropertySelectionViewController: UIViewController {
     
     var user: User
     
+    /// Used by containing view controllers to determine duration of expansion/contraction
+    /// animation of the height constraint for the property selector (child vc). This animation
+    /// should take place in `preferredContentSizeDidChange`.
+    let expansionDuration: TimeInterval = 0.3
+    
+    /// Determines if the selection should start expanded and animate closed after a short period of time.
+    let shouldPeak: Bool
+    
+    // MARK: - Private Properties
+    
     /// Calculates the properties to display, moving the selected property to the top (if there is one)
     /// and adding AllProperties to allow for selecting all properties (which sets the selectedProperty
     /// user default to nil).
@@ -30,32 +39,24 @@ class PropertySelectionViewController: UIViewController {
         if let selectedProperty = selectedProperty,
             let index = properties.firstIndex(of: selectedProperty) {
             properties.move(fromOffsets: [index], toOffset: 0)
-  
+            
             return properties + [AllProperties()]
         } else {
             return [AllProperties()] + properties
         }
     }
     
-    var selectedProperty: Property? {
+    private var selectedProperty: Property? {
         get { UserDefaults.standard.selectedProperty(forUser: user) }
         set { UserDefaults.standard.setSelectedProperty(newValue, forUser: user) }
     }
     
-    /// Used by containing view controllers to determine duration of expansion/contraction
-    /// animation of the height constraint for the property selector (child vc). This animation
-    /// should take place in `preferredContentSizeDidChange`.
-    let expansionDuration: TimeInterval = 0.3
-    
-    // MARK: - Private Properties
-    
     private let cellHeight: CGFloat = 32
-    
     private var tableView = UITableView()
     private var dataSource: UITableViewDiffableDataSource<Int, String>?
     private var selectedPropertyObserver: UserDefaultsObservation?
-    
-    private var isExpanded = false {
+    private var shouldAnimateDifferences = false
+    private var isExpanded = true {
         didSet {
             if isExpanded {
                 tableView.setNeedsLayout()
@@ -74,9 +75,9 @@ class PropertySelectionViewController: UIViewController {
         fatalError("`init(coder:)` not implemented. Use `init(user:)`.")
     }
     
-    init(user: User) {
+    init(user: User, shouldPeak: Bool = false) {
         self.user = user
-        
+        self.shouldPeak = shouldPeak
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -94,15 +95,24 @@ class PropertySelectionViewController: UIViewController {
         addShadows()
         setUpTableView()
         
-        isExpanded = true
+        if shouldPeak {
+            isExpanded = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.isExpanded = false
+            }
+        } else {
+            isExpanded = false
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.isExpanded = false
-        }
+        shouldAnimateDifferences = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        isExpanded = false
     }
     
     // MARK: - Private Methods
@@ -152,7 +162,7 @@ class PropertySelectionViewController: UIViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(properties.map { $0.name })
         
-        dataSource?.apply(snapshot, animatingDifferences: true)
+        dataSource?.apply(snapshot, animatingDifferences: shouldAnimateDifferences)
     }
     
     private func addShadows() {
@@ -208,7 +218,6 @@ extension PropertySelectionViewController: UITableViewDelegate {
             }
             
             reloadData()
-            
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             tableView.isScrollEnabled = false
             isExpanded = false

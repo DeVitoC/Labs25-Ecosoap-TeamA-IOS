@@ -22,7 +22,8 @@ class ImpactViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private lazy var propertySelector = PropertySelectionViewController(user: impactController.user)
+    private lazy var propertySelector = PropertySelectionViewController(user: impactController.user,
+                                                                        shouldPeak: true)
     private var propertySelectorHeight: NSLayoutConstraint?
     
     private var massUnitObserver: UserDefaultsObservation?
