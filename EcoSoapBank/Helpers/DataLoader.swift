@@ -11,8 +11,13 @@ import KeychainAccess
 
 
 protocol DataLoader {
+    /// Fetch the data using the provided request and return it asynchronously using the provided closure.
     func loadData(with request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void)
+    /// Fetch the token from cached memory if present and not expired.
+    ///
+    /// Throws an error if token is not present or if it has expired.
     func getToken() throws -> String
+    /// Remove the token from cached memory if present.
     func removeToken()
 }
 
