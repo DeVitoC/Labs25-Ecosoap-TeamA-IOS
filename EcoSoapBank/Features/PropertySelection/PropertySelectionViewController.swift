@@ -53,6 +53,7 @@ class PropertySelectionViewController: UIViewController {
     
     private var tableView = UITableView()
     private var dataSource: UITableViewDiffableDataSource<Int, String>?
+    private var selectedPropertyObserver: UserDefaultsObservation?
     
     private var isExpanded = false {
         didSet {
@@ -83,6 +84,10 @@ class PropertySelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        selectedPropertyObserver = UserDefaults.$selectedPropertyIDsByUser.observe { [weak self] _, _ in
+            self?.reloadData()
+        }
         
         view.backgroundColor = .codGrey
         
