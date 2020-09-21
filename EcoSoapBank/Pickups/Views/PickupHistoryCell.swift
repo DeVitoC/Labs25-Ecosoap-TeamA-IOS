@@ -30,7 +30,7 @@ struct PickupHistoryCell: View {
     }
 
     var body: some View {
-        Button(action: { onTap(pickup) }, label: {
+        NavigationButton(action: { onTap(pickup) }, label: {
             VStack(alignment: .leading, spacing: 16) {
                 // Date
                 VStack(alignment: .leading) {
@@ -90,6 +90,23 @@ extension PickupHistoryCell {
                 .aspectRatio(contentMode: .fit)
                 .font(UIFont.systemFont(ofSize: 24, weight: .medium))
                 .frame(width: 28, alignment: .leading)
+        }
+    }
+
+    private struct NavigationButton<Content: View>: View {
+        private let button: Button<Content>
+
+        init(action: @escaping () -> Void, label: @escaping () -> Content) {
+            self.button = Button(action: action, label: label)
+        }
+
+        var body: some View {
+            HStack(alignment: .center, spacing: 2) {
+                button
+
+                Image(systemName: "chevron.right")
+                    .foregroundColor(Color(.tertiaryLabel))
+            }
         }
     }
     
