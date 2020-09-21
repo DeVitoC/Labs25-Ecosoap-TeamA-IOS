@@ -10,18 +10,23 @@ import Foundation
 
 
 enum ESBError {
+    /// A catch-all error that something occurred that prevents the user from moving forward as intended.
     static let unknown = CustomError(
         errorDescription: "An unknown error occurred",
         recoverySuggestion: "Please try again a little later, and contact us if it occurs repeatedly.")
 }
 
 
+/// A quick interface for a custom error that conforms to the `LocalizedError` protocol.
 struct CustomError: LocalizedError {
     let errorDescription: String
     let recoverySuggestion: String
 }
 
 
+/// A message representing an error that can be presented to the user.
+///
+/// Most commonly used with `UIViewController.presentAlert(for:)` or `View.errorAlert(_:)`.
 struct ErrorMessage: CustomStringConvertible {
     let title: String
     let message: String
@@ -67,6 +72,7 @@ struct ErrorMessage: CustomStringConvertible {
 }
 
 
+/// An error for use with mocked failures. **Not for use in production.**
 enum MockError: LocalizedError {
     case shouldFail
 
