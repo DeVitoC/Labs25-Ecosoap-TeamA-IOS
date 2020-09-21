@@ -8,7 +8,10 @@
 
 import Foundation
 
+
+// Indicates this item can be initialized with a random value.
 protocol Randomizable {
+    /// Return a random value.
     static func random() -> Self
 }
 
