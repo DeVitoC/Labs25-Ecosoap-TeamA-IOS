@@ -31,10 +31,12 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.register(NewCartonCell.self,
                     forCellReuseIdentifier: NewCartonCell.reuseIdentifier)
         $0.delegate = self
+        $0.isScrollEnabled = false
     }
+    
     private lazy var dataSource = DataSource(
         tableView: tableView,
-        cellProvider: cell(for:at:with:))
+        cellProvider: { [weak self] in self?.cell(for: $0, at: $1, with: $2) })
 
     private lazy var addCartonButton = configure(UIButton(type: .system)) {
         $0.setPreferredSymbolConfiguration(
@@ -45,7 +47,7 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         let title = NSAttributedString(
             string: "Add Carton",
             attributes: [
-                NSAttributedString.Key.font: UIFont.muli(),
+                NSAttributedString.Key.font: UIFont.preferredMuli(forTextStyle: .body),
         ])
         $0.tintColor = .esbGreen
         $0.setAttributedTitle(title, for: .normal)
@@ -59,6 +61,9 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.inputView = propertyPicker
         $0.borderStyle = .roundedRect
         $0.text = viewModel.selectedProperty.name
+        $0.font = .preferredMuli(forTextStyle: .body)
+        $0.adjustsFontForContentSizeCategory = true
+        $0.setContentHuggingPriority(.defaultHigh + 1, for: .vertical)
     }
     private lazy var propertyPicker = InputPickerView(
         data: viewModel.properties,
@@ -69,6 +74,8 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         $0.inputView = datePicker
         $0.borderStyle = .roundedRect
         $0.text = viewModel.readyDate.string()
+        $0.font = .preferredMuli(forTextStyle: .body)
+        $0.adjustsFontForContentSizeCategory = true
     }
     private lazy var datePicker = configure(UIDatePicker()) {
         $0.datePickerMode = .date
@@ -76,7 +83,8 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     }
     private lazy var notesView = configure(ESBTextView()) {
         $0.delegate = self
-        $0.font = .muli(style: .body)
+        $0.font = .preferredMuli(forTextStyle: .subheadline)
+        $0.adjustsFontForContentSizeCategory = true
     }
     private lazy var scheduleButton = configure(ESBButton()) {
         $0.setTitle("Schedule Pickup", for: .normal)
@@ -108,6 +116,15 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
         setUpViews()
         bindToViewModel()
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        UIView.animate(withDuration: 0.3) {
+            self.tableViewHeight.constant =
+                self.tableView.contentSize.height
+            self.view.layoutIfNeeded()
+        }
+    }
 }
 
 // MARK: - Setup / Update
@@ -132,16 +149,14 @@ extension SchedulePickupViewController {
         var remainingConstraints = [
             addCartonButton.heightAnchor.constraint(equalToConstant: 30),
             tableView.topAnchor.constraint(equalTo: cartonsLabel.bottomAnchor, constant: 8),
-            tableView.topAnchor.constraint(equalTo: addCartonButton.bottomAnchor, constant: 8),
             tableViewHeight,
             addCartonButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 2),
-
             readyDateField.topAnchor.constraint(equalTo: readyDateLabel.bottomAnchor, constant: 8),
             notesLabel.topAnchor.constraint(equalTo: readyDateField.bottomAnchor, constant: 20),
             notesView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 8),
             notesView.heightAnchor.constraint(equalToConstant: 150),
             scheduleButton.topAnchor.constraint(equalTo: notesView.bottomAnchor, constant: 20),
-            scheduleButton.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: 20)
+            scheduleButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -40)
         ]
 
         if viewModel.properties.count > 1 {
@@ -182,7 +197,8 @@ extension SchedulePickupViewController {
     private func configureSectionLabel(titled title: String) -> UILabel {
         let label = UILabel()
         label.text = title.uppercased()
-        label.font = .muli(style: .caption1)
+        label.font = .preferredMuli(forTextStyle: .caption1)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .secondaryLabel
         return label
     }
@@ -211,16 +227,6 @@ extension SchedulePickupViewController {
             $0.appendItems(cartons, toSection: 0)
         }
         dataSource.apply(snapshot)
-        UIView.animate(withDuration: 0.3) { [unowned self] in
-            defer { self.view.layoutIfNeeded() }
-            guard !cartons.isEmpty else {
-                self.tableViewHeight.constant = 0
-                return
-            }
-            self.tableViewHeight.constant =
-                self.tableView.contentSize.height
-                - (CGFloat(cartons.count) * 7.5)
-        }
     }
 }
 

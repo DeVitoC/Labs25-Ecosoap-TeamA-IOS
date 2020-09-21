@@ -38,14 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setUpAppAppearance() {
         
         configure(UIBarButtonItem.appearance()) {
-            $0.tintColor = .white
+            $0.tintColor = .barButtonTint
             $0.setTitleTextAttributes(
                 [.font: UIFont.barButtonItem],
                 for: .normal)
         }
         
         configure(UIButton.appearance()) {
-            $0.tintColor = .white
+            $0.tintColor = .barButtonTint
         }
         
         configure(UINavigationBar.appearance()) { nav in
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     .foregroundColor: UIColor.black
                 ]
                 
-                let textAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.muli(typeface: .semiBold)]
+                let textAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.barButtonItem]
                 $0.backButtonAppearance.normal.titleTextAttributes = textAttributes
                 $0.doneButtonAppearance.normal.titleTextAttributes = textAttributes
             }
@@ -95,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         configure(UITableViewCell.appearance()) {
-            $0.backgroundColor = UIColor.systemGray6
+            $0.backgroundColor = UIColor.historyCellBackground
         }
     }
 }

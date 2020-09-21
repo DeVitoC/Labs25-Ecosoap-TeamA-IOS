@@ -17,14 +17,7 @@ class PickupCoordinator: FlowCoordinator {
     private let pickupController: PickupController
     private(set) var user: User
 
-    // rootVC is the base controller that will be opened.
-    // In this case, the UIHostingController that will allow SwiftUI views to be displayed on the ViewController
-    private(set) lazy var rootVC: UIViewController = UIHostingController(
-        // Initializes view with PickupHistoryView with the passed in pickupController
-        rootView: PickupHistoryView(
-            pickupController: pickupController,
-            schedulePickup: { [weak self] in self?.scheduleNewPickup() }))
-
+    private(set) lazy var rootVC = UINavigationController(rootViewController: historyVC())
     private var cancellables = Set<AnyCancellable>()
     private var scheduleVC: SchedulePickupViewController?
     var scheduleVM: SchedulePickupViewModel?
@@ -64,7 +57,7 @@ class PickupCoordinator: FlowCoordinator {
 
 extension PickupCoordinator {
     /// Presents the scheduleVC (SchedulePickupViewController) as the curent ViewController
-    func scheduleNewPickup() {
+    @objc func scheduleNewPickup() {
         guard user.properties?.first != nil else {
             return rootVC.presentAlert(for: UserError.noProperties)
         }
@@ -74,6 +67,15 @@ extension PickupCoordinator {
             $0.modalPresentationStyle = .fullScreen
         }
         rootVC.present(nav, animated: true, completion: nil)
+    }
+
+    func showPickupDetail(for pickup: Pickup) {
+        guard let vc = PickupDetailViewController.storyboard().instantiateInitialViewController(creator: {
+            PickupDetailViewController(coder: $0, pickup: pickup)
+        }) else {
+            preconditionFailure("Failed to initialize PickupDetailViewController from storyboard.")
+        }
+        rootVC.pushViewController(vc, animated: true)
     }
 
     /// Dismisses the **SchedulePickupViewController** and passes the pickupResult to the successAlert
@@ -109,6 +111,22 @@ extension PickupCoordinator {
                     completionHandler: nil)
         }))
         return alert
+    }
+
+    private func historyVC() -> UIViewController {
+        configure(UIHostingController(
+            rootView: PickupHistoryView(
+                pickupController: pickupController,
+                onPickupTap: { [weak self] in self?.showPickupDetail(for: $0) }))
+        ) {
+            $0.navigationItem.setRightBarButton(
+                UIBarButtonItem(
+                    image: UIImage.addBoxSymbol.scaled(toNewHeight: 28),
+                    style: .plain,
+                    target: self,
+                    action: #selector(scheduleNewPickup)),
+                animated: false)
+        }
     }
 
     /// Controls the popover view of the **EditCartonViewController**

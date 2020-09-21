@@ -31,17 +31,12 @@ class ImpactViewController: UIViewController {
         }
                 
         setUpCollectionView()
-
-        impactController?.getImpactStats { [weak self] error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self?.presentAlert(for: error)
-                    return
-                }
-                
-                self?.collectionView.reloadData()
-            }
-        }
+        refreshImpactStats()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.reloadData()
     }
     
     private func setUpCollectionView() {
@@ -54,6 +49,28 @@ class ImpactViewController: UIViewController {
         
         view.addSubviewsUsingAutolayout(collectionView)
         collectionView.fillSuperview()
+        collectionView.refreshControl = UIRefreshControl()
+        collectionView.refreshControl?.addTarget(
+            self,
+            action: #selector(refreshImpactStats(_:)),
+            for: .valueChanged)
+    }
+
+    @objc private func refreshImpactStats(_ sender: Any? = nil) {
+        guard let impactController = impactController else { return }
+        collectionView.refreshControl?.beginRefreshing()
+
+        impactController.getImpactStats { [weak self] error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.presentAlert(for: error)
+                    return
+                }
+
+                self?.collectionView.refreshControl?.endRefreshing()
+                self?.collectionView.reloadData()
+            }
+        }
     }
 }
 
@@ -75,6 +92,12 @@ extension ImpactViewController: UICollectionViewDataSource {
        
         return cell
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
+            collectionView.reloadData()
+        }
+    }
 }
 
 // MARK: - Flow Layout Delegate
@@ -93,6 +116,16 @@ extension ImpactViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width
         return CGSize(width: width, height: width * ImpactLayout.cellAspectRatio)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if traitCollection.preferredContentSizeCategory > .large {
+            return UIFontMetrics.default.scaledValue(for: 20)
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,

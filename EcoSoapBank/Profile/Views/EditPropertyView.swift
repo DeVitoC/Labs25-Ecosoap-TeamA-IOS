@@ -32,7 +32,7 @@ struct EditPropertyView: View {
             Section {
                 TextField("Name", text: $propertyInfo.name)
                 Picker("Property Type", selection: $propertyInfo.propertyType) {
-                    ForEach(ProfileViewModel.propertyTypes) {
+                    ForEach(Property.PropertyType.allCases) {
                         Text($0.display)
                             .tag($0)
                     }

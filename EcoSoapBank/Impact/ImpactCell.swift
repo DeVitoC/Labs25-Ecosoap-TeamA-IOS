@@ -31,15 +31,23 @@ class ImpactCell: UICollectionViewCell {
     
     // Views
     private let titleLabel = configure(UILabel()) {
-        $0.font = .montserrat(style: .title2, typeface: .semiBold)
+        let font = UIFont.montserrat(ofSize: UIFont.TextStyle.title3.defaultPointSize,
+                                     typeface: .semiBold)
+        $0.font = UIFontMetrics(forTextStyle: .title3)
+            .scaledFont(for: font, maximumPointSize: 50)
+        $0.adjustsFontForContentSizeCategory = true
         $0.textColor = .label
         $0.text = "34.9 lbs"
     }
     
     private let subtitleLabel = configure(UILabel()) {
-        $0.font = .montserrat(style: .body)
+        let font = UIFont.montserrat(ofSize: UIFont.TextStyle.subheadline.defaultPointSize)
+        $0.font = UIFontMetrics(forTextStyle: .subheadline)
+            .scaledFont(for: font, maximumPointSize: 30)
+        $0.adjustsFontForContentSizeCategory = true
+        $0.adjustsFontSizeToFitWidth = true
         $0.textColor = UIColor.codGrey.orInverse()
-        $0.numberOfLines = 0
+        $0.numberOfLines = 2
         $0.text = "bottle amenities\nrecycled"
     }
     
@@ -113,7 +121,8 @@ class ImpactCell: UICollectionViewCell {
             
             titleLabel.leadingAnchor.constraint(equalTo: circleView.trailingAnchor,
                                                 constant: horizontalLabelPadding),
-            subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor)
+            subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            subtitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -imagePadding),
         ]
     }
     
@@ -127,7 +136,8 @@ class ImpactCell: UICollectionViewCell {
             
             titleLabel.trailingAnchor.constraint(equalTo: circleView.leadingAnchor,
                                                  constant: -horizontalLabelPadding),
-            subtitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+            subtitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            subtitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: imagePadding),
         ]
     }
     

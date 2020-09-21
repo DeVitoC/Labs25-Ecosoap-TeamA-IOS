@@ -12,35 +12,43 @@ import UIKit
 // MARK: - Cell
 
 struct PickupHistoryCell: View {
+    @Environment(\.sizeCategory) var sizeCategory
+    
     let pickup: Pickup
 
     @Binding var statusWidth: CGFloat?
 
-    init(pickup: Pickup, statusWidth: Binding<CGFloat?>) {
+    private var onTap: (Pickup) -> Void
+
+    init(pickup: Pickup,
+         statusWidth: Binding<CGFloat?>,
+         onPickupTap: @escaping (Pickup) -> Void
+    ) {
         self.pickup = pickup
         self._statusWidth = statusWidth
+        self.onTap = onPickupTap
     }
 
     var body: some View {
-        NavigationLink(
-            destination: PickupDetailViewController.Representable(pickup: pickup)
-        ) {
+        Button(action: { onTap(pickup) }, label: {
             VStack(alignment: .leading, spacing: 16) {
                 // Date
                 VStack(alignment: .leading) {
                     Text("READY DATE")
-                        .font(UIFont.muli(style: .caption2, typeface: .regular))
+                        .font(.smallCaption)
                         .foregroundColor(Color(.secondaryLabel))
                     Text(pickup.readyDate.string())
-                        .font(UIFont.muli(style: .body, typeface: .bold))
+                        .font(.preferredMuli(forTextStyle: .headline))
                 }
 
-                HStack(spacing: 12) {
+                HStack {
                     // Pickup Status
                     HStack(spacing: 4) {
                         StatusIcon(status: pickup.status)
                         Text(pickup.status.display)
-                            .font(UIFont.muli(style: .callout, typeface: .regular))
+                            .lineLimit(2)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .font(UIFont.preferredMuli(forTextStyle: .callout))
                             .foregroundColor(Color(UIColor.codGrey.orInverse()))
                         Spacer()
                     }.readingGeometry(
@@ -52,7 +60,7 @@ struct PickupHistoryCell: View {
                             } else {
                                 self.statusWidth = $0
                             }
-                    }).frame(width: statusWidth)
+                        }).frame(width: statusWidth)
 
                     // Cartons
                     HStack(spacing: 4) {
@@ -60,15 +68,18 @@ struct PickupHistoryCell: View {
                             .modifier(Icon())
                             .foregroundColor(Color(.downyBlue))
                         Text("\(pickup.cartons.count) Cartons")
-                            .font(UIFont.muli(style: .callout, typeface: .regular))
+                            .lineLimit(2)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .font(UIFont.preferredMuli(forTextStyle: .callout))
                             .foregroundColor(Color(UIColor.codGrey.orInverse()))
                         Spacer()
-                    }.padding(.leading, 20)
+                    }
                 }
-            }.padding(.top, 6)
-                .padding(.bottom, 10)
-        }
-        .font(Font(UIFont.muli(style: .body)))
+            }
+            .padding(EdgeInsets(top: 6, leading: 0, bottom: 10, trailing: 0))
+        })
+        .font(Font(UIFont.preferredMuli(forTextStyle: .body)))
+        .listRowBackground(Color(.historyCellBackground))
     }
 }
 
@@ -77,7 +88,7 @@ extension PickupHistoryCell {
         func body(content: Content) -> some View {
             content
                 .aspectRatio(contentMode: .fit)
-                .font(UIFont.systemFont(ofSize: 24, weight: .medium).scaled())
+                .font(UIFont.systemFont(ofSize: 24, weight: .medium))
                 .frame(width: 28, alignment: .leading)
         }
     }
@@ -125,8 +136,11 @@ extension PickupHistoryCell {
 
 struct PickupListItem_Previews: PreviewProvider {
     static var previews: some View {
-        PickupHistoryCell(pickup: .random(), statusWidth: .constant(nil))
-            .previewLayout(.sizeThatFits)
-            .padding()
+        PickupHistoryCell(
+            pickup: .random(),
+            statusWidth: .constant(nil),
+            onPickupTap: { _ in }
+        ).previewLayout(.sizeThatFits)
+        .padding()
     }
 }

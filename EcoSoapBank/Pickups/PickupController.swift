@@ -21,13 +21,6 @@ protocol PickupDataProvider {
 }
 
 
-enum PickupError: Error {
-    case noResult
-    case noDelegate
-    case unknown
-}
-
-
 class PickupController: ObservableObject {
     @Published private(set) var pickups: [Pickup] = []
     @Published private(set) var error: Error?
@@ -55,7 +48,7 @@ class PickupController: ObservableObject {
 
         // Observe changes to property ID in user defaults; fetch new pickups on change
         UserDefaults.standard.selectedPropertyPublisher(forUser: user)
-            .mapError({ _ in PickupError.unknown })
+            .mapError({ _ in ESBError.unknown })
             .compactMap({ [weak self] selection in
                 self?.pickupsPublisher(forPropertyID: selection.property?.id)
             }).flatMap { $0 }
@@ -69,7 +62,7 @@ class PickupController: ObservableObject {
     @discardableResult
     func fetchPickups(forPropertyID propertyID: String) -> Future<[Pickup], Error> {
         Future { [weak self] promise in
-            guard let self = self else { return promise(.failure(PickupError.unknown)) }
+            guard let self = self else { return promise(.failure(ESBError.unknown)) }
 
             self.dataProvider.fetchPickups(forPropertyID: propertyID) { [weak self] result in
                 guard let self = self else { return promise(result) }
@@ -79,8 +72,10 @@ class PickupController: ObservableObject {
                     DispatchQueue.main.async {
                         self.pickups = sortedPickups
                     }
+                    promise(.success(sortedPickups))
+                } else {
+                    promise(result)
                 }
-                promise(result)
             }
         }
     }
@@ -93,14 +88,16 @@ class PickupController: ObservableObject {
         return properties
             .map { fetchPickups(forPropertyID: $0.id) }             // [Publisher<[Pickup]>]
             .publisher                                              // Publisher<[Publisher[Pickup]>]>
-            .mapError { _ in PickupError.unknown }                  // makes compiler happy?
+            .mapError { _ in ESBError.unknown }                     // makes compiler happy?
             .flatMap { $0 }                                         // [Publisher[Pickup]>] -> Publisher<[Pickup]...>
             .collect()                                              // [Pickup]... -> [[Pickup]]
             .map { arrays in arrays.flatMap { $0 } }                // [[Pickup]] -> [Pickup]
             .map { Array(Set($0)).sorted(by: Self.pickupSorter) }   // unique, sort
             .receive(on: DispatchQueue.main)                        // run following on main thread
             .handleEvents(receiveOutput: { [weak self] pickups in   // set sorted pickups
-                self?.pickups = pickups
+                DispatchQueue.main.async {
+                    self?.pickups = pickups
+                }
             }).eraseToAnyPublisher()
     }
 
@@ -112,9 +109,14 @@ class PickupController: ObservableObject {
                 guard let self = self else { return }
                 if case .success(let pickupResult) = result {
                     guard let pickup = pickupResult.pickup else {
-                        return promise(.failure(PickupError.noResult))
+                        return promise(.failure(ESBError.noResult))
                     }
-                    DispatchQueue.main.async { self.pickups.insert(pickup, at: 0) }
+                    var sortingPickups = self.pickups
+                    sortingPickups.append(pickup)
+                    sortingPickups.sort(by: Self.pickupSorter)
+                    DispatchQueue.main.async {
+                        self.pickups = sortingPickups
+                    }
                 }
                 promise(result)
             }
