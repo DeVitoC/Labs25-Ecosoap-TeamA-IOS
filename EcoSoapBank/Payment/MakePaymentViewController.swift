@@ -10,13 +10,15 @@ import UIKit
 import Stripe
 
 
+/// Responsible for updating UI and any related cleanup on behalf of the `MakePaymentViewController`.
 protocol MakePaymentDelegate: AnyObject {
+    /// Dismiss and return to the previous view.
     func cancelPayment()
 }
 
 
+/// Displays the next payment and allows the user to make a payment. **Currently only partially implemented**; the user can view the next due payment, but cannot make a payment in the app.
 class MakePaymentViewController: UIViewController {
-
     private let paymentController: PaymentController
     private let payment: NextPaymentDue
 
@@ -27,6 +29,7 @@ class MakePaymentViewController: UIViewController {
         $0.numberStyle = .currency
     }
 
+    /// Responsible for updating UI and any related cleanup on behalf of the `MakePaymentViewController`.
     weak var delegate: MakePaymentDelegate?
 
     // MARK: - Subviews
@@ -47,11 +50,11 @@ class MakePaymentViewController: UIViewController {
         spacing: 12,
         arrangedSubviews: [dueLabel, amountLabel])
 
-    private lazy var dueDateStack: UIStackView = keyValueView(
+    private lazy var dueDateStack: UIStackView = captionedHStack(
         caption: "Due on:",
         content: textForDate(payment.dueDate))
 
-    private lazy var periodStack: UIStackView = keyValueView(
+    private lazy var periodStack: UIStackView = captionedHStack(
         caption: "For period:",
         content: "\(textForDate(payment.invoicePeriodStartDate)) — \(textForDate(payment.invoicePeriodEndDate))")
 
@@ -70,15 +73,9 @@ class MakePaymentViewController: UIViewController {
                 ]),
             for: .normal)
         $0.contentHorizontalAlignment = .right
-//        $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-//        $0.setContentHuggingPriority(.defaultHigh, for: .vertical)
-//        $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-//        $0.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-//        $0.titleEdgeInsets = .zero
-//        $0.contentEdgeInsets = .zero
         $0.addTarget(self, action: #selector(openInvoice(_:)), for: .touchUpInside)
     }
-    private lazy var invoiceStack = keyValueView(
+    private lazy var invoiceStack = captionedHStack(
         caption: "Invoice (open in browser):",
         content: invoiceButton)
 
@@ -155,17 +152,17 @@ class MakePaymentViewController: UIViewController {
 
     // MARK: - Subview Factory
 
-    private func keyValueView(caption: String, content: String) -> UIStackView {
+    private func captionedHStack(caption: String, content: String) -> UIStackView {
         let contentView = configure(UILabel()) {
             $0.text = content
             $0.font = .preferredMuli(forTextStyle: .callout)
             $0.textColor = UIColor.codGrey.orInverse()
             $0.textAlignment = .right
         }
-        return keyValueView(caption: caption, content: contentView)
+        return captionedHStack(caption: caption, content: contentView)
     }
 
-    private func keyValueView(caption: String, content: UIView) -> UIStackView {
+    private func captionedHStack(caption: String, content: UIView) -> UIStackView {
         let captionLabel = configure(UILabel()) {
             $0.text = caption
             $0.font = .preferredMuli(forTextStyle: .headline)
@@ -199,7 +196,7 @@ class MakePaymentViewController: UIViewController {
 // MARK: - Actions
 
 extension MakePaymentViewController {
-    @objc func makePayment(_ sender: Any?) {
+    @objc private func makePayment(_ sender: Any?) {
         guard let context = paymentContext else {
             return presentAlert(
                 for: ErrorMessage(
@@ -209,11 +206,11 @@ extension MakePaymentViewController {
         context.presentPaymentOptionsViewController()
     }
 
-    @objc func cancelTapped(_ sender: Any?) {
+    @objc private func cancelTapped(_ sender: Any?) {
         delegate?.cancelPayment()
     }
 
-    @objc func openInvoice(_ sender: Any? = nil) {
+    @objc private func openInvoice(_ sender: Any? = nil) {
         guard let url = payment.invoice else {
             return presentAlert(
                 for: ErrorMessage(
@@ -223,7 +220,7 @@ extension MakePaymentViewController {
         UIApplication.shared.open(url)
     }
 
-    func stringFromIntegerAmount(_ amount: Int) -> String {
+    private func stringFromIntegerAmount(_ amount: Int) -> String {
         let decimal = Decimal(amount) * 0.01
         return currencyFormatter.string(from: decimal as NSDecimalNumber)!
     }
