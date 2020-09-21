@@ -42,7 +42,6 @@ struct PickupHistoryView: View {
         }
         .pullToRefresh(isShowing: $refreshing, onRefresh: refreshPickups)
         .errorAlert($error)
-        .navigationBarTitle("Pickup History", displayMode: .inline)
         .listStyle(PlainListStyle())
     }
 

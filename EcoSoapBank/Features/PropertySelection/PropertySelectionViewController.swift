@@ -91,7 +91,6 @@ class PropertySelectionViewController: UIViewController {
         }
         
         view.backgroundColor = .codGrey
-        
         addShadows()
         setUpTableView()
         
@@ -149,8 +148,8 @@ class PropertySelectionViewController: UIViewController {
             
             return cell
         }
-        tableView.dataSource = dataSource
         
+        tableView.dataSource = dataSource
         reloadData()
     }
     // swiftlint:enable closure_parameter_position

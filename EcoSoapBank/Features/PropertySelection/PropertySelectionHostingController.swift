@@ -9,14 +9,13 @@
 import SwiftUI
 import UIKit
 
-/// Embeds the given SwiftUI View (in a UIHostingController) along with a
-/// PropertySelectionViewController as child views, with the property selector
-/// constrained above the SwiftUI View.
-class PropertySelectionHostingController<V: View>: UIViewController {
+/// Embeds the given view controller along with a PropertySelectionViewController
+/// as child views, with the property selector constrained above the given view controller.
+class PropertySelectionContainingController: UIViewController {
     
     // MARK: - Public Properties
     
-    let hostingController: UIHostingController<V>
+    let mainViewController: UIViewController
     let propertySelector: PropertySelectionViewController
     
     // MARK: - Private Properties
@@ -30,8 +29,8 @@ class PropertySelectionHostingController<V: View>: UIViewController {
         fatalError("`init(coder:)` not implemented. Use `init(user:)`.")
     }
     
-    init(rootView: V, user: User) {
-        self.hostingController = UIHostingController(rootView: rootView)
+    init(mainViewController: UIViewController, user: User) {
+        self.mainViewController = mainViewController
         self.propertySelector = PropertySelectionViewController(user: user)
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,10 +40,12 @@ class PropertySelectionHostingController<V: View>: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addChild(hostingController)
+        addChild(mainViewController)
         addChild(propertySelector)
-        view.addSubviewsUsingAutolayout(hostingController.view, propertySelector.view)
-        hostingController.didMove(toParent: self)
+        
+        view.addSubviewsUsingAutolayout(mainViewController.view, propertySelector.view)
+        
+        mainViewController.didMove(toParent: self)
         propertySelector.didMove(toParent: self)
         
         propertySelectorHeight =
@@ -56,10 +57,10 @@ class PropertySelectionHostingController<V: View>: UIViewController {
             propertySelector.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             propertySelector.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             propertySelectorHeight!,
-            hostingController.view.topAnchor.constraint(equalTo: propertySelector.view.bottomAnchor),
-            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            mainViewController.view.topAnchor.constraint(equalTo: propertySelector.view.bottomAnchor),
+            mainViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mainViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mainViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     

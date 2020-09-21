@@ -12,11 +12,15 @@ class ImpactCoordinator: FlowCoordinator {
     
     init(user: User, dataProvider: ImpactDataProvider) {
         let impactController = ImpactController(user: user, dataProvider: dataProvider)
-        impactVC = ImpactViewController(impactController: impactController)
+        impactVC = PropertySelectionContainingController(
+            mainViewController: ImpactViewController(impactController: impactController),
+            user: user
+        )
+        impactVC.navigationItem.title = "Impact Summary"
     }
     
     let rootVC = UINavigationController()
-    let impactVC: ImpactViewController
+    let impactVC: PropertySelectionContainingController
     
     func start() {
         let globe = UIImage(
