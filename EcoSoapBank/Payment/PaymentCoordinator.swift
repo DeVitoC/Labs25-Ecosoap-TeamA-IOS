@@ -40,7 +40,13 @@ class PaymentCoordinator: FlowCoordinator {
     }
 
     @objc private func makePaymentTapped(_ sender: Any?) {
-        guard let property = UserDefaults.standard.selectedProperty(forUser: paymentController.user) else {
+        guard let property: Property = {
+            if (paymentController.user.properties?.count ?? 0) > 1 {
+                return UserDefaults.standard.selectedProperty(forUser: paymentController.user)
+            } else {
+                return paymentController.user.properties?.first
+            }
+        }() else {
             return rootVC.presentAlert(
                 for: ErrorMessage(
                     title: "Cannot get next payment for all properties.",
