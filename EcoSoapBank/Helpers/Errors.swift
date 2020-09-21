@@ -9,10 +9,10 @@
 import Foundation
 
 
-enum ESBError: Error {
-    case noResult
-    case noDelegate
-    case unknown
+enum ESBError {
+    static let unknown = CustomError(
+        errorDescription: "An unknown error occurred",
+        recoverySuggestion: "Please try again a little later, and contact us if it occurs repeatedly.")
 }
 
 
@@ -67,8 +67,16 @@ struct ErrorMessage: CustomStringConvertible {
 }
 
 
-enum MockError: Error {
+enum MockError: LocalizedError {
     case shouldFail
+
+    var errorDescription: String? {
+        "Uh oh! You found a bug."
+    }
+
+    var recoverySuggestion: String? {
+        "You shouldn't be seeing this! Please contact us and let us know how you got here so we can fix it. Thank you!"
+    }
 }
 
 
