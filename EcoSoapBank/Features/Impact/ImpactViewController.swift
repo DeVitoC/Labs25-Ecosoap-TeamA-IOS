@@ -23,6 +23,7 @@ class ImpactViewController: UIViewController {
     
     private var massUnitObserver: UserDefaultsObservation?
     private var selectedPropertyObserver: UserDefaultsObservation?
+    private let refreshControl = UIRefreshControl()
     
     // MARK: - Init
     
@@ -57,6 +58,12 @@ class ImpactViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         collectionView.reloadData()
+        refreshControl.bounds = CGRect(
+            x: refreshControl.bounds.origin.x,
+            y: -20,
+            width: refreshControl.bounds.size.width,
+            height: refreshControl.bounds.size.height
+        )
     }
     
     // MARK: - Private Methods
@@ -69,7 +76,7 @@ class ImpactViewController: UIViewController {
         
         view.addSubviewsUsingAutolayout(collectionView)
         
-        collectionView.refreshControl = UIRefreshControl()
+        collectionView.refreshControl = refreshControl
         collectionView.refreshControl?.addTarget(
             self,
             action: #selector(refreshImpactStats(_:)),
@@ -84,7 +91,7 @@ class ImpactViewController: UIViewController {
     }
 
     @objc private func refreshImpactStats(_ sender: Any? = nil) {
-        collectionView.refreshControl?.beginRefreshing()
+        refreshControl.beginRefreshing()
 
         impactController.getImpactStats { [weak self] error in
             DispatchQueue.main.async {
@@ -93,7 +100,7 @@ class ImpactViewController: UIViewController {
                     return
                 }
 
-                self?.collectionView.refreshControl?.endRefreshing()
+                self?.refreshControl.endRefreshing()
                 self?.collectionView.reloadData()
             }
         }

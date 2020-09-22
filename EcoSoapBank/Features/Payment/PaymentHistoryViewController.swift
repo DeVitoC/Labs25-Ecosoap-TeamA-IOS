@@ -18,6 +18,8 @@ class PaymentHistoryViewController: UIViewController {
             self.paymentCollectionView.reloadData()
         }
     }
+    
+    private let refreshControl = UIRefreshControl()
 
     // Cell Properties
     var cellWidth: CGFloat {
@@ -27,21 +29,31 @@ class PaymentHistoryViewController: UIViewController {
     var notExpandedHeight: CGFloat = 80
     var isExpanded: IndexPath?
     let cellIdentifier = "PaymentCell"
-
+    
     // MARK: - Initialization methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         refreshPayments()
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        refreshControl.bounds = CGRect(
+            x: refreshControl.bounds.origin.x,
+            y: -20,
+            width: refreshControl.bounds.size.width,
+            height: refreshControl.bounds.size.height
+        )
+    }
+    
     func setupCollectionView() {
         view.addSubview(paymentCollectionView)
         paymentCollectionView.dataSource = self
         paymentCollectionView.delegate = self
         paymentCollectionView.translatesAutoresizingMaskIntoConstraints = false
         paymentCollectionView.register(PaymentHistoryCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
-        paymentCollectionView.backgroundColor = .systemGray5
+        paymentCollectionView.backgroundColor = UIColor.tableViewCellBackground
         
         NSLayoutConstraint.activate([
             paymentCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -49,26 +61,28 @@ class PaymentHistoryViewController: UIViewController {
             paymentCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             paymentCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        paymentCollectionView.refreshControl = UIRefreshControl()
-        paymentCollectionView.refreshControl?.addTarget(self,
-                                                        action: #selector(refreshControlDidTrigger(_:)),
-                                                        for: .valueChanged)
+        
+        refreshControl.addTarget(self, action: #selector(refreshControlDidTrigger(_:)), for: .valueChanged)
+        paymentCollectionView.refreshControl = refreshControl
     }
 
     private func compositionalLayout() -> UICollectionViewLayout {
         let size = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
             heightDimension: .estimated(100))
-        return UICollectionViewCompositionalLayout(
-            section: NSCollectionLayoutSection(
-                group: .vertical(
-                    layoutSize: size,
-                    subitems: [NSCollectionLayoutItem(layoutSize: size)])))
+        
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitems: [NSCollectionLayoutItem(layoutSize: size)])
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 20, leading: 0, bottom: 0, trailing: 0)
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+
+        return layout
     }
 
     private func refreshPayments() {
         guard let controller = paymentController else { return }
-        paymentCollectionView.refreshControl?.beginRefreshing()
+        refreshControl.beginRefreshing()
         controller.fetchPaymentsForSelectedProperty(completion: { [weak self] result in
             switch result {
             case .success(let payments):
@@ -86,7 +100,7 @@ class PaymentHistoryViewController: UIViewController {
                 }
             }
             DispatchQueue.main.async {
-                self?.paymentCollectionView.refreshControl?.endRefreshing()
+                self?.refreshControl.endRefreshing()
             }
         })
     }
