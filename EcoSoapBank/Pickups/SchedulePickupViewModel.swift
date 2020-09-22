@@ -75,6 +75,7 @@ extension SchedulePickupViewModel {
             }
             return
         }
+        // Calls the schedulePickup method on the delegate to schedule the pickup with the current data
         delegate.schedulePickup(
             for: Pickup.ScheduleInput(
                 base: Pickup.Base(
