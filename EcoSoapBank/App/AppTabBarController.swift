@@ -9,6 +9,7 @@
 import UIKit
 
 
+/// The app's root level tab bar controller. Uses `BackgroundView` as its root view, and can dismiss any/all presented view controllers.
 class AppTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,13 +20,18 @@ class AppTabBarController: UITabBarController {
         }
     }
 
-    /// Recursively dismisses any view controllers currently being presented
+    /// Recursively dismisses any view controllers currently being presented.
     func dismissAllPresentedViewControllers(onComplete: (() -> Void)?) {
-        if presentedViewController != nil {
-            dismiss(animated: true) {
-                self.dismissAllPresentedViewControllers(onComplete: onComplete)
+        func dismissIfPresenting(on parent: UIViewController, onComplete: (() -> Void)?) {
+            if let child = parent.presentedViewController {
+                dismissIfPresenting(on: child, onComplete: {
+                    parent.dismiss(animated: true, completion: onComplete)
+                })
+            } else {
+                onComplete?()
             }
         }
-        onComplete?()
+
+        dismissIfPresenting(on: self, onComplete: onComplete)
     }
 }

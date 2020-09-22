@@ -147,11 +147,14 @@ extension UIView {
 
 
 extension UIEdgeInsets {
+    /// The total width of the horizontal insets.
     var width: CGFloat { left + right }
+    /// The total width of the vertical insets.
     var height: CGFloat { top + bottom }
 }
 
 
+/// An object that can be constrained via anchors.
 protocol AutoLayoutConstrainable {
     var bottomAnchor: NSLayoutYAxisAnchor { get }
     var centerXAnchor: NSLayoutXAxisAnchor { get }

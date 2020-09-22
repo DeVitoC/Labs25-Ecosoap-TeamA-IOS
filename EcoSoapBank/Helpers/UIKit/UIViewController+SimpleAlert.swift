@@ -11,8 +11,8 @@ import UIKit
 extension UIViewController {
     func presentSimpleAlert(with title: String?,
                             message: String?,
-                            preferredStyle: UIAlertController.Style,
-                            dismissText: String,
+                            preferredStyle: UIAlertController.Style = .alert,
+                            dismissText: String = "Okay",
                             completionUponDismissal: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         

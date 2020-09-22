@@ -26,7 +26,7 @@ class SchedulePickupViewModel {
     lazy var selectedProperty = properties.first!
 
     private var user: User
-    private weak var delegate: SchedulePickupViewModelDelegate?
+    private weak var delegate: SchedulePickupViewModelDelegate!
 
     init(user: User, delegate: SchedulePickupViewModelDelegate?) {
         self.user = user
@@ -56,12 +56,6 @@ extension SchedulePickupViewModel {
     }
 
     func schedulePickup(_ completion: ResultHandler<Pickup.ScheduleResult>? = nil) {
-        guard let delegate = delegate else {
-            if let comp = completion {
-                comp(.failure(ESBError.noDelegate))
-            }
-            return
-        }
         delegate.schedulePickup(
             for: Pickup.ScheduleInput(
                 base: Pickup.Base(

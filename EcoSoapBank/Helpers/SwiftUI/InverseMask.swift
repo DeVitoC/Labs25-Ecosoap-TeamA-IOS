@@ -10,7 +10,8 @@ import SwiftUI
 
 
 extension View {
-    func inverseMask<Mask>(_ mask: Mask) -> some View where Mask: View {
+    /// Masks this view using the alpha channel of the given view. Inverse of regular mask.
+    func inverseMask<Mask: View>(_ mask: Mask) -> some View {
         self.mask(mask
             .foregroundColor(.black)
             .background(Color.white)
