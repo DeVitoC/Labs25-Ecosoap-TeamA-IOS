@@ -8,11 +8,14 @@
 
 import SwiftUI
 
+
+/// A UIKit `UITextView` wrapped for use in SwiftUI.
 struct TextView: UIViewRepresentable {
     @Binding var text: String
 
     var font: UIFont
 
+    /// Create a `TextView` with a binding to the view's text content and a `UIFont`.
     init(
         text: Binding<String>,
         font: UIFont = .preferredFont(forTextStyle: .body)
