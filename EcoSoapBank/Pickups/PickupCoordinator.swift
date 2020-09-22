@@ -17,6 +17,8 @@ class PickupCoordinator: FlowCoordinator {
     private let pickupController: PickupController
     private(set) var user: User
 
+    // rootVC is the base controller that will be opened.
+    // In this case, the UINavigationController that will provide the navigation bar and stack
     private(set) lazy var rootVC = UINavigationController(rootViewController: historyVC())
     private var cancellables = Set<AnyCancellable>()
     private var scheduleVC: SchedulePickupViewController?
@@ -56,7 +58,7 @@ class PickupCoordinator: FlowCoordinator {
 // MARK: - Event handlers
 
 extension PickupCoordinator {
-    /// Presents the scheduleVC (SchedulePickupViewController) as the curent ViewController
+    /// Presents the scheduleVC (**SchedulePickupViewController**) as the curent **ViewController**
     @objc func scheduleNewPickup() {
         guard user.properties?.first != nil else {
             return rootVC.presentAlert(for: UserError.noProperties)
@@ -69,6 +71,8 @@ extension PickupCoordinator {
         rootVC.present(nav, animated: true, completion: nil)
     }
 
+    /// Loads and configures the **PickupDetailViewController**
+    /// - Parameter pickup: The **Pickup** whose details will be displayed on the **PickupDetailViewController**
     func showPickupDetail(for pickup: Pickup) {
         guard let vc = PickupDetailViewController.storyboard().instantiateInitialViewController(creator: {
             PickupDetailViewController(coder: $0, pickup: pickup)
@@ -113,6 +117,8 @@ extension PickupCoordinator {
         return alert
     }
 
+    /// Configures the **PickupHistoryView** and returns as a **UIViewController**
+    /// - Returns: Returns the configured **PickupHistoryView** as a **UIViewController**
     private func historyVC() -> UIViewController {
         configure(UIHostingController(
             rootView: PickupHistoryView(
