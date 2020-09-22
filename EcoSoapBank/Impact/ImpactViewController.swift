@@ -9,8 +9,9 @@
 import UIKit
 
 
+/// Displays the impact a property or all properties is having via Eco-Soap Bank
 class ImpactViewController: UIViewController {
-    
+
     var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
@@ -19,13 +20,15 @@ class ImpactViewController: UIViewController {
     var impactController: ImpactController?
     
     private var massUnitObserver: UserDefaultsObservation?
-    
+
+    /// Initailizes and configures the ImpactViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemGray6
         navigationItem.title = "Impact Summary"
-        
+
+        // Assigns the units of measurement to display based on the user's UserDefaults
         massUnitObserver = UserDefaults.$massUnit.observe { [weak self] _, _ in
             self?.collectionView.reloadData()
         }
@@ -33,12 +36,12 @@ class ImpactViewController: UIViewController {
         setUpCollectionView()
         refreshImpactStats()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         collectionView.reloadData()
     }
-    
+
     private func setUpCollectionView() {
         collectionView.register(ImpactCell.self, forCellWithReuseIdentifier: ImpactCell.reuseIdentifier)
         
@@ -102,6 +105,7 @@ extension ImpactViewController: UICollectionViewDataSource {
 
 // MARK: - Flow Layout Delegate
 
+/// Enum describing several layout sizes
 private enum ImpactLayout {
     static let headerHeight: CGFloat = 80
     static let cellAspectRatio: CGFloat = 0.31
