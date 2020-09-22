@@ -55,7 +55,11 @@ enum LoginError: LocalizedError {
 }
 
 
+/// Coordinator that initializes and starts the LoginViewController
 class LoginCoordinator: FlowCoordinator {
+
+    // rootVC is the base controller that will be opened.
+    // In this case, the UIViewController that is passed in the initializer
     private var rootVC: UIViewController
     private lazy var loginVC = LoginViewController(delegate: self)
 
@@ -65,6 +69,10 @@ class LoginCoordinator: FlowCoordinator {
 
     // MARK: - Init/Start
 
+    /// Initializer that takes in a **UIViewController** and **UserController** and initializes the **LoginCoordinator**
+    /// - Parameters:
+    ///   - root: The **UIViewController** to display
+    ///   - userController: The **UserController** to manage the **User** being logged in
     init(
         root: UIViewController,
         userController: UserController
@@ -84,6 +92,7 @@ class LoginCoordinator: FlowCoordinator {
             }).store(in: &cancellables)
     }
 
+    /// Calls the showLoginScreen method to start the rootVC which pushes the loginVC as the current ViewController.
     func start() {
         showLoginScreen()
     }
@@ -92,6 +101,8 @@ class LoginCoordinator: FlowCoordinator {
 // MARK: - Private Helpers
 
 extension LoginCoordinator {
+
+    /// Calls the rootVC to push the loginVC as the current ViewController.
     private func showLoginScreen() {
         guard loginVC.presentedViewController == nil else {
             return loginVC.dismiss(animated: true, completion: showLoginScreen)
@@ -106,6 +117,7 @@ extension LoginCoordinator {
 // MARK: - LoginVC Delegate
 
 extension LoginCoordinator: LoginViewControllerDelegate {
+    /// Method that presents the LoadingViewController
     func login() {
         guard let loginURL = userController.oktaLoginURL else {
             return rootVC.presentAlert(for: LoginError.oktaFailure)
