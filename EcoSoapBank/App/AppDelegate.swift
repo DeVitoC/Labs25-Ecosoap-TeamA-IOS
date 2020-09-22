@@ -90,12 +90,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         configure(UITableView.appearance()) {
-            $0.backgroundColor = UIColor.systemGray5
+            $0.backgroundColor = UIColor.tableViewCellBackground
             $0.separatorColor = UIColor.esbSeparator
         }
         
         configure(UITableViewCell.appearance()) {
-            $0.backgroundColor = UIColor.historyCellBackground
+            $0.backgroundColor = UIColor.tableViewCellBackground
         }
     }
 }
