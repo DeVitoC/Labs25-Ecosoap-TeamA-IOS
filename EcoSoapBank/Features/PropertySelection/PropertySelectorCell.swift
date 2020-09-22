@@ -12,7 +12,7 @@ class PropertySelectorCell: UITableViewCell {
     
     let label = configure(UILabel()) {
         $0.textAlignment = .center
-        $0.font = .preferredMontserrat(forTextStyle: .caption2, typeface: .medium)
+        $0.font = .montserrat(ofSize: 17, typeface: .medium)
         $0.textColor = .downyBlue
     }
     
