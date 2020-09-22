@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Class that sets up the Impact Cell layout
 class ImpactCell: UICollectionViewCell {
     
     enum Alignment {
@@ -85,6 +86,7 @@ class ImpactCell: UICollectionViewCell {
     
     // MARK: - Private Methods
 
+    /// Primary UI Layout method for the ImpactCell. Adds UI Elements to the contentView and then calls the relevant methods to complete the rest of the UI setup
     private func setUp() {
         contentView.addSubviewsUsingAutolayout(titleLabel, subtitleLabel, circleView, lineView)
         
@@ -94,7 +96,8 @@ class ImpactCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate(leadingConstraints)
     }
-    
+
+    /// Adds constraints to the main UI elements that are common to leading and trailing alligned cells
     private func addCommonConstraints() {
         NSLayoutConstraint.activate([
             circleView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -110,7 +113,8 @@ class ImpactCell: UICollectionViewCell {
                                                constant: verticalLabelPadding)
         ])
     }
-    
+
+    /// Adds constraints to UI elements that will be used for the leading alligned cells
     private func setUpLeadingConstraints() {
         leadingConstraints = [
             circleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
@@ -125,7 +129,8 @@ class ImpactCell: UICollectionViewCell {
             subtitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -imagePadding),
         ]
     }
-    
+
+    /// Adds constraints to UI elements that will be used for the trailing alligned cells
     private func setUpTrailingConstraints() {
         trailingConstraints = [
             circleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
@@ -140,7 +145,8 @@ class ImpactCell: UICollectionViewCell {
             subtitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: imagePadding),
         ]
     }
-    
+
+    /// Controls which constraints will be active based on leading or trailing allignment of the cell
     private func swapHorizontalConstraints() {
         if alignment == .leading {
             NSLayoutConstraint.deactivate(trailingConstraints)
@@ -152,7 +158,8 @@ class ImpactCell: UICollectionViewCell {
             subtitleLabel.textAlignment = .right
         }
     }
-    
+
+    /// Method that updates the text and image of the UI elements when ImpactCellViewModel is set
     private func updateViews() {
         guard let viewModel = viewModel else { return }
         titleLabel.text = viewModel.title
