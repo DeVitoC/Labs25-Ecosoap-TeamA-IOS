@@ -31,7 +31,6 @@ class PaymentHistoryViewController: UIViewController {
     // MARK: - Initialization methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Payment History"
         setupCollectionView()
         refreshPayments()
     }

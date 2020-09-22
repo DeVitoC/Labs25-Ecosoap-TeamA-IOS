@@ -12,12 +12,14 @@ import UIKit
 class PaymentCoordinator: FlowCoordinator {
     
     init(user: User, dataProvider: PaymentDataProvider) {
-        paymentVC.paymentController = PaymentController(user: user,
-                                                        dataProvider: dataProvider)
+        let paymentHistoryVC = PaymentHistoryViewController()
+        paymentHistoryVC.paymentController = PaymentController(user: user, dataProvider: dataProvider)
+        paymentVC = PropertySelectionViewController(mainViewController: paymentHistoryVC, user: user)
+        paymentVC.navigationItem.title = "Payment History"
     }
 
     let rootVC = UINavigationController()
-    let paymentVC = PaymentHistoryViewController()
+    let paymentVC: PropertySelectionViewController
 
     /// Starts the PaymentHistoryViewController
     func start() {
