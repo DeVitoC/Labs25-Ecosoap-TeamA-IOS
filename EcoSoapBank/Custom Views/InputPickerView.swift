@@ -9,6 +9,7 @@
 import UIKit
 
 
+/// A simple picker view to be used as input for a text field. Acts as its own delegate/data source.
 class InputPickerView<DataItem>:
 UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
     var data: [DataItem]
