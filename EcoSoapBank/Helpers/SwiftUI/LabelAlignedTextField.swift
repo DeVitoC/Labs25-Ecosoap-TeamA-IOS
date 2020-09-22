@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+
+/// A text field with an accompanying label, aligned in a vertical stack according to the widest label, giving the impression of a uniform grid.
 struct LabelAlignedTextField: View {
     let title: String
     let placeholder: String

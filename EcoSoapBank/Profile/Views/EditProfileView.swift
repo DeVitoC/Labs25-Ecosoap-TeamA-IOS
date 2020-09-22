@@ -14,6 +14,7 @@ struct EditProfileView: View {
     @State var profileInfo: EditableProfileInfo
 
     @Environment(\.presentationMode) var presentationMode
+    /// The width of the widest label; used for aligning labels in a column.
     @State var labelWidth: CGFloat?
 
     init(_ user: User) {
@@ -21,18 +22,18 @@ struct EditProfileView: View {
     }
 
     var body: some View {
-        With($profileInfo) { profile in
+        With($profileInfo) { prf in
             Form {
                 Section(header: Text("Name".uppercased())) {
-                    self.textField("First", text: profile.firstName)
-                    self.textField("Middle", text: profile.middleName)
-                    self.textField("Last", text: profile.lastName)
+                    self.textField("First", text: prf.firstName)
+                    self.textField("Middle", text: prf.middleName)
+                    self.textField("Last", text: prf.lastName)
                 }
 
                 Section(header: Text("Contact Info".uppercased())) {
-                    self.textField("Email", text: profile.email)
-                    self.textField("Skype", text: profile.skype)
-                    self.textField("Phone", text: profile.phone)
+                    self.textField("Email", text: prf.email)
+                    self.textField("Skype", text: prf.skype)
+                    self.textField("Phone", text: prf.phone)
                 }
             }
         }
@@ -46,12 +47,14 @@ struct EditProfileView: View {
         )
     }
 
+    /// A custom label and text field, aligned vertically.
     func textField(_ title: String, text: Binding<String>) -> some View {
         LabelAlignedTextField(title: title, labelWidth: $labelWidth, text: text)
             .fonts(label: Font(UIFont.preferredMuli(forTextStyle: .caption1, typeface: .bold)),
                    textField: Font(UIFont.preferredMuli(forTextStyle: .body, typeface: .light)))
     }
 
+    /// Save the user's profile changes to the server.
     func commitChanges() {
         viewModel.commitProfileChanges(profileInfo) {
             self.presentationMode.wrappedValue.dismiss()
