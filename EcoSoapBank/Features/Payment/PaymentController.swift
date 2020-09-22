@@ -12,9 +12,11 @@ import Combine
 
 protocol PaymentDataProvider {
     func fetchPayments(forPropertyID propertyID: String,
-                       _ completion: @escaping (Result<[Payment], Error>) -> Void)
+                       completion: @escaping ResultHandler<[Payment]>)
     func makePayment(_ paymentInput: Payment,
-                     completion: @escaping (Result<Payment, Error>) -> Void)
+                     completion: @escaping ResultHandler<Payment>)
+    func fetchNextPayment(forPropertyID propertyID: String,
+                          completion: @escaping ResultHandler<NextPaymentDue>)
 }
 
 class PaymentController {
@@ -34,8 +36,12 @@ class PaymentController {
         self.dataProvider = dataProvider
     }
 
-    func fetchPayments(forPropertyID propertyID: String, completion: @escaping (Result<[Payment], Error>) -> Void) {
-        dataProvider.fetchPayments(forPropertyID: propertyID, completion)
+    func fetchPayments(forPropertyID propertyID: String, completion: @escaping ResultHandler<[Payment]>) {
+        dataProvider.fetchPayments(forPropertyID: propertyID, completion: completion)
+    }
+
+    func fetchNextPayment(forPropertyID propertyID: String, completion: @escaping ResultHandler<NextPaymentDue>) {
+        dataProvider.fetchNextPayment(forPropertyID: propertyID, completion: completion)
     }
 
     func fetchPaymentsForAllProperties(completion: @escaping ResultHandler<[Payment]>) {

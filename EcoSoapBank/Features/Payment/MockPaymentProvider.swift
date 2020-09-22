@@ -23,13 +23,25 @@ class MockPaymentProvider {
 extension MockPaymentProvider: PaymentDataProvider {
     /// Simply returns mock Pickups through closure
     /// (or `MockPickupProvider.Error.shouldFail` if `shouldFail` instance property is set to `true`).
-    func fetchPayments(forPropertyID propertyID: String, _ completion: @escaping ResultHandler<[Payment]>) {
+    func fetchPayments(forPropertyID propertyID: String, completion: @escaping ResultHandler<[Payment]>) {
         DispatchQueue.global().async {
             guard !self.shouldFail else {
                 completion(.mockFailure())
                 return
             }
             completion(.success(.random()))
+        }
+    }
+
+    func fetchNextPayment(
+        forPropertyID propertyID: String,
+        completion: @escaping ResultHandler<NextPaymentDue>
+    ) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.2) {
+            guard !self.shouldFail else {
+                return completion(.mockFailure())
+            }
+            completion(.success(.mock))
         }
     }
 
@@ -82,6 +94,16 @@ extension Payment {
                 paymentMethod: randomPaymentMethod()
         )
     }
+}
+
+extension NextPaymentDue {
+    static let mock = NextPaymentDue(
+        invoiceCode: mockInvoiceCode(),
+        invoice: URL(string: "http://google.com"),
+        amountDue: 250_00,
+        invoicePeriodStartDate: Date(year: 2020, month: 4, day: 01),
+        invoicePeriodEndDate: Date(year: 2020, month: 6, day: 01),
+        dueDate: Date(year: 2020, month: 7, day: 01))
 }
 
 //extension Payment.ScheduleResult {

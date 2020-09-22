@@ -119,4 +119,17 @@ enum GraphQLQueries {
         }
     }
     """
+
+    static let nextPaymentByPropertyId = """
+    query NextPaymentByPropertyId($input: NextPaymentByPropertyIdInput) {
+        nextPaymentByPropertyId(input: $input) {
+            invoiceCode
+            invoice
+            amountDue
+            invoicePeriodStartDate
+            invoicePeriodEndDate
+            dueDate
+        }
+    }
+    """
 }

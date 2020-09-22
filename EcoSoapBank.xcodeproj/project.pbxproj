@@ -128,6 +128,7 @@
 		46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */; };
 		46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E624C98D8900FE0CD1 /* Notifications.swift */; };
 		46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */; };
+		990C241D25191D6800055BA9 /* LabelHuggingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C241C25191D6800055BA9 /* LabelHuggingButton.swift */; };
 		990C3A32250C2FFE00ACDE78 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C3A31250C2FFE00ACDE78 /* TestHelpers.swift */; };
 		990C3A33250C2FFE00ACDE78 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C3A31250C2FFE00ACDE78 /* TestHelpers.swift */; };
 		990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */; };
@@ -313,6 +314,7 @@
 		46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		46BEB4E624C98D8900FE0CD1 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+SimpleAlert.swift"; sourceTree = "<group>"; };
+		990C241C25191D6800055BA9 /* LabelHuggingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelHuggingButton.swift; sourceTree = "<group>"; };
 		990C3A31250C2FFE00ACDE78 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
@@ -661,6 +663,7 @@
 				9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */,
 				46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */,
 				E28E911324FEBC320014DF82 /* UIViews+Convenience.swift */,
+				990C241C25191D6800055BA9 /* LabelHuggingButton.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1211,6 +1214,7 @@
 				997BF11224E20AAE00A643D8 /* TextView.swift in Sources */,
 				0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */,
 				E2D04F9324F0D50600515831 /* Address.swift in Sources */,
+				990C241D25191D6800055BA9 /* LabelHuggingButton.swift in Sources */,
 				998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */,
 				04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */,
 				9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */,
