@@ -76,8 +76,8 @@
 		0445F05024EDEA7F00A0A665 /* ESBCircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */; };
 		047B897F251121E500AB10D3 /* CartonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B897D251121E500AB10D3 /* CartonCollectionViewCell.swift */; };
 		047B8980251121E500AB10D3 /* CartonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047B897E251121E500AB10D3 /* CartonCollectionViewCell.xib */; };
-		047B89822513BA0900AB10D3 /* PropertySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */; };
-		047B89842513BC2700AB10D3 /* PropertySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B89832513BC2700AB10D3 /* PropertySelectionCell.swift */; };
+		047B89822513BA0900AB10D3 /* PropertySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B89812513BA0900AB10D3 /* PropertySelector.swift */; };
+		047B89842513BC2700AB10D3 /* PropertySelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B89832513BC2700AB10D3 /* PropertySelectorCell.swift */; };
 		049379A524EAE7140084051B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A424EAE7140084051B /* Images.swift */; };
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
@@ -110,7 +110,7 @@
 		04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90224FD60AA00263376 /* GraphQLOperation.swift */; };
 		04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90424FD85CF00263376 /* HTTPMethod.swift */; };
 		04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90624FD860B00263376 /* GraphQLError.swift */; };
-		04CE18DA2518FE9A00D9CA4E /* PropertySelectionContainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CE18D92518FE9A00D9CA4E /* PropertySelectionContainingController.swift */; };
+		04CE18DA2518FE9A00D9CA4E /* PropertySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CE18D92518FE9A00D9CA4E /* PropertySelectionViewController.swift */; };
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
@@ -264,8 +264,8 @@
 		0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBCircularImageView.swift; sourceTree = "<group>"; };
 		047B897D251121E500AB10D3 /* CartonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartonCollectionViewCell.swift; sourceTree = "<group>"; };
 		047B897E251121E500AB10D3 /* CartonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartonCollectionViewCell.xib; sourceTree = "<group>"; };
-		047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectionViewController.swift; sourceTree = "<group>"; };
-		047B89832513BC2700AB10D3 /* PropertySelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectionCell.swift; sourceTree = "<group>"; };
+		047B89812513BA0900AB10D3 /* PropertySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelector.swift; sourceTree = "<group>"; };
+		047B89832513BC2700AB10D3 /* PropertySelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectorCell.swift; sourceTree = "<group>"; };
 		049379A424EAE7140084051B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 		04CCD90224FD60AA00263376 /* GraphQLOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLOperation.swift; sourceTree = "<group>"; };
 		04CCD90424FD85CF00263376 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		04CCD90624FD860B00263376 /* GraphQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLError.swift; sourceTree = "<group>"; };
-		04CE18D92518FE9A00D9CA4E /* PropertySelectionContainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectionContainingController.swift; sourceTree = "<group>"; };
+		04CE18D92518FE9A00D9CA4E /* PropertySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectionViewController.swift; sourceTree = "<group>"; };
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -486,9 +486,9 @@
 		04B1C7752513DC5300F3E7A4 /* PropertySelection */ = {
 			isa = PBXGroup;
 			children = (
-				047B89812513BA0900AB10D3 /* PropertySelectionViewController.swift */,
-				047B89832513BC2700AB10D3 /* PropertySelectionCell.swift */,
-				04CE18D92518FE9A00D9CA4E /* PropertySelectionContainingController.swift */,
+				04CE18D92518FE9A00D9CA4E /* PropertySelectionViewController.swift */,
+				047B89812513BA0900AB10D3 /* PropertySelector.swift */,
+				047B89832513BC2700AB10D3 /* PropertySelectorCell.swift */,
 			);
 			path = PropertySelection;
 			sourceTree = "<group>";
@@ -1153,7 +1153,7 @@
 				99BA964425001FE400821694 /* AppTabBarController.swift in Sources */,
 				99D0166024FEA6D9001A7555 /* With.swift in Sources */,
 				04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */,
-				04CE18DA2518FE9A00D9CA4E /* PropertySelectionContainingController.swift in Sources */,
+				04CE18DA2518FE9A00D9CA4E /* PropertySelectionViewController.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
 				9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */,
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,
@@ -1164,7 +1164,7 @@
 				999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */,
 				04C91E282509D04A005ED433 /* ESBTextField.swift in Sources */,
 				99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */,
-				047B89822513BA0900AB10D3 /* PropertySelectionViewController.swift in Sources */,
+				047B89822513BA0900AB10D3 /* PropertySelector.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
 				99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
@@ -1198,7 +1198,7 @@
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
 				99CE3DDF250AEFD60039E3FC /* Alert+ErrorMessage.swift in Sources */,
-				047B89842513BC2700AB10D3 /* PropertySelectionCell.swift in Sources */,
+				047B89842513BC2700AB10D3 /* PropertySelectorCell.swift in Sources */,
 				99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */,
 				E2C37DEA2508222200B9F20F /* PaymentHistoryViewController.swift in Sources */,
 				992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */,

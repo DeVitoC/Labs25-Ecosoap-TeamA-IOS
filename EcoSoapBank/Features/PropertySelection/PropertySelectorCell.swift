@@ -1,5 +1,5 @@
 //
-//  PropertySelectionCell.swift
+//  PropertySelectorCell.swift
 //  EcoSoapBank
 //
 //  Created by Shawn Gee on 9/17/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PropertySelectionCell: UITableViewCell {
+class PropertySelectorCell: UITableViewCell {
     
     let label = configure(UILabel()) {
         $0.textAlignment = .center

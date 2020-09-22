@@ -108,7 +108,7 @@ extension PickupCoordinator {
         )
         let pickupHistoryHostingController = UIHostingController(rootView: pickupHistoryView)
         
-        let historyVC = PropertySelectionContainingController(
+        let historyVC = PropertySelectionViewController(
             mainViewController: pickupHistoryHostingController,
             user: user
         )
