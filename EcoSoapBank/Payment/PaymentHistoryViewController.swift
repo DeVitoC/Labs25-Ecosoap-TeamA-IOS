@@ -19,12 +19,6 @@ class PaymentHistoryViewController: UIViewController {
         }
     }
 
-    // Cell Properties
-    var cellWidth: CGFloat {
-        paymentCollectionView.frame.size.width
-    }
-    var expandedHeight: CGFloat = 200
-    var notExpandedHeight: CGFloat = 80
     var isExpanded: IndexPath?
     let cellIdentifier = "PaymentCell"
 
