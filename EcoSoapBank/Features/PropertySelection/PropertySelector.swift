@@ -29,6 +29,18 @@ class PropertySelector: UIViewController {
     /// Determines whether the property selector should display initially expanded before animating closed.
     let shouldPeak: Bool
     
+    var isExpanded = true {
+        didSet {
+            if isExpanded {
+                tableView.setNeedsLayout()
+                tableView.layoutIfNeeded()
+                preferredContentSize.height = tableView.contentSize.height - 1
+            } else {
+                preferredContentSize.height = cellHeight - 1 // hide bottom separator line
+            }
+        }
+    }
+    
     // MARK: - Private Properties
     
     /// Calculates the properties to display, moving the selected property to the top (if there is one)
@@ -57,17 +69,6 @@ class PropertySelector: UIViewController {
     private var dataSource: UITableViewDiffableDataSource<Int, String>?
     private var selectedPropertyObserver: UserDefaultsObservation?
     private var shouldAnimateDifferences = false
-    private var isExpanded = true {
-        didSet {
-            if isExpanded {
-                tableView.setNeedsLayout()
-                tableView.layoutIfNeeded()
-                preferredContentSize.height = tableView.contentSize.height - 1
-            } else {
-                preferredContentSize.height = cellHeight - 1 // hide bottom separator line
-            }
-        }
-    }
     
     // MARK: - Init
     
@@ -92,7 +93,7 @@ class PropertySelector: UIViewController {
         }
         
         view.backgroundColor = .codGrey
-        addShadows()
+        addShadow()
         setUpTableView()
         
         if shouldPeak {
@@ -165,35 +166,19 @@ class PropertySelector: UIViewController {
         dataSource?.apply(snapshot, animatingDifferences: shouldAnimateDifferences) // only animate if already visible
     }
     
-    private func addShadows() {
+    private func addShadow() {
         let topShadow = GradientView()
         topShadow.colors = [UIColor.codGrey.adjustingBrightness(by: -0.07), .codGrey]
         topShadow.startPoint = CGPoint(x: 0, y: 0)
         topShadow.endPoint = CGPoint(x: 0, y: 1)
         
-        let bottomShadow = GradientView()
-        bottomShadow.colors = [UIColor.codGrey.adjustingBrightness(by: -0.05), .codGrey]
-        bottomShadow.startPoint = CGPoint(x: 0, y: 1)
-        bottomShadow.endPoint = CGPoint(x: 0, y: 0)
-        
-        let line = UIView()
-        line.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        
-        view.addSubviewsUsingAutolayout(topShadow, bottomShadow, line)
+        view.addSubviewsUsingAutolayout(topShadow)
         
         NSLayoutConstraint.activate([
             topShadow.topAnchor.constraint(equalTo: view.topAnchor),
             topShadow.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topShadow.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             topShadow.heightAnchor.constraint(equalToConstant: 8),
-            bottomShadow.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomShadow.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomShadow.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomShadow.heightAnchor.constraint(equalToConstant: 6),
-            line.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            line.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            line.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            line.heightAnchor.constraint(equalToConstant: 1.0)
         ])
     }
 }

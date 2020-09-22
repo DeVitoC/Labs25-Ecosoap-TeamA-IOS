@@ -21,6 +21,28 @@ class PropertySelectionViewController: UIViewController {
     // MARK: - Private Properties
     
     private var propertySelectorHeight: NSLayoutConstraint?
+    private let tabWidth: CGFloat = 50
+    private let chevron = UIImageView("chevron.down")
+    private let separatorColor = UIColor.black.withAlphaComponent(0.6)
+    private let separatorWidth: CGFloat = 1.0
+    
+    private lazy var tabCutout = configure(UIButton()) {
+        $0.backgroundColor = .codGrey
+        $0.layer.cornerRadius = tabWidth / 2
+        $0.layer.borderColor = separatorColor.cgColor
+        $0.layer.borderWidth = separatorWidth
+        
+        chevron.tintColor = .downyBlue
+        $0.addSubviewsUsingAutolayout(chevron)
+        chevron.centerHorizontallyInSuperview()
+        chevron.centerVerticallyInSuperview(multiplier: 1.5)
+        
+        $0.addTarget(self, action: #selector(openPropertySelector), for: .touchUpInside)
+    }
+    
+    private lazy var separatorLine = configure(UIView()) {
+        $0.backgroundColor = separatorColor
+    }
     
     // MARK: - Init
     
@@ -45,7 +67,28 @@ class PropertySelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setUpMainViews()
+        setUpCutout()
+    }
+    
+    override func preferredContentSizeDidChange(forChildContentContainer container: UIContentContainer) {
+        super.preferredContentSizeDidChange(forChildContentContainer: container)
+        if container === propertySelector {
+            propertySelectorHeight?.constant = container.preferredContentSize.height
+            UIView.animate(withDuration: propertySelector.expansionDuration) {
+                self.chevron.layer.opacity = self.propertySelector.isExpanded ? 0 : 1.0
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    // MARK: - Private Methods
+    
+    @objc func openPropertySelector() {
+        propertySelector.isExpanded = true
+    }
+    
+    private func setUpMainViews() {
         addChild(mainViewController)
         addChild(propertySelector)
         
@@ -70,13 +113,18 @@ class PropertySelectionViewController: UIViewController {
         ])
     }
     
-    override func preferredContentSizeDidChange(forChildContentContainer container: UIContentContainer) {
-        super.preferredContentSizeDidChange(forChildContentContainer: container)
-        if container === propertySelector {
-            propertySelectorHeight?.constant = container.preferredContentSize.height
-            UIView.animate(withDuration: propertySelector.expansionDuration) {
-                self.view.layoutIfNeeded()
-            }
-        }
+    private func setUpCutout() {
+        mainViewController.view.addSubviewsUsingAutolayout(separatorLine, tabCutout)
+        
+        tabCutout.centerHorizontallyInSuperview()
+        tabCutout.constrainToSize(CGSize(width: tabWidth, height: tabWidth))
+        tabCutout.centerYAnchor.constraint(equalTo: mainViewController.view.topAnchor, constant: -5).isActive = true
+        
+        NSLayoutConstraint.activate([
+            separatorLine.topAnchor.constraint(equalTo: mainViewController.view.topAnchor),
+            separatorLine.leadingAnchor.constraint(equalTo: mainViewController.view.leadingAnchor),
+            separatorLine.trailingAnchor.constraint(equalTo: mainViewController.view.trailingAnchor),
+            separatorLine.heightAnchor.constraint(equalToConstant: separatorWidth)
+        ])
     }
 }
