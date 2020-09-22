@@ -89,8 +89,8 @@ class ImpactController {
 
     /// Initializes the **ImpactController** with the current **User** and **ImpactDataProvider**
     /// - Parameters:
-    ///   - user: <#user description#>
-    ///   - dataProvider: <#dataProvider description#>
+    ///   - user: The current **User** that is logged in
+    ///   - dataProvider: An object that conforms to the **ImpactDataProvider** protocol which will either provide mock data or live network call methods
     init(user: User, dataProvider: ImpactDataProvider) {
         self.user = user
         self.dataProvider = dataProvider
