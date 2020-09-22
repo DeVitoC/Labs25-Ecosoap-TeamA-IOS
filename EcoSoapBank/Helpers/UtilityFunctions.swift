@@ -27,7 +27,7 @@ public func configure<T>(
 
 
 extension Date {
-    init?(year: Int, month: Int, day: Int, hour: Int, minute: Int, timeZone: TimeZone = .current) {
+    init?(year: Int, month: Int, day: Int, hour: Int = 0, minute: Int = 0, timeZone: TimeZone = .current) {
         guard let date = DateComponents(
             calendar: .current,
             timeZone: timeZone,

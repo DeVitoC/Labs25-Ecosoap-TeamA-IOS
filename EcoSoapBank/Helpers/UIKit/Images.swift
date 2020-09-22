@@ -25,6 +25,7 @@ extension UIImage {
     static let plusSquareFill = UIImage(systemName: "plus.square.fill")!
     static let cubeBox = UIImage(systemName: "cube.box")!
     static let cubeBoxFill = UIImage(systemName: "cube.box.fill")!
+    static let creditCard = UIImage(systemName: "creditcard")
 
     func withAlpha(_ alpha: CGFloat) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)

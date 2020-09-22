@@ -89,8 +89,14 @@ class GraphQLController: UserDataProvider, ImpactDataProvider, PickupDataProvide
     
     // Payments
     
-    func fetchPayments(forPropertyID propertyID: String, _ completion: @escaping (ResultHandler<[Payment]>)) {
+    func fetchPayments(forPropertyID propertyID: String, completion: @escaping (ResultHandler<[Payment]>)) {
         performOperation(.paymentsByPropertyID(id: propertyID), completion: completion)
+    }
+
+    func fetchNextPayment(forPropertyID propertyID: String, completion: @escaping ResultHandler<NextPaymentDue>) {
+        performOperation(.nextPaymentByPropertyID(id: propertyID),
+                         completion: completion,
+                         decodingOptions: [.isNotNested: true])
     }
 
     func makePayment(_ paymentInput: Payment, completion: @escaping ResultHandler<Payment>) {

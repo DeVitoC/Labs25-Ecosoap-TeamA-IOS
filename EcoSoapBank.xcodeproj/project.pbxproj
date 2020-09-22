@@ -125,6 +125,7 @@
 		46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */; };
 		46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E624C98D8900FE0CD1 /* Notifications.swift */; };
 		46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */; };
+		990C241D25191D6800055BA9 /* LabelHuggingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C241C25191D6800055BA9 /* LabelHuggingButton.swift */; };
 		990C3A32250C2FFE00ACDE78 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C3A31250C2FFE00ACDE78 /* TestHelpers.swift */; };
 		990C3A33250C2FFE00ACDE78 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C3A31250C2FFE00ACDE78 /* TestHelpers.swift */; };
 		990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */; };
@@ -165,7 +166,7 @@
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
 		998EF05925102DA800EDD19E /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 998EF05825102DA800EDD19E /* SwiftUIRefresh */; };
 		9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E024F9B78C00DD16B5 /* StripeController.swift */; };
-		9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
+		9990F6E324F9BFFE00DD16B5 /* MakePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* MakePaymentViewController.swift */; };
 		9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */; };
 		999411772513B99F00675831 /* UseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999411762513B99F00675831 /* UseMock.swift */; };
 		999B2D0E25014DEB002D3591 /* View+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999B2D0D25014DEB002D3591 /* View+Alignment.swift */; };
@@ -307,6 +308,7 @@
 		46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		46BEB4E624C98D8900FE0CD1 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+SimpleAlert.swift"; sourceTree = "<group>"; };
+		990C241C25191D6800055BA9 /* LabelHuggingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelHuggingButton.swift; sourceTree = "<group>"; };
 		990C3A31250C2FFE00ACDE78 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
@@ -347,7 +349,7 @@
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
 		9990F6E024F9B78C00DD16B5 /* StripeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeController.swift; sourceTree = "<group>"; };
-		9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		9990F6E224F9BFFE00DD16B5 /* MakePaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePaymentViewController.swift; sourceTree = "<group>"; };
 		9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlert.swift"; sourceTree = "<group>"; };
 		999411762513B99F00675831 /* UseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseMock.swift; sourceTree = "<group>"; };
 		999B2D0D25014DEB002D3591 /* View+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alignment.swift"; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 				992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */,
 				9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */,
 				E28E911324FEBC320014DF82 /* UIViews+Convenience.swift */,
+				990C241C25191D6800055BA9 /* LabelHuggingButton.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -702,7 +705,7 @@
 				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
 				E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */,
 				E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */,
-				9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */,
+				9990F6E224F9BFFE00DD16B5 /* MakePaymentViewController.swift */,
 				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
 				E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */,
 			);
@@ -1158,7 +1161,7 @@
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				992BB64524EF021600638AA4 /* MockUserDataProvider.swift in Sources */,
 				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
-				9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */,
+				9990F6E324F9BFFE00DD16B5 /* MakePaymentViewController.swift in Sources */,
 				99B6175B24EAF0A20099664B /* SchedulePickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
 				998913D524DE0907009ADBC1 /* PickupHistoryCell.swift in Sources */,
@@ -1183,6 +1186,7 @@
 				997BF11224E20AAE00A643D8 /* TextView.swift in Sources */,
 				0445F04A24EC648E00A0A665 /* UserDefaults.swift in Sources */,
 				E2D04F9324F0D50600515831 /* Address.swift in Sources */,
+				990C241D25191D6800055BA9 /* LabelHuggingButton.swift in Sources */,
 				998913D124DDFF96009ADBC1 /* PickupController.swift in Sources */,
 				04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */,
 				9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */,
