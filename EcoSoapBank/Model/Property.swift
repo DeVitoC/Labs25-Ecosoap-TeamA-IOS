@@ -94,6 +94,10 @@ extension UserDefaults {
     
     private static let propertySelectionByUserID = PassthroughSubject<[String: PropertySelection], Never>()
 
+    func propertySelection(forUser user: User) -> PropertySelection {
+        PropertySelection(selectedProperty(forUser: user))
+    }
+    
     func selectedPropertyPublisher(forUser user: User) -> AnyPublisher<PropertySelection, Never> {
         UserDefaults.propertySelectionByUserID
             .compactMap({ propertySelectionByUserID -> PropertySelection? in
@@ -103,6 +107,7 @@ extension UserDefaults {
             }).eraseToAnyPublisher()
     }
     
+    // Get selected property from user defaults
     func selectedProperty(forUser user: User) -> Property? {
         guard
             let propertyIDsByUserID = Self.selectedPropertyIDsByUser,
@@ -111,11 +116,11 @@ extension UserDefaults {
         return user.properties?.first(where: { $0.id == propertyID })
     }
 
-    func propertySelection(forUser user: User) -> PropertySelection {
-        PropertySelection(selectedProperty(forUser: user))
-    }
-
+    // Set selected property to user defaults
     func setSelectedProperty(_ property: Property?, forUser user: User) {
+        if Self.selectedPropertyIDsByUser == nil {
+            Self.selectedPropertyIDsByUser = [:] // add user default if not there
+        }
         Self.selectedPropertyIDsByUser?[user.id] = property?.id
         UserDefaults.propertySelectionByUserID.send([user.id: PropertySelection(property)])
     }
