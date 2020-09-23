@@ -78,13 +78,17 @@ extension UIView {
     ///
     /// Also sets `translatesAutoResizingMaskIntoConstraints` to false.
     /// - Precondition: View must be embedded in a superview.
-    func fillSuperview() {
+    func fillSuperview(respectingSafeArea: Bool = false) {
         guard let superview = superview else {
             assertionFailure("\(Self.self) has no superview to fill")
             return
         }
         
-        self.constrain(with: constraints(from: superview, toSides: .all, constant: 0))
+        self.constrain(with: constraints(
+            from: respectingSafeArea ? superview.safeAreaLayoutGuide : superview,
+            toSides: .all,
+            constant: 0)
+        )
     }
     
     /// Centers a view horizontally in it's superview with specified multiplier
