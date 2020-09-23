@@ -85,7 +85,6 @@
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
 		04A40785251AD13F001CBFED /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 04A40784251AD13F001CBFED /* Introspect */; };
 		04A40786251AD652001CBFED /* Utilities+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */; };
-		04A40787251AD65E001CBFED /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
 		04A40789251ADA2D001CBFED /* MakePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A40788251ADA2D001CBFED /* MakePaymentViewController.swift */; };
 		04B6FEAF24FEDCDF000CC58A /* DateCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */; };
 		04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */; };
@@ -358,7 +357,6 @@
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
 		9990F6E024F9B78C00DD16B5 /* StripeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeController.swift; sourceTree = "<group>"; };
-		9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlert.swift"; sourceTree = "<group>"; };
 		999411762513B99F00675831 /* UseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseMock.swift; sourceTree = "<group>"; };
 		999B2D0D25014DEB002D3591 /* View+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alignment.swift"; sourceTree = "<group>"; };
@@ -732,7 +730,6 @@
 				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
 				E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */,
 				E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */,
-				9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */,
 				04A40788251ADA2D001CBFED /* MakePaymentViewController.swift */,
 				E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */,
 				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
@@ -1153,7 +1150,6 @@
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
 				999411772513B99F00675831 /* UseMock.swift in Sources */,
 				04D1758D24E4195C00F8929C /* GradientView.swift in Sources */,
-				04A40787251AD65E001CBFED /* CheckoutViewController.swift in Sources */,
 				049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */,
 				992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */,
 				047B897F251121E500AB10D3 /* CartonCollectionViewCell.swift in Sources */,
