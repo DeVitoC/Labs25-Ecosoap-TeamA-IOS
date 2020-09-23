@@ -29,14 +29,14 @@ class PropertySelector: UIViewController {
     /// Determines whether the property selector should display initially expanded before animating closed.
     let shouldPeak: Bool
     
-    var isExpanded = true {
+    var isExpanded = false {
         didSet {
+            updateTableView()
+            
             if isExpanded {
-                tableView.setNeedsLayout()
-                tableView.layoutIfNeeded()
-                preferredContentSize.height = tableView.contentSize.height - 1
+                setExpandedContentSize()
             } else {
-                preferredContentSize.height = cellHeight - 1 // hide bottom separator line
+                setCollapsedContentSize()
             }
         }
     }
@@ -65,6 +65,7 @@ class PropertySelector: UIViewController {
     }
     
     private let cellHeight: CGFloat = 32
+    private let expandedCellHeight: CGFloat = 44
     private var tableView = UITableView()
     private var dataSource: UITableViewDiffableDataSource<Int, String>?
     private var selectedPropertyObserver: UserDefaultsObservation?
@@ -102,7 +103,7 @@ class PropertySelector: UIViewController {
                 self.isExpanded = false
             }
         } else {
-            isExpanded = false
+            setCollapsedContentSize()
         }
     }
     
@@ -181,11 +182,25 @@ class PropertySelector: UIViewController {
             topShadow.heightAnchor.constraint(equalToConstant: 8),
         ])
     }
+    
+    private func setCollapsedContentSize() {
+        preferredContentSize.height = cellHeight - 1 // hide bottom separator line
+    }
+    
+    private func setExpandedContentSize() {
+        preferredContentSize.height =
+            expandedCellHeight * CGFloat(tableView.numberOfRows(inSection: 0)) - 1
+    }
+    
+    private func updateTableView() {
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
 }
 
 extension PropertySelector: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        cellHeight
+        isExpanded ? expandedCellHeight : cellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
