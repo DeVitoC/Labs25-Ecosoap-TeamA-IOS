@@ -55,12 +55,12 @@ class ImpactViewController: UIViewController {
         refreshImpactStats()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         collectionView.reloadData()
         refreshControl.bounds = CGRect(
             x: refreshControl.bounds.origin.x,
-            y: -20,
+            y: -UIRefreshControl.topPadding,
             width: refreshControl.bounds.size.width,
             height: refreshControl.bounds.size.height
         )

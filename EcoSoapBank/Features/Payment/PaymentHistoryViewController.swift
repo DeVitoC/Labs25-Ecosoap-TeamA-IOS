@@ -37,11 +37,11 @@ class PaymentHistoryViewController: UIViewController {
         refreshPayments()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         refreshControl.bounds = CGRect(
             x: refreshControl.bounds.origin.x,
-            y: -20,
+            y: -UIRefreshControl.topPadding,
             width: refreshControl.bounds.size.width,
             height: refreshControl.bounds.size.height
         )
@@ -73,7 +73,7 @@ class PaymentHistoryViewController: UIViewController {
         
         let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitems: [NSCollectionLayoutItem(layoutSize: size)])
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 20, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = .init(top: UIRefreshControl.topPadding, leading: 3, bottom: 0, trailing: 0) // match table view leading, add space for refresh control
         
         let layout = UICollectionViewCompositionalLayout(section: section)
 

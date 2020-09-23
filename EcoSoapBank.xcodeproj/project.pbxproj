@@ -81,6 +81,7 @@
 		049379A524EAE7140084051B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A424EAE7140084051B /* Images.swift */; };
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
+		04A40785251AD13F001CBFED /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 04A40784251AD13F001CBFED /* Introspect */; };
 		04B6FEAF24FEDCDF000CC58A /* DateCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */; };
 		04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */; };
 		04BE6D0324F041E700DFC47D /* ImpactControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */; };
@@ -111,6 +112,7 @@
 		04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90424FD85CF00263376 /* HTTPMethod.swift */; };
 		04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90624FD860B00263376 /* GraphQLError.swift */; };
 		04CE18DA2518FE9A00D9CA4E /* PropertySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CE18D92518FE9A00D9CA4E /* PropertySelectionViewController.swift */; };
+		04CE18DC251ACF4400D9CA4E /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CE18DB251ACF4400D9CA4E /* PullToRefresh.swift */; };
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
@@ -167,7 +169,6 @@
 		998913D724DE0C34009ADBC1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D624DE0C33009ADBC1 /* Property.swift */; };
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
-		998EF05925102DA800EDD19E /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 998EF05825102DA800EDD19E /* SwiftUIRefresh */; };
 		9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E024F9B78C00DD16B5 /* StripeController.swift */; };
 		9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
 		9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */; };
@@ -293,6 +294,7 @@
 		04CCD90424FD85CF00263376 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		04CCD90624FD860B00263376 /* GraphQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLError.swift; sourceTree = "<group>"; };
 		04CE18D92518FE9A00D9CA4E /* PropertySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectionViewController.swift; sourceTree = "<group>"; };
+		04CE18DB251ACF4400D9CA4E /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -416,8 +418,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				998EF05925102DA800EDD19E /* SwiftUIRefresh in Frameworks */,
 				042CD96024F585AA00ADFCB5 /* KeychainAccess in Frameworks */,
+				04A40785251AD13F001CBFED /* Introspect in Frameworks */,
 				041E1E2124E1E1510052831D /* OktaAuth in Frameworks */,
 				999CBA3D24F9AFF100CDF0F3 /* Stripe.framework in Frameworks */,
 			);
@@ -545,6 +547,7 @@
 				993B15CB24F42D8C00529517 /* InputPickerView.swift */,
 				99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */,
 				999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */,
+				04CE18DB251ACF4400D9CA4E /* PullToRefresh.swift */,
 				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
 			);
 			path = "Custom Views";
@@ -886,7 +889,7 @@
 			packageProductDependencies = (
 				041E1E2024E1E1510052831D /* OktaAuth */,
 				042CD95F24F585AA00ADFCB5 /* KeychainAccess */,
-				998EF05825102DA800EDD19E /* SwiftUIRefresh */,
+				04A40784251AD13F001CBFED /* Introspect */,
 			);
 			productName = LabsScaffolding;
 			productReference = 466C4270249A8748007D033E /* EcoSoapBank.app */;
@@ -969,7 +972,7 @@
 			packageReferences = (
 				041E1E1F24E1E1510052831D /* XCRemoteSwiftPackageReference "OktaAuth" */,
 				042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
-				998EF05725102DA800EDD19E /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
+				04A40783251AD13F001CBFED /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 466C4271249A8748007D033E /* Products */;
 			projectDirPath = "";
@@ -1233,6 +1236,7 @@
 				0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */,
 				999B2D1025019045002D3591 /* InverseMask.swift in Sources */,
 				992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */,
+				04CE18DC251ACF4400D9CA4E /* PullToRefresh.swift in Sources */,
 				E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */,
 				998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */,
 				E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */,
@@ -1593,12 +1597,12 @@
 				minimumVersion = 4.2.0;
 			};
 		};
-		998EF05725102DA800EDD19E /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
+		04A40783251AD13F001CBFED /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUIRefresh";
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.3;
+				minimumVersion = 0.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1614,10 +1618,10 @@
 			package = 042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
 		};
-		998EF05825102DA800EDD19E /* SwiftUIRefresh */ = {
+		04A40784251AD13F001CBFED /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 998EF05725102DA800EDD19E /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
-			productName = SwiftUIRefresh;
+			package = 04A40783251AD13F001CBFED /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
