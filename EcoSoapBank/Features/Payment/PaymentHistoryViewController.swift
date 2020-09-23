@@ -10,8 +10,12 @@ import UIKit
 
 class PaymentHistoryViewController: UIViewController {
 
-    // MARK: - Properties
+    // MARK: - Public Properties
     var paymentController: PaymentController?
+    
+    
+    // MARK: - Private Properties
+    
     private lazy var paymentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout())
     private var payments: [Payment] = [] {
         didSet {
@@ -20,13 +24,16 @@ class PaymentHistoryViewController: UIViewController {
     }
     
     private let refreshControl = UIRefreshControl()
-
-    var isExpanded: IndexPath?
-    let cellIdentifier = "PaymentCell"
+    private let cellIdentifier = "PaymentCell"
+    private var selectedPropertyObserver: UserDefaultsObservation?
     
-    // MARK: - Initialization methods
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectedPropertyObserver = UserDefaults.$selectedPropertyIDsByUser.observe { [weak self] _, _ in
+            self?.refreshPayments()
+        }
         setupCollectionView()
         refreshPayments()
     }
@@ -41,7 +48,9 @@ class PaymentHistoryViewController: UIViewController {
         )
     }
     
-    func setupCollectionView() {
+    // MARK: - Private Methods
+    
+    private func setupCollectionView() {
         view.addSubview(paymentCollectionView)
         paymentCollectionView.dataSource = self
         paymentCollectionView.delegate = self
