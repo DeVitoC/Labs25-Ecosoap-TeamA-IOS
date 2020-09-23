@@ -80,6 +80,9 @@ class SchedulePickupViewController: KeyboardHandlingViewController {
     private lazy var datePicker = configure(UIDatePicker()) {
         $0.datePickerMode = .date
         $0.minimumDate = Date()
+        if #available(iOS 13.4, *) {
+            $0.preferredDatePickerStyle = .wheels
+        }
     }
     private lazy var notesView = configure(ESBTextView()) {
         $0.delegate = self

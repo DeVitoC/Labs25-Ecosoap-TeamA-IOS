@@ -9,6 +9,7 @@
 import Foundation
 
 extension JSONDecoder.DateDecodingStrategy {
+    /// The date decoding strategy for Eco-Soap Bank's GraphQL backend.
     static let graphQL = JSONDecoder.DateDecodingStrategy.custom { decoder -> Date in
         let container = try decoder.singleValueContainer()
         let dateString = try container.decode(String.self).replacingOccurrences(of: "−", with: "-")

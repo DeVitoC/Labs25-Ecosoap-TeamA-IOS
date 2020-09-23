@@ -82,6 +82,8 @@
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
 		04A40785251AD13F001CBFED /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 04A40784251AD13F001CBFED /* Introspect */; };
+		04A40786251AD652001CBFED /* Utilities+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */; };
+		04A40787251AD65E001CBFED /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
 		04B6FEAF24FEDCDF000CC58A /* DateCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */; };
 		04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */; };
 		04BE6D0324F041E700DFC47D /* ImpactControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */; };
@@ -128,7 +130,6 @@
 		466C4280249A8749007D033E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466C427E249A8749007D033E /* LaunchScreen.storyboard */; };
 		46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E024C9828800FE0CD1 /* Profile.swift */; };
 		46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */; };
-		46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E624C98D8900FE0CD1 /* Notifications.swift */; };
 		46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */; };
 		990C241D25191D6800055BA9 /* LabelHuggingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C241C25191D6800055BA9 /* LabelHuggingButton.swift */; };
 		990C3A32250C2FFE00ACDE78 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C3A31250C2FFE00ACDE78 /* TestHelpers.swift */; };
@@ -154,7 +155,6 @@
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
-		994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* UtilityFunctions.swift */; };
 		994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8824DDB68700C12921 /* UtilityTests.swift */; };
 		99789CC52502C832000428AC /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99789CC42502C832000428AC /* ProfileTests.swift */; };
 		997BF11224E20AAE00A643D8 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BF11124E20AAE00A643D8 /* TextView.swift */; };
@@ -170,7 +170,6 @@
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
 		9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E024F9B78C00DD16B5 /* StripeController.swift */; };
-		9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
 		9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */; };
 		999411772513B99F00675831 /* UseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999411762513B99F00675831 /* UseMock.swift */; };
 		999B2D0E25014DEB002D3591 /* View+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999B2D0D25014DEB002D3591 /* View+Alignment.swift */; };
@@ -314,7 +313,6 @@
 		466C4287249A889F007D033E /* File Organization.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "File Organization.md"; sourceTree = "<group>"; };
 		46BEB4E024C9828800FE0CD1 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		46BEB4E624C98D8900FE0CD1 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+SimpleAlert.swift"; sourceTree = "<group>"; };
 		990C241C25191D6800055BA9 /* LabelHuggingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelHuggingButton.swift; sourceTree = "<group>"; };
 		990C3A31250C2FFE00ACDE78 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
@@ -339,7 +337,7 @@
 		994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupCoordinator.swift; sourceTree = "<group>"; };
 		994E4B7624DDB55E00C12921 /* ImpactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactViewController.swift; sourceTree = "<group>"; };
-		994E4B7824DDB58300C12921 /* UtilityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
+		994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Convenience.swift"; sourceTree = "<group>"; };
 		994E4B7E24DDB67000C12921 /* EcoSoapBankTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcoSoapBankTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		994E4B8224DDB67000C12921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		994E4B8824DDB68700C12921 /* UtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityTests.swift; sourceTree = "<group>"; };
@@ -626,13 +624,12 @@
 				992BB64224EEFBAD00638AA4 /* Errors.swift */,
 				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
 				E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */,
-				46BEB4E624C98D8900FE0CD1 /* Notifications.swift */,
 				04C91E25250929C1005ED433 /* PrintJson.swift */,
 				99B6177024EC3D000099664B /* Publisher+HandleError.swift */,
 				992C929024F70B0C004FCBBB /* Randomizable.swift */,
 				0445F04924EC648E00A0A665 /* UserDefaults.swift */,
 				0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */,
-				994E4B7824DDB58300C12921 /* UtilityFunctions.swift */,
+				994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1153,6 +1150,7 @@
 				E27B4B1B24E1ED2100148E4E /* GraphQLController.swift in Sources */,
 				999411772513B99F00675831 /* UseMock.swift in Sources */,
 				04D1758D24E4195C00F8929C /* GradientView.swift in Sources */,
+				04A40787251AD65E001CBFED /* CheckoutViewController.swift in Sources */,
 				049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */,
 				992BB63A24EDCF1400638AA4 /* PickupDetailViewController.swift in Sources */,
 				047B897F251121E500AB10D3 /* CartonCollectionViewCell.swift in Sources */,
@@ -1166,6 +1164,7 @@
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
 				992FBC9024FDC01F0099C32D /* ProfileViewModel.swift in Sources */,
+				04A40786251AD652001CBFED /* Utilities+Convenience.swift in Sources */,
 				04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */,
 				999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */,
 				04C91E282509D04A005ED433 /* ESBTextField.swift in Sources */,
@@ -1177,7 +1176,6 @@
 				99C0467A24FD8B9200E2B005 /* EditProfileView.swift in Sources */,
 				99B6175D24EAF0C70099664B /* SchedulePickupViewModel.swift in Sources */,
 				998913D324DDFFA8009ADBC1 /* Pickup.swift in Sources */,
-				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				E28E911424FEBC320014DF82 /* UIViews+Convenience.swift in Sources */,
 				04C91E2A2509D069005ED433 /* ESBBordered.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
@@ -1190,8 +1188,6 @@
 				E2C37DEB2508222600B9F20F /* PaymentHistoryCollectionViewCell.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				992BB64524EF021600638AA4 /* MockUserDataProvider.swift in Sources */,
-				994E4B7924DDB58300C12921 /* UtilityFunctions.swift in Sources */,
-				9990F6E324F9BFFE00DD16B5 /* CheckoutViewController.swift in Sources */,
 				99B6175B24EAF0A20099664B /* SchedulePickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
 				998913D524DE0907009ADBC1 /* PickupHistoryCell.swift in Sources */,

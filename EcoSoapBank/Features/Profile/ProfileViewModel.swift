@@ -10,6 +10,7 @@ import SwiftUI
 import Combine
 
 
+/// Handles business logic of views in Profile section of app.
 class ProfileViewModel: ObservableObject {
     /// The currently signed-in user.
     @Published private(set) var user: User

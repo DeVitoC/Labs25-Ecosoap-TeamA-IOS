@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Private Methods
     
-    func setUpSubviews() {
+    private func setUpSubviews() {
         let logo = ESBCircularImageView(image: UIImage(named: "esbLogoWhite")!)
         view.addSubview(logo)
         
@@ -70,7 +70,7 @@ class LoginViewController: UIViewController {
                                                               constant: 40))
     }
     
-    func setUpMissionStatementLabel() -> UILabel {
+    private func setUpMissionStatementLabel() -> UILabel {
         let missionStatementLabel = UILabel()
         
         let line1 = "Saving, sanitizing, and supplying\n"
@@ -112,7 +112,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Actions
     
-    @objc func signIn(_ sender: UIButton) {
+    @objc private func signIn(_ sender: UIButton) {
         delegate?.login()
     }
 }

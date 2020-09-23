@@ -22,6 +22,7 @@ struct PickupHistoryView: View {
 
     @State private var fetchSubscription: AnyCancellable?
 
+    /// Called when an individual cell is tapped.
     private var onPickupTap: (Pickup) -> Void
 
     init(pickupController: PickupController,

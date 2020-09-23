@@ -169,14 +169,22 @@ extension PickupCoordinator: SchedulePickupViewModelDelegate {
             LoadingViewController(loadingText: "Scheduling pickup..."),
             animated: true)
 
-        self.pickupController.schedulePickup(for: input)
+        var subscription: AnyCancellable?
+        subscription = pickupController.schedulePickup(for: input)
             .receive(on: DispatchQueue.main)
-            .handleError({ [weak self] error in
-                self?.rootVC.presentAlert(for: error)
-                completion(.failure(error))
-            }).sink(receiveValue: { [weak self] result in
+            .sink(receiveCompletion: { [weak self] publisherDone in
+                if case .failure(let error) = publisherDone {
+                    self?.rootVC.presentAlert(for: error)
+                    completion(.failure(error))
+                }
+                if let sub = subscription {
+                    self?.cancellables.remove(sub)
+                }
+            }, receiveValue: { [weak self] result in
                 self?.handlePickupScheduleResult(result)
                 completion(.success(result))
-            }).store(in: &self.cancellables)
+            })
+
+        cancellables.insert(subscription!)
     }
 }

@@ -109,7 +109,7 @@ class PickupController: ObservableObject {
                 guard let self = self else { return }
                 if case .success(let pickupResult) = result {
                     guard let pickup = pickupResult.pickup else {
-                        return promise(.failure(ESBError.noResult))
+                        return promise(.failure(GraphQLError.noData))
                     }
                     var sortingPickups = self.pickups
                     sortingPickups.append(pickup)

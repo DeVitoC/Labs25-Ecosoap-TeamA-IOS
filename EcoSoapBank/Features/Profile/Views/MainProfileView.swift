@@ -10,9 +10,12 @@ import SwiftUI
 
 
 struct MainProfileView: View {
+    /// Allows responding to Dynamic Type.
     @Environment(\.sizeCategory) var sizeCategory
-    @EnvironmentObject var viewModel: ProfileViewModel
     
+    @EnvironmentObject var viewModel: ProfileViewModel
+
+    /// Helper for constraining width of icon.
     @State var iconWidth: CGFloat = 15
 
     var body: some View {
@@ -20,6 +23,8 @@ struct MainProfileView: View {
             Form {
                 if !viewModel.propertyOptions.isEmpty {
                     Section(header: Text("User".uppercased())) {
+
+                        // Edit Profile
                         NavigationLink(destination: EditProfileView(viewModel.user)) {
                             HStack {
                                 Image.personSquareFill()
@@ -31,6 +36,7 @@ struct MainProfileView: View {
                             }
                         }.isDetailLink(false)
 
+                        // Selected property
                         if viewModel.properties.count > 1 {
                             Picker(
                                 selection: $viewModel.managingProperty,
@@ -43,6 +49,7 @@ struct MainProfileView: View {
                         }
                     }
 
+                    // Edit properties
                     Section(header: Text("Edit Property Info".uppercased())) {
                         ForEach(viewModel.properties) { property in
                             NavigationLink(
@@ -55,6 +62,7 @@ struct MainProfileView: View {
                     Text("User account has no associated properties. Please contact Eco-Soap Bank for more info.")
                 }
 
+                // log out button
                 Section {
                     Button(action: viewModel.logOut) {
                         HStack {
@@ -91,6 +99,7 @@ struct MainProfileView: View {
     }
 }
 
+/// Helper for constraining width of icon.
 struct IconWidth: PreferenceKey {
     static var defaultValue: CGFloat = 0
 

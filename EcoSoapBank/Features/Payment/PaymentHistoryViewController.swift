@@ -21,12 +21,6 @@ class PaymentHistoryViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
 
-    // Cell Properties
-    var cellWidth: CGFloat {
-        paymentCollectionView.frame.size.width
-    }
-    var expandedHeight: CGFloat = 200
-    var notExpandedHeight: CGFloat = 80
     var isExpanded: IndexPath?
     let cellIdentifier = "PaymentCell"
     
@@ -73,11 +67,10 @@ class PaymentHistoryViewController: UIViewController {
         
         let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitems: [NSCollectionLayoutItem(layoutSize: size)])
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: UIRefreshControl.topPadding, leading: 3, bottom: 0, trailing: 0) // match table view leading, add space for refresh control
-        
-        let layout = UICollectionViewCompositionalLayout(section: section)
-
-        return layout
+        // Match table view leading padding, add space for refresh control
+        section.contentInsets = .init(top: UIRefreshControl.topPadding, leading: 3, bottom: 0, trailing: 0)
+       
+        return UICollectionViewCompositionalLayout(section: section)
     }
 
     private func refreshPayments() {

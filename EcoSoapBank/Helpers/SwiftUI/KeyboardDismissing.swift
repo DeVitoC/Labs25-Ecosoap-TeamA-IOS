@@ -35,22 +35,23 @@ struct KeyboardDismissing: ViewModifier {
     @ViewBuilder
     func body(content: Content) -> some View {
         content
-            .gesture(TapGesture().onEnded(content.hideKeyboard),
+            .gesture(TapGesture().onEnded(hideKeyboard),
                      including: keyboardObserver.isShowing ? .all : .none)
-    }
-}
-
-extension View {
-    func keyboardDismissing() -> some View {
-        modifier(KeyboardDismissing())
     }
 
     /// Dismisses the keyboard.
-    func hideKeyboard() {
+    private func hideKeyboard() {
         UIApplication.shared.sendAction(
             #selector(UIResponder.resignFirstResponder),
             to: nil,
             from: nil,
             for: nil)
+    }
+}
+
+extension View {
+    /// Enables dismissing the keyborad by tapping anywhere in the view.
+    func keyboardDismissing() -> some View {
+        modifier(KeyboardDismissing())
     }
 }

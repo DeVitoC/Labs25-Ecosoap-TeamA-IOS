@@ -94,13 +94,13 @@ private struct PullToRefresh: UIViewRepresentable {
     }
     
     public func makeCoordinator() -> Coordinator {
-        return Coordinator(onRefresh: onRefresh, isShowing: $isShowing)
+        Coordinator(onRefresh: onRefresh, isShowing: $isShowing)
     }
 }
 
 extension View {
     public func pullToRefresh(isShowing: Binding<Bool>, onRefresh: @escaping () -> Void) -> some View {
-        return overlay(
+        overlay(
             PullToRefresh(isShowing: isShowing, onRefresh: onRefresh)
                 .frame(width: 0, height: 0)
         )
