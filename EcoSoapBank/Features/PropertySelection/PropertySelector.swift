@@ -202,7 +202,6 @@ extension PropertySelector: UITableViewDelegate {
                 selectedProperty = nil // All Properties selected
             }
             
-            reloadData()
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             tableView.isScrollEnabled = false
             isExpanded = false
