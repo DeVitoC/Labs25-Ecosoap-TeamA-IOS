@@ -67,7 +67,6 @@ class UserController: ObservableObject {
 // MARK: - Public
 
 extension UserController {
-    var oktaLoginURL: URL? { OktaAuth.shared.identityAuthURL() }
 
     /// Logs the user in using the Bearer token from Okta.
     /// - Parameter completion: A closure that takes in a `Result<User, Error>`, called when login is completed.

@@ -18,7 +18,7 @@ class AppFlowCoordinator: FlowCoordinator {
     let window: UIWindow
 
     /// The main app tab bar controller.
-    private(set) lazy var tabBarController = AppTabBarController()
+    private lazy var tabBarController = AppTabBarController()
 
     // Coordinators for each app 'module'
 
@@ -26,9 +26,7 @@ class AppFlowCoordinator: FlowCoordinator {
     private var pickupCoord: PickupCoordinator?
     private var paymentCoord: PaymentCoordinator?
     private var profileCoord: ProfileCoordinator?
-    private(set) lazy var loginCoord = LoginCoordinator(
-        root: tabBarController,
-        userController: userController)
+    private lazy var loginCoord = LoginCoordinator(root: tabBarController)
 
     /// Handles business logic related to user, login, profile, and properties.
     private(set) lazy var userController = UserController(dataLoader: userProvider)

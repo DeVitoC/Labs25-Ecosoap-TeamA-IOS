@@ -59,18 +59,12 @@ class LoginCoordinator: FlowCoordinator {
     private var rootVC: UIViewController
     private lazy var loginVC = LoginViewController(delegate: self)
 
-    private var userController: UserController
-
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Init/Start
 
-    init(
-        root: UIViewController,
-        userController: UserController
-    ) {
+    init(root: UIViewController) {
         self.rootVC = root
-        self.userController = userController
         
         loginVC.modalPresentationStyle = .fullScreen
 
@@ -107,7 +101,7 @@ extension LoginCoordinator {
 
 extension LoginCoordinator: LoginViewControllerDelegate {
     func login() {
-        guard let loginURL = userController.oktaLoginURL else {
+        guard let loginURL = OktaAuth.shared.identityAuthURL() else {
             return rootVC.presentAlert(for: LoginError.oktaFailure)
         }
         loginVC.present(LoadingViewController(loadingText: "Logging in..."), animated: true) {
