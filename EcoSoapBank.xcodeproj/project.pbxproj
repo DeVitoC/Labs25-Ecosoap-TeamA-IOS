@@ -74,6 +74,8 @@
 		0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */; };
 		0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04D24EDD9C700A0A665 /* ESBButton.swift */; };
 		0445F05024EDEA7F00A0A665 /* ESBCircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */; };
+		0458CE87251AE2A6000F3990 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */; };
+		0458CE8A251AF634000F3990 /* PaymentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458CE89251AF634000F3990 /* PaymentCoordinator.swift */; };
 		047B897F251121E500AB10D3 /* CartonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B897D251121E500AB10D3 /* CartonCollectionViewCell.swift */; };
 		047B8980251121E500AB10D3 /* CartonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047B897E251121E500AB10D3 /* CartonCollectionViewCell.xib */; };
 		047B89822513BA0900AB10D3 /* PropertySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B89812513BA0900AB10D3 /* PropertySelector.swift */; };
@@ -84,6 +86,7 @@
 		04A40785251AD13F001CBFED /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 04A40784251AD13F001CBFED /* Introspect */; };
 		04A40786251AD652001CBFED /* Utilities+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */; };
 		04A40787251AD65E001CBFED /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */; };
+		04A40789251ADA2D001CBFED /* MakePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A40788251ADA2D001CBFED /* MakePaymentViewController.swift */; };
 		04B6FEAF24FEDCDF000CC58A /* DateCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */; };
 		04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */; };
 		04BE6D0324F041E700DFC47D /* ImpactControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */; };
@@ -185,7 +188,6 @@
 		99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177024EC3D000099664B /* Publisher+HandleError.swift */; };
 		99B6177324EC743F0099664B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177224EC743F0099664B /* LoginCoordinator.swift */; };
 		99BA964425001FE400821694 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA964325001FE400821694 /* AppTabBarController.swift */; };
-		99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */; };
 		99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467724FD8AF200E2B005 /* MainProfileView.swift */; };
 		99C0467A24FD8B9200E2B005 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467924FD8B9200E2B005 /* EditProfileView.swift */; };
 		99CE3DDF250AEFD60039E3FC /* Alert+ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CE3DDE250AEFD60039E3FC /* Alert+ErrorMessage.swift */; };
@@ -197,7 +199,6 @@
 		E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B324E45BF800C5DF8B /* QueryObjects.swift */; };
 		E2C37DE32508207C00B9F20F /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2F0EB24F844A10050BFCF /* PaymentController.swift */; };
 		E2C37DE42508208100B9F20F /* MockPaymentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */; };
-		E2C37DE92508221E00B9F20F /* PaymentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */; };
 		E2C37DEA2508222200B9F20F /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */; };
 		E2C37DEB2508222600B9F20F /* PaymentHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */; };
 		E2D04F9324F0D50600515831 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9224F0D50600515831 /* Address.swift */; };
@@ -263,6 +264,7 @@
 		0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsObservation.swift; sourceTree = "<group>"; };
 		0445F04D24EDD9C700A0A665 /* ESBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBButton.swift; sourceTree = "<group>"; };
 		0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBCircularImageView.swift; sourceTree = "<group>"; };
+		0458CE89251AF634000F3990 /* PaymentCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCoordinator.swift; sourceTree = "<group>"; };
 		047B897D251121E500AB10D3 /* CartonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartonCollectionViewCell.swift; sourceTree = "<group>"; };
 		047B897E251121E500AB10D3 /* CartonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartonCollectionViewCell.xib; sourceTree = "<group>"; };
 		047B89812513BA0900AB10D3 /* PropertySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelector.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 		049379A424EAE7140084051B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		04A40788251ADA2D001CBFED /* MakePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MakePaymentViewController.swift; path = EcoSoapBank/Features/Payment/MakePaymentViewController.swift; sourceTree = SOURCE_ROOT; };
 		04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCoding.swift; sourceTree = "<group>"; };
 		04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellViewModelTests.swift; sourceTree = "<group>"; };
 		04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactControllerTests.swift; sourceTree = "<group>"; };
@@ -399,7 +402,6 @@
 		E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLControllerMockDataTests.swift; sourceTree = "<group>"; };
 		E2D302FE24E5F464008A6FAF /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataLoader.swift; sourceTree = "<group>"; };
-		E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentCoordinator.swift; path = EcoSoapBank/Features/Payment/PaymentCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		E2E2F0E924F838170050BFCF /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		E2E2F0EB24F844A10050BFCF /* PaymentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -726,13 +728,14 @@
 		994E4B6F24DDAEB700C12921 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
-				E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */,
-				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
+				0458CE89251AF634000F3990 /* PaymentCoordinator.swift */,
+				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
 				E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */,
 				E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */,
 				9990F6E224F9BFFE00DD16B5 /* CheckoutViewController.swift */,
-				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
+				04A40788251ADA2D001CBFED /* MakePaymentViewController.swift */,
 				E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */,
+				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -1168,6 +1171,7 @@
 				04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */,
 				999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */,
 				04C91E282509D04A005ED433 /* ESBTextField.swift in Sources */,
+				0458CE8A251AF634000F3990 /* PaymentCoordinator.swift in Sources */,
 				99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */,
 				047B89822513BA0900AB10D3 /* PropertySelector.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
@@ -1184,6 +1188,7 @@
 				990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */,
 				04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */,
 				04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */,
+				04A40789251ADA2D001CBFED /* MakePaymentViewController.swift in Sources */,
 				993B15CC24F42D8C00529517 /* InputPickerView.swift in Sources */,
 				E2C37DEB2508222600B9F20F /* PaymentHistoryCollectionViewCell.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
@@ -1197,11 +1202,11 @@
 				992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */,
 				998913D724DE0C34009ADBC1 /* Property.swift in Sources */,
 				04BE6D0524F045C800DFC47D /* MockImpactProvider.swift in Sources */,
+				0458CE87251AE2A6000F3990 /* ProfileCoordinator.swift in Sources */,
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
 				99CE3DDF250AEFD60039E3FC /* Alert+ErrorMessage.swift in Sources */,
 				047B89842513BC2700AB10D3 /* PropertySelectorCell.swift in Sources */,
-				99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */,
 				E2C37DEA2508222200B9F20F /* PaymentHistoryViewController.swift in Sources */,
 				992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */,
 				04C91DDB250817B2005ED433 /* ESBTextView.swift in Sources */,
@@ -1223,7 +1228,6 @@
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
 				E2E2F0EA24F838170050BFCF /* Payment.swift in Sources */,
 				992FBC8724FDABE10099C32D /* LabelAlignedTextField.swift in Sources */,
-				E2C37DE92508221E00B9F20F /* PaymentCoordinator.swift in Sources */,
 				04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */,
 				04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */,
 				04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */,
