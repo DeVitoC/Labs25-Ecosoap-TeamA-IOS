@@ -34,3 +34,18 @@ The iOS app enables hotel partners to track pickups of recycled supplies, paymen
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE
+
+## App Architecture
+
+<img src="./Assets/ESB-App-architecture.png" alt="architecture diagram"/>
+<img src="./Assets/ESB-Module-architecture.png" alt="architecture diagram"/>
+
+This app utilizes the coordinator pattern to manage flow between views. For more on this pattern, see the following articles:
+
+- https://www.hackingwithswift.com/articles/71/how-to-use-the-coordinator-pattern-in-ios-apps
+- https://www.hackingwithswift.com/articles/175/advanced-coordinator-pattern-tutorial-ios
+
+## Known issues
+
+- App styling is slightly inconsistent in some spots, especially on iOS14. This is largely due to limitations in SwiftUI. Due to time constraints, these were not able to be addressed. It may be worth replacing all SwiftUI views with UIKit implementations for more customizability if time permits.
+- The user cannot currently make payments due to lack of access to a working Stripe backend. Once this is available, Stripe implementation will need to be completed in the Payment module.
