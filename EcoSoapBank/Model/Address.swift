@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct Address: Codable, Equatable, Hashable {
     let address1: String?
     let address2: String?

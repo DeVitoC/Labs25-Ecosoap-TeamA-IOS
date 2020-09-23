@@ -10,6 +10,7 @@ import UIKit
 
 
 extension UISwipeActionsConfiguration {
+    /// A swipe action configuration for deletion of cell content.
     static func remove(_ deleteHandler: @escaping UIContextualAction.Handler
     ) -> UISwipeActionsConfiguration {
         let delete = UIContextualAction(

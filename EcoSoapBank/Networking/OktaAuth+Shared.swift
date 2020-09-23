@@ -24,6 +24,8 @@ extension OktaAuth {
         clientID: "0oapaqacafrGUTfKx4x6",
         redirectURI: "labs://scaffolding/implicit/callback")
 
+    /// Publishes error if Okta login failed.
     static let error = PassthroughSubject<Error, Never>()
+    /// Publishes `Void` if Okta login was successful.
     static let success = PassthroughSubject<Void, Never>()
 }

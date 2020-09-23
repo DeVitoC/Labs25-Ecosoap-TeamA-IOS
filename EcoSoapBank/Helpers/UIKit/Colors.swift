@@ -15,7 +15,7 @@ extension UIColor {
 
     static let esbSeparator = UIColor.downyBlue.orAdjustingBrightness(by: -0.3, defaultLight: false)
 
-    static let historyCellBackground = UIColor.systemGray6
+    static let tableViewCellBackground = UIColor.systemGray6
     static let barButtonTint = UIColor.white
 }
 

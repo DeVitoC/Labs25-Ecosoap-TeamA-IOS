@@ -19,6 +19,10 @@ import Combine
 ///   }
 ///   ```
 class UserDefaultsObservation: NSObject {
+    
+    // Create a KVOContext to identify the observer
+    private static var context = 0
+    
     /// The key to observe
     let key: Key
     
@@ -31,11 +35,11 @@ class UserDefaultsObservation: NSObject {
         self.onChange = onChange
         self.key = key
         super.init()
-        UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: [.old, .new], context: nil)
+        UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: [.old, .new], context: &Self.context)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        guard let change = change, object != nil, keyPath == key.rawValue else { return }
+        guard let change = change, object != nil, keyPath == key.rawValue, context == &Self.context else { return }
         onChange(change[.oldKey] as Any, change[.newKey] as Any)
     }
     
@@ -47,7 +51,7 @@ class UserDefaultsObservation: NSObject {
 
 extension UserDefaultsObservation: Cancellable {
     func cancel() {
-        UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue, context: nil)
+        UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue, context: &Self.context)
     }
 
     func erasedToAnyCancellable() -> AnyCancellable {

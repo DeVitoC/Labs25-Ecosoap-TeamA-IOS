@@ -10,6 +10,9 @@ import SwiftUI
 
 
 extension Alert {
+    /// Create an alert from an `ErrorMessage`.
+    ///
+    /// If `secondaryButton` is nil, `primaryButton` will be used as a `dismissButton`. If `primaryButton` is nil, the default button configuration will be used. It is considered programmer error to provide a `secondaryButton` without a `primaryButton`.
     init(_ errorMessage: ErrorMessage,
          primaryButton: Button? = nil,
          secondaryButton: Button? = nil
@@ -31,6 +34,11 @@ extension Alert {
         }
     }
 
+    /// Create an alert from an `Error`, which will be used to make an `ErrorMessage`.
+    ///
+    /// Best if error conforms to `LocalizedError`.
+    ///
+    /// If `secondaryButton` is nil, `primaryButton` will be used as a `dismissButton`. If `primaryButton` is nil, the default button configuration will be used. It is considered programmer error to provide a `secondaryButton` without a `primaryButton`.
     init(_ error: Error?,
          primaryButton: Button? = nil,
          secondaryButton: Button? = nil
@@ -42,6 +50,9 @@ extension Alert {
 }
 
 extension View {
+    /// Present an alert when the provided error binding returns a non-nil error value.
+    ///
+    /// Best if error conforms to `LocalizedError`.
     func errorAlert(_ error: Binding<Error?>) -> some View {
         self.alert(
             isPresented: Binding(

@@ -12,23 +12,30 @@ import OktaAuth
 import Combine
 
 
+/// Handles interoperation between different app modules, overall app UI flow.
 class AppFlowCoordinator: FlowCoordinator {
+    /// The main app window.
     let window: UIWindow
 
-    private(set) lazy var tabBarController = AppTabBarController()
+    /// The main app tab bar controller.
+    private lazy var tabBarController = AppTabBarController()
 
-    private(set) var impactCoord: ImpactCoordinator?
-    private(set) var pickupCoord: PickupCoordinator?
-    private(set) var paymentCoord: PaymentCoordinator?
-    private(set) var profileCoord: ProfileCoordinator?
-    private(set) lazy var loginCoord = LoginCoordinator(
-        root: tabBarController,
-        userController: userController)
+    // Coordinators for each app 'module'
+
+    private var impactCoord: ImpactCoordinator?
+    private var pickupCoord: PickupCoordinator?
+    private var paymentCoord: PaymentCoordinator?
+    private var profileCoord: ProfileCoordinator?
+    private lazy var loginCoord = LoginCoordinator(root: tabBarController)
+
+    /// Handles business logic related to user, login, profile, and properties.
     private(set) lazy var userController = UserController(dataLoader: userProvider)
 
     // MARK: - Data Providers
 
     private var graphQLController = GraphQLController()
+
+    // Data providers for app modules.
 
     private lazy var userProvider: UserDataProvider = useMock ? MockUserDataProvider() : graphQLController
     private lazy var pickupProvider: PickupDataProvider = useMock ? MockPickupProvider() : graphQLController
@@ -37,6 +44,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
     // MARK: - Init / Start
 
+    /// Holds subscription to changes in user, allowing app coordinator to respond to log-in, log-out, and other events that may cause the user to change.
     private var userSubscription: AnyCancellable?
 
     init(window: UIWindow) {
@@ -44,12 +52,13 @@ class AppFlowCoordinator: FlowCoordinator {
     }
 
     func start() {
-        userSubscription = makeUserChangesSubscription()
+        userSubscription = subscribeToUserChanges()
 
         // set up window and make visible
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
 
+        // if bearer from Okta is present, user bearer to fetch User from GraphQL; otherwise, log in with Okta to get bearer
         if Keychain.Okta.isLoggedIn || skipLogin {
             tabBarController.present(
                 LoadingViewController(loadingText: "Logging in..."),
@@ -86,6 +95,7 @@ class AppFlowCoordinator: FlowCoordinator {
         ])
     }
 
+    /// Called after attempting to fetch the User from backend. If successful, starts all module coordinators and sets up tab bar controller.
     private func onLoginComplete(withUser user: User?) {
         guard let user = user else {
             guard userController.user != nil else {
@@ -119,7 +129,7 @@ class AppFlowCoordinator: FlowCoordinator {
         userSubscription = nil
     }
 
-    private func makeUserChangesSubscription() -> AnyCancellable {
+    private func subscribeToUserChanges() -> AnyCancellable {
         userController.$user
             .dropFirst(1)
             .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
@@ -134,7 +144,7 @@ class AppFlowCoordinator: FlowCoordinator {
 
 extension AppFlowCoordinator: ProfileDelegate {
     func logOut() {
-        userSubscription = makeUserChangesSubscription()
+        userSubscription = subscribeToUserChanges()
         loginCoord.start()
     }
 }

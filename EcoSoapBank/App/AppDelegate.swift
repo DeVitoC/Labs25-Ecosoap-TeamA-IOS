@@ -86,16 +86,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         configure(UITabBar.appearance()) {
             $0.tintColor = .esbGreen
-            $0.backgroundColor = .systemGray2
+            $0.barTintColor = .systemGray5
         }
 
         configure(UITableView.appearance()) {
-            $0.backgroundColor = UIColor.systemGray5
+            $0.backgroundColor = .systemGray5
             $0.separatorColor = UIColor.esbSeparator
         }
         
         configure(UITableViewCell.appearance()) {
-            $0.backgroundColor = UIColor.historyCellBackground
+            $0.backgroundColor = .tableViewCellBackground
         }
     }
 }
