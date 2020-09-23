@@ -20,9 +20,9 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
     var payment: Payment? {
         didSet { updateContent() }
     }
-
-    var isExpanded = false {
-        didSet { updateLayout() }
+    
+    override var isSelected: Bool { // cell expands when selected
+        didSet { updateViews() } // so update views when isSelected changes
     }
 
     private let dateFormatter = configure(DateFormatter()) {
@@ -125,8 +125,13 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
         constrainNewSubviewToSafeArea(rootStack,
                                       sides: [.top, .leading, .trailing],
                                       constant: Padding.medium)
-        bottomAnchor.constraint(equalTo: rootStack.bottomAnchor, constant: Padding.large)
-            .isActive = true
+        rootStack.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                          constant: -Padding.large).isActive = true
+        
+        // Make cell try to stay as small as possible
+        let smallestHeightConstraint = rootStack.heightAnchor.constraint(equalToConstant: 0)
+        smallestHeightConstraint.priority = .defaultLow
+        smallestHeightConstraint.isActive = true
 
         // Divider
         configure(UIView()) {
@@ -138,8 +143,8 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
                                             constant: Padding.medium)
             ])
         }
-
-        updateLayout()
+        
+        updateViews()
     }
 
     // MARK: - Update
@@ -158,18 +163,18 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
         invoiceCodeLabel.text = payment.invoiceCode
     }
 
-    private func updateLayout() {
-        self.disclosureIndicator.transform = self.isExpanded ?
-            CGAffineTransform(rotationAngle: .pi)
-            : .identity
-        self.detailStack.isHidden = !self.isExpanded
-        self.invoiceStack.isHidden = !self.isExpanded
-    }
-
     @objc private func openInvoice(_ sender: Any?) {
         if let urlString = payment?.invoice, let url = URL(string: urlString) {
             UIApplication.shared.open(url)
         }
+    }
+    
+    private func updateViews() {
+        // set the rotation just under 180º so that it rotates back the same way
+        let upsideDown = CGAffineTransform(rotationAngle: .pi * 0.999 )
+        self.disclosureIndicator.transform = self.isSelected ? upsideDown :.identity
+        self.detailStack.isHidden = !self.isSelected
+        self.invoiceStack.isHidden = !self.isSelected
     }
 }
 

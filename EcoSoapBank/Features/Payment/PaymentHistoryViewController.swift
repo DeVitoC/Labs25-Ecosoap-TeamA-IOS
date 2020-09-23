@@ -10,8 +10,12 @@ import UIKit
 
 class PaymentHistoryViewController: UIViewController {
 
-    // MARK: - Properties
+    // MARK: - Public Properties
     var paymentController: PaymentController?
+    
+    
+    // MARK: - Private Properties
+    
     private lazy var paymentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout())
     private var payments: [Payment] = [] {
         didSet {
@@ -20,13 +24,16 @@ class PaymentHistoryViewController: UIViewController {
     }
     
     private let refreshControl = UIRefreshControl()
-
-    var isExpanded: IndexPath?
-    let cellIdentifier = "PaymentCell"
+    private let cellIdentifier = "PaymentCell"
+    private var selectedPropertyObserver: UserDefaultsObservation?
     
-    // MARK: - Initialization methods
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectedPropertyObserver = UserDefaults.$selectedPropertyIDsByUser.observe { [weak self] _, _ in
+            self?.refreshPayments()
+        }
         setupCollectionView()
         refreshPayments()
     }
@@ -41,7 +48,9 @@ class PaymentHistoryViewController: UIViewController {
         )
     }
     
-    func setupCollectionView() {
+    // MARK: - Private Methods
+    
+    private func setupCollectionView() {
         view.addSubview(paymentCollectionView)
         paymentCollectionView.dataSource = self
         paymentCollectionView.delegate = self
@@ -104,18 +113,19 @@ class PaymentHistoryViewController: UIViewController {
 }
 
 extension PaymentHistoryViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        toggleExpandCell(indexPath: indexPath)
-    }
 
-    /// Method to control toggle isExpanded and reload paymentCollectionView based on the results.
-    func toggleExpandCell(indexPath: IndexPath) {
-        if let index = isExpanded, index == indexPath {
-            isExpanded = nil
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        defer { paymentCollectionView.performBatchUpdates(nil) }
+        
+        let cell = collectionView.cellForItem(at: indexPath)
+        
+        if cell?.isSelected ?? false {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            return false
         } else {
-            isExpanded = indexPath
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+            return true
         }
-        self.paymentCollectionView.reloadData()
     }
 }
 
@@ -132,7 +142,6 @@ extension PaymentHistoryViewController: UICollectionViewDataSource {
             withReuseIdentifier: cellIdentifier,
             for: indexPath) as? PaymentHistoryCollectionViewCell
             else { return UICollectionViewCell() }
-        cell.isExpanded = isExpanded == indexPath ? true : false
         cell.payment = payments[indexPath.row]
 
         return cell
