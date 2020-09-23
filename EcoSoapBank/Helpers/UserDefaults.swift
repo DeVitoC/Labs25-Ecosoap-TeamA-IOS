@@ -18,7 +18,8 @@ extension UserDefaults {
 // MARK: - Property Wrapper
 
 /// This property wrapper simply gets and sets any allowable property list value
-@propertyWrapper struct UserDefault<T: PropertyListValue> {
+@propertyWrapper class UserDefault<T: PropertyListValue> {
+
     let key: Key
 
     var wrappedValue: T? {

@@ -100,21 +100,30 @@ extension PickupCoordinator {
         }))
         return alert
     }
-
+    
     private func historyVC() -> UIViewController {
-        configure(UIHostingController(
-            rootView: PickupHistoryView(
-                pickupController: pickupController,
-                onPickupTap: { [weak self] in self?.showPickupDetail(for: $0) }))
-        ) {
-            $0.navigationItem.setRightBarButton(
-                UIBarButtonItem(
-                    image: UIImage.addBoxSymbol.scaled(toNewHeight: 28),
-                    style: .plain,
-                    target: self,
-                    action: #selector(scheduleNewPickup)),
-                animated: false)
-        }
+        let pickupHistoryView = PickupHistoryView(
+            pickupController: pickupController,
+            onPickupTap: { [weak self] in self?.showPickupDetail(for: $0) }
+        )
+        let pickupHistoryHostingController = UIHostingController(rootView: pickupHistoryView)
+        
+        let historyVC = PropertySelectionController(
+            mainViewController: pickupHistoryHostingController,
+            user: user
+        )
+
+        historyVC.navigationItem.title = "Pickup History"
+        historyVC.navigationItem.setRightBarButton(
+            UIBarButtonItem(
+                image: UIImage.addBoxSymbol.scaled(toNewHeight: 28),
+                style: .plain,
+                target: self,
+                action: #selector(scheduleNewPickup)),
+            animated: false
+        )
+        
+        return historyVC
     }
 
     private func editCartonVC(for viewModel: NewCartonViewModel) -> EditCartonViewController {

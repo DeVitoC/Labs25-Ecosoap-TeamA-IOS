@@ -120,7 +120,7 @@ class PaymentHistoryCollectionViewCell: UICollectionViewCell {
     }
 
     private func commonInit() {
-        backgroundColor = .historyCellBackground
+        backgroundColor = .tableViewCellBackground
 
         constrainNewSubviewToSafeArea(rootStack,
                                       sides: [.top, .leading, .trailing],

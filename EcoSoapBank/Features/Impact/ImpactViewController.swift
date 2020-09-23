@@ -11,54 +11,87 @@ import UIKit
 
 class ImpactViewController: UIViewController {
     
+    // MARK: - Public Properties
+    
+    var impactController: ImpactController
     var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
-    var impactController: ImpactController?
+    // MARK: - Private Properties
     
     private var massUnitObserver: UserDefaultsObservation?
+    private var selectedPropertyObserver: UserDefaultsObservation?
+    private let refreshControl = UIRefreshControl()
+    
+    // MARK: - Init
+    
+    @available(*, unavailable, message: "Use init(impactController:)")
+    required init?(coder: NSCoder) {
+        fatalError("`init(coder:)` not implemented. Use `init(impactController:)`.")
+    }
+    
+    init(impactController: ImpactController) {
+        self.impactController = impactController
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemGray6
-        navigationItem.title = "Impact Summary"
         
         massUnitObserver = UserDefaults.$massUnit.observe { [weak self] _, _ in
             self?.collectionView.reloadData()
+        }
+        selectedPropertyObserver = UserDefaults.$selectedPropertyIDsByUser.observe { [weak self] _, _ in
+            self?.refreshImpactStats()
         }
                 
         setUpCollectionView()
         refreshImpactStats()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         collectionView.reloadData()
+        refreshControl.bounds = CGRect(
+            x: refreshControl.bounds.origin.x,
+            y: -UIRefreshControl.topPadding,
+            width: refreshControl.bounds.size.width,
+            height: refreshControl.bounds.size.height
+        )
     }
+    
+    // MARK: - Private Methods
     
     private func setUpCollectionView() {
         collectionView.register(ImpactCell.self, forCellWithReuseIdentifier: ImpactCell.reuseIdentifier)
-        
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.backgroundColor = .clear
         
         view.addSubviewsUsingAutolayout(collectionView)
-        collectionView.fillSuperview()
-        collectionView.refreshControl = UIRefreshControl()
+        
+        collectionView.refreshControl = refreshControl
         collectionView.refreshControl?.addTarget(
             self,
             action: #selector(refreshImpactStats(_:)),
             for: .valueChanged)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
     }
 
     @objc private func refreshImpactStats(_ sender: Any? = nil) {
-        guard let impactController = impactController else { return }
-        collectionView.refreshControl?.beginRefreshing()
+        refreshControl.beginRefreshing()
 
         impactController.getImpactStats { [weak self] error in
             DispatchQueue.main.async {
@@ -67,7 +100,7 @@ class ImpactViewController: UIViewController {
                     return
                 }
 
-                self?.collectionView.refreshControl?.endRefreshing()
+                self?.refreshControl.endRefreshing()
                 self?.collectionView.reloadData()
             }
         }
@@ -79,7 +112,7 @@ class ImpactViewController: UIViewController {
 extension ImpactViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        impactController?.viewModels.count ?? 0
+        impactController.viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,7 +121,7 @@ extension ImpactViewController: UICollectionViewDataSource {
         }
         
         cell.alignment = indexPath.row % 2 == 0 ? .leading : .trailing
-        cell.viewModel = impactController?.viewModels[indexPath.row]
+        cell.viewModel = impactController.viewModels[indexPath.row]
        
         return cell
     }

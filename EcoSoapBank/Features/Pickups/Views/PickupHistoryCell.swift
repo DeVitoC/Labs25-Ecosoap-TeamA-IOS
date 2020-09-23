@@ -30,22 +30,22 @@ struct PickupHistoryCell: View {
     }
 
     var body: some View {
-        NavigationButton(action: { onTap(pickup) }, label: {
+        NavigationButton(action: { self.onTap(self.pickup) }, label: {
             VStack(alignment: .leading, spacing: 16) {
                 // Date
                 VStack(alignment: .leading) {
                     Text("READY DATE")
                         .font(.smallCaption)
                         .foregroundColor(Color(.secondaryLabel))
-                    Text(pickup.readyDate.string())
+                    Text(self.pickup.readyDate.string())
                         .font(.preferredMuli(forTextStyle: .headline))
                 }
 
                 HStack {
                     // Pickup Status
                     HStack(spacing: 4) {
-                        StatusIcon(status: pickup.status)
-                        Text(pickup.status.display)
+                        StatusIcon(status: self.pickup.status)
+                        Text(self.pickup.status.display)
                             .lineLimit(2)
                             .fixedSize(horizontal: false, vertical: true)
                             .font(UIFont.preferredMuli(forTextStyle: .callout))
@@ -60,14 +60,14 @@ struct PickupHistoryCell: View {
                             } else {
                                 self.statusWidth = $0
                             }
-                        }).frame(width: statusWidth)
+                    }).frame(width: self.statusWidth)
 
                     // Cartons
                     HStack(spacing: 4) {
                         Image(systemName: "square.stack.3d.up.fill")
                             .modifier(Icon())
                             .foregroundColor(Color(.downyBlue))
-                        Text("\(pickup.cartons.count) Cartons")
+                        Text("\(self.pickup.cartons.count) Cartons")
                             .lineLimit(2)
                             .fixedSize(horizontal: false, vertical: true)
                             .font(UIFont.preferredMuli(forTextStyle: .callout))
@@ -79,7 +79,7 @@ struct PickupHistoryCell: View {
             .padding(EdgeInsets(top: 6, leading: 0, bottom: 10, trailing: 0))
         })
         .font(Font(UIFont.preferredMuli(forTextStyle: .body)))
-        .listRowBackground(Color(.historyCellBackground))
+            .listRowBackground(Color( .tableViewCellBackground))
     }
 }
 
