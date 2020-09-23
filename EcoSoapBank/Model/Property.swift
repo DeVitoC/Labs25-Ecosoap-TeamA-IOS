@@ -1,29 +1,13 @@
-/* GRAPHQL SCHEMA (as of 2020-08-07 15:25)
- type Property {
-     id: ID!
-     name: String!
-     propertyType: PropertyType!
-     rooms: Int!
-     services: [HospitalityService]!
-     collectionType: CollectionType!
-     logo: Url
-     phone: String
-     billingAddress: Address
-     shippingAddress: Address
-     coordinates: Coordinates
-     shippingNote: String
-     notes: String
-     hub: Hub
-     impact: ImpactStats
-     users: [User]
-     pickups: [Pickup]
-     contract: HospitalityContract
- }
- */
+//
+//  Property.swift
+//  EcoSoapBank
+//
+//  Created by Jon Bash on 8/7/20.
+//  Copyright © 2020 Spencer Curtis. All rights reserved.
+//
 
 import Foundation
 import Combine
-
 
 struct Property: Codable, Equatable, Identifiable, Hashable {
     let id: String
