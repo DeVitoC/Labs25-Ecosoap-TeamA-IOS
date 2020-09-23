@@ -69,7 +69,7 @@ class PropertySelector: UIViewController {
     private var dataSource: UITableViewDiffableDataSource<Int, String>?
     private var selectedPropertyObserver: UserDefaultsObservation?
     private var shouldAnimateDifferences = false
-    
+
     // MARK: - Init
     
     @available(*, unavailable, message: "Use init(user:)")

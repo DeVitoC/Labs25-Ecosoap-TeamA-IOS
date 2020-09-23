@@ -1,5 +1,5 @@
 //
-//  PropertySelectionViewController.swift
+//  PropertySelectionController.swift
 //  EcoSoapBank
 //
 //  Created by Shawn Gee on 9/21/20.
@@ -11,7 +11,7 @@ import UIKit
 
 /// Embeds the given view controller along with a PropertySelector as child views,
 /// with the property selector constrained above the given view controller.
-class PropertySelectionViewController: UIViewController {
+class PropertySelectionController: UIViewController {
     
     // MARK: - Public Properties
     
@@ -44,6 +44,8 @@ class PropertySelectionViewController: UIViewController {
         $0.backgroundColor = separatorColor
     }
     
+    private var selectorIsDisabled = false
+    
     // MARK: - Init
     
     @available(*, unavailable, message: "Use init(user:)")
@@ -60,6 +62,11 @@ class PropertySelectionViewController: UIViewController {
     init(mainViewController: UIViewController, user: User, shouldPeak: Bool = false) {
         self.mainViewController = mainViewController
         self.propertySelector = PropertySelector(user: user, shouldPeak: shouldPeak)
+        
+        if let propertyCount = user.properties?.count, propertyCount < 2 {
+            selectorIsDisabled = true
+        }
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -67,12 +74,24 @@ class PropertySelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if selectorIsDisabled {
+            view.addSubviewsUsingAutolayout(mainViewController.view)
+            mainViewController.view.fillSuperview(respectingSafeArea: true)
+            UIRefreshControl.topPadding = 0 // Remove padding if property selector is disabled
+            return
+        } else {
+            // Make sure padding is set to default otherwise
+            UIRefreshControl.topPadding = UIRefreshControl.topPaddingDefault
+        }
+        
         setUpMainViews()
         setUpCutout()
     }
     
     override func preferredContentSizeDidChange(forChildContentContainer container: UIContentContainer) {
         super.preferredContentSizeDidChange(forChildContentContainer: container)
+        
         if container === propertySelector {
             propertySelectorHeight?.constant = container.preferredContentSize.height
             UIView.animate(withDuration: propertySelector.expansionDuration) {
@@ -127,4 +146,10 @@ class PropertySelectionViewController: UIViewController {
             separatorLine.heightAnchor.constraint(equalToConstant: separatorWidth)
         ])
     }
+}
+
+// Extra padding for refresh control due to tab cutout
+extension UIRefreshControl {
+    static var topPadding: CGFloat = 20
+    fileprivate static let topPaddingDefault: CGFloat = 20
 }

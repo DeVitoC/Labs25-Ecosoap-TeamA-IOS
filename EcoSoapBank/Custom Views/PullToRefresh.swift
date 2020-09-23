@@ -106,7 +106,3 @@ extension View {
         )
     }
 }
-
-extension UIRefreshControl {
-    static let topPadding: CGFloat = 20
-}

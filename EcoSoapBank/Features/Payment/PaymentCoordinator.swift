@@ -11,7 +11,7 @@ import UIKit
 /// Coordinator that manages the initialization of the PaymentHistoryViewController
 class PaymentCoordinator: FlowCoordinator {
     private(set) lazy var rootVC = UINavigationController()
-    private let paymentVC: PropertySelectionViewController
+    private let paymentVC: PropertySelectionController
     private let paymentController: PaymentController
     private var makePaymentNav: UINavigationController?
 
@@ -20,7 +20,7 @@ class PaymentCoordinator: FlowCoordinator {
         paymentController = PaymentController(user: user, dataProvider: dataProvider)
         paymentHistoryVC.paymentController = paymentController
         
-        paymentVC = PropertySelectionViewController(mainViewController: paymentHistoryVC, user: user)
+        paymentVC = PropertySelectionController(mainViewController: paymentHistoryVC, user: user)
         paymentVC.navigationItem.title = "Payment History"
         paymentVC.navigationItem.setRightBarButton(
         UIBarButtonItem(

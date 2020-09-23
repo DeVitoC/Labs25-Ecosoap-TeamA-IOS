@@ -12,7 +12,7 @@ class ImpactCoordinator: FlowCoordinator {
     
     init(user: User, dataProvider: ImpactDataProvider) {
         let impactController = ImpactController(user: user, dataProvider: dataProvider)
-        impactVC = PropertySelectionViewController(
+        impactVC = PropertySelectionController(
             mainViewController: ImpactViewController(impactController: impactController),
             user: user,
             shouldPeak: true
@@ -21,7 +21,7 @@ class ImpactCoordinator: FlowCoordinator {
     }
     
     let rootVC = UINavigationController()
-    let impactVC: PropertySelectionViewController
+    let impactVC: PropertySelectionController
     
     func start() {
         let globe = UIImage(
