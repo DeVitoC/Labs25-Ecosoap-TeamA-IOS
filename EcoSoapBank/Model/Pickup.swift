@@ -1,56 +1,12 @@
-/* GRAPHQL SCHEMA
- type Pickup {
-     id: ID!
-     confirmationCode: String!
-     collectionType: CollectionType!**
-     status: PickupStatus!**
-     readyDate: Date!**
-     pickupDate: Date**
-     property: Property!^^
-     cartons: [PickupCarton!]!^^
-     notes: String**
- }
+//
+//  Pickup.swift
+//  EcoSoapBank
+//
+//  Created by Jon Bash on 8/7/20.
+//  Copyright © 2020 Spencer Curtis. All rights reserved.
+//
 
- type SchedulePickupInput {
-     collectionType: CollectionType!
-     status: PickupStatus!
-     readyDate: Date!
-     pickupDate: Date
-     propertyId: ID!
-     cartons: [PickupCartonInput!]!
-     notes: String
- }
-
- enum PickupStatus {
-     SUBMITTED
-     OUT_FOR_PICKUP
-     COMPLETE
-     CANCELLED
- }
-
- type PickupCarton {
-     id: ID!
-     product: HospitalityService
-     weight: Int
- }
-
- input PickupCartonInput {
-     product: HospitalityService
-     weight: Int
- }
-
- enum CollectionType {
-     COURIER_CONSOLIDATED
-     COURIER_DIRECT
-     GENERATED_LABEL
-     LOCAL
-     OTHER
- }
- */
-
-import SwiftUI
 import UIKit
-
 
 struct Pickup: Identifiable, PickupBaseContainer, Equatable, Hashable {
     let base: Base

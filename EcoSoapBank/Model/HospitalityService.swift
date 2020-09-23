@@ -1,12 +1,10 @@
-/* GRAPHQL SCHEMA (as of 2020-08-07 15:35)
- enum HospitalityService {
-     BOTTLES
-     LINENS
-     OTHER
-     PAPER
-     SOAP
- }
- */
+//
+//  HospitalityService.swift
+//  EcoSoapBank
+//
+//  Created by Jon Bash on 8/7/20.
+//  Copyright © 2020 Spencer Curtis. All rights reserved.
+//
 
 import Foundation
 

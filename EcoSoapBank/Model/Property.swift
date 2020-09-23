@@ -1,29 +1,13 @@
-/* GRAPHQL SCHEMA (as of 2020-08-07 15:25)
- type Property {
-     id: ID!
-     name: String!
-     propertyType: PropertyType!
-     rooms: Int!
-     services: [HospitalityService]!
-     collectionType: CollectionType!
-     logo: Url
-     phone: String
-     billingAddress: Address
-     shippingAddress: Address
-     coordinates: Coordinates
-     shippingNote: String
-     notes: String
-     hub: Hub
-     impact: ImpactStats
-     users: [User]
-     pickups: [Pickup]
-     contract: HospitalityContract
- }
- */
+//
+//  Property.swift
+//  EcoSoapBank
+//
+//  Created by Jon Bash on 8/7/20.
+//  Copyright © 2020 Spencer Curtis. All rights reserved.
+//
 
 import Foundation
 import Combine
-
 
 struct Property: Codable, Equatable, Identifiable, Hashable {
     let id: String
@@ -87,9 +71,17 @@ enum PropertySelection: Hashable {
     }
 }
 
+
 extension UserDefaults {
+    
+    @UserDefault(Key("selectedPropertyIDsByUser")) static var selectedPropertyIDsByUser: [String: String]?
+    
     private static let propertySelectionByUserID = PassthroughSubject<[String: PropertySelection], Never>()
 
+    func propertySelection(forUser user: User) -> PropertySelection {
+        PropertySelection(selectedProperty(forUser: user))
+    }
+    
     func selectedPropertyPublisher(forUser user: User) -> AnyPublisher<PropertySelection, Never> {
         UserDefaults.propertySelectionByUserID
             .compactMap({ propertySelectionByUserID -> PropertySelection? in
@@ -98,39 +90,24 @@ extension UserDefaults {
                 } else { return nil }
             }).eraseToAnyPublisher()
     }
-
-    var selectedPropertyIDsByUser: [String: String]? {
-        get { UserDefaults.standard.value(forKey: .selectedPropertyIDsByUserKey) as? [String: String] }
-        set { UserDefaults.standard.set(newValue, forKey: .selectedPropertyIDsByUserKey) }
-    }
     
+    // Get selected property from user defaults
     func selectedProperty(forUser user: User) -> Property? {
         guard
-            let propertyIDsByUserID = dictionary(forKey: .selectedPropertyIDsByUserKey),
-            let propertyID = propertyIDsByUserID[user.id] as? String
+            let propertyIDsByUserID = Self.selectedPropertyIDsByUser,
+            let propertyID = propertyIDsByUserID[user.id]
             else { return nil }
         return user.properties?.first(where: { $0.id == propertyID })
     }
 
-    func propertySelection(forUser user: User) -> PropertySelection {
-        PropertySelection(selectedProperty(forUser: user))
-    }
-
+    // Set selected property to user defaults
     func setSelectedProperty(_ property: Property?, forUser user: User) {
-        var propertyIDsByUserID = dictionary(forKey: .selectedPropertyIDsByUserKey) ?? [:]
-
-        if let property = property {
-            propertyIDsByUserID[user.id] = property.id
-            set(propertyIDsByUserID, forKey: .selectedPropertyIDsByUserKey)
-        } else {
-            removeObject(forKey: .selectedPropertyIDsByUserKey)
+        if Self.selectedPropertyIDsByUser == nil {
+            Self.selectedPropertyIDsByUser = [:] // add user default if not there
         }
+        Self.selectedPropertyIDsByUser?[user.id] = property?.id
         UserDefaults.propertySelectionByUserID.send([user.id: PropertySelection(property)])
     }
-}
-
-extension String {
-    static let selectedPropertyIDsByUserKey = "selectedPropertyIDsByUser"
 }
 
 // MARK: - Editable Property Info

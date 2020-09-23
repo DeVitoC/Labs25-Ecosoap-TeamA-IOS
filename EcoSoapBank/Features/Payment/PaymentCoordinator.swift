@@ -10,24 +10,25 @@ import UIKit
 
 /// Coordinator that manages the initialization of the PaymentHistoryViewController
 class PaymentCoordinator: FlowCoordinator {
-    private(set) lazy var rootVC = UINavigationController(rootViewController: paymentHistoryVC)
-    private lazy var paymentHistoryVC = configure(PaymentHistoryViewController()) {
-        $0.navigationItem.setRightBarButton(
-            UIBarButtonItem(
-                image: .creditCard,
-                style: .plain,
-                target: self,
-                action: #selector(makePaymentTapped(_:))),
-            animated: true)
-    }
+    private(set) lazy var rootVC = UINavigationController()
+    private let paymentVC: PropertySelectionController
+    private let paymentController: PaymentController
     private var makePaymentNav: UINavigationController?
 
-    let paymentController: PaymentController
-
     init(user: User, dataProvider: PaymentDataProvider) {
-        self.paymentController = PaymentController(user: user,
-                                                   dataProvider: dataProvider)
+        let paymentHistoryVC = PaymentHistoryViewController()
+        paymentController = PaymentController(user: user, dataProvider: dataProvider)
         paymentHistoryVC.paymentController = paymentController
+        
+        paymentVC = PropertySelectionController(mainViewController: paymentHistoryVC, user: user)
+        paymentVC.navigationItem.title = "Payment History"
+        paymentVC.navigationItem.setRightBarButton(
+        UIBarButtonItem(
+            image: .creditCard,
+            style: .plain,
+            target: self,
+            action: #selector(makePaymentTapped(_:))),
+        animated: true)
     }
 
     /// Starts the PaymentHistoryViewController
@@ -37,6 +38,7 @@ class PaymentCoordinator: FlowCoordinator {
             withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular)
         )
         rootVC.tabBarItem = UITabBarItem(title: "Payments", image: payment, tag: 0)
+        rootVC.pushViewController(paymentVC, animated: false)
     }
 
     @objc private func makePaymentTapped(_ sender: Any?) {

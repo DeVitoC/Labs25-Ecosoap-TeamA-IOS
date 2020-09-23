@@ -74,11 +74,18 @@
 		0445F04C24EC7AA600A0A665 /* UserDefaultsObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */; };
 		0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04D24EDD9C700A0A665 /* ESBButton.swift */; };
 		0445F05024EDEA7F00A0A665 /* ESBCircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */; };
+		0458CE87251AE2A6000F3990 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */; };
+		0458CE8A251AF634000F3990 /* PaymentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458CE89251AF634000F3990 /* PaymentCoordinator.swift */; };
 		047B897F251121E500AB10D3 /* CartonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B897D251121E500AB10D3 /* CartonCollectionViewCell.swift */; };
 		047B8980251121E500AB10D3 /* CartonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047B897E251121E500AB10D3 /* CartonCollectionViewCell.xib */; };
+		047B89822513BA0900AB10D3 /* PropertySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B89812513BA0900AB10D3 /* PropertySelector.swift */; };
+		047B89842513BC2700AB10D3 /* PropertySelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B89832513BC2700AB10D3 /* PropertySelectorCell.swift */; };
 		049379A524EAE7140084051B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A424EAE7140084051B /* Images.swift */; };
 		049379A724EAE9FF0084051B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049379A624EAE9FF0084051B /* UIView+Layout.swift */; };
 		049379A924EB25600084051B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049379A824EB25600084051B /* Images.xcassets */; };
+		04A40785251AD13F001CBFED /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 04A40784251AD13F001CBFED /* Introspect */; };
+		04A40786251AD652001CBFED /* Utilities+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */; };
+		04A40789251ADA2D001CBFED /* MakePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A40788251ADA2D001CBFED /* MakePaymentViewController.swift */; };
 		04B6FEAF24FEDCDF000CC58A /* DateCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */; };
 		04BE6D0124F03F2000DFC47D /* ImpactCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */; };
 		04BE6D0324F041E700DFC47D /* ImpactControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */; };
@@ -108,6 +115,8 @@
 		04CCD90324FD60AA00263376 /* GraphQLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90224FD60AA00263376 /* GraphQLOperation.swift */; };
 		04CCD90524FD85CF00263376 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90424FD85CF00263376 /* HTTPMethod.swift */; };
 		04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCD90624FD860B00263376 /* GraphQLError.swift */; };
+		04CE18DA2518FE9A00D9CA4E /* PropertySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CE18D92518FE9A00D9CA4E /* PropertySelectionController.swift */; };
+		04CE18DC251ACF4400D9CA4E /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CE18DB251ACF4400D9CA4E /* PullToRefresh.swift */; };
 		04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758624E317FB00F8929C /* ImpactStats.swift */; };
 		04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758824E3453B00F8929C /* ImpactCell.swift */; };
 		04D1758D24E4195C00F8929C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1758C24E4195C00F8929C /* GradientView.swift */; };
@@ -148,7 +157,6 @@
 		994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7224DDB48800C12921 /* ImpactCoordinator.swift */; };
 		994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7424DDB4A100C12921 /* PickupCoordinator.swift */; };
 		994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7624DDB55E00C12921 /* ImpactViewController.swift */; };
-		994E4B7924DDB58300C12921 /* Utilities+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */; };
 		994E4B8924DDB68700C12921 /* UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E4B8824DDB68700C12921 /* UtilityTests.swift */; };
 		99789CC52502C832000428AC /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99789CC42502C832000428AC /* ProfileTests.swift */; };
 		997BF11224E20AAE00A643D8 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BF11124E20AAE00A643D8 /* TextView.swift */; };
@@ -163,9 +171,7 @@
 		998913D724DE0C34009ADBC1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D624DE0C33009ADBC1 /* Property.swift */; };
 		998913D924DE0C90009ADBC1 /* HospitalityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913D824DE0C90009ADBC1 /* HospitalityService.swift */; };
 		998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */; };
-		998EF05925102DA800EDD19E /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 998EF05825102DA800EDD19E /* SwiftUIRefresh */; };
 		9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E024F9B78C00DD16B5 /* StripeController.swift */; };
-		9990F6E324F9BFFE00DD16B5 /* MakePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E224F9BFFE00DD16B5 /* MakePaymentViewController.swift */; };
 		9990F6E524F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */; };
 		999411772513B99F00675831 /* UseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999411762513B99F00675831 /* UseMock.swift */; };
 		999B2D0E25014DEB002D3591 /* View+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999B2D0D25014DEB002D3591 /* View+Alignment.swift */; };
@@ -181,7 +187,6 @@
 		99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177024EC3D000099664B /* Publisher+HandleError.swift */; };
 		99B6177324EC743F0099664B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B6177224EC743F0099664B /* LoginCoordinator.swift */; };
 		99BA964425001FE400821694 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA964325001FE400821694 /* AppTabBarController.swift */; };
-		99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467524FD8AB400E2B005 /* ProfileCoordinator.swift */; };
 		99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467724FD8AF200E2B005 /* MainProfileView.swift */; };
 		99C0467A24FD8B9200E2B005 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0467924FD8B9200E2B005 /* EditProfileView.swift */; };
 		99CE3DDF250AEFD60039E3FC /* Alert+ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CE3DDE250AEFD60039E3FC /* Alert+ErrorMessage.swift */; };
@@ -193,7 +198,6 @@
 		E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B961B324E45BF800C5DF8B /* QueryObjects.swift */; };
 		E2C37DE32508207C00B9F20F /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2F0EB24F844A10050BFCF /* PaymentController.swift */; };
 		E2C37DE42508208100B9F20F /* MockPaymentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */; };
-		E2C37DE92508221E00B9F20F /* PaymentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */; };
 		E2C37DEA2508222200B9F20F /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */; };
 		E2C37DEB2508222600B9F20F /* PaymentHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */; };
 		E2D04F9324F0D50600515831 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D04F9224F0D50600515831 /* Address.swift */; };
@@ -259,11 +263,15 @@
 		0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsObservation.swift; sourceTree = "<group>"; };
 		0445F04D24EDD9C700A0A665 /* ESBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBButton.swift; sourceTree = "<group>"; };
 		0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBCircularImageView.swift; sourceTree = "<group>"; };
+		0458CE89251AF634000F3990 /* PaymentCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCoordinator.swift; sourceTree = "<group>"; };
 		047B897D251121E500AB10D3 /* CartonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartonCollectionViewCell.swift; sourceTree = "<group>"; };
 		047B897E251121E500AB10D3 /* CartonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartonCollectionViewCell.xib; sourceTree = "<group>"; };
+		047B89812513BA0900AB10D3 /* PropertySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelector.swift; sourceTree = "<group>"; };
+		047B89832513BC2700AB10D3 /* PropertySelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectorCell.swift; sourceTree = "<group>"; };
 		049379A424EAE7140084051B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		049379A624EAE9FF0084051B /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		049379A824EB25600084051B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		04A40788251ADA2D001CBFED /* MakePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MakePaymentViewController.swift; path = EcoSoapBank/Features/Payment/MakePaymentViewController.swift; sourceTree = SOURCE_ROOT; };
 		04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCoding.swift; sourceTree = "<group>"; };
 		04BE6D0024F03F2000DFC47D /* ImpactCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCellViewModelTests.swift; sourceTree = "<group>"; };
 		04BE6D0224F041E700DFC47D /* ImpactControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactControllerTests.swift; sourceTree = "<group>"; };
@@ -286,6 +294,8 @@
 		04CCD90224FD60AA00263376 /* GraphQLOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLOperation.swift; sourceTree = "<group>"; };
 		04CCD90424FD85CF00263376 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		04CCD90624FD860B00263376 /* GraphQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLError.swift; sourceTree = "<group>"; };
+		04CE18D92518FE9A00D9CA4E /* PropertySelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySelectionController.swift; sourceTree = "<group>"; };
+		04CE18DB251ACF4400D9CA4E /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		04D1758624E317FB00F8929C /* ImpactStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactStats.swift; sourceTree = "<group>"; };
 		04D1758824E3453B00F8929C /* ImpactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactCell.swift; sourceTree = "<group>"; };
 		04D1758C24E4195C00F8929C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -347,7 +357,6 @@
 		998913D824DE0C90009ADBC1 /* HospitalityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalityService.swift; sourceTree = "<group>"; };
 		998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extensions.swift"; sourceTree = "<group>"; };
 		9990F6E024F9B78C00DD16B5 /* StripeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeController.swift; sourceTree = "<group>"; };
-		9990F6E224F9BFFE00DD16B5 /* MakePaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePaymentViewController.swift; sourceTree = "<group>"; };
 		9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlert.swift"; sourceTree = "<group>"; };
 		999411762513B99F00675831 /* UseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseMock.swift; sourceTree = "<group>"; };
 		999B2D0D25014DEB002D3591 /* View+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alignment.swift"; sourceTree = "<group>"; };
@@ -372,8 +381,8 @@
 		99D0165F24FEA6D8001A7555 /* With.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
 		E220C32624E35E59003FF32D /* GraphQLQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueries.swift; sourceTree = "<group>"; };
 		E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLController.swift; sourceTree = "<group>"; };
-		E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryViewController.swift; path = EcoSoapBank/Payment/PaymentHistoryViewController.swift; sourceTree = SOURCE_ROOT; };
-		E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryCollectionViewCell.swift; path = EcoSoapBank/Payment/PaymentHistoryCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryViewController.swift; path = EcoSoapBank/Features/Payment/PaymentHistoryViewController.swift; sourceTree = SOURCE_ROOT; };
+		E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentHistoryCollectionViewCell.swift; path = EcoSoapBank/Features/Payment/PaymentHistoryCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		E28E911324FEBC320014DF82 /* UIViews+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViews+Convenience.swift"; sourceTree = "<group>"; };
 		E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPaymentProvider.swift; sourceTree = "<group>"; };
 		E2AEB12424E7371500C42ACD /* mockImpactStatsFailure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockImpactStatsFailure.json; sourceTree = "<group>"; };
@@ -391,7 +400,6 @@
 		E2D302FC24E5EEA0008A6FAF /* GraphQLControllerMockDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLControllerMockDataTests.swift; sourceTree = "<group>"; };
 		E2D302FE24E5F464008A6FAF /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataLoader.swift; sourceTree = "<group>"; };
-		E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentCoordinator.swift; path = EcoSoapBank/Payment/PaymentCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		E2E2F0E924F838170050BFCF /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		E2E2F0EB24F844A10050BFCF /* PaymentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -408,8 +416,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				998EF05925102DA800EDD19E /* SwiftUIRefresh in Frameworks */,
 				042CD96024F585AA00ADFCB5 /* KeychainAccess in Frameworks */,
+				04A40785251AD13F001CBFED /* Introspect in Frameworks */,
 				041E1E2124E1E1510052831D /* OktaAuth in Frameworks */,
 				999CBA3D24F9AFF100CDF0F3 /* Stripe.framework in Frameworks */,
 			);
@@ -477,6 +485,29 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		04B1C7752513DC5300F3E7A4 /* PropertySelection */ = {
+			isa = PBXGroup;
+			children = (
+				04CE18D92518FE9A00D9CA4E /* PropertySelectionController.swift */,
+				047B89812513BA0900AB10D3 /* PropertySelector.swift */,
+				047B89832513BC2700AB10D3 /* PropertySelectorCell.swift */,
+			);
+			path = PropertySelection;
+			sourceTree = "<group>";
+		};
+		04B1C7762513DC8700F3E7A4 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				04B1C7752513DC5300F3E7A4 /* PropertySelection */,
+				994E4B6D24DDAEA800C12921 /* Impact */,
+				994E4B6E24DDAEB100C12921 /* Pickups */,
+				994E4B6F24DDAEB700C12921 /* Payment */,
+				99C0467424FD8AA500E2B005 /* Profile */,
+				997ECB5725101BB0003B9430 /* Login */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
 		04BE6D0C24F05ABB00DFC47D /* Impact Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,17 +535,18 @@
 			isa = PBXGroup;
 			children = (
 				04D6D72B24E8444C0003A585 /* BackgroundView.swift */,
-				0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */,
-				04D1758C24E4195C00F8929C /* GradientView.swift */,
-				04C91E292509D069005ED433 /* ESBBordered.swift */,
-				04C91DDA250817B2005ED433 /* ESBTextView.swift */,
-				04C91E272509D04A005ED433 /* ESBTextField.swift */,
-				99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */,
-				0445F04D24EDD9C700A0A665 /* ESBButton.swift */,
-				993B15CB24F42D8C00529517 /* InputPickerView.swift */,
 				993B15CD24F4575500529517 /* CursorlessTextField.swift */,
-				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
+				0445F04D24EDD9C700A0A665 /* ESBButton.swift */,
+				04C91E292509D069005ED433 /* ESBBordered.swift */,
+				0445F04F24EDEA7F00A0A665 /* ESBCircularImageView.swift */,
+				04C91E272509D04A005ED433 /* ESBTextField.swift */,
+				04C91DDA250817B2005ED433 /* ESBTextView.swift */,
+				04D1758C24E4195C00F8929C /* GradientView.swift */,
+				993B15CB24F42D8C00529517 /* InputPickerView.swift */,
+				99B6176E24EC307A0099664B /* KeyboardHandlingViewController.swift */,
 				999CBA3924F8755E00CDF0F3 /* LoadingViewController.swift */,
+				04CE18DB251ACF4400D9CA4E /* PullToRefresh.swift */,
+				9985ED1124F06E39009F108F /* SteppedSlider.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -534,12 +566,12 @@
 				041E1E8424E1EA9C0052831D /* Fonts */,
 				466C427C249A8749007D033E /* Colors.xcassets */,
 				049379A824EB25600084051B /* Images.xcassets */,
+				466C4273249A8748007D033E /* AppDelegate.swift */,
 				990CA23C24DB69D9002B5FA4 /* AppFlowCoordinator.swift */,
 				99BA964325001FE400821694 /* AppTabBarController.swift */,
 				999411762513B99F00675831 /* UseMock.swift */,
-				466C4273249A8748007D033E /* AppDelegate.swift */,
-				466C4275249A8748007D033E /* SceneDelegate.swift */,
 				466C427E249A8749007D033E /* LaunchScreen.storyboard */,
+				466C4275249A8748007D033E /* SceneDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -570,11 +602,7 @@
 		466C4272249A8748007D033E /* EcoSoapBank */ = {
 			isa = PBXGroup;
 			children = (
-				994E4B6D24DDAEA800C12921 /* Impact */,
-				994E4B6E24DDAEB100C12921 /* Pickups */,
-				994E4B6F24DDAEB700C12921 /* Payment */,
-				99C0467424FD8AA500E2B005 /* Profile */,
-				997ECB5725101BB0003B9430 /* Login */,
+				04B1C7762513DC8700F3E7A4 /* Features */,
 				46BEB4EB24C98EB400FE0CD1 /* Model */,
 				E27B4B1924E1ECE800148E4E /* Networking */,
 				46BEB4EA24C98EA300FE0CD1 /* Helpers */,
@@ -591,17 +619,17 @@
 			children = (
 				9921943324E49AC300E16C16 /* UIKit */,
 				9983874F24E4694400450244 /* SwiftUI */,
-				994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */,
+				E2D302FE24E5F464008A6FAF /* DataLoader.swift */,
 				04B6FEAE24FEDCDF000CC58A /* DateCoding.swift */,
+				992BB64224EEFBAD00638AA4 /* Errors.swift */,
+				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
+				E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */,
+				04C91E25250929C1005ED433 /* PrintJson.swift */,
+				99B6177024EC3D000099664B /* Publisher+HandleError.swift */,
+				992C929024F70B0C004FCBBB /* Randomizable.swift */,
 				0445F04924EC648E00A0A665 /* UserDefaults.swift */,
 				0445F04B24EC7AA600A0A665 /* UserDefaultsObservation.swift */,
-				E2D302FE24E5F464008A6FAF /* DataLoader.swift */,
-				E2D3030024E5F9B8008A6FAF /* MockDataLoader.swift */,
-				99B6177024EC3D000099664B /* Publisher+HandleError.swift */,
-				992BB64224EEFBAD00638AA4 /* Errors.swift */,
-				992C929024F70B0C004FCBBB /* Randomizable.swift */,
-				990CA23E24DB69ED002B5FA4 /* FlowCoordinator.swift */,
-				04C91E25250929C1005ED433 /* PrintJson.swift */,
+				994E4B7824DDB58300C12921 /* Utilities+Convenience.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -609,14 +637,14 @@
 		46BEB4EB24C98EB400FE0CD1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				46BEB4E024C9828800FE0CD1 /* Profile.swift */,
-				998913D224DDFFA8009ADBC1 /* Pickup.swift */,
-				998913D824DE0C90009ADBC1 /* HospitalityService.swift */,
-				998913D624DE0C33009ADBC1 /* Property.swift */,
-				04D1758624E317FB00F8929C /* ImpactStats.swift */,
-				E2D302F424E5CA32008A6FAF /* User.swift */,
 				E2D04F9224F0D50600515831 /* Address.swift */,
+				998913D824DE0C90009ADBC1 /* HospitalityService.swift */,
+				04D1758624E317FB00F8929C /* ImpactStats.swift */,
 				E2E2F0E924F838170050BFCF /* Payment.swift */,
+				998913D224DDFFA8009ADBC1 /* Pickup.swift */,
+				46BEB4E024C9828800FE0CD1 /* Profile.swift */,
+				998913D624DE0C33009ADBC1 /* Property.swift */,
+				E2D302F424E5CA32008A6FAF /* User.swift */,
 				992BB64624EF08E400638AA4 /* Mock Providers */,
 			);
 			path = Model;
@@ -625,15 +653,15 @@
 		9921943324E49AC300E16C16 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				041E1E8524E1EB580052831D /* Fonts.swift */,
 				041E1EA624E22B1E0052831D /* Colors.swift */,
+				041E1E8524E1EB580052831D /* Fonts.swift */,
 				049379A424EAE7140084051B /* Images.swift */,
-				46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */,
 				990CA24124DB6C19002B5FA4 /* UIStoryboard+Constants.swift */,
-				991874D324E4B28900F636FB /* UIView+Subviews.swift */,
-				049379A624EAE9FF0084051B /* UIView+Layout.swift */,
 				992BB64B24F033F100638AA4 /* UISwipeActionsConfiguration+Constants.swift */,
+				049379A624EAE9FF0084051B /* UIView+Layout.swift */,
+				991874D324E4B28900F636FB /* UIView+Subviews.swift */,
 				9990F6E424F9C8F100DD16B5 /* UIViewController+ErrorAlert.swift */,
+				46BF10BD24D388FF001C6753 /* UIViewController+SimpleAlert.swift */,
 				E28E911324FEBC320014DF82 /* UIViews+Convenience.swift */,
 				990C241C25191D6800055BA9 /* LabelHuggingButton.swift */,
 			);
@@ -698,13 +726,13 @@
 		994E4B6F24DDAEB700C12921 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
-				E2E2F0E724F815780050BFCF /* PaymentCoordinator.swift */,
-				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
+				0458CE89251AF634000F3990 /* PaymentCoordinator.swift */,
+				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
 				E28E910F24FD541F0014DF82 /* PaymentHistoryViewController.swift */,
 				E28E911124FDBFFC0014DF82 /* PaymentHistoryCollectionViewCell.swift */,
-				9990F6E224F9BFFE00DD16B5 /* MakePaymentViewController.swift */,
-				E2E2F0EB24F844A10050BFCF /* PaymentController.swift */,
+				04A40788251ADA2D001CBFED /* MakePaymentViewController.swift */,
 				E28E911524FEEE590014DF82 /* MockPaymentProvider.swift */,
+				9990F6E024F9B78C00DD16B5 /* StripeController.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -736,15 +764,15 @@
 		9983874F24E4694400450244 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */,
+				99CE3DDE250AEFD60039E3FC /* Alert+ErrorMessage.swift */,
+				999B2D0F25019045002D3591 /* InverseMask.swift */,
 				9983874B24E4657C00450244 /* KeyboardAvoiding.swift */,
 				9983874D24E4658600450244 /* KeyboardDismissing.swift */,
-				997BF11124E20AAE00A643D8 /* TextView.swift */,
 				992FBC8624FDABE10099C32D /* LabelAlignedTextField.swift */,
-				99D0165F24FEA6D8001A7555 /* With.swift */,
+				998913DA24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift */,
+				997BF11124E20AAE00A643D8 /* TextView.swift */,
 				999B2D0D25014DEB002D3591 /* View+Alignment.swift */,
-				999B2D0F25019045002D3591 /* InverseMask.swift */,
-				99CE3DDE250AEFD60039E3FC /* Alert+ErrorMessage.swift */,
+				99D0165F24FEA6D8001A7555 /* With.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -785,15 +813,15 @@
 			isa = PBXGroup;
 			children = (
 				E27B4B1A24E1ED2100148E4E /* GraphQLController.swift */,
-				04CCD90224FD60AA00263376 /* GraphQLOperation.swift */,
-				04D3252E25004D57005ABDEB /* GraphQLResult.swift */,
-				E220C32624E35E59003FF32D /* GraphQLQueries.swift */,
-				E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */,
-				E2B961B324E45BF800C5DF8B /* QueryObjects.swift */,
-				04CCD90424FD85CF00263376 /* HTTPMethod.swift */,
 				04CCD90624FD860B00263376 /* GraphQLError.swift */,
-				992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */,
+				E2B961B124E45B5400C5DF8B /* GraphQLMutations.swift */,
+				04CCD90224FD60AA00263376 /* GraphQLOperation.swift */,
+				E220C32624E35E59003FF32D /* GraphQLQueries.swift */,
+				04D3252E25004D57005ABDEB /* GraphQLResult.swift */,
+				04CCD90424FD85CF00263376 /* HTTPMethod.swift */,
 				04E42DFE24F6C04600D4003E /* Keychain+Okta.swift */,
+				992BB64724EF0F4900638AA4 /* OktaAuth+Shared.swift */,
+				E2B961B324E45BF800C5DF8B /* QueryObjects.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -858,7 +886,7 @@
 			packageProductDependencies = (
 				041E1E2024E1E1510052831D /* OktaAuth */,
 				042CD95F24F585AA00ADFCB5 /* KeychainAccess */,
-				998EF05825102DA800EDD19E /* SwiftUIRefresh */,
+				04A40784251AD13F001CBFED /* Introspect */,
 			);
 			productName = LabsScaffolding;
 			productReference = 466C4270249A8748007D033E /* EcoSoapBank.app */;
@@ -941,7 +969,7 @@
 			packageReferences = (
 				041E1E1F24E1E1510052831D /* XCRemoteSwiftPackageReference "OktaAuth" */,
 				042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
-				998EF05725102DA800EDD19E /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
+				04A40783251AD13F001CBFED /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 466C4271249A8748007D033E /* Products */;
 			projectDirPath = "";
@@ -1128,16 +1156,20 @@
 				99BA964425001FE400821694 /* AppTabBarController.swift in Sources */,
 				99D0166024FEA6D9001A7555 /* With.swift in Sources */,
 				04E42DFF24F6C04600D4003E /* Keychain+Okta.swift in Sources */,
+				04CE18DA2518FE9A00D9CA4E /* PropertySelectionController.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
 				9990F6E124F9B78C00DD16B5 /* StripeController.swift in Sources */,
 				041E1E8624E1EB580052831D /* Fonts.swift in Sources */,
 				990CA24224DB6C19002B5FA4 /* UIStoryboard+Constants.swift in Sources */,
 				994E4B7324DDB48800C12921 /* ImpactCoordinator.swift in Sources */,
 				992FBC9024FDC01F0099C32D /* ProfileViewModel.swift in Sources */,
+				04A40786251AD652001CBFED /* Utilities+Convenience.swift in Sources */,
 				04FEE1DC24E5E16600F51D69 /* ImpactCellViewModel.swift in Sources */,
 				999CBA3A24F8755E00CDF0F3 /* LoadingViewController.swift in Sources */,
 				04C91E282509D04A005ED433 /* ESBTextField.swift in Sources */,
+				0458CE8A251AF634000F3990 /* PaymentCoordinator.swift in Sources */,
 				99C0467824FD8AF200E2B005 /* MainProfileView.swift in Sources */,
+				047B89822513BA0900AB10D3 /* PropertySelector.swift in Sources */,
 				990CA23F24DB69ED002B5FA4 /* FlowCoordinator.swift in Sources */,
 				99B6177124EC3D010099664B /* Publisher+HandleError.swift in Sources */,
 				994E4B7524DDB4A100C12921 /* PickupCoordinator.swift in Sources */,
@@ -1152,12 +1184,11 @@
 				990CA23D24DB69D9002B5FA4 /* AppFlowCoordinator.swift in Sources */,
 				04D6D72C24E8444C0003A585 /* BackgroundView.swift in Sources */,
 				04FEE1B624E48AB000F51D69 /* ImpactController.swift in Sources */,
+				04A40789251ADA2D001CBFED /* MakePaymentViewController.swift in Sources */,
 				993B15CC24F42D8C00529517 /* InputPickerView.swift in Sources */,
 				E2C37DEB2508222600B9F20F /* PaymentHistoryCollectionViewCell.swift in Sources */,
 				041E1EA724E22B1E0052831D /* Colors.swift in Sources */,
 				992BB64524EF021600638AA4 /* MockUserDataProvider.swift in Sources */,
-				994E4B7924DDB58300C12921 /* Utilities+Convenience.swift in Sources */,
-				9990F6E324F9BFFE00DD16B5 /* MakePaymentViewController.swift in Sources */,
 				99B6175B24EAF0A20099664B /* SchedulePickupViewController.swift in Sources */,
 				994E4B7724DDB55E00C12921 /* ImpactViewController.swift in Sources */,
 				998913D524DE0907009ADBC1 /* PickupHistoryCell.swift in Sources */,
@@ -1167,10 +1198,11 @@
 				992BB64A24F0319D00638AA4 /* EditCartonViewController.swift in Sources */,
 				998913D724DE0C34009ADBC1 /* Property.swift in Sources */,
 				04BE6D0524F045C800DFC47D /* MockImpactProvider.swift in Sources */,
+				0458CE87251AE2A6000F3990 /* ProfileCoordinator.swift in Sources */,
 				E2B961B424E45BF800C5DF8B /* QueryObjects.swift in Sources */,
 				99B6176F24EC307A0099664B /* KeyboardHandlingViewController.swift in Sources */,
 				99CE3DDF250AEFD60039E3FC /* Alert+ErrorMessage.swift in Sources */,
-				99C0467624FD8AB400E2B005 /* ProfileCoordinator.swift in Sources */,
+				047B89842513BC2700AB10D3 /* PropertySelectorCell.swift in Sources */,
 				E2C37DEA2508222200B9F20F /* PaymentHistoryViewController.swift in Sources */,
 				992BB64324EEFBAD00638AA4 /* Errors.swift in Sources */,
 				04C91DDB250817B2005ED433 /* ESBTextView.swift in Sources */,
@@ -1192,7 +1224,6 @@
 				9983874C24E4657C00450244 /* KeyboardAvoiding.swift in Sources */,
 				E2E2F0EA24F838170050BFCF /* Payment.swift in Sources */,
 				992FBC8724FDABE10099C32D /* LabelAlignedTextField.swift in Sources */,
-				E2C37DE92508221E00B9F20F /* PaymentCoordinator.swift in Sources */,
 				04CCD90724FD860B00263376 /* GraphQLError.swift in Sources */,
 				04D1758724E317FB00F8929C /* ImpactStats.swift in Sources */,
 				04D1758924E3453B00F8929C /* ImpactCell.swift in Sources */,
@@ -1201,6 +1232,7 @@
 				0445F04E24EDD9C700A0A665 /* ESBButton.swift in Sources */,
 				999B2D1025019045002D3591 /* InverseMask.swift in Sources */,
 				992C929124F70B0C004FCBBB /* Randomizable.swift in Sources */,
+				04CE18DC251ACF4400D9CA4E /* PullToRefresh.swift in Sources */,
 				E220C32724E35E59003FF32D /* GraphQLQueries.swift in Sources */,
 				998913DB24DE1AC6009ADBC1 /* SwiftUI+Extensions.swift in Sources */,
 				E2B961B224E45B5400C5DF8B /* GraphQLMutations.swift in Sources */,
@@ -1422,7 +1454,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 94ZMA2MYR4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1445,7 +1477,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 94ZMA2MYR4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1561,12 +1593,12 @@
 				minimumVersion = 4.2.0;
 			};
 		};
-		998EF05725102DA800EDD19E /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
+		04A40783251AD13F001CBFED /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUIRefresh";
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.3;
+				minimumVersion = 0.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1582,10 +1614,10 @@
 			package = 042CD95E24F585AA00ADFCB5 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
 		};
-		998EF05825102DA800EDD19E /* SwiftUIRefresh */ = {
+		04A40784251AD13F001CBFED /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 998EF05725102DA800EDD19E /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
-			productName = SwiftUIRefresh;
+			package = 04A40783251AD13F001CBFED /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
