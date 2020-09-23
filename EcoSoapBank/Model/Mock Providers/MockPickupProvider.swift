@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import LoremSwiftum
 
 /// For placeholder and testing purposes.
 class MockPickupProvider {
@@ -185,9 +185,7 @@ fileprivate func mockNotes() -> String {
 
     guard hasNotes else { return "" }
 
-    return (1...10).reduce(into: "") { result, _ in
-        result += UUID().uuidString
-    }
+    return Lorem.paragraph
 }
 
 extension Property.PropertyType: Randomizable {}
