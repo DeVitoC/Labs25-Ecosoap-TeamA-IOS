@@ -62,7 +62,6 @@ class PropertySelectionController: UIViewController {
     init(mainViewController: UIViewController, user: User, shouldPeak: Bool = false) {
         self.mainViewController = mainViewController
         self.propertySelector = PropertySelector(user: user, shouldPeak: shouldPeak)
-        
         if let propertyCount = user.properties?.count, propertyCount < 2 {
             selectorIsDisabled = true
         }
