@@ -71,6 +71,7 @@ class ImpactViewController: UIViewController {
     }
 
     // MARK: - Private Methods
+    /// Lays out the CollectionView to fill the parent view and configures cell
     private func setUpCollectionView() {
         collectionView.register(ImpactCell.self, forCellWithReuseIdentifier: ImpactCell.reuseIdentifier)
         collectionView.delegate = self
@@ -93,6 +94,8 @@ class ImpactViewController: UIViewController {
         ])
     }
 
+    /// Method that fetches the Impact Stats from the server and reloads the collectionview with the new data
+    /// - Parameter sender: The sender that called this method. Defaults to **nil** unless called by another UI element
     @objc private func refreshImpactStats(_ sender: Any? = nil) {
         refreshControl.beginRefreshing()
 
