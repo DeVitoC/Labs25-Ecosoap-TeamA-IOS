@@ -41,7 +41,7 @@ class ImpactViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        collectionView.accessibilityLabel = "Impact Statistics"
         view.backgroundColor = .systemGray6
         
         massUnitObserver = UserDefaults.$massUnit.observe { [weak self] _, _ in

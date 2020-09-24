@@ -157,5 +157,7 @@ class ImpactCell: UICollectionViewCell {
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
         circleView.image = viewModel.image
+        isAccessibilityElement = true
+        accessibilityLabel = viewModel.title + " " + viewModel.subtitle
     }
 }
