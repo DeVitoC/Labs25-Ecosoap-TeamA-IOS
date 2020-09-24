@@ -140,6 +140,7 @@ private enum ImpactLayout {
     static let cellAspectRatio: CGFloat = 0.31
     static let sectionInsetTop: CGFloat = 40
     static let sectionInsetBotttom: CGFloat = 40
+    static let minimumLineSpacing: CGFloat = 20
 }
 
 extension ImpactViewController: UICollectionViewDelegateFlowLayout {
@@ -154,8 +155,9 @@ extension ImpactViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        // Add line spacing if the font scaling is bigger than .large
         if traitCollection.preferredContentSizeCategory > .large {
-            return UIFontMetrics.default.scaledValue(for: 20)
+            return UIFontMetrics.default.scaledValue(for: ImpactLayout.minimumLineSpacing)
         } else {
             return 0
         }
