@@ -14,6 +14,9 @@ private struct AllProperties: PropertyDisplayable { let name = "All Properties" 
 
 extension Property: PropertyDisplayable {}
 
+/// The Property Selector View Controller that controls how the proprety selector at the top
+/// of each page. Can be either open or closed and have as many cells as there are properties
+/// for the current user
 class PropertySelector: UIViewController {
     
     // MARK: - Public Properties
@@ -77,7 +80,11 @@ class PropertySelector: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("`init(coder:)` not implemented. Use `init(user:)`.")
     }
-    
+
+    /// Initailizes the **PropertySelector**
+    /// - Parameters:
+    ///   - user: The currently logged in **User** whose properties will be displayed
+    ///   - shouldPeak: **Bool** value which indicates whether the **PropertySelector** should be expanded briefly at the start
     init(user: User, shouldPeak: Bool = false) {
         self.user = user
         self.shouldPeak = shouldPeak
@@ -96,7 +103,9 @@ class PropertySelector: UIViewController {
         view.backgroundColor = .codGrey
         addShadow()
         setUpTableView()
-        
+
+        // If shouldPeak is true, briefly expands the PropertySelector and then
+        // animates it back to the collapsed size. 
         if shouldPeak {
             isExpanded = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
