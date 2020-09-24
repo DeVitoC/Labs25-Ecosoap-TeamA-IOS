@@ -8,7 +8,7 @@ Eco-Soap Bank is a humanitarian and environmental non-profit organization workin
 
 The iOS app enables hotel partners to track pickups of recycled supplies, payments, administrative information, and the positive impact their contributions are having on the world.
 
-<img src="./Assets/screenshot1.png" alt="app screenshot"/> <img src="./Assets/screenshot2.png" alt="app screenshot"/> <img src="./Assets/screenshot3.png" alt="app screenshot"/> <img src="./Assets/screenshot4.png" alt="app screenshot"/> <img src="./Assets/screenshot5.png" alt="app screenshot"/>
+<img src="./Assets/screenshot1.png" alt="app screenshot"/> <img src="./Assets/screenshot2.png" alt="app screenshot"/> <img src="./Assets/screenshot3.png" alt="app screenshot"/> <img src="./Assets/screenshot4.png" alt="app screenshot"/> <img src="./Assets/screenshot5.png" alt="app screenshot"/> <img src="./Assets/screenshot6.png" alt="app screenshot"/>
 
 ## Contributors
 
