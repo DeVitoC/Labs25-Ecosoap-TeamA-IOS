@@ -14,8 +14,6 @@ class ImpactCell: UICollectionViewCell {
         case leading, trailing
     }
     
-    static let reuseIdentifier = "ImpactCell"
-    
     // MARK: - Public Properties
     
     var viewModel: ImpactCellViewModel? { didSet { updateViews() } }
