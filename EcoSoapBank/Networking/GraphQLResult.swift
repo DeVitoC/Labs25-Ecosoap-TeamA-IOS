@@ -10,7 +10,11 @@ import Foundation
 
 /// A container for decoding the result of a GraphQL query or mutation
 struct GraphQLResult<T: Decodable>: Decodable {
+    
+    /// The decoded object, if present
     let object: T?
+    /// A list of error messages from the GraphQL server. There can be errors even if an object
+    /// was successfully decoded.
     let errorMessages: [String]
     
     enum CodingKeys: String, CodingKey {
@@ -25,6 +29,8 @@ struct GraphQLResult<T: Decodable>: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
+        // This logic lets the decoder decode objects that are nested at two
+        // different levels in the JSON using the `isNotNested` CodingUserInfoKey
         if let isNotNested = decoder.userInfo[.isNotNested] as? Bool, isNotNested == true {
             let dataDict = try container.decodeIfPresent([String: T].self, forKey: .data)
             self.object = dataDict?.values.first
