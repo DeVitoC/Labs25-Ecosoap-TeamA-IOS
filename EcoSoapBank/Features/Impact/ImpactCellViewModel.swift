@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// This view model is set on an `ImpactCell` for display in the `ImpactViewController`
 struct ImpactCellViewModel {
     enum Unit {
         case grams

@@ -14,11 +14,12 @@ class ImpactCell: UICollectionViewCell {
         case leading, trailing
     }
     
-    static let reuseIdentifier = "ImpactCell"
-    
     // MARK: - Public Properties
     
     var viewModel: ImpactCellViewModel? { didSet { updateViews() } }
+    
+    /// Swaps horizontal constraints to allow the cell to either be aligned to either the
+    /// leading or trailing edge.
     var alignment: Alignment = .leading {
         didSet {
             if oldValue != alignment {
@@ -37,7 +38,6 @@ class ImpactCell: UICollectionViewCell {
             .scaledFont(for: font, maximumPointSize: 50)
         $0.adjustsFontForContentSizeCategory = true
         $0.textColor = .label
-        $0.text = "34.9 lbs"
     }
     
     private let subtitleLabel = configure(UILabel()) {
@@ -48,7 +48,6 @@ class ImpactCell: UICollectionViewCell {
         $0.adjustsFontSizeToFitWidth = true
         $0.textColor = UIColor.codGrey.orInverse()
         $0.numberOfLines = 2
-        $0.text = "bottle amenities\nrecycled"
     }
     
     private let circleView = configure(ESBCircularImageView()) {
@@ -158,5 +157,7 @@ class ImpactCell: UICollectionViewCell {
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
         circleView.image = viewModel.image
+        isAccessibilityElement = true
+        accessibilityLabel = viewModel.title + " " + viewModel.subtitle
     }
 }

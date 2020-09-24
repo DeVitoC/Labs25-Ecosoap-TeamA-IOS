@@ -32,5 +32,7 @@ class CartonCollectionViewCell: UICollectionViewCell {
         productLabel.text = cartonContents.product.rawValue.capitalized
         cartonView.percentFull = cartonContents.percentFull
         percentFullLabel.text = ("\(cartonContents.percentFull)%")
+        isAccessibilityElement = true
+        accessibilityLabel = "Carton of " + productLabel.text! + " " + percentFullLabel.text!
     }
 }
