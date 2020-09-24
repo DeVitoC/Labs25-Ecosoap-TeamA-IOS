@@ -21,17 +21,19 @@ class NewCartonViewModel {
 }
 
 extension NewCartonViewModel: Hashable {
-    /// <#Description#>
+    /// Defines how "==" works for comparing **NewCartonViewModels**.
+    /// Compares if both are the same object (===) and also that the carton property is the same for both
+    /// Required for conformance to Hashable
     /// - Parameters:
-    ///   - lhs: <#lhs description#>
-    ///   - rhs: <#rhs description#>
-    /// - Returns: <#description#>
+    ///   - lhs: The **NewCartonViewModel** on the left side of the "=="
+    ///   - rhs: The **newCartonViewModel** on the right side of the "=="
+    /// - Returns: Returns **true** if the two **NewCartonViewModels** are the same object and **false** if they are not.
     static func == (lhs: NewCartonViewModel, rhs: NewCartonViewModel) -> Bool {
         lhs === rhs && lhs.carton == rhs.carton
     }
 
-    /// <#Description#>
-    /// - Parameter hasher: <#hasher description#>
+    /// Conforms the **NewCartonViewModel** to Hashable
+    /// - Parameter hasher: The **Hasher** object to be hashed
     func hash(into hasher: inout Hasher) {
         hasher.combine(ObjectIdentifier(self))
     }
