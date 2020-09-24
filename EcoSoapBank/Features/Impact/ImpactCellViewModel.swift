@@ -8,7 +8,11 @@
 
 import UIKit
 
+/// Model describing the ImpactCell View Data including properties for a title,
+/// amount, unit, subtitle, and image
 struct ImpactCellViewModel {
+    /// Enum that defines the two types of units that can be displayed in an ImpactCell
+    /// grams for contributions made, and people for how many peoplehave been helped
     enum Unit {
         case grams
         case people
