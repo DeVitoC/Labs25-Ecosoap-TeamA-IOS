@@ -27,6 +27,7 @@ class PropertySelectionController: UIViewController {
     private let separatorWidth: CGFloat = 1.0
     
     private lazy var tabCutout = configure(UIButton()) {
+        $0.accessibilityLabel = "Open Property Selector"
         $0.backgroundColor = .codGrey
         $0.layer.cornerRadius = tabWidth / 2
         $0.layer.borderColor = separatorColor.cgColor
