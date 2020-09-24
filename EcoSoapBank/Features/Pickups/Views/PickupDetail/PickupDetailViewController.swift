@@ -77,13 +77,7 @@ class PickupDetailViewController: UIViewController {
         title = "Pickup Details"
         
         tableView.dataSource = self
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        
-        collectionView.register(
-            UINib(nibName: "CartonCollectionViewCell", bundle: .main),
-            forCellWithReuseIdentifier: NSStringFromClass(CartonCollectionViewCell.self)
-        )
+        setUpCartonCollectionView()
         
         setUpViews()
         updateViews()
@@ -117,6 +111,17 @@ class PickupDetailViewController: UIViewController {
         
         notesView.text = pickup.notes
         notesHeadingLabel.isHidden = pickup.notes.isEmpty
+    }
+    
+    private func setUpCartonCollectionView() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        collectionView.register(
+            UINib(nibName: "CartonCollectionViewCell", bundle: .main),
+            forCellWithReuseIdentifier: NSStringFromClass(CartonCollectionViewCell.self)
+        )
+        collectionView.accessibilityLabel = "Cartons in pickup"
     }
 }
 

@@ -82,6 +82,7 @@ extension UserDefaults {
         PropertySelection(selectedProperty(forUser: user))
     }
     
+    // Subscribe to observe the selected property via Combine
     func selectedPropertyPublisher(forUser user: User) -> AnyPublisher<PropertySelection, Never> {
         UserDefaults.propertySelectionByUserID
             .compactMap({ propertySelectionByUserID -> PropertySelection? in

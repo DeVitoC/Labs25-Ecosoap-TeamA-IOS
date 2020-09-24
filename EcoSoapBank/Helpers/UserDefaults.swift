@@ -33,6 +33,7 @@ extension UserDefaults {
         self.key = key
     }
     
+    // Allows observing changes through use of a closure. See "UserDefaultsObservation"
     func observe(change: @escaping (T?, T?) -> Void) -> UserDefaultsObservation {
         UserDefaultsObservation(key: key) { old, new in
             change(old as? T, new as? T)

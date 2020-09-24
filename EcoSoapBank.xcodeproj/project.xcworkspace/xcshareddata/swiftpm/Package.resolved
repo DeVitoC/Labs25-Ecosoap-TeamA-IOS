@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "LoremSwiftum",
+        "repositoryURL": "https://github.com/lukaskubanek/LoremSwiftum.git",
+        "state": {
+          "branch": null,
+          "revision": "eef89bf8b9937462f9c493789609897763b383e2",
+          "version": "2.2.1"
+        }
+      },
+      {
         "package": "OktaAuth",
         "repositoryURL": "https://github.com/SpencerCurtis/OktaAuth.git",
         "state": {
