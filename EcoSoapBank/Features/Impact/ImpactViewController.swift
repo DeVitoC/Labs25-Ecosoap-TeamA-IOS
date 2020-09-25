@@ -43,7 +43,7 @@ class ImpactViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        collectionView.accessibilityLabel = "Impact Statistics"
         view.backgroundColor = .systemGray6
         navigationItem.title = "Impact Summary"
 
@@ -73,7 +73,10 @@ class ImpactViewController: UIViewController {
     // MARK: - Private Methods
     /// Lays out the CollectionView to fill the parent view and configures cell
     private func setUpCollectionView() {
-        collectionView.register(ImpactCell.self, forCellWithReuseIdentifier: ImpactCell.reuseIdentifier)
+        collectionView.register(
+            ImpactCell.self,
+            forCellWithReuseIdentifier: NSStringFromClass(ImpactCell.self)
+        )
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .clear
@@ -122,8 +125,10 @@ extension ImpactViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImpactCell.reuseIdentifier, for: indexPath) as? ImpactCell else {
-            fatalError("Unable to cast cell as \(ImpactCell.self)")
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: NSStringFromClass(ImpactCell.self),
+            for: indexPath) as? ImpactCell else {
+                fatalError("Unable to cast cell as \(ImpactCell.self)")
         }
         
         cell.alignment = indexPath.row % 2 == 0 ? .leading : .trailing
@@ -147,6 +152,7 @@ private enum ImpactLayout {
     static let cellAspectRatio: CGFloat = 0.31
     static let sectionInsetTop: CGFloat = 40
     static let sectionInsetBotttom: CGFloat = 40
+    static let minimumLineSpacing: CGFloat = 20
 }
 
 extension ImpactViewController: UICollectionViewDelegateFlowLayout {
@@ -161,8 +167,9 @@ extension ImpactViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        // Add line spacing if the font scaling is bigger than .large
         if traitCollection.preferredContentSizeCategory > .large {
-            return UIFontMetrics.default.scaledValue(for: 20)
+            return UIFontMetrics.default.scaledValue(for: ImpactLayout.minimumLineSpacing)
         } else {
             return 0
         }

@@ -32,6 +32,9 @@ class PropertySelector: UIViewController {
     /// Determines whether the property selector should display initially expanded before animating closed.
     let shouldPeak: Bool
     
+    /// When true, the property selector sets it's preferred content size to a size that will
+    /// display all of the cells for selection, and when false the selector will set it's size
+    /// so that only the selected property (which is on top) will be visible.
     var isExpanded = false {
         didSet {
             updateTableView()
@@ -62,13 +65,17 @@ class PropertySelector: UIViewController {
         }
     }
     
+    /// The selected property is set via user defaults so that it can be updated app wide
+    /// and persist between launches. A UserDefaultsObservation can be used to observe changes
+    /// as is done in this class, or you can use Combine to observe by subscribing to the
+    /// `selectedPropertyPublisher`
     private var selectedProperty: Property? {
         get { UserDefaults.standard.selectedProperty(forUser: user) }
         set { UserDefaults.standard.setSelectedProperty(newValue, forUser: user) }
     }
     
     private let cellHeight: CGFloat = 32
-    private let expandedCellHeight: CGFloat = 44
+    private let expandedCellHeight: CGFloat = 44 // Expand the cell to make tapping easier
     private var tableView = UITableView()
     private var dataSource: UITableViewDiffableDataSource<Int, String>?
     private var selectedPropertyObserver: UserDefaultsObservation?
@@ -129,7 +136,10 @@ class PropertySelector: UIViewController {
     // MARK: - Private Methods
     
     private func setUpTableView() {
-        tableView.register(PropertySelectorCell.self, forCellReuseIdentifier: NSStringFromClass(PropertySelectorCell.self))
+        tableView.register(
+            PropertySelectorCell.self,
+            forCellReuseIdentifier: NSStringFromClass(PropertySelectorCell.self)
+        )
         
         tableView.delegate = self
         tableView.backgroundColor = .clear

@@ -23,12 +23,13 @@ class PaymentCoordinator: FlowCoordinator {
         paymentVC = PropertySelectionController(mainViewController: paymentHistoryVC, user: user)
         paymentVC.navigationItem.title = "Payment History"
         paymentVC.navigationItem.setRightBarButton(
-        UIBarButtonItem(
-            image: .creditCard,
-            style: .plain,
-            target: self,
-            action: #selector(makePaymentTapped(_:))),
-        animated: true)
+            UIBarButtonItem(
+                image: .creditCard,
+                style: .plain,
+                target: self,
+                action: #selector(makePaymentTapped(_:))),
+            animated: true)
+        paymentVC.navigationItem.rightBarButtonItem?.accessibilityLabel = "Next Payment"
     }
 
     /// Starts the PaymentHistoryViewController

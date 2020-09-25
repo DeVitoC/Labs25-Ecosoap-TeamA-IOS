@@ -27,6 +27,7 @@ class PropertySelectionController: UIViewController {
     private let separatorWidth: CGFloat = 1.0
     
     private lazy var tabCutout = configure(UIButton()) {
+        $0.accessibilityLabel = "Open Property Selector"
         $0.backgroundColor = .codGrey
         $0.layer.cornerRadius = tabWidth / 2
         $0.layer.borderColor = separatorColor.cgColor
@@ -62,7 +63,6 @@ class PropertySelectionController: UIViewController {
     init(mainViewController: UIViewController, user: User, shouldPeak: Bool = false) {
         self.mainViewController = mainViewController
         self.propertySelector = PropertySelector(user: user, shouldPeak: shouldPeak)
-        
         if let propertyCount = user.properties?.count, propertyCount < 2 {
             selectorIsDisabled = true
         }
@@ -95,6 +95,7 @@ class PropertySelectionController: UIViewController {
             propertySelectorHeight?.constant = container.preferredContentSize.height
             UIView.animate(withDuration: propertySelector.expansionDuration) {
                 self.chevron.layer.opacity = self.propertySelector.isExpanded ? 0 : 1.0
+                self.tabCutout.isAccessibilityElement = !self.propertySelector.isExpanded
                 self.view.layoutIfNeeded()
             }
         }

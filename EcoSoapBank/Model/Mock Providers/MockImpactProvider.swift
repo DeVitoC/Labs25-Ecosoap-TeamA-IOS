@@ -8,6 +8,8 @@
 
 import Foundation
 
+private var statsByPropertyID: [String: ImpactStats] = [:]
+
 /// For placeholder and testing purposes
 struct MockImpactProvider: ImpactDataProvider {
     /// Set to `true` for testing networking failures
@@ -27,11 +29,19 @@ struct MockImpactProvider: ImpactDataProvider {
             return
         }
         
-        completion(.success(ImpactStats(soapRecycled: 13090,
-                                        bottlesRecycled: 1982,
-                                        linensRecycled: 3298,
-                                        paperRecycled: 2948,
-                                        peopleServed: 323,
-                                        womenEmployed: 5)))
+        if let stats = statsByPropertyID[propertyID] {
+            completion(.success(stats))
+            return
+        }
+        
+        let stats = ImpactStats(soapRecycled: Int.random(in: 50_000...200_000),
+                                bottlesRecycled: Int.random(in: 20_000...100_000),
+                                linensRecycled: Int.random(in: 20_000...100_000),
+                                paperRecycled: Int.random(in: 20_000...100_000),
+                                peopleServed: Int.random(in: 1000...10_000),
+                                womenEmployed: Int.random(in: 5...10))
+        
+        statsByPropertyID[propertyID] = stats
+        completion(.success(stats))
     }
 }
