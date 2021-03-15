@@ -40,7 +40,7 @@ class PropertySelectionController: UIViewController {
         
         $0.addTarget(self, action: #selector(openPropertySelector), for: .touchUpInside)
     }
-    
+
     private lazy var separatorLine = configure(UIView()) {
         $0.backgroundColor = separatorColor
     }
@@ -48,13 +48,13 @@ class PropertySelectionController: UIViewController {
     private var selectorIsDisabled = false
     
     // MARK: - Init
-    
+
     @available(*, unavailable, message: "Use init(user:)")
     required init?(coder: NSCoder) {
         fatalError("`init(coder:)` not implemented. Use `init(user:)`.")
     }
     
-    /// Sets up the
+    /// Initializes and configures the PropertySelectionController for the given View Controller
     /// - Parameters:
     ///   - mainViewController: The main view controller to embed.
     ///   - user: The User whose properties should be displayed in the property selector.
@@ -74,7 +74,6 @@ class PropertySelectionController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if selectorIsDisabled {
             view.addSubviewsUsingAutolayout(mainViewController.view)
             mainViewController.view.fillSuperview(respectingSafeArea: true)
@@ -103,11 +102,13 @@ class PropertySelectionController: UIViewController {
     }
     
     // MARK: - Private Methods
-    
+
+    /// Method that sets the propertySelector's isExpanded property to true when clicked
     @objc func openPropertySelector() {
         propertySelector.isExpanded = true
     }
-    
+
+    /// Sets up and configures the main View Controller and propertySelector constraints
     private func setUpMainViews() {
         addChild(mainViewController)
         addChild(propertySelector)
@@ -132,7 +133,8 @@ class PropertySelectionController: UIViewController {
             mainViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
-    
+
+    /// Sets up and configures the separatorLine and tabCutout constraints
     private func setUpCutout() {
         mainViewController.view.addSubviewsUsingAutolayout(separatorLine, tabCutout)
         

@@ -9,8 +9,9 @@
 import UIKit
 
 
+/// Displays the impact a property or all properties is having via Eco-Soap Bank
 class ImpactViewController: UIViewController {
-    
+
     // MARK: - Public Properties
     
     var impactController: ImpactController
@@ -24,9 +25,10 @@ class ImpactViewController: UIViewController {
     private var massUnitObserver: UserDefaultsObservation?
     private var selectedPropertyObserver: UserDefaultsObservation?
     private let refreshControl = UIRefreshControl()
-    
+
     // MARK: - Init
-    
+
+    /// Initailizes and configures the ImpactViewController
     @available(*, unavailable, message: "Use init(impactController:)")
     required init?(coder: NSCoder) {
         fatalError("`init(coder:)` not implemented. Use `init(impactController:)`.")
@@ -43,7 +45,9 @@ class ImpactViewController: UIViewController {
         super.viewDidLoad()
         collectionView.accessibilityLabel = "Impact Statistics"
         view.backgroundColor = .systemGray6
-        
+        navigationItem.title = "Impact Summary"
+
+        // Assigns the units of measurement to display based on the user's UserDefaults
         massUnitObserver = UserDefaults.$massUnit.observe { [weak self] _, _ in
             self?.collectionView.reloadData()
         }
@@ -54,7 +58,7 @@ class ImpactViewController: UIViewController {
         setUpCollectionView()
         refreshImpactStats()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
@@ -65,9 +69,9 @@ class ImpactViewController: UIViewController {
             height: refreshControl.bounds.size.height
         )
     }
-    
+
     // MARK: - Private Methods
-    
+    /// Lays out the CollectionView to fill the parent view and configures cell
     private func setUpCollectionView() {
         collectionView.register(
             ImpactCell.self,
@@ -93,6 +97,8 @@ class ImpactViewController: UIViewController {
         ])
     }
 
+    /// Method that fetches the Impact Stats from the server and reloads the collectionview with the new data
+    /// - Parameter sender: The sender that called this method. Defaults to **nil** unless called by another UI element
     @objc private func refreshImpactStats(_ sender: Any? = nil) {
         refreshControl.beginRefreshing()
 
@@ -140,6 +146,7 @@ extension ImpactViewController: UICollectionViewDataSource {
 
 // MARK: - Flow Layout Delegate
 
+/// Enum describing several layout sizes
 private enum ImpactLayout {
     static let headerHeight: CGFloat = 80
     static let cellAspectRatio: CGFloat = 0.31

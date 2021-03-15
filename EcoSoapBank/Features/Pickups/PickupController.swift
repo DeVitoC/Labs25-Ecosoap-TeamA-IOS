@@ -10,11 +10,22 @@ import Foundation
 import Combine
 
 
+/// Protocol that allows either the live GraphQLController or a mock DataProvider to be passed in to handle data requests
 protocol PickupDataProvider {
+    /// The method in a class that conforms to PickupDataProvider that either provides
+    /// mock data or configures and makes calls to the Fetch method to get data from the server
+    /// - Parameters:
+    ///   - propertyID: A **String** that contains the property ID to fetch pickup history data for
+    ///   - completion: Competion that returns either **Pickup** history data or an **Error**
     func fetchPickups(
         forPropertyID propertyID: String,
         _ completion: @escaping ResultHandler<[Pickup]>)
 
+    /// The method in a class that conforms to PickupDataProvider that either provides
+    /// mock data or sends a new Pickup request to the server
+    /// - Parameters:
+    ///   - pickupInput: The data that will be sent to the server to schedule a new **Pickup**
+    ///   - completion: Completion that returns either **Pickup.ScheduleResults** object or an **Error**
     func schedulePickup(
         _ pickupInput: Pickup.ScheduleInput,
         completion: @escaping ResultHandler<Pickup.ScheduleResult>)
@@ -42,6 +53,10 @@ class PickupController: ObservableObject {
         $0.readyDate > $1.readyDate
     }
 
+    /// Initializes the PickupController with the current **User** and either a mock or live **PickupDataProvider**
+    /// - Parameters:
+    ///   - user: The currenet **User** that is logged in
+    ///   - dataProvider: An object that conforms to the **PickupDataProvider** protocol which will either provide mock data or live network call methods
     init(user: User, dataProvider: PickupDataProvider) {
         self.dataProvider = dataProvider
         self.user = user
@@ -59,6 +74,10 @@ class PickupController: ObservableObject {
             .store(in: &cancellables)
     }
 
+    /// Method that will call the fetchPrickups method on the DataProvider for the currently selected property and pass the result on
+    /// - Parameters:
+    ///   - propertyID: The ID for the currently selected **Property**
+    /// - Returns: Returns a **Future** with an array of **Pickup** objects or an **Error**
     @discardableResult
     func fetchPickups(forPropertyID propertyID: String) -> Future<[Pickup], Error> {
         Future { [weak self] promise in
@@ -80,6 +99,8 @@ class PickupController: ObservableObject {
         }
     }
 
+    /// Method that will call the fetchPrickups method on the DataProvider for all properties for the current user and pass the result on
+    /// - Returns: Returns an **AnyPublisher** object with an array of **Pickup** objects or an **Error**
     func fetchPickupsForAllProperties() -> AnyPublisher<[Pickup], Error> {
         guard let properties = properties, !properties.isEmpty else {
             return Future { $0(.failure(UserError.noProperties)) }
@@ -101,6 +122,9 @@ class PickupController: ObservableObject {
             }).eraseToAnyPublisher()
     }
 
+    /// Method that will call the schedulePickup method on the DataProvider and pass the result on
+    /// - Parameter pickupInput: The **Pickup.ScheduleInput** data the user entered that will be sent to the server to schedule a new Pickup
+    /// - Returns: Returns a **Future** with a **Pickup.ScheduleResult** or an **Error**
     func schedulePickup(
         for pickupInput: Pickup.ScheduleInput
     ) -> Future<Pickup.ScheduleResult, Error> {

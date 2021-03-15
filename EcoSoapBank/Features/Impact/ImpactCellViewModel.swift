@@ -10,6 +10,8 @@ import UIKit
 
 /// This view model is set on an `ImpactCell` for display in the `ImpactViewController`
 struct ImpactCellViewModel {
+    /// Enum that defines the two types of units that can be displayed in an ImpactCell
+    /// grams for contributions made, and people for how many peoplehave been helped
     enum Unit {
         case grams
         case people

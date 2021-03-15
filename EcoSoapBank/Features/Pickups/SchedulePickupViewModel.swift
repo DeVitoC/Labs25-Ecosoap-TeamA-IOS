@@ -10,6 +10,7 @@ import Foundation
 import Combine
 
 
+/// Protocol that provides Delegate methods for hte SchedulePickupViewModel
 protocol SchedulePickupViewModelDelegate: AnyObject {
     func editCarton(for viewModel: NewCartonViewModel)
     func cancelPickup()
@@ -19,6 +20,7 @@ protocol SchedulePickupViewModelDelegate: AnyObject {
 }
 
 
+/// Creates the View Model that allows a user to Schedule a new **Pickup**
 class SchedulePickupViewModel {
     @Published private(set) var cartons: [NewCartonViewModel] = []
     var readyDate: Date = Date()
@@ -28,6 +30,10 @@ class SchedulePickupViewModel {
     private var user: User
     private weak var delegate: SchedulePickupViewModelDelegate!
 
+    /// Initializes the **SchedulePickupViewModel** with the passed in **User** and optional **SchedulePickupViewModelDelegate**
+    /// - Parameters:
+    ///   - user: The currently logged in **User**
+    ///   - delegate: And optinoal **SchedulePickupViewModelDelegate**
     init(user: User, delegate: SchedulePickupViewModelDelegate?) {
         self.user = user
         self.delegate = delegate
@@ -39,23 +45,31 @@ class SchedulePickupViewModel {
 extension SchedulePickupViewModel {
     var properties: [Property] { user.properties ?? [] }
 
+    /// Method that will append a new carton to the cartons array. Initializes a default carton of type **Soap** and **0%** full
     func addCarton() {
         cartons.append(.init(carton: .init(product: .soap, percentFull: 0)))
     }
 
+    /// Method that allows a user to edit a carton. Takes in a carton index and calls the editCarton method on the delegate
+    /// - Parameter cartonIndex: The **Int** carton index of the **Carton** the user is editing
     func editCarton(atIndex cartonIndex: Int) {
         assert((0..<cartons.count).contains(cartonIndex),
                "Attempted to edit index outside of range for NewPickupViewModel.cartons")
         delegate?.editCarton(for: cartons[cartonIndex])
     }
 
+    /// Method that allows a user to remove a carton. Takes in a carton index and removes the selected carton from the cartons array.
+    /// - Parameter cartonIndex: The **Int** carton index of the **Carton** the user is removing
     func removeCarton(atIndex cartonIndex: Int) {
         assert((0..<cartons.count).contains(cartonIndex),
                "Attempted to remove index outside of range for NewPickupViewModel.cartons")
         cartons.remove(at: cartonIndex)
     }
 
+    /// Method that allows a user to schedule a pickup with the current carton and date information
+    /// - Parameter completion: A completion that passes on a **ResultHandler** with a **Pickup.ScheduleResults** object of an **Error**
     func schedulePickup(_ completion: ResultHandler<Pickup.ScheduleResult>? = nil) {
+        // Calls the schedulePickup method on the delegate to schedule the pickup with the current data
         delegate.schedulePickup(
             for: Pickup.ScheduleInput(
                 base: Pickup.Base(
@@ -69,6 +83,7 @@ extension SchedulePickupViewModel {
             completion: completion ?? { _ in })
     }
 
+    /// Method that allows a user to cancel a pickup
     func cancelPickup() {
         delegate?.cancelPickup()
     }
